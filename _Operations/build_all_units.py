@@ -32,9 +32,10 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT, TA_JUSTIFY
 from reportlab.platypus.flowables import Image as RLImage
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
+# Updated 2026-03-29: session path updated to current session
 
-MNT       = "/sessions/beautiful-wonderful-mendel/mnt/Communicate by Design"
-SCRATCH   = "/sessions/beautiful-wonderful-mendel"
+MNT       = "/sessions/kind-gracious-keller/mnt/Communicate by Design"
+SCRATCH   = "/sessions/kind-gracious-keller"
 SYM_CACHE = os.path.join(MNT, "_Operations/symbol_cache")
 TRACKER   = os.path.join(MNT, "Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf")
 NF_ROOT   = os.path.join(MNT, "Products/Nonfiction Units")
@@ -113,6 +114,8 @@ UNITS = {
         ],
         "top5_core":   ['fight','show','stop','right','change'],
         "top5_fringe": ['protest','law','disability','equal','rights'],
+        # Student print pages (zero-indexed) — confirmed 2026-03-29 via PDF keyword scan
+        "student_pages": [2, 4, 7, 10, 13, 14, 15, 16, 17, 18, 20, 23, 24, 26, 27, 28, 29, 31, 32, 33, 35],
         "what_inside": [
             "Multi-version informational passages (V1, V2, V3 Lexile ranges)",
             "Annotation tools and reading frameworks",
@@ -146,6 +149,8 @@ UNITS = {
         ],
         "top5_core":   ['free','because','help','show','true'],
         "top5_fringe": ['captivity','whale','ocean','wild','freedom'],
+        # Student print pages (zero-indexed) — confirmed 2026-03-29 via PDF keyword scan
+        "student_pages": [2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21],
         "what_inside": [
             "Multi-version informational passages (V1, V2, V3 Lexile ranges)",
             "Annotation tools and reading frameworks",
@@ -178,6 +183,8 @@ UNITS = {
         ],
         "top5_core":   ['prove','wrong','stop','fight','show'],
         "top5_fringe": ['radium','factory','safe','danger','lie'],
+        # Student print pages (zero-indexed) — confirmed 2026-03-29 via PDF keyword scan
+        "student_pages": [2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
         "what_inside": [
             "Multi-version informational passages (V1, V2, V3 Lexile ranges)",
             "Annotation tools and reading frameworks",
@@ -191,8 +198,8 @@ UNITS = {
     "Capitol Crawl": {
         "folder":     "Capitol Crawl",
         "unit_pdf":   os.path.join(SCRATCH, "Capitol_Crawl_Lesson_COMPLETE.pdf"),
-        "aac_pages":  [11, 12, 13],
-        "docx":       "COMMUNICATE BY DESIGN.docx",
+        "aac_pages":  [10, 11],  # confirmed 2026-03-29: idx 10=Differentiating, idx 11=Communication Access
+        "docx":       "Capitol_Crawl_Lesson_COMPLETE.docx",
         "sym_cards":  None,
         "prefix":     "Capitol_Crawl",
         "display":    "The Capitol Crawl: March 12, 1990",
@@ -202,13 +209,17 @@ UNITS = {
             'strong','weak','because','but','agree','disagree','why',
             'who','what','where','when'
         ],
+        # 'disability' added 2026-03-29 — vocabulary framework gap (ADA/Jennifer Keelan context)
         "fringe_words": [
-            'crawl','Capitol','steps','protest','law','ADA','ADAPT',
+            'crawl','Capitol','steps','protest','law','disability','ADA','ADAPT',
             'source','reliable','corroborate','evidence','claim','verify',
             'contradict'
         ],
+        # Top 5 updated 2026-03-29 to center disability rights vocabulary
         "top5_core":   ['because','agree','strong','true','same'],
-        "top5_fringe": ['protest','law','evidence','claim','ADA'],
+        "top5_fringe": ['disability','ADA','evidence','claim','corroborate'],
+        # Student print pages (zero-indexed) — confirmed 2026-03-29 via PDF keyword scan
+        "student_pages": [2, 3, 4, 7, 10, 11, 31, 44, 45, 46, 48, 49],
         "what_inside": [
             "Multi-version informational passages (V1, V2, V3 Lexile ranges)",
             "Source tracking and corroboration framework",
@@ -222,8 +233,8 @@ UNITS = {
     "Zitkala-Sa": {
         "folder":     "Zitkala-Sa",
         "unit_pdf":   os.path.join(SCRATCH, "Zitkala-Sa_Lesson_COMPLETE.pdf"),
-        "aac_pages":  [11],
-        "docx":       None,          # extracted from zip — handled specially
+        "aac_pages":  [11],          # confirmed 2026-03-29: idx 11=Differentiating/Communication Access
+        "docx":       "Zitkala-Sa_Lesson_COMPLETE.docx",
         "sym_cards":  "Zitkala-Sa_Symbol_Cards.pdf",
         "prefix":     "Zitkala_Sa",
         "display":    "Zitkala-Ša: Testifying in Her Own Voice",
@@ -239,6 +250,8 @@ UNITS = {
         ],
         "top5_core":   ['change','need','right','stop','because'],
         "top5_fringe": ['assimilation','boarding','spirit','testimony','reservation'],
+        # Student print pages (zero-indexed) — confirmed 2026-03-29 via PDF keyword scan
+        "student_pages": [2, 4, 7, 11, 32, 48, 49, 50, 53, 55, 56, 57, 58, 59, 60],
         "what_inside": [
             "Multi-version informational passages (V1, V2, V3 Lexile ranges)",
             "Annotation tools and reading frameworks",
@@ -250,23 +263,35 @@ UNITS = {
             "AAC Communication Session Tracker",
         ],
     },
-    # Frances Kelsey — packet already built; include here for Welcome/Terms + TPT folder
+    # Frances Kelsey — rebuilt 2026-03-29 with vocabulary framework alignment
     "Frances Kelsey": {
         "folder":     "Frances Kelsey",
-        "unit_pdf":   os.path.join(SCRATCH, "Frances_Kelsey_Unit_v2.pdf"),
+        "unit_pdf":   os.path.join(SCRATCH, "Frances_Kelsey_Unit_COMPLETE.pdf"),
         "aac_pages":  [7, 8, 9],
-        "docx":       "Frances_Kelsey_Unit_v2.docx",
+        "docx":       "Frances_Kelsey_COMPLETE.docx",
         "sym_cards":  "Frances_Kelsey_Symbol_Cards.pdf",
         "prefix":     "Frances_Kelsey",
         "display":    "Frances Kelsey: The Woman Who Said No",
         "grade_range": "Grades 6–10",
-        "core_words": [],   # not rebuilt
-        "fringe_words": [],
-        "top5_core":   [],
-        "top5_fringe": [],
+        # Full vocabulary added 2026-03-29 (previously empty — framework alignment)
+        "core_words": [
+            'say','think','know','want','not','good','bad','wrong','right',
+            'help','stop','go','more','different','same','because','but',
+            'if','true','question','answer','prove','show','tell','believe',
+            'strong','weak'
+        ],
+        "fringe_words": [
+            'FDA','drug','safe','test','approve','deny','claim','evidence',
+            'reasoning','thalidomide','birth defect','company','pressure',
+            'review','scientist','law','protect'
+        ],
+        "top5_core":   ['not','show','wrong','because','strong'],
+        "top5_fringe": ['safe','test','deny','pressure','claim'],
+        # Student print pages (zero-indexed) — confirmed 2026-03-29 via PDF keyword scan
+        "student_pages": [3, 4, 5, 7, 8, 9, 17, 19, 20, 21, 23, 24, 62, 84, 85],
         "what_inside": [
             "Multi-version informational passages (V1, V2, V3 Lexile ranges)",
-            "Annotation tools and reading frameworks",
+            "CER (Claim-Evidence-Reasoning) framework and annotation tools",
             "Differentiation strategies for all learners",
             "MLL & AAC communication access support",
             "IEP goal stems and SDI documentation tools",
@@ -274,7 +299,6 @@ UNITS = {
             "Communication Access Packet with ARASAAC vocabulary cards",
             "AAC Communication Session Tracker",
         ],
-        "packet_already_built": True,
     },
 }
 
@@ -495,10 +519,19 @@ def build_symbol_pages_pdf(section_title: str, words: list, unit_title: str) -> 
     return buf.getvalue()
 
 
-# ── Welcome & Terms page ──────────────────────────────────────────────────────
-
+# ── Welcome to the Product PDF ────────────────────────────────────────────────
+#
+# UPDATED 2026-03-29 — New structure per TPT folder spec:
+#   Page 1: Welcome + What's Inside + What Makes This Product Different
+#   Page 2: How to Use This Product + Accessibility Statement + About the Creator + Terms
+#
+# This is the teacher orientation document. It answers:
+#   1. What is this product?
+#   2. What makes it different from standard ELA units?
+#   3. How do I use it in my classroom?
+#
 def build_welcome_pdf(unit_cfg) -> bytes:
-    """One-page branded Welcome + About + Terms for TPT folder."""
+    """Branded Welcome to the Product PDF — 2-page orientation for TPT folder."""
     unit_title  = unit_cfg["display"]
     grade_range = unit_cfg["grade_range"]
     what_inside = unit_cfg["what_inside"]
@@ -564,6 +597,7 @@ def build_welcome_pdf(unit_cfg) -> bytes:
         inside_items.append(Paragraph(f"• {wi}", item))
 
     story = [
+        # ── PAGE 1: Welcome + What's Inside + What Makes This Different ──────
         hdr_row,
         HRFlowable(width="100%", thickness=1.5, color=TEAL, spaceAfter=6),
         title_tbl,
@@ -572,6 +606,104 @@ def build_welcome_pdf(unit_cfg) -> bytes:
         Paragraph("What's Inside", h2),
         HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
         *inside_items,
+        Spacer(1, 8),
+
+        Paragraph("What Makes This Product Different", h2),
+        HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
+        Paragraph(
+            "Most ELA units were built for a single learner profile. "
+            "This one was built for everyone in the room.",
+            body),
+        Paragraph(
+            "• <b>Three reading versions (V1 / V2 / V3)</b> — same unit question, "
+            "same activities, same expectation. The Lexile range varies; the rigor does not. "
+            "No ability labels on student materials. Teachers sort; students don't know.",
+            item),
+        Paragraph(
+            "• <b>AAC access built in from the start</b> — not as an add-on. "
+            "Every unit includes a Communication Access Packet with ARASAAC symbol cards "
+            "for core and fringe vocabulary, a Top 5 Priority Vocabulary page, "
+            "and an AAC Session Tracker. The SLP can program fringe vocabulary "
+            "before the unit begins using the fringe word list.",
+            item),
+        Paragraph(
+            "• <b>IEP-aligned by design</b> — includes IEP goal stems, "
+            "SDI documentation tools (Checkpoint Protocol), and participation pathways "
+            "for students who cannot produce written responses.",
+            item),
+        Paragraph(
+            "• <b>Partner guidance embedded</b> — not just for the teacher. "
+            "Paraeducators, families, and related service providers each have "
+            "a clear role. Three communication partner modes are explained "
+            "in the unit itself.",
+            item),
+        Paragraph(
+            "• <b>WCAG 2.2 Level AA</b> — PDFs and Word documents both meet "
+            "ADA Title II accessibility standards. "
+            "The Word document is fully Google-convertible for digital access.",
+            item),
+
+        Spacer(1, 10),
+        HRFlowable(width="100%", thickness=0.5, color=TEAL, spaceAfter=3),
+        Paragraph(
+            f"{unit_title}  ·  Communicate by Design  ·  "
+            "teacherspayteachers.com/store/communicate-by-design  ·  "
+            "© Communicate by Design. All rights reserved.",
+            ParagraphStyle("ft", fontName="Helvetica", fontSize=7,
+                textColor=SLATE, leading=9, alignment=TA_CENTER)),
+
+        # ── PAGE 2: How to Use + Accessibility Statement + About + Terms ──────
+        PageBreak(),
+        hdr_row,
+        HRFlowable(width="100%", thickness=1.5, color=TEAL, spaceAfter=6),
+
+        Paragraph("How to Use This Product", h2),
+        HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
+        Paragraph(
+            "<b>Step 1 — Send the Communication Access Packet to your SLP first.</b> "
+            "Allow 1–2 weeks for fringe vocabulary to be programmed before the unit begins. "
+            "The CAP is in this folder labeled Communication_Access_Packet.",
+            item),
+        Paragraph(
+            "<b>Step 2 — Run the Vocabulary Preview Routine</b> before Lesson 1. "
+            "The 5-minute routine is on the Vocabulary Preview page in the unit. "
+            "It introduces the 5 highest-priority words using the Say &amp; Show → "
+            "Check → Connect → Flag sequence.",
+            item),
+        Paragraph(
+            "<b>Step 3 — Choose the reading version for each student.</b> "
+            "V1 (900–1050 Lexile), V2 (650–800), or V3 (400–550). "
+            "The student pages are labeled with small letters or numbers — "
+            "Lexile information is never printed on student pages.",
+            item),
+        Paragraph(
+            "<b>Step 4 — Print Student Print Materials.</b> "
+            "The Student_Print_Materials PDF contains only the pages students "
+            "handle: annotation guide, passages, activities, sentence frames, "
+            "evidence sheet, prompt, and rubric. Print and copy from that file.",
+            item),
+        Paragraph(
+            "<b>Step 5 — Open the COMPLETE.docx for everything else.</b> "
+            "Teacher reference pages, modeling scripts, checkpoint protocols, "
+            "and pacing guides are in the Word document. "
+            "Convert to Google Docs if your school uses Google Classroom.",
+            item),
+        Paragraph(
+            "<b>Step 6 — Use the AAC Session Tracker (last page of the CAP).</b> "
+            "Record the communication mode each student used each session. "
+            "This document supports IEP progress monitoring.",
+            item),
+        Spacer(1, 6),
+
+        Paragraph("Accessibility Statement", h2),
+        HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
+        Paragraph(
+            "This product is designed to WCAG 2.2 Level AA standards. "
+            "Materials include multi-version passages across three Lexile ranges, "
+            "ARASAAC symbol-supported vocabulary, AAC participation pathways, "
+            "and IEP-aligned goal stems. Every scaffold varies the access; "
+            "the expectation does not change.",
+            body),
         Spacer(1, 6),
 
         Paragraph("About the Creator", h2),
@@ -588,17 +720,6 @@ def build_welcome_pdf(unit_cfg) -> bytes:
             "&nbsp;&nbsp;<b>Substack:</b> communicatebydesign.substack.com  "
             "&nbsp;&nbsp;<b>Instagram:</b> @communicatebydesignaac",
             small),
-        Spacer(1, 6),
-
-        Paragraph("Accessibility Statement", h2),
-        HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
-        Paragraph(
-            "This product is designed to WCAG 2.2 Level AA standards. "
-            "Materials include multi-version passages across three Lexile ranges, "
-            "ARASAAC symbol-supported vocabulary, AAC participation pathways, "
-            "and IEP-aligned goal stems. Every scaffold varies the access; "
-            "the expectation does not change.",
-            body),
         Spacer(1, 6),
 
         Paragraph("Terms of Use", h2),
@@ -675,7 +796,26 @@ def build_comm_access_packet(unit_name, unit_cfg):
 
 
 # ── Assemble TPT folder for one unit ─────────────────────────────────────────
-
+#
+# UPDATED 2026-03-29 — New 4-component TPT folder standard:
+#
+#   [prefix]_TPT/
+#   ├── [prefix]_Welcome_to_the_Product.pdf   ← Welcome + What Makes Different + How to Use + Terms
+#   ├── [prefix]_COMPLETE.docx                ← Full unit Word packet (Google-convertible)
+#   ├── [prefix]_Communication_Access_Packet.pdf  ← AAC-specific: unit pages + Top 5 + symbol cards + tracker
+#   └── [prefix]_Student_Print_Materials.pdf  ← Print-only student materials (activities, prompts, tools)
+#
+# RATIONALE:
+#   - COMPLETE.docx: teachers can convert to Google Docs for student access
+#   - CAP: SLP/AAC team handoff; can't be found anywhere else
+#   - Student Print Materials: fast copy-ready packet for student use
+#   - Welcome PDF: orientation for the teacher; what makes this different from standard ELA
+#
+# NOTE on Student Print Materials:
+#   This requires a `student_pages` key in the unit config listing PDF page indices.
+#   If `student_pages` is not configured or the PDF is missing, this file is skipped
+#   with a warning. Add page indices after verifying the COMPLETE.docx PDF export.
+#
 def assemble_tpt_folder(unit_name, unit_cfg):
     unit_folder = os.path.join(NF_ROOT, unit_cfg["folder"])
     prefix      = unit_cfg["prefix"]
@@ -684,27 +824,32 @@ def assemble_tpt_folder(unit_name, unit_cfg):
 
     copies = []
 
-    # 1. COMPLETE.docx
+    # ── 1. Welcome to the Product PDF ─────────────────────────────────────────
+    welcome_bytes = build_welcome_pdf(unit_cfg)
+    welcome_path  = os.path.join(tpt_folder, f"{prefix}_Welcome_to_the_Product.pdf")
+    with open(welcome_path, "wb") as f:
+        f.write(welcome_bytes)
+    copies.append(f"{prefix}_Welcome_to_the_Product.pdf")
+
+    # Also save to unit root for reference
+    welcome_root = os.path.join(unit_folder, f"{prefix}_Welcome_to_the_Product.pdf")
+    with open(welcome_root, "wb") as f:
+        f.write(welcome_bytes)
+
+    # ── 2. COMPLETE.docx ──────────────────────────────────────────────────────
     if unit_cfg["docx"]:
+        # Check unit folder first, then TPT subfolder
         src_docx = os.path.join(unit_folder, unit_cfg["docx"])
+        if not os.path.exists(src_docx):
+            src_docx = os.path.join(unit_folder, f"{prefix}_TPT", unit_cfg["docx"])
         if os.path.exists(src_docx):
             dst = os.path.join(tpt_folder, f"{prefix}_COMPLETE.docx")
             shutil.copy2(src_docx, dst)
             copies.append(f"{prefix}_COMPLETE.docx")
         else:
-            print(f"  ⚠ DOCX not found: {src_docx}")
+            print(f"  ⚠ DOCX not found (build JS script first): {src_docx}")
 
-    # 2. Symbol Cards PDF (if exists)
-    if unit_cfg["sym_cards"]:
-        src_sym = os.path.join(unit_folder, unit_cfg["sym_cards"])
-        if os.path.exists(src_sym):
-            dst = os.path.join(tpt_folder, f"{prefix}_Symbol_Cards.pdf")
-            shutil.copy2(src_sym, dst)
-            copies.append(f"{prefix}_Symbol_Cards.pdf")
-        else:
-            print(f"  ⚠ Symbol Cards not found: {src_sym}")
-
-    # 3. Communication Access Packet
+    # ── 3. Communication Access Packet ────────────────────────────────────────
     cap_src = os.path.join(unit_folder, f"{prefix}_Communication_Access_Packet.pdf")
     if os.path.exists(cap_src):
         dst = os.path.join(tpt_folder, f"{prefix}_Communication_Access_Packet.pdf")
@@ -713,22 +858,65 @@ def assemble_tpt_folder(unit_name, unit_cfg):
     else:
         print(f"  ⚠ Comm Access Packet not found: {cap_src}")
 
-    # 4. Welcome & Terms
-    welcome_bytes = build_welcome_pdf(unit_cfg)
-    welcome_path  = os.path.join(tpt_folder, f"{prefix}_Welcome_and_Terms.pdf")
-    with open(welcome_path, "wb") as f:
-        f.write(welcome_bytes)
-    copies.append(f"{prefix}_Welcome_and_Terms.pdf")
-
-    # Also save Welcome/Terms to unit root for reference
-    welcome_root = os.path.join(unit_folder, f"{prefix}_Welcome_and_Terms.pdf")
-    with open(welcome_root, "wb") as f:
-        f.write(welcome_bytes)
+    # ── 4. Student Print Materials ────────────────────────────────────────────
+    student_pages = unit_cfg.get("student_pages")
+    unit_pdf_path = unit_cfg.get("unit_pdf")
+    if student_pages and unit_pdf_path and os.path.exists(unit_pdf_path):
+        try:
+            student_bytes = build_student_print_materials(unit_cfg, student_pages)
+            spm_path = os.path.join(tpt_folder, f"{prefix}_Student_Print_Materials.pdf")
+            with open(spm_path, "wb") as f:
+                f.write(student_bytes)
+            copies.append(f"{prefix}_Student_Print_Materials.pdf")
+        except Exception as e:
+            print(f"  ⚠ Student Print Materials failed: {e}")
+    else:
+        print(f"  ⚠ Student Print Materials: student_pages not configured or unit PDF missing.")
+        print(f"      → Add 'student_pages' key to unit config with page indices after PDF export.")
 
     print(f"  ✓ TPT folder: {tpt_folder}")
     for c in copies:
         print(f"      {c}")
     return tpt_folder
+
+
+# ── Student Print Materials extractor ────────────────────────────────────────
+#
+# Extracts print-only student pages from the unit PDF.
+# Pages are specified as zero-indexed page indices in the unit config:
+#   "student_pages": [list_of_zero_indexed_page_numbers]
+#
+# Standard student print materials (what gets printed and handed to students):
+#   - Annotation Guide / Text Interaction Tool Guide
+#   - Sentence Frames
+#   - V1 passage + reading activity
+#   - V2 passage + reading activity
+#   - V3 passage + reading activity
+#   - Evidence Recording Sheet
+#   - Unit Prompt
+#   - Self-Assessment Checklist
+#   - Rubric
+#   - Research Choice Board
+#
+# Page indices must be confirmed from the unit PDF after COMPLETE.docx is exported.
+#
+def build_student_print_materials(unit_cfg, page_indices) -> bytes:
+    unit_pdf_path = unit_cfg["unit_pdf"]
+    unit_title    = unit_cfg["display"]
+    prefix        = unit_cfg["prefix"]
+
+    reader = PdfReader(unit_pdf_path)
+    writer = PdfWriter()
+
+    for idx in page_indices:
+        if idx < len(reader.pages):
+            writer.add_page(reader.pages[idx])
+        else:
+            print(f"  ⚠ Student page index {idx} out of range (unit has {len(reader.pages)} pages)")
+
+    buf = io.BytesIO()
+    writer.write(buf)
+    return buf.getvalue()
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -743,12 +931,17 @@ def main():
         print(f"  {unit_name}")
         print(f"{'─'*60}")
 
-        # Build Comm Access Packet (skip Frances Kelsey — already built)
-        if not cfg.get("packet_already_built"):
-            print(f"  Building Communication Access Packet…")
-            build_comm_access_packet(unit_name, cfg)
+        # Build Comm Access Packet (all units rebuilt with vocabulary framework 2026-03-29)
+        if cfg["core_words"] or cfg["fringe_words"]:
+            if os.path.exists(cfg["unit_pdf"]):
+                print(f"  Building Communication Access Packet…")
+                build_comm_access_packet(unit_name, cfg)
+            else:
+                print(f"  ⚠ Unit PDF not found — skipping CAP build: {cfg['unit_pdf']}")
+                print(f"      → Export COMPLETE.docx to PDF first (Word → File → Save As → PDF)")
+                print(f"      → Save to scratch: {cfg['unit_pdf']}")
         else:
-            print(f"  (Frances Kelsey packet already built — skipping)")
+            print(f"  ⚠ No vocabulary configured for {unit_name} — skipping CAP build")
 
         # Assemble TPT folder
         print(f"  Assembling TPT folder…")

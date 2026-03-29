@@ -90,8 +90,8 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 
 | Tool | File | Purpose |
 |------|------|---------|
-| **AAC Vocabulary Explorer** | `Products/UFLI Phonics/cbd-vocabulary-explorer.html` | Search 476 words by Fitzgerald Key category, word type, product line. Click any word → see which products/lessons use it, related words, AAC team notes (core vs. fringe guidance), product recommendations. Links to UFLI lesson activity. |
-| **UFLI Lesson Activity** | `Products/UFLI Phonics/ufli-lesson-activity.html` | Interactive 8-step UFLI lesson player with AAC access modes, auditory confirmation loop, per-step data tracking. |
+| **AAC Vocabulary Explorer** | `Products/UFLI Phonics/cbd-vocabulary-explorer.html` | Search 476 words by Fitzgerald Key category, word type, product line. Click any word → see which products/lessons use it, related words, AAC team notes (core vs. fringe guidance), product recommendations. Links to UFLI lesson activity. **Sticky header (2026-03-29).** |
+| **UFLI Lesson Activity** | `Products/UFLI Phonics/ufli-lesson-activity.html` | Interactive 8-step UFLI lesson player with AAC access modes, auditory confirmation loop, per-step data tracking. **Persistent branded nav bar on all screens with link back to Vocabulary Explorer (2026-03-29).** |
 
 **Vocabulary Explorer features:**
 - Embedded 476-word dataset (no network required)
