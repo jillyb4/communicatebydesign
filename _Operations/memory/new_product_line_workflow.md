@@ -96,7 +96,7 @@ Every product line needs a research foundation document. Check:
   - Nonfiction: Partial (via nonfiction_build_reference.md + annotated evidence in units)
   - Fiction: ✅ `Fiction_Narrative_Research_Foundation.md`
   - UFLI: ✅ `CbD_Research_Reference_AAC_Phonics_Literacy.md` + `UFLI_AAC_Phonics_Research_Reference.md`
-  - Picture Book Companions: ⚠️ Not yet created — needed before major build
+  - Picture Book Companions: ✅ `Picture_Book_Companions_Research_Foundation.md` (created 2026-03-29)
   - AT/AAC IEP Team: Partial (brand guidelines + accessibility docs)
   - Chapter Books: ⚠️ Not yet created
 
@@ -263,3 +263,7 @@ Use this section to record key decisions made during each new product line devel
 | Picture Book Companions | First product: All the Way to the Top (Jennifer Keelan) | 2026-03-26 | K–3, IRA + Dialogic + ALS framework |
 | Fiction Anchor Texts | Annotation codes LOCKED: [TRAIT] / [WHY] / [CHANGE] | 2026-03-29 | Wonder only — define per title |
 | All lines | Vocabulary framework required before build | 2026-03-29 | `Research/CbD_Vocabulary_Selection_Framework.md` |
+| Picture Book Companions | Research foundation document created | 2026-03-29 | `Research/Picture_Book_Companions_Research_Foundation.md` — IRA + Dialogic + ALS framework documented; HLPs 12/13/14/16 mapped; K–3 vocabulary ceiling: 15–20 words; primary standard RL.K-3.3 + secondary RL.K-3.4 |
+| Picture Book Companions | Three-reading structure locked | 2026-03-29 | IRA read / vocabulary re-read / student-led re-read |
+| Picture Book Companions | ALS one-pager embedded in every companion (non-negotiable) | 2026-03-29 | Partner training is the predictor variable per Binger & Light 2007 |
+| Picture Book Companions | Visual Scene Displays → V2 only | 2026-03-29 | Grid default for V1; VSD planned for second iteration |

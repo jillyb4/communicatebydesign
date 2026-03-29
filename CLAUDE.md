@@ -61,7 +61,7 @@ Strategic context only (things that don't belong in Airtable):
 | Area | What's Happening | Key Date |
 |------|-----------------|----------|
 | **TPT store** | 13 products LIVE. UFLI (36 products) is next major launch. | May 2026 |
-| **All the Way to the Top Companion** | K–3 picture book companion. Plan doc saved. Price: $5. | July 2026 (ADA anniversary) |
+| **All the Way to the Top Companion** | K–3 picture book companion. Price: $5. Research foundation built (`Research/Picture_Book_Companions_Research_Foundation.md`). Framework: IRA + Dialogic Reading + ALS. Standard: RL.K-3.3 + RL.K-3.4. 3-reading structure + ALS one-pager embedded. Vocab ceiling: 15–20 words. VSD → V2. | July 2026 (ADA anniversary) |
 | **504 Sit-In + Capitol Crawl bundle** | Bundle both for Disability Pride Month. Both LIVE. | July 2026 |
 | **UFLI Phonics** | 36 products built + QC passed. Covers in Canva → preview PDFs → TPT upload. | May 2026 |
 | **AAC Trading Cards** | 5 decks built, Order #82750 placed. Etsy/Amazon standalone deck test underway (week of 2026-03-29). File structure cleaned — flat deck folders under `Products/AAC Trading Cards/`. | — |
@@ -130,7 +130,7 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 | **AT/AAC Tools** | Family/Homeschool | 0 live + 6 pipeline (F0–F5) |
 | **Nonfiction Reading Units** | — | 6 live + 1 freebie (Keiko Part 1). Grades 6–10. |
 | **Fiction Anchor Texts** | — | 0 live. SDI companion units for traditional K–12 novels already in classrooms. NOT a Lexile differentiation product — text stays the same, access layer is the product. Skills target RL standards. Framework: Story Grammar (Spencer & Petersen 2020) + Description-First activity design + Visual Scene Displays + Emotional/mental state vocabulary pre-teaching. Product architecture: two files per unit — main unit docx + Fiction Printable Packet PDF (Python/ReportLab, 4 layers, 9 pages). Two vocabulary sets: Set A = SDI instruction targets (symbol cards + Vocab Map), Set B = full communication board vocabulary. Printable Packet spec: `_Operations/memory/fiction_printable_packet_spec.md`. Reference: `_Operations/memory/fiction_reference.md`. Research: `Research/Fiction_Narrative_Research_Foundation.md`. Brand color TBD. Pricing model TBD (not passage-count based). |
-| **Picture Book Companions** | K–3 | 0 live. New sub-line est. 2026-03-26. First product: All the Way to the Top. Framework: Interactive Read-Aloud + Dialogic Reading + Aided Language Stimulation. |
+| **Picture Book Companions** | K–3 | 0 live. New sub-line est. 2026-03-26. First product: All the Way to the Top. Framework: IRA + Dialogic Reading + ALS. Research: `Research/Picture_Book_Companions_Research_Foundation.md` (created 2026-03-29). Standards: RL.K-3.3 + RL.K-3.4. 3-reading structure. ALS one-pager embedded. Vocab ceiling: 15–20 words. |
 | **UFLI Phonics** | — | 36 products built, not yet listed. Target May 2026. |
 | **AAC Trading Cards** | Standalone Decks | 5 decks: UFLI (346), Alphabet (78), Starter Core (54), Growing Core (170), Full Core (377) |
 | **AAC Trading Cards** | Per-Product Companion | Module: `_Operations/cbd_trading_cards.py` |
