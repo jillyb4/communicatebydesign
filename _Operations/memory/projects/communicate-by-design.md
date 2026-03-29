@@ -171,6 +171,19 @@ Every CbD lesson ships with 2.5"×3.5" trading card–sized symbol cards that ac
 
 ---
 
+## Digital Interactive Line (Session 18+)
+
+Two companion HTML tools in `Products/UFLI Phonics/`:
+
+| Tool | File | Status |
+|------|------|--------|
+| **AAC Vocabulary Explorer** | `cbd-vocabulary-explorer.html` | Sticky header ✓ (2026-03-29). Nav link to UFLI Lesson Activity opens in same tab. |
+| **UFLI Lesson Activity** | `ufli-lesson-activity.html` | Branded nav bar on ALL screens (config/lesson/complete) with link back to Vocabulary Explorer ✓ (2026-03-29). |
+
+Both tools navigate between each other in the same browser tab. GitHub commit needed after any .html edits.
+
+---
+
 ## UFLI Phonics Product Line
 
 ### Products BUILT (36 total)

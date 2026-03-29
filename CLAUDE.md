@@ -246,7 +246,7 @@ Monitor special education Facebook groups (7.5M+ viewers) for real practitioner 
 
 ## Instructional Frameworks (REQUIRED — load before any unit build or QC)
 
-All four frameworks must be applied before any nonfiction, fiction, or picture book unit moves to build. The vocabulary framework applies to ALL product lines.
+All six frameworks must be applied before any nonfiction, fiction, or picture book unit moves to build. The vocabulary and communication access frameworks apply to ALL product lines.
 
 ### Vocabulary Selection Framework (Session 18)
 - **Quick reference:** `_Operations/memory/vocabulary_selection_reference.md`
@@ -254,23 +254,35 @@ All four frameworks must be applied before any nonfiction, fiction, or picture b
 
 Two-dimension classification (both tags required on every word): AAC Access Layer (core/fringe/heart) + Instructional Layer (explicit/background/generative). Max ~30 fringe per nonfiction unit. Top 5 core + Top 5 fringe required. Hard rule: if framework doesn't cover a new product type → research session first.
 
-### Differentiation Framework (Session 19)
+### Differentiation Framework (Session 19 — v2.0)
 - **Quick reference:** `_Operations/memory/differentiation_reference.md`
 - **Full research:** `Research/CbD_Differentiation_Framework.md`
 
-Governs V1/V2/V3 text version design. Lexile bands locked: V1 (900–1050), V2 (650–800), V3 (400–550). Three mechanisms: text complexity reduction (sentence decomposition, syntactic simplification, knowledge demand), activity scaffold gradient (open-ended → partial structure → choice/cloze), AAC response pathway overlay. Hard rule: vocabulary list, standard, skill type, and all factual content are identical across all versions.
+V1/V2/V3 is an **accommodation framework** (not modification). V1 = grade-level Lexile, open-ended response. V2 = 5th/6th grade comprehension level, same skill + same HLPs, reading barrier removed, one focus skill. V3 = 3rd/4th grade reading level + vocabulary TAUGHT within the unit (Descriptive Teaching Model), same skill + same HLPs. AAC access is active at ALL versions. Locked constants: standard, essential question, vocabulary list, factual content, skill type, response task category, HLPs. Hard rule: every V3 activity must pass the access test (skill demonstrated, not just recalled).
+
+### Communication Access Framework (Session 19 — NEW)
+- **Quick reference:** `_Operations/memory/communication_access_reference.md`
+- **Full research:** `Research/CbD_Communication_Access_Framework.md`
+
+The ecosystem overlay. AAC access for ALL students using ANY type of AAC (SGD, e-trans board, symbol cards, alternative pencil). Applies at every version level (V1, V2, V3). Layers across product lines: UFLI (K-2) → Chapter Books/Fiction (Gr 3-8) → Nonfiction (Gr 6-10). Progression and continual learning — not a static overlay. CAP is the delivery mechanism. Hard rule: no activity in any CbD product accepts oral response only; every response opportunity has a non-speech pathway.
 
 ### Communication Partner Framework (Session 19)
 - **Quick reference:** `_Operations/memory/communication_partner_reference.md`
 - **Full research:** `Research/CbD_Communication_Partner_Framework.md`
 
-Governs partner guidance design in all units. Four behaviors: Model (ALgS), Wait (5 seconds), Expand, Offer Choice. Partner guidance is built-in at point of use, not supplemental. Written for Circle 3 competence (sub para with no AAC training). Hard rule: at least one callout per unit specifies wait time with seconds, models specific vocabulary, and explains how to respond to AAC output.
+Four behaviors: Model (ALgS), Wait (5 seconds), Expand, Offer Choice. Partner guidance is built-in at point of use, not supplemental. Written for Circle 3 competence (sub para with no AAC training). Hard rule: at least one callout per unit specifies wait time with seconds, models specific vocabulary, and explains how to respond to AAC output.
 
 ### SDI Framework (Session 19)
 - **Quick reference:** `_Operations/memory/sdi_reference.md`
 - **Full research:** `Research/CbD_SDI_Framework.md`
 
-Governs IEP goal stem design and SDI vs. accommodation distinction. SDI = methodology/content/delivery adaptation; accommodation = format/setting change. V2/V3 adapted text + vocabulary pre-teaching + CAP = SDI-level. IEP goal stems: observable verb + condition + criterion + data method. Hard rule: "understand/know/learn" never used in goal stems.
+Governs SDI vs. accommodation component labeling in units. SDI = methodology/content/delivery adaptation; accommodation = format/setting change. V2/V3 adapted text + vocabulary pre-teaching + CAP = SDI-level. Hard rule: SDI components must be explicitly labeled in teacher guidance. IEP goal stems live in the IEP Goal Ecosystem file (below), not here.
+
+### IEP Goal Ecosystem (Session 19 — NEW)
+- **Quick reference:** `_Operations/memory/iep_goal_ecosystem_reference.md`
+- **Full research:** `Research/CbD_IEP_Goal_Ecosystem.md`
+
+IEP goals are support infrastructure for the CbD ecosystem, not the product itself. Goal stems are model language for teams — starting points, not compliance guarantees. Two-goal model per unit: academic ELA goal + AAC communication goal. Observable verb requirement (never "understand/know/learn"). IDEA structure: Given [condition] → will [verb + skill] → as measured by [tool] → achieving [criterion] → by [date]. Accommodation test required: all CbD goals must be framed as accommodations (same standard, different access), not modifications.
 
 ### Assessment and Data Framework (Session 19)
 - **Quick reference:** `_Operations/memory/assessment_data_reference.md`
@@ -280,10 +292,12 @@ Governs rubric design, mastery criteria, and data collection tools. Rubrics: 3-l
 
 **Phase 1 Framework Gate (required before any new unit build):**
 1. Vocabulary Framework — type confirmed, max fringe checked, Top 5 selected
-2. Differentiation Framework — V1/V2/V3 Lexile targets confirmed, scaffold gradient designed
-3. Communication Partner Framework — partner guidance callouts drafted
-4. SDI Framework — IEP goal stems written, SDI vs. accommodation labeled
-5. Assessment Framework — rubric designed, mastery criteria set, data roles assigned
+2. Differentiation Framework — V1/V2/V3 Lexile targets confirmed, HLPs labeled, AAC access confirmed at all versions
+3. Communication Access Framework — CAP vocabulary list complete, response opportunities in all activities, partner guidance at point of use
+4. Communication Partner Framework — partner guidance callouts drafted for all three version levels
+5. SDI Framework — SDI components identified and labeled, accommodations listed separately
+6. IEP Goal Ecosystem — academic goal stem + AAC goal stem written for this unit's skill type
+7. Assessment Framework — rubric designed, mastery criteria set, data roles assigned
 
 ---
 
@@ -300,10 +314,12 @@ Before any new product line (or major new product within a line) moves into buil
 
 **Phase 1 — Framework Application (before build):**
 1. Vocabulary Framework Gate — word type confirmed, max fringe checked, Top 5 selected
-2. Differentiation Framework Gate — V1/V2/V3 Lexile targets + scaffold gradient confirmed
-3. Communication Partner Framework Gate — partner guidance callouts drafted
-4. SDI Framework Gate — IEP goal stems written, SDI vs. accommodation labeled
-5. Assessment Framework Gate — rubric designed, mastery criteria set, data roles assigned
+2. Differentiation Framework Gate — V1/V2/V3 Lexile targets + scaffold gradient confirmed, HLPs labeled, AAC access at all versions
+3. Communication Access Framework Gate — CAP vocabulary list complete, response opportunities designed, partner guidance at point of use
+4. Communication Partner Framework Gate — partner guidance callouts drafted for all version levels
+5. SDI Framework Gate — SDI components identified and labeled, accommodations listed separately
+6. IEP Goal Ecosystem Gate — academic goal stem + AAC goal stem written for this unit's skill type
+7. Assessment Framework Gate — rubric designed, mastery criteria set, data roles assigned
 6. Research Foundation Gate — does a research file exist in `Research/`? If NO → create it first.
 7. Product Architecture — what files ship? what build scripts needed?
 8. Brand/Identity — product line color, cover direction, footer text locked?

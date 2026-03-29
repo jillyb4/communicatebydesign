@@ -7,14 +7,15 @@
 
 This document is the research-backed framework governing how Communicate by Design designs and labels Specially Designed Instruction (SDI) components across all product lines. It exists because SDI is a legal requirement under IDEA — not a synonym for "extra help" or "modified materials." Without a principled framework, CbD products may provide differentiation without ensuring that differentiation rises to the level of SDI, and IEP teams using CbD materials may not know which components constitute legally documentable SDI.
 
-**This framework answers four operational questions:**
+**This framework answers three operational questions:**
 
 1. **What is SDI under IDEA?** (Legal definition and three adaptation types)
 2. **Which CbD product components constitute SDI?** (And which are accommodations)
-3. **How are IEP goal stems designed to align to CbD units?** (Goal structure)
-4. **What documentation evidence does a team need?** (Data trail)
+3. **What documentation evidence does a team need?** (Data trail)
 
 It applies to all CbD text-based product lines. Product design must distinguish SDI from accommodation — the distinction has legal and instructional consequences.
+
+**IEP goal stems are documented separately.** The model language for writing measurable annual goals connected to CbD units — including IDEA measurability requirements, the accommodation vs. modification distinction, observable verb guidance, and goal stems by unit and skill type — is in `Research/CbD_IEP_Goal_Ecosystem.md` and the quick reference `_Operations/memory/iep_goal_ecosystem_reference.md`. This file focuses on the product design question: which components constitute SDI and how must they be identified.
 
 ---
 
@@ -115,47 +116,18 @@ These components are good instructional practice and may be listed in the accomm
 
 ---
 
-## Part 3: IEP Goal Stem Design
+## Part 3: IEP Goal Stems — Cross-Reference
 
-CbD units include IEP goal stems — model language for annual goals and short-term objectives that connect to the unit's ELA standard. These are designed to IDEA specifications: measurable, time-bound, using observable behavior verbs, and tied to a specific standard.
+IEP goal stem design is documented in `Research/CbD_IEP_Goal_Ecosystem.md`. That file covers:
+- The full IDEA goal structure (condition + observable verb + criterion + data method)
+- Observable verb guidance by skill type
+- Goal stem examples by unit (504 Sit-In, Capitol Crawl, Frances Kelsey, cross-unit AAC)
+- The two-goal model (academic ELA + AAC communication)
+- The accommodation vs. modification distinction for goal framing
 
-### The IEP Goal Structure (IDEA 34 CFR §300.320)
+The quick reference is in `_Operations/memory/iep_goal_ecosystem_reference.md`.
 
-A legally compliant measurable annual goal requires:
-1. **Observable behavior** — what the student will DO (not "understand" or "know")
-2. **Condition** — under what circumstances (given what materials, supports, or prompts)
-3. **Criterion** — how well, how consistently, measured how
-
-**Model structure:**
-
-> Given [condition: adapted materials, supports, prompts], [student name] will [observable behavior verb] [skill/content] as measured by [data method], achieving [criterion: accuracy/frequency/consistency] by [date].
-
-### Behavior Verbs by Skill Type
-
-| Skill Type | Observable Verbs |
-|-----------|-----------------|
-| Close Reading / Annotation | identify, annotate, cite, label, locate, mark |
-| Author's Purpose / Perspective | explain, describe, distinguish, compare, defend, support with evidence |
-| CER (Claim-Evidence-Reasoning) | state, identify, select, write, match, construct |
-| Text Structure | identify, label, organize, sequence, categorize |
-| Sourcing / Corroboration | evaluate, rate, compare, distinguish, justify |
-| AAC communication output | indicate, select, communicate, produce, use (specify modality: via AAC device / via communication board / via eye gaze) |
-
-**Never use:** understand, appreciate, know, be aware of, learn — these are not observable behaviors and do not satisfy IDEA's measurability requirement.
-
-### Goal Stem Examples by Unit
-
-**504 Sit-In (Skill #4: Author's Purpose/Perspective):**
-> Given the V[2/3] adapted passage and a Perspective Comparison chart, [student] will identify at least 2 ways the government and disability community perspectives differ, citing textual evidence for each, with 80% accuracy across 3 consecutive trials as measured by teacher rubric.
-
-**Capitol Crawl (Skill #6: Sourcing/Corroboration):**
-> Given 4 source excerpts and the ESR graphic organizer, [student] will rate each source as Strong, Medium, or Weak and provide one text-based justification for each rating, achieving 3 of 4 correct ratings across 2 consecutive trials.
-
-**Frances Kelsey (Skill #5: CER):**
-> Given a V[2/3] adapted passage and CER frame, [student] will construct a written claim and identify 2 pieces of supporting evidence, with the claim matching the evidence in 4 of 5 trials as measured by the CER rubric.
-
-**AAC Communication Goal (Cross-Unit):**
-> Given a communication board or AAC device with pre-programmed unit vocabulary, [student] will use at least 2 symbols in sequence to respond to a comprehension question during content-area instruction, in 4 of 5 opportunities across 3 consecutive data collection sessions.
+When writing goal stems for a new CbD unit, consult the IEP Goal Ecosystem file first.
 
 ---
 
@@ -191,13 +163,10 @@ The Communication Access Packet is designed to serve as part of the SDI document
 - [ ] Which components are accommodations? (Listed separately)
 - [ ] Are SDI components labeled as requiring IEP documentation?
 
-**Gate 2: IEP Goal Stem Completeness**
-- [ ] Goal stem includes observable behavior verb?
-- [ ] Goal stem includes condition (adapted materials, supports)?
-- [ ] Goal stem includes measurable criterion (accuracy, frequency, consistency)?
-- [ ] Goal stem references the specific ELA standard?
-- [ ] Goal stem includes data collection method?
-- [ ] "Understand" / "know" / "learn" NOT used?
+**Gate 2: IEP Goal Stems**
+- [ ] Goal stems present for this unit's skill type (academic + AAC)?
+- [ ] Goal stems follow IDEA structure per `Research/CbD_IEP_Goal_Ecosystem.md`?
+- [ ] "Understand" / "know" / "learn" NOT used in any goal stem?
 
 **Gate 3: SDI vs. Accommodation Distinction**
 - [ ] Is the distinction between SDI and accommodation explained in the unit teacher guidance?
