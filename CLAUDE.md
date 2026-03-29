@@ -244,23 +244,46 @@ Monitor special education Facebook groups (7.5M+ viewers) for real practitioner 
 
 ---
 
-## Vocabulary Selection Framework (Session 18 — REQUIRED FOR ALL PRODUCTS)
-Every vocabulary decision in every CbD product runs through this framework before build begins.
+## Instructional Frameworks (REQUIRED — load before any unit build or QC)
 
-- **Quick reference (load during build):** `_Operations/memory/vocabulary_selection_reference.md`
-- **Full research + citations:** `Research/CbD_Vocabulary_Selection_Framework.md`
+All four frameworks must be applied before any nonfiction, fiction, or picture book unit moves to build. The vocabulary framework applies to ALL product lines.
 
-**Two-dimension classification — both tags required on every word:**
-- AAC Access Layer: Core (already programmed) / Fringe (SLP must add; 1–2 week lead time) / Heart
-- Instructional Layer: Explicit instruction target / Background knowledge / Generative/response
+### Vocabulary Selection Framework (Session 18)
+- **Quick reference:** `_Operations/memory/vocabulary_selection_reference.md`
+- **Full research:** `Research/CbD_Vocabulary_Selection_Framework.md`
 
-**Product line vocabulary types:**
-- UFLI: FIXED decode targets in `ufli_lesson_configs.js` — do not alter
-- Nonfiction (6–10): Tier 2 academic + Tier 3 content; max ~30 fringe; shared response core across all 6 units
-- Fiction: Emotional/mental state first → relational/causal → narrative fringe (not name) → skill-specific
-- Picture Book Companions (K–3): IRA read-aloud + thematic conceptual vocabulary
+Two-dimension classification (both tags required on every word): AAC Access Layer (core/fringe/heart) + Instructional Layer (explicit/background/generative). Max ~30 fringe per nonfiction unit. Top 5 core + Top 5 fringe required. Hard rule: if framework doesn't cover a new product type → research session first.
 
-**Hard rule:** If vocabulary type is unclear OR the framework doesn't cover a new product type, a vocabulary research session is the FIRST deliverable — not a unit draft.
+### Differentiation Framework (Session 19)
+- **Quick reference:** `_Operations/memory/differentiation_reference.md`
+- **Full research:** `Research/CbD_Differentiation_Framework.md`
+
+Governs V1/V2/V3 text version design. Lexile bands locked: V1 (900–1050), V2 (650–800), V3 (400–550). Three mechanisms: text complexity reduction (sentence decomposition, syntactic simplification, knowledge demand), activity scaffold gradient (open-ended → partial structure → choice/cloze), AAC response pathway overlay. Hard rule: vocabulary list, standard, skill type, and all factual content are identical across all versions.
+
+### Communication Partner Framework (Session 19)
+- **Quick reference:** `_Operations/memory/communication_partner_reference.md`
+- **Full research:** `Research/CbD_Communication_Partner_Framework.md`
+
+Governs partner guidance design in all units. Four behaviors: Model (ALgS), Wait (5 seconds), Expand, Offer Choice. Partner guidance is built-in at point of use, not supplemental. Written for Circle 3 competence (sub para with no AAC training). Hard rule: at least one callout per unit specifies wait time with seconds, models specific vocabulary, and explains how to respond to AAC output.
+
+### SDI Framework (Session 19)
+- **Quick reference:** `_Operations/memory/sdi_reference.md`
+- **Full research:** `Research/CbD_SDI_Framework.md`
+
+Governs IEP goal stem design and SDI vs. accommodation distinction. SDI = methodology/content/delivery adaptation; accommodation = format/setting change. V2/V3 adapted text + vocabulary pre-teaching + CAP = SDI-level. IEP goal stems: observable verb + condition + criterion + data method. Hard rule: "understand/know/learn" never used in goal stems.
+
+### Assessment and Data Framework (Session 19)
+- **Quick reference:** `_Operations/memory/assessment_data_reference.md`
+- **Full research:** `Research/CbD_Assessment_Data_Framework.md`
+
+Governs rubric design, mastery criteria, and data collection tools. Rubrics: 3-level (Does Not Yet Meet / Approaching / Meets), behavioral descriptions, identical across V1/V2/V3, on the student response document. Default mastery: 80% accuracy across 3 consecutive trials; generalization across 2+ partners. Data roles: special educator (rubrics) + para (Session Tracker) + SLP (CAP confirmation).
+
+**Phase 1 Framework Gate (required before any new unit build):**
+1. Vocabulary Framework — type confirmed, max fringe checked, Top 5 selected
+2. Differentiation Framework — V1/V2/V3 Lexile targets confirmed, scaffold gradient designed
+3. Communication Partner Framework — partner guidance callouts drafted
+4. SDI Framework — IEP goal stems written, SDI vs. accommodation labeled
+5. Assessment Framework — rubric designed, mastery criteria set, data roles assigned
 
 ---
 
@@ -276,10 +299,14 @@ Before any new product line (or major new product within a line) moves into buil
 4. Is there a meaningful gap vs. competitors?
 
 **Phase 1 — Framework Application (before build):**
-1. Vocabulary Framework Gate — what type is this? Does the framework cover it? If NO → research first.
-2. Research Foundation Gate — does a research file exist in `Research/`? If NO → create it first.
-3. Product Architecture — what files ship? what build scripts needed?
-4. Brand/Identity — product line color, cover direction, footer text locked?
+1. Vocabulary Framework Gate — word type confirmed, max fringe checked, Top 5 selected
+2. Differentiation Framework Gate — V1/V2/V3 Lexile targets + scaffold gradient confirmed
+3. Communication Partner Framework Gate — partner guidance callouts drafted
+4. SDI Framework Gate — IEP goal stems written, SDI vs. accommodation labeled
+5. Assessment Framework Gate — rubric designed, mastery criteria set, data roles assigned
+6. Research Foundation Gate — does a research file exist in `Research/`? If NO → create it first.
+7. Product Architecture — what files ship? what build scripts needed?
+8. Brand/Identity — product line color, cover direction, footer text locked?
 
 **Phase 2 — Ecosystem Coherence:** vocabulary carryover, trading card companion, bundle strategy, Substack angle, freebie/entry point, IEP goal coherence.
 

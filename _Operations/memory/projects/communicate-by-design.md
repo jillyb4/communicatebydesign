@@ -345,6 +345,25 @@ Goes BEYOND modeling. Teaches families to be their child's first communication t
 
 ---
 
+## Instructional Frameworks (Session 19 — 2026-03-29)
+
+Four research-backed frameworks now govern all text-based product builds. All four must be applied before any new unit moves to build. Each has a Research file (full citations) + an operational quick reference in `_Operations/memory/`.
+
+| Framework | Quick Reference | Research File | Governs |
+|-----------|----------------|---------------|---------|
+| **Vocabulary Selection** | `vocabulary_selection_reference.md` | `Research/CbD_Vocabulary_Selection_Framework.md` | Word selection, AAC/instructional classification, Top 5, symbol coverage |
+| **Differentiation** | `differentiation_reference.md` | `Research/CbD_Differentiation_Framework.md` | V1/V2/V3 text versions, Lexile bands, scaffold gradient, locked constants |
+| **Communication Partner** | `communication_partner_reference.md` | `Research/CbD_Communication_Partner_Framework.md` | Partner guidance design, 4 behaviors (Model/Wait/Expand/Choice), Circle 3 test |
+| **SDI + Assessment** | `sdi_reference.md` / `assessment_data_reference.md` | `Research/CbD_SDI_Framework.md` / `Research/CbD_Assessment_Data_Framework.md` | IEP goal stems, SDI vs. accommodation, rubric design, mastery criteria, data roles |
+
+**Files needing manual cleanup in iCloud (cannot delete from sandbox):**
+- `Products/Nonfiction Units/504 Sit In/504_Sit_In_Welcome_and_Terms.pdf` — stale; superseded by Welcome_to_the_Product.pdf
+- `Products/Nonfiction Units/Capitol Crawl/Capitol_Crawl_Welcome_and_Terms.pdf` — stale
+- `Products/Nonfiction Units/[each unit]/zi[random]` — iCloud temp zip artifacts (6 files)
+- `Products/Nonfiction Units/` root level: `Capitol_Crawl_Lesson_COMPLETE.docx`, `Keiko_Unit_COMPLETE.docx`, `Radium_Girls_Unit_COMPLETE.docx`, `Zitkala-Sa_Lesson_COMPLETE.docx` — orphaned copies; authoritative versions are in unit subfolders
+
+---
+
 ## AAC Symbol System
 
 - **Primary source:** ARASAAC (arasaac.org) — 13,000+ pictograms, CC BY-NC-SA 4.0
