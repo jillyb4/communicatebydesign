@@ -1,0 +1,309 @@
+# Memory
+
+## Me
+Jill McCardel, special educator and advocate. Creator of Communicate by Design (CbD).
+Working toward AT certification (not yet certified — do NOT call me AT Specialist).
+
+## Brand: Communicate by Design (CbD)
+| Element | Value |
+|---------|-------|
+| **Tagline** | Where AT Meets Practice |
+| **Navy** | #1B1F3B (Deep Ink Navy — backgrounds) |
+| **Teal (documents)** | #006DA0 (Accessible Deep Teal — WCAG AA, 5.68:1 on white). All .docx/.pdf builds. |
+| **Teal (digital/Canva)** | #00B4D8 (Electric Teal — COMMUNICATE text, Canva, social). Fails WCAG on white — navy backgrounds or non-text accents only. |
+| **Amber** | #FFB703 (Warm Amber — BY DESIGN text, icon) |
+| **Yellow** | #FFD700 (accents) |
+| **Hierarchy** | AT → AAC → SGD |
+| **Audience** | Special educators, IEP teams, OTs, PTs, BCBAs, RBTs, paraprofessionals, families |
+| **Icon** | Amber speech bubble with AAC communication board inside |
+
+## Platforms
+| Platform | Handle / URL |
+|----------|-------------|
+| **Substack** | communicatebydesign.substack.com |
+| **TPT** | teacherspayteachers.com/store/communicate-by-design |
+| **Instagram** | @communicatebydesignaac |
+| **Airtable** | Base ID: `appeaT8hkeXWqQKIj` — 5 tables: Work Items, Products, Launch Pipeline, Instructional Activities, **Vocabulary** (new). Primary cowork hub for all tasks, products, content, and pipeline. Read this at session start. |
+
+## Canva Designs
+| Design | ID | Size |
+|--------|-----|------|
+| **Original vertical banner** | DAHDHHKwF38 | 1587×2245 |
+| **TPT horizontal banner** | DAHDIIvdYh4 | 1200×320 |
+| **Substack cover** | DAHDIK9mx8I | 1200×400 |
+| **Instagram template** | DAHDIAorU0g | 1080×1080 |
+| **Floral/butterfly graphics** | DAHEmCpBep0 | — |
+
+## Key Terms
+| Term | Meaning |
+|------|---------|
+| AT | Assistive Technology |
+| AAC | Augmentative & Alternative Communication |
+| SGD | Speech Generating Device |
+| IEP | Individualized Education Program |
+| SLP | Speech-Language Pathologist |
+| SPED | Special Education |
+| CbD | Communicate by Design (internal only — spell out in all outward-facing content) |
+| TPT | Teachers Pay Teachers (tpt.com) |
+| OT | Occupational Therapist |
+| PT | Physical Therapist |
+| BCBA | Board Certified Behavior Analyst |
+| RBT | Registered Behavior Technician |
+→ Full glossary: `_Operations/memory/glossary.md`
+
+## Active Projects
+
+**→ Live product status, prices, TPT URLs, and Pinterest ✓: read from Airtable (`appeaT8hkeXWqQKIj`). That is the authoritative source. Do not duplicate or re-track individual product status here.**
+
+Strategic context only (things that don't belong in Airtable):
+
+| Area | What's Happening | Key Date |
+|------|-----------------|----------|
+| **TPT store** | 13 products LIVE. UFLI (36 products) is next major launch. | May 2026 |
+| **All the Way to the Top Companion** | K–3 picture book companion. Plan doc saved. Price: $5. | July 2026 (ADA anniversary) |
+| **504 Sit-In + Capitol Crawl bundle** | Bundle both for Disability Pride Month. Both LIVE. | July 2026 |
+| **UFLI Phonics** | 36 products built + QC passed. Covers in Canva → preview PDFs → TPT upload. | May 2026 |
+| **AAC Trading Cards** | 5 decks built, Order #82750 placed. Etsy/Amazon standalone deck test underway (week of 2026-03-29). File structure cleaned — flat deck folders under `Products/AAC Trading Cards/`. | — |
+| **AT/AAC Family Sub-Line** | Pipeline designed (F0–F5). Build F0 freebie first. | — |
+| **Substack** | 3 posts live. Next: "AT Consideration Is a Legal Requirement…" ⚠️ Fix price ref to $4 (not $6) before publish. | Late Mar 2026 |
+| **Re-upload nonfiction zips** | All 6 units need Session 16 content update re-uploaded to TPT. | — |
+| **AT certification** | In planning. | — |
+| **Fiction Line — Wonder** | Unit 1: Wonder: Character Analysis (RL.6.3/7.3, grades 3–8). Build script complete (`Products/Fiction Anchor Texts/Wonder - Character Analysis/build_wonder_character_analysis.js`). ⚠️ Word can't open output docx — debugging needed. Vocabulary added to `nonfiction_unit_vocab.js` as entry #7 (12 core + 12 fringe). Annotation codes LOCKED (2026-03-29): [TRAIT] / [WHY] / [CHANGE]. Fiction Printable Packet spec LOCKED: `_Operations/memory/fiction_printable_packet_spec.md` — 4 layers, Python/ReportLab, 9 pages. Product architecture: two-file model (main unit docx + Printable Packet PDF). ⚠️ 8 missing ARASAAC symbols: alone, belong, invisible, loyal, bully, ordinary, helmet, face looks different. ⚠️ Delete `Wonder_Character_Analysis_Printable_Kit.docx` (wrong format — manual). Pricing TBD. Cover color TBD (bright/light, not navy). | — |
+
+→ Full pipeline: **Airtable Launch Pipeline table** (`tblKDEYyrRdPOtbhX`) — 68 records. The Excel `CbD_TPT_Launch_Calendar.xlsx` has been fully migrated to Airtable (Session 17) and is now deprecated.
+
+## Airtable Structure (Session 17–18)
+
+| Table | ID | Records | Purpose |
+|-------|----|---------|---------|
+| Work Items | `tblZFoHoKnkJqySSQ` | ~70 | Tasks, content, platform actions. All have Product Line assigned. Includes 16 Substack pipeline posts + 10 live-product action items added Session 17. |
+| Products | `tbl2YSRQiW7RHEPY5` | 32 | One record per product. Pipeline milestone checkboxes (Docx Built, QC Passed, Preview PDF, Canva Cover, TPT Listed, Pinterest, Instagram, Facebook, In Bundle). Linked to Work Items via "Work Items" field `fldQqKF1j3rZKRifK`. |
+| Launch Pipeline | `tblKDEYyrRdPOtbhX` | 68 | All pipeline product ideas across every product line — migrated from `CbD_TPT_Launch_Calendar.xlsx` (Session 17). Linked to Products table. Fields: Product Name, Product Line, Status, Estimated Price, Target Date, Seasonal Hook, Strategic Notes, Grade Band, RL/ELA Standards, CbD Target Skills, Priority Score, Linked Product. |
+| Instructional Activities | `tblHJlkbCF7c4tCNP` | 6 | Evidence-based instructional activities with HLP references, UDL principles, AAC framework connections. Linked to Launch Pipeline. Activities: ALM Shared Reading (HLP 16), Visual Scene Displays (HLP 13), Descriptive Teaching Model (HLP 12), Predictable Chart Writing/Write-Ables (HLP 14), Story Bags & Multisensory Grounding (HLP 13), Critical Response Scaffolds (HLP 14). |
+| **Vocabulary** | `tblL2KH04WijW8XUb` | **476** | **NEW (Session 18).** Master AAC vocabulary database. All core + fringe words from UFLI Phonics (346 words, Lessons 5–34) + Nonfiction Reading Units (137 words, 6 units). Fields: Word, Word Type (Core/Fringe/Heart), Fitzgerald Category (Actions/Descriptions/Nouns/People/Prepositions/Social), Fitzgerald Color Hex, UFLI Lessons, First UFLI Lesson, Nonfiction Units (multi-select: all 6 units), Product Lines, Product Count, Appears in Both Lines, Priority Vocabulary, Notes. |
+
+## Digital Interactive Line (Session 18 — NEW)
+
+Vocabulary-driven digital product ecosystem. Two companion HTML tools:
+
+| Tool | File | Purpose |
+|------|------|---------|
+| **AAC Vocabulary Explorer** | `Products/UFLI Phonics/cbd-vocabulary-explorer.html` | Search 476 words by Fitzgerald Key category, word type, product line. Click any word → see which products/lessons use it, related words, AAC team notes (core vs. fringe guidance), product recommendations. Links to UFLI lesson activity. |
+| **UFLI Lesson Activity** | `Products/UFLI Phonics/ufli-lesson-activity.html` | Interactive 8-step UFLI lesson player with AAC access modes, auditory confirmation loop, per-step data tracking. |
+
+**Vocabulary Explorer features:**
+- Embedded 476-word dataset (no network required)
+- Modified Fitzgerald Key color filter (yellow/green/orange/white/blue/pink)
+- Word Type filter: Core / Fringe / Heart Word
+- Product Line filter: UFLI Phonics / Nonfiction Reading Units
+- Per-word detail: products that use it, lesson chips (click → open UFLI activity), related words, product recommendations
+- AAC team note on every word (core = likely on system; fringe = pre-program before instruction)
+- ★ Priority Vocabulary flagging (Top 5 core/fringe per unit)
+
+**Data sources for Vocabulary table:**
+- UFLI words: `_Operations/fitzgerald_key.js` + `Products/UFLI Phonics/UFLI/ufli_lesson_configs.js`
+- Nonfiction words: confirmed per-unit word lists in `_Operations/memory/nonfiction_build_reference.md`
+- Classification: `getFitzgeraldCategory()` from `_Operations/fitzgerald_key.js`
+- Build scripts: `/sessions/busy-vigilant-keller/build_master_vocab.js` + `prepare_batches.js`
+
+**Products table covers:** AT/AAC IEP Team (7), AT/AAC Family (6), Nonfiction (7), UFLI Phonics (4), Bundle (3), Trading Cards (5), Picture Book Companions (1), Fiction Anchor Texts (1) = 34 product records
+
+**Task Category field (`flddTbX7EhIE1EV28`):** Separate singleSelect on Work Items — "Product Work" or "Operations". Operations tasks have no Product Line (blank). Product Work tasks carry a Product Line. Do NOT use Operations in the Product Line field — Operations is NOT a product line.
+
+**Pending Airtable manual work:**
+- Link Work Items records to their specific Products table records (can do in Airtable UI)
+- Delete 3 blank/empty Work Items records (MCP cannot delete — do manually: recacRAoUpf2Pm7K6, reccV2W1OY0Z4xHgI, recm3WsrttywsUP6p)
+- Remove "Operations" from the Product Line field's choice list (manual in Airtable field settings — no longer used there)
+
+## Scheduled Tasks
+
+| Task | Name | Trigger | Scope |
+|------|------|---------|-------|
+| CbD Platform Automation | `cbd-tpt-browser-tasks` | Manual (ad-hoc) | Reads Airtable "Ready to Pick Up" queue → executes tasks across TPT, Substack, Facebook, Instagram, Pinterest, Canva → verifies → marks Done |
+
+## Product Lines
+| Line | Sub-line | Status |
+|------|----------|--------|
+| **AT/AAC Tools** | IEP Team | 7 live + 8 pipeline |
+| **AT/AAC Tools** | Family/Homeschool | 0 live + 6 pipeline (F0–F5) |
+| **Nonfiction Reading Units** | — | 6 live + 1 freebie (Keiko Part 1). Grades 6–10. |
+| **Fiction Anchor Texts** | — | 0 live. SDI companion units for traditional K–12 novels already in classrooms. NOT a Lexile differentiation product — text stays the same, access layer is the product. Skills target RL standards. Framework: Story Grammar (Spencer & Petersen 2020) + Description-First activity design + Visual Scene Displays + Emotional/mental state vocabulary pre-teaching. Product architecture: two files per unit — main unit docx + Fiction Printable Packet PDF (Python/ReportLab, 4 layers, 9 pages). Two vocabulary sets: Set A = SDI instruction targets (symbol cards + Vocab Map), Set B = full communication board vocabulary. Printable Packet spec: `_Operations/memory/fiction_printable_packet_spec.md`. Reference: `_Operations/memory/fiction_reference.md`. Research: `Research/Fiction_Narrative_Research_Foundation.md`. Brand color TBD. Pricing model TBD (not passage-count based). |
+| **Picture Book Companions** | K–3 | 0 live. New sub-line est. 2026-03-26. First product: All the Way to the Top. Framework: Interactive Read-Aloud + Dialogic Reading + Aided Language Stimulation. |
+| **UFLI Phonics** | — | 36 products built, not yet listed. Target May 2026. |
+| **AAC Trading Cards** | Standalone Decks | 5 decks: UFLI (346), Alphabet (78), Starter Core (54), Growing Core (170), Full Core (377) |
+| **AAC Trading Cards** | Per-Product Companion | Module: `_Operations/cbd_trading_cards.py` |
+
+## Nonfiction Unit Pricing
+| Passages | Price |
+|----------|-------|
+| 1 passage | $8.95 |
+| 2 passages | $9.95 |
+| 3 passages | $10.95 |
+| 4+ passages | $11.95 |
+
+## UFLI Phonics Pricing
+| Product | Price |
+|---------|-------|
+| Teacher Guide + Communication Partner Guide | $5 |
+| Individual Lesson Packet (Lessons 5–34) | $1 each |
+| Lessons 5–34 Bundle | $25 (save $5) |
+| Complete Set (Guide + All 30 Packets + Supplemental PDFs) | $28 (save $7) |
+
+## AAC Trading Card Deck Tiers
+| Deck | Cards |
+|------|-------|
+| UFLI Phonics Deck | 346 |
+| Alphabet Deck | 78 |
+| Starter Core Deck | 54 |
+| Growing Core Deck | 170 |
+| Full Core Deck | 377 |
+Core decks are nested (Starter ⊆ Growing ⊆ Full). Per-product companion decks via `cbd_trading_cards.py`.
+→ Print spec, build scripts, binder ecosystem: `_Operations/memory/symbol_binder_reference.md`
+
+## Memberships
+| Org | Status |
+|-----|--------|
+| **RESNA** | Member (joined March 6, 2026, Order 83792) |
+
+---
+
+## CbD Writing Standards (ALL content — posts, products, descriptions)
+
+### Strengths-Based Language — NON-NEGOTIABLE
+All CbD writing assumes competence and good intent in practitioners AND students. The gap is always the system, the training, or the missing tool — never the person.
+
+| ❌ Never | ✅ Always |
+|----------|----------|
+| "The thing your para is probably doing wrong" | "A shift most partners were never taught" |
+| "Teams skip the AT requirement" | "Teams haven't been equipped to treat it as more than a checkbox" |
+| "Under-informed practitioners" | "Practitioners who haven't been given the research" |
+| "Students who can't read" | "Students who haven't had access to the right instruction" |
+
+**The rule:** If the sentence implies the person is the problem, rewrite it so the system or the training is the problem.
+
+### Post Length & Format
+- **Target:** 700–900 words (3–4 minute read). One strong idea per post.
+- **Structure:** Name the thing directly → one layer of evidence → one concrete Monday takeaway
+- **No windup:** First sentence delivers the point. Do not bury the lead.
+- **One citation is enough.** This is not a literature review.
+
+### Substack Content Strategy — The FB Group Engine
+Monitor special education Facebook groups (7.5M+ viewers) for real practitioner questions → write a 700-word post that answers it directly → drop the Substack link in the thread.
+**FB comment template:** *"I actually wrote about this — [link]. The short version: [one sentence]."*
+
+---
+
+## Substack Pipeline
+| Pillar | Color | Purpose |
+|--------|-------|---------|
+| 🔴 **Policy & Advocacy** | Red | Hot takes with evidence — AT enforcement, dyslexia gaps, school deflections |
+| 🟠 **Family & Teaching** | Orange | Teach It Tuesdays + "Tools I Wish I Had" origin stories |
+| 🔵 **Instructional Practice / UFLI** | Blue | Science of Reading for ALL Learners series |
+| 🟢 **Nonfiction** | Green | Behind-the-scenes essays tied to seasonal unit launches |
+| 🟡 **Real Questions, Real Answers** | Yellow | FB group questions answered as posts |
+
+**Live posts:** Welcome (March 2026) · Keiko behind-the-scenes (March 15) · "That Statistic Is 33 Years Old" (March 25) ✅
+**Next up:** 🔴 "AT Consideration Is a Legal Requirement. So Why Does Every IEP Team Skip It?" — Late Mar
+**July (ADA Anniversary):** 🔴 "The Capitol Crawl Was a Child's Act of Resistance" — Jennifer Keelan was 8. Ties to Capitol Crawl unit (6–10) + All the Way to the Top companion (K–3). Launch hook for both products.
+→ Full pipeline + growth workflow: `Substack/CbD_Substack_Growth_Workflow.md`
+
+---
+
+## Hard Rules (Never Violate)
+- Do NOT call Jill an "AT Specialist" or "AAC Specialist" — not yet certified
+- Do NOT mention OPTN Pediatric Transplantation Committee work
+- Correct title: "special educator and advocate"
+- Brand voice: evidence-based, practical, no fluff, no filler
+- **Nonfiction grade range: 6–10.** Use Step 0d workflow for new units.
+- **Strengths-based language ONLY:**
+  - Never: "above grade level," "below grade level," "low readers," "high/low students," "struggling readers"
+  - Instead: "students who thrive with complex text," "students building toward complex text," "students accessing V2/V3 Lexile ranges"
+  - Lexile ranges: V1: 900–1050, V2: 650–800, V3: 400–550 — not grade-level labels
+  - Frame scaffolding as access, not remediation: "The scaffold varies, the expectation does not"
+- **AAC-inclusive language:**
+  - Never: "point to" as the sole interaction verb
+  - Instead: "select, point to, or use gaze to indicate"
+  - Neutral verbs: "identify," "indicate," "cite," "select"
+- **Do NOT abbreviate "CbD" in outward-facing content** — always spell out "Communicate by Design"
+- **Do NOT default to "work with the SLP"** — frame as team responsibility, not SLP gatekeeping
+- **Do NOT assume the student has an SGD** — product must work with alternative pencil + e-trans board + symbol cards + phoneme sound access
+- **Do NOT add words to the UFLI lesson** — words are fixed; core/fringe are research-based AAC categories, not our designations
+- **AAC is not just SGD** — low-tech AAC (e-trans boards, symbol cards, alternative pencils) is equally valid
+- **"Communication Access" is the section heading** — not "AAC Support"
+- **Every unit word is core or fringe; every fringe word has a symbol**
+- **V3 passages:** core words + highest-frequency fringe only. Scaffold = vocabulary access, not reduced expectation.
+- **Do NOT invent skill designations:** Keiko=#1, Radium Girls=#1, Zitkala-Ša=#3, 504 Sit-In=#4, Frances Kelsey=#5, Capitol Crawl=#6
+- **Do NOT change existing unit pricing** — use tiered table above
+- **AAC core/fringe word TABLE required** in every unit's Differentiating section — `makeTable()`, not bullet lists
+- **Every nonfiction unit must have all 22 standard sections** → `_Operations/memory/nonfiction_build_reference.md`
+- **WCAG 2.2 Level AA** on all documents. Use #006DA0 teal in .docx/.pdf (not #00B4D8).
+- **PDF generation:** Word → File → Save As → PDF (not Print to PDF, not LibreOffice)
+- **Every TPT Listing Package must include Output 0 before any other section.** Output 0 = three copy/paste-ready TPT fields: (1) title ≤80 chars verified, pipe-separated, leading with topic name + differentiator + SPED + grades; (2) description opening ≤180 chars, keyword-dense (NOT hook-style), containing product name + "special education" + "grades 6-10" + "adapted reading" + "AAC"; (3) 7 custom keyword tags. Title structure: `[Topic] | [Historical/Subject Angle] | [Adapted Reading or Differentiator] | [SPED Grades 6-10]`. → SEO standard: `Marketing/SEO Reports/CbD_TPT_SEO_Audit_2026-03-26.md`
+
+---
+
+## Build Session Rules
+- **Never build without explicit instruction.** Answer first, build only when asked.
+- **str_replace over rebuilds always.** Targeted edits, not full rebuilds.
+- **Flag usage cost before large builds** (all 30 packets, all 6 nonfiction units, etc.)
+- **Nonfiction require path:** `path.join(__dirname, "..", "..", "..", "_Operations", "cbd_docx_template")` — 3 levels up from unit folder
+- **Template:** `_Operations/cbd_docx_template.js`
+- **Communication Access Packet (multi-unit):** `_Operations/build_all_units.py` — builds all 6 nonfiction units, assembles TPT folders with Welcome/Terms. Word lists + page counts in `nonfiction_build_reference.md`. Run after docx → PDF conversion.
+- **Communication Access Packet (single-unit reference):** `_Operations/build_comm_access_packet.py` (Frances Kelsey)
+→ Full build warnings + code patterns: `_Operations/memory/build_system_reference.md`
+→ UFLI build details + packet features: `_Operations/memory/ufli_build_reference.md`
+→ Symbol cards + binder ecosystem + print spec: `_Operations/memory/symbol_binder_reference.md`
+→ Nonfiction 22 sections + QC checklist: `_Operations/memory/nonfiction_build_reference.md`
+→ TPT SEO strategy: `Marketing/SEO Reports/CbD_SEO_Keyword_Research.xlsx` + auto-memory
+
+---
+
+## Folder Structure
+```
+Communicate by Design/
+├── Brand Assets/
+├── Distrubution/
+│   └── Teachers Pay Teachers/ (Cover Index, Launch Calendar, TPT strategy docs, CSVs)
+├── Marketing/
+│   ├── Photos/
+│   ├── Pinterest/
+│   └── SEO Reports/           (CbD_SEO_Keyword_Research.xlsx, all SEO audits)
+├── Products/
+│   ├── AAC Trading Cards/     (flat deck folders: UFLI Phonics, Alphabet, Starter/Growing/Full Core, Upper Elementary)
+│   ├── AT AAC IEP TEAM Supports/
+│   ├── Fiction Anchor Texts/
+│   ├── Nonfiction Units/      (build scripts + COMPLETE.docx inside each unit folder)
+│   ├── Picture Book Companions/
+│   └── UFLI Phonics/          (Ready for TPT v3/ = 34 final files)
+├── Research/
+├── Substack/
+└── _Operations/
+    ├── Print References/
+    ├── QC/
+    ├── memory/                (projects/, reference files, CbD_Unit_Design_Master_Reference.md)
+    ├── symbol_cache/          (741 ARASAAC PNGs)
+    └── symbol_library/        (400+ word-to-symbol mappings)
+```
+Key files: `_Operations/CbD_Production_Workflows.xlsx` · `Distrubution/Teachers Pay Teachers/CbD_TPT_Launch_Calendar.xlsx` · `TASKS.md`
+
+---
+
+## Accessibility Standard
+All CbD documents target **WCAG 2.2 Level AA**. Use **#006DA0** teal in .docx/.pdf (not #00B4D8). Every teacher document must include: Accessibility Statement → About the Creator → Terms of Use → end matter (in this order).
+- Pre-Publish Checklist: `_Operations/CbD_Pre-Publish_Accessibility_Checklist.jsx`
+- ADA Title II deadline: April 24, 2026 (schools 50k+), April 26, 2027 (smaller)
+
+---
+
+## Session Close Protocol (MANDATORY)
+When Jill says "close it out", "save everything", "wrap up", or similar — run ALL steps:
+
+1. **CLAUDE.md** — add/update products, strategies, decisions, pricing; update Active Projects table
+2. **Project Memory** (`_Operations/memory/projects/communicate-by-design.md`) — mirror key changes
+3. **Auto-Memory** (`/mnt/.auto-memory/`) — create/update memory files; update MEMORY.md index
+4. **TASKS.md** — add new tasks, mark completed
+5. **Launch Calendar** (`Distrubution/Teachers Pay Teachers/CbD_TPT_Launch_Calendar.xlsx`) — update Master Pipeline
+6. **Production Workflows** (`_Operations/CbD_Production_Workflows.xlsx`) — add new steps if process changed
+7. **Calendar & Scheduled Tasks** — create events for new deadlines; update `reference_scheduled_tasks.md`
+8. **Spreadsheets & Deliverables** — save new files to workspace, verify computer:// links
+9. **Final Check** — read back TASKS.md; confirm with Jill: "Everything saved. Here's what changed: [list]"

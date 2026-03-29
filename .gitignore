@@ -1,0 +1,89 @@
+# ============================================================
+# Communicate by Design — .gitignore
+# Git tracks CODE (scripts, HTML tools, reference docs) only.
+# Large assets, built products, and binaries are excluded.
+# ============================================================
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node dependencies (never commit these — huge folder)
+node_modules/
+package-lock.json
+
+# ---- BINARY DOCUMENTS (use iCloud for these) ----
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+*.pages
+*.numbers
+*.key
+
+# ---- IMAGES & MEDIA ----
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.ico
+*.mp4
+*.mov
+*.heic
+
+# ---- ARCHIVES ----
+*.zip
+*.tar
+*.gz
+*.7z
+
+# ---- LARGE ASSET FOLDERS ----
+# Symbol cache (741 ARASAAC PNGs — huge, tracked by iCloud)
+_Operations/symbol_cache/
+
+# QC folder (large PDFs and preview files)
+_Operations/QC/
+
+# Print reference PDFs
+_Operations/Print References/
+
+# node_modules inside _Operations
+_Operations/node_modules/
+
+# ---- FINAL PRODUCT FOLDERS (built outputs, not code) ----
+# These are the ready-to-upload product files — iCloud has them
+Products/AAC Trading Cards/
+Products/Nonfiction Units/*/
+!Products/Nonfiction Units/*/build_*.js
+!Products/Nonfiction Units/*/build_*.py
+
+Products/AT AAC IEP TEAM Supports/
+Products/Picture Book Companions/
+Products/UFLI Phonics/Ready for TPT v3/
+
+# Brand assets (images/PDFs — iCloud handles these)
+Brand Assets/
+
+# Distribution files (TPT CSVs, strategy docs)
+Distrubution/
+
+# Marketing assets
+Marketing/Photos/
+Marketing/Pinterest/
+
+# ---- DATA FILES ----
+*.csv
+*.db
+*.sqlite
+
+# ---- ENVIRONMENT / SECRETS ----
+.env
+.env.*
+secrets.*

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Communicate by Design — Task Board</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #1B1F3B; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; color: #fff; }
+
+/* HEADER */
+.header { padding: 16px 24px 12px; border-bottom: 1px solid #2e3561; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.brand-row { display: flex; align-items: center; gap: 10px; }
+.brand-icon { background: #FFB703; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.brand-name { font-size: 16px; font-weight: bold; letter-spacing: 1px; color: #00B4D8; }
+.brand-name span { color: #FFB703; }
+.brand-tag { font-size: 10px; color: #94A3B8; }
+.stats { display: flex; gap: 8px; flex-wrap: wrap; }
+.stat { background: #252A4A; border-radius: 8px; padding: 7px 14px; text-align: center; }
+.stat-num { font-size: 18px; font-weight: bold; }
+.stat-label { font-size: 10px; color: #94A3B8; }
+
+/* BOARD */
+.board-wrap { overflow-x: auto; padding: 16px 16px 40px; }
+.board { display: flex; gap: 14px; min-width: max-content; align-items: flex-start; }
+
+/* COLUMNS */
+.col { background: #1e2344; border-radius: 12px; width: 290px; flex-shrink: 0; display: flex; flex-direction: column; max-height: calc(100vh - 130px); }
+.col-header { padding: 11px 14px 9px; border-radius: 12px 12px 0 0; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.col-title { font-weight: bold; font-size: 13px; flex: 1; }
+.col-count { background: rgba(0,0,0,0.25); border-radius: 10px; padding: 1px 8px; font-size: 11px; }
+.col-body { padding: 8px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; flex: 1; }
+.col-body::-webkit-scrollbar { width: 4px; }
+.col-body::-webkit-scrollbar-track { background: transparent; }
+.col-body::-webkit-scrollbar-thumb { background: #3a4170; border-radius: 4px; }
+
+/* CATEGORY LABEL */
+.cat-label { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; padding: 6px 4px 2px; }
+
+/* CARDS */
+.card { background: #252A4A; border-radius: 8px; padding: 9px 9px 7px; border-left: 3px solid #94A3B8; }
+.card.is-done { opacity: 0.4; background: #1a2a1a; }
+
+/* CARD TOP ROW: checkbox + title */
+.card-top { display: flex; align-items: flex-start; gap: 8px; }
+
+/* CHECKBOX */
+.cb { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #4a5580; background: transparent; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: #1B1F3B; transition: all 0.15s; margin-top: 1px; }
+.cb:hover { border-color: #34d399; }
+.cb.checked { background: #34d399; border-color: #34d399; }
+
+.card-title { font-size: 12px; font-weight: bold; line-height: 1.35; flex: 1; }
+.card-title.done { text-decoration: line-through; color: #94A3B8; }
+
+/* BADGE ROW */
+.badge-row { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; margin: 5px 0 2px 30px; }
+.badge { border-radius: 4px; padding: 2px 6px; font-size: 10px; font-weight: bold; cursor: pointer; user-select: none; }
+.badge:hover { opacity: 0.8; }
+.pri-high   { background: #ef4444; color: #fff; }
+.pri-medium { background: #f59e0b; color: #1B1F3B; }
+.pri-low    { background: #1B1F3B; border: 1px solid #3a4170; color: #94A3B8; }
+.ws-substack  { background: #064e3b; border: 1px solid #34d399; color: #34d399; }
+.ws-tpt       { background: #0c3047; border: 1px solid #00B4D8; color: #00B4D8; }
+.ws-canva     { background: #3d2700; border: 1px solid #FFB703; color: #FFB703; }
+.ws-build     { background: #2e1065; border: 1px solid #a78bfa; color: #a78bfa; }
+.ws-horizon   { background: #1e293b; border: 1px solid #94A3B8; color: #94A3B8; }
+.dl-badge { border: 1px solid #FFB703; color: #FFB703; background: transparent; font-size: 10px; padding: 2px 5px; border-radius: 4px; }
+.dl-hot   { border-color: #ef4444; color: #ef4444; }
+.tpt-link { text-decoration: none; display: inline-block; }
+.tpt-link:hover { background: #006DA0 !important; color: #fff !important; border-color: #006DA0 !important; }
+
+/* DETAIL */
+.detail-toggle { background: none; border: none; color: #4a5580; font-size: 10px; cursor: pointer; padding: 2px 0 0 30px; display: block; }
+.detail-text { color: #94A3B8; font-size: 11px; margin: 4px 0 0 30px; line-height: 1.5; }
+
+/* MOVE BUTTONS */
+.card-actions { display: flex; gap: 4px; justify-content: flex-end; margin-top: 6px; }
+.move-btn { background: #1B1F3B; border: 1px solid #3a4170; color: #94A3B8; border-radius: 4px; padding: 2px 8px; font-size: 10px; cursor: pointer; }
+.move-btn:hover { background: #2e3561; color: #fff; }
+.done-btn { border-color: #34d399 !important; color: #34d399 !important; }
+
+/* COLUMN THEMES */
+.col-now     .col-header { background: linear-gradient(135deg,#7f1d1d,#450a0a); }
+.col-queue   .col-header { background: linear-gradient(135deg,#006DA0,#003d5c); }
+.col-someday .col-header { background: linear-gradient(135deg,#4c1d95,#2e1065); }
+.col-done    .col-header { background: linear-gradient(135deg,#14532d,#052e16); }
+
+.hint { text-align: center; color: #3a4470; font-size: 10px; padding: 10px 0 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand-row">
+    <div class="brand-icon">💬</div>
+    <div>
+      <div class="brand-name">COMMUNICATE <span>BY DESIGN</span></div>
+      <div class="brand-tag">Where AT Meets Practice</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="s-now"     style="color:#ef4444">—</div><div class="stat-label">This Week</div></div>
+    <div class="stat"><div class="stat-num" id="s-queue"   style="color:#00B4D8">—</div><div class="stat-label">Up Next</div></div>
+    <div class="stat"><div class="stat-num" id="s-someday" style="color:#a78bfa">—</div><div class="stat-label">Someday</div></div>
+    <div class="stat"><div class="stat-num" id="s-done"    style="color:#34d399">—</div><div class="stat-label">Done</div></div>
+  </div>
+</div>
+
+<div class="board-wrap"><div class="board" id="board"></div></div>
+<div class="hint">⚪ Circle = check off done &nbsp;·&nbsp; Priority + workflow badges are clickable &nbsp;·&nbsp; Move cards with ← → &nbsp;·&nbsp; Columns scroll &nbsp;·&nbsp; All changes save in your browser</div>
+
+<script>
+const WORKFLOWS = {
+  "Substack":     { stages:["Outline","Drafting","Editing","Ready to Publish","Published"], cls:"ws-substack" },
+  "TPT Store":    { stages:["To Do","In Progress","Files Ready","Uploaded","Live"], cls:"ws-tpt" },
+  "Canva Covers": { stages:["To Design","Sketching","In Canva","Exported","Done"], cls:"ws-canva" },
+  "Build Queue":  { stages:["Plan","Drafting","Building","QC","Ready to List","Live"], cls:"ws-build" },
+  "Long Horizon": { stages:["Backlog","Researching","Planning","Active"], cls:"ws-horizon" },
+};
+
+const CAT_COLORS = {
+  "Substack":     "#34d399",
+  "TPT Store":    "#00B4D8",
+  "Canva Covers": "#FFB703",
+  "Build Queue":  "#a78bfa",
+  "Long Horizon": "#94A3B8",
+};
+
+const COLS = ["now","queue","someday","done"];
+const COL_META = {
+  now:     { title:"🔥 This Week", cls:"col-now",     prev:null,      next:"queue"   },
+  queue:   { title:"📋 Up Next",   cls:"col-queue",   prev:"now",     next:"someday" },
+  someday: { title:"🗓 Someday",   cls:"col-someday", prev:"queue",   next:"done"    },
+  done:    { title:"✅ Done",      cls:"col-done",    prev:"someday", next:null       },
+};
+
+const TASKS = [
+  { id:1,  col:"now",     cat:"Substack",     priority:"high",   wstage:0, deadline:"Mar 31",      title:"AT Consideration post",                        detail:"\"AT Consideration Is a Legal Requirement. So Why Does Every IEP Team Skip It?\" — due NOW." },
+  { id:2,  col:"now",     cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 1",       title:"Earth Day keyword push — Keiko listing",        detail:"Update Keiko TPT listing with Earth Day keywords. Hard deadline April 1.", tptUrl:"https://www.teacherspayteachers.com/Product/Keiko-Free-Willy-Nonfiction-Unit-Adapted-Reading-SPED-AAC-Grades-6-10-15817061" },
+  { id:3,  col:"now",     cat:"Substack",     priority:"high",   wstage:2, deadline:null,          title:"First TPT Drop post",                           detail:"File ready (Substack/Substack-FirstTPTDrop-Post.md). Needs Canva thumbnails, then publish." },
+  { id:4,  col:"now",     cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,          title:"Add tag gold mines to all listings",            detail:'"aactivities" (AAC), "ulfi" (UFLI), "drawn to aac" (AAC), "special education lesson plans template" (nonfiction).', tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:5,  col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,          title:"Re-upload nonfiction zips — 6 units",           detail:"All 6 have new _Complete.zip with Symbol Cards + Printable Kit. Add Google Docs note to listings.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:6,  col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,          title:"Re-upload 6 units — Session 16 content",        detail:"Updated Communication Access section, hang-over fixes, partner modes, access verb language.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:7,  col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,          title:"V3 passage audit — all 6 units",                detail:"V3 = core words + highest-frequency fringe only. Start: Keiko → Radium Girls.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:8,  col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,          title:"Preview PDFs — AT Checklist + AT Toolkit",      detail:"Build previews for highest-traffic AT/AAC products. Include one page of symbol cards.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:9,  col:"queue",   cat:"TPT Store",    priority:"low",    wstage:0, deadline:null,          title:"TPT audit — Pipeline spreadsheet",              detail:"Fill TPT Zip, Thumbnails, Preview PDF columns in Master Pipeline tab.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:10, col:"queue",   cat:"TPT Store",    priority:"low",    wstage:0, deadline:null,          title:"TPT cross-linking audit",                       detail:"Freebies link TO paid products. Toolkit links FROM Checklist.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:11, col:"queue",   cat:"TPT Store",    priority:"low",    wstage:0, deadline:null,          title:"TPT Awards section",                            detail:"Manual entry — content already drafted.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:12, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,          title:"Nonfiction bundle — Keiko + Radium Girls",      detail:"Create bundle listing on TPT.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:13, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:1, deadline:"Ongoing",     title:"Daily SellerSpy searches",                      detail:"5 free/day: \"core vocabulary\", \"adapted reading\", \"IEP tools\", \"phonics AAC\", \"disability history\".", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
+  { id:14, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:"Apr 27–May 2",title:"Ahrefs 7-day trial",                            detail:"Start April 27. CANCEL by May 2 at 9am PT. Run competitor plan (SEO spreadsheet → Ahrefs tab)." },
+  { id:15, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:0, deadline:null,          title:"Zitkala-Ša — cover",                            detail:"TPT cover needed." },
+  { id:16, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:0, deadline:null,          title:"Frances Kelsey — cover",                        detail:"TPT cover needed." },
+  { id:17, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:0, deadline:null,          title:"Radium Girls — cover",                          detail:"TPT cover needed." },
+  { id:18, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:0, deadline:null,          title:"Keiko — cover",                                 detail:"TPT cover needed." },
+  { id:19, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:0, deadline:"May 2026",    title:"UFLI — covers (36 products)",                   detail:"Target May 2026 launch." },
+  { id:20, col:"queue",   cat:"Build Queue",  priority:"high",   wstage:1, deadline:"Jul 26 2026", title:"All the Way to the Top Companion",              detail:"K–3 Picture Book Companion. Plan done. Draft unit content section by section. Price: $5." },
+  { id:21, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:1, deadline:null,          title:"Alternative Pencil Guide",                      detail:"Jill actively building. Prerequisite for UFLI product line." },
+  { id:22, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:"Jul 2026",    title:"UFLI Teacher Guide",                            detail:"Build before per-lesson packets." },
+  { id:23, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:null,          title:"Family sub-line F0 freebie",                    detail:"\"Your AAC Quick-Start: 5 Things I Wish Someone Had Told Me.\" Lead magnet." },
+  { id:24, col:"queue",   cat:"Build Queue",  priority:"low",    wstage:0, deadline:null,          title:"Haben Girma unit",                              detail:"Completes Disability Rights triple bundle. Zero TPT competition." },
+  { id:25, col:"queue",   cat:"Build Queue",  priority:"low",    wstage:0, deadline:null,          title:"Jennifer Keelan bundle",                        detail:"All the Way to the Top ($5) + Capitol Crawl ($9.95). Once both are live." },
+  { id:26, col:"queue",   cat:"Build Queue",  priority:"low",    wstage:0, deadline:null,          title:"AAC Trading Cards — resubmit 1-up format",      detail:"Order #82750 placed. Resubmit cards file in 1-up format." },
+  { id:27, col:"queue",   cat:"Substack",     priority:"medium", wstage:0, deadline:"Jul 2026",    title:"\"The Capitol Crawl Was a Child's Act of Resistance\"", detail:"Jennifer Keelan was 9. Ties to Capitol Crawl unit + All the Way to the Top companion." },
+  { id:28, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:null,          title:"AT certification",                              detail:"Working toward; not yet started." },
+  { id:29, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:"Feb 2027",    title:"Tommie Smith & John Carlos unit",               detail:"BHM February 2027." },
+  { id:30, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:null,          title:"Fiction line — first product",                  detail:"Workflow + framework built. First product TBD." },
+];
+
+// STATE
+let state = JSON.parse(localStorage.getItem("cbd_kanban_v4") || "null");
+if (!state) {
+  state = {};
+  TASKS.forEach(t => { state[t.id] = { col:t.col, priority:t.priority, wstage:t.wstage, expanded:false }; });
+}
+function save() { localStorage.setItem("cbd_kanban_v4", JSON.stringify(state)); }
+
+function render() {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
+
+  const colMap = {};
+  COLS.forEach(c => colMap[c] = {});
+
+  TASKS.forEach(t => {
+    const s = state[t.id] || { col:t.col, priority:t.priority, wstage:t.wstage, expanded:false };
+    if (!colMap[s.col]) colMap[s.col] = {};
+    if (!colMap[s.col][t.cat]) colMap[s.col][t.cat] = [];
+    colMap[s.col][t.cat].push({ ...t, ...s });
+  });
+
+  COLS.forEach(c => {
+    const n = Object.values(colMap[c]).flat().length;
+    const el = document.getElementById("s-" + c);
+    if (el) el.textContent = n;
+  });
+
+  COLS.forEach(colId => {
+    const meta = COL_META[colId];
+    const cats  = colMap[colId];
+    const total = Object.values(cats).flat().length;
+
+    const col = document.createElement("div");
+    col.className = "col " + meta.cls;
+
+    const hdr = document.createElement("div");
+    hdr.className = "col-header";
+    hdr.innerHTML = `<span class="col-title">${meta.title}</span><span class="col-count">${total}</span>`;
+    col.appendChild(hdr);
+
+    const body = document.createElement("div");
+    body.className = "col-body";
+
+    const catOrder = ["Substack","TPT Store","Canva Covers","Build Queue","Long Horizon"];
+    catOrder.forEach(cat => {
+      const items = cats[cat];
+      if (!items || !items.length) return;
+
+      const catColor = CAT_COLORS[cat] || "#94A3B8";
+      const lbl = document.createElement("div");
+      lbl.className = "cat-label";
+      lbl.style.color = catColor;
+      lbl.textContent = cat;
+      body.appendChild(lbl);
+
+      const priOrder = { high:0, medium:1, low:2 };
+      items.sort((a,b) => priOrder[a.priority] - priOrder[b.priority]);
+
+      items.forEach(task => body.appendChild(makeCard(task, colId, meta, catColor)));
+    });
+
+    col.appendChild(body);
+    board.appendChild(col);
+  });
+}
+
+function makeCard(task, colId, colMeta, catColor) {
+  const wf     = WORKFLOWS[task.cat];
+  const stage  = wf.stages[Math.min(task.wstage, wf.stages.length - 1)];
+  const isDone = colId === "done";
+
+  const card = document.createElement("div");
+  card.className = "card" + (isDone ? " is-done" : "");
+  card.style.borderLeftColor = catColor;
+
+  // TOP ROW: checkbox + title
+  const top = document.createElement("div");
+  top.className = "card-top";
+
+  // Checkbox circle
+  const cb = document.createElement("div");
+  cb.className = "cb" + (isDone ? " checked" : "");
+  cb.innerHTML = isDone ? "✓" : "";
+  cb.title = isDone ? "Move back to Someday" : "Mark done";
+  cb.onclick = () => {
+    if (isDone) {
+      state[task.id].col = "someday";
+    } else {
+      state[task.id].col = "done";
+    }
+    save(); render();
+  };
+  top.appendChild(cb);
+
+  const titleEl = document.createElement("div");
+  titleEl.className = "card-title" + (isDone ? " done" : "");
+  titleEl.textContent = task.title;
+  top.appendChild(titleEl);
+  card.appendChild(top);
+
+  // BADGES
+  const badges = document.createElement("div");
+  badges.className = "badge-row";
+
+  // Priority
+  const priLabels = { high:"🔴 High", medium:"🟡 Med", low:"⚪ Low" };
+  const priClass  = { high:"pri-high", medium:"pri-medium", low:"pri-low" };
+  const priBadge  = document.createElement("span");
+  priBadge.className = "badge " + priClass[task.priority];
+  priBadge.textContent = priLabels[task.priority];
+  priBadge.title = "Click to change priority";
+  priBadge.onclick = () => {
+    const cycle = { high:"medium", medium:"low", low:"high" };
+    state[task.id].priority = cycle[state[task.id].priority];
+    save(); render();
+  };
+  badges.appendChild(priBadge);
+
+  // Workflow status
+  const wsBadge = document.createElement("span");
+  wsBadge.className = "badge " + wf.cls;
+  wsBadge.textContent = stage;
+  wsBadge.title = "Click to advance: " + wf.stages.join(" → ");
+  wsBadge.onclick = () => {
+    state[task.id].wstage = ((state[task.id].wstage ?? 0) + 1) % wf.stages.length;
+    save(); render();
+  };
+  badges.appendChild(wsBadge);
+
+  // Deadline
+  if (task.deadline) {
+    const dl = document.createElement("span");
+    dl.className = "dl-badge" + (task.deadline === "Apr 1" ? " dl-hot" : "");
+    dl.textContent = "📅 " + task.deadline;
+    badges.appendChild(dl);
+  }
+
+  // TPT direct link
+  if (task.tptUrl) {
+    const tptLink = document.createElement("a");
+    tptLink.className = "badge ws-tpt tpt-link";
+    tptLink.textContent = "↗ TPT";
+    tptLink.href = task.tptUrl;
+    tptLink.target = "_blank";
+    tptLink.rel = "noopener noreferrer";
+    tptLink.title = "Open on Teachers Pay Teachers";
+    badges.appendChild(tptLink);
+  }
+
+  card.appendChild(badges);
+
+  // Detail toggle
+  if (task.detail) {
+    const tog = document.createElement("button");
+    tog.className = "detail-toggle";
+    tog.textContent = task.expanded ? "▲ hide" : "▼ more";
+    tog.onclick = () => { state[task.id].expanded = !state[task.id].expanded; save(); render(); };
+    card.appendChild(tog);
+    if (task.expanded) {
+      const det = document.createElement("div");
+      det.className = "detail-text";
+      det.textContent = task.detail;
+      card.appendChild(det);
+    }
+  }
+
+  // Move buttons (for column shifting, separate from checkbox done)
+  const actions = document.createElement("div");
+  actions.className = "card-actions";
+  if (colMeta.prev) {
+    const b = document.createElement("button");
+    b.className = "move-btn";
+    b.textContent = "← Back";
+    b.onclick = () => { state[task.id].col = colMeta.prev; save(); render(); };
+    actions.appendChild(b);
+  }
+  if (colMeta.next && colMeta.next !== "done") {
+    const b = document.createElement("button");
+    b.className = "move-btn";
+    b.textContent = "→ Next";
+    b.onclick = () => { state[task.id].col = colMeta.next; save(); render(); };
+    actions.appendChild(b);
+  }
+  card.appendChild(actions);
+  return card;
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TPT Traffic Report — Communicate by Design</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f6fa;
+      color: #1B1F3B;
+      padding: 40px 24px;
+    }
+
+    .container { max-width: 820px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      background: #1B1F3B;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left h1 {
+      color: #00B4D8;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .header-left .sub {
+      color: #FFB703;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      text-align: right;
+    }
+    .header-right .date {
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+    }
+    .header-right .store {
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* Summary cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 22px 20px;
+      border-top: 4px solid #1B1F3B;
+    }
+    .card.teal  { border-top-color: #006DA0; }
+    .card.amber { border-top-color: #FFB703; }
+    .card.red   { border-top-color: #E63946; }
+    .card.green { border-top-color: #2DC653; }
+    .card-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #888; }
+    .card-value { font-size: 32px; font-weight: 700; color: #1B1F3B; margin: 6px 0 2px; }
+    .card-delta { font-size: 13px; font-weight: 500; }
+    .card-delta.down { color: #E63946; }
+    .card-delta.up   { color: #2DC653; }
+    .card-note  { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+    /* Table */
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1B1F3B;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e8e9f0;
+    }
+    .table-wrap { background: white; border-radius: 10px; overflow: hidden; margin-bottom: 28px; }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: #1B1F3B; }
+    thead th {
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 13px 18px;
+      text-align: left;
+    }
+    thead th:not(:first-child) { text-align: right; }
+    tbody tr { border-bottom: 1px solid #f0f1f6; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 13px 18px; font-size: 14px; }
+    tbody td:not(:first-child) { text-align: right; }
+    .source-name { font-weight: 500; }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 20px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .badge.new { background: #e8f9ee; color: #2DC653; }
+    .badge.dropped { background: #fde8e8; color: #E63946; }
+    .badge.star { background: #fff4e0; color: #FFB703; }
+    .delta-cell { font-weight: 600; }
+    .delta-cell.up   { color: #2DC653; }
+    .delta-cell.down { color: #E63946; }
+    .delta-cell.flat { color: #aaa; }
+    .total-row { background: #f5f6fa; }
+    .total-row td { font-weight: 700; font-size: 14px; }
+
+    /* Insight box */
+    .insights { background: white; border-radius: 10px; padding: 24px 26px; margin-bottom: 28px; }
+    .insight-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .insight-item:last-child { margin-bottom: 0; }
+    .insight-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .icon-blue  { background: #e0f2fe; }
+    .icon-amber { background: #fff4e0; }
+    .icon-green { background: #e8f9ee; }
+    .icon-red   { background: #fde8e8; }
+    .insight-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .insight-body p  { font-size: 13px; color: #555; line-height: 1.55; }
+
+    /* Action box */
+    .action-box {
+      background: #1B1F3B;
+      border-radius: 10px;
+      padding: 22px 26px;
+    }
+    .action-box h3 { color: #FFB703; font-size: 14px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.6px; }
+    .action-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .action-item:last-child { margin-bottom: 0; }
+    .action-num {
+      background: #FFB703;
+      color: #1B1F3B;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .action-item p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+    .action-item strong { color: white; }
+
+    .footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 28px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Communicate by Design</h1>
+      <div class="sub">TPT Traffic Report · Week-over-Week</div>
+    </div>
+    <div class="header-right">
+      <div class="date">Generated March 28, 2026</div>
+      <div class="store">teacherspayteachers.com/Store/Communicate-by-Design</div>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="cards">
+    <div class="card teal">
+      <div class="card-label">This Week Total</div>
+      <div class="card-value">124</div>
+      <div class="card-delta down">▼ 33% vs. last week</div>
+      <div class="card-note">Mar 22–28, 2026</div>
+    </div>
+    <div class="card amber">
+      <div class="card-label">Last Week Total</div>
+      <div class="card-value">185</div>
+      <div class="card-delta flat">— baseline</div>
+      <div class="card-note">Mar 15–21, 2026</div>
+    </div>
+    <div class="card green">
+      <div class="card-label">Facebook Surge</div>
+      <div class="card-value">+750%</div>
+      <div class="card-delta up">▲ 2 → 17 click-throughs</div>
+      <div class="card-note">Biggest mover this week</div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="section-title">Traffic Source Breakdown</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Last Week<br><span style="font-weight:400;opacity:.7">Mar 15–21</span></th>
+          <th>This Week<br><span style="font-weight:400;opacity:.7">Mar 22–28</span></th>
+          <th>Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="source-name">Direct</td>
+          <td>178</td>
+          <td>104</td>
+          <td class="delta-cell down">▼ 74 (−42%)</td>
+        </tr>
+        <tr>
+          <td class="source-name">
+            Social | Facebook
+            <span class="badge star">⭐ Top Mover</span>
+          </td>
+          <td>2</td>
+          <td>17</td>
+          <td class="delta-cell up">▲ +15 (+750%)</td>
+        </tr>
+        <tr>
+          <td class="source-name">communicatebydesign.substack.com</td>
+          <td>1</td>
+          <td>2</td>
+          <td class="delta-cell up">▲ +1 (+100%)</td>
+        </tr>
+        <tr>
+          <td class="source-name">ig | (referral)
+            <span class="badge new">New</span>
+          </td>
+          <td>—</td>
+          <td>1</td>
+          <td class="delta-cell up">▲ New</td>
+        </tr>
+        <tr>
+          <td class="source-name">search.pch.com
+            <span class="badge dropped">Dropped</span>
+          </td>
+          <td>2</td>
+          <td>—</td>
+          <td class="delta-cell down">▼ −2</td>
+        </tr>
+        <tr>
+          <td class="source-name">Pinterest | (referral)
+            <span class="badge dropped">Dropped</span>
+          </td>
+          <td>1</td>
+          <td>—</td>
+          <td class="delta-cell down">▼ −1</td>
+        </tr>
+        <tr>
+          <td class="source-name">substack.com
+            <span class="badge dropped">Dropped</span>
+          </td>
+          <td>1</td>
+          <td>—</td>
+          <td class="delta-cell down">▼ −1</td>
+        </tr>
+        <tr class="total-row">
+          <td>TOTAL</td>
+          <td>185</td>
+          <td>124</td>
+          <td class="delta-cell down">▼ 61 (−33%)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Key Insights -->
+  <div class="section-title">Key Insights</div>
+  <div class="insights">
+    <div class="insight-item">
+      <div class="insight-icon icon-blue">📉</div>
+      <div class="insight-body">
+        <h4>Direct traffic dip is expected, not alarming</h4>
+        <p>Direct traffic dropped from 178 → 104 (−42%), driving the overall dip. At this stage of store growth, direct traffic reflects returning visitors and bookmarks — week-to-week variance here is normal. No action needed unless this trend continues for 3+ weeks.</p>
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-icon icon-green">🚀</div>
+      <div class="insight-body">
+        <h4>Facebook strategy is working</h4>
+        <p>Facebook click-throughs jumped from 2 → 17 (+750%). The "That Statistic Is 33 Years Old" Substack post published March 25 is almost certainly driving this — a direct result of the FB group engine strategy. This is early validation that the drop-a-link-in-the-thread approach converts to TPT traffic.</p>
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-icon icon-amber">✉️</div>
+      <div class="insight-body">
+        <h4>Substack is trickling through consistently</h4>
+        <p>Substack sent 1 click-through last week and 2 this week — a small but steady signal. With only 3 posts live, this will grow as the subscriber base builds. The Substack → TPT pipeline is intact.</p>
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-icon icon-red">💲</div>
+      <div class="insight-body">
+        <h4>No conversions yet — but that's the right problem to solve next</h4>
+        <p>All 373 this-month click-throughs show $0.00 earnings and 0.00% conversion. Traffic is landing but not purchasing. The next lever is product page optimization (title, cover image, description preview) and funneling warm traffic directly to specific products, not just the store front.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="action-box">
+    <h3>Recommended Next Actions</h3>
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <p><strong>Keep the Facebook engine going.</strong> Post the next Substack (AT Consideration Is a Legal Requirement) and drop it in 2–3 FB groups within 24 hours of publish. Track whether Facebook click-throughs hold above 15 next week.</p>
+    </div>
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <p><strong>Optimize the highest-traffic product pages.</strong> With this many direct click-throughs and zero conversions, the product pages need review — covers, description openers, and pricing clarity should be the first pass.</p>
+    </div>
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <p><strong>Track weekly (not monthly).</strong> Set a standing weekly check-in on the Traffic tab every Saturday morning to catch trends early. The monthly view masks the Facebook signal we almost missed this week.</p>
+    </div>
+  </div>
+
+  <div class="footer">Communicate by Design · communicatebydesign.substack.com · March 28, 2026</div>
+
+</div>
+</body>
+</html>

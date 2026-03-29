@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CbD Fiction Cover — Color Direction</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;700&display=swap');
+  body { background: #f1f5f9; margin: 0; padding: 40px 20px; font-family: 'Instrument Sans', sans-serif; color: #1e293b; }
+  h1 { text-align: center; color: #475569; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  p.sub { text-align: center; color: #94A3B8; font-size: 12px; margin-bottom: 40px; }
+
+  .section-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin: 40px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 980px; margin: 0 auto 20px; }
+
+  .cover {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+
+  .cover .title-block {
+    padding: 16px 14px 8px;
+    text-align: center;
+    z-index: 2;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .cover .unit-title {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-family: Impact, 'Arial Black', sans-serif;
+    text-transform: uppercase;
+  }
+  .cover .subtitle {
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: 4px;
+    font-family: 'Instrument Sans', sans-serif;
+    letter-spacing: 0.5px;
+  }
+  .cover .illustration {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cover .footer {
+    width: 100%;
+    padding: 7px 0 6px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .cover .brand-line { font-size: 8px; font-weight: 700; letter-spacing: 1.5px; font-family: 'Instrument Sans', sans-serif; }
+  .cover .info-line { font-size: 6.5px; font-family: 'Instrument Sans', sans-serif; margin-top: 1px; }
+
+  .option-label { text-align: center; margin-top: 12px; }
+  .option-label .color-name { font-size: 14px; font-weight: 700; color: #1e293b; }
+  .option-label .hex { font-size: 10px; color: #94A3B8; margin-top: 2px; }
+  .option-label .rationale { font-size: 11px; color: #64748b; margin-top: 6px; line-height: 1.5; }
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: middle; margin-right: 5px; border: 1px solid rgba(0,0,0,0.1); }
+
+  /* Book SVG reusable */
+</style>
+</head>
+<body>
+
+<h1>CbD Fiction Line — Cover Direction</h1>
+<p class="sub">Exploring bright, TPT-friendly options away from the dark corporate look</p>
+
+<!-- ======================== -->
+<div class="section-label">Option A — Bright White Background (most TPT-looking)</div>
+<div class="grid" style="max-width:680px; margin: 0 auto 0;">
+
+  <!-- A1: White bg, Teal + Amber -->
+  <div>
+    <div class="cover" style="background: #ffffff;">
+      <div class="title-block">
+        <div class="unit-title" style="color: #1B1F3B;">Wonder</div>
+        <div class="subtitle" style="color: #006DA0;">Fiction Anchor Text Unit</div>
+      </div>
+      <div class="illustration">
+        <svg width="130" height="115" viewBox="0 0 130 115">
+          <!-- Bright open book -->
+          <ellipse cx="65" cy="106" rx="52" ry="6" fill="#e2e8f0"/>
+          <path d="M65 18 Q38 24 20 94 L65 94 Z" fill="#006DA0"/>
+          <path d="M65 18 Q92 24 110 94 L65 94 Z" fill="#00B4D8"/>
+          <rect x="63" y="18" width="4" height="76" fill="#004d80"/>
+          <!-- Glow/star burst from book -->
+          <circle cx="65" cy="56" r="22" fill="#FFB703" opacity="0.15"/>
+          <line x1="32" y1="50" x2="60" y2="50" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="30" y1="62" x2="59" y2="62" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="28" y1="74" x2="58" y2="74" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="70" y1="50" x2="98" y2="50" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="71" y1="62" x2="100" y2="62" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="72" y1="74" x2="102" y2="74" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <!-- Stars -->
+          <text x="16" y="34" font-size="12" fill="#FFB703">★</text>
+          <text x="108" y="44" font-size="10" fill="#00B4D8">★</text>
+          <text x="22" y="82" font-size="8" fill="#006DA0">★</text>
+        </svg>
+      </div>
+      <div class="footer" style="background:#1B1F3B; border-top: 3px solid #FFB703;">
+        <div class="brand-line" style="color:#FFB703;">COMMUNICATE BY DESIGN</div>
+        <div class="info-line" style="color:#94A3B8;">Fiction Anchor Text · Grades 3–5 · SPED & Inclusive · AAC Accessible</div>
+      </div>
+    </div>
+    <div class="option-label">
+      <div class="color-name"><span class="swatch" style="background:#ffffff; border:1px solid #cbd5e1;"></span>White + Brand Teal</div>
+      <div class="hex">White bg · #006DA0 / #00B4D8 book · Navy footer</div>
+      <div class="rationale">Classic TPT look. Clean, readable, stops the scroll. Uses the exact brand teal we already have. Very distinct from nonfiction.</div>
+    </div>
+  </div>
+
+  <!-- A2: White bg, Amber pop -->
+  <div>
+    <div class="cover" style="background: #fffbf0;">
+      <div class="title-block">
+        <div class="unit-title" style="color: #1B1F3B;">Wonder</div>
+        <div class="subtitle" style="color: #b45309;">Fiction Anchor Text Unit</div>
+      </div>
+      <div class="illustration">
+        <svg width="130" height="115" viewBox="0 0 130 115">
+          <ellipse cx="65" cy="106" rx="52" ry="6" fill="#fde68a" opacity="0.5"/>
+          <path d="M65 18 Q38 24 20 94 L65 94 Z" fill="#FFB703"/>
+          <path d="M65 18 Q92 24 110 94 L65 94 Z" fill="#FFD700"/>
+          <rect x="63" y="18" width="4" height="76" fill="#d97706"/>
+          <circle cx="65" cy="56" r="24" fill="#FFB703" opacity="0.12"/>
+          <line x1="32" y1="50" x2="60" y2="50" stroke="#1B1F3B" stroke-width="1.5" opacity="0.3"/>
+          <line x1="30" y1="62" x2="59" y2="62" stroke="#1B1F3B" stroke-width="1.5" opacity="0.3"/>
+          <line x1="28" y1="74" x2="58" y2="74" stroke="#1B1F3B" stroke-width="1.5" opacity="0.3"/>
+          <line x1="70" y1="50" x2="98" y2="50" stroke="#1B1F3B" stroke-width="1.5" opacity="0.3"/>
+          <line x1="71" y1="62" x2="100" y2="62" stroke="#1B1F3B" stroke-width="1.5" opacity="0.3"/>
+          <line x1="72" y1="74" x2="102" y2="74" stroke="#1B1F3B" stroke-width="1.5" opacity="0.3"/>
+          <text x="16" y="34" font-size="12" fill="#1B1F3B" opacity="0.4">★</text>
+          <text x="108" y="44" font-size="10" fill="#FFB703">★</text>
+        </svg>
+      </div>
+      <div class="footer" style="background:#1B1F3B; border-top: 3px solid #FFB703;">
+        <div class="brand-line" style="color:#FFB703;">COMMUNICATE BY DESIGN</div>
+        <div class="info-line" style="color:#94A3B8;">Fiction Anchor Text · Grades 3–5 · SPED & Inclusive · AAC Accessible</div>
+      </div>
+    </div>
+    <div class="option-label">
+      <div class="color-name"><span class="swatch" style="background:#fffbf0;"></span>Warm White + Amber</div>
+      <div class="hex">Cream bg · #FFB703 book · Navy footer</div>
+      <div class="rationale">Warm and approachable. Uses Amber as the hero — same as nonfiction but the light background makes it feel totally different.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================== -->
+<div class="section-label">Option B — Teal Background (brand color, bright & distinct)</div>
+<div class="grid" style="max-width:480px; margin: 0 auto 0;">
+
+  <!-- B1: Electric Teal bg -->
+  <div>
+    <div class="cover" style="background: linear-gradient(160deg, #00B4D8 0%, #0077A8 100%);">
+      <div class="title-block">
+        <div class="unit-title" style="color: #ffffff;">Wonder</div>
+        <div class="subtitle" style="color: #FFD700;">Fiction Anchor Text Unit</div>
+      </div>
+      <div class="illustration">
+        <svg width="130" height="115" viewBox="0 0 130 115">
+          <ellipse cx="65" cy="106" rx="52" ry="6" fill="#005580" opacity="0.4"/>
+          <path d="M65 18 Q38 24 20 94 L65 94 Z" fill="#ffffff"/>
+          <path d="M65 18 Q92 24 110 94 L65 94 Z" fill="#e0f7ff"/>
+          <rect x="63" y="18" width="4" height="76" fill="#006da0"/>
+          <circle cx="65" cy="56" r="24" fill="white" opacity="0.08"/>
+          <line x1="32" y1="50" x2="60" y2="50" stroke="#006DA0" stroke-width="1.5" opacity="0.5"/>
+          <line x1="30" y1="62" x2="59" y2="62" stroke="#006DA0" stroke-width="1.5" opacity="0.5"/>
+          <line x1="28" y1="74" x2="58" y2="74" stroke="#006DA0" stroke-width="1.5" opacity="0.5"/>
+          <line x1="70" y1="50" x2="98" y2="50" stroke="#006DA0" stroke-width="1.5" opacity="0.5"/>
+          <line x1="71" y1="62" x2="100" y2="62" stroke="#006DA0" stroke-width="1.5" opacity="0.5"/>
+          <line x1="72" y1="74" x2="102" y2="74" stroke="#006DA0" stroke-width="1.5" opacity="0.5"/>
+          <text x="14" y="34" font-size="14" fill="#FFB703">★</text>
+          <text x="108" y="40" font-size="11" fill="#FFD700">★</text>
+          <text x="20" y="86" font-size="9" fill="white" opacity="0.5">★</text>
+        </svg>
+      </div>
+      <div class="footer" style="background:#1B1F3B; border-top: 3px solid #FFB703;">
+        <div class="brand-line" style="color:#FFB703;">COMMUNICATE BY DESIGN</div>
+        <div class="info-line" style="color:#94A3B8;">Fiction Anchor Text · Grades 3–5 · SPED & Inclusive · AAC Accessible</div>
+      </div>
+    </div>
+    <div class="option-label">
+      <div class="color-name"><span class="swatch" style="background:#00B4D8;"></span>Electric Teal Background</div>
+      <div class="hex">#00B4D8 → #0077A8 gradient · White book · Navy footer</div>
+      <div class="rationale">Bright, fun, instantly different from nonfiction navy. Uses the existing brand teal as the canvas. White book on teal pops hard at thumbnail size.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ======================== -->
+<div class="section-label">Option C — Split / Two-Tone (playful, modern TPT style)</div>
+<div class="grid" style="max-width:480px; margin: 0 auto 0;">
+
+  <!-- C1: Split teal + white -->
+  <div>
+    <div class="cover" style="background: #ffffff; position:relative; overflow:hidden;">
+      <!-- Top teal band -->
+      <div style="position:absolute; top:0; left:0; right:0; height:52%; background: linear-gradient(135deg, #1B1F3B 0%, #00B4D8 100%); z-index:0;"></div>
+      <!-- Bottom white band -->
+      <div style="position:absolute; bottom:0; left:0; right:0; height:48%; background:#ffffff; z-index:0;"></div>
+
+      <div class="title-block" style="position:relative; z-index:2;">
+        <div class="unit-title" style="color: #ffffff; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">Wonder</div>
+        <div class="subtitle" style="color: #FFD700;">Fiction Anchor Text Unit</div>
+      </div>
+      <div class="illustration" style="position:relative; z-index:2;">
+        <svg width="130" height="110" viewBox="0 0 130 110">
+          <!-- Book sits at the split -->
+          <rect x="25" y="45" width="80" height="60" rx="4" fill="#1B1F3B" opacity="0.08"/>
+          <path d="M65 12 Q38 18 22 85 L65 85 Z" fill="#FFB703"/>
+          <path d="M65 12 Q92 18 108 85 L65 85 Z" fill="#FFD700"/>
+          <rect x="63" y="12" width="4" height="73" fill="#d97706"/>
+          <line x1="32" y1="44" x2="60" y2="44" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="30" y1="56" x2="59" y2="56" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="28" y1="68" x2="58" y2="68" stroke="#1B1F3B" stroke-width="1.5" opacity="0.25"/>
+          <line x1="70" y1="44" x2="98" y2="44" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="71" y1="56" x2="100" y2="56" stroke="white" stroke-width="1.5" opacity="0.6"/>
+          <line x1="72" y1="68" x2="102" y2="68" stroke="#1B1F3B" stroke-width="1.5" opacity="0.25"/>
+        </svg>
+      </div>
+      <div class="footer" style="background:#1B1F3B; border-top: 3px solid #FFB703; position:relative; z-index:2;">
+        <div class="brand-line" style="color:#FFB703;">COMMUNICATE BY DESIGN</div>
+        <div class="info-line" style="color:#94A3B8;">Fiction Anchor Text · Grades 3–5 · SPED & Inclusive · AAC Accessible</div>
+      </div>
+    </div>
+    <div class="option-label">
+      <div class="color-name"><span class="swatch" style="background:linear-gradient(135deg,#1B1F3B,#00B4D8);"></span>Navy-to-Teal + White Split</div>
+      <div class="hex">Gradient top · white bottom · Amber book</div>
+      <div class="rationale">Modern TPT style. Dynamic, bright at first glance. Book spans the split — visually interesting. All brand colors.</div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; color:#94a3b8; font-size:11px; margin-top:40px; max-width:600px; margin-left:auto; margin-right:auto; line-height: 1.7;">
+  All options use only existing CbD brand colors — no new hex values invented.<br>
+  The difference is in the <strong>background treatment</strong>, not just the accent.<br>
+  Which direction feels right? Or pull elements from different options.
+</p>
+
+</body>
+</html>

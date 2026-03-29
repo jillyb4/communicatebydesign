@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — AAC Vocabulary Explorer</title>
+<style>
+  :root {
+    --navy:   #1B1F3B;
+    --teal:   #00B4D8;
+    --teal-d: #006DA0;
+    --amber:  #FFB703;
+    --yellow: #FFD700;
+    --white:  #FFFFFF;
+    --slate:  #94A3B8;
+    --card:   #252A4A;
+    --fitz-yellow: #E8C222;
+    --fitz-green:  #00A86B;
+    --fitz-orange: #FF8C00;
+    --fitz-blue:   #4A90D9;
+    --fitz-pink:   #E88CA5;
+    --fitz-white:  #8B8B8B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    border-bottom: 3px solid var(--amber);
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon {
+    width: 42px; height: 42px;
+    background: var(--amber);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .brand-text { line-height: 1.2; }
+  .brand-communicate { color: var(--teal); font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .brand-bydesign    { color: var(--amber); font-size: 13px; font-weight: 700; letter-spacing: 2px; }
+  .brand-tagline     { color: var(--slate); font-size: 11px; margin-top: 2px; }
+  .header-right { display: flex; gap: 10px; align-items: center; }
+  .ufli-btn {
+    background: var(--teal-d); color: var(--white);
+    border: none; border-radius: 6px;
+    padding: 7px 14px; font-size: 12px; font-weight: 700;
+    cursor: pointer; text-decoration: none; display: inline-block;
+  }
+  .ufli-btn:hover { background: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1B1F3B 0%, #252A4A 100%);
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .hero h1 { font-size: 22px; color: var(--white); margin-bottom: 6px; }
+  .hero p  { font-size: 14px; color: var(--slate); max-width: 680px; line-height: 1.5; }
+  .stats-row { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 24px; font-weight: 700; color: var(--amber); }
+  .stat-lbl { font-size: 11px; color: var(--slate); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── CONTROLS ── */
+  .controls {
+    background: var(--card);
+    padding: 16px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 340px; }
+  .search-wrap input {
+    width: 100%;
+    background: var(--navy);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: var(--white);
+    padding: 9px 14px 9px 36px;
+    font-size: 14px;
+    outline: none;
+  }
+  .search-wrap input:focus { border-color: var(--teal); }
+  .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--slate); font-size: 14px; }
+  .filter-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .filter-label { font-size: 11px; color: var(--slate); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .fitz-btn {
+    border: none; border-radius: 20px; cursor: pointer;
+    padding: 5px 12px; font-size: 12px; font-weight: 700; color: var(--navy);
+    transition: opacity 0.15s, transform 0.1s;
+    opacity: 0.55;
+  }
+  .fitz-btn.active { opacity: 1; transform: scale(1.05); }
+  .fitz-btn:hover  { opacity: 0.85; }
+  .type-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 6px; cursor: pointer;
+    padding: 5px 11px; font-size: 12px; font-weight: 700; color: var(--slate);
+    transition: all 0.15s;
+  }
+  .type-btn.active { background: var(--teal-d); border-color: var(--teal); color: var(--white); }
+  .type-btn:hover  { border-color: var(--teal); color: var(--white); }
+  .line-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 6px; cursor: pointer;
+    padding: 5px 11px; font-size: 12px; font-weight: 700; color: var(--slate);
+    transition: all 0.15s;
+  }
+  .line-btn.active { background: var(--amber); border-color: var(--amber); color: var(--navy); }
+  .line-btn:hover  { border-color: var(--amber); color: var(--white); }
+  .clear-btn {
+    background: none; border: none; color: var(--slate); font-size: 12px;
+    cursor: pointer; text-decoration: underline; margin-left: 4px;
+  }
+  .clear-btn:hover { color: var(--white); }
+  .result-count {
+    margin-left: auto; font-size: 12px; color: var(--slate); white-space: nowrap;
+  }
+
+  /* ── LAYOUT ── */
+  .main { display: flex; height: calc(100vh - 240px); min-height: 400px; }
+  .word-list-pane {
+    width: 260px; min-width: 200px;
+    background: var(--navy);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .detail-pane {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+    background: #1a1e38;
+  }
+
+  /* ── WORD LIST ── */
+  .word-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.12s;
+  }
+  .word-item:hover { background: var(--card); }
+  .word-item.selected { background: var(--card); border-left: 3px solid var(--teal); padding-left: 11px; }
+  .fitz-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .word-text { font-size: 13px; font-weight: 600; flex: 1; }
+  .word-type-badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 2px 5px; border-radius: 3px;
+  }
+  .badge-C  { background: #006DA0; color: var(--white); }
+  .badge-F  { background: rgba(255,140,0,0.25); color: #FF8C00; }
+  .badge-H  { background: rgba(232,140,165,0.3); color: #E88CA5; }
+  .badge-CU { background: #00B4D8; color: var(--navy); }
+
+  /* ── DETAIL ── */
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; height: 100%; color: var(--slate);
+    text-align: center; gap: 12px;
+  }
+  .empty-state .icon { font-size: 48px; opacity: 0.4; }
+  .empty-state p { max-width: 280px; font-size: 14px; line-height: 1.5; }
+
+  .detail-header {
+    display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px;
+  }
+  .detail-fitz-swatch {
+    width: 56px; height: 56px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+  }
+  .detail-word { font-size: 32px; font-weight: 700; color: var(--white); }
+  .detail-meta { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+  .meta-tag {
+    font-size: 11px; font-weight: 700; padding: 3px 8px;
+    border-radius: 4px; letter-spacing: 0.4px;
+  }
+  .mt-core  { background: var(--teal-d); color: var(--white); }
+  .mt-fringe{ background: rgba(255,140,0,0.2); color: #FF8C00; border: 1px solid rgba(255,140,0,0.4); }
+  .mt-heart { background: rgba(232,140,165,0.3); color: #E88CA5; }
+  .mt-fitz  { color: var(--navy); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; }
+  .mt-priority { background: var(--yellow); color: var(--navy); }
+
+  .section { margin-bottom: 20px; }
+  .section-title {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--slate); margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding-bottom: 5px;
+  }
+
+  .product-card {
+    background: var(--card); border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 8px;
+    border-left: 3px solid var(--teal-d);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .product-card.nonfiction { border-left-color: var(--amber); }
+  .product-icon { font-size: 20px; }
+  .product-info { flex: 1; }
+  .product-header {
+    display: flex; align-items: center; gap: 6px;
+    flex-wrap: wrap; margin-bottom: 4px;
+  }
+  .product-line-label {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--slate);
+    border: 1px solid rgba(148,163,184,0.3); border-radius: 3px;
+    padding: 1px 5px;
+  }
+  .status-badge {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.6px; border-radius: 3px; padding: 2px 6px;
+  }
+  .status-live { background: rgba(0,168,107,0.25); color: #00A86B; border: 1px solid rgba(0,168,107,0.4); }
+  .status-in-production { background: rgba(0,180,216,0.2); color: var(--teal); border: 1px solid rgba(0,180,216,0.35); }
+  .status-next { background: rgba(74,144,217,0.2); color: #4A90D9; border: 1px solid rgba(74,144,217,0.35); }
+  .status-idea { background: rgba(148,163,184,0.15); color: var(--slate); border: 1px solid rgba(148,163,184,0.3); }
+  .product-name { font-size: 13px; font-weight: 700; color: var(--white); }
+  .product-sub  { font-size: 11px; color: var(--slate); margin-top: 2px; }
+  .product-platforms {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px;
+  }
+  .platform-chip {
+    font-size: 10px; font-weight: 700;
+    background: rgba(0,180,216,0.12); border: 1px solid rgba(0,180,216,0.3);
+    color: var(--teal); border-radius: 4px; padding: 2px 7px;
+    text-decoration: none;
+  }
+  .platform-chip:hover { background: rgba(0,180,216,0.25); }
+  .product-est {
+    font-size: 10px; color: var(--amber); margin-top: 4px;
+  }
+  .product-tpt  {
+    font-size: 10px; color: var(--teal); text-decoration: none;
+    margin-top: 4px; display: inline-block;
+  }
+  .product-tpt:hover { text-decoration: underline; }
+
+  .lesson-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .lesson-chip {
+    background: rgba(0,180,216,0.12); border: 1px solid rgba(0,180,216,0.3);
+    color: var(--teal); border-radius: 4px;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; cursor: pointer;
+    transition: background 0.12s;
+  }
+  .lesson-chip:hover { background: rgba(0,180,216,0.25); }
+
+  .related-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .related-word {
+    background: var(--card); border-radius: 6px;
+    padding: 5px 10px; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: background 0.12s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .related-word:hover { background: rgba(0,180,216,0.15); }
+
+  .rec-card {
+    background: var(--card); border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 8px;
+    border: 1px solid rgba(255,183,3,0.25);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .rec-score {
+    background: var(--amber); color: var(--navy);
+    border-radius: 6px; padding: 6px 10px; text-align: center;
+    font-size: 16px; font-weight: 700; min-width: 40px;
+  }
+  .rec-info { flex: 1; }
+  .rec-name { font-size: 13px; font-weight: 700; }
+  .rec-desc { font-size: 11px; color: var(--slate); margin-top: 2px; }
+
+  /* ── FITZGERALD LEGEND ── */
+  .fitz-legend {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 12px 24px;
+    background: var(--card);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .fitz-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--slate); }
+  .fitz-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+  @media (max-width: 600px) {
+    .word-list-pane { width: 140px; min-width: 120px; }
+    .detail-word { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">💬</div>
+    <div class="brand-text">
+      <div><span class="brand-communicate">COMMUNICATE</span> <span class="brand-bydesign">BY DESIGN</span></div>
+      <div class="brand-tagline">Where AT Meets Practice</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span style="font-size:13px;font-weight:700;color:var(--teal);">AAC Vocabulary Explorer</span>
+    <a class="ufli-btn" href="./ufli-lesson-activity.html" target="_blank">🔤 UFLI Lesson Activity</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Search Vocabulary Across All Products</h1>
+  <p>Find core and fringe AAC vocabulary words, see which products and lessons use them, and get recommendations for reinforcing communication access.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num" id="stat-total">476</div><div class="stat-lbl">Total Words</div></div>
+    <div class="stat"><div class="stat-num" id="stat-core">75</div><div class="stat-lbl">Core Words</div></div>
+    <div class="stat"><div class="stat-num" id="stat-fringe">398</div><div class="stat-lbl">Fringe Words</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Nonfiction Units</div></div>
+    <div class="stat"><div class="stat-num">30</div><div class="stat-lbl">UFLI Lessons</div></div>
+  </div>
+</div>
+
+<div class="fitz-legend">
+  <div class="fitz-legend-item"><div class="fitz-legend-dot" style="background:var(--fitz-yellow)"></div> People / Pronouns</div>
+  <div class="fitz-legend-item"><div class="fitz-legend-dot" style="background:var(--fitz-green)"></div> Actions / Verbs</div>
+  <div class="fitz-legend-item"><div class="fitz-legend-dot" style="background:var(--fitz-orange)"></div> Descriptions</div>
+  <div class="fitz-legend-item"><div class="fitz-legend-dot" style="background:var(--fitz-white)"></div> Nouns</div>
+  <div class="fitz-legend-item"><div class="fitz-legend-dot" style="background:var(--fitz-blue)"></div> Prepositions / Time</div>
+  <div class="fitz-legend-item"><div class="fitz-legend-dot" style="background:var(--fitz-pink)"></div> Social / Feelings</div>
+  <span style="margin-left:auto;font-size:11px;color:var(--slate);">Modified Fitzgerald Key — Standard AAC Color System</span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Search vocabulary words…" autocomplete="off">
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Category</span>
+    <button class="fitz-btn active" data-fitz="all" style="background:#4A4A6A;color:var(--white);">All</button>
+    <button class="fitz-btn" data-fitz="yellow" style="background:var(--fitz-yellow);">People</button>
+    <button class="fitz-btn" data-fitz="green"  style="background:var(--fitz-green);">Actions</button>
+    <button class="fitz-btn" data-fitz="orange" style="background:var(--fitz-orange);">Desc.</button>
+    <button class="fitz-btn" data-fitz="white"  style="background:#8B8B8B;">Nouns</button>
+    <button class="fitz-btn" data-fitz="blue"   style="background:var(--fitz-blue);">Prep.</button>
+    <button class="fitz-btn" data-fitz="pink"   style="background:var(--fitz-pink);">Social</button>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Type</span>
+    <button class="type-btn active" data-type="all">All</button>
+    <button class="type-btn" data-type="C">Core</button>
+    <button class="type-btn" data-type="F">Fringe</button>
+    <button class="type-btn" data-type="H">♥ Heart</button>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Line</span>
+    <button class="line-btn active" data-line="all">All</button>
+    <button class="line-btn" data-line="UFLI Phonics">UFLI</button>
+    <button class="line-btn" data-line="Nonfiction Reading Units">Nonfiction</button>
+  </div>
+
+  <button class="clear-btn" onclick="clearFilters()">Clear all</button>
+  <div class="result-count" id="result-count">476 words</div>
+</div>
+
+<div class="main">
+  <div class="word-list-pane" id="word-list"></div>
+  <div class="detail-pane" id="detail-pane">
+    <div class="empty-state">
+      <div class="icon">🔍</div>
+      <p>Select a word from the list to see where it appears across products and get recommendations for supporting communication access.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── EMBEDDED VOCABULARY DATA ──
+const VOCAB = 
+[{"w":"ab","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"access","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"ad","t":"F","f":"white","fl":"Nouns","ul":[13],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"ada","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"adapt","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"advocate","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"after","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"agree","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"am","t":"C","f":"green","fl":"Actions","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"an","t":"H","f":"blue","fl":"Prepositions","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"and","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"answer","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"ap","t":"F","f":"white","fl":"Nouns","ul":[6],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"approve","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"assimilation","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"at","t":"C","f":"blue","fl":"Prepositions","ul":[5,6,10,11,19],"nu":[],"pl":["UFLI Phonics"],"pc":5,"p5":false},{"w":"ax","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"bad","t":"CU","f":"orange","fl":"Descriptions","ul":[17,19],"nu":["Frances Kelsey","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":7,"p5":false},{"w":"bag","t":"F","f":"white","fl":"Nouns","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"bags","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"ban","t":"F","f":"green","fl":"Actions","ul":[19],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"barrier","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"bat","t":"F","f":"green","fl":"Actions","ul":[17,19,24],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"because","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":5,"p5":true},{"w":"bed","t":"F","f":"white","fl":"Nouns","ul":[19,24,26],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"before","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"beg","t":"F","f":"green","fl":"Actions","ul":[18,31],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"believe","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"ben","t":"F","f":"yellow","fl":"People","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"best","t":"CU","f":"orange","fl":"Descriptions","ul":[30,32],"nu":["Keiko"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"bet","t":"F","f":"green","fl":"Actions","ul":[18,24,26,30,31],"nu":[],"pl":["UFLI Phonics"],"pc":5,"p5":false},{"w":"bets","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"bid","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"big","t":"F","f":"orange","fl":"Descriptions","ul":[17,31],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"bin","t":"F","f":"white","fl":"Nouns","ul":[17,19,21],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"bins","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"bit","t":"F","f":"green","fl":"Actions","ul":[17,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"blot","t":"F","f":"white","fl":"Nouns","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"boarding","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"bone","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"bops","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"box","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"brave","t":"C","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"brim","t":"F","f":"white","fl":"Nouns","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"bud","t":"F","f":"green","fl":"Actions","ul":[19],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"bug","t":"F","f":"white","fl":"Nouns","ul":[18,29],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"bugs","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"building","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"bun","t":"F","f":"white","fl":"Nouns","ul":[17,19,21],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"buns","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"but","t":"C","f":"blue","fl":"Prepositions","ul":[17,19],"nu":["Frances Kelsey","Capitol Crawl","Zitkala-Ša"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":5,"p5":false},{"w":"cab","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cam","t":"F","f":"white","fl":"Nouns","ul":[14],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"can","t":"C","f":"green","fl":"Actions","ul":[14],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cap","t":"F","f":"green","fl":"Actions","ul":[14,20],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"capitol","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"caps","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"captivity","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"care","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"cat","t":"F","f":"white","fl":"Nouns","ul":[14,19,20],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"cats","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"change","t":"C","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Radium Girls","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":true},{"w":"claim","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"clap","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"clog","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"clop","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"clot","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cob","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cod","t":"F","f":"white","fl":"Nouns","ul":[14],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"community","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"company","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"con","t":"F","f":"green","fl":"Actions","ul":[14],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"contradict","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"cop","t":"F","f":"green","fl":"Actions","ul":[14],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cops","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"corroborate","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"cot","t":"F","f":"white","fl":"Nouns","ul":[14,16,19],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"court","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"crab","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"crawl","t":"F","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"crib","t":"F","f":"white","fl":"Nouns","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"crop","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cub","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cup","t":"F","f":"white","fl":"Nouns","ul":[15],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"cut","t":"F","f":"green","fl":"Actions","ul":[15,16],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"dab","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"dakota","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"danger","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"demand","t":"F","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"den","t":"F","f":"white","fl":"Nouns","ul":[18,19,28],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"dent","t":"F","f":"white","fl":"Nouns","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"deny","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"die","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"different","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":6,"p5":false},{"w":"dig","t":"F","f":"green","fl":"Actions","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"digs","t":"F","f":"green","fl":"Actions","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"din","t":"F","f":"white","fl":"Nouns","ul":[19],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"disability","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"disagree","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"discrimination","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"do","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"doctor","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"dog","t":"F","f":"white","fl":"Nouns","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"dot","t":"F","f":"white","fl":"Nouns","ul":[13,16,19],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"drip","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"drips","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"drop","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"drug","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"dub","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"dug","t":"F","f":"green","fl":"Actions","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"dun","t":"F","f":"white","fl":"Nouns","ul":[15,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"end","t":"F","f":"green","fl":"Actions","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"equal","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"evidence","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"factory","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"fad","t":"F","f":"green","fl":"Actions","ul":[13],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fair","t":"C","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"false","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Keiko","Radium Girls","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"family","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"fan","t":"F","f":"green","fl":"Actions","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fat","t":"F","f":"orange","fl":"Descriptions","ul":[7,10,12,19],"nu":[],"pl":["UFLI Phonics"],"pc":4,"p5":false},{"w":"fax","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fed","t":"F","f":"green","fl":"Actions","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"federal","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"feel","t":"C","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Keiko","Radium Girls","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":false},{"w":"fend","t":"F","f":"green","fl":"Actions","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fig","t":"F","f":"white","fl":"Nouns","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fight","t":"C","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"figs","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fin","t":"F","f":"white","fl":"Nouns","ul":[9,10,19,21,22],"nu":[],"pl":["UFLI Phonics"],"pc":5,"p5":false},{"w":"fins","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"first","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"fit","t":"F","f":"green","fl":"Actions","ul":[8,9,10],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"fix","t":"F","f":"green","fl":"Actions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"flag","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"flat","t":"F","f":"orange","fl":"Descriptions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"flax","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"flip","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"flop","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"fox","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"free","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["504 Sit-In","Keiko"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"freedom","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"fun","t":"F","f":"green","fl":"Actions","ul":[15,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"gab","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"gap","t":"F","f":"white","fl":"Nouns","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"gaps","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"gas","t":"F","f":"white","fl":"Nouns","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"get","t":"C","f":"green","fl":"Actions","ul":[18,23,30],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"gets","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"gigs","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"glop","t":"F","f":"white","fl":"Nouns","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"go","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"gob","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"good","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":5,"p5":false},{"w":"got","t":"C","f":"green","fl":"Actions","ul":[16,19,23],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"government","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"grab","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"gram","t":"F","f":"white","fl":"Nouns","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"grim","t":"F","f":"orange","fl":"Descriptions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"grip","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"grips","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"gum","t":"F","f":"white","fl":"Nouns","ul":[16,30],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"gut","t":"F","f":"white","fl":"Nouns","ul":[16,30],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"had","t":"C","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hair","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"has","t":"H","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hat","t":"F","f":"white","fl":"Nouns","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"healthy","t":"F","f":"orange","fl":"Descriptions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"help","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":5,"p5":true},{"w":"hid","t":"C","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"him","t":"C","f":"yellow","fl":"People","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hip","t":"F","f":"white","fl":"Nouns","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"his","t":"H","f":"yellow","fl":"People","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hit","t":"C","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hog","t":"F","f":"white","fl":"Nouns","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"home","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"hop","t":"F","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hot","t":"F","f":"orange","fl":"Descriptions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hug","t":"F","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"hum","t":"F","f":"green","fl":"Actions","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"human","t":"F","f":"yellow","fl":"People","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"hut","t":"F","f":"white","fl":"Nouns","ul":[23],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"if","t":"C","f":"blue","fl":"Prepositions","ul":[8,10],"nu":["Frances Kelsey"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"important","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"in","t":"C","f":"blue","fl":"Prepositions","ul":[9,10,19],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"it","t":"C","f":"yellow","fl":"People","ul":[8,9,10],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"jab","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jag","t":"F","f":"white","fl":"Nouns","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jam","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jan","t":"F","f":"yellow","fl":"People","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jest","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jet","t":"F","f":"white","fl":"Nouns","ul":[29,30],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"jig","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jim","t":"F","f":"yellow","fl":"People","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"job","t":"F","f":"white","fl":"Nouns","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jog","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jon","t":"F","f":"yellow","fl":"People","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jot","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jug","t":"F","f":"white","fl":"Nouns","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"just","t":"C","f":"orange","fl":"Descriptions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"jut","t":"F","f":"green","fl":"Actions","ul":[29],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"ken","t":"F","f":"yellow","fl":"People","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"kid","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"kids","t":"F","f":"white","fl":"Nouns","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"kim","t":"F","f":"yellow","fl":"People","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"kin","t":"F","f":"white","fl":"Nouns","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"kip","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"kit","t":"F","f":"white","fl":"Nouns","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"know","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":5,"p5":false},{"w":"lab","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lad","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lag","t":"F","f":"green","fl":"Actions","ul":[26,27],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"lamp","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lap","t":"F","f":"green","fl":"Actions","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"laps","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"last","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"law","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey","504 Sit-In","Radium Girls","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"lax","t":"F","f":"orange","fl":"Descriptions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"learn","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"led","t":"F","f":"green","fl":"Actions","ul":[26,28],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"leg","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"less","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"let","t":"F","f":"green","fl":"Actions","ul":[26,28],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"lid","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lie","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"limp","t":"F","f":"green","fl":"Actions","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lip","t":"F","f":"white","fl":"Nouns","ul":[26,27,32],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"lips","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lit","t":"F","f":"green","fl":"Actions","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"live","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"log","t":"F","f":"green","fl":"Actions","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lot","t":"F","f":"white","fl":"Nouns","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lox","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"lug","t":"F","f":"green","fl":"Actions","ul":[26,27],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"lump","t":"F","f":"green","fl":"Actions","ul":[26],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mad","t":"F","f":"orange","fl":"Descriptions","ul":[13,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"make","t":"C","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"man","t":"F","f":"white","fl":"Nouns","ul":[11,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"map","t":"F","f":"white","fl":"Nouns","ul":[6,7,9,10,12,14,20],"nu":[],"pl":["UFLI Phonics"],"pc":7,"p5":false},{"w":"maps","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mat","t":"F","f":"white","fl":"Nouns","ul":[5,6,10,12,14,19,20],"nu":[],"pl":["UFLI Phonics"],"pc":7,"p5":false},{"w":"mats","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"max","t":"F","f":"orange","fl":"Descriptions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mean","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"meg","t":"F","f":"yellow","fl":"People","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"men","t":"F","f":"white","fl":"Nouns","ul":[18,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"met","t":"F","f":"green","fl":"Actions","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mix","t":"F","f":"green","fl":"Actions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mob","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mod","t":"F","f":"orange","fl":"Descriptions","ul":[13],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"money","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"mop","t":"F","f":"green","fl":"Actions","ul":[12,20],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"mops","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"more","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"move","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"mud","t":"F","f":"white","fl":"Nouns","ul":[19],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"mug","t":"F","f":"white","fl":"Nouns","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nab","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nag","t":"F","f":"green","fl":"Actions","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nags","t":"F","f":"green","fl":"Actions","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nap","t":"F","f":"green","fl":"Actions","ul":[9,16],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"naps","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"need","t":"C","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"net","t":"F","f":"white","fl":"Nouns","ul":[18,23,31],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"nets","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"next","t":"F","f":"orange","fl":"Descriptions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nip","t":"F","f":"green","fl":"Actions","ul":[9],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nod","t":"F","f":"green","fl":"Actions","ul":[13,16],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"nop","t":"F","f":"white","fl":"Nouns","ul":[12,16],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"not","t":"C","f":"orange","fl":"Descriptions","ul":[12,13,15,16,19,23],"nu":["Frances Kelsey"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":7,"p5":true},{"w":"nub","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"nut","t":"F","f":"white","fl":"Nouns","ul":[15],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"occupy","t":"F","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"ocean","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"on","t":"C","f":"blue","fl":"Prepositions","ul":[12],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"op","t":"F","f":"white","fl":"Nouns","ul":[12],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"organize","t":"F","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"ox","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pad","t":"F","f":"green","fl":"Actions","ul":[13],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"paint","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"pam","t":"F","f":"yellow","fl":"People","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pan","t":"F","f":"green","fl":"Actions","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"park","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"pat","t":"F","f":"green","fl":"Actions","ul":[6,10,11,12,19],"nu":[],"pl":["UFLI Phonics"],"pc":5,"p5":false},{"w":"pats","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"peg","t":"F","f":"green","fl":"Actions","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pen","t":"F","f":"white","fl":"Nouns","ul":[18,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"people","t":"C","f":"yellow","fl":"People","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"pet","t":"F","f":"green","fl":"Actions","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pets","t":"F","f":"white","fl":"Nouns","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pig","t":"F","f":"white","fl":"Nouns","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pigs","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pim","t":"F","f":"yellow","fl":"People","ul":[8],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pin","t":"F","f":"green","fl":"Actions","ul":[9,10,15,19],"nu":[],"pl":["UFLI Phonics"],"pc":4,"p5":false},{"w":"pit","t":"F","f":"green","fl":"Actions","ul":[8,9,10,15,19],"nu":[],"pl":["UFLI Phonics"],"pc":5,"p5":false},{"w":"place","t":"C","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"plog","t":"F","f":"white","fl":"Nouns","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"plop","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"plot","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"plug","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pod","t":"F","f":"white","fl":"Nouns","ul":[13],"nu":["Keiko"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"pop","t":"F","f":"green","fl":"Actions","ul":[12],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pops","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pot","t":"F","f":"white","fl":"Nouns","ul":[12,13,15,19],"nu":[],"pl":["UFLI Phonics"],"pc":4,"p5":false},{"w":"pox","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pressure","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"prim","t":"F","f":"orange","fl":"Descriptions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"prod","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"proof","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"prop","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"protect","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"protest","t":"F","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":true},{"w":"prove","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"pug","t":"F","f":"white","fl":"Nouns","ul":[16,18],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"pugs","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"pun","t":"F","f":"green","fl":"Actions","ul":[15,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"quest","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"question","t":"C","f":"pink","fl":"Social","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"quid","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"quilt","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"quin","t":"F","f":"yellow","fl":"People","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"quip","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"quit","t":"F","f":"green","fl":"Actions","ul":[32,34],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"quiz","t":"F","f":"green","fl":"Actions","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"radium","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"rag","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rags","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rap","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rat","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"red","t":"F","f":"orange","fl":"Descriptions","ul":[24,26],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"reliable","t":"F","f":"orange","fl":"Descriptions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"reservation","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"rest","t":"F","f":"green","fl":"Actions","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"review","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"rid","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rig","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"right","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Radium Girls","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"rights","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"rim","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rip","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rod","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rug","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rugs","t":"F","f":"white","fl":"Nouns","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"run","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"runs","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"rut","t":"F","f":"green","fl":"Actions","ul":[24],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sad","t":"F","f":"orange","fl":"Descriptions","ul":[13,17],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"safe","t":"F","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"sag","t":"F","f":"green","fl":"Actions","ul":[16],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sags","t":"F","f":"green","fl":"Actions","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sam","t":"F","f":"yellow","fl":"People","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"same","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":6,"p5":true},{"w":"sap","t":"F","f":"white","fl":"Nouns","ul":[6,7,9,10],"nu":[],"pl":["UFLI Phonics"],"pc":4,"p5":false},{"w":"sat","t":"F","f":"green","fl":"Actions","ul":[5,6,7,10,11,12,19],"nu":[],"pl":["UFLI Phonics"],"pc":7,"p5":false},{"w":"sax","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"say","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"scientist","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"section","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"set","t":"F","f":"green","fl":"Actions","ul":[18],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sets","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"show","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"sick","t":"F","f":"orange","fl":"Descriptions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"sign","t":"F","f":"green","fl":"Actions","ul":[],"nu":["504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"sip","t":"F","f":"green","fl":"Actions","ul":[8,9],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"sit","t":"CU","f":"green","fl":"Actions","ul":[8,9,10,19],"nu":["504 Sit-In"],"pl":["UFLI Phonics","Nonfiction Reading Units"],"pc":5,"p5":false},{"w":"six","t":"F","f":"orange","fl":"Descriptions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"skid","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"skim","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"skin","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"skip","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"skit","t":"F","f":"green","fl":"Actions","ul":[22],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"slap","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"slip","t":"F","f":"green","fl":"Actions","ul":[27,32],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"slob","t":"F","f":"white","fl":"Nouns","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"slot","t":"F","f":"green","fl":"Actions","ul":[27],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sob","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sod","t":"F","f":"white","fl":"Nouns","ul":[13],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"source","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"spirit","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"squib","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"squid","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"steps","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"stop","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Radium Girls","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"strong","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":true},{"w":"sub","t":"F","f":"green","fl":"Actions","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"sum","t":"F","f":"green","fl":"Actions","ul":[15,30],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"sun","t":"F","f":"white","fl":"Nouns","ul":[15,19],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"swag","t":"F","f":"green","fl":"Actions","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"swim","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"tab","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tad","t":"F","f":"white","fl":"Nouns","ul":[13,17],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"tag","t":"F","f":"green","fl":"Actions","ul":[16,21],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"tags","t":"F","f":"green","fl":"Actions","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tam","t":"F","f":"white","fl":"Nouns","ul":[11],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tan","t":"F","f":"green","fl":"Actions","ul":[11,33],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"tap","t":"F","f":"green","fl":"Actions","ul":[6,7,9,10,12,14,17,20,22,34],"nu":[],"pl":["UFLI Phonics"],"pc":10,"p5":false},{"w":"taps","t":"F","f":"green","fl":"Actions","ul":[20,22,34],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"tax","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tell","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"ten","t":"F","f":"white","fl":"Nouns","ul":[18,19,28,33],"nu":[],"pl":["UFLI Phonics"],"pc":4,"p5":false},{"w":"tend","t":"F","f":"green","fl":"Actions","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"test","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"testimony","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"thalidomide","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Frances Kelsey"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"then","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"think","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":6,"p5":false},{"w":"tim","t":"F","f":"yellow","fl":"People","ul":[8],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tin","t":"F","f":"white","fl":"Nouns","ul":[9,10,19,22,28,34],"nu":[],"pl":["UFLI Phonics"],"pc":6,"p5":false},{"w":"tins","t":"F","f":"white","fl":"Nouns","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tip","t":"F","f":"green","fl":"Actions","ul":[8,9,22,34],"nu":[],"pl":["UFLI Phonics"],"pc":4,"p5":false},{"w":"today","t":"F","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko","Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"top","t":"F","f":"green","fl":"Actions","ul":[12,20],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"tops","t":"F","f":"green","fl":"Actions","ul":[20],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tot","t":"F","f":"green","fl":"Actions","ul":[12],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"trim","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"trip","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"trips","t":"F","f":"green","fl":"Actions","ul":[25],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"true","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","Keiko","Radium Girls","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"tub","t":"F","f":"white","fl":"Nouns","ul":[17],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tug","t":"F","f":"green","fl":"Actions","ul":[16,18,21],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"tugs","t":"F","f":"green","fl":"Actions","ul":[21],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"tux","t":"F","f":"white","fl":"Nouns","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"twig","t":"F","f":"white","fl":"Nouns","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"twin","t":"F","f":"white","fl":"Nouns","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"un","t":"F","f":"blue","fl":"Prepositions","ul":[15],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"up","t":"C","f":"blue","fl":"Prepositions","ul":[15],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"us","t":"F","f":"yellow","fl":"People","ul":[15],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"van","t":"F","f":"white","fl":"Nouns","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"vast","t":"F","f":"orange","fl":"Descriptions","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"vat","t":"F","f":"white","fl":"Nouns","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"vend","t":"F","f":"white","fl":"Nouns","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"vent","t":"F","f":"white","fl":"Nouns","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"verify","t":"F","f":"green","fl":"Actions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"vest","t":"F","f":"white","fl":"Nouns","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"vet","t":"F","f":"white","fl":"Nouns","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"vin","t":"F","f":"yellow","fl":"People","ul":[33],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"wag","t":"F","f":"green","fl":"Actions","ul":[28,29,31],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"want","t":"C","f":"green","fl":"Actions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":3,"p5":false},{"w":"wax","t":"F","f":"green","fl":"Actions","ul":[31],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"weak","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":2,"p5":false},{"w":"web","t":"F","f":"white","fl":"Nouns","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"wed","t":"F","f":"green","fl":"Actions","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"wen","t":"F","f":"white","fl":"Nouns","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"went","t":"F","f":"green","fl":"Actions","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"west","t":"F","f":"white","fl":"Nouns","ul":[28,30,32],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"wet","t":"F","f":"orange","fl":"Descriptions","ul":[28,30],"nu":[],"pl":["UFLI Phonics"],"pc":2,"p5":false},{"w":"whale","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"what","t":"C","f":"pink","fl":"Social","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"when","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"where","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"which","t":"C","f":"blue","fl":"Prepositions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"who","t":"C","f":"yellow","fl":"People","ul":[],"nu":["Capitol Crawl"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"why","t":"C","f":"pink","fl":"Social","ul":[],"nu":["Keiko","Radium Girls","Capitol Crawl","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":false},{"w":"wig","t":"F","f":"white","fl":"Nouns","ul":[28,29,31],"nu":[],"pl":["UFLI Phonics"],"pc":3,"p5":false},{"w":"wild","t":"F","f":"orange","fl":"Descriptions","ul":[],"nu":["Keiko"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":true},{"w":"wilt","t":"F","f":"green","fl":"Actions","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"win","t":"F","f":"green","fl":"Actions","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"wist","t":"F","f":"white","fl":"Nouns","ul":[32],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"wit","t":"F","f":"white","fl":"Nouns","ul":[28],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"worker","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Radium Girls"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"wrong","t":"C","f":"orange","fl":"Descriptions","ul":[],"nu":["Frances Kelsey","504 Sit-In","Radium Girls","Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":4,"p5":true},{"w":"yam","t":"F","f":"white","fl":"Nouns","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"yen","t":"F","f":"white","fl":"Nouns","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"yep","t":"F","f":"pink","fl":"Social","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"yes","t":"C","f":"pink","fl":"Social","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"yet","t":"F","f":"blue","fl":"Prepositions","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"yum","t":"F","f":"pink","fl":"Social","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"yup","t":"F","f":"pink","fl":"Social","ul":[30],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zak","t":"F","f":"yellow","fl":"People","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zap","t":"F","f":"green","fl":"Actions","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zaps","t":"F","f":"green","fl":"Actions","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zip","t":"F","f":"green","fl":"Actions","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zips","t":"F","f":"green","fl":"Actions","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zit","t":"F","f":"white","fl":"Nouns","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false},{"w":"zitkala","t":"F","f":"white","fl":"Nouns","ul":[],"nu":["Zitkala-Ša"],"pl":["Nonfiction Reading Units"],"pc":1,"p5":false},{"w":"zits","t":"F","f":"white","fl":"Nouns","ul":[34],"nu":[],"pl":["UFLI Phonics"],"pc":1,"p5":false}];
+
+// ── PRODUCT METADATA ──
+// status values: 'Live' | 'In Production' | 'Next' | 'Idea'
+// productLine: user-facing line name (Nonfiction / UFLI Supplemental / Fiction Supplemental / AT AAC)
+// platforms: shown for Live products; each has { name, url }
+// estimatedDate: shown for In Production
+// productionWindow: shown for Next
+// Idea products only shown if build file + Communication Access packet both exist
+const PRODUCTS = {
+  'UFLI Phonics': {
+    label: 'UFLI Phonics Lesson Packets (Lessons 5–34)',
+    icon: '🔤',
+    productLine: 'UFLI Supplemental',
+    status: 'In Production',
+    estimatedDate: 'May 2026',
+    desc: '30 adapted lesson packets with AAC access layers, auditory confirmation loop, and Communication Access one-sheets.',
+    cardClass: '',
+  },
+  'Keiko': {
+    label: 'Keiko: A Whale\'s Journey',
+    icon: '🐋',
+    productLine: 'Nonfiction',
+    status: 'Live',
+    platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/store/communicate-by-design' }],
+    desc: 'Grades 6–10 | RI standards | V1–V3 Lexile | Skill #1: Close Reading & Annotation',
+    cardClass: 'nonfiction',
+  },
+  'Radium Girls': {
+    label: 'Radium Girls: Labor, Science & Justice',
+    icon: '⚗️',
+    productLine: 'Nonfiction',
+    status: 'Live',
+    platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/store/communicate-by-design' }],
+    desc: 'Grades 6–10 | RI standards | V1–V3 Lexile | Skill #1: Close Reading & Annotation',
+    cardClass: 'nonfiction',
+  },
+  'Frances Kelsey': {
+    label: 'Frances Kelsey: Science, Evidence & Power',
+    icon: '🔬',
+    productLine: 'Nonfiction',
+    status: 'Live',
+    platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/store/communicate-by-design' }],
+    desc: 'Grades 6–10 | RI standards | V1–V3 Lexile | Skill #5',
+    cardClass: 'nonfiction',
+  },
+  '504 Sit-In': {
+    label: '504 Sit-In: Disability Rights & Advocacy',
+    icon: '✊',
+    productLine: 'Nonfiction',
+    status: 'Live',
+    platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/store/communicate-by-design' }],
+    desc: 'Grades 6–10 | RI standards | V1–V3 Lexile | Skill #4',
+    cardClass: 'nonfiction',
+  },
+  'Capitol Crawl': {
+    label: 'Capitol Crawl 1990: Source Analysis & Argumentation',
+    icon: '🏛️',
+    productLine: 'Nonfiction',
+    status: 'Live',
+    platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/store/communicate-by-design' }],
+    desc: 'Grades 6–10 | RI standards | V1–V3 Lexile | Skill #6',
+    cardClass: 'nonfiction',
+  },
+  'Zitkala-Ša': {
+    label: 'Zitkala-Ša: Voice, Identity & Resistance',
+    icon: '🪶',
+    productLine: 'Nonfiction',
+    status: 'Live',
+    platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/store/communicate-by-design' }],
+    desc: 'Grades 6–10 | RI standards | V1–V3 Lexile | Skill #3',
+    cardClass: 'nonfiction',
+  },
+};
+
+const FITZ_COLORS = {
+  yellow: '#E8C222', green: '#00A86B', orange: '#FF8C00',
+  white: '#8B8B8B', blue: '#4A90D9', pink: '#E88CA5'
+};
+const FITZ_ICONS = {
+  yellow: '👤', green: '⚡', orange: '🎨', white: '📦', blue: '📍', pink: '💬'
+};
+
+// ── STATE ──
+let filteredWords = [...VOCAB];
+let selectedWord  = null;
+let activeFilters = { search: '', fitz: 'all', type: 'all', line: 'all' };
+
+// Update stats
+const coreCount = VOCAB.filter(v => v.t === 'C' || v.t === 'CU').length;
+const fringeCount = VOCAB.filter(v => v.t === 'F').length;
+document.getElementById('stat-core').textContent = coreCount;
+document.getElementById('stat-fringe').textContent = fringeCount;
+document.getElementById('stat-total').textContent = VOCAB.length;
+
+// ── FILTER ENGINE ──
+function applyFilters() {
+  const q = activeFilters.search.toLowerCase().trim();
+  filteredWords = VOCAB.filter(v => {
+    if (q && !v.w.startsWith(q) && !v.w.includes(q)) return false;
+    if (activeFilters.fitz !== 'all' && v.f !== activeFilters.fitz) return false;
+    if (activeFilters.type !== 'all') {
+      if (activeFilters.type === 'C' && v.t !== 'C' && v.t !== 'CU') return false;
+      if (activeFilters.type === 'F' && v.t !== 'F') return false;
+      if (activeFilters.type === 'H' && v.t !== 'H') return false;
+    }
+    if (activeFilters.line !== 'all' && !v.pl.includes(activeFilters.line)) return false;
+    return true;
+  });
+  // Sort: priority first, then by word
+  filteredWords.sort((a,b) => {
+    if (a.p5 && !b.p5) return -1;
+    if (!a.p5 && b.p5) return 1;
+    return a.w.localeCompare(b.w);
+  });
+  renderList();
+  document.getElementById('result-count').textContent = filteredWords.length + ' word' + (filteredWords.length !== 1 ? 's' : '');
+}
+
+// ── RENDER WORD LIST ──
+function renderList() {
+  const el = document.getElementById('word-list');
+  if (filteredWords.length === 0) {
+    el.innerHTML = '<div style="padding:20px 14px;color:var(--slate);font-size:13px;text-align:center;">No words match.<br><span style="font-size:11px;">Try clearing filters.</span></div>';
+    return;
+  }
+  el.innerHTML = filteredWords.map((v, i) => {
+    const sel = selectedWord && v.w === selectedWord.w ? 'selected' : '';
+    const typeKey = v.t === 'CU' ? 'C' : v.t;
+    const color = FITZ_COLORS[v.f] || '#8B8B8B';
+    const badge = v.p5 ? '<span style="color:var(--yellow);font-size:10px;">★</span>' : '';
+    return `<div class="word-item ${sel}" onclick="selectWord(${i})" data-idx="${i}">
+      <div class="fitz-dot" style="background:${color}"></div>
+      <span class="word-text">${v.w}${badge}</span>
+      <span class="word-type-badge badge-${typeKey}">${typeKey === 'H' ? '♥' : typeKey}</span>
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER DETAIL ──
+function selectWord(listIdx) {
+  selectedWord = filteredWords[listIdx];
+  // Highlight selected
+  document.querySelectorAll('.word-item').forEach((el, i) => {
+    el.classList.toggle('selected', i === listIdx);
+  });
+  renderDetail(selectedWord);
+}
+
+function selectWordByValue(word) {
+  const idx = filteredWords.findIndex(v => v.w === word);
+  if (idx >= 0) {
+    selectWord(idx);
+    // Scroll into view
+    const items = document.querySelectorAll('.word-item');
+    if (items[idx]) items[idx].scrollIntoView({ block: 'nearest' });
+  } else {
+    // Word may be filtered out — show it anyway
+    const v = VOCAB.find(w => w.w === word);
+    if (v) renderDetail(v);
+  }
+}
+
+function renderDetail(v) {
+  const color = FITZ_COLORS[v.f] || '#8B8B8B';
+  const icon  = FITZ_ICONS[v.f] || '📦';
+  const typeName = v.t === 'C' ? 'Core' : v.t === 'CU' ? 'Core (UFLI + Nonfiction)' : v.t === 'H' ? 'Heart Word' : 'Fringe';
+  const typeCls  = v.t === 'H' ? 'mt-heart' : (v.t === 'C' || v.t === 'CU') ? 'mt-core' : 'mt-fringe';
+  const fitzLabel = v.fl;
+
+  // Products used in
+  function makeProductCard(p, subLine) {
+    const statusKey = p.status.toLowerCase().replace(/\s+/g, '-');
+    const platformsHTML = p.status === 'Live' && p.platforms
+      ? `<div class="product-platforms">${p.platforms.map(pl =>
+          `<a class="platform-chip" href="${pl.url}" target="_blank">${pl.name} ✓</a>`
+        ).join('')}</div>`
+      : '';
+    const estHTML = p.status === 'In Production' && p.estimatedDate
+      ? `<div class="product-est">Estimated live: ${p.estimatedDate}</div>`
+      : p.status === 'Next' && p.productionWindow
+      ? `<div class="product-est">Planned: ${p.productionWindow}</div>`
+      : '';
+    return `<div class="product-card ${p.cardClass || ''}">
+      <div class="product-icon">${p.icon}</div>
+      <div class="product-info">
+        <div class="product-header">
+          <span class="product-line-label">${p.productLine}</span>
+          <span class="status-badge status-${statusKey}">${p.status}</span>
+        </div>
+        <div class="product-name">${p.label}</div>
+        <div class="product-sub">${subLine}</div>
+        ${platformsHTML}${estHTML}
+      </div>
+    </div>`;
+  }
+
+  let productsHTML = '';
+  if (v.ul.length > 0) {
+    const p = PRODUCTS['UFLI Phonics'];
+    productsHTML += makeProductCard(p,
+      `Appears in ${v.ul.length} lesson${v.ul.length>1?'s':''}: ${v.ul.map(n=>'L'+n).join(', ')}`);
+  }
+  for (const unit of v.nu) {
+    const p = PRODUCTS[unit];
+    if (!p) continue;
+    productsHTML += makeProductCard(p, p.desc);
+  }
+  if (!productsHTML) productsHTML = '<div style="color:var(--slate);font-size:13px;">No products yet for this word.</div>';
+
+  // Related words (same Fitzgerald category, same type preference)
+  const related = VOCAB.filter(w => w.w !== v.w && w.f === v.f)
+    .sort((a, b) => b.pc - a.pc)
+    .slice(0, 18);
+  const relatedHTML = related.map(r => {
+    const rc = FITZ_COLORS[r.f];
+    return `<div class="related-word" onclick="selectWordByValue('${r.w}')">
+      <div class="fitz-dot" style="background:${rc}"></div>${r.w}
+    </div>`;
+  }).join('');
+
+  // Product recommendations (units that share the most vocab)
+  const recScores = {};
+  // Find all words in the same Fitzgerald category
+  const sameCategory = VOCAB.filter(w => w.f === v.f);
+  for (const w of sameCategory) {
+    for (const unit of w.nu) {
+      recScores[unit] = (recScores[unit] || 0) + 1;
+    }
+    if (w.ul.length > 0) {
+      recScores['UFLI Phonics'] = (recScores['UFLI Phonics'] || 0) + w.ul.length;
+    }
+  }
+  // Exclude products already containing this word
+  const alreadyIn = new Set([...v.nu, ...(v.ul.length > 0 ? ['UFLI Phonics'] : [])]);
+  const recs = Object.entries(recScores)
+    .filter(([name]) => !alreadyIn.has(name) && PRODUCTS[name])
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3);
+  let recsHTML = recs.map(([name, score]) => {
+    const p = PRODUCTS[name];
+    const statusKey = p.status.toLowerCase().replace(/\s+/g, '-');
+    return `<div class="rec-card">
+      <div class="rec-score">${p.icon}</div>
+      <div class="rec-info">
+        <div style="display:flex;gap:5px;align-items:center;margin-bottom:3px;">
+          <span class="product-line-label">${p.productLine}</span>
+          <span class="status-badge status-${statusKey}">${p.status}</span>
+        </div>
+        <div class="rec-name">${p.label}</div>
+        <div class="rec-desc">${score} shared ${fitzLabel.toLowerCase()} words — strong vocabulary reinforcement</div>
+      </div>
+    </div>`;
+  }).join('');
+  if (!recsHTML) recsHTML = '<div style="color:var(--slate);font-size:13px;">No additional recommendations — this word is unique to its product line.</div>';
+
+  // UFLI lesson chips
+  let lessonChipsHTML = '';
+  if (v.ul.length > 0) {
+    lessonChipsHTML = `<div class="section">
+      <div class="section-title">UFLI Phonics — Lesson Appearances</div>
+      <div class="lesson-chips">
+        ${v.ul.map(n => `<span class="lesson-chip" onclick="openUFLI(${n})">Lesson ${n}</span>`).join('')}
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--slate);">Click a lesson chip to open the UFLI interactive activity for that lesson.</div>
+    </div>`;
+  }
+
+  document.getElementById('detail-pane').innerHTML = `
+    <div class="detail-header">
+      <div class="detail-fitz-swatch" style="background:${color}20;border:2px solid ${color};">
+        <span style="font-size:26px;">${icon}</span>
+      </div>
+      <div>
+        <div class="detail-word">${v.w}</div>
+        <div class="detail-meta">
+          <span class="meta-tag ${typeCls}">${typeName}</span>
+          <span class="meta-tag mt-fitz" style="background:${color};">${fitzLabel}</span>
+          ${v.p5 ? '<span class="meta-tag mt-priority">★ Priority Vocabulary</span>' : ''}
+          <span style="font-size:11px;color:var(--slate);">Appears in ${v.pc} product${v.pc!==1?'s':''}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Found In These Products</div>
+      ${productsHTML}
+    </div>
+
+    ${lessonChipsHTML}
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="section">
+        <div class="section-title">Related Words — Same Category (${fitzLabel})</div>
+        <div class="related-grid">${relatedHTML || '<span style="color:var(--slate);font-size:13px;">No related words in this category.</span>'}</div>
+      </div>
+      <div class="section">
+        <div class="section-title">Recommended Products for Reinforcement</div>
+        ${recsHTML}
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:12px;padding:14px;background:var(--card);border-radius:8px;border:1px solid rgba(255,183,3,0.2);">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:6px;">AAC Team Note</div>
+      <div style="font-size:13px;color:var(--slate);line-height:1.6;">
+        ${v.t === 'C' || v.t === 'CU'
+          ? `"<strong style="color:var(--white);">${v.w}</strong>" is a <strong>core word</strong> — high-frequency and likely already present on most AAC systems. No pre-programming needed. Confirm location with the student's team before instruction.`
+          : v.t === 'H'
+          ? `"<strong style="color:var(--white);">${v.w}</strong>" is a <strong>heart word</strong> — irregular spelling, high frequency. Coordinate with the SLP/AAC team to confirm it is accessible on the student's system or via printed card before instruction begins.`
+          : `"<strong style="color:var(--white);">${v.w}</strong>" is a <strong>fringe word</strong> — unit-specific. Coordinate with the full IEP team (not SLP alone) to add this symbol to the student's system, e-trans board, or printed card set <em>before</em> instruction begins. Do not assume the student has access to this word.`
+        }
+      </div>
+    </div>
+  `;
+}
+
+function openUFLI(lessonNum) {
+  window.open(`./ufli-lesson-activity.html?lesson=${lessonNum}`, '_blank');
+}
+
+function clearFilters() {
+  document.getElementById('search').value = '';
+  activeFilters = { search: '', fitz: 'all', type: 'all', line: 'all' };
+  document.querySelectorAll('.fitz-btn').forEach(b => b.classList.toggle('active', b.dataset.fitz === 'all'));
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === 'all'));
+  document.querySelectorAll('.line-btn').forEach(b => b.classList.toggle('active', b.dataset.line === 'all'));
+  applyFilters();
+}
+
+// ── EVENT LISTENERS ──
+document.getElementById('search').addEventListener('input', e => {
+  activeFilters.search = e.target.value;
+  applyFilters();
+});
+
+document.querySelectorAll('.fitz-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilters.fitz = btn.dataset.fitz;
+    document.querySelectorAll('.fitz-btn').forEach(b => b.classList.toggle('active', b === btn));
+    applyFilters();
+  });
+});
+
+document.querySelectorAll('.type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilters.type = btn.dataset.type;
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('active', b === btn));
+    applyFilters();
+  });
+});
+
+document.querySelectorAll('.line-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilters.line = btn.dataset.line;
+    document.querySelectorAll('.line-btn').forEach(b => b.classList.toggle('active', b === btn));
+    applyFilters();
+  });
+});
+
+// ── INIT ──
+applyFilters();
+</script>
+</body>
+</html>

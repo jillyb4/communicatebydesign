@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — Progress Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; background: #1B1F3B; color: #fff; min-height: 100vh; padding: 24px; }
+
+  /* Header */
+  .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; border-bottom: 2px solid #FFB703; padding-bottom: 16px; }
+  .header h1 { font-size: 22px; font-weight: 900; letter-spacing: 0.5px; }
+  .header h1 span { color: #FFB703; }
+  .header .date { font-size: 12px; color: #94A3B8; }
+  .tagline { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+
+  /* Stat bar */
+  .stats { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 28px; }
+  .stat { background: #252A4A; border-radius: 8px; padding: 14px 10px; text-align: center; }
+  .stat .num { font-size: 28px; font-weight: 900; line-height: 1; }
+  .stat .label { font-size: 10px; color: #94A3B8; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat.live .num { color: #38BDF8; }
+  .stat.ready .num { color: #FFB703; }
+  .stat.build .num { color: #22D3EE; }
+  .stat.draft .num { color: #818CF8; }
+  .stat.done .num { color: #4ADE80; }
+  .stat.idea .num { color: #94A3B8; }
+  .stat.todo .num { color: #F87171; }
+
+  /* Urgent banner */
+  .urgent { background: linear-gradient(135deg, #7f1d1d, #991b1b); border: 1px solid #ef4444; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .urgent .badge { background: #ef4444; color: #fff; font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: 4px; white-space: nowrap; text-transform: uppercase; }
+  .urgent .text { font-size: 13px; font-weight: 700; }
+  .urgent .sub { font-size: 11px; color: #fca5a5; margin-top: 2px; }
+
+  /* Two column layout */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .cols3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+
+  /* Section card */
+  .card { background: #252A4A; border-radius: 10px; overflow: hidden; }
+  .card-header { padding: 12px 16px; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+  .card-header .count { background: rgba(255,255,255,0.15); font-size: 10px; padding: 1px 7px; border-radius: 10px; font-weight: 700; }
+  .card-body { padding: 0 8px 8px; }
+
+  /* Task rows */
+  .task { padding: 8px 8px; border-radius: 6px; margin-top: 4px; display: flex; align-items: flex-start; gap: 8px; }
+  .task:hover { background: rgba(255,255,255,0.04); }
+  .task-left { flex: 1; min-width: 0; }
+  .task-name { font-size: 12px; font-weight: 700; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .task-sub { font-size: 10px; color: #94A3B8; margin-top: 2px; line-height: 1.4; }
+  .task-right { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; }
+
+  /* Badges */
+  .badge { font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+  .b-high { background: #7f1d1d; color: #fca5a5; }
+  .b-med { background: #713f12; color: #fde68a; }
+  .b-low { background: #1e293b; color: #94A3B8; }
+  .b-live { background: #0c4a6e; color: #38BDF8; }
+  .b-ready { background: #422006; color: #FFB703; }
+  .b-build { background: #164e63; color: #67e8f9; }
+  .b-draft { background: #2e1065; color: #c4b5fd; }
+  .b-plan { background: #1e3a5f; color: #93c5fd; }
+  .b-done { background: #14532d; color: #4ADE80; }
+  .b-idea { background: #1e293b; color: #94A3B8; }
+  .b-todo { background: #450a0a; color: #fca5a5; }
+  .b-queue { background: #FFB703; color: #1B1F3B; }
+
+  /* Line colors */
+  .line-nonfiction { border-left: 3px solid #f97316; }
+  .line-ataac { border-left: 3px solid #006DA0; }
+  .line-ufli { border-left: 3px solid #a855f7; }
+  .line-substack { border-left: 3px solid #22c55e; }
+  .line-bundle { border-left: 3px solid #FFD700; }
+  .line-trading { border-left: 3px solid #22D3EE; }
+  .line-pic { border-left: 3px solid #ec4899; }
+  .line-other { border-left: 3px solid #475569; }
+
+  /* Section headers */
+  .sh-queue { background: linear-gradient(90deg, #78350f, #92400e); }
+  .sh-high { background: linear-gradient(90deg, #7f1d1d, #991b1b); }
+  .sh-live { background: linear-gradient(90deg, #0c4a6e, #075985); }
+  .sh-pipeline { background: linear-gradient(90deg, #1e3a5f, #1e40af); }
+  .sh-substack { background: linear-gradient(90deg, #14532d, #166534); }
+  .sh-deadline { background: linear-gradient(90deg, #3b0764, #4c1d95); }
+  .sh-idea { background: linear-gradient(90deg, #1e293b, #334155); }
+
+  /* Deadline items */
+  .deadline-row { display: flex; align-items: center; gap: 8px; padding: 8px 8px; border-radius: 6px; margin-top: 4px; }
+  .deadline-row:hover { background: rgba(255,255,255,0.04); }
+  .deadline-date { font-size: 10px; font-weight: 900; color: #FFB703; width: 64px; flex-shrink: 0; }
+  .deadline-name { font-size: 12px; flex: 1; }
+  .deadline-overdue { color: #f87171; }
+
+  /* Social checks */
+  .social-check { font-size: 10px; }
+  .s-yes { color: #4ADE80; }
+  .s-no { color: #475569; }
+
+  /* Divider */
+  .divider { height: 1px; background: rgba(255,255,255,0.06); margin: 6px 0; }
+
+  /* Footer */
+  .footer { text-align: center; font-size: 10px; color: #475569; margin-top: 28px; padding-top: 16px; border-top: 1px solid #252A4A; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <h1>COMMUNICATE <span>BY DESIGN</span></h1>
+    <div class="tagline">Where AT Meets Practice — Progress Dashboard</div>
+  </div>
+  <div class="date">March 27, 2026</div>
+</div>
+
+<!-- Stat Bar -->
+<div class="stats">
+  <div class="stat live"><div class="num">12</div><div class="label">Live</div></div>
+  <div class="stat ready"><div class="num">9</div><div class="label">Ready</div></div>
+  <div class="stat build"><div class="num">4</div><div class="label">In Build</div></div>
+  <div class="stat draft"><div class="num">2</div><div class="label">Drafting</div></div>
+  <div class="stat"><div class="num" style="color:#93c5fd">2</div><div class="label">Planning</div></div>
+  <div class="stat done"><div class="num">4</div><div class="label">Done ✓</div></div>
+  <div class="stat idea"><div class="num">7</div><div class="label">Ideas</div></div>
+</div>
+
+<!-- URGENT -->
+<div class="urgent">
+  <div>
+    <div class="badge">⚠ Due in 4 days</div>
+  </div>
+  <div>
+    <div class="text">AT Consideration Substack Post — Publish by March 31</div>
+    <div class="sub">"AT Consideration Is a Legal Requirement. So Why Does Every IEP Team Skip It?" — currently Drafting</div>
+  </div>
+</div>
+
+<div class="cols">
+
+  <!-- Browser Queue -->
+  <div class="card">
+    <div class="card-header sh-queue">
+      🤖 Browser Queue (Ready to Pick Up)
+      <span class="count">11</span>
+    </div>
+    <div class="card-body">
+
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">Re-upload nonfiction zips — 6 units</div>
+          <div class="task-sub">New _Complete.zip with Symbol Cards + Printable Kit</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">Re-upload 6 nonfiction units — Session 16</div>
+          <div class="task-sub">Comm Access section, hang-over fixes, partner modes</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="task line-substack">
+        <div class="task-left">
+          <div class="task-name">First TPT Drop — Substack post</div>
+          <div class="task-sub">Add phone photo → publish. File ready in Substack/</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">Add tag gold mines to all TPT listings</div>
+          <div class="task-sub">"aactivities", "ulfi", "drawn to aac", "sped lesson plans template"</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-med">Med</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">Daily SellerSpy searches</div>
+          <div class="task-sub">5 free/day: core vocab, adapted reading, IEP tools…</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-med">Med</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="task line-bundle">
+        <div class="task-left">
+          <div class="task-name">Nonfiction bundle — Keiko + Radium Girls</div>
+          <div class="task-sub">Create bundle listing on TPT</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-med">Med</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">TPT cross-linking audit</div>
+          <div class="task-sub">Freebies → paid products; Toolkit links from Checklist</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-low">Low</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">TPT Awards section</div>
+          <div class="task-sub">Manual entry — content already drafted</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-low">Low</span>
+          <span class="badge b-queue">Queued</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="task line-other" style="opacity:0.5">
+        <div class="task-left">
+          <div class="task-name">✓ Earth Day keyword push — Keiko</div>
+          <div class="task-sub">Done. Still checked in Airtable — safe to uncheck.</div>
+        </div>
+        <div class="task-right"><span class="badge b-done">Done</span></div>
+      </div>
+
+      <div class="task line-trading" style="opacity:0.5">
+        <div class="task-left">
+          <div class="task-name">✓ AAC Trading Cards — resubmit 1-up</div>
+          <div class="task-sub">Done. Order #82750 placed.</div>
+        </div>
+        <div class="task-right"><span class="badge b-done">Done</span></div>
+      </div>
+
+      <div class="task line-other" style="opacity:0.5">
+        <div class="task-left">
+          <div class="task-name">✓ TPT audit — Pipeline spreadsheet</div>
+          <div class="task-sub">Done. Can uncheck in Airtable.</div>
+        </div>
+        <div class="task-right"><span class="badge b-done">Done</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- High Priority Active Work -->
+  <div class="card">
+    <div class="card-header sh-high">
+      🔴 High Priority — Active Work
+      <span class="count">6</span>
+    </div>
+    <div class="card-body">
+
+      <div class="task line-substack">
+        <div class="task-left">
+          <div class="task-name">AT Consideration Substack post</div>
+          <div class="task-sub">Due Mar 31 · Currently: Drafting · "Why Does Every IEP Team Skip It?"</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-draft">Drafting</span>
+        </div>
+      </div>
+
+      <div class="task line-pic">
+        <div class="task-left">
+          <div class="task-name">All the Way to the Top Companion</div>
+          <div class="task-sub">Due Jul 26 · K–3 Picture Book · Plan done → draft section by section</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-draft">Drafting</span>
+        </div>
+      </div>
+
+      <div class="task line-ataac">
+        <div class="task-left">
+          <div class="task-name">IEP AT Consideration Toolkit</div>
+          <div class="task-sub">Live · Highest traffic · Build preview PDF + Canva social link</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-live">Live</span>
+        </div>
+      </div>
+
+      <div class="task line-ataac">
+        <div class="task-left">
+          <div class="task-name">IEP AT Consideration Checklist</div>
+          <div class="task-sub">Live · Freebie ID 15796344 · Build preview PDF + Canva social</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-live">Live</span>
+        </div>
+      </div>
+
+      <div class="task line-ataac">
+        <div class="task-left">
+          <div class="task-name">Universal AAC Communication Data Tracker</div>
+          <div class="task-sub">Ready · FREE product · Upload to Drive + Canva cover + TPT listing</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-ready">Ready</span>
+        </div>
+      </div>
+
+      <div class="task line-ataac">
+        <div class="task-left">
+          <div class="task-name">Unit Cleanup — Add Data Tracking Insert</div>
+          <div class="task-sub">All 6 nonfiction + 30 UFLI + All the Way to the Top · Start: Keiko</div>
+        </div>
+        <div class="task-right">
+          <span class="badge b-high">High</span>
+          <span class="badge b-todo">Todo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Live Products + Substack -->
+<div class="cols">
+
+  <!-- Live Products -->
+  <div class="card">
+    <div class="card-header sh-live">
+      ✅ Live on TPT — 12 Products
+    </div>
+    <div class="card-body">
+
+      <div style="font-size:10px; color:#94A3B8; padding: 8px 8px 2px; text-transform:uppercase; letter-spacing:.5px; font-weight:700;">AT/AAC IEP Team</div>
+      <div class="task line-ataac">
+        <div class="task-left"><div class="task-name">IEP AT Consideration Toolkit</div><div class="task-sub">ID 15795702 · Highest traffic · Needs preview PDF + social</div></div>
+        <div class="task-right"><span class="badge b-high">High</span></div>
+      </div>
+      <div class="task line-ataac">
+        <div class="task-left"><div class="task-name">IEP AT Consideration Checklist</div><div class="task-sub">FREE · ID 15796344 · Needs preview PDF + social</div></div>
+        <div class="task-right"><span class="badge b-high">High</span></div>
+      </div>
+      <div class="task line-ataac">
+        <div class="task-left"><div class="task-name">AAC Communication Partner Quick Guide</div><div class="task-sub">Add Canva social link · check Pinterest</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-ataac">
+        <div class="task-left"><div class="task-name">AAC Data Collection Forms</div><div class="task-sub">Add Canva social link · check Pinterest</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-ataac">
+        <div class="task-left"><div class="task-name">Visual Schedule Template Pack</div><div class="task-sub">Add Canva social link · check Pinterest</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-bundle">
+        <div class="task-left"><div class="task-name">AT & AAC Toolkit Bundle</div><div class="task-sub">Add Canva social link · check Pinterest</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="font-size:10px; color:#94A3B8; padding: 8px 8px 2px; text-transform:uppercase; letter-spacing:.5px; font-weight:700;">Nonfiction Units</div>
+      <div class="task line-nonfiction">
+        <div class="task-left"><div class="task-name">Keiko: A Whale's Journey</div><div class="task-sub">#1 · 4 passages · Add Canva social link</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left"><div class="task-name">Radium Girls</div><div class="task-sub">#1 · 4 passages · Add Canva social link</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left"><div class="task-name">Zitkala-Ša</div><div class="task-sub">#3 · 2 passages · Add Canva social link</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left"><div class="task-name">504 Sit-In</div><div class="task-sub">#4 · 4 passages · Add Canva social + bundle with Capitol Crawl Jul</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left"><div class="task-name">Frances Kelsey</div><div class="task-sub">#5 · 4 passages · Add Canva social link</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left"><div class="task-name">Capitol Crawl 1990</div><div class="task-sub">#6 · 2 passages · Add Canva social; bundle with 504 Jul</div></div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Substack + Pipeline -->
+  <div style="display:flex; flex-direction:column; gap:18px;">
+
+    <!-- Substack -->
+    <div class="card">
+      <div class="card-header sh-substack">
+        📧 Substack Pipeline
+      </div>
+      <div class="card-body">
+        <div class="task">
+          <div class="task-left">
+            <div class="task-name">She Didn't Use Her Device</div>
+            <div class="task-sub">Published Mar 27 · Drop link in SPED FB groups</div>
+          </div>
+          <div class="task-right"><span class="badge b-done">Published</span></div>
+        </div>
+        <div class="task">
+          <div class="task-left">
+            <div class="task-name">That Statistic Is 33 Years Old</div>
+            <div class="task-sub">Published Mar 25 ✓</div>
+          </div>
+          <div class="task-right"><span class="badge b-done">Published</span></div>
+        </div>
+        <div class="task">
+          <div class="task-left">
+            <div class="task-name">First TPT Drop</div>
+            <div class="task-sub">Ready to Publish · Add phone photo → publish</div>
+          </div>
+          <div class="task-right"><span class="badge b-high">High</span><span class="badge b-ready">Ready</span></div>
+        </div>
+        <div class="task">
+          <div class="task-left">
+            <div class="task-name">AT Consideration Is a Legal Requirement</div>
+            <div class="task-sub">Due Mar 31 · Currently drafting</div>
+          </div>
+          <div class="task-right"><span class="badge b-high">High</span><span class="badge b-draft">Drafting</span></div>
+        </div>
+        <div class="task" style="opacity:.7">
+          <div class="task-left">
+            <div class="task-name">Capitol Crawl — Child's Act of Resistance</div>
+            <div class="task-sub">Target Jul 2026 · ADA anniversary tie-in</div>
+          </div>
+          <div class="task-right"><span class="badge b-idea">Outline</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In Build -->
+    <div class="card">
+      <div class="card-header sh-pipeline">
+        🔨 In Build
+        <span class="count">4</span>
+      </div>
+      <div class="card-body">
+        <div class="task line-ufli">
+          <div class="task-left">
+            <div class="task-name">UFLI — Cover Designs (36 products)</div>
+            <div class="task-sub">Due May 1 · Design in Canva for all 36 before launch</div>
+          </div>
+          <div class="task-right"><span class="badge b-med">Med</span></div>
+        </div>
+        <div class="task line-ataac">
+          <div class="task-left">
+            <div class="task-name">Preview PDFs — AT Checklist + Toolkit</div>
+            <div class="task-sub">Include symbol cards page. Highest traffic products.</div>
+          </div>
+          <div class="task-right"><span class="badge b-med">Med</span></div>
+        </div>
+        <div class="task line-nonfiction">
+          <div class="task-left">
+            <div class="task-name">V3 Passage Audit — All 6 units</div>
+            <div class="task-sub">Core + highest-freq fringe only. Start: Keiko → Radium Girls</div>
+          </div>
+          <div class="task-right"><span class="badge b-med">Med</span></div>
+        </div>
+        <div class="task line-ataac">
+          <div class="task-left">
+            <div class="task-name">Alternative Pencil Guide</div>
+            <div class="task-sub">Prerequisite for UFLI product line</div>
+          </div>
+          <div class="task-right"><span class="badge b-med">Med</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Deadlines + Ideas -->
+<div class="cols">
+
+  <!-- Deadlines -->
+  <div class="card">
+    <div class="card-header sh-deadline">
+      📅 Deadlines
+    </div>
+    <div class="card-body" style="padding: 8px;">
+      <div class="deadline-row">
+        <div class="deadline-date deadline-overdue">MAR 31</div>
+        <div class="deadline-name">AT Consideration Substack post</div>
+        <span class="badge b-high">4 days</span>
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-date" style="color:#f97316;">APR 1</div>
+        <div class="deadline-name" style="opacity:.6;">Earth Day keyword push — Keiko <span style="color:#4ADE80">✓ Done</span></div>
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-date">APR 27</div>
+        <div class="deadline-name">Ahrefs 7-day trial · START · cancel May 2 9am PT</div>
+        <span class="badge b-plan">31 days</span>
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-date">MAY 1</div>
+        <div class="deadline-name">UFLI cover designs (36 products)</div>
+        <span class="badge b-med">35 days</span>
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-date">JUL 1</div>
+        <div class="deadline-name">Capitol Crawl Substack + UFLI Teacher Guide</div>
+        <span class="badge b-low">96 days</span>
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-date">JUL 26</div>
+        <div class="deadline-name">All the Way to the Top Companion — ADA anniversary</div>
+        <span class="badge b-low">121 days</span>
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-date">FEB '27</div>
+        <div class="deadline-name">Tommie Smith & John Carlos unit — BHM</div>
+        <span class="badge b-idea">Idea</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ideas Pipeline -->
+  <div class="card">
+    <div class="card-header sh-idea">
+      💡 Ideas &amp; Someday Pipeline
+      <span class="count">7</span>
+    </div>
+    <div class="card-body">
+      <div class="task line-bundle">
+        <div class="task-left">
+          <div class="task-name">Jennifer Keelan Bundle</div>
+          <div class="task-sub">All the Way to the Top ($5) + Capitol Crawl ($9.95) — create once both live</div>
+        </div>
+        <div class="task-right"><span class="badge b-low">Low</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left">
+          <div class="task-name">Haben Girma unit</div>
+          <div class="task-sub">Completes Disability Rights triple bundle. Zero TPT competition.</div>
+        </div>
+        <div class="task-right"><span class="badge b-low">Low</span></div>
+      </div>
+      <div class="task line-substack">
+        <div class="task-left">
+          <div class="task-name">Capitol Crawl Substack — Child's Act of Resistance</div>
+          <div class="task-sub">Jul 2026 · ADA anniversary · ties to both products</div>
+        </div>
+        <div class="task-right"><span class="badge b-low">Low</span></div>
+      </div>
+      <div class="task line-ataac">
+        <div class="task-left">
+          <div class="task-name">Family Sub-Line F0 Freebie</div>
+          <div class="task-sub">"Your AAC Quick-Start: 5 Things I Wish…" — lead magnet</div>
+        </div>
+        <div class="task-right"><span class="badge b-med">Med</span></div>
+      </div>
+      <div class="task line-other">
+        <div class="task-left">
+          <div class="task-name">AT Certification</div>
+          <div class="task-sub">Research path and timeline</div>
+        </div>
+        <div class="task-right"><span class="badge b-low">Low</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left">
+          <div class="task-name">Fiction Line — first product</div>
+          <div class="task-sub">Workflow + framework built. Define first product.</div>
+        </div>
+        <div class="task-right"><span class="badge b-low">Low</span></div>
+      </div>
+      <div class="task line-nonfiction">
+        <div class="task-left">
+          <div class="task-name">Tommie Smith &amp; John Carlos unit</div>
+          <div class="task-sub">BHM Feb 2027 — begin planning late 2026</div>
+        </div>
+        <div class="task-right"><span class="badge b-low">Low</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  Communicate by Design · communicatebydesign.substack.com · teacherspayteachers.com/store/communicate-by-design · @communicatebydesignaac<br>
+  Dashboard generated March 27, 2026 from live Airtable data (44 records)
+</div>
+
+</body>
+</html>
