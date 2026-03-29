@@ -24,6 +24,7 @@ Working toward AT certification (not yet certified — do NOT call me AT Special
 | **TPT** | teacherspayteachers.com/store/communicate-by-design |
 | **Instagram** | @communicatebydesignaac |
 | **Airtable** | Base ID: `appeaT8hkeXWqQKIj` — 5 tables: Work Items, Products, Launch Pipeline, Instructional Activities, **Vocabulary** (new). Primary cowork hub for all tasks, products, content, and pipeline. Read this at session start. |
+| **GitHub** | github.com/jillyb4/communicatebydesign — Code backup repo. Git initialized INSIDE iCloud CbD folder. `.gitignore` tracks code only (.js/.py/.html/.md/.jsx/.json); excludes binaries, symbol_cache, QC, node_modules, images, PDFs, Office docs. After any code changes: open GitHub Desktop → commit → Push origin. *(Set up 2026-03-29)* |
 
 ## Canva Designs
 | Design | ID | Size |

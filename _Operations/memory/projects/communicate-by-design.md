@@ -38,6 +38,7 @@ Capacity-building stands in contrast to the "expert model" in which AT services 
 | TPT | [teacherspayteachers.com/store/communicate-by-design](https://www.teacherspayteachers.com/store/communicate-by-design) | 13 products LIVE ✓; Awards section needs manual entry |
 | Instagram | @communicatebydesignaac | Template done ✓ |
 | Airtable | Base `appeaT8hkeXWqQKIj` | 4 tables: Work Items (~70 records), Products (32 records), Launch Pipeline (68 records, `tblKDEYyrRdPOtbhX`), Instructional Activities (6 records, `tblHJlkbCF7c4tCNP`). Session 17 (2026-03-27): Launch Calendar Excel fully migrated to Airtable — Excel is deprecated. |
+| **GitHub** | github.com/jillyb4/communicatebydesign | **LIVE ✓ (2026-03-29)** — Code backup repo. Git initialized inside iCloud CbD folder. `.gitignore` tracks code only (.js/.py/.html/.md/.jsx/.json); excludes binaries, symbol_cache, QC, node_modules, images, PDFs, Office docs. Use GitHub Desktop: commit → push origin after any code changes. |
 
 ---
 

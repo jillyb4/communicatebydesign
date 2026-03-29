@@ -4,6 +4,7 @@
 
 ## Active
 
+- [ ] **GitHub — next commit workflow** — Remind Jill of the 3-step routine after any code changes: (1) Open GitHub Desktop → (2) Type summary + click "Commit to main" → (3) Click "Push origin." Repo: `github.com/jillyb4/communicatebydesign`. *(Added 2026-03-29)*
 - [ ] **Weekly TPT Traffic Check** — Every Saturday, pull Traffic tab on TPT dashboard (This week vs. Last week). Watch: (1) Facebook click-throughs — goal is 15+ sustained after Mar 28 surge driven by "That Statistic Is 33 Years Old" post; (2) Direct traffic trend — flag if drops below 80/week for 3+ consecutive weeks; (3) Conversion rate — currently 0.00%, needs product page optimization pass. Report template saved: `Marketing/TPT_Traffic_Report_2026-03-28.html`. *(Added 2026-03-28)*
 - [ ] **Product page conversion audit** — 373 click-throughs this month, $0.00 earned = 0% conversion. Review top-traffic product listings: cover image, description opener (first 180 chars), pricing display, and thumbnail. Start with AT Checklist + AT Toolkit (highest direct traffic products). *(Added 2026-03-28)*
 
@@ -89,3 +90,5 @@
 - [x] Launch Calendar rebuild — Master Pipeline (one tab, all products), Frameworks tab, Fiction Line tab. Old 7-tab structure replaced.
 - [x] **Launch Calendar → Airtable migration (Session 17)** — All content from `CbD_TPT_Launch_Calendar.xlsx` migrated to Airtable: Launch Pipeline table (68 records, `tblKDEYyrRdPOtbhX`), Instructional Activities table (6 records, `tblHJlkbCF7c4tCNP`), 16 Substack pipeline posts added to Work Items, 10 live-product action items added to Work Items. Excel is deprecated.
 - [x] TPT price update — Toolkit $4, Comm Partner $3, Data Collection $3, Visual Schedule $4, Bundle $10.
+- [x] **TPT badge links in Task Dashboard** — `CbD_Task_Dashboard.html` updated: TPT badges are now clickable links (↗ TPT) opening product pages in new tab. Direct product URL on Keiko Earth Day task; store URL on all others. *(2026-03-29)*
+- [x] **GitHub setup — COMPLETE** — Git repo initialized INSIDE iCloud CbD folder (`~/Library/Mobile Documents/com~apple~CloudDocs/Communicate by Design/`). `.gitignore` created (tracks code only: .js/.py/.html/.md/.jsx/.json; excludes binaries, symbol_cache, QC, node_modules, built PDFs/docx/xlsx/images). Remote connected to `https://github.com/jillyb4/communicatebydesign`. 2 commits pushed (Initial commit + Update CLAUDE.md). Repo LIVE at `github.com/jillyb4/communicatebydesign`. Language breakdown: JavaScript 43.9% / HTML 36.9% / Python 19.2%. *(2026-03-29)*
