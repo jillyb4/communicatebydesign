@@ -68,6 +68,7 @@ Strategic context only (things that don't belong in Airtable):
 | **Substack** | 3 posts live. Next: "AT Consideration Is a Legal Requirement…" ⚠️ Fix price ref to $4 (not $6) before publish. | Late Mar 2026 |
 | **Re-upload nonfiction zips** | All 6 units need Session 16 content update re-uploaded to TPT. | — |
 | **AT certification** | In planning. | — |
+| **Vocabulary Framework** | Built Session 18. Applies to ALL product lines. Quick ref: `_Operations/memory/vocabulary_selection_reference.md`. Full research: `Research/CbD_Vocabulary_Selection_Framework.md`. New Product Line Workflow: `_Operations/memory/new_product_line_workflow.md`. |
 | **Fiction Line — Wonder** | Unit 1: Wonder: Character Analysis (RL.6.3/7.3, grades 3–8). Build script complete (`Products/Fiction Anchor Texts/Wonder - Character Analysis/build_wonder_character_analysis.js`). ⚠️ Word can't open output docx — debugging needed. Vocabulary added to `nonfiction_unit_vocab.js` as entry #7 (12 core + 12 fringe). Annotation codes LOCKED (2026-03-29): [TRAIT] / [WHY] / [CHANGE]. Fiction Printable Packet spec LOCKED: `_Operations/memory/fiction_printable_packet_spec.md` — 4 layers, Python/ReportLab, 9 pages. Product architecture: two-file model (main unit docx + Printable Packet PDF). ⚠️ 8 missing ARASAAC symbols: alone, belong, invisible, loyal, bully, ordinary, helmet, face looks different. ⚠️ Delete `Wonder_Character_Analysis_Printable_Kit.docx` (wrong format — manual). Pricing TBD. Cover color TBD (bright/light, not navy). | — |
 
 → Full pipeline: **Airtable Launch Pipeline table** (`tblKDEYyrRdPOtbhX`) — 68 records. The Excel `CbD_TPT_Launch_Calendar.xlsx` has been fully migrated to Airtable (Session 17) and is now deprecated.
@@ -239,6 +240,47 @@ Monitor special education Facebook groups (7.5M+ viewers) for real practitioner 
 - **WCAG 2.2 Level AA** on all documents. Use #006DA0 teal in .docx/.pdf (not #00B4D8).
 - **PDF generation:** Word → File → Save As → PDF (not Print to PDF, not LibreOffice)
 - **Every TPT Listing Package must include Output 0 before any other section.** Output 0 = three copy/paste-ready TPT fields: (1) title ≤80 chars verified, pipe-separated, leading with topic name + differentiator + SPED + grades; (2) description opening ≤180 chars, keyword-dense (NOT hook-style), containing product name + "special education" + "grades 6-10" + "adapted reading" + "AAC"; (3) 7 custom keyword tags. Title structure: `[Topic] | [Historical/Subject Angle] | [Adapted Reading or Differentiator] | [SPED Grades 6-10]`. → SEO standard: `Marketing/SEO Reports/CbD_TPT_SEO_Audit_2026-03-26.md`
+
+---
+
+## Vocabulary Selection Framework (Session 18 — REQUIRED FOR ALL PRODUCTS)
+Every vocabulary decision in every CbD product runs through this framework before build begins.
+
+- **Quick reference (load during build):** `_Operations/memory/vocabulary_selection_reference.md`
+- **Full research + citations:** `Research/CbD_Vocabulary_Selection_Framework.md`
+
+**Two-dimension classification — both tags required on every word:**
+- AAC Access Layer: Core (already programmed) / Fringe (SLP must add; 1–2 week lead time) / Heart
+- Instructional Layer: Explicit instruction target / Background knowledge / Generative/response
+
+**Product line vocabulary types:**
+- UFLI: FIXED decode targets in `ufli_lesson_configs.js` — do not alter
+- Nonfiction (6–10): Tier 2 academic + Tier 3 content; max ~30 fringe; shared response core across all 6 units
+- Fiction: Emotional/mental state first → relational/causal → narrative fringe (not name) → skill-specific
+- Picture Book Companions (K–3): IRA read-aloud + thematic conceptual vocabulary
+
+**Hard rule:** If vocabulary type is unclear OR the framework doesn't cover a new product type, a vocabulary research session is the FIRST deliverable — not a unit draft.
+
+---
+
+## New Product Line Workflow (Session 18 — REQUIRED BEFORE ANY NEW LINE)
+Before any new product line (or major new product within a line) moves into build, run the full workflow.
+
+- **Full workflow:** `_Operations/memory/new_product_line_workflow.md`
+
+**Phase 0 — Concept Validation (answer before anything else):**
+1. What is the instructional gap? (Confirmed real practitioner problem)
+2. What ELA/literacy standard does this serve? (One skill, standard codes, grade band)
+3. Who is the primary buyer persona?
+4. Is there a meaningful gap vs. competitors?
+
+**Phase 1 — Framework Application (before build):**
+1. Vocabulary Framework Gate — what type is this? Does the framework cover it? If NO → research first.
+2. Research Foundation Gate — does a research file exist in `Research/`? If NO → create it first.
+3. Product Architecture — what files ship? what build scripts needed?
+4. Brand/Identity — product line color, cover direction, footer text locked?
+
+**Phase 2 — Ecosystem Coherence:** vocabulary carryover, trading card companion, bundle strategy, Substack angle, freebie/entry point, IEP goal coherence.
 
 ---
 
