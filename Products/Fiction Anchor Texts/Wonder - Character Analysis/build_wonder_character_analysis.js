@@ -39,6 +39,16 @@ const RL_STANDARDS  = "RL.3.3 · RL.5.3 · RL.6.3 · RL.7.3";
 const PRODUCT_LINE  = "Fiction Anchor Text Unit";
 
 // ─────────────────────────────────────────────────────────────────────────
+// AAC ACCESS NOTE CONSTANTS
+// Single source of truth for vocab table AAC access language.
+// Update here → updates everywhere. Do not inline these strings.
+// ─────────────────────────────────────────────────────────────────────────
+const AAC_CORE          = "Part of most AAC ecosystems";
+const AAC_CORE_CONFIRM  = "Part of most AAC ecosystems — confirm location before unit";
+const AAC_CORE_VERIFY   = "Part of most AAC ecosystems — verify location";
+const AAC_CORE_KIND     = "Part of most AAC ecosystems — confirm 'kind' vs 'kindness'";
+
+// ─────────────────────────────────────────────────────────────────────────
 // BUILD CHILDREN ARRAY
 // ─────────────────────────────────────────────────────────────────────────
 
@@ -162,7 +172,7 @@ children.push(T.p(
 children.push(h2k("Mental State Language Is the Core Challenge"));
 children.push(T.p(
   "For students with complex communication needs, emotional and mental state language is the hardest domain — and it is also the heart of literary analysis. " +
-  "Words like because, maybe, believe, decide, and wonder are core vocabulary words, already on most devices, " +
+  `Words like because, maybe, believe, decide, and wonder are core vocabulary words, ${AAC_CORE.toLowerCase()}, ` +
   "but they are rarely targeted explicitly in fiction instruction. " +
   "Pre-teaching emotional vocabulary before each part of Wonder is a non-negotiable step in this unit."
 ));
@@ -313,18 +323,18 @@ children.push(h2k("Core and Fringe Vocabulary for Wonder — Character Analysis"
 children.push(T.makeTable(
   ["Word", "★ Core / Fringe", "Why It Matters in Wonder", "AAC Access Note"],
   [
-    ["feel",                 "★ Core",  "The primary question in every character activity: How does this person feel?", "On most devices — confirm location before unit"],
-    ["want",                 "★ Core",  "Character motivation — what does each person want?", "On most devices"],
-    ["think",                "★ Core",  "Internal monologue; narrator perspective", "On most devices"],
-    ["know",                 "★ Core",  "What each narrator knows (and doesn't)", "On most devices"],
-    ["change",               "★ Core",  "Central to character arc across whole book", "On most devices"],
-    ["because",              "★ Core",  "Causal reasoning — essential for motivation questions", "On most devices"],
-    ["maybe",                "★ Core",  "Inference scaffold — 'maybe he feels...'", "On most devices"],
-    ["sad",                  "★ Core",  "Auggie's emotional arc; also Via and Jack", "On most devices"],
-    ["scared",               "★ Core",  "Auggie entering school; any new situation", "On most devices"],
-    ["happy",                "★ Core",  "Resolution; Summer scenes; end of book", "On most devices"],
-    ["alone",                "★ Core",  "Auggie's experience; also Via's isolation", "On most devices"],
-    ["kind",                 "★ Core",  "The central moral theme of the novel", "On most devices — confirm 'kind' vs 'kindness'"],
+    ["feel",                 "★ Core",  "The primary question in every character activity: How does this person feel?", AAC_CORE_CONFIRM],
+    ["want",                 "★ Core",  "Character motivation — what does each person want?", AAC_CORE],
+    ["think",                "★ Core",  "Internal monologue; narrator perspective", AAC_CORE],
+    ["know",                 "★ Core",  "What each narrator knows (and doesn't)", AAC_CORE],
+    ["change",               "★ Core",  "Central to character arc across whole book", AAC_CORE],
+    ["because",              "★ Core",  "Causal reasoning — essential for motivation questions", AAC_CORE],
+    ["maybe",                "★ Core",  "Inference scaffold — 'maybe he feels...'", AAC_CORE],
+    ["sad",                  "★ Core",  "Auggie's emotional arc; also Via and Jack", AAC_CORE],
+    ["scared",               "★ Core",  "Auggie entering school; any new situation", AAC_CORE],
+    ["happy",                "★ Core",  "Resolution; Summer scenes; end of book", AAC_CORE],
+    ["alone",                "★ Core",  "Auggie's experience; also Via's isolation", AAC_CORE],
+    ["kind",                 "★ Core",  "The central moral theme of the novel", AAC_CORE_KIND],
     ["different",            "Fringe",  "Auggie looks different — THE central descriptor", "Symbol needed"],
     ["belong",               "Fringe",  "Auggie's journey; belonging to a group", "Symbol needed"],
     ["invisible",            "Fringe",  "Auggie's wish; metaphor throughout", "Symbol needed"],
@@ -333,15 +343,15 @@ children.push(T.makeTable(
     ["bully",                "Fringe",  "Julian's behavior; important for plot", "Symbol needed"],
     ["face looks different", "Fringe",  "Description of Auggie without using his name", "Visual reference — pair with illustration"],
     ["ordinary",             "Fringe",  "Theme: everyone is ordinary in their own way", "Symbol or core combo"],
-    ["friend",               "Fringe",  "Central goal; Summer; Jack", "On most devices — verify location"],
+    ["friend",               "Fringe",  "Central goal; Summer; Jack", AAC_CORE_VERIFY],
     ["helmet",               "Fringe",  "Early plot point; symbol of hiding and protection", "Symbol needed — specific object"],
-    ["school",               "Fringe",  "Primary setting", "On most devices"],
+    ["school",               "Fringe",  "Primary setting", AAC_CORE],
     ["choose",               "Fringe",  "Precept: 'When given the choice, choose kind'", "Core combo: 'choose' + 'kind'"],
   ],
-  col4(0.18, 0.14, 0.42, 0.26)
+  col4(0.16, 0.16, 0.40, 0.28)
 ));
 children.push(T.tableCaption(
-  "★ Core = high-frequency, cross-context words available on most AAC systems. " +
+  "★ Core = high-frequency, cross-context words, part of most AAC ecosystems. " +
   "Fringe = Wonder-specific vocabulary requiring system preparation. " +
   "Coordinate with the student's SLP or AAC team before the unit to confirm vocabulary is available. This is a team responsibility, not an SLP-only task."
 ));
@@ -679,22 +689,53 @@ children.push(T.p(
 children.push(T.heading1("IEP Goal Stems and Data Collection"));
 children.push(T.teacherRefLabel());
 
-children.push(h2k("Sample IEP Goal Stems — Character Analysis"));
+children.push(T.p(
+  "CbD units ship with two goal stem types per unit: one academic ELA goal and one AAC communication goal. " +
+  "These are starting points for the IEP team — not final language. Edit to match the student's baseline, access method, IEP review date, and team decisions. " +
+  "Academic progress and communication progress are separate. Both need separate goals and separate data."
+));
+children.push(T.callout(
+  "All goal stems follow IDEA's measurability requirement: Given [condition] → will [observable verb + skill] → as measured by [data tool] → achieving [criterion] → across [consistency] → by [date].\n" +
+  "Never use 'understand,' 'know,' or 'learn' — these are not observable behaviors."
+));
+
+children.push(h2k("Academic Goal Stems — Character Analysis (RL)"));
 children.push(T.makeTable(
   ["Standard", "Goal Stem"],
   [
     ["RL.3.3",
-     "Given a grade-level fiction text and a character description board, [student] will describe a character's traits or actions with 80% accuracy across 3 consecutive data collection sessions using their AAC system or partner-confirmed response."],
+     "Given Wonder by R.J. Palacio read aloud by a partner and a character description board, [student] will describe a character's traits or actions using descriptive vocabulary as measured by rubric scoring on Part 1 and Part 2 response activities, achieving a score of Approaching or Meets on 4 of 5 trials across 3 consecutive sessions by [IEP date]."],
     ["RL.5.3",
-     "Given two characters from a grade-level fiction text and a visual comparison structure, [student] will identify at least two similarities and two differences between characters with 80% accuracy using any access method."],
+     "Given Wonder by R.J. Palacio read aloud by a partner and a visual comparison structure, [student] will identify at least two similarities and two differences between two characters, citing evidence from the text as measured by rubric scoring on Part 2 (Character Comparison) activities, achieving correct comparison with evidence on 3 of 4 trials across 2 consecutive sessions by [IEP date]."],
     ["RL.6.3",
-     "Given a grade-level fiction text and structured prompting, [student] will describe how a character responds or changes across the story arc using core and fringe vocabulary, with 80% accuracy across 3 data points."],
+     "Given Wonder by R.J. Palacio read aloud by a partner and a character change graphic organizer, [student] will describe how a character responds or changes as the plot moves toward resolution using core and fringe vocabulary as measured by rubric scoring on Part 4 (Character Change) activities, achieving a complete before/after arc with evidence on 4 of 5 trials across 3 consecutive sessions by [IEP date]."],
     ["RL.7.3",
-     "Given a grade-level fiction text and inference scaffolds (because / maybe / probably), [student] will explain a character's motivation for an action using a sentence frame and core vocabulary, with 80% accuracy in 3 consecutive sessions."],
+     "Given Wonder by R.J. Palacio read aloud by a partner and inference scaffolds (because / maybe / probably), [student] will explain a character's motivation for an action using a sentence frame and cited text evidence as measured by rubric scoring on Part 3 (Character Motivation) activities, achieving claim + motivation with evidence on 4 of 5 trials across 3 consecutive sessions by [IEP date]."],
   ],
-  col2(0.12, 0.88)
+  col2(0.10, 0.90)
 ));
-children.push(T.tableCaption("Edit to match the student's IEP language, access method, and baseline. Goal stems are starting points, not final language."));
+children.push(T.tableCaption("Select the standard anchor that matches the student's IEP and grade placement. Adjust condition (access method), criterion (from baseline data), and date to match the individual student."));
+
+children.push(T.spacer());
+children.push(h2k("AAC Communication Goal Stem — Character Analysis Context"));
+children.push(T.p(
+  "This goal targets communication development within the Wonder unit context — separate from the academic ELA skill. " +
+  "Data is collected on the Communication Session Tracker by the paraprofessional, not on the academic rubric."
+));
+children.push(T.makeTable(
+  ["Goal Type", "Goal Stem"],
+  [
+    ["Multi-symbol utterance",
+     "Given Wonder by R.J. Palacio shared reading with a communication partner using Aided Language Stimulation, [student] will produce a 2+ symbol utterance in response to comprehension prompts about character as measured by Communication Session Tracker data, achieving 4 of 5 response opportunities across 2 consecutive sessions with 2 different partners by [IEP date]."],
+    ["Fringe vocabulary use in context",
+     "Given Wonder by R.J. Palacio unit with pre-programmed character vocabulary and partner Aided Language Stimulation, [student] will use at least one pre-programmed fringe vocabulary word (e.g., different, belong, brave, change) in a contextually appropriate response during a character activity as measured by Communication Session Tracker data, achieving 4 of 5 opportunities across 2 consecutive sessions by [IEP date]."],
+  ],
+  col2(0.22, 0.78)
+));
+children.push(T.tableCaption(
+  "Academic progress ≠ communication progress. Both are reportable at IEP review. A student can meet the rubric criterion using a sentence frame and still be building toward spontaneous AAC output — track both. " +
+  "Generalization criterion: 2+ different partners. AAC skills that only appear with one partner have not generalized."
+));
 
 children.push(T.spacer());
 children.push(h2k("Data Collection Guidance"));
@@ -779,7 +820,7 @@ children.push(...T.termsOfUse());
 // ASSEMBLE AND WRITE
 // ─────────────────────────────────────────────────────────────────────────
 
-const outputPath = "/sessions/fervent-gallant-fermat/Wonder_Character_Analysis_COMPLETE.docx";
+const outputPath = path.join(__dirname, "Wonder_Character_Analysis_COMPLETE.docx");
 
 T.assembleAndWrite(
   `${UNIT_TITLE}: ${UNIT_SUBTITLE}`,

@@ -219,6 +219,20 @@ Run all vocabulary QC gates from `vocabulary_selection_reference.md` PLUS:
 - [ ] Substack angle identified
 - [ ] WCAG 2.2 AA plan confirmed (all docs use `#006DA0`, PDF via Word → Save As)
 
+### Vocabulary Pipeline Gate (required before build begins)
+
+Once vocabulary is finalized for the unit, lock it into the ecosystem:
+
+1. Add the unit entry to `_Operations/cbd_unit_vocab.js` — this is the source of truth for all unit vocabulary (fiction and nonfiction)
+2. Add the product entry to `_Operations/rebuild_vocab_explorer.js`:
+   - Add to `UNIT_KEY` mapping (full unit title → short key)
+   - If fiction: add short key to `FICTION_UNITS` Set
+   - Add product card to `PRODUCTS_BLOCK` with `status: 'In Production'`
+3. Run `node _Operations/rebuild_vocab_explorer.js` → AAC Vocabulary Explorer updates; product appears with "In Production" badge
+4. Run `AIRTABLE_API_KEY=xxx node _Operations/sync_vocab_to_airtable.js` → Airtable Vocabulary table (`tblL2KH04WijW8XUb`) updated with new words
+
+**Verification:** Open `cbd-vocabulary-explorer.html` → filter by Fiction or Nonfiction line → confirm unit appears, word count matches source, and product card shows "In Production".
+
 ---
 
 ## Phase 4: Build
@@ -249,6 +263,23 @@ Before listing on TPT:
 - [ ] Pinterest board planned
 - [ ] Instagram post drafted
 - [ ] Substack post either live or scheduled
+
+### Vocabulary Explorer Launch Gate (required at go-live)
+
+When the product goes live on TPT:
+
+1. Update `PRODUCTS_BLOCK` in `_Operations/rebuild_vocab_explorer.js`:
+   - Change `status: 'In Production'` → `status: 'Live'`
+   - Add `platforms: [{ name: 'TPT', url: 'https://www.teacherspayteachers.com/Product/...' }]`
+2. Run `node _Operations/rebuild_vocab_explorer.js` → product badge updates to "Live"
+3. Run `AIRTABLE_API_KEY=xxx node _Operations/sync_vocab_to_airtable.js` → Airtable confirms no vocabulary drift
+
+**Vocabulary QC check:** Open `cbd-vocabulary-explorer.html` → click any word from this unit → confirm:
+- "Vocabulary in These Products" shows the correct unit with a Live badge
+- "Appears in X products" count matches the number of product cards shown
+- No words are missing or unexpected (compare against the word list in `cbd_unit_vocab.js`)
+
+If any word is missing from the explorer or count is wrong → recheck `cbd_unit_vocab.js` entry and rebuild before the listing goes live.
 
 ---
 

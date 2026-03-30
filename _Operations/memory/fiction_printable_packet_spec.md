@@ -118,7 +118,7 @@ packet. Partner knows what they're working with before the session starts.
 ### ⚠️ Two vocabulary sets — keep them separate throughout
 
 **VOCABULARY SET A — SDI Instruction Targets**
-Source: `_Operations/nonfiction_unit_vocab.js` — the unit's entry in the master
+Source: `_Operations/cbd_unit_vocab.js` — the unit's entry in the master
 vocabulary database. These are the words the team explicitly models, tracks on
 the Session Tracker, and adds to the Vocabulary Map. Fewer words, targeted focus.
 For Wonder: 12 core + 12 fringe = 24 words.
@@ -360,7 +360,7 @@ Gives precise layout control for cell sizing, gaze-access boards, and PDF append
 - [WHY] — why they act that way (motivation, internal feelings, cause)
 - [CHANGE] — how the character changes (before/after, growth, resolution)
 
-**SDI instruction targets — Set A (nonfiction_unit_vocab.js entry #7):**
+**SDI instruction targets — Set A (cbd_unit_vocab.js entry #7):**
 - Core (12): feel, want, think, know, change, because, maybe, sad, scared, happy, alone, kind
 - Fringe (12): different, belong, invisible, brave, loyal, bully, ordinary, friend, helmet, school, choose, face looks different
 

@@ -444,7 +444,7 @@ def build_symbol_cards(unit_title, words, output_path):
 def main():
     """CLI entry point. Usage:
         python cbd_symbol_cards.py --unit "Unit Title" --vocab vocab.json --output cards.pdf
-        python cbd_symbol_cards.py --unit "504 Sit-In 1977" --vocab-js  (reads nonfiction_unit_vocab.js unit 4)
+        python cbd_symbol_cards.py --unit "504 Sit-In 1977" --vocab-js  (reads cbd_unit_vocab.js unit 4)
     """
     import argparse
     parser = argparse.ArgumentParser(description="CbD Symbol Card PDF Generator")

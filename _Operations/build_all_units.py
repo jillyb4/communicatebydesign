@@ -48,6 +48,16 @@ AMBER = colors.HexColor("#FFB703")
 SLATE = colors.HexColor("#94A3B8")
 WHITE = colors.white
 
+# ── AAC access language constants ──────────────────────────────────────────────
+# Single source of truth. Update here → updates all nonfiction unit output.
+# Do not inline these strings elsewhere in this file.
+
+AAC_CORE_NOTE = (
+    "Core words are part of most AAC ecosystems. "
+    "Fringe words are unit-specific — students may use printed cards, "
+    "symbols from an existing PEC set, or programmed device pages."
+)
+
 # ── Fitzgerald Key ─────────────────────────────────────────────────────────────
 
 FKC_BORDER = {
@@ -409,10 +419,7 @@ def build_top5_pdf(unit_cfg) -> bytes:
         HRFlowable(width="100%", thickness=1.5, color=TEAL, spaceAfter=6),
         Paragraph("Priority Vocabulary for Communication Access", h1),
         Paragraph(
-            "These are the highest-priority vocabulary words for this unit. "
-            "Core words appear on most AAC systems. "
-            "Fringe words are unit-specific — students may use printed cards, "
-            "symbols from an existing PEC set, or programmed device pages.",
+            f"These are the highest-priority vocabulary words for this unit. {AAC_CORE_NOTE}",
             intro),
         two_col,
         Spacer(1, 8),

@@ -55,7 +55,7 @@ Each TPT zip contains:
 4. Communication Board (Level 2 access sizing)
 5. Reading Practice Cards
 
-- Vocab config: `_Operations/nonfiction_unit_vocab.js` (all 6 units, 248 total words)
+- Vocab config: `_Operations/cbd_unit_vocab.js` (all 6 units, 248 total words)
 - Default access level: Level 2 (4/row, 1.25", eye gaze/direct selection)
 - Kit builder: `_Operations/build_unit_printable_kit.js`
 

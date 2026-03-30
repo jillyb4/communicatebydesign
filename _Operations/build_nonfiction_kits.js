@@ -18,7 +18,7 @@ const https = require('https');
 // ── Paths ─────────────────────────────────────────────────────
 const SYMBOL_DIR = path.join(__dirname, 'symbol_cache');
 const OUTPUT_DIR = path.join(__dirname, '..', 'Products', 'Nonfiction Units', 'Printable_Kits_v6');
-const VOCAB_FILE = path.join(__dirname, 'nonfiction_unit_vocab.js');
+const VOCAB_FILE = path.join(__dirname, 'cbd_unit_vocab.js');
 
 // The unit kit builder is in the UFLI folder — require it
 const KIT_BUILDER_PATH = path.join(__dirname, 'build_unit_printable_kit.js');

@@ -229,7 +229,7 @@ Both tools navigate between each other in the same browser tab. GitHub commit ne
 
 **Annotation codes (LOCKED):** [TRAIT] / [WHY] / [CHANGE]
 
-**Wonder vocabulary (entry #7 in `nonfiction_unit_vocab.js`):**
+**Wonder vocabulary (entry #7 in `cbd_unit_vocab.js`):**
 - Core (12): feel, want, think, know, change, because, maybe, sad, scared, happy, alone, kind
 - Fringe (12): different, belong, invisible, brave, loyal, bully, ordinary, friend, helmet, school, choose, face looks different
 - 8 missing ARASAAC symbols: alone, belong, invisible, loyal, bully, ordinary, helmet, face looks different → fetch before building Printable Packet

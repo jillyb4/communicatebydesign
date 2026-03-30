@@ -140,7 +140,7 @@ def build_product_deck(product_name, words, output_path, back_image=None):
 def build_from_vocab_config(product_name, vocab_config, output_path):
     """
     Build trading cards from a nonfiction unit vocab config (as used in
-    _Operations/nonfiction_unit_vocab.js). Expects a list of dicts with
+    _Operations/cbd_unit_vocab.js). Expects a list of dicts with
     'word' and optionally 'core' boolean.
 
     This is a convenience wrapper for nonfiction units where vocab is

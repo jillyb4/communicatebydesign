@@ -195,7 +195,7 @@ The text is the same. The thinking target is the same. The evidence of understan
 
 ## Product Architecture (Per Fiction Unit)
 
-*Updated 2026-03-29 — reconciled with Wonder build script and Fiction Printable Packet spec*
+*Updated 2026-03-29 (Session 19) — Printable Packet built. Wonder approaching launch.*
 
 Fiction units ship as **two files** bundled in the TPT zip:
 
@@ -226,9 +226,9 @@ Purpose-designed 7–9 page printable with 4 layers:
 
 | Support | Status | Location |
 |---------|--------|----------|
-| Character Description Board | ✅ Specified — build when Printable Packet script written | Printable Packet Layer 3 Board A |
-| Emotion + Reasoning Board | ✅ Specified — build when Printable Packet script written | Printable Packet Layer 3 Board B |
-| Literary Discussion Moves Board | ✅ Specified — build when Printable Packet script written | Printable Packet Layer 3 Board C |
+| Character Description Board | ✅ Built — `build_wonder_printable_packet.py` Layer 3 Board A (landscape) | Printable Packet p.4 |
+| Emotion + Reasoning Board | ✅ Built — `build_wonder_printable_packet.py` Layer 3 Board B | Printable Packet p.5 |
+| Literary Discussion Moves Board | ✅ Built — `build_wonder_printable_packet.py` Layer 3 Board C | Printable Packet p.6 |
 | Comparison Board | ✅ Already in main unit docx (Section 8, Part 2 activity table) | Main Unit docx |
 | Before/After Story Strip | ✅ Already in main unit docx (Section 10, Part 4 activity table) | Main Unit docx |
 | Visual Scene Displays (4 scenes) | ⚠️ NOT built — requires original illustration + format decision | Separate files, V2 |
@@ -261,7 +261,7 @@ All digital download only. V1 TPT zip = Main Unit docx + Printable Packet PDF.
 
 ## Wonder: Character Analysis — First Fiction Unit
 
-*Added Session 18 | 2026-03-28 | Annotation codes locked 2026-03-29*
+*Added Session 18 | 2026-03-28 | Annotation codes locked 2026-03-29 | QC + docx fix 2026-03-29*
 
 **Novel:** *Wonder* by R.J. Palacio (2012)
 **Skill:** Character Analysis (RL.3.3 / RL.5.3 / RL.6.3 / RL.7.3)
@@ -269,7 +269,44 @@ All digital download only. V1 TPT zip = Main Unit docx + Printable Packet PDF.
 **Grade band:** 3–8
 **Standard:** RL.6.3 / RL.7.3 anchor — characters respond/change as plot moves toward resolution
 **Build script:** `Products/Fiction Anchor Texts/Wonder - Character Analysis/build_wonder_character_analysis.js`
-**Status:** Script complete. ⚠️ Word cannot open output — debugging needed.
+**Status:** ✅ Docx fixed and building (Session 19). Output: 215 paragraphs, 25 tables. Word-openable.
+
+**Session 19 fixes applied:**
+- ✅ Output path corrected — was hardcoded to dead session `fervent-gallant-fermat`, now uses `path.join(__dirname, ...)`
+- ✅ IEP goal stems updated to full IDEA structure (Given → will → as measured by → achieving → across → by [date])
+- ✅ Two-goal model added: academic RL goal + AAC communication goal (separate goals, separate data tools)
+- ✅ AAC communication goal stems added for multi-symbol utterance and fringe vocabulary in context
+- ✅ Goal stem callout added: IDEA measurability rule + "never understand/know/learn"
+
+**✅ Session 19 — Printable Packet built:**
+- Script: `build_wonder_printable_packet.py` — runs, produces `Wonder_Character_Analysis_Printable_Packet.pdf`
+- 8 pages: Layer 1 (env setup) + Layer 2 (core + fringe symbol cards) + Layer 3 (Boards A/B/C) + Layer 4a (vocab map) + Layer 4b (session tracker)
+- Symbol substitutions: belong→include (#11702), ordinary→usual (#2547), face looks different→face (#2684)
+- All 6 other formerly-missing symbols confirmed in cache: alone_7253, bully_12321, invisible_32755, loyal_33006, helmet_2691
+
+**⚠️ Still needs manual Finder deletion (iCloud-locked — cannot delete from sandbox):**
+- `Wonder_Character_Analysis_COMPLETE-1.docx` — stale duplicate
+- `Wonder_Character_Analysis_Printable_Kit.docx` — wrong format (replace with Printable Packet PDF)
+
+**⚠️ Still blocking launch:**
+- Symbol substitutions for `belong` (include) and `ordinary` (usual) need Jill's sign-off
+- Pricing model not confirmed (nonfiction passage-count table doesn't apply to fiction)
+- Cover color/background not locked (spec: bright/light background, hero color TBD)
+
+**ℹ️ Not blocking launch:**
+- VSD illustrations deferred to V2 (documented in fiction_reference.md)
+- Wait time stated as "10–15 seconds" in unit vs. Communication Partner Framework standard "5 seconds" — intentional deviation, document rationale
+- `cbd_docx_template.js` title page hardcodes "A Nonfiction Reading Unit" — fix in template (not Wonder script)
+
+**⚠️ Template issue (fix in `cbd_docx_template.js`, not in Wonder build script):**
+- Title page renders "A Nonfiction Reading Unit" as a hardcoded label — appears above "Fiction Anchor Text" line
+- Fix: `titlePage()` needs a `productType` parameter to override the default label for non-nonfiction product lines
+
+**Remaining framework gaps (not blocking launch, but pre-launch QC items):**
+- Vocabulary lists not fully reconciled: build script table ≠ cbd_unit_vocab.js entry ≠ fiction_reference.md quick-ref list
+- Two-dimension vocabulary classification (instructional layer tags + Top 5 designations) not yet added to vocab table
+- SDI vs. accommodation components not explicitly labeled in a dedicated table in teacher guidance
+- Wait time stated as "10–15 seconds" vs. Communication Partner Framework standard of "5 seconds" — intentional deviation should be documented with rationale
 
 ### Why Wonder First
 - Whole-book scope is appropriate: Wonder is read across grades 3–8, giving widest TPT market
