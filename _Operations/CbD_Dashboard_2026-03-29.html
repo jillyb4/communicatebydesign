@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Communicate by Design — Task Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1B1F3B;font-family:Arial,Helvetica,sans-serif;color:#fff;min-height:100vh;font-size:13px}
+
+/* ── HEADER ── */
+.header{padding:14px 20px;border-bottom:1px solid #2e3561;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;background:#1B1F3B;z-index:100}
+.brand{display:flex;align-items:center;gap:10px}
+.bubble{background:#FFB703;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.brand-name{font-size:15px;font-weight:bold;letter-spacing:.5px;color:#00B4D8}
+.brand-name span{color:#FFB703}
+.brand-tag{font-size:10px;color:#94A3B8;margin-top:1px}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stat{background:#252A4A;border-radius:8px;padding:5px 12px;text-align:center}
+.stat-n{font-size:16px;font-weight:bold}
+.stat-l{font-size:10px;color:#94A3B8}
+.date-badge{font-size:11px;color:#94A3B8;background:#252A4A;padding:4px 10px;border-radius:6px}
+
+/* ── FILTERS ── */
+.filters{padding:10px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid #2e3561}
+.filter-label{font-size:11px;color:#94A3B8;margin-right:4px}
+.filter-btn{background:#252A4A;border:1px solid #3a4170;color:#94A3B8;border-radius:20px;padding:4px 12px;font-size:11px;cursor:pointer;transition:all .15s;font-family:Arial,Helvetica,sans-serif}
+.filter-btn.active{background:#006DA0;border-color:#006DA0;color:#fff}
+.search-wrap{margin-left:auto}
+.search{background:#252A4A;border:1px solid #3a4170;border-radius:8px;padding:5px 10px;color:#fff;font-size:12px;font-family:Arial,Helvetica,sans-serif;width:180px}
+.search:focus{outline:none;border-color:#006DA0}
+.search::placeholder{color:#4a5580}
+
+/* ── TABLE WRAPPER ── */
+.table-wrap{overflow-x:auto;padding:16px 20px 40px}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;min-width:900px}
+thead tr{background:#252A4A}
+th{padding:9px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#94A3B8;font-weight:bold;border-bottom:2px solid #1B1F3B;white-space:nowrap}
+th:first-child{border-radius:8px 0 0 0}
+th:last-child{border-radius:0 8px 0 0}
+tbody tr{border-bottom:1px solid #252A4A;transition:background .1s}
+tbody tr:hover{background:#1e2344}
+
+/* ── CELLS ── */
+td{padding:9px 12px;vertical-align:top}
+
+/* task name */
+.task-name{font-weight:bold;color:#fff;line-height:1.3;margin-bottom:3px}
+.task-group{font-size:10px;color:#4a5580;text-transform:uppercase;letter-spacing:.5px}
+
+/* product pill */
+.product{display:inline-flex;align-items:center;gap:5px;border-radius:12px;padding:3px 9px;font-size:11px;font-weight:bold;white-space:nowrap}
+.product .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* deadline */
+.deadline{font-weight:bold;white-space:nowrap}
+.dl-now{color:#f87171}
+.dl-mar{color:#fb923c}
+.dl-may{color:#FFB703}
+.dl-jul{color:#34d399}
+.dl-none{color:#4a5580}
+
+/* next step */
+.next{color:#CBD5E1;line-height:1.4}
+.next strong{color:#00B4D8}
+
+/* holdup badge */
+.holdup{display:inline-block;background:#7c2d12;color:#fca5a5;border-radius:4px;font-size:10px;padding:2px 7px;font-weight:bold;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+.holdup.jill{background:#4c1d95;color:#c4b5fd}
+.holdup.ready{background:#14532d;color:#86efac}
+
+/* priority dot */
+.pri{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.pri-high{background:#f87171}
+.pri-med{background:#FFB703}
+.pri-low{background:#4a5580}
+
+/* row hidden */
+.row-hidden{display:none}
+
+/* section dividers */
+.section-row td{background:#1B1F3B;padding:8px 12px 4px;pointer-events:none}
+.section-title{font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#4a5580;border-bottom:1px solid #252A4A;padding-bottom:4px}
+
+/* TPT link */
+.tpt-link{color:#00B4D8;text-decoration:none;font-size:11px;margin-left:6px}
+.tpt-link:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="brand">
+    <div class="bubble">💬</div>
+    <div>
+      <div class="brand-name">COMMUNICATE <span>BY DESIGN</span></div>
+      <div class="brand-tag">Where AT Meets Practice</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="stat"><div class="stat-n" id="cnt-jill">0</div><div class="stat-l">Jill Action</div></div>
+    <div class="stat"><div class="stat-n" id="cnt-high">0</div><div class="stat-l">High Priority</div></div>
+    <div class="stat"><div class="stat-n" id="cnt-total">0</div><div class="stat-l">Total Open</div></div>
+    <div class="date-badge">Updated March 29, 2026</div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="jill">⚠️ Jill Action</button>
+  <button class="filter-btn" data-filter="now">🔴 Due Now</button>
+  <button class="filter-btn" data-filter="may">May 2026</button>
+  <button class="filter-btn" data-filter="july">July 2026</button>
+  <button class="filter-btn" data-filter="wonder">Fiction / Wonder</button>
+  <button class="filter-btn" data-filter="nonfiction">Nonfiction</button>
+  <button class="filter-btn" data-filter="ufli">UFLI</button>
+  <button class="filter-btn" data-filter="trading">Trading Cards</button>
+  <button class="filter-btn" data-filter="ops">Operations</button>
+  <div class="search-wrap">
+    <input class="search" type="text" id="search" placeholder="Search tasks…"/>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="table-wrap">
+<table id="task-table">
+<thead>
+  <tr>
+    <th style="width:28px"></th>
+    <th style="width:240px">Task</th>
+    <th style="width:160px">Product / Line</th>
+    <th style="width:100px">Deadline</th>
+    <th>Next Step / Current Holdup</th>
+  </tr>
+</thead>
+<tbody id="tbody">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION: JILL ACTION REQUIRED -->
+<!-- ═══════════════════════════════════════════════════ -->
+<tr class="section-row"><td colspan="5"><div class="section-title">⚠️ Jill Action Required — Blocked on You</div></td></tr>
+
+<tr data-tags="jill now wonder">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Wonder: Export COMPLETE.docx → PDF → run FULL assembly</div>
+    <div class="task-group">Fiction</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Wonder Unit</span></td>
+  <td><span class="deadline dl-now">Now</span></td>
+  <td>
+    <span class="holdup jill">Jill action</span>
+    <div class="next">Open <strong>Wonder_Character_Analysis_COMPLETE.docx</strong> in Word → File → Save As → PDF (same folder). Then run <strong>python3 build_wonder_assembly.py</strong> → produces 32-page FULL.pdf (unit + packet merged).</div>
+  </td>
+</tr>
+
+<tr data-tags="jill now wonder">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Wonder: Delete wrong kit file from Finder</div>
+    <div class="task-group">Fiction</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Wonder Unit</span></td>
+  <td><span class="deadline dl-now">Now</span></td>
+  <td>
+    <span class="holdup jill">Jill action</span>
+    <div class="next">Delete <strong>Wonder_Character_Analysis_Printable_Kit.docx</strong> manually from Finder — iCloud mount is read-only from sandbox. Wrong format (UFLI trading card size).</div>
+  </td>
+</tr>
+
+<tr data-tags="jill now ops">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">GitHub: Push Session 21 code changes</div>
+    <div class="task-group">Operations</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#94A3B8"><span class="dot" style="background:#94A3B8"></span>Operations</span></td>
+  <td><span class="deadline dl-now">ASAP</span></td>
+  <td>
+    <span class="holdup jill">Jill action</span>
+    <div class="next">Open <strong>GitHub Desktop</strong> → commit → Push origin. Files: <strong>sync_vocab_to_airtable.js</strong>, <strong>build_wonder_printable_packet.py</strong>, <strong>build_wonder_assembly.py</strong> (new), <strong>cbd-vocabulary-explorer.html</strong>, <strong>ufli-lesson-activity.html</strong>.</div>
+  </td>
+</tr>
+
+<tr data-tags="jill now substack">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Substack: Fix $6 → $4 price before publishing</div>
+    <div class="task-group">Substack</div>
+  </td>
+  <td><span class="product" style="background:#3b1f1f;color:#fca5a5"><span class="dot" style="background:#fca5a5"></span>Substack — Policy Post</span></td>
+  <td><span class="deadline dl-mar">Late Mar 2026</span></td>
+  <td>
+    <span class="holdup jill">Jill action</span>
+    <div class="next">Find "$6" in draft "AT Consideration Is a Legal Requirement" post → change to <strong>$4</strong> (matches live TPT listing #15795702). Fix first, then publish. Do not publish with wrong price.</div>
+  </td>
+</tr>
+
+<tr data-tags="jill now substack">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Substack: First TPT Drop post — add thumbnails &amp; publish</div>
+    <div class="task-group">Substack</div>
+  </td>
+  <td><span class="product" style="background:#3b1f1f;color:#fca5a5"><span class="dot" style="background:#fca5a5"></span>Substack</span></td>
+  <td><span class="deadline dl-mar">Ready now</span></td>
+  <td>
+    <span class="holdup jill">Jill action</span>
+    <div class="next">All TPT URLs + prices are inserted. Only remaining step: add <strong>Canva thumbnails</strong> → publish. File: <strong>Substack/Substack-FirstTPTDrop-Post.md</strong>.</div>
+  </td>
+</tr>
+
+<tr data-tags="jill now ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Airtable: Delete 3 blank Work Items records</div>
+    <div class="task-group">Operations</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#94A3B8"><span class="dot" style="background:#94A3B8"></span>Operations</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <span class="holdup jill">Jill action — manual only</span>
+    <div class="next">Cannot delete via MCP. Go to Airtable Work Items table → delete manually: <strong>recacRAoUpf2Pm7K6</strong>, <strong>reccV2W1OY0Z4xHgI</strong>, <strong>recm3WsrttywsUP6p</strong>.</div>
+  </td>
+</tr>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION: HIGH PRIORITY / NOW -->
+<!-- ═══════════════════════════════════════════════════ -->
+<tr class="section-row"><td colspan="5"><div class="section-title">🔴 High Priority — Act Now</div></td></tr>
+
+<tr data-tags="now trading">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Trading Cards: Launch Phase 1 on Etsy</div>
+    <div class="task-group">AAC Trading Cards</div>
+  </td>
+  <td><span class="product" style="background:#1f2f1f;color:#86efac"><span class="dot" style="background:#86efac"></span>AAC Trading Cards</span></td>
+  <td><span class="deadline dl-now">Now</span></td>
+  <td>
+    <span class="holdup ready">Ready to launch</span>
+    <div class="next">List <strong>Starter Core (54), Growing Core (170), Full Core (377)</strong> from Order #82750 inventory on Etsy. Professional photography showing Fitzgerald Key color system (fanned card spread). Write <strong>two listing variants</strong> per deck: clinical (SLP/educator) + plain parent language. A/B test 30 days. Sub-brand: "CbD Card Collection." Goal: 10 reviews before Amazon launch.</div>
+  </td>
+</tr>
+
+<tr data-tags="now trading">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Trading Cards: Unit economics audit</div>
+    <div class="task-group">AAC Trading Cards</div>
+  </td>
+  <td><span class="product" style="background:#1f2f1f;color:#86efac"><span class="dot" style="background:#86efac"></span>AAC Trading Cards</span></td>
+  <td><span class="deadline dl-now">Before next print run</span></td>
+  <td>
+    <span class="holdup">Gate: go/no-go</span>
+    <div class="next">Calculate <strong>cost-per-card at 500-unit run</strong> for Starter Core (54), Growing Core (170), UFLI deck (346). Compare to Etsy pricing that sustains margin after 6.5% Etsy fee + shipping materials. This is the Phase 2 go/no-go gate.</div>
+  </td>
+</tr>
+
+<tr data-tags="now ops">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Product page conversion audit</div>
+    <div class="task-group">TPT Store / Marketing</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#FFB703"><span class="dot" style="background:#FFB703"></span>TPT Store</span></td>
+  <td><span class="deadline dl-now">ASAP</span></td>
+  <td>
+    <span class="holdup">⚠️ 373 clicks · $0 earned</span>
+    <div class="next">0% conversion rate is the top priority. Start with <strong>AT Checklist + AT Toolkit</strong> (highest traffic). Review: cover image, description opener (first 180 chars), pricing display, thumbnail. These two listings are the entry point for the entire funnel.</div>
+  </td>
+</tr>
+
+<tr data-tags="now nonfiction ops">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Re-upload all 6 nonfiction zips to TPT</div>
+    <div class="task-group">Nonfiction</div>
+  </td>
+  <td><span class="product" style="background:#3b2f00;color:#FFB703"><span class="dot" style="background:#FFB703"></span>Nonfiction — All 6 Units</span></td>
+  <td><span class="deadline dl-now">ASAP</span></td>
+  <td>
+    <span class="holdup ready">Files built — upload needed</span>
+    <div class="next">New <strong>_Complete.zip</strong> files have Session 16 updates: Communication Access section, hang-over page fixes (Keiko), partner modes note, access verb language. Replace existing TPT downloads. Add note: "Includes Word (.docx) and PDF formats."</div>
+  </td>
+</tr>
+
+<tr data-tags="now ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Add tag gold mines to TPT listings</div>
+    <div class="task-group">TPT Store / SEO</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#FFB703"><span class="dot" style="background:#FFB703"></span>TPT Store</span></td>
+  <td><span class="deadline dl-now">Quick win</span></td>
+  <td>
+    <span class="holdup ready">5-minute task</span>
+    <div class="next">Paste into TPT tag fields: <strong>"aactivities"</strong> (all AAC products), <strong>"ulfi"</strong> (all UFLI products), <strong>"drawn to aac"</strong> (AAC tags), <strong>"special education lesson plans template"</strong> (nonfiction). Free SEO wins.</div>
+  </td>
+</tr>
+
+<tr data-tags="now nonfiction">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Preview PDFs — AT/AAC products</div>
+    <div class="task-group">AT/AAC IEP Team</div>
+  </td>
+  <td><span class="product" style="background:#1B1F3B;color:#00B4D8;border:1px solid #00B4D8"><span class="dot" style="background:#00B4D8"></span>AT/AAC IEP Team</span></td>
+  <td><span class="deadline dl-now">ASAP</span></td>
+  <td>
+    <div class="next">Build preview PDFs for <strong>AT Checklist + AT Toolkit</strong> (highest traffic). Include one page of symbol cards in every nonfiction/UFLI preview — the Fitzgerald Key trading card design is a key visual differentiator.</div>
+  </td>
+</tr>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION: FICTION LINE — WONDER -->
+<!-- ═══════════════════════════════════════════════════ -->
+<tr class="section-row"><td colspan="5"><div class="section-title">📖 Fiction Line — Wonder (Blocking TPT Launch)</div></td></tr>
+
+<tr data-tags="wonder now">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Wonder: Lock pricing + cover color</div>
+    <div class="task-group">Fiction</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Wonder Unit</span></td>
+  <td><span class="deadline dl-now">Blocking listing</span></td>
+  <td>
+    <span class="holdup">Blocking: Airtable record + TPT listing</span>
+    <div class="next">Decide: <strong>Pricing</strong> — candidates $8.95 / $9.95 / new fiction tier. <strong>Cover color</strong> — bright/light background (NOT navy), hero color TBD. Leading candidates: Electric Teal on white, or split treatment. Both decisions required before any cover build or TPT listing.</div>
+  </td>
+</tr>
+
+<tr data-tags="wonder">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">Wonder: Build rubric</div>
+    <div class="task-group">Fiction</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Wonder Unit</span></td>
+  <td><span class="deadline dl-now">Before listing</span></td>
+  <td>
+    <div class="next">3-level rubric (Does Not Yet Meet / Approaching / Meets). Behavioral descriptions. <strong>Identical across V1/V2/V3</strong>. Referenced in IEP goal stems but not yet built. Add to main unit docx or as Layer 6 in Printable Packet.</div>
+  </td>
+</tr>
+
+<tr data-tags="wonder">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Wonder: Create Welcome_and_Terms.pdf</div>
+    <div class="task-group">Fiction</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Wonder Unit</span></td>
+  <td><span class="deadline dl-now">Before listing</span></td>
+  <td>
+    <div class="next">Accessibility Statement + About the Creator + Terms of Use. <strong>Reuse nonfiction boilerplate</strong> — do not rebuild. Same structure as all other unit TPT folders.</div>
+  </td>
+</tr>
+
+<tr data-tags="wonder ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Wonder: Add product record to Airtable</div>
+    <div class="task-group">Fiction</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Wonder Unit</span></td>
+  <td><span class="deadline dl-none">After pricing locked</span></td>
+  <td>
+    <span class="holdup">Waiting on: pricing + cover decision</span>
+    <div class="next">Add to <strong>Products table + Launch Pipeline</strong> once pricing and cover color are confirmed. Cannot create record until both are locked.</div>
+  </td>
+</tr>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION: MAY 2026 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<tr class="section-row"><td colspan="5"><div class="section-title">📅 May 2026 — UFLI Launch</div></td></tr>
+
+<tr data-tags="may ufli">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">UFLI: Upload 36 products to TPT</div>
+    <div class="task-group">UFLI Phonics</div>
+  </td>
+  <td><span class="product" style="background:#1f1f3b;color:#a78bfa"><span class="dot" style="background:#a78bfa"></span>UFLI Phonics</span></td>
+  <td><span class="deadline dl-may">May 2026</span></td>
+  <td>
+    <span class="holdup ready">36 products built + QC passed</span>
+    <div class="next">Sequence: Canva covers → preview PDFs → TPT upload. 34 final files in <strong>Products/UFLI Phonics/Ready for TPT v3/</strong>. Run ufli-qc checklist before each listing. Add Etsy callout to each listing for UFLI deck.</div>
+  </td>
+</tr>
+
+<tr data-tags="may trading ufli">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Trading Cards: UFLI Phase 2 Etsy listing</div>
+    <div class="task-group">AAC Trading Cards</div>
+  </td>
+  <td><span class="product" style="background:#1f2f1f;color:#86efac"><span class="dot" style="background:#86efac"></span>AAC Trading Cards</span></td>
+  <td><span class="deadline dl-may">May 2026</span></td>
+  <td>
+    <div class="next">Create UFLI deck (346 cards) Etsy listing <strong>before</strong> May UFLI TPT launch. Add callout to every UFLI TPT listing: "Want the physical vocabulary cards? UFLI Phonics AAC Trading Cards (346 cards, Fitzgerald Key) ships from our Etsy store." Coordinate with UFLI upload timeline.</div>
+  </td>
+</tr>
+
+<tr data-tags="may ops">
+  <td><div class="pri pri-high"></div></td>
+  <td>
+    <div class="task-name">District site license: Build + pitch</div>
+    <div class="task-group">Institutional Sales</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#FFB703"><span class="dot" style="background:#FFB703"></span>TPT / UFLI Bundle</span></td>
+  <td><span class="deadline dl-may">Before May 2026</span></td>
+  <td>
+    <span class="holdup">Highest-revenue action next 90 days</span>
+    <div class="next">Package UFLI Phonics + AT/AAC IEP Team supports as <strong>"Communication Access Starter Pack"</strong> — $499–$999 site license. Write one-page SPED director pitch leading with IDEA compliance angle. Send to <strong>5 SPED directors via RESNA network</strong> before May UFLI launch.</div>
+  </td>
+</tr>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION: JULY 2026 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<tr class="section-row"><td colspan="5"><div class="section-title">📅 July 2026 — ADA Anniversary / Disability Pride Month</div></td></tr>
+
+<tr data-tags="july nonfiction">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">All the Way to the Top Companion</div>
+    <div class="task-group">Picture Book Companions — K–3</div>
+  </td>
+  <td><span class="product" style="background:#3b2f00;color:#fde68a"><span class="dot" style="background:#fde68a"></span>Picture Book Companions</span></td>
+  <td><span class="deadline dl-jul">July 26, 2026</span></td>
+  <td>
+    <div class="next">Plan complete — <strong>AllTheWayToTheTop_Unit_PLAN.md</strong> done. Next: draft unit content section by section. Framework: IRA + Dialogic Reading + ALS. Standard: RL.K-3.3 + RL.K-3.4. 3-reading structure. Price: $5. ADA anniversary hook. Pairs with Capitol Crawl for Jennifer Keelan bundle.</div>
+  </td>
+</tr>
+
+<tr data-tags="july nonfiction">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">504 + Capitol Crawl bundle listing</div>
+    <div class="task-group">Nonfiction</div>
+  </td>
+  <td><span class="product" style="background:#3b2f00;color:#FFB703"><span class="dot" style="background:#FFB703"></span>Nonfiction Bundle</span></td>
+  <td><span class="deadline dl-jul">July 2026</span></td>
+  <td>
+    <div class="next">Both products LIVE. Create bundle listing on TPT for Disability Pride Month. Pair with Jennifer Keelan / ADA anniversary angle for the July content push.</div>
+  </td>
+</tr>
+
+<tr data-tags="july substack">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Substack: "The Capitol Crawl Was a Child's Act of Resistance"</div>
+    <div class="task-group">Substack — Advocacy Pillar</div>
+  </td>
+  <td><span class="product" style="background:#3b1f1f;color:#fca5a5"><span class="dot" style="background:#fca5a5"></span>Substack</span></td>
+  <td><span class="deadline dl-jul">July 2026</span></td>
+  <td>
+    <div class="next">Jennifer Keelan was 8. Advocacy pillar post. Ties to Capitol Crawl unit (6–10) + All the Way to the Top (K–3). Write as ADA anniversary hook. Launch bridge for both products.</div>
+  </td>
+</tr>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SECTION: STRATEGIC -->
+<!-- ═══════════════════════════════════════════════════ -->
+<tr class="section-row"><td colspan="5"><div class="section-title">🔭 Strategic — No Hard Deadline</div></td></tr>
+
+<tr data-tags="nonfiction ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Nonfiction expansion: Map 22-unit target</div>
+    <div class="task-group">Nonfiction</div>
+  </td>
+  <td><span class="product" style="background:#3b2f00;color:#FFB703"><span class="dot" style="background:#FFB703"></span>Nonfiction</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <div class="next">Current: 6 live. Target: 22 units (2 lessons per skill). <strong>Map which 11 skills are the priority order</strong> and which topics serve each skill. This is the curriculum backbone of the full trading card ecosystem threshold.</div>
+  </td>
+</tr>
+
+<tr data-tags="wonder ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Fiction expansion: Sequence 25-unit launch set</div>
+    <div class="task-group">Fiction Anchor Texts</div>
+  </td>
+  <td><span class="product" style="background:#1e3a5f;color:#7dd3fc"><span class="dot" style="background:#7dd3fc"></span>Fiction Anchor Texts</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <div class="next">31 titles in Airtable Pipeline (11 disability-rep texts flagged). <strong>6-unit launch set confirmed:</strong> Wonder · The Giver · Rules · Out of My Mind · Hatchet · Ghost. Sequence remaining 19 by grade band coverage, topic diversity, seasonal hooks.</div>
+  </td>
+</tr>
+
+<tr data-tags="nonfiction ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">Nonfiction bundle: Keiko + Radium Girls</div>
+    <div class="task-group">Nonfiction</div>
+  </td>
+  <td><span class="product" style="background:#3b2f00;color:#FFB703"><span class="dot" style="background:#FFB703"></span>Nonfiction Bundle</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <div class="next">Create bundle listing on TPT. Both products LIVE. Pair as a "Women in Science + Conservation" bundle. No build work needed — just listing creation.</div>
+  </td>
+</tr>
+
+<tr data-tags="ops">
+  <td><div class="pri pri-med"></div></td>
+  <td>
+    <div class="task-name">TPT cross-linking audit</div>
+    <div class="task-group">TPT Store</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#FFB703"><span class="dot" style="background:#FFB703"></span>TPT Store</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <div class="next">Confirm <strong>freebies (AT Checklist, Finding Symbols) link TO paid products</strong>. Confirm <strong>Toolkit links FROM Checklist</strong>. Internal linking = free conversion lift. Quick audit, no build needed.</div>
+  </td>
+</tr>
+
+<tr data-tags="substack ops">
+  <td><div class="pri pri-low"></div></td>
+  <td>
+    <div class="task-name">Substack: Plan paid membership tier</div>
+    <div class="task-group">Substack</div>
+  </td>
+  <td><span class="product" style="background:#3b1f1f;color:#fca5a5"><span class="dot" style="background:#fca5a5"></span>Substack</span></td>
+  <td><span class="deadline dl-none">At 500 subscribers</span></td>
+  <td>
+    <div class="next">Draft offer structure before hitting 500 free subscribers. Proposed: <strong>$12–15/month "CbD Practitioner"</strong> tier — 1 new resource/month + monthly live Q&A + early product access. Have offer ready to activate at threshold.</div>
+  </td>
+</tr>
+
+<tr data-tags="ops">
+  <td><div class="pri pri-low"></div></td>
+  <td>
+    <div class="task-name">Airtable: Link Work Items → Products table</div>
+    <div class="task-group">Operations</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#94A3B8"><span class="dot" style="background:#94A3B8"></span>Operations</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <div class="next">Manual linking in Airtable UI — link each Work Items task to its specific Products table record. Can also do via a future MCP session. Unlocks full relational dashboard view.</div>
+  </td>
+</tr>
+
+<tr data-tags="ops">
+  <td><div class="pri pri-low"></div></td>
+  <td>
+    <div class="task-name">Ahrefs 7-day trial</div>
+    <div class="task-group">SEO / Marketing</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#94A3B8"><span class="dot" style="background:#94A3B8"></span>Operations / SEO</span></td>
+  <td><span class="deadline dl-none">Start April 27</span></td>
+  <td>
+    <span class="holdup">⚠️ CANCEL by May 2 at 9am PT</span>
+    <div class="next">Start <strong>April 27</strong>. Run 7-day competitor research plan (SEO spreadsheet → Ahrefs tab). <strong>Cancel by May 2, 9am PT</strong> — set a calendar reminder NOW so this doesn't auto-charge.</div>
+  </td>
+</tr>
+
+<tr data-tags="nonfiction ops">
+  <td><div class="pri pri-low"></div></td>
+  <td>
+    <div class="task-name">V3 passage audit — all 6 nonfiction units</div>
+    <div class="task-group">Nonfiction</div>
+  </td>
+  <td><span class="product" style="background:#3b2f00;color:#FFB703"><span class="dot" style="background:#FFB703"></span>Nonfiction — All 6 Units</span></td>
+  <td><span class="deadline dl-none">No deadline</span></td>
+  <td>
+    <div class="next">New rule (Session 16): V3 passages must use core words + highest-frequency fringe only. Review V3 text in each unit against its fringe word list. Flag any V3-exclusive vocabulary without a symbol. <strong>Priority: Keiko first, then Radium Girls.</strong></div>
+  </td>
+</tr>
+
+<tr data-tags="ops">
+  <td><div class="pri pri-low"></div></td>
+  <td>
+    <div class="task-name">Weekly TPT traffic check</div>
+    <div class="task-group">Operations / Marketing</div>
+  </td>
+  <td><span class="product" style="background:#252A4A;color:#FFB703"><span class="dot" style="background:#FFB703"></span>TPT Store</span></td>
+  <td><span class="deadline dl-none">Every Saturday</span></td>
+  <td>
+    <div class="next">Pull <strong>Traffic tab on TPT dashboard</strong> (This week vs. Last week). Watch: (1) Facebook click-throughs — goal 15+ sustained; (2) Direct traffic — flag if below 80/week for 3+ consecutive weeks; (3) Conversion rate — currently 0.00%. Template: <strong>Marketing/TPT_Traffic_Report_2026-03-28.html</strong>.</div>
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<script>
+// ── COUNT STATS ──
+function updateStats(){
+  const rows = [...document.querySelectorAll('#tbody tr[data-tags]')].filter(r=>!r.classList.contains('row-hidden'));
+  const jill = rows.filter(r=>r.getAttribute('data-tags').includes('jill')).length;
+  const high = rows.filter(r=>r.querySelector('.pri-high')).length;
+  document.getElementById('cnt-jill').textContent = rows.filter(r=>r.getAttribute('data-tags').includes('jill')).length;
+  document.getElementById('cnt-high').textContent = rows.filter(r=>r.querySelector('.pri-high')).length;
+  document.getElementById('cnt-total').textContent = rows.length;
+}
+
+// ── FILTER ──
+let activeFilter = 'all';
+let searchVal = '';
+
+function applyFilters(){
+  const rows = document.querySelectorAll('#tbody tr[data-tags]');
+  const sectionRows = document.querySelectorAll('.section-row');
+
+  rows.forEach(r=>{
+    const tags = r.getAttribute('data-tags');
+    const text = r.textContent.toLowerCase();
+    const matchFilter = activeFilter === 'all' || tags.includes(activeFilter);
+    const matchSearch = searchVal === '' || text.includes(searchVal);
+    r.classList.toggle('row-hidden', !(matchFilter && matchSearch));
+  });
+
+  // Hide section rows if all their children are hidden
+  sectionRows.forEach(sr=>{
+    let next = sr.nextElementSibling;
+    let anyVisible = false;
+    while(next && !next.classList.contains('section-row')){
+      if(next.getAttribute('data-tags') && !next.classList.contains('row-hidden')) anyVisible = true;
+      next = next.nextElementSibling;
+    }
+    sr.classList.toggle('row-hidden', !anyVisible);
+  });
+
+  updateStats();
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.getAttribute('data-filter');
+    applyFilters();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e=>{
+  searchVal = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+
+// Initial count
+updateStats();
+</script>
+</body>
+</html>

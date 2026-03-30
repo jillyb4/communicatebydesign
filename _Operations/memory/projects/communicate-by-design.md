@@ -37,7 +37,7 @@ Capacity-building stands in contrast to the "expert model" in which AT services 
 | Substack | communicatebydesign.substack.com | Live ✓ (3 posts published) |
 | TPT | [teacherspayteachers.com/store/communicate-by-design](https://www.teacherspayteachers.com/store/communicate-by-design) | 13 products LIVE ✓; Awards section needs manual entry |
 | Instagram | @communicatebydesignaac | Template done ✓ |
-| Airtable | Base `appeaT8hkeXWqQKIj` | 4 tables: Work Items (~70 records), Products (32 records), Launch Pipeline (68 records, `tblKDEYyrRdPOtbhX`), Instructional Activities (6 records, `tblHJlkbCF7c4tCNP`). Session 17 (2026-03-27): Launch Calendar Excel fully migrated to Airtable — Excel is deprecated. |
+| Airtable | Base `appeaT8hkeXWqQKIj` | 5 tables: Work Items (~98), Products (32), Launch Pipeline (68), Instructional Activities (13), Vocabulary (**501** — synced Session 21). 7 new Work Items added Session 22 (trading card + institutional sales + expansion planning tasks). |
 | **GitHub** | github.com/jillyb4/communicatebydesign | **LIVE ✓ (2026-03-29)** — Code backup repo. Git initialized inside iCloud CbD folder. `.gitignore` tracks code only (.js/.py/.html/.md/.jsx/.json); excludes binaries, symbol_cache, QC, node_modules, images, PDFs, Office docs. Use GitHub Desktop: commit → push origin after any code changes. |
 
 ---
@@ -105,6 +105,21 @@ Capacity-building stands in contrast to the "expert model" in which AT services 
 
 ---
 
+## AAC Trading Cards — CbD Card Collection (Session 22)
+
+**Sub-brand name locked: CbD Card Collection.** All listings: "AAC Trading Cards · CbD Card Collection."
+
+**3-Phase Launch Strategy:**
+- Phase 1 (NOW): Standalone core decks (Starter Core, Growing Core, Full Core) on Etsy from Order #82750 inventory. Professional photography showing Fitzgerald Key color system. Two listing variants: clinical (SLP/educator) + plain parent language. Goal: 10 Etsy reviews before Amazon launch.
+- Phase 2 (May 2026): UFLI Phonics deck on Etsy, timed to TPT UFLI curriculum launch. Add Etsy callout to every UFLI TPT listing.
+- Phase 3 (rolling): Per-curriculum companion decks as nonfiction (→22) and fiction (→25) expand.
+
+**Full ecosystem threshold:** 22 nonfiction + 25 fiction + UFLI = ~83 curriculum products.
+
+**⚠️ Gate before next print run:** Unit economics audit — cost-per-card at 500-unit run for Starter Core, Growing Core, UFLI deck. Print-on-demand not viable long-term for 170+ card decks.
+
+---
+
 ## Symbol Card Binder Ecosystem (Session 12)
 Every CbD lesson ships with 2.5"×3.5" trading card–sized symbol cards that accumulate into a student's 9-pocket binder organized by Modified Fitzgerald Key categories. 3-zone card layout: category bar (binder sorting) → ARASAAC symbol → word + POS label. Build script: `build_unit_printable_kit.js` Component 2. Every lesson MUST include symbol cards + word tracker. No other TPT store offers this.
 
@@ -117,7 +132,7 @@ Every CbD lesson ships with 2.5"×3.5" trading card–sized symbol cards that ac
 | **AT/AAC Tools** | IEP Team | 7 live | 8 pipeline ideas | Workflow BUILT ✓ |
 | **AT/AAC Tools** | Family/Homeschool/Hybrid | 0 live | 6 pipeline (F0–F5) | Pipeline designed |
 | **Nonfiction Reading Units** | — | 6 live (incl. freebie) | 2 built not listed | All 6 standardized, workflow BUILT ✓ |
-| **Fiction Anchor Texts** | — | 0 live | 20 candidates | Workflow BUILT ✓ |
+| **Fiction Anchor Texts** | — | 0 live | ~25 pipeline ideas (target: 25 units) | Workflow BUILT ✓ |
 | **UFLI Phonics** | — | 0 live | 36 products BUILT | QC PASSED ✓, TPT listings DRAFTED ✓ |
 
 ---
@@ -213,15 +228,18 @@ Both tools navigate between each other in the same browser tab. GitHub commit ne
 **Key features:** Includes open-source AAC symbols (ARASAAC), AAC activity adaptations built in (not bolted on).
 **Workflow:** BUILT ✓ — `_Operations/CbD_Production_Workflows.xlsx` → 📖 Fiction Workflow tab (9-phase, 48-step + Preview PDF).
 **Pipeline:** 20 anchor text candidates with standards, skills, grade bands. 6 evidence-based instructional activities (HLP/UDL/AAC connections).
-**Status:** Wonder: Character Analysis (Unit 1) in active build. Main unit docx built (⚠️ Word open error unresolved). Framework decisions LOCKED 2026-03-29.
+**Status:** Wonder: Character Analysis (Unit 1) in active build. Main unit docx BUILT ✓ · Printable Packet BUILT ✓ (13 pages, Layer 5 student response pages added Session 21) · Assembly script BUILT ✓. Awaiting Jill: Word PDF export → run assembly → FULL.pdf.
 
-### Wonder: Character Analysis — Current State (2026-03-29)
+### Wonder: Character Analysis — Current State (2026-03-29 Session 21)
 
-**Product Architecture (two-file model):**
-1. Main Unit Docx — all content in one document (`build_wonder_character_analysis.js`)
-2. Fiction Printable Packet PDF — Python/ReportLab, 4 layers, 9 pages (`build_wonder_printable_packet.py`)
+**Product Architecture (final: three-file workflow):**
+1. `Wonder_Character_Analysis_COMPLETE.docx` — all teacher unit content (`build_wonder_character_analysis.js`) — BUILT ✓ (34.6 KB)
+2. `Wonder_Character_Analysis_Printable_Packet.pdf` — Python/ReportLab, **5 layers, 13 pages** (`build_wonder_printable_packet.py`) — BUILT ✓ (1.9 MB)
+3. `Wonder_Character_Analysis_FULL.pdf` — merged final TPT upload (`build_wonder_assembly.py`) — ⚠️ **Needs Word PDF export first**
 
-**Fiction Printable Packet spec:** `_Operations/memory/fiction_printable_packet_spec.md` — LOCKED. Do not build without reading this first.
+**To complete the FULL.pdf:** Open COMPLETE.docx in Word → File → Save As → PDF → save as `Wonder_Character_Analysis_COMPLETE.pdf` → run `python3 build_wonder_assembly.py` → 32-page FULL.pdf.
+
+**Fiction Printable Packet spec:** `_Operations/memory/fiction_printable_packet_spec.md` — NOTE: spec says 4 layers/9 pages; actual build is now 5 layers/13 pages (Layer 5 = student response pages). Update spec next session.
 
 **Two vocabulary sets (keep separate):**
 - Set A (SDI instruction targets, 24 words): appears on symbol cards (Layer 2) and Vocabulary Map (Layer 4a)
@@ -229,26 +247,42 @@ Both tools navigate between each other in the same browser tab. GitHub commit ne
 
 **Annotation codes (LOCKED):** [TRAIT] / [WHY] / [CHANGE]
 
+**Symbol substitutions (LOCKED):**
+- belong → include (arasaac_include_11702.png)
+- ordinary → usual (arasaac_usual_2547.png)
+- face looks different → face (arasaac_face_2684.png)
+- alone, bully, invisible, loyal, helmet: confirmed present in symbol_cache
+
 **Wonder vocabulary (entry #7 in `cbd_unit_vocab.js`):**
 - Core (12): feel, want, think, know, change, because, maybe, sad, scared, happy, alone, kind
 - Fringe (12): different, belong, invisible, brave, loyal, bully, ordinary, friend, helmet, school, choose, face looks different
-- 8 missing ARASAAC symbols: alone, belong, invisible, loyal, bully, ordinary, helmet, face looks different → fetch before building Printable Packet
+
+**Layer 5 — Student Response Pages (Session 21):**
+- p10 Part 1: Describe to Draw (draw/write box)
+- p11 Part 2: Same and Different (SAME / DIFFERENT T-chart)
+- p12 Part 3: Why Did They Do That? (sentence frame + lines)
+- p13 Part 4: Before and After (BEFORE / AFTER two-column + amber arrow)
+- p14 Part 5: The Big Idea (3 sentence starters + lines)
+Each page: Part bar, student info row (Name/Date/Character), teal-accented prompt box, FK vocabulary strip, annotation code chips ([TRAIT]/[WHY]/[CHANGE]), footer.
 
 **Layer 3 — Three communication boards:**
 - Board A: Character Description (LOOKS LIKE / DOES / FEELS / WANTS)
 - Board B: Emotion + Reasoning (emotional vocab + because/maybe/probably prominent)
-- Board C: Literary Discussion Moves (discussion + evidence citing + [TRAIT]/[WHY]/[CHANGE])
+- Board C: Literary Discussion Moves (discussion + evidence citing + annotation codes)
 
 **Visual supports in main docx (DO NOT rebuild in Printable Packet):**
 - Comparison Board → Section 8 of build script
 - Before/After Strip → Section 10 of build script
 
-**Visual Supports V2 (deferred):** VSDs for 4 scenes (first day / lunch / Halloween / graduation). Requires original illustration. Unit launchable without them.
+**Visual Supports V2 (deferred):** VSDs for 4 scenes. Unit launchable without them.
 
-**Open blockers:**
-- ⚠️ Word open error on main unit docx (debugging needed)
-- ⚠️ Delete `Wonder_Character_Analysis_Printable_Kit.docx` (wrong format — manual, iCloud read-only)
-- ⚠️ Fetch 8 missing ARASAAC symbols before Printable Packet build
+**Remaining before TPT listing:**
+- ⚠️ Word PDF export → run assembly (Jill action)
+- ⚠️ Decide pricing ($8.95/$9.95) and cover color (bright/light, not navy)
+- ⚠️ Delete `Wonder_Character_Analysis_Printable_Kit.docx` (wrong format — manual Finder)
+- ⚠️ Build rubric (3-level, referenced in IEP goals but not yet built)
+- ⚠️ Update `fiction_printable_packet_spec.md` to reflect 5 layers / 13 pages
+- ⚠️ Add Airtable product record once pricing/cover locked
 
 ---
 

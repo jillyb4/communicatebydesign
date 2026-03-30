@@ -23,11 +23,11 @@ Deep reference for UFLI Phonics product builds. Pull this file for UFLI build se
 ```
 
 ## Lessons 1–4 Note
-UFLI Lessons 1–4 introduce letters only — no words until Lesson 5. Packets exist but are essentially empty. Do NOT sell as $1 products. The Teacher Guide + Letter Card Library PDF covers these lessons.
+UFLI Lessons 1–4 introduce letters — no new phoneme-grapheme words yet, but students DO have work to do from Lesson 1. Packets for Lessons 1–4 focus on: alternative pencil access for letter recognition, e-trans board setup, symbol-to-letter correspondence, and partner scripting for the auditory confirmation loop. These ARE $1 individual products. Students should not wait until Lesson 5 to begin. The Teacher Guide covers the 8-step structure; Lesson 1–4 packets carry the letter-specific access content for each lesson.
 
 ## Ready for TPT Folder
 `Products/UFLI Phonics/Ready for TPT v3/` — 34 final files:
-- 30 lesson packets (.docx, Lessons 5–34)
+- 34 lesson packets (.docx, Lessons 1–34)
 - `UFLI_Teacher_Guide_and_Communication_Partner_Guide.docx`
 - `UFLI_Letter_Cards_Lowercase.pdf`
 - `UFLI_Session_Data_Tracker.pdf`

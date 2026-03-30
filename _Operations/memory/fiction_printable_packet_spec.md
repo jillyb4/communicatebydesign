@@ -7,7 +7,7 @@
 
 ## What It Is
 
-A purpose-designed printable (7–9 pages) that gives any team — regardless of a
+A purpose-designed printable (**13 pages for Wonder; 7–9 pages baseline**) that gives any team — regardless of a
 student's current AAC access level — exactly what they need to run a fiction
 anchor text unit with complex communicators, while systematically building a
 vocabulary library.
@@ -44,15 +44,18 @@ starters. Different access points for different moments. All of them working tog
 
 ---
 
-## Packet Structure (7–9 pages)
+## Packet Structure (13 pages — Wonder build; 7–9 pages baseline)
 
 | Page(s) | Layer | Content |
 |---------|-------|---------|
 | 1 | Layer 1: Communication Environment Setup | Partner reference — modes, prompt hierarchy, barrier check |
-| 2–4 | Layer 2: Vocabulary Access | 2"×2" symbol cards — core board + fringe card set |
-| 5–6 | Layer 3: Communication Board for Activities | Literary discussion moves as low-tech communication board |
-| 7 | Layer 4a: Unit Vocabulary Map | Cumulative library tracker — all unit words |
+| 2–3 | Layer 2: Vocabulary Access | Symbol cards — core Set A (12 words) + fringe Set A (12 words, chapter order) |
+| 4–6 | Layer 3: Communication Boards | Board A: Character Description (landscape) · Board B: Emotion + Reasoning · Board C: Literary Discussion Moves |
+| 7 | Layer 4a: Unit Vocabulary Map | Cumulative library tracker — all unit words with tracking circles |
 | 8–9 | Layer 4b: AAC Session Tracker | Appended unchanged |
+| 10–14 | **Layer 5: Student Response Pages** | **NEW (Session 21).** One print-ready student response page per Part (5 total). Each: Part bar, student info row, teal prompt box, FK vocabulary strip, response area, annotation code chips, footer. Response types: draw box · T-chart · sentence frame + lines · before/after columns · sentence starters + lines |
+
+**Note:** Layer 5 added in Session 21. Wonder build = 13 pages. Baseline (new fiction units) starts at 4 layers / 9 pages; add Layer 5 student pages when building.
 
 ---
 

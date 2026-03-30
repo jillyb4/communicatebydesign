@@ -807,8 +807,9 @@ children.push(T.tableCaption("If a word is not available, prepare a physical sym
 // END MATTER
 // ═══════════════════════════════════════════════════════════════════════
 
-children.push(T.heading1("Accessibility Statement"));
-children.push(...T.accessibilityStatement());
+// NOTE: Accessibility Statement is NOT included in the fiction unit docx.
+// It belongs in the Welcome Packet (TPT folder), not in the main instructional document.
+// See fiction_reference.md for this rule.
 
 children.push(T.heading1("About the Creator"));
 children.push(...T.aboutTheCreator());

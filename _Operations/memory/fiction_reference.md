@@ -210,7 +210,9 @@ One unified document containing:
 - Parts 1–N of the SDI Activity Sequence (unit-specific, typically 5 parts)
 - IEP Goal Stems + Data Collection Guidance
 - Communication Access Quick Reference (pull-out page — laminate)
-- End matter: Accessibility Statement → About the Creator → Terms of Use
+- End matter: About the Creator → Terms of Use
+- ⚠️ NOTE: Accessibility Statement goes in the Welcome Packet (TPT folder), NOT in the main unit docx. Fiction units are teacher-facing supplements — the Accessibility Statement belongs with the TPT packaging documents, not appended to the instructional content.
+- Welcome Packet content (Accessibility Statement + About the Creator + Terms of Use) is shared boilerplate — same across ALL CbD units. Reuse the existing `Welcome_and_Terms.pdf` from the nonfiction model. Do NOT rebuild per fiction unit. TPT zip = Main Unit docx + Printable Packet PDF + Welcome_and_Terms.pdf (shared).
 
 **File 2: Fiction Printable Packet PDF** (built with `build_[title]_printable_packet.py`)
 Purpose-designed 7–9 page printable with 4 layers:

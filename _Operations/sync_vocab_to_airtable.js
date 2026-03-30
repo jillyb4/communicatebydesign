@@ -86,6 +86,7 @@ async function fetchAllRecords() {
   let offset;
   do {
     const url = new URL(AT_BASE);
+    url.searchParams.set('returnFieldsByFieldId', 'true');
     if (offset) url.searchParams.set('offset', offset);
     const data = await atFetch(url.toString());
     records.push(...data.records);
@@ -107,6 +108,26 @@ async function updateRecords(batch) {
     body: JSON.stringify({ records: batch }),
   });
 }
+
+// ── Airtable value normalization ──────────────────────────────────────────────
+
+// Map source wordType strings to Airtable single-select option names
+const WORD_TYPE_LABELS = { core: 'Core', fringe: 'Fringe', heart: 'Heart Word' };
+function wordTypeLabel(t) { return WORD_TYPE_LABELS[t] || 'Fringe'; }
+
+// Map full unit titles (from cbd_unit_vocab.js) to Airtable multiselect option names
+const UNIT_TITLE_MAP = {
+  'Radium Girls'                             : 'Radium Girls',
+  "Keiko: A Whale's Journey"                 : 'Keiko',
+  'Frances Kelsey and the Thalidomide Crisis': 'Frances Kelsey',
+  '504 Sit-In 1977'                          : '504 Sit-In',
+  'Capitol Crawl 1990'                       : 'Capitol Crawl',
+  'Zitkala-Ša'                               : 'Zitkala-Ša',
+};
+function unitLabel(title) { return UNIT_TITLE_MAP[title] || title; }
+
+// Extract string value from Airtable single-select (may be object or string)
+function selectName(v) { return v && typeof v === 'object' ? v.name : v; }
 
 // ── Build master vocabulary map from source files ─────────────────────────────
 // Key: lowercase word. Value: aggregated data across all product lines.
@@ -151,8 +172,9 @@ function buildMasterMap() {
       if (!e.wordType || (e.wordType === 'core' && w.type === 'fringe')) {
         e.wordType = w.type;
       }
-      if (isNonfiction && !e.nonfictionUnits.includes(unit.unitTitle)) {
-        e.nonfictionUnits.push(unit.unitTitle);
+      const mappedTitle = unitLabel(unit.unitTitle);
+      if (isNonfiction && !e.nonfictionUnits.includes(mappedTitle)) {
+        e.nonfictionUnits.push(mappedTitle);
       }
       e.productLines.add(productLine);
       if (w.top5) e.priority = true;
@@ -218,15 +240,17 @@ function buildMasterMap() {
 // ── Diff helpers ──────────────────────────────────────────────────────────────
 
 function multiSelectVal(arr) {
-  // Airtable returns multipleSelects as array of strings
-  return arr ? [...arr].sort().join('|') : '';
+  // Airtable returns multipleSelects as array of strings or objects {id, name}
+  if (!arr) return '';
+  return arr.map(x => (x && typeof x === 'object' ? x.name : x)).sort().join('|');
 }
 
 function fieldsDiffer(current, desired) {
   // Returns true if any mapped field has changed
+  // Single-select fields may return {id, name} objects — extract .name before comparing
   const checks = [
-    [F.WORD_TYPE,     current[F.WORD_TYPE],                              desired.wordType],
-    [F.FITZ_CATEGORY, current[F.FITZ_CATEGORY],                          desired.fitzCategory],
+    [F.WORD_TYPE,     selectName(current[F.WORD_TYPE]),                   wordTypeLabel(desired.wordType)],
+    [F.FITZ_CATEGORY, selectName(current[F.FITZ_CATEGORY]),               desired.fitzCategory],
     [F.FITZ_COLOR,    current[F.FITZ_COLOR],                             desired.fitzColor],
     [F.UFLI_LESSONS,  current[F.UFLI_LESSONS]  ?? null,                  desired.ufliLessonsStr],
     [F.FIRST_LESSON,  current[F.FIRST_LESSON]  ?? null,                  desired.firstLesson],
@@ -250,7 +274,7 @@ function fieldsDiffer(current, desired) {
 function buildFields(e) {
   const fields = {
     [F.WORD]         : e.word,
-    [F.WORD_TYPE]    : e.wordType,
+    [F.WORD_TYPE]    : wordTypeLabel(e.wordType),
     [F.FITZ_CATEGORY]: e.fitzCategory,
     [F.FITZ_COLOR]   : e.fitzColor,
     [F.PRODUCT_COUNT]: e.productCount,
