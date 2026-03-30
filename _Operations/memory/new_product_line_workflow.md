@@ -58,9 +58,12 @@ Run a TPT search before claiming a gap. Identify:
 
 ## Phase 1: Framework Application (Required Before Build)
 
-### 1.1 — Vocabulary Framework Gate
+All seven framework gates must pass before build begins. Load each reference file — do not work from memory.
 
-This is required for every product. Answer these questions:
+---
+
+### 1.1 — Vocabulary Framework Gate
+→ Reference: `_Operations/memory/vocabulary_selection_reference.md`
 
 **A. What TYPE of vocabulary does this product involve?**
 
@@ -74,69 +77,283 @@ This is required for every product. Answer these questions:
 | Chapter book (future) | Sustained vocabulary across chapters | Section 4e (partial) |
 
 **B. Does the existing vocabulary framework cover this product type?**
-- If YES → load `_Operations/memory/vocabulary_selection_reference.md` and apply it
-- If NO or PARTIAL → a vocabulary research session is required BEFORE build begins
+- If YES → load the reference and apply it
+- If NO or PARTIAL → vocabulary research session required BEFORE build begins; extend `Research/CbD_Vocabulary_Selection_Framework.md` first
 
 **C. Can the 6-step word selection process be applied?**
-Run through the 6 steps from the vocabulary reference. If any step produces "unknown" answers, that is the first build task — research first.
+Run through the 6 steps from the vocabulary reference. Any "unknown" answer = first build task.
 
-**D. Can the CAP (Communication Access Packet) be built for this product?**
+**D. Can the CAP be built for this product?**
 - Are symbol sources available (ARASAAC)?
-- Is the core/fringe word count reasonable (≤30 fringe)?
+- Is the fringe word count ≤30?
 - Is there SLP handoff language defined?
-- If NO to any of these → resolve before architecture decisions
 
-**Decision gate:** If vocabulary type is unclear OR the framework doesn't cover it → the FIRST deliverable is a vocabulary research session that extends `Research/CbD_Vocabulary_Selection_Framework.md`. Build does not begin until framework coverage is confirmed.
+**Decision gate:**
+- [ ] Vocabulary type confirmed
+- [ ] Framework coverage confirmed
+- [ ] Word list drafted (core + fringe, Top 5 each)
+- [ ] CAP buildable (symbols available, fringe ≤30)
+- [ ] Words added to `_Operations/cbd_unit_vocab.js`
 
-### 1.2 — Research Foundation Gate
+---
 
-Every product line needs a research foundation document. Check:
+### 1.2 — Differentiation Framework Gate
+→ Reference: `_Operations/memory/differentiation_reference.md`
 
-- Does a research file exist in `Research/` that covers this product line?
-  - Nonfiction: Partial (via nonfiction_build_reference.md + annotated evidence in units)
-  - Fiction: ✅ `Fiction_Narrative_Research_Foundation.md`
-  - UFLI: ✅ `CbD_Research_Reference_AAC_Phonics_Literacy.md` + `UFLI_AAC_Phonics_Research_Reference.md`
-  - Picture Book Companions: ✅ `Picture_Book_Companions_Research_Foundation.md` (created 2026-03-29)
-  - AT/AAC IEP Team: Partial (brand guidelines + accessibility docs)
-  - Chapter Books: ⚠️ Not yet created
+**A. Are V1/V2/V3 Lexile targets confirmed for this product type?**
 
-If no research file exists:
-1. Create one using `Research_Template.md`
-2. Answer: What professional organizations (ASHA, CEC, CAST, IRIS) ground this product?
-3. What HLPs apply? (Every CbD product must map to at least 2 HLPs)
-4. What does the research say a student with AAC needs to succeed with this content type?
+| Version | Nonfiction | Fiction / Picture Book |
+|---------|-----------|----------------------|
+| V1 | 900–1050L | Grade-band equivalent |
+| V2 | 650–800L | 5th/6th grade comprehension |
+| V3 | 400–550L | 3rd/4th grade reading level |
 
-### 1.3 — Product Architecture Decision
+**B. Are the locked constants defined for this unit?**
+- ELA standard (identical across all versions)
+- Essential question (identical across all versions)
+- Vocabulary list (same across all versions)
+- Skill type (one skill per unit — no exceptions)
+- Response task category (format scaffolds; task does not change)
+- HLPs (same category across all versions; scaffold changes, not the practice)
 
-Define what files the product ships with:
+**C. Does every V3 activity pass the IDEA access test?**
+> "Can a student completing this activity be said to have *demonstrated the skill* the standard requires? Or has the task been reduced to factual recall?"
+- If recall only → rewrite before build begins
+
+**D. Is the V3 vocabulary instruction step (Descriptive Teaching Model) planned — not just a glossary?**
+
+**Decision gate:**
+- [ ] Lexile targets confirmed for all three versions
+- [ ] All locked constants defined
+- [ ] V3 activities pass IDEA access test
+- [ ] V3 vocabulary instruction step planned (Descriptive Teaching Model format)
+- [ ] HLPs labeled and consistent across versions
+
+---
+
+### 1.3 — Communication Access Framework Gate
+→ Reference: `_Operations/memory/communication_access_reference.md`
+
+**A. Is the CAP vocabulary list complete (core + fringe)?**
+The CAP must be ready to deliver to the SLP 1–2 weeks before Day 1 of instruction. It cannot be an afterthought.
+
+**B. Does every activity in every version have at least one non-speech AAC response pathway?**
+No activity in any CbD product may accept oral response only.
+
+**C. Is the consistent core response vocabulary present across all activities?**
+Required core set: *because, show, prove, agree, different, same, not, true, wrong* — these build the cross-unit motor pathway.
+
+**D. Is partner guidance written at the point of use (not in an appendix)?**
+Every activity where AAC response is expected must have embedded guidance — not a separate "AAC guide."
+
+**Decision gate:**
+- [ ] CAP vocabulary list complete (fringe list finalized, symbols sourced)
+- [ ] CAP delivery timeline documented (1–2 weeks before Day 1)
+- [ ] Every activity has an AAC-compatible response opportunity
+- [ ] No activity relies on oral response only
+- [ ] Core response vocabulary consistent with cross-unit set
+- [ ] Partner guidance embedded at point of use in activity design
+
+---
+
+### 1.4 — Communication Partner Framework Gate
+→ Reference: `_Operations/memory/communication_partner_reference.md`
+
+Partner guidance must be written before the unit is built — it cannot be added after.
+
+**A. Are all four evidence-based partner behaviors planned for each version level?**
+
+| Behavior | Required |
+|---------|---------|
+| Model (ALgS) | Name specific vocabulary + when to model |
+| Wait | Must specify 5 seconds — not "give extra time" |
+| Expand | Accept AAC output → add 1–2 words |
+| Offer Choice | When no response after waiting — 2 genuine options from the text |
+
+**B. Does every guidance callout pass the Circle 3 test?**
+Write for a substitute para with no AAC training, 5 minutes before the lesson. Disposition-based language ("be patient") fails. Behavior-specific language ("count silently to 5") passes.
+
+**C. Is partner guidance present in all required locations?**
+- Unit introduction (AAC orientation)
+- Vocabulary Preview (which words to model and when)
+- Reading activities (read-aloud guidance; V3 vocabulary teaching step)
+- Response activities (wait time; how to expand; choice if no response)
+- CAP page 1 (SLP + partner preparation)
+
+**Decision gate:**
+- [ ] All four partner behaviors planned for all version levels
+- [ ] At least one callout specifies wait time in seconds (5 seconds)
+- [ ] At least one callout names specific vocabulary to model
+- [ ] At least one callout explains what to do with a student AAC response
+- [ ] All callouts are 5 lines or fewer (Circle 3 test)
+- [ ] Partner guidance location plan confirmed (embedded, not appended)
+
+---
+
+### 1.5 — SDI Framework Gate
+→ Reference: `_Operations/memory/sdi_reference.md`
+
+**A. Which CbD components in this product are SDI-level (vs. accommodation)?**
+
+| SDI-Level Component | Accommodation-Level Component |
+|---------------------|-------------------------------|
+| V2/V3 adapted text | Symbol Cards PDF |
+| Vocabulary Preview Routine | Extended time |
+| CAP used with SLP collaboration | Read-aloud (test accommodation) |
+| AAC Response Pathway as primary modality | Sentence frames (test accommodation) |
+| Partner Read-Aloud Protocol | Preferential seating |
+| V3 Vocabulary Instruction (Descriptive Teaching Model) | |
+
+**B. Is there a documented SDI trail planned?**
+For every SDI-level component: IEP annual goal → IEP SDI section naming the adaptation → CAP delivery timestamp → Session Tracker data.
+
+**C. Is the SDI vs. accommodation distinction explained in teacher guidance?**
+Teachers need to know what to write in the IEP and where. This must be in the teacher document — not assumed.
+
+**Decision gate:**
+- [ ] SDI components identified and labeled for this product
+- [ ] Accommodation components listed separately
+- [ ] SDI vs. accommodation distinction drafted for teacher guidance
+- [ ] CAP confirmed as the SDI delivery tool for the AAC component
+- [ ] Documentation trail planned (IEP goal → CAP → Session Tracker → data)
+
+---
+
+### 1.6 — IEP Goal Ecosystem Gate
+→ Reference: `_Operations/memory/iep_goal_ecosystem_reference.md`
+
+Every CbD unit ships with a minimum of two goal stems: one academic (ELA skill) + one AAC communication.
+
+**A. Is the academic goal stem written for this unit's specific skill type?**
+
+Goal stem structure:
+```
+Given [condition: version + specific supports],
+[student] will [observable verb] [skill + standard]
+as measured by [data tool in the product],
+achieving [performance criterion] + [consistency criterion] by [date].
+```
+
+| Skill Type | Observable Verbs |
+|-----------|-----------------|
+| Close Reading / Annotation | identify, annotate, cite, locate, mark |
+| Author's Purpose / Perspective | explain, distinguish, compare, defend |
+| CER | state, identify, select, write, construct |
+| Text Structure | label, organize, sequence, categorize |
+| Sourcing / Corroboration | evaluate, rate, compare, justify |
+| Character Analysis (Fiction) | identify, describe, compare, support with evidence |
+
+**Never use:** understand, know, appreciate, be aware of, learn.
+
+**B. Does the academic goal stem pass the accommodation test?**
+> "Is the ELA standard in this goal the same standard peers are working toward, with a different access method?"
+
+**C. Is the AAC goal stem written and separate from the academic goal?**
+Academic progress and communication progress are not the same. Both need separate goals and separate data.
+
+**Decision gate:**
+- [ ] Academic goal stem drafted (full IDEA structure: condition + verb + standard + measure + criterion + date)
+- [ ] Goal uses observable verb from the approved list
+- [ ] Goal passes the accommodation test (same standard, different access)
+- [ ] AAC communication goal stem drafted and separate from academic goal
+- [ ] Default mastery criteria applied (see Assessment & Data Framework)
+
+---
+
+### 1.7 — Assessment & Data Framework Gate
+→ Reference: `_Operations/memory/assessment_data_reference.md`
+
+**A. Is a rubric designed for every scored response activity?**
+- 3 levels: Does Not Yet Meet / Approaching / Meets
+- Each level = observable student behavior (not "excellent/good/needs work")
+- Identical across V1/V2/V3
+- On the student's response document — not a separate sheet
+- Scorable by a para with no content expertise
+
+**B. Are default mastery criteria applied?**
+
+| Skill | Academic Criterion | AAC Criterion |
+|-------|-------------------|---------------|
+| Close Reading / Annotation | 80%, 3 consecutive sessions | 4/5 opp., 2+ sessions |
+| CER | Claim + 2 evidence aligned, 4 of 5 trials | CER via AAC, 3/5 trials |
+| Author's Purpose / Perspective | 2 perspectives w/ evidence, 3 of 4 trials | 2+ symbol sequence, 4/5 opp. |
+| Text Structure | 3 of 4 elements labeled, 3 consecutive | Cause/effect via AAC, 4/5 opp. |
+| Sourcing / Corroboration | 3/4 sources rated w/ justification, 2 consecutive | Source rated via AAC, 3/5 |
+
+Minimum: 70%. Generalization: across 2+ partners before reporting mastery.
+
+**C. Are data roles assigned in teacher guidance?**
+- Special educator → rubric scores + session accuracy
+- Para → Communication Session Tracker + symbol output tallies
+- SLP → vocabulary pre-programming confirmation + CAP delivery date
+
+**Decision gate:**
+- [ ] Rubric designed for every scored activity (3-level, behavioral descriptions)
+- [ ] Rubric identical across V1/V2/V3
+- [ ] Rubric placed on student response document (not separate)
+- [ ] Session Tracker included in CAP
+- [ ] Default mastery criteria applied (minimum 70%; 2+ partners for generalization)
+- [ ] Data roles assigned in teacher guidance
+
+---
+
+### 1.8 — Research Foundation Gate
+
+Every product line needs a research foundation document before build.
+
+| Product Line | Status |
+|---|---|
+| Nonfiction | Partial (via `nonfiction_build_reference.md` + annotated evidence in units) |
+| Fiction | ✅ `Fiction_Narrative_Research_Foundation.md` |
+| UFLI | ✅ `CbD_Research_Reference_AAC_Phonics_Literacy.md` + `UFLI_AAC_Phonics_Research_Reference.md` |
+| Picture Book Companions | ✅ `Picture_Book_Companions_Research_Foundation.md` |
+| AT/AAC IEP Team | Partial |
+| Chapter Books | ⚠️ Not yet created |
+
+If no research file exists: create one using `Research_Template.md`. Answer: what professional organizations (ASHA, CEC, CAST, IRIS) ground this product? What HLPs apply (minimum 2)? What does the research say a student with AAC needs to succeed with this content type?
+
+**Decision gate:**
+- [ ] Research foundation document exists in `Research/`
+- [ ] Minimum 2 HLPs mapped to this product
+- [ ] Professional organization grounding identified
+
+---
+
+### 1.9 — Product Architecture Decision
+
+Define exactly what files the product ships with before writing any code.
 
 | Required for every product | Notes |
 |---------------------------|-------|
-| Main content file (docx or PDF) | Built via `cbd_docx_template.js` or Python/ReportLab |
+| Main content file (.docx or PDF) | Built via `cbd_docx_template.js` or Python/ReportLab |
 | Communication Access Packet (CAP) | 10-page standard (nonfiction) or adapted format |
 | Symbol cards | 2"×2" ARASAAC grid, Fitzgerald Key borders |
-| IEP goal stems | Minimum 3 per product |
-| Partner mode guidance | Mode 1 / Mode 2 / Mode 3 described |
-| Session tracker insert | Appended to CAP |
+| IEP goal stems | Minimum 2 per product (academic + AAC) |
+| Partner guidance | Embedded in unit document — not supplemental |
+| Session Tracker | Appended to CAP |
 
 | Optional / line-specific | Trigger |
 |--------------------------|---------|
-| Printable Packet PDF (fiction) | Fiction Anchor Texts only — 4 layers, 9 pages |
+| Printable Packet PDF | Fiction Anchor Texts only — 4 layers, 9 pages, Python/ReportLab |
 | Lesson chips + interactive activity link | UFLI only |
 | Visual Scene Displays | Fiction + Picture Book Companions (V2) |
-| Trading Card companion deck | Triggered by `cbd_trading_cards.py` — any product with fringe vocabulary |
-| Preview PDF (watermarked) | Every TPT listing that includes the main docx |
+| Trading Card companion deck | Any product with fringe vocabulary → `cbd_trading_cards.py` |
+| Preview PDF (watermarked, 8–9 pages) | Every TPT listing that includes the main docx |
 
-### 1.4 — Build System Check
+---
+
+### 1.10 — Build System Check
 
 Before writing any code:
 - Does an existing build script cover this product? (`build_all_units.py`, `cbd_docx_template.js`, `build_covers_v2.py`)
 - What new scripts or templates are needed?
-- What is the folder structure for this product? (`Products/[Line]/[Product Name]/`)
-- Has the Airtable Products table record been created for this product?
+- What is the folder structure? (`Products/[Line]/[Product Name]/`)
+- Has the Airtable Products table record been created?
 - Has the Launch Pipeline record been created?
 
-### 1.5 — Brand and Identity Decision
+---
+
+### 1.11 — Brand and Identity Decision
 
 | Decision | Where to find the answer |
 |----------|--------------------------|
@@ -239,14 +456,68 @@ Once vocabulary is finalized for the unit, lock it into the ecosystem:
 
 Follow the standard production workflow in `CbD_Production_Workflows.xlsx`.
 
-Key rules that apply to every build regardless of product line:
+### Universal Build Rules (Apply to Every Product)
+
 - `str_replace` over rebuilds always — targeted edits, not full rebuilds
-- Never build without explicit instruction — answer first
-- Flag usage cost before large multi-unit builds
-- Every unit requires: Accessibility Statement → About the Creator → Terms of Use (in this order, at end)
+- Never build without explicit instruction — answer first, build when asked
+- Flag usage cost before large multi-unit builds (all 30 UFLI packets, all 6 nonfiction units, etc.)
+- Every unit requires end matter in this order: Accessibility Statement → About the Creator → Terms of Use
 - Symbol cards use Fitzgerald Key border colors — no exceptions
-- Never "point to" as the sole interaction verb
-- "Communication Access" is the section heading — never "AAC Support"
+- Never "point to" as the sole interaction verb — always "select, point to, or use gaze to indicate"
+- Section heading is always "Communication Access" — never "AAC Support"
+- WCAG 2.2 Level AA on all documents; use `#006DA0` in .docx/.pdf (never `#00B4D8`)
+- PDF generation: Word → File → Save As → PDF (not Print to PDF, not LibreOffice)
+
+### Build Sequence by Product Type
+
+**Nonfiction Reading Unit**
+1. Run Phase 1 Framework Gate checklist (all 7 gates) — do not skip
+2. Build V1 passage → V2 → V3 (in this order; V3 is a reduction of V2, not independent)
+3. Build activities for each version (Close Reading → Vocabulary Preview → Response Activity)
+4. Build CAP: vocabulary list → Fitzgerald categories → ARASAAC symbols → Session Tracker → SLP handoff page
+5. Build symbol cards (`cbd_symbol_cards.py`) — Fitzgerald Key borders, 2"×2" grid
+6. Add IEP goal stems (academic + AAC) and SDI labeling to teacher guidance
+7. Embed partner guidance at point of use (vocabulary preview, reading, response activities)
+8. Run 22-section QC checklist (`_Operations/memory/nonfiction_build_reference.md`)
+9. Run all framework QC gates (differentiation, communication access, partner, SDI, IEP, assessment)
+10. Build preview PDF (watermarked, 8–9 pages)
+
+**Fiction Anchor Text Unit**
+1. Run Phase 1 Framework Gate checklist (all 7 gates)
+2. Build main unit docx: story grammar framework → annotation activities → vocabulary instruction → response activities
+3. Build Fiction Printable Packet (Python/ReportLab, 4 layers, 9 pages) — spec: `_Operations/memory/fiction_printable_packet_spec.md`
+4. Build CAP for fiction vocabulary (emotional/mental state + story grammar fringe)
+5. Build symbol cards for Set A (SDI instruction targets) and Set B (full communication board vocab)
+6. Add IEP goal stems and SDI labeling
+7. Embed partner guidance
+8. Build preview PDF (watermarked)
+
+**UFLI Phonics Lesson Packet**
+1. Run vocabulary gate (UFLI words are fixed — do not add or remove)
+2. Build lesson packet via `build_ufli_packet.js` — do not start from scratch
+3. Confirm Communication Partner Guide is generated alongside each packet
+4. Run QC: `_Operations/memory/ufli_build_reference.md`
+
+**Picture Book Companion**
+1. Run Phase 1 Framework Gate checklist (all 7 gates)
+2. Build 3-reading structure: IRA read / vocabulary re-read / student-led re-read
+3. Vocabulary ceiling: 15–20 words maximum
+4. Embed ALS one-pager (non-negotiable)
+5. Build CAP (vocabulary list, symbols, partner guidance)
+6. Apply RL.K-3.3 and RL.K-3.4 standards
+7. Build preview PDF
+
+### Build Completion Checklist (All Types)
+
+- [ ] All framework QC gates passed (use checklist from each reference file)
+- [ ] 22 sections present (nonfiction) or equivalent structure (fiction/picture book)
+- [ ] Partner guidance embedded at point of use — not in appendix
+- [ ] Rubric on student response document — not separate
+- [ ] CAP complete: vocabulary, symbols, Session Tracker, SLP handoff
+- [ ] IEP goal stems included (academic + AAC, full IDEA structure)
+- [ ] End matter in correct order: Accessibility Statement → About the Creator → Terms of Use
+- [ ] WCAG check: all headings have styles, teal is `#006DA0`, contrast passes
+- [ ] PDF generated via Word → Save As (not Print to PDF)
 
 ---
 
@@ -280,6 +551,59 @@ When the product goes live on TPT:
 - No words are missing or unexpected (compare against the word list in `cbd_unit_vocab.js`)
 
 If any word is missing from the explorer or count is wrong → recheck `cbd_unit_vocab.js` entry and rebuild before the listing goes live.
+
+---
+
+## Phase 6: Post-Launch Maintenance
+
+A product going live is not the end of the workflow. These steps keep the ecosystem in sync.
+
+### At Launch (Within 48 Hours of TPT Listing Going Live)
+
+- [ ] Vocabulary Explorer status updated: `status: 'In Production'` → `status: 'Live'` + TPT URL added in `rebuild_vocab_explorer.js` PRODUCTS_BLOCK
+- [ ] Run `node _Operations/rebuild_vocab_explorer.js` → Live badge active in explorer
+- [ ] Run `AIRTABLE_API_KEY=xxx node _Operations/sync_vocab_to_airtable.js` → Airtable Vocabulary table confirmed in sync
+- [ ] Airtable Products table record updated: Workflow Stage → "Live"
+- [ ] Cover moved from `Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/` → `TPT Image Covers Uploaded/`
+- [ ] Cover Index updated (`Distrubution/Teachers Pay Teachers/CbD_TPT_Cover_Index.md`)
+- [ ] Pinterest post live
+- [ ] Instagram post live
+- [ ] Substack post live or scheduled
+
+### Vocabulary Drift Monitoring
+
+Vocabulary drift = words added to a product during build that were never added to `cbd_unit_vocab.js`, or words removed from the product but still in the source file.
+
+**How to check:**
+1. Open `cbd_unit_vocab.js` — find the unit's word array
+2. Open the built product docx — find the Vocabulary section
+3. Cross-reference word by word
+4. Any mismatch → update `cbd_unit_vocab.js` → rebuild explorer → re-sync Airtable
+
+**When to run:** At launch, and any time a product receives a content update (new passage, revised vocabulary section).
+
+### Product Updates and Re-Uploads
+
+When a product is updated after launch (new content, corrected passage, vocabulary revision):
+
+1. Make the change in the build source (unit JS/Python build script)
+2. If vocabulary changed → update `cbd_unit_vocab.js` first
+3. Rebuild the docx → regenerate PDF (Word → Save As)
+4. Re-upload to TPT (replace files — do not create a new listing)
+5. If vocabulary changed → run `node _Operations/rebuild_vocab_explorer.js`
+6. If vocabulary changed → run `sync_vocab_to_airtable.js`
+7. Update Airtable Products record: note the update in the record
+
+**Active re-upload queue:** All 6 nonfiction units need Session 16 content update re-uploaded to TPT (as of 2026-03-29).
+
+### Bundle Management
+
+When a bundle is created from existing live products:
+- Create a new Airtable Products record for the bundle
+- Create a new Launch Pipeline record
+- Build a bundle preview PDF (combine previews from both products)
+- New TPT listing — new cover
+- Price = individual prices minus discount (see bundle strategy from Phase 2.3)
 
 ---
 

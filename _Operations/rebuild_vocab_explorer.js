@@ -76,7 +76,7 @@ function buildVocab() {
     for (const w of unit.newWords) {
       const e = entry(w.word);
       if (!e.t || (e.t === 'C' && w.type === 'fringe')) e.t = w.type === 'core' ? 'C' : 'F';
-      if (!isFiction && !e.nu.includes(shortKey)) e.nu.push(shortKey);
+      if (!e.nu.includes(shortKey)) e.nu.push(shortKey); // includes fiction units
       e.pl.add(productLine);
       if (w.top5) e.p5 = true;
     }
