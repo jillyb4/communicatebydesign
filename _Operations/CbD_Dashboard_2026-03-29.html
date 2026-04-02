@@ -87,6 +87,47 @@ td{padding:9px 12px;vertical-align:top}
 /* TPT link */
 .tpt-link{color:#00B4D8;text-decoration:none;font-size:11px;margin-left:6px}
 .tpt-link:hover{text-decoration:underline}
+
+/* ── PIPELINE TIMELINES ── */
+.timelines-wrap{padding:14px 20px 18px;border-bottom:2px solid #252A4A;background:#141830}
+.timeline-section{margin-bottom:14px}
+.timeline-section:last-child{margin-bottom:0}
+.timeline-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.timeline-icon{font-size:13px}
+.timeline-lbl{font-size:11px;font-weight:bold;color:#fff;text-transform:uppercase;letter-spacing:.7px}
+.timeline-meta{font-size:10px;color:#4a5580;margin-left:4px}
+.phase-cards{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;scrollbar-color:#3a4170 transparent}
+.phase-card{flex:0 0 138px;background:#252A4A;border-radius:8px;padding:9px 10px;border-top:3px solid #3a4170}
+.phase-card.pc-active{border-top-color:#FFB703}
+.phase-card.pc-live{border-top-color:#34d399;background:#1a2e22}
+.phase-card.pc-pipeline{border-top-color:#006DA0}
+.pc-month{font-size:9px;font-weight:bold;color:#4a5580;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
+.pc-title{font-size:12px;font-weight:bold;color:#fff;line-height:1.2;margin-bottom:2px}
+.pc-subtitle{font-size:10px;color:#94A3B8;margin-bottom:2px}
+.pc-grade{font-size:10px;color:#94A3B8}
+.pc-standard{font-size:10px;color:#00B4D8;margin:2px 0 4px}
+.pc-skill{font-size:9px;color:#CBD5E1;font-style:italic;margin-bottom:4px;line-height:1.3}
+.pc-badge{font-size:9px;font-weight:bold;border-radius:4px;padding:2px 6px;display:inline-block;text-transform:uppercase;letter-spacing:.3px}
+.pcb-finishing{background:#4c3300;color:#FFB703}
+.pcb-planned{background:#1B1F3B;color:#4a5580;border:1px solid #3a4170}
+.pcb-live{background:#14532d;color:#86efac}
+.pcb-pipeline{background:#0c2840;color:#60a5fa}
+.pc-pair{font-size:9px;color:#4a5580;margin-top:4px}
+.pc-pair span{color:#94A3B8}
+/* live chips */
+.live-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.live-chip{background:#14532d;color:#86efac;border-radius:10px;padding:2px 9px;font-size:10px;font-weight:bold}
+/* ufli tracker */
+.ufli-tracker{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ufli-step{background:#252A4A;border-radius:8px;padding:7px 12px;text-align:center;min-width:90px}
+.ufli-step.done{background:#1a2e22}
+.ufli-step-n{font-size:16px;font-weight:bold;color:#fff}
+.ufli-step-n.full{color:#86efac}
+.ufli-step-n.partial{color:#FFB703}
+.ufli-step-n.zero{color:#4a5580}
+.ufli-step-l{font-size:10px;color:#94A3B8;margin-top:1px}
+.ufli-arrow{color:#4a5580;font-size:13px}
+.ufli-target{font-size:11px;color:#FFB703;font-weight:bold;margin-left:auto;background:#252A4A;padding:5px 12px;border-radius:8px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -124,6 +165,166 @@ td{padding:9px 12px;vertical-align:top}
   <div class="search-wrap">
     <input class="search" type="text" id="search" placeholder="Search tasks…"/>
   </div>
+</div>
+
+<!-- PIPELINE TIMELINES -->
+<div class="timelines-wrap">
+
+  <!-- ── Fiction Line ── -->
+  <div class="timeline-section">
+    <div class="timeline-hdr">
+      <span class="timeline-icon">📖</span>
+      <span class="timeline-lbl">Fiction Line — 6-Unit Launch Pipeline</span>
+      <span class="timeline-meta">Apr → Sep 2026 · RL Standards · Disability-rep titles flagged ⭐</span>
+    </div>
+    <div class="phase-cards">
+      <div class="phase-card pc-active">
+        <div class="pc-month">APR 2026</div>
+        <div class="pc-title">Wonder</div>
+        <div class="pc-grade">Gr 3–8</div>
+        <div class="pc-standard">RL.5.3 · RL.5.6</div>
+        <div class="pc-skill">Character Analysis</div>
+        <span class="pc-badge pcb-finishing">⚠ Finishing</span>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">MAY 2026</div>
+        <div class="pc-title">The Giver</div>
+        <div class="pc-grade">Gr 6–8</div>
+        <div class="pc-standard">RL.7.1 · RL.7.2</div>
+        <div class="pc-skill">Theme + Inference</div>
+        <span class="pc-badge pcb-planned">Planned</span>
+        <div class="pc-pair">Pairs: <span>Fred Korematsu</span></div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">JUN 2026</div>
+        <div class="pc-title">Rules · Identity</div>
+        <div class="pc-grade">Gr 4–6</div>
+        <div class="pc-standard">RL.4.3 · RL.4.6</div>
+        <div class="pc-skill">Identity &amp; Belonging</div>
+        <span class="pc-badge pcb-planned">Planned</span>
+        <div class="pc-pair">Pairs: <span>Judy Heumann</span></div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">JUL 2026</div>
+        <div class="pc-title">Out of My Mind</div>
+        <div class="pc-grade">Gr 4–7</div>
+        <div class="pc-standard">RL.5.3 · RL.5.6</div>
+        <div class="pc-skill">Character POV</div>
+        <span class="pc-badge pcb-planned">Planned</span>
+        <div class="pc-pair">⭐ AAC Protagonist · Flagship</div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">AUG 2026</div>
+        <div class="pc-title">Hatchet</div>
+        <div class="pc-grade">Gr 5–7</div>
+        <div class="pc-standard">RL.5.2 · RL.5.5</div>
+        <div class="pc-skill">Survival + Text Structure</div>
+        <span class="pc-badge pcb-planned">Planned</span>
+        <div class="pc-pair">Pairs: <span>Malala Yousafzai</span></div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">SEP 2026</div>
+        <div class="pc-title">Ghost</div>
+        <div class="pc-grade">Gr 5–8</div>
+        <div class="pc-standard">RL.7.1 · RL.7.3</div>
+        <div class="pc-skill">Character Change · BHM</div>
+        <span class="pc-badge pcb-planned">Planned</span>
+        <div class="pc-pair">Pairs: <span>Roberto Clemente</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Nonfiction Pipeline ── -->
+  <div class="timeline-section">
+    <div class="timeline-hdr">
+      <span class="timeline-icon">📰</span>
+      <span class="timeline-lbl">Nonfiction — 6 Live + Units 7–10 Pipeline</span>
+      <span class="timeline-meta">Gr 6–10 · 1 unit/month May–Sep 2026 · Pairs with fiction</span>
+    </div>
+    <div class="live-chips">
+      <span class="live-chip">✓ #1 Keiko</span>
+      <span class="live-chip">✓ #2 Radium Girls</span>
+      <span class="live-chip">✓ #3 Zitkala-Ša</span>
+      <span class="live-chip">✓ #4 504 Sit-In</span>
+      <span class="live-chip">✓ #5 Frances Kelsey</span>
+      <span class="live-chip">✓ #6 Capitol Crawl</span>
+    </div>
+    <div class="phase-cards">
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">MAY 2026 · UNIT 7</div>
+        <div class="pc-title">Fred Korematsu</div>
+        <div class="pc-subtitle">APAHM Hook</div>
+        <div class="pc-standard">Point of View / Perspective</div>
+        <div class="pc-skill">RI.6.6</div>
+        <span class="pc-badge pcb-pipeline">Not Started</span>
+        <div class="pc-pair">Pairs: <span>The Giver</span></div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">JUN 2026 · UNIT 8</div>
+        <div class="pc-title">Judy Heumann</div>
+        <div class="pc-subtitle">Disability Identity</div>
+        <div class="pc-standard">Cause &amp; Effect</div>
+        <div class="pc-skill">RI.7.3 · 504 funnel</div>
+        <span class="pc-badge pcb-pipeline">Not Started</span>
+        <div class="pc-pair">Pairs: <span>Rules · Identity</span></div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">AUG 2026 · UNIT 9</div>
+        <div class="pc-title">Malala Yousafzai</div>
+        <div class="pc-subtitle">Back-to-School Hook</div>
+        <div class="pc-standard">CER Applied to Speech</div>
+        <div class="pc-skill">RI.6.8</div>
+        <span class="pc-badge pcb-pipeline">Not Started</span>
+        <div class="pc-pair">Pairs: <span>Hatchet</span></div>
+      </div>
+      <div class="phase-card pc-pipeline">
+        <div class="pc-month">SEP 2026 · UNIT 10</div>
+        <div class="pc-title">Roberto Clemente</div>
+        <div class="pc-subtitle">Hispanic Heritage Month</div>
+        <div class="pc-standard">Compare &amp; Contrast</div>
+        <div class="pc-skill">RI.6.9 · First C/C unit</div>
+        <span class="pc-badge pcb-pipeline">Not Started</span>
+        <div class="pc-pair">Pairs: <span>Ghost</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── UFLI Launch Readiness ── -->
+  <div class="timeline-section">
+    <div class="timeline-hdr">
+      <span class="timeline-icon">🔤</span>
+      <span class="timeline-lbl">UFLI Phonics — Phase 1 Launch Readiness</span>
+      <span class="timeline-meta">Lessons 1–34 · 36 products · Lessons A–J + phonics units 1–3</span>
+    </div>
+    <div class="ufli-tracker">
+      <div class="ufli-step done">
+        <div class="ufli-step-n full">36/36</div>
+        <div class="ufli-step-l">Built ✓</div>
+      </div>
+      <div class="ufli-arrow">→</div>
+      <div class="ufli-step done">
+        <div class="ufli-step-n full">36/36</div>
+        <div class="ufli-step-l">QC Passed ✓</div>
+      </div>
+      <div class="ufli-arrow">→</div>
+      <div class="ufli-step">
+        <div class="ufli-step-n zero">0/36</div>
+        <div class="ufli-step-l">Canva Covers</div>
+      </div>
+      <div class="ufli-arrow">→</div>
+      <div class="ufli-step">
+        <div class="ufli-step-n zero">0/36</div>
+        <div class="ufli-step-l">Preview PDFs</div>
+      </div>
+      <div class="ufli-arrow">→</div>
+      <div class="ufli-step">
+        <div class="ufli-step-n zero">0/36</div>
+        <div class="ufli-step-l">TPT Listed</div>
+      </div>
+      <div class="ufli-target">🎯 May 2026</div>
+    </div>
+  </div>
+
 </div>
 
 <!-- TABLE -->

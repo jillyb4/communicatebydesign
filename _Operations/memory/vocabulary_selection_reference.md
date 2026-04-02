@@ -60,6 +60,21 @@ Character names = always fringe. Never design for name recall.
 **Picture Book Companions (K–3):**
 IRA read-aloud vocabulary + thematic conceptual vocabulary. Max ~15–20 per book. Every word must be ARASAAC-symbolizable and 1–2 touch accessible.
 
+**Poetry Reading Units (Gr 6–10):**
+Three vocabulary categories. Select in this priority order — do NOT invert:
+
+1. **Emotional/mood vocabulary** — semi-core. These words (*lonely, angry, proud, wonder, lost, free, hope, afraid*) exist on most robust AAC systems. Verify presence before flagging as fringe. Students must be able to name what they FEEL before they can analyze what it means (NOTICE → FEEL gate).
+2. **Literary device terms** — always fringe; always Tier 3; always require pre-programming. Max 3–5 per unit. These are the explicit instruction targets: the skill the standard requires. (*figurative language, metaphor, imagery, tone, speaker, stanza, structure*). ARASAAC symbol required for every term.
+3. **Response/analysis vocabulary** — core + fringe mix. Same response words as nonfiction (*because, show, prove, agree, same, different, not, true, wrong*) — already on most robust systems. Add unit-specific response fringe only when standard requires it (e.g., *compares, contrasts* for RL.x.9).
+
+**Total fringe ceiling: 15–20 words.** Same ceiling as Picture Book Companions — poetry units are structurally shorter than nonfiction units.
+
+**Read-aloud delivery rule:** Vocabulary instruction happens before and during shared reading, not as independent silent work. The poem is always delivered via partner read-aloud. The V3 vocabulary teaching step (Descriptive Teaching Model) targets 2–3 literary device terms maximum per unit — not per poem.
+
+**Top 5 fringe = the literary device terms for the unit's target skill.** These go on the CAP priority page. Emotional vocabulary is semi-core and does not need to occupy the Top 5 slots unless the SLP confirms the words are absent from the student's system.
+
+⚠️ AAC Note: Poetry units use the access-layer model (same poem across V1/V2/V3). Vocabulary list is IDENTICAL across all access levels. Version assignment changes scaffold depth — not which words are programmed.
+
 ---
 
 ## SGD Motor Planning

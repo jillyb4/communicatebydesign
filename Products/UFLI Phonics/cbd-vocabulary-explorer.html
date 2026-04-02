@@ -342,7 +342,7 @@
     <div class="stat"><div class="stat-num" id="stat-core">78</div><div class="stat-lbl">Core Words</div></div>
     <div class="stat"><div class="stat-num" id="stat-fringe">420</div><div class="stat-lbl">Fringe Words</div></div>
     <div class="stat"><div class="stat-num" id="stat-units">7</div><div class="stat-lbl">Units</div></div>
-    <div class="stat"><div class="stat-num">30</div><div class="stat-lbl">UFLI Lessons</div></div>
+    <div class="stat"><div class="stat-num" id="stat-ufli">30</div><div class="stat-lbl">UFLI Lessons</div></div>
   </div>
 </div>
 
@@ -557,6 +557,24 @@ function applyFilters() {
   });
   renderList();
   document.getElementById('result-count').textContent = filteredWords.length + ' word' + (filteredWords.length !== 1 ? 's' : '');
+
+  // ── Update header stats to reflect current filter ──
+  const isFiltered = activeFilters.search || activeFilters.fitz !== 'all' || activeFilters.type !== 'all' || activeFilters.line !== 'all' || activeFilters.product !== 'all';
+  const fTotal  = filteredWords.length;
+  const fCore   = filteredWords.filter(v => v.t === 'C' || v.t === 'CU').length;
+  const fFringe = filteredWords.filter(v => v.t === 'F').length;
+  const fUnits  = new Set(filteredWords.flatMap(v => v.nu || [])).size;
+  const fUfli   = new Set(filteredWords.flatMap(v => v.ul || [])).size;
+
+  document.getElementById('stat-total').textContent  = fTotal;
+  document.getElementById('stat-core').textContent   = fCore;
+  document.getElementById('stat-fringe').textContent = fFringe;
+  document.getElementById('stat-units').textContent  = fUnits;
+  document.getElementById('stat-ufli').textContent   = fUfli;
+
+  // Dim stats when showing full set, highlight amber when filtered
+  const statNums = document.querySelectorAll('.stat-num');
+  statNums.forEach(el => el.style.color = isFiltered ? 'var(--teal)' : 'var(--amber)');
 }
 
 // ── RENDER WORD LIST ──

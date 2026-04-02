@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CbD Product Development Workflow</title>
+<style>
+  :root {
+    --navy: #1B1F3B;
+    --navy-mid: #252a4d;
+    --navy-light: #2e3560;
+    --teal: #00B4D8;
+    --teal-dark: #0090ac;
+    --amber: #FFB703;
+    --yellow: #FFD700;
+    --white: #ffffff;
+    --off-white: #f5f6fa;
+    --text-light: #a8b0cc;
+    --green: #22c55e;
+    --red: #ef4444;
+    --orange: #f97316;
+    --purple: #a855f7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── INTERNAL NAV BAR ── */
+  .cbd-nav {
+    background: #0d1020;
+    border-bottom: 1px solid var(--navy-light);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    height: 36px;
+    font-size: 12px;
+  }
+  .cbd-nav-brand {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--text-light); font-size: 11px; letter-spacing: 0.05em;
+    padding-right: 16px; border-right: 1px solid var(--navy-light);
+    margin-right: 8px; white-space: nowrap;
+  }
+  .cbd-nav-brand span { color: var(--amber); font-weight: 700; }
+  .cbd-nav-tabs { display: flex; align-items: center; gap: 2px; }
+  .cbd-nav-tab {
+    display: flex; align-items: center; gap: 5px;
+    padding: 0 12px; height: 36px;
+    color: var(--text-light); text-decoration: none;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+  }
+  .cbd-nav-tab:hover { color: var(--white); text-decoration: none; border-bottom-color: var(--navy-light); }
+  .cbd-nav-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .cbd-nav-divider { width: 1px; height: 18px; background: var(--navy-light); margin: 0 8px; }
+  .cbd-nav-ext { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .cbd-nav-ext-link {
+    display: flex; align-items: center; gap: 4px;
+    padding: 0 10px; height: 36px;
+    color: #64748b; text-decoration: none;
+    font-size: 11px; transition: color 0.15s; white-space: nowrap;
+  }
+  .cbd-nav-ext-link:hover { color: var(--teal); text-decoration: none; }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy-mid);
+    border-bottom: 3px solid var(--amber);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 36px;
+    z-index: 100;
+  }
+  .brand-icon {
+    width: 44px; height: 44px;
+    background: var(--amber);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .brand-text { line-height: 1.2; }
+  .brand-text .name { font-size: 14px; color: var(--text-light); letter-spacing: 0.05em; text-transform: uppercase; }
+  .brand-text .title { font-size: 20px; font-weight: 700; color: var(--white); }
+  .brand-text .sub { font-size: 12px; color: var(--amber); margin-top: 2px; }
+  .header-right { margin-left: auto; font-size: 12px; color: var(--text-light); text-align: right; }
+
+  /* ── MAIN LAYOUT ── */
+  .main { padding: 32px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── PHASE CONTAINERS ── */
+  .phase-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+
+  .phase-label {
+    width: 120px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+  }
+  .phase-badge {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    background: var(--navy-mid);
+    border: 2px solid var(--amber);
+    border-radius: 8px;
+    padding: 16px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    white-space: nowrap;
+    text-align: center;
+  }
+  .phase-badge.phase0 { border-color: var(--teal); color: var(--teal); }
+  .phase-badge.phase1 { border-color: var(--amber); color: var(--amber); }
+  .phase-badge.framework { border-color: var(--purple); color: var(--purple); }
+  .phase-badge.build { border-color: var(--green); color: var(--green); }
+  .phase-badge.qc { border-color: var(--orange); color: var(--orange); }
+  .phase-badge.launch { border-color: var(--yellow); color: var(--yellow); }
+
+  /* ── CONNECTOR ARROWS ── */
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -4px 0 12px 152px;
+  }
+  .connector-arrow {
+    width: 2px;
+    height: 24px;
+    background: var(--navy-light);
+    position: relative;
+  }
+  .connector-arrow::after {
+    content: '▼';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--navy-light);
+    font-size: 10px;
+  }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+  .cards-grid.three-col { grid-template-columns: repeat(3, 1fr); }
+  .cards-grid.four-col { grid-template-columns: repeat(4, 1fr); }
+  .cards-grid.seven-col { grid-template-columns: repeat(7, 1fr); }
+  .cards-grid.single { grid-template-columns: 1fr; }
+
+  .step-card {
+    background: var(--navy-mid);
+    border: 1.5px solid var(--navy-light);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .step-card:hover { border-color: var(--teal); }
+  .step-card.teal-accent { border-top: 3px solid var(--teal); }
+  .step-card.amber-accent { border-top: 3px solid var(--amber); }
+  .step-card.green-accent { border-top: 3px solid var(--green); }
+  .step-card.orange-accent { border-top: 3px solid var(--orange); }
+  .step-card.purple-accent { border-top: 3px solid var(--purple); }
+  .step-card.yellow-accent { border-top: 3px solid var(--yellow); }
+  .step-card.red-accent { border-top: 3px solid var(--red); }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: var(--navy-light);
+    color: var(--text-light);
+  }
+  .step-number.teal { background: var(--teal); color: var(--navy); }
+  .step-number.amber { background: var(--amber); color: var(--navy); }
+  .step-number.green { background: var(--green); color: var(--navy); }
+  .step-number.orange { background: var(--orange); color: var(--navy); }
+  .step-number.purple { background: var(--purple); color: var(--white); }
+  .step-number.yellow { background: var(--yellow); color: var(--navy); }
+
+  .step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .step-desc {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .step-desc em {
+    color: var(--teal);
+    font-style: normal;
+  }
+
+  /* ── CHECKPOINT CARD ── */
+  .checkpoint-card {
+    background: rgba(255, 183, 3, 0.1);
+    border: 1.5px solid var(--amber);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .checkpoint-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .checkpoint-text .title { font-size: 12px; font-weight: 700; color: var(--amber); margin-bottom: 3px; }
+  .checkpoint-text .desc { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+
+  /* ── GATE CARD ── */
+  .gate-card {
+    background: rgba(168, 85, 247, 0.08);
+    border: 1.5px solid var(--purple);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .gate-number {
+    display: inline-flex;
+    width: 22px; height: 22px;
+    align-items: center; justify-content: center;
+    background: var(--purple);
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .gate-title { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 4px; line-height: 1.3; }
+  .gate-check { font-size: 10px; color: var(--text-light); line-height: 1.5; }
+  .gate-check span { color: var(--purple); }
+
+  /* ── QC ROW ── */
+  .qc-section { flex: 1; }
+  .qc-category { margin-bottom: 12px; }
+  .qc-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  .qc-items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .qc-item {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 11px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .qc-item .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    flex-shrink: 0;
+  }
+
+  /* ── LAUNCH SECTION ── */
+  .launch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    flex: 1;
+  }
+  .launch-card {
+    background: var(--navy-mid);
+    border: 1.5px solid var(--navy-light);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .launch-card.yellow-accent { border-top: 3px solid var(--yellow); }
+  .launch-platform {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+    margin-bottom: 8px;
+  }
+  .launch-items { list-style: none; }
+  .launch-items li {
+    font-size: 11px;
+    color: var(--text-light);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--navy-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.4;
+  }
+  .launch-items li:last-child { border-bottom: none; }
+  .launch-items li::before { content: '→'; color: var(--yellow); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    margin: 32px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-divider-line { flex: 1; height: 1px; background: var(--navy-light); }
+  .section-divider-text {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+    white-space: nowrap;
+  }
+
+  /* ── HARD RULES BANNER ── */
+  .rules-banner {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1.5px solid var(--red);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+  }
+  .rules-banner .title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .rule-item {
+    font-size: 11px;
+    color: var(--text-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.4;
+  }
+  .rule-item::before { content: '⚠'; color: var(--red); flex-shrink: 0; font-size: 10px; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-light);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+  }
+
+  /* ── TPT SEO BOX ── */
+  .seo-box {
+    background: var(--navy-mid);
+    border: 1.5px solid var(--teal);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .seo-box-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .seo-fields { display: flex; flex-direction: column; gap: 8px; }
+  .seo-field {
+    background: var(--navy-light);
+    border-radius: 6px;
+    padding: 8px 10px;
+  }
+  .seo-field-label { font-size: 10px; color: var(--teal); font-weight: 700; text-transform: uppercase; margin-bottom: 3px; }
+  .seo-field-desc { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+  .seo-formula {
+    font-size: 11px;
+    color: var(--amber);
+    font-family: monospace;
+    background: var(--navy);
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  /* ── WIDE CARD ── */
+  .wide-card {
+    flex: 1;
+    background: var(--navy-mid);
+    border: 1.5px solid var(--navy-light);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .cards-grid.seven-col { grid-template-columns: repeat(3, 1fr); }
+    .cards-grid.four-col { grid-template-columns: repeat(2, 1fr); }
+    .launch-grid { grid-template-columns: 1fr 1fr; }
+    .rules-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .phase-label { display: none; }
+    .cards-grid { grid-template-columns: 1fr !important; }
+    .main { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Internal Navigation -->
+<nav class="cbd-nav">
+  <div class="cbd-nav-brand">💬 <span>CbD</span> Internal</div>
+  <div class="cbd-nav-tabs">
+    <a class="cbd-nav-tab" href="CbD_Launch_Dashboard.html">📊 Launch Dashboard</a>
+    <a class="cbd-nav-tab active" href="CbD_Workflow_Visual.html">🔧 Workflow Visual</a>
+  </div>
+  <div class="cbd-nav-divider"></div>
+  <div class="cbd-nav-ext">
+    <a class="cbd-nav-ext-link" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">Airtable ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">TPT ↗</a>
+    <a class="cbd-nav-ext-link" href="https://communicatebydesign.substack.com" target="_blank">Substack ↗</a>
+    <a class="cbd-nav-ext-link" href="Products/UFLI Phonics/cbd-vocabulary-explorer.html">🔍 Vocab Explorer ↗</a>
+  </div>
+</nav>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="brand-icon">💬</div>
+  <div class="brand-text">
+    <div class="name">Communicate by Design</div>
+    <div class="title">Product Development Workflow</div>
+    <div class="sub">Concept → Live & Optimized</div>
+  </div>
+  <div class="header-right">
+    Nonfiction · Fiction · UFLI · Picture Books<br>
+    <span style="color:var(--amber)">AT/AAC Tools · Trading Cards</span>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div> Phase 0: Concept</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div> Phase 1: Frameworks</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div> Phase 2: Draft</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Phase 3: Build</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Phase 4: QC</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Phase 5: Launch</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Hard Rule / Non-Negotiable</div>
+  </div>
+
+  <!-- ════ PHASE 0: TOPIC ANALYSIS ════ -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <div class="phase-badge phase0">Phase 0 · Topic Analysis</div>
+    </div>
+    <div class="cards-grid" style="grid-template-columns: repeat(4, 1fr);">
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0a</div>
+        <div class="step-title">Read Master Reference</div>
+        <div class="step-desc">Always first. Grounds you in the design system, skill grid, and existing product inventory.<br><br><em>CbD_Unit_Design_Master_Reference.md</em></div>
+      </div>
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0b</div>
+        <div class="step-title">Research the Topic</div>
+        <div class="step-desc">Primary sources, historical accounts, photos, docs, first-person narratives. Ask: How rich is the material? Whose voices are present / missing? Is there existing curriculum coverage?</div>
+      </div>
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0c</div>
+        <div class="step-title">Age Range & Version Strategy</div>
+        <div class="step-desc">Let the content decide the audience. Check for age-sensitive themes. Lock V1/V2/V3: <em>same skill, same expectation, different access</em>.<br><br>V1: 900–1050 · V2: 650–800 · V3: 400–550</div>
+      </div>
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0d</div>
+        <div class="step-title">Arc &amp; Scope</div>
+        <div class="step-desc">Decide passage count (1–4): <em>1 passage</em> = mini-lesson/freebie · <em>2 passages</em> = comparison/shift (Capitol Crawl model) · <em>3–4 passages</em> = full narrative arc (504 model)</div>
+      </div>
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0e</div>
+        <div class="step-title">Select Target Skill</div>
+        <div class="step-desc">Choose from skill grid. Skill shapes the text interaction tool, graphic organizer, and all comprehension activity design. Confirm skill number + tool + organizer type.</div>
+      </div>
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0f</div>
+        <div class="step-title">Write Essential Question</div>
+        <div class="step-desc">Arguable, not googleable. Connects to justice, identity, power, responsibility, or voice. Appears on title page + teacher materials. Drives discussion + project work.</div>
+      </div>
+
+      <div class="step-card teal-accent">
+        <div class="step-number teal">0g</div>
+        <div class="step-title">Evaluate Project Potential</div>
+        <div class="step-desc">Does the topic support synthesis, real-world action, or position-taking? If yes → design a project component. If no → comprehension activities are enough.</div>
+      </div>
+
+      <div class="step-card" style="background: rgba(0,180,216,0.08); border-color: var(--teal);">
+        <div class="step-number teal">0h</div>
+        <div class="step-title" style="color:var(--teal)">✓ Checkpoint: User Approves</div>
+        <div class="step-desc">Confirm before ANY drafting: essential question · age range · V1/V2/V3 strategy · passage count · arc · target skill + tool + organizer · project or no project.<br><br><strong style="color:var(--teal)">This is the product blueprint.</strong></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-arrow"></div></div>
+
+  <!-- ════ PHASE 1: FRAMEWORK GATES ════ -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <div class="phase-badge framework">Phase 1 · 7 Framework Gates</div>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+      <div style="font-size:11px; color:var(--text-light); margin-bottom:4px;">Run all 7 gates before any build. Each gate has a dedicated quick-reference file in <span style="color:var(--purple)">_Operations/memory/</span></div>
+      <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap: 10px;">
+
+        <div class="gate-card">
+          <div class="gate-number">1</div>
+          <div class="gate-title">Vocabulary Framework</div>
+          <div class="gate-check">Word type confirmed<br>Max ~30 fringe checked<br>Top 5 core selected<br>Top 5 fringe selected<br><span>vocabulary_selection_reference.md</span></div>
+        </div>
+
+        <div class="gate-card">
+          <div class="gate-number">2</div>
+          <div class="gate-title">Differentiation Framework</div>
+          <div class="gate-check">V1/V2/V3 Lexile targets<br>Scaffold gradient confirmed<br>HLPs labeled<br>AAC access at all versions<br><span>differentiation_reference.md</span></div>
+        </div>
+
+        <div class="gate-card">
+          <div class="gate-number">3</div>
+          <div class="gate-title">Communication Access</div>
+          <div class="gate-check">CAP vocab list complete<br>Response opps designed<br>Partner guidance at point of use<br>Non-speech pathway in every activity<br><span>communication_access_reference.md</span></div>
+        </div>
+
+        <div class="gate-card">
+          <div class="gate-number">4</div>
+          <div class="gate-title">Comm Partner Framework</div>
+          <div class="gate-check">ALgS + Wait + Expand + Choice<br>Partner callouts drafted<br>All 3 version levels<br>Written for Circle 3 (para, no AAC training)<br><span>communication_partner_reference.md</span></div>
+        </div>
+
+        <div class="gate-card">
+          <div class="gate-number">5</div>
+          <div class="gate-title">SDI Framework</div>
+          <div class="gate-check">SDI components labeled<br>Accommodations listed separately<br>V2/V3 text = SDI-level<br>Vocab pre-teaching = SDI<br><span>sdi_reference.md</span></div>
+        </div>
+
+        <div class="gate-card">
+          <div class="gate-number">6</div>
+          <div class="gate-title">IEP Goal Ecosystem</div>
+          <div class="gate-check">Academic ELA goal stem<br>AAC communication goal stem<br>Observable verbs only<br>IDEA structure: Given→will→measured by<br><span>iep_goal_ecosystem_reference.md</span></div>
+        </div>
+
+        <div class="gate-card">
+          <div class="gate-number">7</div>
+          <div class="gate-title">Assessment &amp; Data Framework</div>
+          <div class="gate-check">3-level rubric designed<br>Mastery criteria set<br>Data roles assigned<br>Rubric on student response doc<br><span>assessment_data_reference.md</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-arrow"></div></div>
+
+  <!-- ════ PHASE 2: DRAFT ════ -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <div class="phase-badge phase1">Phase 2 · Draft &amp; Review</div>
+    </div>
+    <div class="cards-grid three-col">
+
+      <div class="step-card amber-accent">
+        <div class="step-number amber">1</div>
+        <div class="step-title">Draft Markdown Content</div>
+        <div class="step-desc">All passages × all versions (V1/V2/V3). Teacher materials. Comprehension activities. Essential question. Project component if applicable.<br><br><em>Word count targets per version · Key vocabulary highlighted at V3</em></div>
+      </div>
+
+      <div class="step-card amber-accent">
+        <div class="step-number amber">✓</div>
+        <div class="step-title">Checkpoint: User Approves Content</div>
+        <div class="step-desc">Review all passages + activities before build script is written. Changes are cheap in markdown. Changes are expensive in .docx.<br><br><em>Check: passage accuracy · skill alignment · essential question · AAC vocabulary list</em></div>
+      </div>
+
+      <div class="step-card amber-accent">
+        <div class="step-number amber">!</div>
+        <div class="step-title">Run Inclusive Design Diagnostic</div>
+        <div class="step-desc">Mandatory after drafting, before build. Full prompt in unit-design-workflow.md. Checks: CCSS rigor · HLPs · UDL 3.0 · AAC integration · morphology · DOK levels. Implement quick wins before build.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-arrow"></div></div>
+
+  <!-- ════ PHASE 3: BUILD ════ -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <div class="phase-badge build">Phase 3 · Build</div>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="step-card green-accent">
+          <div class="step-number green">A</div>
+          <div class="step-title">2-Part Lesson Script (Capitol Crawl / Zitkala-Ša model)</div>
+          <div class="step-desc">~960 lines · Build script in product folder · <em>require</em> template via relative path to <em>_Operations/cbd_docx_template.js</em> · Passage extraction via regex · Output: <em>{Name}_Lesson_COMPLETE.docx</em></div>
+        </div>
+        <div class="step-card green-accent">
+          <div class="step-number green">B</div>
+          <div class="step-title">4-Part Unit Script (504 Sit-In / Frances Kelsey model)</div>
+          <div class="step-desc">~1,500–2,000+ lines · Build script in <em>_Operations/</em> · Multi-session work · Build in phases: teacher docs → passages → comprehension → answer keys · Rebuild + validate XML after each phase</div>
+        </div>
+      </div>
+
+      <!-- Critical Build Warnings -->
+      <div class="rules-banner" style="border-color:var(--green); background:rgba(34,197,94,0.06);">
+        <div class="title" style="color:var(--green)">⚙ Critical Build Warnings — Never Skip</div>
+        <div class="rules-grid">
+          <div class="rule-item" style="color:var(--text-light)"><span style="color:var(--green)">⚠</span> Always spread array-returning template functions (missing <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">...</code> causes <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">&lt;0/&gt;</code> XML corruption)</div>
+          <div class="rule-item" style="color:var(--text-light)"><span style="color:var(--green)">⚠</span> <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">studentHandoutHeader</code> takes exactly 3 args: (unitTitle, title, subtitle)</div>
+          <div class="rule-item" style="color:var(--text-light)"><span style="color:var(--green)">⚠</span> V3 passage: strip **Key Vocabulary** heading before passing to <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">buildPassageParagraphs</code> (avoids duplicate header)</div>
+          <div class="rule-item" style="color:var(--text-light)"><span style="color:var(--green)">⚠</span> V3 regex boundary: use <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">\*Word count:</code> or <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">## </code> as end boundary — NOT <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">---\s*\n</code></div>
+          <div class="rule-item" style="color:var(--text-light)"><span style="color:var(--green)">⚠</span> MCQ spacing: use <code style="background:var(--navy);padding:1px 4px;border-radius:3px;font-size:10px">before: 160</code> (not 280) for question stems to keep all 5 on one page</div>
+          <div class="rule-item" style="color:var(--text-light)"><span style="color:var(--green)">⚠</span> Table headers: no special chars (¶, §) — they render literally in Word. Plain text only.</div>
+        </div>
+      </div>
+
+      <!-- Quick Wins -->
+      <div class="wide-card" style="border-color:var(--green);">
+        <div style="font-size:11px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Standard Quick Wins — Apply to Every Unit</div>
+        <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:8px;">
+          <div class="qc-item"><div class="dot" style="background:var(--green)"></div>Word Parts morphology handout (3–5 Tier 2/3 words)</div>
+          <div class="qc-item"><div class="dot" style="background:var(--green)"></div>Student-facing learning targets on every primary handout</div>
+          <div class="qc-item"><div class="dot" style="background:var(--green)"></div>Text structure / skill-specific visual reference card (half-page)</div>
+          <div class="qc-item"><div class="dot" style="background:var(--green)"></div>Scaffold fading rationale (teacher-facing, cite HLP 15)</div>
+          <div class="qc-item"><div class="dot" style="background:var(--green)"></div>V3 DOK 3 MCQ: at least 1 structure/skill-analysis question</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-arrow"></div></div>
+
+  <!-- ════ PHASE 4: QC ════ -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <div class="phase-badge qc">Phase 4 · QC</div>
+    </div>
+    <div class="qc-section">
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:16px;">
+        <div>
+          <div class="qc-header">Structural</div>
+          <div class="qc-items" style="flex-direction:column; gap:5px;">
+            <div class="qc-item"><div class="dot"></div>Zero XML corruption (<code>&lt;0/&gt;</code> tags)</div>
+            <div class="qc-item"><div class="dot"></div>Heading hierarchy H1 → H2 → H3, no skips</div>
+            <div class="qc-item"><div class="dot"></div>Table header rows tagged for screen readers</div>
+            <div class="qc-item"><div class="dot"></div>Page breaks present (pageBreakBefore)</div>
+            <div class="qc-item"><div class="dot"></div>Brand colors: Navy #1B1F3B · Teal #006DA0 · Amber #FFB703</div>
+            <div class="qc-item"><div class="dot"></div>WCAG 2.2 Level AA — #006DA0 in .docx/.pdf only</div>
+          </div>
+        </div>
+        <div>
+          <div class="qc-header">Content</div>
+          <div class="qc-items" style="flex-direction:column; gap:5px;">
+            <div class="qc-item"><div class="dot"></div>All passages present (versions × parts)</div>
+            <div class="qc-item"><div class="dot"></div>All comprehension activities present (by version)</div>
+            <div class="qc-item"><div class="dot"></div>Answer key complete</div>
+            <div class="qc-item"><div class="dot"></div>Accessibility Statement included</div>
+            <div class="qc-item"><div class="dot"></div>Essential question appears in multiple locations</div>
+            <div class="qc-item"><div class="dot"></div>22 standard sections present (nonfiction units)</div>
+          </div>
+        </div>
+        <div>
+          <div class="qc-header">Inclusive Language</div>
+          <div class="qc-items" style="flex-direction:column; gap:5px;">
+            <div class="qc-item"><div class="dot"></div>Zero deficit-framing (no "below grade level," "struggling readers")</div>
+            <div class="qc-item"><div class="dot"></div>"point to" always paired with inclusive alternatives</div>
+            <div class="qc-item"><div class="dot"></div>AAC-inclusive verbs: select, indicate, identify</div>
+            <div class="qc-item"><div class="dot"></div>Strengths-based language throughout</div>
+            <div class="qc-item"><div class="dot"></div>"Communication Access" (not "AAC Support") as section heading</div>
+            <div class="qc-item"><div class="dot"></div>PDF: Word → Save As PDF (not Print to PDF, not LibreOffice)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-arrow"></div></div>
+
+  <!-- ════ PHASE 5: TPT LISTING + LAUNCH ════ -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <div class="phase-badge launch">Phase 5 · Publish &amp; Launch</div>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+
+      <!-- Output 0 -->
+      <div class="seo-box">
+        <div class="seo-box-title">Output 0 — TPT Listing Package (Required Before ANY Other Section)</div>
+        <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:12px;">
+          <div class="seo-field">
+            <div class="seo-field-label">① Title ≤80 chars</div>
+            <div class="seo-field-desc">Pipe-separated. Leads with topic. Must include differentiator + SPED + grades.</div>
+            <div class="seo-formula">[Topic] | [Historical/Subject Angle]<br>| [Adapted Reading or Differentiator]<br>| [SPED Grades 6-10]</div>
+          </div>
+          <div class="seo-field">
+            <div class="seo-field-label">② Description Opening ≤180 chars</div>
+            <div class="seo-field-desc">Keyword-dense — NOT hook-style. Contains: product name + "special education" + "grades 6-10" + "adapted reading" + "AAC"</div>
+            <div class="seo-formula">{Topic} nonfiction unit | Special education<br>grades 6-10. {Subject angle} at three reading<br>levels — adapted reading with AAC supports.</div>
+          </div>
+          <div class="seo-field">
+            <div class="seo-field-label">③ 7 Custom Keyword Tags</div>
+            <div class="seo-field-desc">Enter all 7 in the custom keywords field. Topic-specific + nonfiction + special education + adapted reading + SPED + subject angle + bonus keyword.</div>
+            <div class="seo-formula">{Topic} | {subject} | nonfiction |<br>special education | adapted reading |<br>SPED | {bonus keyword}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Launch grid -->
+      <div class="launch-grid">
+        <div class="launch-card yellow-accent">
+          <div class="launch-platform">TPT Dashboard</div>
+          <ul class="launch-items">
+            <li>Paste Output 0 title + description opening</li>
+            <li>Enter 7 custom keyword tags</li>
+            <li>Upload preview file (6–8 pages of actual content)</li>
+            <li>Upload product ZIP (all 3 version levels)</li>
+            <li>Set correct price from tiered table</li>
+            <li>Enable SPED + grade level filters</li>
+            <li>Add bundle cross-link to description</li>
+            <li>Add Keiko free preview link to description</li>
+          </ul>
+        </div>
+        <div class="launch-card yellow-accent">
+          <div class="launch-platform">Canva + Pinterest</div>
+          <ul class="launch-items">
+            <li>Build product cover (use CbD Canva template)</li>
+            <li>Export cover PNG for TPT thumbnail</li>
+            <li>Create Instagram 3-slide carousel sequence</li>
+            <li>Pin to relevant Pinterest board with keyword-rich description</li>
+            <li>Verify cover matches brand colors + WCAG on dark background</li>
+          </ul>
+        </div>
+        <div class="launch-card yellow-accent">
+          <div class="launch-platform">Substack + Funnel</div>
+          <ul class="launch-items">
+            <li>Identify pillar (🔴 Policy / 🟠 Family / 🔵 UFLI / 🟢 Nonfiction / 🟡 FB Answer)</li>
+            <li>Write 700–900 word post tied to unit story</li>
+            <li>Post to Substack with TPT product link</li>
+            <li>Drop FB group comment with Substack link</li>
+            <li>Add "Read on Substack" cross-link to TPT listing</li>
+            <li>Update tpt-funnel.md with Substack connection</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ HARD RULES ════ -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-text">Non-Negotiable Rules</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="rules-banner">
+    <div class="title">Hard Rules — Never Violate</div>
+    <div class="rules-grid">
+      <div class="rule-item">Never call Jill "AT Specialist" or "AAC Specialist" — not yet certified. Title: "special educator and advocate"</div>
+      <div class="rule-item">Never "above/below grade level," "struggling readers," "low students" — use V1/V2/V3 Lexile framing</div>
+      <div class="rule-item">Never "point to" as the sole interaction verb — "select, point to, or use gaze to indicate"</div>
+      <div class="rule-item">Never default to "work with the SLP" — frame as IEP team responsibility</div>
+      <div class="rule-item">Never assume the student has an SGD — must work with alternative pencil + e-trans board + symbol cards</div>
+      <div class="rule-item">Never add words to a UFLI lesson — the word list is fixed and research-based</div>
+      <div class="rule-item">Never abbreviate "CbD" in outward-facing content — always "Communicate by Design"</div>
+      <div class="rule-item">Never change existing unit pricing — use the tiered price table</div>
+      <div class="rule-item">Every nonfiction unit requires 22 standard sections → nonfiction_build_reference.md</div>
+      <div class="rule-item">AAC core/fringe word TABLE required in every unit's Differentiating section — makeTable(), not bullet lists</div>
+      <div class="rule-item">Every Output 0 must be in the listing package BEFORE any other section</div>
+      <div class="rule-item">Never rebuild something already approved — str_replace over full rebuilds always</div>
+    </div>
+  </div>
+
+  <!-- ════ SEASONAL LAUNCH HOOKS ════ -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-text">Seasonal Launch Calendar</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(6,1fr); gap:10px; margin-bottom:32px;">
+    <div class="step-card" style="border-top:3px solid #ec4899;">
+      <div style="font-size:10px; font-weight:700; color:#ec4899; text-transform:uppercase; margin-bottom:6px;">March</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Women's History Month</div>
+      <div style="font-size:11px; color:var(--text-light);">Radium Girls · Frances Kelsey · WHM Bundle<br><br><em style="color:#ec4899">Upload by mid-Jan</em></div>
+    </div>
+    <div class="step-card" style="border-top:3px solid var(--green);">
+      <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; margin-bottom:6px;">April</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Earth Day (Apr 22)</div>
+      <div style="font-size:11px; color:var(--text-light);">Keiko · Keiko Part 1 Free Preview<br><br><em style="color:var(--green)">Upload by mid-Feb</em></div>
+    </div>
+    <div class="step-card" style="border-top:3px solid var(--teal);">
+      <div style="font-size:10px; font-weight:700; color:var(--teal); text-transform:uppercase; margin-bottom:6px;">July</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Disability Pride Month + ADA (Jul 26)</div>
+      <div style="font-size:11px; color:var(--text-light);">504 Sit-In · Capitol Crawl · Disability Rights Bundle · All the Way to the Top<br><br><em style="color:var(--teal)">Upload by Jun 25</em></div>
+    </div>
+    <div class="step-card" style="border-top:3px solid var(--orange);">
+      <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; margin-bottom:6px;">September</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Labor Day / Back to School</div>
+      <div style="font-size:11px; color:var(--text-light);">Radium Girls (labor rights) · AT Toolkit Bundle<br><br><em style="color:var(--orange)">Upload by mid-Jul</em></div>
+    </div>
+    <div class="step-card" style="border-top:3px solid var(--amber);">
+      <div style="font-size:10px; font-weight:700; color:var(--amber); text-transform:uppercase; margin-bottom:6px;">November</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Native American Heritage Month</div>
+      <div style="font-size:11px; color:var(--text-light);">Zitkala-Ša<br><br><em style="color:var(--amber)">Upload by Oct 15</em></div>
+    </div>
+    <div class="step-card" style="border-top:3px solid var(--text-light);">
+      <div style="font-size:10px; font-weight:700; color:var(--text-light); text-transform:uppercase; margin-bottom:6px;">Year-Round</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">SPED / Civil Rights</div>
+      <div style="font-size:11px; color:var(--text-light);">All nonfiction units · AT Tools · UFLI Phonics<br><br><em style="color:var(--text-light)">Always visible</em></div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div style="text-align:center; padding:16px 0 8px; font-size:11px; color:var(--text-light); border-top:1px solid var(--navy-light);">
+    Communicate by Design · Product Development Workflow Reference · Updated March 2026
+  </div>
+
+</div>
+</body>
+</html>

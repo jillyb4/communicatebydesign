@@ -197,7 +197,7 @@ The text is the same. The thinking target is the same. The evidence of understan
 
 *Updated 2026-03-29 (Session 19) — Printable Packet built. Wonder approaching launch.*
 
-Fiction units ship as **two files** bundled in the TPT zip:
+Fiction units ship as **three files** bundled in the TPT zip + a Welcome Packet (to-do for Wonder):
 
 **File 1: Main Unit Docx** (built with `build_[title].js` + `cbd_docx_template.js`)
 One unified document containing:
@@ -241,7 +241,43 @@ VSDs are deferred to V2 of Wonder. Unit is complete and launchable without them 
 the main docx references them but they are supplemental, not required for the
 unit to function.
 
-All digital download only. V1 TPT zip = Main Unit docx + Printable Packet PDF.
+All digital download only. **V1 TPT zip = Main Unit docx + Answer Key PDF + Printable Packet PDF.**
+Welcome Packet (PDF) is the 4th file — to-do for Wonder, required before TPT listing.
+
+---
+
+## Answer Key — Build Spec (LOCKED 2026-03-29)
+
+Every fiction unit ships a **Teacher Answer Key PDF** — separate from the main unit docx.
+Build script: `build_[title]_answer_keys.py` (ReportLab, same pattern as Printable Packet builder).
+
+**Consistent design — do not deviate:**
+
+| Element | Spec |
+|---------|------|
+| **Colors** | Navy `#1B1F3B` · Teal `#006DA0` · Amber `#FFB703` · White · Slate |
+| **Fonts** | Helvetica-Bold for headers · Helvetica for body |
+| **Running header** | `[Unit Title] — Answer Key` + `COMMUNICATE BY DESIGN — Teacher Answer Key` (right) |
+| **Part banner** | Navy full-width bar · Part # + title (white) · Novel section + standard (amber/slate) |
+| **Answer boxes** | Teal header label (white text) + light blue (`#F0F4F8`) content background |
+| **Tables** | Navy header row · alternating `#E2E8F0` rows · 0.4pt `#CBD5E1` grid |
+| **Warning banner** | Dark red `#7c2d12` strip at top of cover: "TEACHER DOCUMENT — NOT FOR STUDENT USE" |
+| **Footer** | 7pt slate, centered: `[Unit] · Teacher Answer Key · Communicate by Design · TPT URL · ©` |
+
+**Structure — one page per Part + cover:**
+- Cover: title banner + ⚠️ not-for-student warning + How to Use + Parts overview table
+- Part 1–N: Part banner → student response page description → model answer box(es) → scoring notes table
+
+**Answer box content per Part:**
+- Restate each sub-prompt from the student response page
+- Provide model answer in `ans` style (8pt, dark green background context)
+- Annotation code tags in `note` style: `[TRAIT]` / `[WHY]` / `[CHANGE]`
+- Scoring notes: 3-level rubric table (Meets / Approaching / Does Not Yet Meet)
+- Access barriers callout for any Part where fringe vocabulary is critical
+
+**File naming:** `[Title]_Character_Analysis_Answer_Key.pdf`
+**TPT folder position:** Listed second, after COMPLETE.docx, before Printable Packet.
+**Never included in student-facing materials or printed for students.**
 
 ---
 

@@ -139,6 +139,62 @@ Followed by: partner says the word → student finds it on device/word card → 
 
 ---
 
+---
+
+## ⚠️ Poetry Line Exception — Access-Layer Model
+
+**Poetry Reading Units do NOT use the Lexile text-versioning model.**
+
+The nonfiction V1/V2/V3 model assumes a prose passage that can be rewritten at different Lexile levels while preserving all factual content. That assumption breaks for poetry: rewriting Paul Laurence Dunbar's "We Wear the Mask" at a 400L reading level produces a different poem. The analytical content — the compression, the line breaks, the sound — is the text. Simplifying it destroys the very thing the standard asks students to analyze.
+
+**Instead, poetry uses the access-layer model:**
+
+| Element | Nonfiction V1/V2/V3 | Poetry V1/V2/V3 |
+|---------|---------------------|-----------------|
+| Text | Three different Lexile versions | **Same poem across all versions** |
+| What changes | Reading level of the passage | Annotation scaffolds, response frames, partner support intensity |
+| What stays the same | Standard, skill, vocabulary, facts | Standard, skill, vocabulary, **the poem itself** |
+| Analogous line | Fiction / Picture Book Companions | Fiction / Picture Book Companions |
+
+### What V1/V2/V3 Means for Poetry
+
+| Version | Access Layer | Partner Role |
+|---------|-------------|--------------|
+| **V1** | Poem printed; NFMA frames present; response format open-ended | Models AAC; provides 5-sec wait; no additional scaffolding |
+| **V2** | Poem printed with text annotations and guided NFMA prompts embedded; sentence frames with fill-in structure | Models fringe vocabulary; reads prompts aloud; reduces response field |
+| **V3** | Poem printed with symbol-coded annotations; vocabulary pre-taught using Descriptive Teaching Model before reading; choice/cloze NFMA frames; stanza-by-stanza pacing | Reads every line aloud; teaches vocabulary step; models AAC output at each NFMA prompt; 5-sec wait named in seconds |
+
+**Locked constants (identical across all three poetry access levels):**
+- The poem text (word-for-word identical)
+- ELA standard and essential question
+- Vocabulary list (same words, same Top 5 core/fringe, same CAP)
+- NFMA strategy (all four steps present at every level)
+- Response task category (if V1 = analyze figurative language in evidence, V3 = same task with cloze/choice scaffold)
+- HLPs (HLP 12 annotation, HLP 14 CER-style response, HLP 15 partner support)
+- AAC access pathway (active at all three levels)
+
+### IDEA Compliance Test — Poetry Version
+
+The standard access test still applies to V3 poetry activities:
+
+> "Can a student who completes this activity be said to have *demonstrated the skill* (analyzing figurative language / identifying speaker / analyzing structure) — or has the task been reduced to factual recall?"
+
+**Common poetry V3 compliance failures:**
+- Activity asks student to identify what kind of word (*metaphor*) but not what it means → recall only, not analysis
+- Activity removes all open response elements and replaces entirely with yes/no → modification
+- NFMA step MEAN is cut for V3 because "it's too hard" → standard is removed, not scaffolded
+
+**Hard rule:** V3 must reach the MEAN and ASK steps of NFMA. The scaffold controls HOW the student gets there — it does not remove the destination.
+
+### What Does NOT Change from the Nonfiction Model
+- Pre-build vocabulary gates (required before build)
+- CAP vocabulary list (SLP handoff, 1–2 week lead time)
+- Communication Partner Framework (5-second wait, ALgS modeling, choice offering)
+- Session Tracker assignment (para)
+- Rubric design (3-level, identical across versions — "Does Not Yet Meet / Approaching / Meets")
+
+---
+
 ## QC Gates (Run Before Finalizing Any Version)
 
 **Gate 1: IDEA Compliance**

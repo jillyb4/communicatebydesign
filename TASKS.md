@@ -2,6 +2,19 @@
 > ⚠️ **Primary tracking has moved to Airtable** — Base: `appeaT8hkeXWqQKIj`, table: Work Items. This file is a backup reference. At session start, read Airtable for current state.
 
 
+## Poetry Reading Units — Pre-Build Gates
+*New product line approved 2026-03-30. Unit 1 target: May 2026. Full plan: `Research/CbD_Poetry_Unit_Line_Initial_Build_Plan.md`*
+
+- [x] **Poetry: Lock product line color** — LOCKED ✓ (2026-03-30). Docs: #6B21A8 Deep Violet (WCAG AAA on white, ~12:1). Digital/Canva: #C084FC Bright Violet (navy only). Added to CLAUDE.md brand table. Note: `/brand-guidelines` skill = Anthropic palette (not applicable here) — always use CbD brand theme reference.
+- [x] **Poetry: Create Research Foundation doc** — DONE ✓ (2026-03-30). `Research/CbD_Poetry_Units_Research_Foundation.md` fully populated: 8 sections, real citations, decision log. Standards, HLPs 12/14/15/16/22/8, EBPs, AAC + poetry research, NFMA vs. TPCASTT, IEP goal structure, copyright verification table. All 3 anchor poems confirmed PD.
+- [x] **Poetry: Extend Vocabulary Framework — Section 4f** — DONE ✓ (2026-03-30). "Poetry Reading Units" section added to `_Operations/memory/vocabulary_selection_reference.md`. Three priority tiers: emotional/mood (semi-core) → literary device terms (fringe, 3–5 max) → response/analysis (core). 15–20 fringe ceiling. Access-layer model AAC note.
+- [x] **Poetry: Update Differentiation Reference with poetry exception** — DONE ✓ (2026-03-30). "Poetry Line Exception" section added to `_Operations/memory/differentiation_reference.md`. Access-layer model documented: same poem across V1/V2/V3; scaffold changes, text does not. V1/V2/V3 table for poetry. IDEA compliance test — poetry version. Common V3 compliance failures.
+- [x] **Poetry: Confirm poem selection + copyright for Unit 1** — DONE ✓ (2026-03-30). Final selection locked in Research Foundation Section 8: Dunbar "We Wear the Mask" (1896, PD via Project Gutenberg eBook #18338) · Dickinson "I'm Nobody! Who are you?" (ca. 1891, PD) · Markham "The Man with the Hoe" (1913, PD). All verified PD.
+- [x] **Poetry: Write original CbD disability-voice poem for Unit 1** — DONE ✓ (2026-03-30). "The Words I Carry" (12 lines, 3 stanzas). Devices: voice = river (metaphor), words = stones (simile/imagery), "listen with your ears alone" (extended metaphor). Tone: matter-of-fact, proud. V3 compatible. Saved in `Products/Poetry Reading Units/Unit 1 - What the Voice Carries/Unit1_PreBuild_Planning.md`.
+- [ ] **Poetry: Add product line to Airtable Work Items Product Line field** — "Poetry Reading Units" exists in Launch Pipeline. Confirm it also appears as valid option in Work Items Product Line field. *(Added 2026-03-30)*
+- [x] **Poetry: Write rubric behavioral descriptions for Unit 1** — DONE ✓ (2026-03-30). 3-level (DNM/Approaching/Meets) × 4 criteria: (1) Identify figurative language (NOTICE), (2) Name the type (NOTICE), (3) Interpret meaning (MEAN), (4) Explain effect on tone/mood with poem evidence (FEEL+MEAN). Behavioral descriptions. Response mode note. Modification flag. Quick-score para version. Saved in `Unit1_PreBuild_Planning.md`. IEP mastery threshold: Meets on Criteria 3+4 across 3 consecutive sessions.
+- [ ] **Poetry: Build Unit 1 — "What the Voice Carries"** — ALL gates PASSED ✓. Ready for docx build. Pre-build planning doc complete: `Products/Poetry Reading Units/Unit 1 - What the Voice Carries/Unit1_PreBuild_Planning.md`. Build order: (1) ARASAAC symbol check for 10 fringe words → (2) `build_poetry_unit1.py` → (3) COMPLETE.docx → (4) Printable Packet PDF → (5) CAP → (6) Session Tracker → (7) Canva cover (#6B21A8 Deep Violet) → (8) TPT listing. *(Added 2026-03-30)*
+
 ## Active
 
 - [ ] **GitHub push — Session 21 code changes** — Open GitHub Desktop → commit → push origin. Files changed: `_Operations/sync_vocab_to_airtable.js` (returnFieldsByFieldId fix + selectName + wordTypeLabel + UNIT_TITLE_MAP), `Products/Fiction Anchor Texts/Wonder - Character Analysis/build_wonder_printable_packet.py` (Layer 5 student response pages + draw box fixes + vocab map header fix), `Products/Fiction Anchor Texts/Wonder - Character Analysis/build_wonder_assembly.py` (NEW — merges COMPLETE.pdf + Packet → FULL.pdf). *(Added 2026-03-29)*
@@ -41,6 +54,8 @@
 - [x] **TPT title rewrites** — All 6 DONE ✓ (Radium Girls, Keiko, Frances Kelsey, 504 Sit-In, AT Checklist, Visual Schedule). Implemented March 24.
 
 ## Fiction Line — Active (Session 20 additions)
+
+- [ ] **Wonder: Build Welcome_to_the_Product.pdf** — 2-page orientation PDF for TPT folder. Accessibility Statement + About the Creator + Terms of Use + What's Inside + How to Use. Build with ReportLab (`build_wonder_tpt_package.py` already has this function — just run it and add to ZIP). Required before TPT listing. *(Added 2026-03-29)*
 
 - [x] **Wonder: Rebuild docx** — DONE ✓ (2026-03-29). `build_wonder_character_analysis.js` ran clean. `Wonder_Character_Analysis_COMPLETE.docx` rebuilt (34.6 KB). Validated: opens in python-docx, stale warning cleared.
 - [x] **Wonder: Build student response pages** — DONE ✓ (2026-03-29). Added as **Layer 5** in `build_wonder_printable_packet.py` — 5 pages (one per Part): Describe to Draw · Same and Different · Why Did They Do That? · Before and After · The Big Idea. Each page: Part bar, student info row, prompt box, FK vocabulary strip, response area, annotation code chips, footer. ⚠️ Rubric (referenced in IEP goals) still NOT built — add separately.
