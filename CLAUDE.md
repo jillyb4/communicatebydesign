@@ -36,6 +36,12 @@ Working toward AT certification (not yet certified — do NOT call me AT Special
 | **Substack cover** | DAHDIK9mx8I | 1200×400 |
 | **Instagram template** | DAHDIAorU0g | 1080×1080 |
 | **Floral/butterfly graphics** | DAHEmCpBep0 | — |
+| **Nonfiction Pinterest Pin template** | DAHFdGbv7rs | 365×548 (2:3 pin) — 7 pages, one per nonfiction unit |
+| **IEP AT Consideration Toolkit AD** | DAHEI1nmrPA | 365×548 (2:3 pin) — 5 pin variants |
+| **Fiction Long Format pin** | DAHFeFD9LBk | 365×548 (2:3 pin) — Wonder, 1 page |
+| **Keiko FREE Pinterest pin** | DAHEiSb8S7k | 365×548 (2:3 pin) — posted directly to Pinterest |
+
+→ Full pin design index + workflow: `Distrubution/Pinterest/CBD_Canva_Pin_Design_Index.md`
 
 ## Key Terms
 | Term | Meaning |
@@ -87,6 +93,14 @@ Strategic context only (things that don't belong in Airtable):
 | Instructional Activities | `tblHJlkbCF7c4tCNP` | 13 | Evidence-based instructional activities with HLP references, UDL principles, AAC framework connections. Linked to Launch Pipeline. Original 6: ALM Shared Reading, Visual Scene Displays, Descriptive Teaching Model, Predictable Chart Writing/Write-Ables, Story Bags & Multisensory Grounding, Critical Response Scaffolds. Fiction additions (Session 19): Story Grammar, Inferencing Scaffolds, Describe to Draw. Nonfiction + Picture Book additions (Session 20): Close Reading & Annotation (HLP 16), CER Framework (HLP 14), IRA with Planned Vocabulary Stops (HLP 12+16), Dialogic Reading with CROWD Prompts (HLP 14). ALM updated to include Picture Book Companions. |
 | **Vocabulary** | `tblL2KH04WijW8XUb` | **501** | **NEW (Session 18); synced Session 21.** Master AAC vocabulary database. 346 UFLI Phonics (Lessons 5–34) + 137 Nonfiction (6 units) + 24 Wonder fiction (Set A core + fringe) = 501 words total. Sync script: `_Operations/sync_vocab_to_airtable.js` (uses `returnFieldsByFieldId=true`). Run after any new product line vocab is added. Fields: Word, Word Type (Core/Fringe/Heart), Fitzgerald Category, Fitzgerald Color Hex, UFLI Lessons, First UFLI Lesson, Nonfiction Units, Product Lines, Product Count, Appears in Both Lines, Priority Vocabulary, Notes. |
 
+**Products table — Pinterest tracking fields (added 2026-04-01):**
+| Field | ID | Type | Purpose |
+|-------|-----|------|---------|
+| Pinterest First Pin Date | `fldwrWqdlHarNopcD` | Date | When first pin was created; drives 60-day fresh-pin cycle |
+| Pinterest Pin Count | `fld0w7mq9rfixZ5n9` | Number | How many designs exist; auto-ages product off rotation at 5 |
+| Pinterest Outbound Clicks (30d) | `fldKH1CQdumKHy25Q` | Number | From Pinterest Analytics weekly; drives List B priority |
+| Canva Pin Design ID | `fldIzVfpce6fDpV7x` | Text | Canva design ID(s) used; find in canva.com/design/[ID]/edit |
+
 ## Digital Interactive Line (Session 18 — NEW)
 
 Vocabulary-driven digital product ecosystem. Two companion HTML tools:
@@ -125,6 +139,8 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 | Task | Name | Trigger | Scope |
 |------|------|---------|-------|
 | CbD Platform Automation | `cbd-tpt-browser-tasks` | Manual (ad-hoc) | Reads Airtable "Ready to Pick Up" queue → executes tasks across TPT, Substack, Facebook, Instagram, Pinterest, Canva → verifies → marks Done |
+| Pinterest Daily Brief | `cbd-pinterest-daily-brief` ✅ | 8 AM daily (auto) | Reads Products table → generates 3 pin briefs (2 List A first pins + 1 List B fresh pin) → saves to `Distrubution/Pinterest/Daily Briefs/` → no Pinterest automation. **USE THIS ONE.** |
+| Pinterest v3 (retired) | `cbd-daily-pinterest` 🚫 | Disabled | Superseded by cbd-pinterest-daily-brief. Do not re-enable. |
 
 ## Product Lines
 | Line | Sub-line | Status |

@@ -37,7 +37,7 @@ Capacity-building stands in contrast to the "expert model" in which AT services 
 | Substack | communicatebydesign.substack.com | Live ✓ (3 posts published) |
 | TPT | [teacherspayteachers.com/store/communicate-by-design](https://www.teacherspayteachers.com/store/communicate-by-design) | 13 products LIVE ✓; Awards section needs manual entry |
 | Instagram | @communicatebydesignaac | Template done ✓ |
-| Airtable | Base `appeaT8hkeXWqQKIj` | 5 tables: Work Items (~98), Products (32), Launch Pipeline (68), Instructional Activities (13), Vocabulary (**501** — synced Session 21). 7 new Work Items added Session 22 (trading card + institutional sales + expansion planning tasks). |
+| Airtable | Base `appeaT8hkeXWqQKIj` | 5 tables: Work Items (~98), Products (32), Launch Pipeline (68), Instructional Activities (13), Vocabulary (**501** — synced Session 21). 7 new Work Items added Session 22 (trading card + institutional sales + expansion planning tasks). **Pinterest ✓ field for automation lives in Products table (`fldhVp0lOxQaB9PUB`), NOT Work Items.** |
 | **GitHub** | github.com/jillyb4/communicatebydesign | **LIVE ✓ (2026-03-29)** — Code backup repo. Git initialized inside iCloud CbD folder. `.gitignore` tracks code only (.js/.py/.html/.md/.jsx/.json); excludes binaries, symbol_cache, QC, node_modules, images, PDFs, Office docs. Use GitHub Desktop: commit → push origin after any code changes. |
 
 ---
@@ -419,6 +419,41 @@ Four research-backed frameworks now govern all text-based product builds. All fo
 - **Symbol sizing:** Level 1 (~1.75"/126pt, 3/row), Level 2 (~1.25"/90pt, 4/row), Level 3 (~1"/72pt, 5/row)
 - **Attribution required:** "Pictographic symbols © Government of Aragón. ARASAAC. Licensed under CC BY-NC-SA 4.0."
 - **Teacher note:** "Use symbols from your student's own AAC system first."
+
+---
+
+## Pinterest Strategy (Updated 2026-04-01)
+
+**Daily task:** `cbd-pinterest-daily` scheduled task (9:06 AM daily) — generates a brief file Jill executes manually in 5–10 min. No browser automation attempted. Prompt file: `Distrubution/Pinterest/CBD_Pinterest_Daily_Task.md` (v3.0).
+
+**Airtable source of truth:** Query Products table (`tbl2YSRQiW7RHEPY5`), Pinterest ✓ field = `fldhVp0lOxQaB9PUB`. Do NOT use Work Items table for Pinterest status — Work Items shows stale/incorrect data.
+
+**Board health (verified 2026-03-27):**
+| Board | Pins | Status |
+|-------|------|--------|
+| Communication Partner Strategies | 25 | ✅ Healthy |
+| Assistive Technology for Special Education | 25 | ✅ Healthy |
+| Visual Supports & Communication Boards | 20 | ✅ Healthy |
+| Free Special Education Resources | 13 | ⚠️ Thin |
+| Adapted Nonfiction & Inclusive Literacy | 6 | ⚠️ Thin |
+| IEP Tools & Resources for Teachers | 8 | ⚠️ Thin |
+| Nonfiction Reading for Inclusive Classrooms | 2 | 🔴 Very thin |
+| Communicate by Design Resources | 1 | 🔴 Brand board — needs all 16 product pins |
+| AAC Resources for Families & IEP Teams | 0 | 🔴 Empty — first repin priority |
+
+**Key algorithm facts:**
+- Pin title = 40% of ranking weight — always lead with search keyword, NOT "Communicate by Design"
+- First 100 description chars = 30% — most important keyword phrase goes here
+- 90%+ of Pinterest traffic comes from fresh pins — each product URL needs 3–5 different designs over 60–90 day intervals
+- Average 18 days from first pin view to TPT purchase — board depth + repins build the nurture funnel
+
+**Open manual actions:**
+- Bio must read "special educator and advocate" — currently says "AT specialist" (brand rule violation)
+- "Communicate by Design Resources" brand board needs all 16 product pins saved manually
+- AAC Resources board is empty — first repin priority
+
+**Competitor accounts for repinning:**
+- The Intentional IEP · Simply Special Ed · AdaptEd 4 SPED · Teach Love Autism · Speech Sprouts
 
 ---
 
