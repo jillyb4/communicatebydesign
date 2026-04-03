@@ -37,13 +37,29 @@ Communication Access is:
 - Governed by research on what AAC-supported instruction actually requires
 - A team responsibility shared by the special educator, the paraprofessional, and the SLP
 
-### The Hierarchy: AT → AAC → SGD
+### AT as a Wheel, Not a Hierarchy
 
-CbD's brand hierarchy governs how Communication Access is scoped:
+AT is not a nested hierarchy (AT contains AAC contains SGD). That framing causes teams to fixate on the narrowest end — the SGD — while missing every other functional domain where a student may need support.
 
-- **AT (Assistive Technology):** The broadest category — any device, software, or system that helps a person with a disability function. Every AAC system is AT.
-- **AAC (Augmentative and Alternative Communication):** The specific AT category that supports expressive communication. This includes high-tech (SGDs) and low-tech (symbol boards, e-trans boards, word cards, gesture systems).
-- **SGD (Speech-Generating Device):** One type of AAC system — a device that produces electronic speech output.
+**The correct mental model: AT is a wheel with many spokes.** Each spoke represents a functional domain where a student's disability may create barriers:
+
+- Reading
+- Writing
+- Organization and time management
+- Hearing access
+- Vision
+- Communication ← where AAC lives
+- Motor access
+- Sensory regulation
+
+A student may need AT support across multiple spokes simultaneously. Communication/AAC is one spoke. SGD is one tool at the tip of that spoke. The visual schedule, slant board, colored overlay — all AT, on different spokes.
+
+**For all CbD content:** Use wheel/spoke framing when explaining AT scope. Never use 'AT → AAC → SGD hierarchy' language. This applies to Substack posts, product descriptions, and any practitioner-facing content.
+
+### Within the Communication Spoke
+
+- **AAC (Augmentative and Alternative Communication):** The specific AT category that supports expressive communication. Includes high-tech (SGDs, AAC apps) and low-tech (symbol boards, e-trans boards, word cards, gesture systems, alternative pencils).
+- **SGD (Speech-Generating Device):** One type of AAC — a device that produces electronic speech output.
 
 **CbD's Communication Access framework is built for AAC — not SGD-only.** Every design decision must work for a student who uses a laminated symbol board as readily as a student who uses a Tobii Dynavox.
 
