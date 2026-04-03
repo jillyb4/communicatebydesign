@@ -13,7 +13,7 @@ Working toward AT certification (not yet certified — do NOT call me AT Special
 | **Teal (digital/Canva)** | #00B4D8 (Electric Teal — COMMUNICATE text, Canva, social). Fails WCAG on white — navy backgrounds or non-text accents only. |
 | **Amber** | #FFB703 (Warm Amber — BY DESIGN text, icon) |
 | **Yellow** | #FFD700 (accents) |
-| **Hierarchy** | AT → AAC → SGD |
+| **AAC Philosophy** | AT, AAC, and SGD are an ecosystem — not a hierarchy. Every access method is equally valid. The SGD is never the goal; communication is the goal. |
 | **Audience** | Special educators, IEP teams, OTs, PTs, BCBAs, RBTs, paraprofessionals, families |
 | **Icon** | Amber speech bubble with AAC communication board inside |
 | **Violet (documents)** | #6B21A8 (Deep Violet — Poetry Reading Units, .docx/.pdf. WCAG AAA on white, ~12:1). |

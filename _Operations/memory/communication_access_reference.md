@@ -22,11 +22,15 @@ Communication Access = systematic embedding of AAC-compatible design so that any
 
 ---
 
-## The CbD AAC Hierarchy
+## The CbD AAC Ecosystem (Not a Hierarchy)
 
-AT → AAC → SGD
+AT, AAC, and SGD are **not a hierarchy. They are an ecosystem.**
 
-CbD designs for **AAC** — which includes SGDs and all low-tech systems. Never assume SGD only.
+A student using an e-tran board is not a lesser version of a student using an SGD. A student using PECS is not behind a student with a high-tech device. Every student will use a variety of tools across contexts. That is communication in practice, not a gap.
+
+**The SGD is never the goal. The SGD is one tool in the toolbox. Communication is the goal.**
+
+CbD designs for **AAC** — which includes SGDs and all low-tech systems. Every product must work with alternative pencil + e-trans board + symbol cards as the baseline. Never assume SGD only. Never imply a student is working *toward* a device.
 
 ---
 
