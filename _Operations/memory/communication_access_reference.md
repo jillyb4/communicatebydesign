@@ -70,12 +70,52 @@ CbD designs for **AAC** — which includes SGDs and all low-tech systems. Never 
 
 | Recipient | What They Receive |
 |-----------|------------------|
-| SLP | Fringe vocabulary list + Fitzgerald categories + ARASAAC symbol refs. Due 1-2 weeks before Day 1. |
-| Para | Session Tracker + modeling vocabulary guidance |
-| Special educator | Vocabulary confirmation checklist + Session Tracker summary |
+| Communication team (all) | Vocabulary access checklist — shared responsibility, not SLP-only |
+| SLP | Fringe vocabulary list + Fitzgerald categories + ARASAAC symbol refs for potential SGD programming |
+| Para | Session Tracker + Partner Quick Reference + modeling vocabulary guidance |
+| Special educator | Vocabulary confirmation checklist + fringe reference table + Session Tracker summary |
 | Classroom teacher | Partner guidance embedded in teacher document (not a separate CAP) |
 
-**CAP is non-optional for V3.** Without pre-programmed vocabulary, the V3 vocabulary instruction step cannot happen.
+**CAP is non-optional for V3.** Without vocabulary access (low-tech minimum), the V3 vocabulary instruction step cannot happen.
+
+---
+
+## Two-Tier Vocabulary Access — HARD RULE
+
+**These are two separate things. Do not conflate them.**
+
+**Tier 1 — Low-Tech Symbol Access (immediate, any team member):**
+Symbol cards, e-trans boards, communication boards, printed choice boards. Any team member can prepare and provide these. Does not require SLP involvement. Students can participate in any lesson the day it is taught using low-tech symbol access. This is the floor — no student should be waiting for SLP programming before they can respond.
+
+**Tier 2 — SGD/High-Tech Programming (team conversation, student-driven):**
+Whether and which fringe words go onto the student's SGD is a broader team conversation — not a unilateral SLP decision. Factors: Does the student show interest in this topic? Do they return to these words across sessions? Are these words functional beyond this unit? A student who demonstrates understanding via low-tech access has met the standard — SGD programming of fringe words is an optional, student-led enhancement, not a prerequisite for participation.
+
+**The rule:** No student is ever waiting on SLP scheduling to access vocabulary. Low-tech = immediate. SGD programming = team conversation.
+
+---
+
+## SGD Complexity — What Actually Goes on a Device
+
+An SGD is not one cell = one word. Teams that think this way under-program devices and create unnecessary motor planning burden. SGDs can and should include:
+
+- **Phrase banks** — "I want to go," "I don't know," "Can you read it again" = one button, not 4–5 sequential selections
+- **Sentence starters** — "I think the poet means..." "This is important because..." — pre-loaded frames reduce motor planning to one tap + the content word
+- **Fillers and social language** — "That's interesting," "I need a minute," "I agree" — often absent from student devices; these carry social meaning and reduce communication breakdowns
+- **Pre-built response frames** — for recurring CbD response tasks (e.g., "The figurative language is ___ because ___"), load the frame as one selection; student fills in the variable
+
+**The implication for CbD products:** When writing partner guidance, do not assume every fringe word requires individual navigation. Frame programming guidance as: "Consider loading the NFMA response frame as a single button" alongside the individual word list.
+
+---
+
+## Student Interest and Fringe Vocabulary Programming
+
+Fringe vocabulary programming decisions are individualized. The CAP provides the vocabulary list — the team decides what to program based on the student.
+
+- **Student with strong interest in the topic** (e.g., a student who loves poetry, or whose special interest overlaps with the unit theme): fringe words on this topic may be used beyond the unit. Program them.
+- **Student without interest in this topic**: may still demonstrate full understanding of RL standards via low-tech access during instruction. They understood — they do not need those fringe words permanently programmed to the device. Demonstrating the skill is the standard; the device reflects the student's communication life, not the curriculum map.
+- **The question is always:** Will this student use this word again? Not: Is this word in the unit?
+
+**The rule:** Demonstrated understanding via any access mode = standard met. Fringe programming = student-centered decision, not curriculum-driven obligation.
 
 ---
 
@@ -96,7 +136,7 @@ CbD designs for **AAC** — which includes SGDs and all low-tech systems. Never 
 
 - [ ] Core vocabulary set confirmed (consistent with cross-unit motor pathway)?
 - [ ] Fringe vocabulary list complete?
-- [ ] CAP timeline documented (1–2 weeks before Day 1)?
+- [ ] CAP timeline documented — low-tech access can be provided Day 1 without SLP pre-programming?
 - [ ] Every activity in every version has at least one AAC response opportunity?
 - [ ] No activity accepts oral response only?
 - [ ] All prompts written to be read aloud?
@@ -105,3 +145,6 @@ CbD designs for **AAC** — which includes SGDs and all low-tech systems. Never 
 - [ ] 5-second wait time named in seconds in partner guidance?
 - [ ] Session Tracker included and assigned to para?
 - [ ] Data collection distinguishes academic progress from communication progress?
+- [ ] CAP language uses team framing — no SLP-as-gatekeeper? No single team member "leads" vocabulary access?
+- [ ] CAP includes low-tech symbol access path that does not require SGD programming?
+- [ ] CAP notes SGD phrase/sentence starter options alongside individual word list?

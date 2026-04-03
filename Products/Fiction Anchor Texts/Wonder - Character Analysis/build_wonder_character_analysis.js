@@ -265,6 +265,23 @@ children.push(T.makeTable(
 children.push(T.tableCaption("Select the standard anchor that matches the student's IEP and grade placement. All activities in this unit address the same skill at varying response complexity."));
 
 children.push(T.spacer());
+children.push(h2k("Learning Target"));
+children.push(T.p(
+  "I can describe and compare characters in Wonder, explain what motivates their actions, and trace how a character changes from the beginning to the end of the story."
+));
+children.push(T.tableCaption("This learning target is the same across V1, V2, and V3. The scaffold varies. The expectation does not."));
+children.push(T.makeTable(
+  ["Standard", "Grade-Level Anchor"],
+  [
+    ["RL.3.3", "I can describe a character in Wonder using words from the story."],
+    ["RL.5.3", "I can compare two characters in Wonder and explain how they are the same and different."],
+    ["RL.6.3", "I can describe how a character in Wonder responds to events and changes as the story moves toward its ending."],
+    ["RL.7.3", "I can analyze how characters in Wonder interact and explain how those interactions shape who Auggie becomes by the end of the story."],
+  ],
+  col2(0.18, 0.82)
+));
+
+children.push(T.spacer());
 children.push(h2k("What Character Analysis Requires in Wonder"));
 children.push(...T.bulletList([
   "Identifying the character the story is about in each narrator section",

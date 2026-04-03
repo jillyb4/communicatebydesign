@@ -49,6 +49,9 @@ W, H = letter  # 612 x 792 pts
 
 BASE = Path(__file__).parent.parent  # Communicate by Design root
 UNITS_ROOT = BASE / "Products" / "Nonfiction Units"
+# Preview PDFs are saved alongside the source PDF in each unit's _TPT/ folder.
+# OUTPUT_DIR is kept as a fallback reference only — individual output paths
+# are resolved per unit from the source_pdf location.
 OUTPUT_DIR = UNITS_ROOT / "Preview PDFs"
 
 # ── Unit Configurations ────────────────────────────────────────────────────────

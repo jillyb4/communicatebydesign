@@ -39,12 +39,60 @@ Run these phases in order for every unit:
 | 2 | Run `build_*.js` → `*_COMPLETE.docx` | Uses `cbd_docx_template.js` |
 | 3 | Convert `.docx` → unit PDF (LibreOffice headless) | Required for packet + preview builds |
 | 4 | **Build Communication Access Packet** | Run `_Operations/build_all_units.py` (multi-unit; all 6 units configured) or `_Operations/build_comm_access_packet.py` (Frances Kelsey single-unit reference). Word lists confirmed in Per-Unit Word Lists table below. → outputs `*_Communication_Access_Packet.pdf` |
-| 5 | Build TPT Preview PDF | Run `build_all_previews.py` — watermarked, 8–9 pages |
+| 5 | Build TPT Preview PDF | Run `python3 _Operations/build_all_previews.py` (all units) or `--unit [key]` (single). **Source must be Word-exported PDF** in `_TPT/` folder — NOT LibreOffice. Preview outputs to `_TPT/` folder (with COMPLETE.pdf, CAP, etc.) AND to `Preview PDFs/` central folder. Standard: 11 pages (10 for 504 Sit-In). See Preview Standard below. |
 | 6 | QC — Unit | Run unit QC checklist below |
 | 7 | QC — Communication Access Packet | Run packet QC checklist below |
 | 8 | **Assemble TPT Folder** | `build_all_units.py` creates `[UNIT]_TPT/` with: COMPLETE.docx, Symbol_Cards.pdf (if exists), Communication_Access_Packet.pdf, Welcome_and_Terms.pdf. Zip the folder for upload. |
 | 9 | TPT Listing Package | Output 0 first, then full listing |
 | 10 | Upload to TPT | Zip `[UNIT]_TPT/` → upload; verify live listing |
+
+---
+
+## TPT Preview PDF — Standard (locked 2026-04-02)
+
+**Script:** `_Operations/build_all_previews.py`
+**Output:** `[Unit]_TPT/[Unit]_TPT_Preview.pdf` (primary, lives with all TPT upload files) + `Preview PDFs/` central folder (reference copy)
+
+### Rules — Never Violate
+- **Source PDF:** Always use the Word-exported PDF in `_TPT/` subfolder. NOT LibreOffice. LibreOffice breaks table formatting, creates blank MCQ pages, and causes content overhangs.
+- **MCQ pages are banned from previews.** MCQ questions are stored in Word tables; pypdf cannot merge them and they render blank. Use passage pages and Short Answer / Evidence Sort activity pages instead.
+- **Page selection must show all 3 Lexile versions** (V1 + V2 + V3 passage and activity pages where possible).
+- **Comm Access vocabulary page** is always pulled from `[Unit]_Communication_Access_Packet.pdf`, page index set per unit (the "Priority Vocabulary for Communication Access" branded page with symbols). 504 Sit-In has no CAP file — no symbol page.
+- Never rebuild from scratch. Always edit `UNITS` dict in `build_all_previews.py` with targeted `str_replace`.
+- Run `--inspect --unit [key]` to verify page indices before changing selections.
+
+### Standard Page Structure (per unit)
+| Slot | Content | Notes |
+|------|---------|-------|
+| 1 | Branded cover (generated) | Navy background, PREVIEW badge, preview_items list |
+| 2 | Lesson overview / Standards alignment | idx varies by unit |
+| 3 | Comm-Access or differentiation section | "This unit is designed for AAC users" / "Component AAC access point" / "Differentiating for All Learners" |
+| 4 | V1 passage — actual reading text | NOT the V1 section header — find the page with running text |
+| 5 | V1 activity (Short Answer or Evidence Sort) | Skip MCQ — find Short Answer or Evidence Sort page |
+| 6 | V2 passage — actual reading text | |
+| 7 | V3 passage — actual reading text | |
+| 8 | V3 activity (Short Answer or Evidence Sort) | |
+| 9 | (optional) Additional V2 activity or unique activity type (e.g., Perspective Comparison, Quote Selection) | Unit-specific |
+| 10 | Communication Access vocabulary page from CAP | `symbol_page_idx` = page with "Priority Vocabulary for Communication Access" |
+| 11 | Branded back page (generated) | Price, full_items list, TPT URL, bundle callout |
+
+### Current Unit Configs (page indices verified 2026-04-02)
+| Unit | Source PDF | source_pages | symbol_page_idx |
+|------|-----------|-------------|-----------------|
+| keiko | `Keiko_TPT/Keiko_COMPLETE.pdf` | [3, 8, 24, 28, 45, 47, 58, 60] | 2 (CAP) |
+| radium_girls | `Radium_Girls_TPT/Radium_Girls_COMPLETE.pdf` | [3, 8, 23, 25, 44, 46, 63, 65] | 2 (CAP) |
+| zitkala_sa | `Zitkala_Sa_TPT/Zitkala_Sa_COMPLETE.pdf` | [3, 9, 16, 21, 29, 35, 40, 44] | 1 (CAP) |
+| 504_sit_in | `504_Sit_In_Unit_COMPLETE.pdf` | [5, 18, 39, 45, 53, 55, 65, 70] | none |
+| frances_kelsey | `Frances_Kelsey_TPT/Frances_Kelsey_COMPLETE.pdf` | [3, 8, 27, 38, 44, 65, 66, 70] | 0 (Symbol_Cards) |
+| capitol_crawl | `Capitol_Crawl_TPT/Capitol_Crawl_COMPLETE.pdf` | [3, 12, 16, 18, 27, 33, 40, 44] | 2 (CAP) |
+
+### When Adding a New Nonfiction Unit
+1. Export COMPLETE.docx → PDF from Word → save to `[Unit]_TPT/[Unit]_COMPLETE.pdf`
+2. Run `--inspect --unit [key]` to map all page indices
+3. Select 8 pages: overview + comm-access + V1 passage + V1 SA + V2 passage + V3 passage + V3 SA + one more
+4. Set `symbol_pdf` to `[Unit]_TPT/[Unit]_Communication_Access_Packet.pdf` and find `symbol_page_idx` for the "Priority Vocabulary" page
+5. Add unit config to `UNITS` dict in `build_all_previews.py`
+6. Run `--unit [key]` to build and verify
 
 ---
 

@@ -285,31 +285,15 @@ def build_welcome_pdf() -> bytes:
 
         Paragraph("Terms of Use", h2),
         HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
-        Paragraph("Thank you for purchasing from Communicate by Design!", body),
         Paragraph(
-            "<b>What you CAN do:</b> Use this resource in your own classroom, therapy room, "
-            "or home setting with your own students or child. Print or photocopy pages for "
-            "use with your students. Share with a student's IEP team for direct use with "
-            "that student (e.g., parent, OT, PT, BCBA, RBT, or paraeducator working "
-            "with the same learner). Save a digital backup for personal use.",
-            item),
-        Paragraph(
-            "<b>What you CANNOT do:</b> Share this resource with other teachers or "
-            "professionals for use in their own classrooms — each professional needs "
-            "their own license. Post any part of this resource on any website, shared drive, "
-            "or platform accessible to other staff. Sell, redistribute, or claim this resource "
-            "as your own. Edit or remove copyright information.",
-            item),
-        Paragraph(
+            "This product is licensed for use by a single educator. "
+            "You may print and copy materials for your students. "
+            "You may not redistribute, resell, or share this product digitally "
+            "with other educators outside your classroom. "
+            "To share with colleagues, please direct them to purchase their own copy. "
             "ARASAAC symbols used under Creative Commons Attribution-NonCommercial-"
-            "NoDerivatives 4.0 International License. "
-            "© Communicate by Design. All rights reserved. "
-            "Purchase of this resource grants a single-user license only.",
+            "NoDerivatives 4.0 International License.",
             body),
-        Paragraph(
-            "<i>Need a school or district license? Contact me through my TPT store — "
-            "I offer discounted multi-license options.</i>",
-            small),
 
         Spacer(1, 10),
         HRFlowable(width="100%", thickness=0.5, color=TEAL, spaceAfter=3),
