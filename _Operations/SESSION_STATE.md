@@ -31,6 +31,7 @@ Diagnose:
 | Universal AAC Data Tracker | LIVE FREE | FREE | — |
 | AT & AAC Toolkit Bundle | LIVE | $10.00 | — |
 | Keiko: A Whale's Journey | LIVE | $9.95 | v2 cover uploaded ✓ Apr 3 |
+| All the Way to the Top Companion | LIVE | $5.00 | Listed Apr 4 2026 · TPT ID: 15979429 · ⚠️ Run sync_vocab_to_airtable.js · ⚠️ Add Pinterest pin |
 | Radium Girls | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
 | Zitkala-Ša | LIVE | $9.95 | v2 cover uploaded ✓ Apr 3 |
 | 504 Sit-In | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
@@ -119,16 +120,31 @@ _Operations/
 ---
 
 ## Dashboard Auto-Refresh Log
-- **Last dashboard refresh:** Apr 3 2026 (scheduled task: cbd-dashboard-refresh)
-- **Products Live count:** 15 (was 14 — Nonfiction Bundle confirmed live)
-- **Vocab DB count:** 773 (was 501 — UFLI expanded to 605, Nonfiction to 160, Fiction 24)
-- **Status changes detected:** Word type counts updated (Core: 192, Fringe: 581); UFLI Phonics now 605 words in Airtable; Nonfiction now 160 words
-- **Work Items pulled:** 100 total · High-priority not-done: 33 items detected
-- **No Airtable errors** — all 3 tables pulled successfully (Vocabulary was count-only)
+- **Last dashboard refresh:** Apr 3 2026 (scheduled task: cbd-dashboard-refresh — automated run)
+- **Products Live count:** 15 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2)
+- **Vocab DB count:** 773 (Core: 192, Fringe: 581 · UFLI: 605, Nonfiction: 160, Fiction: 24)
+- **Work Items pulled:** 133 total · High-priority not-done: 43 items · 14 Done
+- **Status changes detected this run:**
+  - Keiko cover status corrected → ⚠ pending TPT upload (cover ready but not yet uploaded per Airtable notes)
+  - All the Way to the Top → status updated to READY TO LIST (Build complete Apr 3 · 95% progress)
+  - Wonder Fiction Unit status corrected → Active Build (not LIVE — was incorrectly showing LIVE in task dashboard)
+  - 4 new tasks added to Task Dashboard: Upload v2 cover Keiko · Radium Girls SEO update · Lead Magnet PDF · Foundation Core Vocab Anchor Set
+  - Cover tasks 15–18 (Zitkala-Ša, Frances Kelsey, Radium Girls, 504 Sit-In) moved to Done — v2 covers built and uploaded
+  - Alert banner updated: 3 overdue items surfaced (Autism Acceptance Month tags, Pinterest logo, Keiko cover upload)
+- **No Airtable errors** — Products (34 records), Work Items (133 records), Vocabulary (773 records) all pulled successfully
 
 ---
 
-## What Changed This Session (2026-04-03 — continuation)
+## What Changed This Session (2026-04-03 — Picture Book Companion build)
+- **All the Way to the Top Companion — BUILD COMPLETE** — Full file set delivered: Welcome Packet (2pp) · Teacher Packet (9pp, Word export) · Student COMPLETE (12pp assembled) · Communication Board (1pp) · Symbol Pages (2pp) · TPT Preview (10pp). Airtable record created: `recPx1oIQOMEUBP9E` (Ready to List). TPT listing package with Output 0 delivered. Tax code: Digital Images - Streaming / Electronic Download. Price: $5. Target list date: July 26 2026 (ADA anniversary).
+- **Symbol pages hard rule LOCKED** — Symbol pages for picture book companions are Python/ReportLab ONLY (`build_symbol_pages_picbook.py`). Never inside `.js` docx build. Card spec locked: symbol + ALL CAPS label + FK border only — no category bars, no star, no POS labels. Documented in `build_system_reference.md` + `PictureBook_Companion_QC_Checklist.md` with hard blocking gates.
+- **`buildSymbolCardsSection()` removed from `build_all_the_way_to_the_top.js`** — function call removed from `studentChildren`; comment added explaining Python-only rule.
+- **New build scripts created:** `build_symbol_pages_picbook.py` (symbol pages + comm board) · `build_welcome_packet.py` (welcome PDF matching Wonder layout).
+- **Communication board built** — FK-colored cell backgrounds (SGD topic page layout), 4-col × 5-row, canvas-based Python/ReportLab, ARASAAC attribution footer.
+- **Jennifer Keelan bundle** — Pair "All the Way to the Top" ($5) + Capitol Crawl ($9.95) for Disability Pride Month July 2026.
+- **⚠️ Pending Jill actions added:** Upload to TPT after Canva cover is done · Run sync_vocab_to_airtable.js after listing · Update Airtable to Live · GitHub push for session build scripts.
+
+## What Changed Previous Session (2026-04-03 — continuation)
 - **4 dashboards** now linked as a suite: Operations, Tasks, Workflow, Vocabulary
 - **CbD_Vocabulary_Dashboard.html** created (NEW) — vocabulary framework reference, Airtable field map, Fitzgerald Key, unit word tables
 - **cbd-dashboard-refresh** scheduled task created — runs 8:15 AM, noon, 11:30 PM daily — pulls Airtable → updates all 4 dashboards

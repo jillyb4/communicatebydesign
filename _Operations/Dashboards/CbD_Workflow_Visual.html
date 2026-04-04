@@ -281,6 +281,7 @@
     padding-bottom: 4px;
     border-bottom: 1px solid var(--navy-light);
   }
+  .qc-header.red { color: #f43f5e; border-bottom-color: rgba(244,63,94,0.3); }
   .qc-items { display: flex; flex-wrap: wrap; gap: 6px; }
   .qc-item {
     background: var(--navy-mid);
@@ -298,6 +299,59 @@
     border-radius: 50%;
     background: var(--orange);
     flex-shrink: 0;
+  }
+  .qc-item .dot.red { background: #f43f5e; }
+  .qc-col-goals {
+    background: rgba(244,63,94,0.06);
+    border: 1.5px solid rgba(244,63,94,0.35);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+
+  /* ── PRODUCT ARCHITECTURE ── */
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .arch-card {
+    background: rgba(34,197,94,0.07);
+    border: 1.5px solid rgba(34,197,94,0.3);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .arch-icon { font-size: 22px; margin-bottom: 6px; }
+  .arch-label { font-size: 11px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+  .arch-desc { font-size: 10px; color: var(--text-light); line-height: 1.4; }
+  .arch-rule {
+    margin-top: 10px;
+    background: rgba(34,197,94,0.05);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 11px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .arch-rule strong { color: var(--green); }
+
+  /* ── VOCAB TIER VISUAL ── */
+  .vocab-tier {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .vocab-tier-row {
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
   }
 
   /* ── LAUNCH SECTION ── */
@@ -581,6 +635,11 @@
           <div class="gate-number">1</div>
           <div class="gate-title">Vocabulary Framework</div>
           <div class="gate-check">Word type confirmed<br>Max ~30 fringe checked<br>Top 5 core selected<br>Top 5 fringe selected<br><span>vocabulary_selection_reference.md</span></div>
+          <div class="vocab-tier">
+            <div class="vocab-tier-row" style="background:rgba(34,197,94,0.25);color:#4ade80;width:60%;margin:0 auto;">Core</div>
+            <div class="vocab-tier-row" style="background:rgba(0,180,216,0.2);color:var(--teal);width:80%;margin:0 auto;">Fringe</div>
+            <div class="vocab-tier-row" style="background:rgba(255,183,3,0.2);color:var(--amber);width:100%;">Heart Words</div>
+          </div>
         </div>
 
         <div class="gate-card">
@@ -666,12 +725,12 @@
         <div class="step-card green-accent">
           <div class="step-number green">A</div>
           <div class="step-title">2-Part Lesson Script (Capitol Crawl / Zitkala-Ša model)</div>
-          <div class="step-desc">~960 lines · Build script in product folder · <em>require</em> template via relative path to <em>_Operations/cbd_docx_template.js</em> · Passage extraction via regex · Output: <em>{Name}_Lesson_COMPLETE.docx</em></div>
+          <div class="step-desc">~960 lines · Build script in product folder · <em>require</em> template via relative path to <em>_Operations/Build/cbd_docx_template.js</em> · Passage extraction via regex · Output: <em>{Name}_Lesson_COMPLETE.docx</em></div>
         </div>
         <div class="step-card green-accent">
           <div class="step-number green">B</div>
           <div class="step-title">4-Part Unit Script (504 Sit-In / Frances Kelsey model)</div>
-          <div class="step-desc">~1,500–2,000+ lines · Build script in <em>_Operations/</em> · Multi-session work · Build in phases: teacher docs → passages → comprehension → answer keys · Rebuild + validate XML after each phase</div>
+          <div class="step-desc">~1,500–2,000+ lines · Build script in product folder · require template via <em>_Operations/Build/cbd_docx_template.js</em> · Multi-session work · Build in phases: teacher docs → passages → comprehension → answer keys · Rebuild + validate XML after each phase</div>
         </div>
       </div>
 
@@ -700,6 +759,36 @@
         </div>
       </div>
 
+      <!-- Product Architecture -->
+      <div class="wide-card" style="border-color:var(--green);">
+        <div style="font-size:11px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">📦 Every Product Ships 4 Components</div>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <div class="arch-icon">📄</div>
+            <div class="arch-label">Content</div>
+            <div class="arch-desc">Main unit docx — passages (V1/V2/V3), activities, answer key, teacher guidance</div>
+          </div>
+          <div class="arch-card">
+            <div class="arch-icon">📋</div>
+            <div class="arch-label">One-Sheet</div>
+            <div class="arch-desc">Communication Access Packet (CAP) — partner guidance, vocab list, AAC access protocol</div>
+          </div>
+          <div class="arch-card">
+            <div class="arch-icon">🃏</div>
+            <div class="arch-label">Symbol Cards</div>
+            <div class="arch-desc">ARASAAC symbols for all unit vocabulary — pre-program fringe, confirm core on system</div>
+          </div>
+          <div class="arch-card">
+            <div class="arch-icon">📊</div>
+            <div class="arch-label">Tracker Insert</div>
+            <div class="arch-desc">Session data tab — measures language growth indicators, not trial count or prompt level</div>
+          </div>
+        </div>
+        <div class="arch-rule">
+          <strong>⚠ Hard rule:</strong> Tracker insert goal stem must target language growth — never compliance, never device operation.
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -711,7 +800,7 @@
       <div class="phase-badge qc">Phase 4 · QC</div>
     </div>
     <div class="qc-section">
-      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:16px;">
+      <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:16px;">
         <div>
           <div class="qc-header">Structural</div>
           <div class="qc-items" style="flex-direction:column; gap:5px;">
@@ -743,6 +832,16 @@
             <div class="qc-item"><div class="dot"></div>Strengths-based language throughout</div>
             <div class="qc-item"><div class="dot"></div>"Communication Access" (not "AAC Support") as section heading</div>
             <div class="qc-item"><div class="dot"></div>PDF: Word → Save As PDF (not Print to PDF, not LibreOffice)</div>
+          </div>
+        </div>
+        <div class="qc-col-goals">
+          <div class="qc-header red">⚠ Goals &amp; Data</div>
+          <div class="qc-items" style="flex-direction:column; gap:5px;">
+            <div class="qc-item"><div class="dot red"></div>IEP goal stems target <strong>language growth</strong> — not compliance, not device operation</div>
+            <div class="qc-item"><div class="dot red"></div>Data tools measure <strong>language growth indicators</strong> — not accuracy/prompt level/trial count alone</div>
+            <div class="qc-item"><div class="dot red"></div>Observable IDEA verb: Given [condition] → will [verb] → measured by [tool] → [criterion]</div>
+            <div class="qc-item"><div class="dot red"></div>Goals framed as <strong>accommodations</strong> — same standard, different access</div>
+            <div class="qc-item"><div class="dot red"></div>Two-goal model: academic ELA goal + AAC communication goal per unit</div>
           </div>
         </div>
       </div>
@@ -853,16 +952,21 @@
     <div class="section-divider-line"></div>
   </div>
 
-  <div style="display:grid; grid-template-columns: repeat(6,1fr); gap:10px; margin-bottom:32px;">
+  <div style="display:grid; grid-template-columns: repeat(7,1fr); gap:10px; margin-bottom:32px;">
     <div class="step-card" style="border-top:3px solid #ec4899;">
       <div style="font-size:10px; font-weight:700; color:#ec4899; text-transform:uppercase; margin-bottom:6px;">March</div>
       <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Women's History Month</div>
       <div style="font-size:11px; color:var(--text-light);">Radium Girls · Frances Kelsey · WHM Bundle<br><br><em style="color:#ec4899">Upload by mid-Jan</em></div>
     </div>
-    <div class="step-card" style="border-top:3px solid var(--green);">
-      <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; margin-bottom:6px;">April</div>
-      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Earth Day (Apr 22)</div>
-      <div style="font-size:11px; color:var(--text-light);">Keiko · Keiko Part 1 Free Preview<br><br><em style="color:var(--green)">Upload by mid-Feb</em></div>
+    <div class="step-card" style="border-top:3px solid #a855f7;">
+      <div style="font-size:10px; font-weight:700; color:#a855f7; text-transform:uppercase; margin-bottom:6px;">April</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">Autism Acceptance Month + Earth Day</div>
+      <div style="font-size:11px; color:var(--text-light);">AT/AAC products → seasonal tags · Keiko · Keiko Part 1 Free Preview<br><br><em style="color:#a855f7">Upload by mid-Feb</em></div>
+    </div>
+    <div class="step-card" style="border-top:3px solid var(--teal);">
+      <div style="font-size:10px; font-weight:700; color:var(--teal); text-transform:uppercase; margin-bottom:6px;">May</div>
+      <div style="font-size:12px; font-weight:700; color:var(--white); margin-bottom:4px;">AAPI Heritage Month + UFLI Launch</div>
+      <div style="font-size:11px; color:var(--text-light);">UFLI AAC Companion (FREE + $20) · Fred Korematsu unit · APAHM hook<br><br><em style="color:var(--teal)">Target: May 2026</em></div>
     </div>
     <div class="step-card" style="border-top:3px solid var(--teal);">
       <div style="font-size:10px; font-weight:700; color:var(--teal); text-transform:uppercase; margin-bottom:6px;">July</div>
@@ -888,7 +992,7 @@
 
   <!-- footer -->
   <div style="text-align:center; padding:16px 0 8px; font-size:11px; color:var(--text-light); border-top:1px solid var(--navy-light);">
-    Communicate by Design · Product Development Workflow Reference · Updated March 2026
+    Communicate by Design · Product Development Workflow Reference · Updated April 2026
   </div>
 
 </div>

@@ -2,14 +2,47 @@
 
 Deep build notes for CbD. Pull this file when doing code/build work.
 
-## Symbol Card Build Rule — LOCKED (Apr 2026)
-**Before any symbol card build, read `make_card()` in `_Operations/build_comm_access_packet.py` as the gold standard.**
-Card = symbol image (or Draw It! dashed box) + word label (ALL CAPS, bold) + Fitzgerald Key colored border. Nothing else.
-- NO category bar, NO core/fringe label, NO extra text on card
-- Word label ALWAYS present, even on Draw It! cards
-- NO blank filler cells — partial rows reflow to fill width
-- 3 columns per row for UFLI (Level 1 — partner-assisted literacy)
-- Applies to: `build_ufli_packet.js` and any future product with symbol cards
+## Symbol Pages — Hard Build Rules — LOCKED (Apr 2026)
+
+### ⛔ STOP — Read this before touching any symbol page code
+
+**Symbol pages are NEVER built inside a `.js` docx build. Period.**
+
+Every CbD product that includes symbol pages must build them as a **Python/ReportLab PDF** using `build_symbol_pages_pdf()` and `make_card()` ported from `_Operations/Build/build_comm_access_packet.py`. The `.js` build handles the `.docx` content only. Symbol pages are a separate PDF merged at assembly.
+
+If you are in a `.js` build file and you are about to write a `symbolCard()` function or a `buildSymbolCardsSection()` function — **stop. Close the `.js` file. Open a Python file.**
+
+### Card spec — LOCKED — no exceptions
+Card = symbol image (or `(no symbol)` italic fallback) + word label (ALL CAPS, Helvetica-Bold, 13pt, navy, centered) + FK-colored 3pt border. **Nothing else.**
+- NO category bar
+- NO core/fringe label ("Core Word", "Unit Vocabulary", etc.)
+- NO star marker (★) on the card face
+- NO part-of-speech label ("verb", "noun", "adj.", etc.)
+- NO extra text of any kind
+- Word label ALWAYS present, even on `(no symbol)` fallback cards
+- Empty/padding cells at end of page: invisible Spacer — NOT a visible blank card
+
+### Card dimensions — LOCKED
+- Card size: 2" × 2" (144pt) fixed — NEVER resize per product
+- Symbol image: 88pt within the card
+- Grid: 3 columns × 4 rows = 12 cards per page
+- Gap: 5pt white space each side of a card (physical gap, not just a border line)
+- FK border: 3pt colored border matching `FKC_BORDER` dict
+
+### Two-section structure — required for every product
+Symbol pages are always two separate labeled sections:
+1. **Core Words** — section header, then core word grid
+2. **Fringe Words — Unit-Specific Vocabulary** — section header, then fringe word grid
+
+Never merge core and fringe into one undivided grid.
+
+### The gold standard function is `make_card()` in `build_comm_access_packet.py`
+- Do NOT rewrite it from scratch for a new product
+- Port it to a product-specific Python file (e.g., `build_symbol_pages_picbook.py`) with updated paths and word lists
+- The function logic, card dimensions, FK color mapping, and fallback behavior must match exactly
+
+### Root cause note (Apr 2026)
+The symbol card spec was violated three times in one session because the spec lived in prose but was not enforced as a build gate. The fix: if you are not in a Python file using `build_symbol_pages_pdf()` + `make_card()`, you are not building symbol pages yet. This rule supersedes any in-line instinct to add labels, markers, or category information to cards.
 
 ## Core Build Warnings
 
@@ -256,6 +289,17 @@ Install: `pip install reportlab --break-system-packages`
 ### AT Device Definition
 **IDEA/Tech Act (1988):** "Any item, piece of equipment, or product system, whether acquired commercially off the shelf, modified, or customized, that is used to increase, maintain, or improve functional capabilities of individuals with disabilities."
 **WHO (2018):** "Products that maintain or improve an individual's functioning and independence, thereby promoting their well-being."
+
+## QC Checklists by Product Line
+
+| Product Line | QC File | When to Run |
+|---|---|---|
+| UFLI Phonics | `_Operations/QC/UFLI_QC_Evaluation_Rubric.md` | Before publishing any UFLI lesson packet |
+| Picture Book Companions | `_Operations/QC/PictureBook_Companion_QC_Checklist.md` | Phase 1 (pre-build on DRAFT.md) + Phase 2 (post-build on .docx) + Phase 3 (pre-PDF export) |
+
+**Picture Book Companion QC covers:** Phase 1 (content + language + brand), Phase 1B (symbol pre-build — fetch, FK classification, core/fringe tagging, symbol page structure, comm board sizing, attribution), Phase 2 (page density, insert page breaks, print fidelity, orphaned headings, response box sizing), Phase 3 (pre-export final checks). Phase 1B must pass before any build script runs.
+
+---
 
 ## Canonical File Paths (updated 2026-03-29)
 | File | Actual Location |
