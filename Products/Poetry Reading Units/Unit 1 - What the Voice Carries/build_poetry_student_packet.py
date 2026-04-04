@@ -267,7 +267,7 @@ def cover_page(c):
         ("N — NOTICE:", "Identify figurative language. Name the type and copy the line."),
         ("F — FEEL:", "What emotion does this language create? What is the tone?"),
         ("M — MEAN:", "What does the figurative language really mean? What is the poet's message?"),
-        ("A — ASK:", "What do you still wonder? Point to evidence from the poem."),
+        ("A — ASK:", "What do you still wonder? Point to, select, or indicate evidence from the poem."),
     ]
     for code, desc in nfma_desc:
         c.setFont("Helvetica-Bold", 8.5)
@@ -439,6 +439,12 @@ def v3_page(c, poem_title, poet):
 
 def build():
     c = rl_canvas.Canvas(OUT, pagesize=letter)
+
+    # PDF metadata
+    c.setTitle("What the Voice Carries — Student Poetry Packet | Communicate by Design")
+    c.setAuthor("Communicate by Design | Jill McCardel")
+    c.setSubject("Poetry Reading Unit · Figurative Language Analysis · Grades 6–10")
+    c.setCreator("Communicate by Design")
 
     cover_page(c)
 

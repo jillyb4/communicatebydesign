@@ -75,10 +75,10 @@ const CONFIG = {
   },
 
   // Local cache directory for downloaded symbols
-  cacheDir: path.join(__dirname, 'symbol_cache'),
+  cacheDir: path.join(__dirname, '..', 'Symbols', 'symbol_cache'),
 
   // Master symbol library (cumulative across all units)
-  libraryFile: path.join(__dirname, 'symbol_cache', '_symbol_library.json'),
+  libraryFile: path.join(__dirname, '..', 'Symbols', 'symbol_cache', '_symbol_library.json'),
 
   // QR code for free symbol resource
   symbolResourceUrl: 'https://arasaac.org/pictograms/search',

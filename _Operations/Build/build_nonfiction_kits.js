@@ -16,7 +16,7 @@ const fs = require('fs');
 const https = require('https');
 
 // ── Paths ─────────────────────────────────────────────────────
-const SYMBOL_DIR = path.join(__dirname, 'symbol_cache');
+const SYMBOL_DIR = path.join(__dirname, '..', 'Symbols', 'symbol_cache');
 const OUTPUT_DIR = path.join(__dirname, '..', 'Products', 'Nonfiction Units', 'Printable_Kits_v6');
 const VOCAB_FILE = path.join(__dirname, 'cbd_unit_vocab.js');
 

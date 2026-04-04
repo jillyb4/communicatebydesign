@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — Vocabulary Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1B1F3B; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+  a { color: #00B4D8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ─── Sticky Nav ──────────────────────────────────────── */
+  .cbd-nav { background: #0d1020; border-bottom: 1px solid #2d3456; padding: 0 20px; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 200; height: 36px; font-size: 12px; }
+  .cbd-nav-brand { display: flex; align-items: center; gap: 6px; color: #94A3B8; font-size: 11px; letter-spacing: 0.05em; padding-right: 16px; border-right: 1px solid #2d3456; margin-right: 8px; white-space: nowrap; }
+  .cbd-nav-brand span { color: #FFB703; font-weight: 700; }
+  .cbd-nav-tabs { display: flex; align-items: center; gap: 2px; }
+  .cbd-nav-tab { display: flex; align-items: center; gap: 5px; padding: 0 12px; height: 36px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+  .cbd-nav-tab:hover { color: #fff; text-decoration: none; border-bottom-color: #2d3456; }
+  .cbd-nav-tab.active { color: #FFB703; border-bottom-color: #FFB703; }
+  .cbd-nav-divider { width: 1px; height: 18px; background: #2d3456; margin: 0 8px; }
+  .cbd-nav-ext { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .cbd-nav-ext-link { display: flex; align-items: center; gap: 4px; padding: 0 10px; height: 36px; color: #64748b; text-decoration: none; font-size: 11px; transition: color 0.15s; white-space: nowrap; }
+  .cbd-nav-ext-link:hover { color: #00B4D8; text-decoration: none; }
+
+  /* ─── Header ──────────────────────────────────────────── */
+  .header { background: #13172e; border-bottom: 3px solid #A78BFA; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-bubble { width: 38px; height: 38px; background: #FFB703; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .brand { font-size: 18px; font-weight: bold; letter-spacing: 0.5px; }
+  .brand span { color: #FFB703; }
+  .tagline { font-size: 11px; color: #94A3B8; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .header-date { font-size: 11px; color: #94A3B8; text-align: right; }
+  .header-date strong { color: #A78BFA; display: block; font-size: 13px; }
+
+  /* ─── Layout ──────────────────────────────────────────── */
+  .container { max-width: 1300px; margin: 0 auto; padding: 20px 24px 48px; }
+  .two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  .four-col  { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 18px; }
+  .five-col  { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 18px; }
+  .full { margin-bottom: 18px; }
+
+  /* ─── KPI Cards ───────────────────────────────────────── */
+  .kpi { background: #252A4A; border-radius: 8px; padding: 14px; border-top: 3px solid; text-align: center; }
+  .kpi.amber  { border-color: #FFB703; }
+  .kpi.teal   { border-color: #00B4D8; }
+  .kpi.green  { border-color: #4ADE80; }
+  .kpi.violet { border-color: #A78BFA; }
+  .kpi.pink   { border-color: #F472B6; }
+  .kpi.orange { border-color: #FB923C; }
+  .kpi.blue   { border-color: #60A5FA; }
+  .kpi-num { font-size: 32px; font-weight: bold; line-height: 1; }
+  .kpi.amber  .kpi-num { color: #FFB703; }
+  .kpi.teal   .kpi-num { color: #00B4D8; }
+  .kpi.green  .kpi-num { color: #4ADE80; }
+  .kpi.violet .kpi-num { color: #A78BFA; }
+  .kpi.pink   .kpi-num { color: #F472B6; }
+  .kpi.orange .kpi-num { color: #FB923C; }
+  .kpi.blue   .kpi-num { color: #60A5FA; }
+  .kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #94A3B8; margin-top: 4px; }
+  .kpi-sub   { font-size: 10px; color: #64748b; margin-top: 4px; line-height: 1.3; }
+
+  /* ─── Section headings ────────────────────────────────── */
+  .section-title { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #A78BFA; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #2d3456; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(167,139,250,0.15); }
+
+  /* ─── Cards ───────────────────────────────────────────── */
+  .card { background: #252A4A; border-radius: 8px; padding: 16px; }
+
+  /* ─── Tables ──────────────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 10px; font-weight: bold; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.6px; padding: 6px 8px; border-bottom: 1px solid #2d3456; text-align: left; white-space: nowrap; }
+  td { padding: 7px 8px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.025); }
+
+  /* ─── Pills ───────────────────────────────────────────── */
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; letter-spacing: 0.3px; }
+  .pill-core   { background: #1a3a5f; color: #60A5FA; }
+  .pill-fringe { background: #2d2a10; color: #FCD34D; }
+  .pill-heart  { background: #3d1030; color: #F472B6; }
+  .pill-both   { background: #14532D; color: #4ADE80; }
+  .pill-ufli   { background: #2d1f4a; color: #C084FC; }
+  .pill-nonfic { background: #3d2000; color: #FB923C; }
+  .pill-fiction{ background: #0a3020; color: #4ADE80; }
+  .pill-poetry { background: #1f1040; color: #A78BFA; }
+  .pill-picbk  { background: #2a0a2a; color: #F472B6; }
+
+  /* ─── Fitzgerald color swatches ──────────────────────── */
+  .fitz-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: middle; border: 1px solid rgba(255,255,255,0.1); }
+  .fitz-yellow  { background: #F59E0B; }
+  .fitz-green   { background: #22C55E; }
+  .fitz-orange  { background: #F97316; }
+  .fitz-white   { background: #E5E7EB; }
+  .fitz-blue    { background: #3B82F6; }
+  .fitz-pink    { background: #EC4899; }
+
+  /* ─── Progress bar ────────────────────────────────────── */
+  .progress-wrap { background: #1B1F3B; border-radius: 4px; height: 6px; margin-top: 6px; overflow: hidden; }
+  .progress-bar  { height: 6px; border-radius: 4px; }
+  .bar-violet { background: #A78BFA; }
+  .bar-amber  { background: #FFB703; }
+  .bar-teal   { background: #00B4D8; }
+  .bar-green  { background: #4ADE80; }
+  .bar-orange { background: #FB923C; }
+  .bar-pink   { background: #F472B6; }
+
+  /* ─── Word grid ───────────────────────────────────────── */
+  .word-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+  .word-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 12px; font-size: 11px; font-weight: 600; cursor: default; }
+  .wc-core   { background: rgba(96,165,250,0.15); color: #93C5FD; border: 1px solid rgba(96,165,250,0.3); }
+  .wc-fringe { background: rgba(252,211,77,0.12); color: #FDE68A; border: 1px solid rgba(252,211,77,0.25); }
+  .wc-heart  { background: rgba(244,114,182,0.15); color: #FBCFE8; border: 1px solid rgba(244,114,182,0.3); }
+
+  /* ─── Legend box ──────────────────────────────────────── */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; color: #94A3B8; margin-bottom: 14px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* ─── Note box ────────────────────────────────────────── */
+  .note-box { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25); border-radius: 8px; padding: 12px 16px; font-size: 11px; color: #C4B5FD; line-height: 1.7; margin-bottom: 18px; }
+  .note-box strong { color: #A78BFA; }
+
+  /* ─── Alert ───────────────────────────────────────────── */
+  .alert { background: linear-gradient(135deg, #3d1f00, #4a2800); border: 1px solid #FB923C; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; }
+  .alert-title { font-size: 12px; font-weight: bold; color: #FCA5A5; margin-bottom: 4px; }
+  .alert-items { font-size: 11px; color: #FED7AA; line-height: 1.8; }
+
+  /* ─── Footer ──────────────────────────────────────────── */
+  .footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 10px; color: #374151; display: flex; justify-content: space-between; align-items: center; }
+
+  /* ─── Product line color dots ─────────────────────────── */
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; flex-shrink: 0; }
+  .dot-nonfiction { background: #FB923C; }
+  .dot-ufli       { background: #C084FC; }
+  .dot-fiction    { background: #4ADE80; }
+  .dot-poetry     { background: #A78BFA; }
+  .dot-picbk      { background: #F472B6; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     STICKY NAV
+══════════════════════════════════════ -->
+<nav class="cbd-nav">
+  <div class="cbd-nav-brand">💬 <span>CbD</span> Internal</div>
+  <div class="cbd-nav-tabs">
+    <a class="cbd-nav-tab" href="CbD_Launch_Dashboard.html">📊 Operations</a>
+    <a class="cbd-nav-tab" href="CbD_Task_Dashboard.html">✅ Tasks</a>
+    <a class="cbd-nav-tab" href="CbD_Workflow_Visual.html">🔧 Workflow</a>
+    <a class="cbd-nav-tab active" href="CbD_Vocabulary_Dashboard.html">📖 Vocabulary</a>
+  </div>
+  <div class="cbd-nav-divider"></div>
+  <div class="cbd-nav-ext">
+    <a class="cbd-nav-ext-link" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">Airtable ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">TPT ↗</a>
+    <a class="cbd-nav-ext-link" href="https://communicatebydesign.substack.com" target="_blank">Substack ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.canva.com" target="_blank">Canva ↗</a>
+    <a class="cbd-nav-ext-link" href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">🔍 Vocab Explorer ↗</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HEADER
+══════════════════════════════════════ -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-bubble">💬</div>
+    <div>
+      <div class="brand">COMMUNICATE <span>BY DESIGN</span></div>
+      <div class="tagline">Where AT Meets Practice</div>
+    </div>
+  </div>
+  <div class="header-date">
+    <strong>Vocabulary Dashboard</strong>
+    April 3, 2026 · Core, Fringe &amp; Heart Words
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ─── What This Is ──────────────────── -->
+<div class="note-box" style="margin-top:16px;">
+  <strong>About this dashboard:</strong> Every word in every CbD product is classified on two dimensions — <strong>AAC Access Layer</strong> (core / fringe / heart) and <strong>Instructional Layer</strong> (explicit / background / generative). This dashboard tracks how vocabulary is distributed across product lines, flags high-priority words, and shows where words appear in more than one product line. The authoritative source is the <strong>Airtable Vocabulary table</strong> (773 words, table ID: tblL2KH04WijW8XUb). The interactive search tool is the <a href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">Vocabulary Explorer ↗</a>.
+</div>
+
+<!-- ─── KPI Row ────────────────────────────────────── -->
+<div class="five-col">
+  <div class="kpi violet">
+    <div class="kpi-num">773</div>
+    <div class="kpi-label">Total Words</div>
+    <div class="kpi-sub">Across all product lines · Airtable synced</div>
+  </div>
+  <div class="kpi blue">
+    <div class="kpi-num">Core</div>
+    <div class="kpi-label">High-frequency AAC</div>
+    <div class="kpi-sub">Likely already on student's system · pre-program before instruction</div>
+  </div>
+  <div class="kpi amber">
+    <div class="kpi-num">Fringe</div>
+    <div class="kpi-label">Topic-specific AAC</div>
+    <div class="kpi-sub">Pre-program or teach explicitly · must be available before lesson</div>
+  </div>
+  <div class="kpi pink">
+    <div class="kpi-num">Heart</div>
+    <div class="kpi-label">High-frequency sight</div>
+    <div class="kpi-sub">UFLI phonics irregular words · memorized, not decoded</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-num">Cross</div>
+    <div class="kpi-label">Appears in 2+ lines</div>
+    <div class="kpi-sub">Priority for system-level pre-programming · embedded in CAP</div>
+  </div>
+</div>
+
+<!-- ─── AAC Classification Framework ──── -->
+<div class="section-title">AAC Access Layer — What These Classifications Mean</div>
+<div class="two-col" style="margin-bottom:18px;">
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#60A5FA; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Core Vocabulary</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      High-frequency words that make up the majority of what we say across contexts: <em>go, want, more, help, stop, that, it, do, like, feel, put, look, make, say, get, come, here, now, no, yes, I, you, we</em> — and others. Core words are likely <strong>already on a student's AAC system</strong> (SGD, e-trans board, or symbol card set). The team does not need to add them — but they do need to model them explicitly during instruction.
+    </div>
+    <div style="margin-top:10px; font-size:11px; color:#64748b;">Team action: Model. Do not assume access means use.</div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#FCD34D; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Fringe Vocabulary</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      Topic-specific words that appear less frequently but are essential for content-area participation. Every CbD fringe word has a symbol card. Fringe words <strong>must be pre-programmed or physically available</strong> before the lesson begins — not built during it. The CAP provides the vocabulary list for each unit so the SLP or educator can prepare access.
+    </div>
+    <div style="margin-top:10px; font-size:11px; color:#64748b;">Team action: Pre-program or print symbol cards before Day 1.</div>
+  </div>
+</div>
+
+<div class="two-col" style="margin-bottom:18px;">
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#FBCFE8; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Heart Words (UFLI Only)</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      High-frequency irregular words from the UFLI phonics sequence — words that cannot be fully decoded by phonics rules and must be memorized. Heart words are introduced at specific UFLI lessons and are tracked by first-lesson appearance. These words receive <strong>symbol card support + phoneme sound access</strong> for complex communicators alongside phonics instruction.
+    </div>
+    <div style="margin-top:10px; font-size:11px; color:#64748b;">Example: <em>the, said, are, was, of, they, have, do, does</em></div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#4ADE80; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Cross-Line Words (Appears in 2+ Lines)</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      Words that appear in both UFLI phonics <strong>and</strong> nonfiction units — or across any two product lines — are the highest-priority vocabulary for AAC system-level support. These words bridge early phonics instruction to content-area comprehension and signal what goes on a student's permanent communication system first.
+    </div>
+    <div style="margin-top:10px; font-size:11px; color:#64748b;">Tracked in Airtable: "Appears in Both Lines" field + Product Count ≥ 2.</div>
+  </div>
+</div>
+
+<!-- ─── Instructional Layer ─────────────────────────────── -->
+<div class="section-title">Instructional Layer — How Words Are Taught</div>
+<div class="three-col" style="margin-bottom:18px;">
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#FB923C; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Explicit Instruction</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      Words that require direct, systematic teaching using the Descriptive Teaching Model. These are the words students <strong>cannot acquire incidentally</strong> from reading or conversation — especially fringe vocabulary essential to comprehension of a specific unit. Every V3 passage word receives explicit instruction.
+    </div>
+    <div style="margin-top:8px; padding: 6px 10px; background: rgba(251,146,60,0.1); border-radius:6px; font-size:11px; color:#FED7AA;">Used in: Vocabulary section · Descriptive Teaching Model activity · Symbol cards</div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#A78BFA; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Background Knowledge</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      Words that students need to <strong>recognize but not produce</strong> — context words, proper nouns, and domain terms that anchor comprehension without being assessment targets. Built through pre-reading activity, visual scene displays, or discussion prompts rather than direct vocabulary instruction.
+    </div>
+    <div style="margin-top:8px; padding: 6px 10px; background: rgba(167,139,250,0.1); border-radius:6px; font-size:11px; color:#C4B5FD;">Used in: Pre-Reading activation · Visual Scene Displays · Partner discussion prompts</div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#4ADE80; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Generative Use</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1;">
+      Words that students are expected to <strong>use in original responses</strong> — in writing, AAC output, or symbol selection. These are the target words that appear in rubrics, on response sheets, and in the Communication Access Packet vocabulary list. Core words always fall here.
+    </div>
+    <div style="margin-top:8px; padding: 6px 10px; background: rgba(74,222,128,0.1); border-radius:6px; font-size:11px; color:#BBF7D0;">Used in: Student response pages · Short answer scaffolds · Rubric language · CAP</div>
+  </div>
+</div>
+
+<!-- ─── Vocabulary by Product Line ─── -->
+<div class="section-title">Vocabulary by Product Line</div>
+<div class="full">
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Product Line</th>
+          <th>Words in DB</th>
+          <th>Core</th>
+          <th>Fringe</th>
+          <th>Heart</th>
+          <th>Top 5 Core</th>
+          <th>Top 5 Fringe</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="dot dot-ufli"></span> UFLI Phonics (Lessons 5–34)</td>
+          <td><strong style="color:#C084FC;">605</strong></td>
+          <td><span class="pill pill-core">Core ✓</span></td>
+          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td><span class="pill pill-heart">Heart ✓</span></td>
+          <td style="font-size:11px; color:#93C5FD;">go, want, more, help, stop</td>
+          <td style="font-size:11px; color:#FDE68A;">sound, letter, word, read, spell</td>
+          <td><span class="pill pill-ufli">LIVE May 2026</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-nonfiction"></span> Nonfiction Reading Units (6 units)</td>
+          <td><strong style="color:#FB923C;">160</strong></td>
+          <td><span class="pill pill-core">Core ✓</span></td>
+          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td style="color:#374151;">—</td>
+          <td style="font-size:11px; color:#93C5FD;">think, know, feel, change, tell</td>
+          <td style="font-size:11px; color:#FDE68A;">protest, rights, evidence, argue, source</td>
+          <td><span class="pill pill-nonfic">6 Units LIVE</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-fiction"></span> Fiction Anchor Texts (Wonder)</td>
+          <td><strong style="color:#4ADE80;">24</strong></td>
+          <td><span class="pill pill-core">Core ✓</span></td>
+          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td style="color:#374151;">—</td>
+          <td style="font-size:11px; color:#93C5FD;">feel, look, say, same, different</td>
+          <td style="font-size:11px; color:#FDE68A;">ordinary, belong, ordinary, face, character</td>
+          <td><span class="pill pill-fiction">LIVE</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-poetry"></span> Poetry Reading Units (Unit 1)</td>
+          <td style="color:#64748b;">TBD</td>
+          <td style="color:#64748b;">Pending</td>
+          <td style="color:#64748b;">Pending</td>
+          <td style="color:#374151;">—</td>
+          <td style="font-size:11px; color:#64748b;">Framework complete · words not yet synced</td>
+          <td style="font-size:11px; color:#64748b;"></td>
+          <td><span class="pill pill-poetry">QC Passed · Listing Pending</span></td>
+        </tr>
+        <tr>
+          <td><span class="dot dot-picbk"></span> Picture Book Companions</td>
+          <td style="color:#64748b;">TBD</td>
+          <td style="color:#64748b;">Pending</td>
+          <td style="color:#64748b;">Pending</td>
+          <td style="color:#374151;">—</td>
+          <td style="font-size:11px; color:#64748b;">All the Way to the Top · build pending</td>
+          <td style="font-size:11px; color:#64748b;"></td>
+          <td><span class="pill pill-picbk">July 2026</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px; font-size:10px; color:#64748b;">Total: 773 words synced to Airtable (Vocabulary table, tblL2KH04WijW8XUb). Sync script: _Operations/Build/sync_vocab_to_airtable.js</div>
+  </div>
+</div>
+
+<!-- ─── Fitzgerald Key ─────────────────────────────────── -->
+<div class="section-title">Fitzgerald Key — Color System for AAC Symbols</div>
+<div class="note-box">
+  CbD uses a <strong>modified Fitzgerald Key</strong> to color-code vocabulary on symbol cards, CAPs, and vocabulary maps. Colors are consistent across all product lines and correspond to word categories. Every symbol card inherits its border/background color from this system.
+</div>
+<div class="full">
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Color</th>
+          <th>Category</th>
+          <th>Examples</th>
+          <th>AAC Role</th>
+          <th>Hex</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="fitz-swatch fitz-yellow"></span><strong style="color:#F59E0B;">Yellow</strong></td>
+          <td>People / Pronouns</td>
+          <td style="font-size:11px; color:#CBD5E1;">I, you, he, she, we, they, me, him, her</td>
+          <td style="font-size:11px; color:#94A3B8;">Almost always core · model in every interaction</td>
+          <td style="font-size:11px; color:#64748b; font-family:monospace;">#F59E0B</td>
+        </tr>
+        <tr>
+          <td><span class="fitz-swatch fitz-green"></span><strong style="color:#22C55E;">Green</strong></td>
+          <td>Verbs / Actions</td>
+          <td style="font-size:11px; color:#CBD5E1;">go, want, help, stop, make, say, do, feel, think, write, read</td>
+          <td style="font-size:11px; color:#94A3B8;">Core verbs are highest-priority generative vocabulary</td>
+          <td style="font-size:11px; color:#64748b; font-family:monospace;">#22C55E</td>
+        </tr>
+        <tr>
+          <td><span class="fitz-swatch fitz-orange"></span><strong style="color:#F97316;">Orange</strong></td>
+          <td>Nouns / Things</td>
+          <td style="font-size:11px; color:#CBD5E1;">book, picture, word, card, symbol, letter, sound, character</td>
+          <td style="font-size:11px; color:#94A3B8;">Mix of core (it, that) and fringe (topic-specific nouns)</td>
+          <td style="font-size:11px; color:#64748b; font-family:monospace;">#F97316</td>
+        </tr>
+        <tr>
+          <td><span class="fitz-swatch fitz-white"></span><strong style="color:#E5E7EB;">White</strong></td>
+          <td>Descriptors / Adjectives</td>
+          <td style="font-size:11px; color:#CBD5E1;">big, little, same, different, good, bad, hard, new, important</td>
+          <td style="font-size:11px; color:#94A3B8;">Same/different are high-priority core for comparison tasks</td>
+          <td style="font-size:11px; color:#64748b; font-family:monospace;">#E5E7EB</td>
+        </tr>
+        <tr>
+          <td><span class="fitz-swatch fitz-blue"></span><strong style="color:#3B82F6;">Blue</strong></td>
+          <td>Social / Prepositions</td>
+          <td style="font-size:11px; color:#CBD5E1;">please, thank you, more, no, yes, stop, in, on, with, for, about</td>
+          <td style="font-size:11px; color:#94A3B8;">Essential pragmatic vocabulary · core at all levels</td>
+          <td style="font-size:11px; color:#64748b; font-family:monospace;">#3B82F6</td>
+        </tr>
+        <tr>
+          <td><span class="fitz-swatch fitz-pink"></span><strong style="color:#EC4899;">Pink</strong></td>
+          <td>Question Words</td>
+          <td style="font-size:11px; color:#CBD5E1;">who, what, where, when, why, how, which</td>
+          <td style="font-size:11px; color:#94A3B8;">Core question words · appear in every product · model actively</td>
+          <td style="font-size:11px; color:#64748b; font-family:monospace;">#EC4899</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px; font-size:10px; color:#64748b;">Reference implementation: _Operations/Build/fitzgerald_key.js · getFitzgeraldCategory() assigns color hex per word.</div>
+  </div>
+</div>
+
+<!-- ─── Nonfiction Unit Word Lists ─────────────────────── -->
+<div class="section-title">Nonfiction Units — Vocabulary Overview</div>
+<div class="note-box">
+  Each nonfiction unit has a confirmed word list with a <strong>max of ~30 fringe words</strong> per unit. Every V3 passage uses only core words + highest-frequency fringe. The CAP (Communication Access Packet) for each unit contains the full per-unit vocabulary list, symbol cards, and team guidance. Full word lists live in <code style="font-size:10px; color:#94A3B8;">_Operations/memory/nonfiction_build_reference.md</code>.
+</div>
+<div class="full">
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Unit</th>
+          <th>Skill Focus</th>
+          <th>Est. Word Count</th>
+          <th>V3 Vocabulary Rule</th>
+          <th>CAP Status</th>
+          <th>Key Fringe Terms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#64748b;">1</td>
+          <td><span class="dot dot-nonfiction"></span>Keiko</td>
+          <td style="font-size:11px;">Main Idea + Details</td>
+          <td>~20</td>
+          <td style="font-size:11px; color:#94A3B8;">Core + highest-frequency fringe only</td>
+          <td><span class="pill pill-nonfic">LIVE</span></td>
+          <td style="font-size:11px; color:#FDE68A;">captive, orca, release, wild, aquarium</td>
+        </tr>
+        <tr>
+          <td style="color:#64748b;">1</td>
+          <td><span class="dot dot-nonfiction"></span>Radium Girls</td>
+          <td style="font-size:11px;">Author's Purpose</td>
+          <td>~20</td>
+          <td style="font-size:11px; color:#94A3B8;">Core + highest-frequency fringe only</td>
+          <td><span class="pill pill-nonfic">LIVE</span></td>
+          <td style="font-size:11px; color:#FDE68A;">radium, poison, lawsuit, factory, workers</td>
+        </tr>
+        <tr>
+          <td style="color:#64748b;">3</td>
+          <td><span class="dot dot-nonfiction"></span>Zitkala-Ša</td>
+          <td style="font-size:11px;">Point of View</td>
+          <td>~22</td>
+          <td style="font-size:11px; color:#94A3B8;">Core + highest-frequency fringe only</td>
+          <td><span class="pill pill-nonfic">LIVE</span></td>
+          <td style="font-size:11px; color:#FDE68A;">boarding school, culture, identity, tradition, language</td>
+        </tr>
+        <tr>
+          <td style="color:#64748b;">4</td>
+          <td><span class="dot dot-nonfiction"></span>504 Sit-In</td>
+          <td style="font-size:11px;">Argument + Evidence</td>
+          <td>~25</td>
+          <td style="font-size:11px; color:#94A3B8;">Core + highest-frequency fringe only</td>
+          <td><span class="pill pill-nonfic">LIVE</span></td>
+          <td style="font-size:11px; color:#FDE68A;">protest, rights, disability, federal, sit-in</td>
+        </tr>
+        <tr>
+          <td style="color:#64748b;">5</td>
+          <td><span class="dot dot-nonfiction"></span>Frances Kelsey</td>
+          <td style="font-size:11px;">Cause + Effect</td>
+          <td>~25</td>
+          <td style="font-size:11px; color:#94A3B8;">Core + highest-frequency fringe only</td>
+          <td><span class="pill pill-nonfic">LIVE</span></td>
+          <td style="font-size:11px; color:#FDE68A;">thalidomide, approve, evidence, FDA, scientist</td>
+        </tr>
+        <tr>
+          <td style="color:#64748b;">6</td>
+          <td><span class="dot dot-nonfiction"></span>Capitol Crawl</td>
+          <td style="font-size:11px;">Compare + Contrast</td>
+          <td>~25</td>
+          <td style="font-size:11px; color:#94A3B8;">Core + highest-frequency fringe only</td>
+          <td><span class="pill pill-nonfic">LIVE</span></td>
+          <td style="font-size:11px; color:#FDE68A;">ADA, wheelchair, crawl, Capitol, law</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── Fiction: Wonder Vocabulary ───────────────────────── -->
+<div class="section-title">Fiction Anchor Texts — Wonder Vocabulary</div>
+<div class="two-col">
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#4ADE80; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.8px;">Set A — SDI Instruction Targets</div>
+    <div style="font-size:11px; color:#94A3B8; margin-bottom:8px;">Symbol cards · Vocab Map · Generative use expected</div>
+    <div class="word-grid">
+      <span class="word-chip wc-core">feel</span>
+      <span class="word-chip wc-core">look</span>
+      <span class="word-chip wc-core">same</span>
+      <span class="word-chip wc-core">different</span>
+      <span class="word-chip wc-core">change</span>
+      <span class="word-chip wc-core">think</span>
+      <span class="word-chip wc-fringe">ordinary</span>
+      <span class="word-chip wc-fringe">belong</span>
+      <span class="word-chip wc-fringe">character</span>
+      <span class="word-chip wc-fringe">trait</span>
+      <span class="word-chip wc-fringe">include</span>
+      <span class="word-chip wc-fringe">usual</span>
+    </div>
+    <div style="margin-top:10px; font-size:10px; color:#64748b;">
+      ⚠️ Symbol substitutions LOCKED: belong→include · ordinary→usual · face→face
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#94A3B8; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.8px;">Set B — Full Communication Board</div>
+    <div style="font-size:11px; color:#94A3B8; margin-bottom:8px;">Full vocabulary set for participation · all versions</div>
+    <div class="word-grid">
+      <span class="word-chip wc-core">I</span>
+      <span class="word-chip wc-core">want</span>
+      <span class="word-chip wc-core">more</span>
+      <span class="word-chip wc-core">help</span>
+      <span class="word-chip wc-core">go</span>
+      <span class="word-chip wc-core">say</span>
+      <span class="word-chip wc-core">make</span>
+      <span class="word-chip wc-core">because</span>
+      <span class="word-chip wc-fringe">Auggie</span>
+      <span class="word-chip wc-fringe">school</span>
+      <span class="word-chip wc-fringe">friend</span>
+      <span class="word-chip wc-fringe">kind</span>
+      <span class="word-chip wc-fringe">mean</span>
+      <span class="word-chip wc-fringe">accept</span>
+    </div>
+    <div style="margin-top:10px; font-size:10px; color:#64748b;">Annotation codes LOCKED: [TRAIT] / [WHY] / [CHANGE]</div>
+  </div>
+</div>
+
+<!-- ─── UFLI Phonics Vocabulary ────────────────────────── -->
+<div class="section-title" style="margin-top:18px;">UFLI Phonics — Vocabulary Structure</div>
+<div class="note-box">
+  The UFLI Phonics vocabulary list is <strong>fixed by the UFLI curriculum</strong> — CbD does not add or change words. Core/fringe/heart classifications are research-based AAC categories applied to existing UFLI lesson words. <strong>Do NOT add words to any UFLI lesson.</strong> 605 words across all UFLI lessons are synced to Airtable with lesson number, first-appearance lesson, and Fitzgerald Key color.
+</div>
+<div class="three-col">
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#C084FC; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">FREE Product — Lessons 1–5</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1; margin-bottom:8px;">Introductory lessons. High-frequency core words + first heart words. Symbol card set + CAP included. Listed FREE on TPT — May 2026.</div>
+    <div style="font-size:11px; color:#64748b;">Heart words: <em>the, a, is, it, in</em> and others introduced by Lesson 5</div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#C084FC; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">PAID Product — Lessons 6–34 + Guide</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1; margin-bottom:8px;">Full lesson sequence. All core, fringe, and heart words for Lessons 6–34. Teacher &amp; Partner Guide included. $20 on TPT — May 2026.</div>
+    <div style="font-size:11px; color:#64748b;">Full sequence: 605 words · lesson-by-lesson symbol card builds</div>
+  </div>
+  <div class="card">
+    <div style="font-size:11px; font-weight:bold; color:#4ADE80; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Cross-Line Words (UFLI + Nonfiction)</div>
+    <div style="font-size:12px; line-height:1.7; color:#CBD5E1; margin-bottom:8px;">Words that appear in UFLI phonics lessons <em>and</em> in nonfiction reading units. These are the highest-priority words for system-level AAC programming. Tracked via "Appears in Both Lines" field in Airtable.</div>
+    <div style="font-size:11px; color:#64748b;">Examples: <em>change, tell, say, read, write, people, think, know</em></div>
+  </div>
+</div>
+
+<!-- ─── Vocabulary Rules ───────────────────────────────── -->
+<div class="section-title" style="margin-top:4px;">Vocabulary Framework Rules — Never Violate</div>
+<div class="full">
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Rule</th>
+          <th>Detail</th>
+          <th>Applies To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">Max ~30 fringe per nonfiction unit</td>
+          <td style="font-size:11px; color:#CBD5E1;">Hard ceiling. Fringe words require pre-programming — too many defeats access.</td>
+          <td style="font-size:11px;"><span class="pill pill-nonfic">Nonfiction</span></td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">Top 5 core + Top 5 fringe required</td>
+          <td style="font-size:11px; color:#CBD5E1;">Every unit must flag priority vocabulary — the words most essential for participation. Listed in CAP and on symbol card set covers.</td>
+          <td style="font-size:11px;"><span class="pill pill-nonfic">Nonfiction</span> <span class="pill pill-fiction">Fiction</span></td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">Both tags required on every word</td>
+          <td style="font-size:11px; color:#CBD5E1;">AAC Access Layer (core/fringe/heart) AND Instructional Layer (explicit/background/generative). Neither alone is sufficient.</td>
+          <td style="font-size:11px;">All product lines</td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">V3 passages: core + highest-frequency fringe only</td>
+          <td style="font-size:11px; color:#CBD5E1;">V3 is an access scaffold — vocabulary access is the scaffold, not a reduced expectation. The skill and standard are identical across V1/V2/V3.</td>
+          <td style="font-size:11px;"><span class="pill pill-nonfic">Nonfiction</span> <span class="pill pill-fiction">Fiction</span></td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">Every fringe word has a symbol</td>
+          <td style="font-size:11px; color:#CBD5E1;">No fringe word enters a CbD unit without a corresponding ARASAAC symbol in the symbol library. Symbols live in _Operations/Symbols/symbol_library/ (400 files).</td>
+          <td style="font-size:11px;">All product lines</td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">Do NOT add words to UFLI lessons</td>
+          <td style="font-size:11px; color:#CBD5E1;">UFLI word lists are fixed by the curriculum. CbD classifies existing words — it does not add vocabulary to the sequence.</td>
+          <td style="font-size:11px;"><span class="pill pill-ufli">UFLI Only</span></td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">If framework doesn't cover a new product type → research session first</td>
+          <td style="font-size:11px; color:#CBD5E1;">No new product line moves to build without a completed Vocabulary Framework Gate. Research file must exist in Research/ before build begins.</td>
+          <td style="font-size:11px;">New product lines</td>
+        </tr>
+        <tr>
+          <td style="color:#FCA5A5; font-weight:bold;">Core/fringe word TABLE required in every unit</td>
+          <td style="font-size:11px; color:#CBD5E1;">The Differentiating section of every unit must include the AAC core/fringe word table built with makeTable() — not bullet lists.</td>
+          <td style="font-size:11px;"><span class="pill pill-nonfic">Nonfiction</span> <span class="pill pill-fiction">Fiction</span> <span class="pill pill-poetry">Poetry</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── Airtable Vocabulary Table Fields ──────────────── -->
+<div class="section-title">Airtable Vocabulary Table — Field Reference</div>
+<div class="full">
+  <div class="card">
+    <div style="font-size:11px; color:#94A3B8; margin-bottom:12px;">Table ID: <code style="color:#A78BFA;">tblL2KH04WijW8XUb</code> · 773 records · Sync script: <code style="color:#A78BFA;">_Operations/Build/sync_vocab_to_airtable.js</code></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>What It Tracks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Word</td>
+          <td style="font-size:11px; color:#94A3B8;">Text</td>
+          <td style="font-size:11px; color:#CBD5E1;">The vocabulary word itself</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Word Type</td>
+          <td style="font-size:11px; color:#94A3B8;">Single Select</td>
+          <td style="font-size:11px; color:#CBD5E1;"><span class="pill pill-core">Core</span> / <span class="pill pill-fringe">Fringe</span> / <span class="pill pill-heart">Heart</span> — AAC Access Layer classification</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Fitzgerald Category</td>
+          <td style="font-size:11px; color:#94A3B8;">Single Select</td>
+          <td style="font-size:11px; color:#CBD5E1;">People / Verbs / Nouns / Descriptors / Social / Questions</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Fitzgerald Color Hex</td>
+          <td style="font-size:11px; color:#94A3B8;">Text</td>
+          <td style="font-size:11px; color:#CBD5E1;">Hex code for symbol card color rendering (from fitzgerald_key.js)</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">UFLI Lessons</td>
+          <td style="font-size:11px; color:#94A3B8;">Text</td>
+          <td style="font-size:11px; color:#CBD5E1;">All lesson numbers where this word appears</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">First UFLI Lesson</td>
+          <td style="font-size:11px; color:#94A3B8;">Number</td>
+          <td style="font-size:11px; color:#CBD5E1;">The first lesson this word is introduced — drives heart word sequencing</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Nonfiction Units</td>
+          <td style="font-size:11px; color:#94A3B8;">Text</td>
+          <td style="font-size:11px; color:#CBD5E1;">Which nonfiction units this word appears in</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Product Lines</td>
+          <td style="font-size:11px; color:#94A3B8;">Text</td>
+          <td style="font-size:11px; color:#CBD5E1;">All CbD product lines this word appears in</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Product Count</td>
+          <td style="font-size:11px; color:#94A3B8;">Number</td>
+          <td style="font-size:11px; color:#CBD5E1;">How many products include this word — drives cross-line priority</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Appears in Both Lines</td>
+          <td style="font-size:11px; color:#94A3B8;">Checkbox</td>
+          <td style="font-size:11px; color:#CBD5E1;">True if word appears in UFLI + at least one other product line — top priority for AAC system</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Priority Vocabulary</td>
+          <td style="font-size:11px; color:#94A3B8;">Checkbox</td>
+          <td style="font-size:11px; color:#CBD5E1;">Top 5 core + Top 5 fringe per unit — flagged with ★ in Vocabulary Explorer</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:bold;">Notes</td>
+          <td style="font-size:11px; color:#94A3B8;">Long Text</td>
+          <td style="font-size:11px; color:#CBD5E1;">AAC team guidance per word (e.g., symbol subs, partner modeling notes, pre-programming instructions)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ─── Pending / Open Items ──────────────────────────── -->
+<div class="alert" style="background: linear-gradient(135deg, #1a2a4a, #0d1a30); border-color: #60A5FA;">
+  <div class="alert-title" style="color:#93C5FD;">📋 Vocabulary Sync Status — 2026 Active Products Only</div>
+  <div class="alert-items" style="color:#BFDBFE;">
+    · <strong style="color:#4ADE80;">Poetry Unit 1 (What the Voice Carries)</strong> — vocabulary added to cbd_unit_vocab.js ✓ · Run sync_vocab_to_airtable.js after Canva cover + TPT listing complete<br>
+    · <strong style="color:#4ADE80;">Picture Book Companions (All the Way to the Top)</strong> — vocabulary confirmed from build file ✓ · 18 words (10 fringe + 8 core) · ARASAAC symbols still placeholders — add symbols before QC<br>
+    · <strong style="color:#FCD34D;">Fiction Units 2–6</strong> — stubs registered in cbd_unit_vocab.js · vocabulary to be confirmed at build time per framework gates · Out of My Mind is highest priority (AAC protagonist)<br>
+    · <strong style="color:#94A3B8;">⚠ Vocab sync rule:</strong> Run sync_vocab_to_airtable.js at build time, after vocabulary framework gates pass — not at TPT listing
+  </div>
+</div>
+
+<div style="background: rgba(55,65,81,0.4); border: 1px solid #374151; border-radius: 8px; padding: 12px 16px; font-size: 11px; color: #64748b; margin-bottom: 18px;">
+  <strong style="color:#94A3B8;">Excluded from 2026 production tracking:</strong> AAC Trading Cards (Year 2 / 2027 — standalone print product, not curriculum). Unit economics question deferred to 2027 planning.
+</div>
+
+</div><!-- /container -->
+
+<div class="container" style="padding-top:0;">
+  <div class="footer">
+    <span>Communicate by Design · Internal Dashboard · Not for distribution</span>
+    <span>Vocabulary table: tblL2KH04WijW8XUb · 773 words · Last synced: Apr 3 2026 (auto-refresh)</span>
+  </div>
+</div>
+
+</body>
+</html>

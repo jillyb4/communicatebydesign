@@ -2,6 +2,15 @@
 
 Deep build notes for CbD. Pull this file when doing code/build work.
 
+## Symbol Card Build Rule — LOCKED (Apr 2026)
+**Before any symbol card build, read `make_card()` in `_Operations/build_comm_access_packet.py` as the gold standard.**
+Card = symbol image (or Draw It! dashed box) + word label (ALL CAPS, bold) + Fitzgerald Key colored border. Nothing else.
+- NO category bar, NO core/fringe label, NO extra text on card
+- Word label ALWAYS present, even on Draw It! cards
+- NO blank filler cells — partial rows reflow to fill width
+- 3 columns per row for UFLI (Level 1 — partner-assisted literacy)
+- Applies to: `build_ufli_packet.js` and any future product with symbol cards
+
 ## Core Build Warnings
 
 - **ALWAYS spread array-returning template functions:** `writeOnLines()`, `studentHandoutHeader()`, `esrPageHeader()`, `mcqPageHeader()`, `saPageHeader()`, `passageHeader()`, `titlePage()`, `tocPage()`, `endMatter()`, `accessibilityStatement()`, `aboutTheCreator()`, `termsOfUse()` — ALL return arrays, ALL need `...` spread. Missing spread causes `<0/>` XML corruption.

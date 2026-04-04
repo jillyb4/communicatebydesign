@@ -531,6 +531,183 @@ const units = [
     morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // POETRY UNIT 1 — What the Voice Carries
+  // Product Line: Poetry Reading Unit
+  // Skill: NOTICE / FEEL / MEAN / ASK (NFMA framework — CbD original)
+  // Standards: RL.6.4 / RL.7.4 / RL.8.4 — Figurative language, connotation, tone
+  // Poems: Paul Laurence Dunbar · Edwin Markham · Emily Dickinson · CbD original
+  // QC PASSED: Apr 3 2026
+  // Status: Canva cover + TPT listing pending
+  // Airtable Products record: receS8L09qmIxUmcO
+  //
+  // Vocabulary structure (3 tiers):
+  //   10 fringe — must pre-program via CAP (SLP lead time: 2 weeks)
+  //   5 semi-core — likely on system, team must verify before Day 1
+  //   13 response core — already on most robust AAC systems (shared with nonfiction)
+  //
+  // Top 5 Fringe: figurative language, metaphor, imagery, tone, speaker
+  // ⚠ NOTE: "figurative language" is a multi-word term — no ARASAAC symbol, use text label card
+  // ──────────────────────────────────────────────────────────────────────────────
+  {
+    number: 1,
+    unitTitle: 'What the Voice Carries',
+    productLine: 'Poetry Reading Unit',
+    phoneme: '',
+    grapheme: '',
+    newWords: [
+      // ── Fringe words (10) — must pre-program via CAP before Day 1 ──
+      // Top 5 Fringe: literary device terms that are primary instructional targets
+      { word: 'figurative language', type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Unit overarching term. Teach before Day 1. No ARASAAC symbol — use text label card.' },
+      { word: 'metaphor',            type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Primary device in Dunbar and CbD poem. No ARASAAC symbol — use text label card.' },
+      { word: 'imagery',             type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Primary device in Markham and CbD poem. No ARASAAC symbol — use text label card.' },
+      { word: 'tone',                type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Connects FEEL → MEAN across all 4 poems. No ARASAAC symbol — use text label card.' },
+      { word: 'speaker',             type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Who is talking? Applies to all 4 poems. ARASAAC symbol: arasaac_speaker.png' },
+      { word: 'mask',                type: 'fringe', instructional: 'explicit',    top5: false, notes: 'Literal object first, then metaphor (Dunbar). ARASAAC symbol: arasaac_mask.png' },
+      { word: 'pretend',             type: 'fringe', instructional: 'generative',  top5: false, notes: 'Connects to Dunbar mask theme. No ARASAAC symbol — use text label card.' },
+      { word: 'voice',               type: 'fringe', instructional: 'generative',  top5: false, notes: 'Generative across all 4 poems (unit title concept). ARASAAC symbol: arasaac_voice.png' },
+      { word: 'labor',               type: 'fringe', instructional: 'background',  top5: false, notes: 'Theme vocabulary for Markham only. ARASAAC symbol: arasaac_labor.png' },
+      { word: 'hoe',                 type: 'fringe', instructional: 'background',  top5: false, notes: 'Concrete tool in Markham title. Define before reading. ARASAAC symbol: arasaac_hoe.png' },
+
+      // ── Semi-core words (5) — likely on system, verify before Day 1 ──
+      // Emotional vocabulary that carries the FEEL step of every NFMA activity.
+      // Classified as core here; flag for team to confirm system access.
+      { word: 'hide',  type: 'core', instructional: 'generative', top5: true,  notes: 'FEEL/MEAN — Dunbar mask theme. Confirm location on device before Day 1.' },
+      { word: 'pain',  type: 'core', instructional: 'generative', top5: true,  notes: 'FEEL — Dunbar and Markham. Confirm location on device before Day 1.' },
+      { word: 'proud', type: 'core', instructional: 'generative', top5: true,  notes: 'FEEL — Dickinson and CbD poem. Confirm location on device before Day 1.' },
+      { word: 'alone', type: 'core', instructional: 'generative', top5: false, notes: 'FEEL — Dickinson and Dunbar. Likely core; confirm on device.' },
+      { word: 'free',  type: 'core', instructional: 'generative', top5: false, notes: 'FEEL/MEAN — CbD poem. Confirm location on device before Day 1.' },
+
+      // ── Response core (13) — already on most robust AAC systems ──
+      // Shared with nonfiction units — intentional for motor pattern automaticity.
+      { word: 'because',   type: 'core', instructional: 'generative', top5: false },
+      { word: 'show',      type: 'core', instructional: 'generative', top5: false },
+      { word: 'prove',     type: 'core', instructional: 'generative', top5: false },
+      { word: 'agree',     type: 'core', instructional: 'generative', top5: false },
+      { word: 'same',      type: 'core', instructional: 'generative', top5: false },
+      { word: 'different', type: 'core', instructional: 'generative', top5: false },
+      { word: 'not',       type: 'core', instructional: 'generative', top5: false },
+      { word: 'true',      type: 'core', instructional: 'generative', top5: false },
+      { word: 'wrong',     type: 'core', instructional: 'generative', top5: false },
+      { word: 'feel',      type: 'core', instructional: 'generative', top5: false },
+      { word: 'mean',      type: 'core', instructional: 'generative', top5: false },
+      { word: 'notice',    type: 'core', instructional: 'generative', top5: false },
+      { word: 'ask',       type: 'core', instructional: 'generative', top5: false },
+    ],
+    reviewWords: [],
+    heartWords: [],
+    morphologyNotes: [],
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────────
+  // ALL THE WAY TO THE TOP — Picture Book Companion
+  // Product Line: Picture Book Companion
+  // Standard: RL.K-3.3 + RL.K-3.4 — Character actions, vocabulary in context
+  // Framework: IRA + Dialogic Reading + ALS
+  // Target: K–3 · Price: $5 · Target Date: July 26 2026 (ADA anniversary)
+  // Vocab ceiling: 15–20 words total
+  //
+  // 8 fringe (Session 1 + Session 2 priority words — confirmed in build)
+  // 2 additional fringe (crawl, brave — on communication board)
+  // 8 core (communication board core words — want, help, change, fight, can, go, more, all)
+  // Plus emotional/action core: Jennifer, determined, frustrated, sad, angry
+  //
+  // Top 5 Fringe: disability, wheelchair, rights, protest, equal
+  // ⚠ All fringe words currently use "[Add ARASAAC symbol]" placeholder — symbols needed before build QC
+  // ──────────────────────────────────────────────────────────────────────────────
+  {
+    number: 1,
+    unitTitle: 'All the Way to the Top',
+    productLine: 'Picture Book Companion',
+    phoneme: '',
+    grapheme: '',
+    newWords: [
+      // ── Session 1 Priority Fringe (introduce before first reading) ──
+      { word: 'disability', type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Session 1 priority. [Add ARASAAC symbol]. Definition: body or mind works differently, may need different tools.' },
+      { word: 'wheelchair', type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Session 1 priority. [Add ARASAAC symbol]. Definition: chair with wheels for moving place to place.' },
+      { word: 'rights',     type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Session 1 priority. [Add ARASAAC symbol]. Definition: things every person is allowed to have and do.' },
+      { word: 'protest',    type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Session 1 priority. [Add ARASAAC symbol]. Definition: showing others something is not fair, often by gathering.' },
+      // ── Session 2 Priority Fringe (introduce before second reading) ──
+      { word: 'Capitol',    type: 'fringe', instructional: 'background',  top5: false, notes: 'Session 2 priority. [Add ARASAAC symbol]. Government building in D.C. where laws are made.' },
+      { word: 'law',        type: 'fringe', instructional: 'background',  top5: false, notes: 'Session 2 priority. [Add ARASAAC symbol]. A rule everyone must follow.' },
+      { word: 'access',     type: 'fringe', instructional: 'explicit',    top5: false, notes: 'Session 2 priority. [Add ARASAAC symbol]. Being able to get into a place or use something.' },
+      { word: 'equal',      type: 'fringe', instructional: 'explicit',    top5: true,  notes: 'Session 2 priority. [Add ARASAAC symbol]. The same for everyone — equal rights.' },
+      // ── Communication board additional fringe ──
+      { word: 'crawl',      type: 'fringe', instructional: 'background',  top5: false, notes: 'On communication board. Key action in Jennifer Keelan story (Capitol Crawl).' },
+      { word: 'brave',      type: 'fringe', instructional: 'generative',  top5: false, notes: 'On communication board. Jennifer\'s character trait — central to retelling.' },
+      // ── Core words (communication board — high-frequency, likely on most systems) ──
+      { word: 'want',       type: 'core',   instructional: 'generative',  top5: true,  notes: 'Jennifer wanted equal rights — drives the whole story. Board: core (blue).' },
+      { word: 'help',       type: 'core',   instructional: 'generative',  top5: false, notes: 'Communication board core.' },
+      { word: 'change',     type: 'core',   instructional: 'generative',  top5: false, notes: 'Communication board core. What Jennifer wanted to change.' },
+      { word: 'fight',      type: 'core',   instructional: 'generative',  top5: false, notes: 'Communication board core. Jennifer fought for rights.' },
+      { word: 'can',        type: 'core',   instructional: 'generative',  top5: false },
+      { word: 'go',         type: 'core',   instructional: 'generative',  top5: false },
+      { word: 'more',       type: 'core',   instructional: 'generative',  top5: false },
+      { word: 'all',        type: 'core',   instructional: 'generative',  top5: false },
+    ],
+    reviewWords: [],
+    heartWords: [],
+    morphologyNotes: [],
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────────
+  // FICTION LAUNCH SET — Units 2–6 (PENDING BUILD)
+  // These stubs reserve the unit entries so they appear in Airtable correctly
+  // once built. Vocabulary will be confirmed and added at build time per the
+  // build-time vocab sync rule. Do NOT add placeholder words — keep newWords
+  // empty until the unit's vocabulary has been confirmed through framework gates.
+  // ──────────────────────────────────────────────────────────────────────────────
+
+  {
+    number: 2,
+    unitTitle: 'The Giver: Character and Society',
+    productLine: 'Fiction Anchor Text Unit',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'Standards: RL.7.1/7.2. Grades 6–8. Pairs with Fred Korematsu nonfiction. Target May 2026 alongside UFLI launch.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 3,
+    unitTitle: 'Rules: Identity and Belonging',
+    productLine: 'Fiction Anchor Text Unit',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'Standards: RL.4.3/4.6. Grades 4–6. AAC sibling/disability rep — identity and belonging theme. Pairs with Judy Heumann nonfiction.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 4,
+    unitTitle: 'Out of My Mind: Voice and Agency',
+    productLine: 'Fiction Anchor Text Unit',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'Standards: RL.5.3/5.6. Grades 4–7. AAC protagonist — FLAGSHIP unit for the line. Highest priority after Wonder.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 5,
+    unitTitle: 'Hatchet: Survival and Resilience',
+    productLine: 'Fiction Anchor Text Unit',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'Standards: RL.5.2/5.5. Grades 5–7. Pairs with Malala Yousafzai nonfiction. Target September 2026.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 6,
+    unitTitle: 'Ghost: Identity and Running',
+    productLine: 'Fiction Anchor Text Unit',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'Standards: RL.7.1/7.3. Grades 5–8. BHM hook. Pairs with Roberto Clemente nonfiction. Target September 2026.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
 ];
 
 module.exports = units;

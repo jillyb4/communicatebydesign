@@ -1,5 +1,6 @@
 # Memory
 
+
 ## Me
 Jill McCardel, special educator and advocate. Creator of Communicate by Design (CbD).
 Working toward AT certification (not yet certified — do NOT call me AT Specialist).
@@ -18,6 +19,7 @@ Working toward AT certification (not yet certified — do NOT call me AT Special
 | **Icon** | Amber speech bubble with AAC communication board inside |
 | **Violet (documents)** | #6B21A8 (Deep Violet — Poetry Reading Units, .docx/.pdf. WCAG AAA on white, ~12:1). |
 | **Violet (digital/Canva)** | #C084FC (Bright Violet — Poetry Reading Units, Canva/social on navy only. Fails WCAG on white). |
+| **Dusty Rose-Coral** | #D4614E (Picture Book Companions + AT/AAC Family/Homeschool sub-line. Locked Apr 3 2026). |
 
 ## Platforms
 | Platform | Handle / URL |
@@ -71,7 +73,7 @@ Strategic context only (things that don't belong in Airtable):
 | **TPT store** | 13 products LIVE. UFLI (36 products) is next major launch. | May 2026 |
 | **All the Way to the Top Companion** | K–3 picture book companion. Price: $5. Research foundation built (`Research/Picture_Book_Companions_Research_Foundation.md`). Framework: IRA + Dialogic Reading + ALS. Standard: RL.K-3.3 + RL.K-3.4. 3-reading structure + ALS one-pager embedded. Vocab ceiling: 15–20 words. VSD → V2. | July 2026 (ADA anniversary) |
 | **504 Sit-In + Capitol Crawl bundle** | Bundle both for Disability Pride Month. Both LIVE. | July 2026 |
-| **UFLI Phonics** | 36 products built + QC passed. Covers in Canva → preview PDFs → TPT upload. | May 2026 |
+| **UFLI Phonics** | Two-product structure LOCKED (2026-04-03): FREE = Lessons 1–5 · PAID $20 = Lessons 6–34 + Teacher/Partner Guide. Old individual/$1/bundle pricing RETIRED. Folders assembled in `UFLI/Output/TPT_FREE_Lessons1-5/` and `TPT_PAID_Lessons6-34/`. TPT listings: `Products/UFLI Phonics/TPT_Listings_UFLI_AAC_Companion.md`. Covers in Canva (Jill handling). | May 2026 |
 | **AAC Trading Cards** | 5 decks built, Order #82750 placed. **Sub-brand name locked: CbD Card Collection.** All listings lead with "AAC Trading Cards · CbD Card Collection." 3-phase launch strategy: Phase 1 = standalone core decks (Starter/Growing/Full) on Etsy NOW from existing inventory; Phase 2 = UFLI Phonics deck on Etsy at May 2026 UFLI curriculum launch (add Etsy callout to every UFLI TPT listing); Phase 3 = per-curriculum companion decks as nonfiction (→22 units) and fiction (→25 units) expand. Full ecosystem threshold: 22 nonfiction + 25 fiction + UFLI. ⚠️ Unit economics question OPEN — calculate cost-per-card at 500-unit print run before committing to next print run. Two Etsy listing variants needed: clinical language (SLP/educator) + plain parent language (family buyer). Goal: 10 Etsy reviews before Amazon launch. | Phase 1: Now · Phase 2: May 2026 |
 | **AT/AAC Family Sub-Line** | Pipeline designed (F0–F5). Build F0 freebie first. | — |
 | **Substack** | 4 posts live. Post #3 "AT Consideration Is a Legal Requirement…" published April 2, 2026. Next: "Tools I Wish Someone Had Handed Me" (Apr 7) · "IEP Goals for AAC Users" (Apr 8) · "My Student Has an AAC Device…" (Apr 10). Gold standard post format locked: `Substack/CbD_Substack_Post_Format_GoldStandard.md` | Apr 2026 |
@@ -91,7 +93,7 @@ Strategic context only (things that don't belong in Airtable):
 | Products | `tbl2YSRQiW7RHEPY5` | 32 | One record per product. Pipeline milestone checkboxes (Docx Built, QC Passed, Preview PDF, Canva Cover, TPT Listed, Pinterest, Instagram, Facebook, In Bundle). Linked to Work Items via "Work Items" field `fldQqKF1j3rZKRifK`. |
 | Launch Pipeline | `tblKDEYyrRdPOtbhX` | 68 | All pipeline product ideas across every product line — migrated from `CbD_TPT_Launch_Calendar.xlsx` (Session 17). Linked to Products table. Fields: Product Name, Product Line, Status, Estimated Price, Target Date, Seasonal Hook, Strategic Notes, Grade Band, RL/ELA Standards, CbD Target Skills, Priority Score, Linked Product. |
 | Instructional Activities | `tblHJlkbCF7c4tCNP` | 13 | Evidence-based instructional activities with HLP references, UDL principles, AAC framework connections. Linked to Launch Pipeline. Original 6: ALM Shared Reading, Visual Scene Displays, Descriptive Teaching Model, Predictable Chart Writing/Write-Ables, Story Bags & Multisensory Grounding, Critical Response Scaffolds. Fiction additions (Session 19): Story Grammar, Inferencing Scaffolds, Describe to Draw. Nonfiction + Picture Book additions (Session 20): Close Reading & Annotation (HLP 16), CER Framework (HLP 14), IRA with Planned Vocabulary Stops (HLP 12+16), Dialogic Reading with CROWD Prompts (HLP 14). ALM updated to include Picture Book Companions. |
-| **Vocabulary** | `tblL2KH04WijW8XUb` | **501** | **NEW (Session 18); synced Session 21.** Master AAC vocabulary database. 346 UFLI Phonics (Lessons 5–34) + 137 Nonfiction (6 units) + 24 Wonder fiction (Set A core + fringe) = 501 words total. Sync script: `_Operations/sync_vocab_to_airtable.js` (uses `returnFieldsByFieldId=true`). Run after any new product line vocab is added. Fields: Word, Word Type (Core/Fringe/Heart), Fitzgerald Category, Fitzgerald Color Hex, UFLI Lessons, First UFLI Lesson, Nonfiction Units, Product Lines, Product Count, Appears in Both Lines, Priority Vocabulary, Notes. |
+| **Vocabulary** | `tblL2KH04WijW8XUb` | **501** | **NEW (Session 18); synced Session 21.** Master AAC vocabulary database. 346 UFLI Phonics (Lessons 5–34) + 137 Nonfiction (6 units) + 24 Wonder fiction (Set A core + fringe) = 501 words total. Sync script: `_Operations/Build/sync_vocab_to_airtable.js` (uses `returnFieldsByFieldId=true`). Run after any new product line vocab is added. Fields: Word, Word Type (Core/Fringe/Heart), Fitzgerald Category, Fitzgerald Color Hex, UFLI Lessons, First UFLI Lesson, Nonfiction Units, Product Lines, Product Count, Appears in Both Lines, Priority Vocabulary, Notes. |
 
 **Products table — Pinterest tracking fields (added 2026-04-01):**
 | Field | ID | Type | Purpose |
@@ -151,9 +153,9 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 | **Fiction Anchor Texts** | — | 0 live. SDI companion units for traditional K–12 novels already in classrooms. NOT a Lexile differentiation product — text stays the same, access layer is the product. Skills target RL standards. Framework: Story Grammar (Spencer & Petersen 2020) + Description-First activity design + Visual Scene Displays + Emotional/mental state vocabulary pre-teaching. Product architecture: two files per unit — main unit docx + Fiction Printable Packet PDF (Python/ReportLab, 4 layers, 9 pages). Two vocabulary sets: Set A = SDI instruction targets (symbol cards + Vocab Map), Set B = full communication board vocabulary. Printable Packet spec: `_Operations/memory/fiction_printable_packet_spec.md`. Reference: `_Operations/memory/fiction_reference.md`. Research: `Research/Fiction_Narrative_Research_Foundation.md`. Brand color TBD. Pricing model TBD (not passage-count based). **Pipeline: 31 titles in Airtable Launch Pipeline. 11 of 31 are disability-representation texts (AAC, autism, physical disability, learning differences, hearing loss, dyslexia). This is a brand identity, not a coincidence.** **CONFIRMED 6-UNIT LAUNCH SET (Session 22):** 1→Wonder (active, Gr 3–8, RL.5.3/5.6) · 2→The Giver (Gr 6–8, RL.7.1/7.2) · 3→Rules · Identity (Gr 4–6, RL.4.3/4.6, AAC sibling/disability rep — identity & belonging theme) · 4→Out of My Mind (Gr 4–7, RL.5.3/5.6, AAC protagonist ⭐ flagship) · 5→Hatchet (Gr 5–7, RL.5.2/5.5) · 6→Ghost (Gr 5–8, RL.7.1/7.3, BHM hook). All 6 records tagged in Airtable as "🚀 LAUNCH SET — Unit X of 6". |
 | **Picture Book Companions** | K–3 | 0 live. New sub-line est. 2026-03-26. First product: All the Way to the Top. Framework: IRA + Dialogic Reading + ALS. Research: `Research/Picture_Book_Companions_Research_Foundation.md` (created 2026-03-29). Standards: RL.K-3.3 + RL.K-3.4. 3-reading structure. ALS one-pager embedded. Vocab ceiling: 15–20 words. |
 | **UFLI Phonics** | — | 36 products built, not yet listed. Target May 2026. |
-| **Poetry Reading Units** | — | 0 live. NEW product line est. 2026-03-30. Grades 6–10. 4-unit Phase 1 pipeline in Airtable. **Architecture: access-layer model** (same poem across V1/V2/V3 — NOT text-versioned). CbD-original strategy: **NOTICE/FEEL/MEAN/ASK (NFMA)**. Price: $9.95/unit. Cadence: every 2 months starting May 2026. All 5 pre-build gates PASSED. **Unit 1 "What the Voice Carries" build status (Session 23):** COMPLETE.docx ✓ · Student Packet ✓ 13pp REBUILT (b&w printable, white bg, thin navy bar only — Session 23) · CAP ✓ 12pp (shared tracker appended, two-tier access, no SLP-gatekeeper language) · Session Tracker ✓ 6pp · ⚠️ QC not yet run · ⚠️ GitHub push pending · ⚠️ Canva cover export + TPT listing pending. Airtable Products record: `receS8L09qmIxUmcO` (Workflow Stage: Building, Docx Built ✓, linked to Launch Pipeline). Launch Pipeline: `recgA5kflO2nGrjmB` (status: 🔨 In Build). Canva cover: `DAHFebI7Z2k`. Initial build plan: `Research/CbD_Poetry_Unit_Line_Initial_Build_Plan.md`. |
+| **Poetry Reading Units** | — | 0 live. NEW product line est. 2026-03-30. Grades 6–10. 4-unit Phase 1 pipeline in Airtable. **Architecture: access-layer model** (same poem across V1/V2/V3 — NOT text-versioned). CbD-original strategy: **NOTICE/FEEL/MEAN/ASK (NFMA)**. Price: $9.95/unit. Cadence: every 2 months starting May 2026. All 5 pre-build gates PASSED. **Unit 1 "What the Voice Carries" build status (Session 24 — Apr 3 2026):** COMPLETE.docx ✓ rebuilt clean (35.5 KB, 16 sections, 17 page breaks) · Student Packet ✓ 13pp rebuilt (b&w, metadata fixed, AAC verb fixed) · CAP ✓ 12pp · Session Tracker ✓ 6pp · **QC PASSED Apr 3 2026** (4 issues fixed — see `Unit1_QC_Report_2026-04-03.md`) · ⚠️ Jill: re-export COMPLETE.docx → PDF from Word (existing PDF is LibreOffice — violates CbD rule) · ⚠️ GitHub push pending · ⚠️ Canva cover export + TPT listing pending. Airtable Products record: `receS8L09qmIxUmcO` (Docx Built ✓, QC Passed ✓). Launch Pipeline: `recgA5kflO2nGrjmB`. Canva cover: `DAHFebI7Z2k`. **CRITICAL BUILD RULES (fixed Apr 3 — apply to ALL future build scripts):** (1) Import `{Paragraph, HeadingLevel, etc.}` from `T` not `require("docx")` — different instances break headings/page breaks. (2) `assembleAndWrite()` auto-strips rootKey XML tags via adm-zip (`_Operations/node_modules/adm-zip` required). (3) `titlePage()` accepts `opts.productLine` — pass `"A Poetry Reading Unit"` for poetry line. Initial build plan: `Research/CbD_Poetry_Unit_Line_Initial_Build_Plan.md`. |
 | **AAC Trading Cards** | Standalone Decks | 5 decks: UFLI (346), Alphabet (78), Starter Core (54), Growing Core (170), Full Core (377) |
-| **AAC Trading Cards** | Per-Product Companion | Module: `_Operations/cbd_trading_cards.py` |
+| **AAC Trading Cards** | Per-Product Companion | Module: `_Operations/Build/cbd_trading_cards.py` |
 
 ## Nonfiction Unit Pricing
 | Passages | Price |
@@ -163,16 +165,14 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 | 3 passages | $10.95 |
 | 4+ passages | $11.95 |
 
-## UFLI Phonics Pricing
-**Full scope: Lessons A–J (Alternative Pencil / 26 letters) + Lessons 1–128 (15 phonics units). Currently built: Lessons 1–34 (Phase 1, May 2026 launch).**
+## UFLI Phonics Pricing — UPDATED 2026-04-03
 
 | Product | Price |
 |---------|-------|
-| Teacher Guide + Communication Partner Guide | $5 |
-| Individual Lesson Packet (any lesson, A–J or 1–128) | $1 each |
-| Unit Bundle (lessons grouped by phonics skill) | $5–6 (TBD by unit lesson count) |
-| Lessons 1–34 Bundle (Phase 1) | $25 (save $9) |
-| Complete Set (all phases — TBD when full scope is built) | TBD |
+| UFLI AAC Companion — Lessons 1–5 | FREE |
+| UFLI AAC Companion — Lessons 6–34 + Teacher & Partner Guide | $20 |
+
+**Old pricing (individual $1/lesson, $5 guide, $25 bundle, $28 complete set) is RETIRED.**
 
 ## AAC Trading Card Deck Tiers
 | Deck | Cards |
@@ -259,6 +259,9 @@ Monitor special education Facebook groups (7.5M+ viewers) for real practitioner 
 - **V3 passages:** core words + highest-frequency fringe only. Scaffold = vocabulary access, not reduced expectation.
 - **Do NOT invent skill designations:** Keiko=#1, Radium Girls=#1, Zitkala-Ša=#3, 504 Sit-In=#4, Frances Kelsey=#5, Capitol Crawl=#6
 - **Do NOT change existing unit pricing** — use tiered table above
+- **Vocabulary sync runs at BUILD TIME, not at TPT listing** — run `sync_vocab_to_airtable.js` after vocabulary framework gates pass and words are confirmed in `cbd_unit_vocab.js`. Do NOT wait until TPT listing. Do NOT sync stubs (`pendingBuild: true`) — words must be confirmed first.
+- **AAC Trading Cards are Year 2 / 2027 — exclude from all 2026 production dashboards, task lists, and KPIs.** Unit economics question deferred to 2027 planning. Do not surface in active tracking.
+- **Completed tasks must be cleared from dashboards immediately.** When a cover is uploaded, QC passes, or a product goes live — remove it from the alert banner AND priority actions list in that same session. Never let a completed task show as overdue.
 - **AAC core/fringe word TABLE required** in every unit's Differentiating section — `makeTable()`, not bullet lists
 - **Every nonfiction unit must have all 22 standard sections** → `_Operations/memory/nonfiction_build_reference.md`
 - **WCAG 2.2 Level AA** on all documents. Use #006DA0 teal in .docx/.pdf (not #00B4D8).
@@ -355,11 +358,13 @@ Before any new product line (or major new product within a line) moves into buil
 - **Never build without explicit instruction.** Answer first, build only when asked.
 - **str_replace over rebuilds always.** Targeted edits, not full rebuilds.
 - **Flag usage cost before large builds** (all 30 packets, all 6 nonfiction units, etc.)
-- **Nonfiction require path:** `path.join(__dirname, "..", "..", "..", "_Operations", "cbd_docx_template")` — 3 levels up from unit folder
-- **Template:** `_Operations/cbd_docx_template.js`
-- **Communication Access Packet (multi-unit):** `_Operations/build_all_units.py` — builds all 6 nonfiction units, assembles TPT folders with Welcome/Terms. Word lists + page counts in `nonfiction_build_reference.md`. Run after docx → PDF conversion.
-- **Communication Access Packet (single-unit reference):** `_Operations/build_comm_access_packet.py` (Frances Kelsey)
-- **TPT Preview PDF (nonfiction standard, locked 2026-04-02):** `_Operations/build_all_previews.py` — watermarked 10–11 page previews for all 6 nonfiction units. Runs after CAP is built. Output: `[Unit]_TPT/[Unit]_TPT_Preview.pdf` (primary, lives with all TPT upload files) + `Preview PDFs/` central copy. **Source MUST be Word-exported PDF from `_TPT/` folder — NEVER LibreOffice.** Standard page set: cover + overview + comm-access + V1/V2/V3 passages + Short Answer/Evidence Sort activities (NO MCQ pages — they render blank) + CAP "Priority Vocabulary" symbol page + back. Full spec + verified page indices in `nonfiction_build_reference.md` → "TPT Preview PDF — Standard." For new units: `--inspect --unit [key]` first, then add UNITS config entry.
+- **Nonfiction require path:** `path.join(__dirname, "..", "..", "..", "_Operations", "Build", "cbd_docx_template")` — 3 levels up from unit folder, into Build/
+- **Template:** `_Operations/Build/cbd_docx_template.js`
+- **Symbol library (authoritative):** `_Operations/Symbols/symbol_library/` (400 files)
+- **Symbol cache (authoritative):** `_Operations/Symbols/symbol_cache/` (741 PNGs)
+- **Communication Access Packet (multi-unit):** `_Operations/Build/build_all_units.py` — builds all 6 nonfiction units, assembles TPT folders with Welcome/Terms. Word lists + page counts in `nonfiction_build_reference.md`. Run after docx → PDF conversion.
+- **Communication Access Packet (single-unit reference):** `_Operations/Build/build_comm_access_packet.py` (Frances Kelsey)
+- **TPT Preview PDF (nonfiction standard, locked 2026-04-02):** `_Operations/Build/build_all_previews.py` — watermarked 10–11 page previews for all 6 nonfiction units. Runs after CAP is built. Output: `[Unit]_TPT/[Unit]_TPT_Preview.pdf` (primary, lives with all TPT upload files) + `Preview PDFs/` central copy. **Source MUST be Word-exported PDF from `_TPT/` folder — NEVER LibreOffice.** Standard page set: cover + overview + comm-access + V1/V2/V3 passages + Short Answer/Evidence Sort activities (NO MCQ pages — they render blank) + CAP "Priority Vocabulary" symbol page + back. Full spec + verified page indices in `nonfiction_build_reference.md` → "TPT Preview PDF — Standard." For new units: `--inspect --unit [key]` first, then add UNITS config entry.
 → Full build warnings + code patterns: `_Operations/memory/build_system_reference.md`
 → UFLI build details + packet features: `_Operations/memory/ufli_build_reference.md`
 → Symbol cards + binder ecosystem + print spec: `_Operations/memory/symbol_binder_reference.md`
@@ -372,29 +377,85 @@ Before any new product line (or major new product within a line) moves into buil
 ```
 Communicate by Design/
 ├── Brand Assets/
+│   ├── CbD-Brand-Guidelines.pdf
+│   ├── Nonfiction Lesson/
+│   │   ├── CbD_Nonfiction_Cover_GoldStandard.md
+│   │   ├── TPT Image Covers Uploaded/   ← LIVE on TPT — do not alter
+│   │   └── TPT Image Cover Pending/     ← built, not yet uploaded
+│   └── AT ACC Products/
 ├── Distrubution/
-│   └── Teachers Pay Teachers/ (Cover Index, Launch Calendar, TPT strategy docs, CSVs)
+│   ├── Teachers Pay Teachers/  (CbD_TPT_Cover_Index.md, TPT strategy docs, CSVs)
+│   └── Pinterest/
+│       ├── CBD_Canva_Pin_Design_Index.md
+│       └── Daily Briefs/        ← pinterest daily brief outputs
 ├── Marketing/
 │   ├── Photos/
-│   ├── Pinterest/
-│   └── SEO Reports/           (CbD_SEO_Keyword_Research.xlsx, all SEO audits)
+│   └── SEO Reports/             (CbD_SEO_Keyword_Research.xlsx, all SEO audits)
 ├── Products/
-│   ├── AAC Trading Cards/     (flat deck folders: UFLI Phonics, Alphabet, Starter/Growing/Full Core, Upper Elementary)
+│   ├── AAC Trading Cards/       (Year 2/2027 — flat deck folders)
 │   ├── AT AAC IEP TEAM Supports/
-│   ├── Fiction Anchor Texts/
-│   ├── Nonfiction Units/      (build scripts + COMPLETE.docx inside each unit folder)
-│   ├── Picture Book Companions/
-│   └── UFLI Phonics/          (Ready for TPT v3/ = 34 final files)
-├── Research/
+│   ├── Fiction Anchor Texts/    (build scripts + COMPLETE.docx inside each unit folder)
+│   ├── Nonfiction Units/        (build scripts + COMPLETE.docx inside each unit folder)
+│   ├── Picture Book Companions/ (All the Way to the Top/)
+│   ├── Poetry Reading Units/    (Unit 1 - What the Voice Carries/)
+│   └── UFLI Phonics/            (Output/TPT_FREE_Lessons1-5/ and TPT_PAID_Lessons6-34/)
+├── Research/                    (all research .md files — authoritative)
 ├── Substack/
+│   ├── CbD_Substack_Post_Format_GoldStandard.md
+│   └── CbD_Substack_Growth_Workflow.md
+├── TASKS.md                     ← active task list
 └── _Operations/
-    ├── Print References/
+    ├── Build/                   ← ALL shared build scripts (moved 2026-04-03)
+    │   ├── cbd_docx_template.js          ← template for all .docx builds
+    │   ├── cbd_unit_vocab.js             ← master vocabulary data (nonfiction + fiction + poetry + picbk)
+    │   ├── cbd_unit_vocab.js             ← vocabulary for all non-UFLI product lines
+    │   ├── fitzgerald_key.js             ← Fitzgerald Key color assignments
+    │   ├── sync_vocab_to_airtable.js     ← run at BUILD TIME after framework gates
+    │   ├── build_all_units.py            ← CAP for all 6 nonfiction units
+    │   ├── build_all_previews.py         ← TPT preview PDFs for all nonfiction units
+    │   ├── build_comm_access_packet.py   ← single-unit CAP reference (Frances Kelsey)
+    │   ├── build_nonfiction_kits.js
+    │   ├── build_unit_printable_kit.js
+    │   ├── build_trading_card_decks.py
+    │   ├── cbd_aac_support.js
+    │   ├── cbd_symbol_cards.py
+    │   ├── cbd_symbol_fetcher.js
+    │   ├── cbd_trading_cards.py
+    │   ├── nonfiction_unit_vocab.js
+    │   ├── rebuild_vocab_explorer.js
+    │   └── [other shared scripts]
+    ├── Dashboards/              ← ALL dashboards here — never create a new one elsewhere
+    │   ├── CbD_Launch_Dashboard.html     ← Operations (primary)
+    │   ├── CbD_Task_Dashboard.html       ← Kanban task board
+    │   ├── CbD_Workflow_Visual.html      ← Pipeline workflow
+    │   └── CbD_Vocabulary_Dashboard.html ← Vocabulary framework reference (NEW Apr 3)
+    ├── Symbols/                 ← AUTHORITATIVE — do not duplicate
+    │   ├── symbol_library/      ← 400 word-to-symbol mappings
+    │   └── symbol_cache/        ← 741 ARASAAC PNGs
+    ├── _Shared_Inserts/         ← About, Accessibility, Terms docx — never rewrite
+    ├── memory/                  ← all reference .md files
+    │   ├── nonfiction_build_reference.md
+    │   ├── ufli_build_reference.md
+    │   ├── build_system_reference.md
+    │   ├── fiction_reference.md
+    │   ├── fiction_printable_packet_spec.md
+    │   ├── vocabulary_selection_reference.md
+    │   ├── new_product_line_workflow.md
+    │   └── [other reference files]
     ├── QC/
-    ├── memory/                (projects/, reference files, CbD_Unit_Design_Master_Reference.md)
-    ├── symbol_cache/          (741 ARASAAC PNGs)
-    └── symbol_library/        (400+ word-to-symbol mappings)
+    ├── SESSION_STATE.md         ← READ THIS FIRST every session
+    ├── CbD_Production_Workflows.xlsx
+    └── node_modules/            ← shared — do NOT duplicate in product folders
 ```
-Key files: `_Operations/CbD_Production_Workflows.xlsx` · `Distrubution/Teachers Pay Teachers/CbD_TPT_Launch_Calendar.xlsx` · `TASKS.md`
+Key files: `_Operations/SESSION_STATE.md` (read first) · `_Operations/CbD_Production_Workflows.xlsx` · `TASKS.md`
+
+**⚠️ Path rules — never guess:**
+- Symbol library: `_Operations/Symbols/symbol_library/` (NOT `_Operations/symbol_library/`)
+- Symbol cache: `_Operations/Symbols/symbol_cache/` (NOT `_Operations/symbol_cache/`)
+- Build scripts: `_Operations/Build/[script]` (NOT `_Operations/[script]`)
+- Dashboards: `_Operations/Dashboards/[file]` (NOT anywhere else)
+- Product build scripts stay in their product folder and require Build/ using the 3-level path
+- Vocabulary data: `_Operations/Build/cbd_unit_vocab.js` (all non-UFLI lines)
 
 ---
 

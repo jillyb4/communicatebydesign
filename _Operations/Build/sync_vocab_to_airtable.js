@@ -117,12 +117,19 @@ function wordTypeLabel(t) { return WORD_TYPE_LABELS[t] || 'Fringe'; }
 
 // Map full unit titles (from cbd_unit_vocab.js) to Airtable multiselect option names
 const UNIT_TITLE_MAP = {
+  // Nonfiction (6 live units)
   'Radium Girls'                             : 'Radium Girls',
   "Keiko: A Whale's Journey"                 : 'Keiko',
   'Frances Kelsey and the Thalidomide Crisis': 'Frances Kelsey',
   '504 Sit-In 1977'                          : '504 Sit-In',
   'Capitol Crawl 1990'                       : 'Capitol Crawl',
   'Zitkala-Ša'                               : 'Zitkala-Ša',
+  // Fiction Anchor Texts
+  'Wonder: Character Analysis'               : 'Wonder',
+  // Poetry Reading Units
+  'What the Voice Carries'                   : 'What the Voice Carries',
+  // Picture Book Companions
+  'All the Way to the Top'                   : 'All the Way to the Top',
 };
 function unitLabel(title) { return UNIT_TITLE_MAP[title] || title; }
 
@@ -161,10 +168,18 @@ function buildMasterMap() {
     // Separate fiction units (unit 7+, unitTitle contains ':') from nonfiction (1–6)
     // unitTitle check: nonfiction units are the first 6; Wonder is fiction.
     // Use productLine field to distinguish.
-    const isNonfiction = unit.productLine === 'Nonfiction Reading Unit';
-    const isFiction    = unit.productLine === 'Fiction Anchor Text Unit' ||
-                         unit.unitTitle.includes('Character Analysis');
-    const productLine  = isFiction ? 'Fiction Anchor Texts' : 'Nonfiction Reading Units';
+    // Skip pending-build stubs — no words to sync yet
+    if (unit.pendingBuild) continue;
+
+    const isNonfiction  = unit.productLine === 'Nonfiction Reading Unit';
+    const isFiction     = unit.productLine === 'Fiction Anchor Text Unit' ||
+                          unit.unitTitle.includes('Character Analysis');
+    const isPoetry      = unit.productLine === 'Poetry Reading Unit';
+    const isPictureBook = unit.productLine === 'Picture Book Companion';
+    const productLine   = isFiction     ? 'Fiction Anchor Texts'      :
+                          isPoetry      ? 'Poetry Reading Units'       :
+                          isPictureBook ? 'Picture Book Companions'    :
+                                         'Nonfiction Reading Units';
 
     for (const w of unit.newWords) {
       const e = entry(w.word);
@@ -179,8 +194,12 @@ function buildMasterMap() {
       e.productLines.add(productLine);
       if (w.top5) e.priority = true;
       if (w.instructional) {
-        const note = `${unit.unitTitle}: ${w.instructional}`;
+        const note = `${mappedTitle}: ${w.instructional}`;
         if (!e.notes.includes(note)) e.notes.push(note);
+      }
+      if (w.notes && typeof w.notes === 'string') {
+        const noteKey = `${mappedTitle} — ${w.notes}`;
+        if (!e.notes.includes(noteKey)) e.notes.push(noteKey);
       }
     }
   }

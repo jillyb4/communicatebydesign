@@ -37,7 +37,7 @@ import os, math, json, sys
 
 # ── Paths ──
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-SYMBOL_CACHE = os.path.join(SCRIPT_DIR, "symbol_cache")
+SYMBOL_CACHE = os.path.join(SCRIPT_DIR, "..", "Symbols", "symbol_cache")
 
 # ── Trading card dimensions ──
 CARD_W = 2.5 * inch

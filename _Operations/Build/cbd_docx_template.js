@@ -866,7 +866,7 @@ function titlePage(opts) {
     spacing: { after: 200 },
     border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: TEAL, space: 1 } },
   }));
-  items.push(p("A Nonfiction Reading Unit", { size: 28, align: AlignmentType.CENTER, color: NAVY, after: 60 }));
+  items.push(p(opts.productLine || "A Nonfiction Reading Unit", { size: 28, align: AlignmentType.CENTER, color: NAVY, after: 60 }));
   items.push(p([
     { text: `Target Literacy Skill ${opts.skillNumber}: `, size: 24, color: NAVY },
     { text: opts.skillName, size: 24, bold: true, color: TEAL },
@@ -1004,7 +1004,25 @@ function assembleAndWrite(unitShortTitle, children, outputPath, meta = {}) {
   });
 
   return Packer.toBuffer(doc).then(buffer => {
-    require("fs").writeFileSync(outputPath, buffer);
+    // Post-process: strip spurious <rootKey>...</rootKey> tags injected by docx XML serializer bug
+    const AdmZip = (() => { try { return require("adm-zip"); } catch { return null; } })();
+    if (AdmZip) {
+      const zip = new AdmZip(buffer);
+      const entry = zip.getEntry("word/document.xml");
+      if (entry) {
+        let xml = entry.getData().toString("utf8");
+        const before = (xml.match(/<rootKey>/g) || []).length;
+        if (before > 0) {
+          xml = xml.replace(/<rootKey>[^<]*<\/rootKey>/g, "");
+          zip.updateFile("word/document.xml", Buffer.from(xml, "utf8"));
+          buffer = zip.toBuffer();
+          console.log(`  (stripped ${before} rootKey tags from document.xml)`);
+        }
+      }
+      require("fs").writeFileSync(outputPath, buffer);
+    } else {
+      require("fs").writeFileSync(outputPath, buffer);
+    }
     console.log(`Document created: ${outputPath}`);
     console.log(`Size: ${(buffer.length / 1024).toFixed(1)} KB`);
     return buffer;

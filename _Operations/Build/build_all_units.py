@@ -36,7 +36,7 @@ from reportlab.platypus.flowables import Image as RLImage
 
 MNT       = "/sessions/kind-gracious-keller/mnt/Communicate by Design"
 SCRATCH   = "/sessions/kind-gracious-keller"
-SYM_CACHE = os.path.join(MNT, "_Operations/symbol_cache")
+SYM_CACHE = os.path.join(MNT, "_Operations/Symbols/symbol_cache")
 TRACKER   = os.path.join(MNT, "Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf")
 NF_ROOT   = os.path.join(MNT, "Products/Nonfiction Units")
 

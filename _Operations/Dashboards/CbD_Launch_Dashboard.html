@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — Operations Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1B1F3B; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; }
+  a { color: #00B4D8; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ─── Sticky Nav ──────────────────────────────────────── */
+  .cbd-nav { background: #0d1020; border-bottom: 1px solid #2d3456; padding: 0 20px; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 200; height: 36px; font-size: 12px; }
+  .cbd-nav-brand { display: flex; align-items: center; gap: 6px; color: #94A3B8; font-size: 11px; letter-spacing: 0.05em; padding-right: 16px; border-right: 1px solid #2d3456; margin-right: 8px; white-space: nowrap; }
+  .cbd-nav-brand span { color: #FFB703; font-weight: 700; }
+  .cbd-nav-tabs { display: flex; align-items: center; gap: 2px; }
+  .cbd-nav-tab { display: flex; align-items: center; gap: 5px; padding: 0 12px; height: 36px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+  .cbd-nav-tab:hover { color: #fff; text-decoration: none; border-bottom-color: #2d3456; }
+  .cbd-nav-tab.active { color: #FFB703; border-bottom-color: #FFB703; }
+  .cbd-nav-divider { width: 1px; height: 18px; background: #2d3456; margin: 0 8px; }
+  .cbd-nav-ext { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .cbd-nav-ext-link { display: flex; align-items: center; gap: 4px; padding: 0 10px; height: 36px; color: #64748b; text-decoration: none; font-size: 11px; transition: color 0.15s; white-space: nowrap; }
+  .cbd-nav-ext-link:hover { color: #00B4D8; text-decoration: none; }
+
+  /* ─── Header ──────────────────────────────────────────── */
+  .header { background: #13172e; border-bottom: 3px solid #FFB703; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-bubble { width: 38px; height: 38px; background: #FFB703; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .brand { font-size: 18px; font-weight: bold; letter-spacing: 0.5px; }
+  .brand span { color: #FFB703; }
+  .tagline { font-size: 11px; color: #94A3B8; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .header-date { font-size: 11px; color: #94A3B8; text-align: right; }
+  .header-date strong { color: #FFB703; display: block; font-size: 13px; }
+
+  /* ─── Layout ──────────────────────────────────────────── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px 24px 48px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  .four-col { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 18px; }
+  .five-col { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 18px; }
+  .full { margin-bottom: 18px; }
+
+  /* ─── KPI Cards ───────────────────────────────────────── */
+  .kpi { background: #252A4A; border-radius: 8px; padding: 14px; border-top: 3px solid; text-align: center; }
+  .kpi.amber { border-color: #FFB703; }
+  .kpi.teal { border-color: #00B4D8; }
+  .kpi.green { border-color: #4ADE80; }
+  .kpi.violet { border-color: #C084FC; }
+  .kpi.pink { border-color: #F472B6; }
+  .kpi-num { font-size: 32px; font-weight: bold; line-height: 1; }
+  .kpi.amber .kpi-num { color: #FFB703; }
+  .kpi.teal .kpi-num { color: #00B4D8; }
+  .kpi.green .kpi-num { color: #4ADE80; }
+  .kpi.violet .kpi-num { color: #C084FC; }
+  .kpi.pink .kpi-num { color: #F472B6; }
+  .kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #94A3B8; margin-top: 4px; }
+  .kpi-sub { font-size: 10px; color: #64748b; margin-top: 4px; line-height: 1.3; }
+
+  /* ─── Section headings ────────────────────────────────── */
+  .section-title { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #FFB703; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #2d3456; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,183,3,0.15); }
+
+  /* ─── Cards ───────────────────────────────────────────── */
+  .card { background: #252A4A; border-radius: 8px; padding: 16px; }
+
+  /* ─── Tables ──────────────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 10px; font-weight: bold; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.6px; padding: 6px 8px; border-bottom: 1px solid #2d3456; text-align: left; white-space: nowrap; }
+  td { padding: 7px 8px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.025); }
+
+  /* ─── Pills ───────────────────────────────────────────── */
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; letter-spacing: 0.3px; }
+  .pill-live    { background: #14532D; color: #4ADE80; }
+  .pill-cover   { background: #713f12; color: #fde68a; }
+  .pill-building{ background: #1e3a5f; color: #60A5FA; }
+  .pill-planning{ background: #2d2d1a; color: #FCD34D; }
+  .pill-drafting{ background: #2d1f4a; color: #C084FC; }
+  .pill-idea    { background: #2a2a2a; color: #94A3B8; }
+  .pill-todo    { background: #1a2a4a; color: #93C5FD; }
+  .pill-done    { background: #14532D; color: #4ADE80; }
+  .pill-inbuild { background: #3d1f00; color: #FB923C; }
+  .pill-high    { background: #450a0a; color: #FCA5A5; }
+  .pill-med     { background: #1c1c00; color: #FDE68A; }
+  .pill-low     { background: #1a1a2a; color: #94A3B8; }
+  .pill-overdue { background: #7f1d1d; color: #fca5a5; }
+
+  /* ─── Line color dots ─────────────────────────────────── */
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; flex-shrink: 0; }
+  .dot-nonfiction { background: #FB923C; }
+  .dot-aac        { background: #60A5FA; }
+  .dot-ufli       { background: #C084FC; }
+  .dot-bundle     { background: #FBBF24; }
+  .dot-fiction    { background: #4ADE80; }
+  .dot-poetry     { background: #A78BFA; }
+  .dot-trading    { background: #2DD4BF; }
+  .dot-picture    { background: #F472B6; }
+  .dot-family     { background: #7DD3FC; }
+
+  /* ─── Checks ──────────────────────────────────────────── */
+  .ck-y { color: #4ADE80; font-size: 12px; }
+  .ck-n { color: #374151; font-size: 12px; }
+  .ck-w { color: #FB923C; font-size: 12px; }
+
+  /* ─── Progress bar ────────────────────────────────────── */
+  .progress-wrap { background: #1B1F3B; border-radius: 4px; height: 6px; margin-top: 6px; overflow: hidden; }
+  .progress-bar  { height: 6px; border-radius: 4px; }
+  .bar-amber  { background: #FFB703; }
+  .bar-teal   { background: #00B4D8; }
+  .bar-green  { background: #4ADE80; }
+  .bar-violet { background: #A78BFA; }
+
+  /* ─── Task rows ───────────────────────────────────────── */
+  .task-row { padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .task-row:last-child { border-bottom: none; }
+  .task-name { font-size: 12px; line-height: 1.4; }
+  .task-meta { font-size: 10px; color: #94A3B8; margin-top: 2px; }
+  .deadline-soon { color: #FCA5A5 !important; font-weight: bold; }
+
+  /* ─── Substack ────────────────────────────────────────── */
+  .ss-row { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .ss-row:last-child { border-bottom: none; }
+  .ss-num { font-size: 11px; color: #94A3B8; width: 22px; flex-shrink: 0; padding-top: 1px; }
+  .ss-title { flex: 1; font-size: 11px; line-height: 1.4; }
+  .ss-date { font-size: 10px; color: #94A3B8; flex-shrink: 0; padding-top: 2px; }
+
+  /* ─── Quick links ─────────────────────────────────────── */
+  .links-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .link-btn { display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: bold; text-decoration: none; }
+  .link-btn:hover { opacity: 0.85; text-decoration: none; }
+  .link-airtable  { background: #FFB703; color: #1B1F3B; }
+  .link-tpt       { background: #22c55e; color: #fff; }
+  .link-substack  { background: #ff6719; color: #fff; }
+  .link-pinterest { background: #e60023; color: #fff; }
+  .link-canva     { background: #00B4D8; color: #1B1F3B; }
+  .link-vocab     { background: #A78BFA; color: #1B1F3B; }
+
+  /* ─── Alert banner ────────────────────────────────────── */
+  .alert { background: linear-gradient(135deg, #7f1d1d, #991b1b); border: 1px solid #ef4444; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; }
+  .alert-title { font-size: 12px; font-weight: bold; color: #fca5a5; margin-bottom: 4px; }
+  .alert-items { font-size: 11px; color: #fecaca; line-height: 1.8; }
+
+  /* ─── Build status chips ──────────────────────────────── */
+  .chip { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 8px; margin: 2px; }
+  .chip-done { background: #14532D; color: #4ADE80; }
+  .chip-warn { background: #450a0a; color: #FCA5A5; }
+
+  /* ─── Footer ──────────────────────────────────────────── */
+  .footer { margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 10px; color: #374151; display: flex; justify-content: space-between; align-items: center; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     STICKY NAV
+══════════════════════════════════════ -->
+<nav class="cbd-nav">
+  <div class="cbd-nav-brand">💬 <span>CbD</span> Internal</div>
+  <div class="cbd-nav-tabs">
+    <a class="cbd-nav-tab active" href="CbD_Launch_Dashboard.html">📊 Operations</a>
+    <a class="cbd-nav-tab" href="CbD_Task_Dashboard.html">✅ Tasks</a>
+    <a class="cbd-nav-tab" href="CbD_Workflow_Visual.html">🔧 Workflow</a>
+    <a class="cbd-nav-tab" href="CbD_Vocabulary_Dashboard.html">📖 Vocabulary</a>
+  </div>
+  <div class="cbd-nav-divider"></div>
+  <div class="cbd-nav-ext">
+    <a class="cbd-nav-ext-link" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">Airtable ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">TPT ↗</a>
+    <a class="cbd-nav-ext-link" href="https://communicatebydesign.substack.com" target="_blank">Substack ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.canva.com" target="_blank">Canva ↗</a>
+    <a class="cbd-nav-ext-link" href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">🔍 Vocab Explorer ↗</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HEADER
+══════════════════════════════════════ -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-bubble">💬</div>
+    <div>
+      <div class="brand">COMMUNICATE <span>BY DESIGN</span></div>
+      <div class="tagline">Where AT Meets Practice</div>
+    </div>
+  </div>
+  <div class="header-date">
+    <strong>Operations Dashboard</strong>
+    April 3, 2026 · Refreshed from Airtable
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── Quick links ── -->
+<div class="links-bar" style="margin-top:16px;">
+  <a class="link-btn link-airtable" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">📋 Airtable Base</a>
+  <a class="link-btn link-tpt" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">🛒 TPT Store</a>
+  <a class="link-btn link-substack" href="https://communicatebydesign.substack.com" target="_blank">✍️ Substack</a>
+  <a class="link-btn link-pinterest" href="https://www.pinterest.com/CommunicatebyDesign" target="_blank">📌 Pinterest</a>
+  <a class="link-btn link-canva" href="https://www.canva.com" target="_blank">🎨 Canva</a>
+  <a class="link-btn link-vocab" href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">🔍 Vocab Explorer</a>
+</div>
+
+<!-- ── Alert: Overdue / HIGH PRIORITY ── -->
+<div class="alert">
+  <div class="alert-title">🔥 Needs Attention — High Priority</div>
+  <div class="alert-items">
+    · <strong>OVERDUE:</strong> Add Autism Acceptance Month seasonal tags to AT/AAC products<br>
+    · <strong>ACTION:</strong> Poetry Unit 1 — re-export COMPLETE.docx → PDF from Word, then GitHub push, then Canva cover export + TPT listing<br>
+    · <strong>ACTION:</strong> Canva pins — Finding Symbols freebie + 504 Sit-In (both at 0 views)<br>
+    · <strong>ACTION:</strong> Canva pins — AT Toolkit + Communication Partner Guide (Autism Acceptance Month)
+  </div>
+</div>
+
+<!-- ── KPI Row ── -->
+<div class="five-col">
+  <div class="kpi amber">
+    <div class="kpi-num">15</div>
+    <div class="kpi-label">Products Live</div>
+    <div class="kpi-sub">on TPT · 6 nonfiction + 7 AT/AAC + 2 bundles</div>
+  </div>
+  <div class="kpi teal">
+    <div class="kpi-num">2</div>
+    <div class="kpi-label">UFLI Products</div>
+    <div class="kpi-sub">FREE (L1–5) · $20 (L6–34) · Covers ✓ · Consistency blocker · May 2026</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-num">4</div>
+    <div class="kpi-label">Substack Live</div>
+    <div class="kpi-sub">Post #4 published Apr 2</div>
+  </div>
+  <div class="kpi violet">
+    <div class="kpi-num">773</div>
+    <div class="kpi-label">Vocab DB Words</div>
+    <div class="kpi-sub"><a href="CbD_Vocabulary_Dashboard.html" style="color:#C4B5FD;">→ Vocabulary Dashboard</a></div>
+  </div>
+  <div class="kpi" style="border-color:#94A3B8; background:#1e2240;">
+    <div style="font-size:11px; font-weight:bold; color:#94A3B8; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.8px;">Units In Progress</div>
+    <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
+      <a href="CbD_Vocabulary_Dashboard.html" style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:bold;background:#3d2000;color:#FB923C;text-decoration:none;">6 Nonfiction ↗</a>
+      <a href="CbD_Workflow_Visual.html" style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:bold;background:#0a3020;color:#4ADE80;text-decoration:none;">6 Fiction ↗</a>
+      <a href="CbD_Workflow_Visual.html" style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:bold;background:#1f1040;color:#A78BFA;text-decoration:none;">4 Poetry ↗</a>
+      <a href="CbD_Workflow_Visual.html" style="display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:bold;background:#2a0a2a;color:#F472B6;text-decoration:none;">1 Picture Book ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     LIVE PRODUCTS
+══════════════════════════════════════ -->
+<div class="section-title">Live Products on TPT</div>
+<div class="full card">
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Line</th>
+        <th>Price</th>
+        <th style="text-align:center;">Docx</th>
+        <th style="text-align:center;">QC</th>
+        <th style="text-align:center;">Preview</th>
+        <th style="text-align:center;">Cover</th>
+        <th style="text-align:center;">Listed</th>
+        <th style="text-align:center;">Pinterest</th>
+        <th style="text-align:center;">Bundle</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="dot dot-nonfiction"></span><strong>Keiko: A Whale's Journey</strong></td>
+        <td style="color:#FB923C;font-size:11px;">Nonfiction</td>
+        <td>$9.95</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="font-size:11px;color:#94A3B8;">v2 cover uploaded ✓</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-nonfiction"></span><strong>Radium Girls</strong></td>
+        <td style="color:#FB923C;font-size:11px;">Nonfiction</td>
+        <td>$11.95</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="font-size:11px;color:#94A3B8;">v2 cover uploaded ✓</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-nonfiction"></span><strong>Zitkala-Ša</strong></td>
+        <td style="color:#FB923C;font-size:11px;">Nonfiction</td>
+        <td>$9.95</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">v2 cover uploaded ✓</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-nonfiction"></span><strong>504 Sit-In</strong></td>
+        <td style="color:#FB923C;font-size:11px;">Nonfiction</td>
+        <td>$11.95</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">v2 cover uploaded ✓ Apr 3</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-nonfiction"></span><strong>Frances Kelsey</strong></td>
+        <td style="color:#FB923C;font-size:11px;">Nonfiction</td>
+        <td>$11.95</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">v2 cover uploaded ✓</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-nonfiction"></span><strong>Capitol Crawl 1990</strong></td>
+        <td style="color:#FB923C;font-size:11px;">Nonfiction</td>
+        <td>$9.95</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">v2 cover uploaded ✓ Apr 3</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>IEP AT Consideration Toolkit</td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>$4.00</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-w">⚠</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="font-size:11px;color:#FCA5A5;">⚠ Preview PDF needed</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>IEP AT Consideration Checklist <span style="font-size:10px;background:#134e4a;color:#5eead4;padding:1px 5px;border-radius:4px;">FREE</span></td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>FREE</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-w">⚠</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#FCA5A5;">⚠ Preview PDF needed</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>AAC Data Collection Forms</td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>$3.00</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">Canva social link needed</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>AAC Communication Partner Quick Guide</td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>$3.00</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">Canva social link needed</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>Visual Schedule Template Pack</td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>$4.00</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#94A3B8;">Canva social link needed</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>Finding Symbols <span style="font-size:10px;background:#134e4a;color:#5eead4;padding:1px 5px;border-radius:4px;">FREE</span></td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>FREE</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-aac"></span>Universal AAC Data Tracker <span style="font-size:10px;background:#134e4a;color:#5eead4;padding:1px 5px;border-radius:4px;">FREE</span></td>
+        <td style="color:#60A5FA;font-size:11px;">AT/AAC IEP Team</td>
+        <td>FREE</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="font-size:11px;color:#FCA5A5;">⚠ Canva cover needed</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-bundle"></span>AT &amp; AAC Toolkit Bundle</td>
+        <td style="color:#FBBF24;font-size:11px;">Bundle</td>
+        <td>$10.00</td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;">—</td>
+        <td style="font-size:11px;color:#FCA5A5;">⚠ Audit: confirm all 5 products + pricing correct</td>
+      </tr>
+      <tr>
+        <td><span class="dot dot-bundle"></span>Nonfiction Bundle — Keiko + Radium Girls</td>
+        <td style="color:#FBBF24;font-size:11px;">Bundle</td>
+        <td>$18.00</td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;"><span class="ck-y">✓</span></td>
+        <td style="text-align:center;"><span class="ck-n">—</span></td>
+        <td style="text-align:center;">—</td>
+        <td style="font-size:11px;color:#94A3B8;">Listed · needs cover + Pinterest</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════
+     PRIORITY ACTIONS + SUBSTACK
+══════════════════════════════════════ -->
+<div class="two-col">
+
+  <!-- Priority Tasks -->
+  <div>
+    <div class="section-title">Priority Actions — Next 7 Days</div>
+    <div class="card">
+      <div class="task-row">
+        <span class="pill pill-overdue" style="margin-right:6px;font-size:9px;">OVERDUE</span>
+        <div>
+          <div class="task-name">Add Autism Acceptance Month seasonal tags to AT/AAC products</div>
+          <div class="task-meta deadline-soon">Was due Apr 1 · AT/AAC IEP Team · Just Do It</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-overdue" style="margin-right:6px;font-size:9px;">OVERDUE</span>
+        <div>
+          <div class="task-name">Upload CbD logo as Pinterest profile photo</div>
+          <div class="task-meta deadline-soon">Operations · Just Do It</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-todo" style="margin-right:6px;font-size:9px;">APR 3</span>
+        <div>
+          <div class="task-name">Poetry Unit 1 — re-export COMPLETE.docx → PDF from Word + GitHub push + TPT listing</div>
+          <div class="task-meta deadline-soon">Poetry Reading Units · Jill action required</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-todo" style="margin-right:6px;font-size:9px;">APR 3</span>
+        <div>
+          <div class="task-name">Canva pins: AT Toolkit + Comm Partner Guide (Autism Acceptance Month)</div>
+          <div class="task-meta deadline-soon">AT/AAC IEP Team · Just Do It</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-todo" style="margin-right:6px;font-size:9px;">APR 5</span>
+        <div>
+          <div class="task-name">Canva pins: Finding Symbols freebie + 504 Sit-In (both at 0 views)</div>
+          <div class="task-meta">Nonfiction · Just Do It</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-todo" style="margin-right:6px;font-size:9px;">APR 6</span>
+        <div>
+          <div class="task-name">Keiko — Create Earth Day Pinterest pin</div>
+          <div class="task-meta">Nonfiction · Just Do It</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-todo" style="margin-right:6px;font-size:9px;">APR 7</span>
+        <div>
+          <div class="task-name">Substack #5 — The Tools I Wish Someone Had Handed Me</div>
+          <div class="task-meta">AT/AAC Family pillar 🟠</div>
+        </div>
+      </div>
+      <div class="task-row">
+        <span class="pill pill-todo" style="margin-right:6px;font-size:9px;">APR 10</span>
+        <div>
+          <div class="task-name">Substack: 'My Student Has an AAC Device — Why Isn't Anyone Using It?'</div>
+          <div class="task-meta">Policy &amp; Advocacy pillar 🔴 · Sit Down &amp; Work</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Substack Pipeline -->
+  <div>
+    <div class="section-title">Substack Pipeline</div>
+    <div class="card" style="margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:bold;color:#94A3B8;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Published</div>
+      <div class="ss-row">
+        <div class="ss-num">#1</div>
+        <div class="ss-title">🟠 Welcome to Communicate by Design</div>
+        <div class="ss-date"><span class="pill pill-done">LIVE</span></div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#2</div>
+        <div class="ss-title">🟢 Keiko behind-the-scenes (Mar 15)</div>
+        <div class="ss-date"><span class="pill pill-done">LIVE</span></div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#3</div>
+        <div class="ss-title">🔴 That Statistic Is 33 Years Old (Mar 25)</div>
+        <div class="ss-date"><span class="pill pill-done">LIVE</span></div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#4</div>
+        <div class="ss-title">🔴 AT Consideration Is a Legal Requirement (Apr 2)</div>
+        <div class="ss-date"><span class="pill pill-done">LIVE</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:10px;font-weight:bold;color:#94A3B8;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Coming Up</div>
+      <div class="ss-row">
+        <div class="ss-num">#5</div>
+        <div class="ss-title">🟠 The Tools I Wish Someone Had Handed Me</div>
+        <div class="ss-date" style="color:#FCA5A5;font-weight:bold;">Apr 7</div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#6</div>
+        <div class="ss-title">🔴 IEP Goals for AAC Users</div>
+        <div class="ss-date" style="color:#FCA5A5;font-weight:bold;">Apr 8</div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#7</div>
+        <div class="ss-title">🔴 My Student Has an AAC Device… Why Isn't Anyone Using It?</div>
+        <div class="ss-date" style="color:#FCA5A5;font-weight:bold;">Apr 10</div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#8</div>
+        <div class="ss-title">🔵 Just Use the Phonemic Keyboard — And Other Things People Say</div>
+        <div class="ss-date">Apr 15</div>
+      </div>
+      <div class="ss-row">
+        <div class="ss-num">#9</div>
+        <div class="ss-title">🟡 Real Question from FB: [monitor groups weekly]</div>
+        <div class="ss-date">Apr 22</div>
+      </div>
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid #2d3456;font-size:10px;color:#64748b;">
+        📌 Strategy: FB group questions (7.5M reach) → Substack post → drop link in comment
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     IN BUILD / COMING SOON
+══════════════════════════════════════ -->
+<div class="section-title">In Build — Coming Soon</div>
+<div class="three-col">
+
+  <!-- UFLI -->
+  <div class="card">
+    <div style="font-size:11px;font-weight:bold;color:#C084FC;margin-bottom:10px;">UFLI AAC Companion — May 2026</div>
+    <table>
+      <thead><tr><th>Product</th><th>Status</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td>Lessons 1–5 <span style="font-size:10px;background:#134e4a;color:#5eead4;padding:1px 5px;border-radius:4px;">FREE</span></td><td><span class="pill pill-high">Consistency Blocker</span></td><td>FREE</td></tr>
+        <tr><td>Lessons 6–34 + Teacher &amp; Partner Guide</td><td><span class="pill pill-high">Consistency Blocker</span></td><td>$20</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;font-size:11px;color:#FCA5A5;">⚠ Blocker: Formatting/consistency issues across lesson packets — must resolve before TPT upload</div>
+    <div style="font-size:10px;color:#94A3B8;margin-top:4px;">Covers: ✓ Done in Canva · Pinterest/reel: ✓ Linked · Content: ⚠ Consistency work in progress</div>
+    <div style="font-size:10px;color:#64748b;margin-top:4px;">Old pricing ($1/lesson, $25 bundle, $28 set) RETIRED — 2-product structure locked Apr 3</div>
+    <div class="progress-wrap"><div class="progress-bar bar-violet" style="width:60%;"></div></div>
+    <div style="font-size:10px;color:#64748b;margin-top:3px;">~60% · consistency is the gate, not covers</div>
+  </div>
+
+  <!-- Poetry -->
+  <div class="card">
+    <div style="font-size:11px;font-weight:bold;color:#A78BFA;margin-bottom:10px;">Poetry Unit 1 — May 2026</div>
+    <div style="font-size:13px;font-weight:bold;margin-bottom:8px;">What the Voice Carries</div>
+    <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>COMPLETE.docx</span><span style="color:#4ADE80;">✓</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Student Packet (13pp)</span><span style="color:#4ADE80;">✓</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>CAP (12pp)</span><span style="color:#4ADE80;">✓</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Session Tracker (6pp)</span><span style="color:#4ADE80;">✓</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>QC pass</span><span style="color:#4ADE80;">✓ PASSED Apr 3</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Re-export PDF from Word</span><span style="color:#FCA5A5;">⚠ Jill action</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>GitHub push</span><span style="color:#FCA5A5;">⚠ Pending</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Canva cover (DAHFebI7Z2k)</span><span style="color:#FCA5A5;">⚠ Export needed</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;"><span>TPT listing</span><span style="color:#FCA5A5;">⚠ Pending</span></div>
+    </div>
+    <div class="progress-wrap"><div class="progress-bar bar-violet" style="width:80%;"></div></div>
+    <div style="font-size:10px;color:#64748b;margin-top:3px;">~80% · QC passed · awaiting Jill: PDF re-export + cover + listing</div>
+  </div>
+
+  <!-- Picture Book + other -->
+  <div>
+    <div class="card" style="margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:bold;color:#F472B6;margin-bottom:8px;">All the Way to the Top — Jul 26, 2026</div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Research foundation</span><span style="color:#4ADE80;">✓</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;"><span>IRA + Dialogic + ALS framework</span><span style="color:#4ADE80;">✓</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Foundation Core vocab anchor set</span><span style="color:#FCA5A5;">⚠ Needed</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;"><span>Docx build</span><span style="color:#FDE68A;">Drafting</span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar bar-amber" style="width:25%;"></div></div>
+      <div style="font-size:10px;color:#64748b;margin-top:3px;">~25% · ADA anniversary hook</div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;font-weight:bold;color:#60A5FA;margin-bottom:8px;">Other In Build</div>
+      <div style="font-size:12px;padding:4px 0;border-bottom:1px solid #2d3456;">Alternative Pencil Guide <span style="float:right;"><span class="pill pill-building">Building</span></span></div>
+      <div style="font-size:12px;padding:4px 0;border-bottom:1px solid #2d3456;">Family Sub-Line F0 Freebie <span style="float:right;"><span class="pill pill-idea">Idea</span></span></div>
+      <div style="font-size:12px;padding:4px 0;">Wonder Fiction Unit (RL.5.3/5.6) <span style="float:right;"><span class="pill pill-live">LIVE</span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     NONFICTION PIPELINE
+══════════════════════════════════════ -->
+<div class="section-title">Nonfiction Pipeline — Units 7–10</div>
+<div class="full card">
+  <table>
+    <thead>
+      <tr><th>#</th><th>Unit</th><th>Skill Focus</th><th>Fiction Pair</th><th>Seasonal Hook</th><th>Target</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:#FFB703;font-weight:bold;">7</td>
+        <td>Fred Korematsu</td>
+        <td style="font-size:11px;">Point of View / Perspective</td>
+        <td style="font-size:11px;color:#94A3B8;">The Giver</td>
+        <td style="font-size:11px;">APAHM · May</td>
+        <td style="color:#FB923C;font-size:11px;">May 2026</td>
+        <td><span class="pill pill-idea">Idea</span></td>
+      </tr>
+      <tr>
+        <td style="color:#FFB703;font-weight:bold;">8</td>
+        <td>Judy Heumann</td>
+        <td style="font-size:11px;">Disability Identity / Cause-Effect</td>
+        <td style="font-size:11px;color:#94A3B8;">Rules</td>
+        <td style="font-size:11px;">Jun · → 504 Sit-In funnel</td>
+        <td style="color:#FB923C;font-size:11px;">Jun 2026</td>
+        <td><span class="pill pill-idea">Idea</span></td>
+      </tr>
+      <tr>
+        <td style="color:#FFB703;font-weight:bold;">9</td>
+        <td>Malala Yousafzai</td>
+        <td style="font-size:11px;">Survival / CER applied to speech</td>
+        <td style="font-size:11px;color:#94A3B8;">Hatchet</td>
+        <td style="font-size:11px;">Back-to-school · Aug</td>
+        <td style="color:#94A3B8;font-size:11px;">Aug 2026</td>
+        <td><span class="pill pill-idea">Idea</span></td>
+      </tr>
+      <tr>
+        <td style="color:#FFB703;font-weight:bold;">10</td>
+        <td>Roberto Clemente</td>
+        <td style="font-size:11px;">Compare/Contrast ← FIRST in catalog</td>
+        <td style="font-size:11px;color:#94A3B8;">Ghost</td>
+        <td style="font-size:11px;">Hispanic Heritage Month · Sep</td>
+        <td style="color:#94A3B8;font-size:11px;">Sep 2026</td>
+        <td><span class="pill pill-idea">Idea</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════
+     FICTION LAUNCH SET
+══════════════════════════════════════ -->
+<div class="section-title">Fiction Anchor Texts — Confirmed 6-Unit Launch Set</div>
+<div class="full card">
+  <table>
+    <thead>
+      <tr><th>#</th><th>Title</th><th>Grades</th><th>Standards</th><th>Notes</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:#4ADE80;font-weight:bold;">1</td>
+        <td><strong>Wonder</strong> — Character Analysis</td>
+        <td>3–8</td>
+        <td style="font-size:11px;">RL.5.3 / RL.5.6</td>
+        <td style="font-size:11px;">Entry point · disability rep</td>
+        <td><span class="pill pill-building">Active Build</span></td>
+      </tr>
+      <tr>
+        <td style="color:#4ADE80;font-weight:bold;">2</td>
+        <td>The Giver</td>
+        <td>6–8</td>
+        <td style="font-size:11px;">RL.7.1 / RL.7.2</td>
+        <td style="font-size:11px;">Pairs with Korematsu (Unit 7)</td>
+        <td><span class="pill pill-idea">Pipeline</span></td>
+      </tr>
+      <tr>
+        <td style="color:#4ADE80;font-weight:bold;">3</td>
+        <td>Rules · Identity</td>
+        <td>4–6</td>
+        <td style="font-size:11px;">RL.4.3 / RL.4.6</td>
+        <td style="font-size:11px;">AAC sibling · disability rep ⭐</td>
+        <td><span class="pill pill-idea">Pipeline</span></td>
+      </tr>
+      <tr>
+        <td style="color:#4ADE80;font-weight:bold;">4</td>
+        <td>Out of My Mind</td>
+        <td>4–7</td>
+        <td style="font-size:11px;">RL.5.3 / RL.5.6</td>
+        <td style="font-size:11px;color:#4ADE80;">AAC protagonist ⭐ FLAGSHIP</td>
+        <td><span class="pill pill-idea">Pipeline</span></td>
+      </tr>
+      <tr>
+        <td style="color:#4ADE80;font-weight:bold;">5</td>
+        <td>Hatchet</td>
+        <td>5–7</td>
+        <td style="font-size:11px;">RL.5.2 / RL.5.5</td>
+        <td style="font-size:11px;">Pairs with Malala (Unit 9)</td>
+        <td><span class="pill pill-idea">Pipeline</span></td>
+      </tr>
+      <tr>
+        <td style="color:#4ADE80;font-weight:bold;">6</td>
+        <td>Ghost</td>
+        <td>5–8</td>
+        <td style="font-size:11px;">RL.7.1 / RL.7.3</td>
+        <td style="font-size:11px;">BHM hook · Pairs with Clemente (Unit 10)</td>
+        <td><span class="pill pill-idea">Pipeline</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:8px;font-size:11px;color:#64748b;">Wonder is the only active build. Remaining 5 begin after UFLI launch (May 2026). All 6 tagged in Airtable as 🚀 LAUNCH SET.</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     AAC TRADING CARDS
+══════════════════════════════════════ -->
+<div class="section-title">AAC Trading Cards — CbD Card Collection</div>
+<div class="full card">
+  <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px;">
+    <div style="text-align:center;"><div style="font-size:24px;font-weight:bold;color:#2DD4BF;">346</div><div style="font-size:10px;color:#94A3B8;">UFLI Phonics<br>Order #82750 placed</div></div>
+    <div style="text-align:center;"><div style="font-size:24px;font-weight:bold;color:#2DD4BF;">78</div><div style="font-size:10px;color:#94A3B8;">Alphabet Deck<br>Building</div></div>
+    <div style="text-align:center;"><div style="font-size:24px;font-weight:bold;color:#2DD4BF;">54</div><div style="font-size:10px;color:#94A3B8;">Starter Core<br>Building</div></div>
+    <div style="text-align:center;"><div style="font-size:24px;font-weight:bold;color:#2DD4BF;">170</div><div style="font-size:10px;color:#94A3B8;">Growing Core<br>Building</div></div>
+    <div style="text-align:center;"><div style="font-size:24px;font-weight:bold;color:#2DD4BF;">377</div><div style="font-size:10px;color:#94A3B8;">Full Core<br>Building</div></div>
+  </div>
+  <div style="font-size:11px;color:#94A3B8;border-top:1px solid #2d3456;padding-top:10px;line-height:1.8;">
+    <strong style="color:#2DD4BF;">Phase 1 (Now):</strong> Launch standalone core decks on Etsy from existing inventory. Goal: 10 Etsy reviews before Amazon launch. &nbsp;
+    <strong style="color:#2DD4BF;">Phase 2 (May 2026):</strong> UFLI deck on Etsy at UFLI curriculum launch — add Etsy callout to every UFLI TPT listing. &nbsp;
+    <strong style="color:#2DD4BF;">Phase 3:</strong> Per-curriculum companion decks as nonfiction + fiction lines expand.<br>
+    <span style="color:#FCA5A5;">⚠ OPEN: Unit economics — calculate cost-per-card at 500-unit print run before committing to next run.</span>
+  </div>
+</div>
+
+<!-- ─── Footer ─── -->
+<div class="footer">
+  <span>Communicate by Design · Jill McCardel, special educator and advocate · Internal use only</span>
+  <span>April 3, 2026 · Live data from Airtable <code style="color:#374151;">appeaT8hkeXWqQKIj</code></span>
+</div>
+
+</div><!-- /container -->
+</body>
+</html>

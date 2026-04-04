@@ -8,6 +8,19 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #1B1F3B; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; color: #fff; }
 
+/* NAV */
+.cbd-nav { background: #0d1020; border-bottom: 1px solid #2d3456; padding: 0 20px; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 200; height: 36px; font-size: 12px; }
+.cbd-nav-brand { display: flex; align-items: center; gap: 6px; color: #94A3B8; font-size: 11px; letter-spacing: 0.05em; padding-right: 16px; border-right: 1px solid #2d3456; margin-right: 8px; white-space: nowrap; }
+.cbd-nav-brand span { color: #FFB703; font-weight: 700; }
+.cbd-nav-tabs { display: flex; align-items: center; gap: 2px; }
+.cbd-nav-tab { display: flex; align-items: center; gap: 5px; padding: 0 12px; height: 36px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+.cbd-nav-tab:hover { color: #fff; text-decoration: none; border-bottom-color: #2d3456; }
+.cbd-nav-tab.active { color: #FFB703; border-bottom-color: #FFB703; }
+.cbd-nav-divider { width: 1px; height: 18px; background: #2d3456; margin: 0 8px; }
+.cbd-nav-ext { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.cbd-nav-ext-link { display: flex; align-items: center; gap: 4px; padding: 0 10px; height: 36px; color: #64748b; text-decoration: none; font-size: 11px; transition: color 0.15s; white-space: nowrap; }
+.cbd-nav-ext-link:hover { color: #00B4D8; text-decoration: none; }
+
 /* HEADER */
 .header { padding: 16px 24px 12px; border-bottom: 1px solid #2e3561; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .brand-row { display: flex; align-items: center; gap: 10px; }
@@ -90,6 +103,23 @@ body { background: #1B1F3B; font-family: Arial, Helvetica, sans-serif; min-heigh
 </head>
 <body>
 
+<nav class="cbd-nav">
+  <div class="cbd-nav-brand">💬 <span>CbD</span> Internal</div>
+  <div class="cbd-nav-tabs">
+    <a class="cbd-nav-tab" href="CbD_Launch_Dashboard.html">📊 Operations</a>
+    <a class="cbd-nav-tab active" href="CbD_Task_Dashboard.html">✅ Tasks</a>
+    <a class="cbd-nav-tab" href="CbD_Workflow_Visual.html">🔧 Workflow</a>
+    <a class="cbd-nav-tab" href="CbD_Vocabulary_Dashboard.html">📖 Vocabulary</a>
+  </div>
+  <div class="cbd-nav-divider"></div>
+  <div class="cbd-nav-ext">
+    <a class="cbd-nav-ext-link" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">Airtable ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">TPT ↗</a>
+    <a class="cbd-nav-ext-link" href="https://communicatebydesign.substack.com" target="_blank">Substack ↗</a>
+    <a class="cbd-nav-ext-link" href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">🔍 Vocab Explorer ↗</a>
+  </div>
+</nav>
+
 <div class="header">
   <div class="brand-row">
     <div class="brand-icon">💬</div>
@@ -135,8 +165,8 @@ const COL_META = {
 };
 
 const TASKS = [
-  { id:1,  col:"now",     cat:"Substack",     priority:"high",   wstage:0, deadline:"Mar 31",      title:"AT Consideration post",                        detail:"\"AT Consideration Is a Legal Requirement. So Why Does Every IEP Team Skip It?\" — due NOW." },
-  { id:2,  col:"now",     cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 1",       title:"Earth Day keyword push — Keiko listing",        detail:"Update Keiko TPT listing with Earth Day keywords. Hard deadline April 1.", tptUrl:"https://www.teacherspayteachers.com/Product/Keiko-Free-Willy-Nonfiction-Unit-Adapted-Reading-SPED-AAC-Grades-6-10-15817061" },
+  { id:1,  col:"done",    cat:"Substack",     priority:"high",   wstage:0, deadline:"Apr 2",       title:"AT Consideration post — PUBLISHED",            detail:"✅ Published Apr 2 2026: \"AT Consideration Is a Legal Requirement. So Why Does Every IEP Team Skip It?\"" },
+  { id:2,  col:"done",    cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 1",       title:"Earth Day keyword push — Keiko listing",        detail:"✅ Done. Updated Keiko TPT listing with Earth Day keywords.", tptUrl:"https://www.teacherspayteachers.com/Product/Keiko-Free-Willy-Nonfiction-Unit-Adapted-Reading-SPED-AAC-Grades-6-10-15817061" },
   { id:3,  col:"now",     cat:"Substack",     priority:"high",   wstage:2, deadline:null,          title:"First TPT Drop post",                           detail:"File ready (Substack/Substack-FirstTPTDrop-Post.md). Needs Canva thumbnails, then publish." },
   { id:4,  col:"now",     cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,          title:"Add tag gold mines to all listings",            detail:'"aactivities" (AAC), "ulfi" (UFLI), "drawn to aac" (AAC), "special education lesson plans template" (nonfiction).', tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
   { id:5,  col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,          title:"Re-upload nonfiction zips — 6 units",           detail:"All 6 have new _Complete.zip with Symbol Cards + Printable Kit. Add Google Docs note to listings.", tptUrl:"https://www.teacherspayteachers.com/store/communicate-by-design" },
@@ -165,6 +195,16 @@ const TASKS = [
   { id:28, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:null,          title:"AT certification",                              detail:"Working toward; not yet started." },
   { id:29, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:"Feb 2027",    title:"Tommie Smith & John Carlos unit",               detail:"BHM February 2027." },
   { id:30, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:null,          title:"Fiction line — first product",                  detail:"Workflow + framework built. First product TBD." },
+  { id:31, col:"now",     cat:"Poetry",       priority:"high",   wstage:1, deadline:"Apr 3",       title:"Poetry Unit 1 — re-export PDF + GitHub + TPT",  detail:"QC passed Apr 3. Jill: re-export COMPLETE.docx → PDF from Word → GitHub push → Canva cover export → TPT listing." },
+  { id:32, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 3",       title:"Add Autism Acceptance Month tags to AT/AAC",     detail:"OVERDUE: was due Apr 1. Add seasonal tags to AT/AAC IEP Team product listings on TPT." },
+  { id:33, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 3",       title:"Canva pins: AT Toolkit + Comm Partner Guide",    detail:"Autism Acceptance Month. Both AT/AAC products need Pinterest pins." },
+  { id:34, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 5",       title:"Canva pins: Finding Symbols + 504 Sit-In",       detail:"Both at 0 views. Finding Symbols freebie + 504 Sit-In nonfiction." },
+  { id:35, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 6",       title:"Keiko — Create Earth Day Pinterest pin",         detail:"Earth Day hook. Nonfiction · Just Do It." },
+  { id:36, col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,          title:"Capitol Crawl — update TPT title + desc + tags", detail:"SEO update: new title + description opening (≤180 chars) + 7 custom keyword tags.", tptUrl:"https://www.teacherspayteachers.com/Product/Capitol-Crawl-Sourcing-Corroboration-Nonfiction-Lesson-Disability-Rig-15912264" },
+  { id:37, col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,          title:"Frances Kelsey — update TPT desc + tags",        detail:"SEO update: new description opening (≤180 chars) + 7 custom keyword tags.", tptUrl:"https://www.teacherspayteachers.com/Product/Frances-Kelsey-CER-Nonfiction-Unit-Womens-History-FDA-SPED-Grades-6-10-15849346" },
+  { id:38, col:"queue",   cat:"Operations",   priority:"high",   wstage:0, deadline:null,          title:"Upload CbD logo as Pinterest profile photo",     detail:"Operations · Just Do It. Pinterest profile needs brand logo." },
+  { id:39, col:"queue",   cat:"Substack",     priority:"high",   wstage:0, deadline:"Apr 7",       title:"Substack #5 — Tools I Wish Someone Had Handed Me", detail:"AT/AAC Family pillar 🟠 · Due Apr 7." },
+  { id:40, col:"queue",   cat:"Substack",     priority:"high",   wstage:0, deadline:"Apr 10",      title:"Substack — My Student Has an AAC Device…",       detail:"Policy & Advocacy pillar 🔴 · Due Apr 10." },
 ];
 
 // STATE

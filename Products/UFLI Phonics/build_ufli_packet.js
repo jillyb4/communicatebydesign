@@ -27,7 +27,8 @@ const { groupByFitzgerald, getFitzgeraldCategory } = require('./fitzgerald_key')
 const {
   Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
   WidthType, AlignmentType, BorderStyle, PageBreak, ImageRun,
-  ShadingType, HeadingLevel, Header, Footer, PageNumber,
+  ShadingType, HeadingLevel, Header, Footer, PageNumber, PageOrientation,
+  VerticalAlign,
 } = require('docx');
 
 // ── CbD Brand ────────────────────────────────────────────────
@@ -372,8 +373,9 @@ async function buildPacket(LESSON, outputDir) {
     ]}));
     if (idx < ladderItems.length - 1) {
       ladderRows.push(new TableRow({ children: [
-        new TableCell({ children: [new Paragraph({ spacing: { after: 0 } })], width: { size: colBadgeH, type: WidthType.DXA }, borders: noBorders, margins: { top: 20, bottom: 20, left: 0, right: 0 }, shading: { fill: 'FFF8E7', type: ShadingType.CLEAR } }),
-        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: 'WAIT \u2014 minimum 10 seconds before moving to the next level', bold: true, font: FONT, size: 14, color: AMBER })], spacing: { after: 0 } })], width: { size: colDetailH, type: WidthType.DXA }, borders: noBorders, margins: { top: 40, bottom: 40, left: 160, right: 160 }, shading: { fill: 'FFF8E7', type: ShadingType.CLEAR } }),
+        // WCAG fix: AMBER on FFF8E7 fails (~1.3:1). Use NAVY bg + white text (21:1) for WAIT rows.
+        new TableCell({ children: [new Paragraph({ spacing: { after: 0 } })], width: { size: colBadgeH, type: WidthType.DXA }, borders: noBorders, margins: { top: 20, bottom: 20, left: 0, right: 0 }, shading: { fill: NAVY, type: ShadingType.CLEAR } }),
+        new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: 'WAIT \u2014 minimum 10 seconds before moving to the next level', bold: true, font: FONT, size: 14, color: 'FFFFFF' })], spacing: { after: 0 } })], width: { size: colDetailH, type: WidthType.DXA }, borders: noBorders, margins: { top: 40, bottom: 40, left: 160, right: 160 }, shading: { fill: NAVY, type: ShadingType.CLEAR } }),
       ]}));
     }
   });
@@ -452,8 +454,17 @@ async function buildPacket(LESSON, outputDir) {
   children.push(new Table({ rows: stepRows, width: {size: CW, type: WidthType.DXA}, columnWidths: [stepLabelW, stepWordsW] }));
 
   // ════════════════════════════════════════════════════════════
-  // SYMBOL CARDS — new words, labeled core/fringe
+  // SYMBOL CARD CONSTANTS — hoisted so available to both card sections
   // ════════════════════════════════════════════════════════════
+  const CARD_COLS = 3;          // Level 1: 3 per row (partner-assisted literacy)
+  const CARD_SYM_SIZE = 126;    // Level 1: ~1.75" / 126pt
+  const CARD_WORD_SIZE = 44;    // 22pt bold ALL CAPS
+  const CARD_COL_W = Math.floor(CW / CARD_COLS);
+
+  // ════════════════════════════════════════════════════════════
+  // SYMBOL CARDS — only render if there are new words to show
+  // ════════════════════════════════════════════════════════════
+  if (LESSON.newWords.length > 0) {
   children.push(pageBreak());
   children.push(h1(`Symbol Cards — Lesson ${LESSON.number}: ${LESSON.phoneme}`));
   children.push(p('Print, cut, and add to the student\'s binder. Each word is labeled as core (high-frequency, used across all contexts) or fringe (lesson-specific vocabulary).', {size: 18, color: '666666', italics: true, after: 60}));
@@ -467,41 +478,121 @@ async function buildPacket(LESSON, outputDir) {
   ], {after: 100}));
   children.push(rule(TEAL));
 
-  // Build symbol card grid
-  const COLS = 4;
-  const colW = Math.floor(CW / COLS);
-  const symRows = [];
+  // ── CbD Symbol Card Standard (from symbol_binder_reference.md — LOCKED) ─────
+  // Source of truth: _Operations/memory/symbol_binder_reference.md
+  // 3-Zone Layout (2.5" × 3.5" trading card):
+  //   Zone 1 (top):    Fitzgerald Key category bar — solid fill + white label text
+  //   Zone 2 (center): ARASAAC symbol, ~60% of card area
+  //   Zone 3 (bottom): Bold word label (ALL CAPS) + part-of-speech sublabel
+  // Level 1 sizing: 126pt symbol, 3 per row — literacy/partner-assisted product
+  // NO core/fringe label on card body — that belongs on reference lists only
+  // NO blank filler cells — partial rows reflow to fill width
+  // Draw It!: word label ALWAYS present below empty drawing space. No text in the drawing area.
 
-  for (let i = 0; i < LESSON.newWords.length; i += COLS) {
-    const rowItems = LESSON.newWords.slice(i, i + COLS);
-    const cells = rowItems.map(item => {
-      const fp = getSymbolPath(item.word, cacheDir);
-      const c = [];
-      if (fs.existsSync(fp)) {
-        c.push(new Paragraph({ children: [new ImageRun({ type: 'png', data: fs.readFileSync(fp), transformation: {width: SYMBOL_SIZE, height: SYMBOL_SIZE}, altText: {title: item.word, description: `Symbol for ${item.word}`, name: item.word} })], alignment: AlignmentType.CENTER, spacing: {after: 0} }));
-      } else {
-        // Drawing box — fun warm-up activity for words without symbols
-        c.push(new Paragraph({ children: [new TextRun({ text: '✏️ Draw it!', font: FONT, size: 14, color: AMBER, bold: true })], alignment: AlignmentType.CENTER, spacing: {after: 20} }));
-        // Empty space for drawing (using underscores as a visual box frame)
-        c.push(new Paragraph({ spacing: {after: 60} }));
-        c.push(new Paragraph({ spacing: {after: 60} }));
-      }
-      c.push(new Paragraph({ children: [new TextRun({ text: item.word, bold: true, font: FONT, size: WORD_LABEL_SIZE, color: NAVY })], alignment: AlignmentType.CENTER, spacing: {before: 60, after: 0} }));
-      const tagColor = item.type === 'core' ? TEAL : AMBER;
-      const tagText = item.type === 'core' ? 'core' : 'fringe';
-      c.push(new Paragraph({ children: [new TextRun({ text: tagText, font: FONT, size: 18, color: tagColor, italics: true })], alignment: AlignmentType.CENTER, spacing: {before: 20, after: 0} }));
-      return new TableCell({ children: c, width: {size: colW, type: WidthType.DXA}, borders, margins: {top: 100, bottom: 80, left: 60, right: 60} });
-    });
-    while (cells.length < COLS) cells.push(new TableCell({ children: [new Paragraph({spacing: {after: 0}})], width: {size: colW, type: WidthType.DXA}, borders: noBorders }));
-    symRows.push(new TableRow({ children: cells }));
+  // Fitzgerald Key category colors (Modified Fitzgerald Key — from symbol_binder_reference.md)
+  const FITZ_COLORS = {
+    'People':       'D4A800',   // Yellow
+    'Actions':      '00A86B',   // Green
+    'Descriptions': 'FF8C00',   // Orange
+    'Nouns':        '8B6914',   // Brown/Gold
+    'Prepositions': '4A90D9',   // Blue
+    'Social':       'E88CA5',   // Pink
+  };
+  const FITZ_LABELS = {
+    'People': 'People / Pronouns',
+    'Actions': 'Verbs / Actions',
+    'Descriptions': 'Descriptions',
+    'Nouns': 'Nouns',
+    'Prepositions': 'Little Words',
+    'Social': 'Social / Feelings',
+  };
+
+  function getFitzColor(word) {
+    const cat = getFitzgeraldCategory(word);
+    return { hex: FITZ_COLORS[cat] || TEAL, label: FITZ_LABELS[cat] || 'Words' };
   }
 
-  children.push(new Table({ rows: symRows, width: {size: CW, type: WidthType.DXA}, columnWidths: Array(COLS).fill(colW) }));
+  function makeFitzBorder(hexColor) {
+    const b = { style: BorderStyle.SINGLE, size: 18, color: hexColor };
+    return { top: b, bottom: b, left: b, right: b };
+  }
+
+  // ── Symbol card — exact docx equivalent of build_comm_access_packet.py make_card() ──
+  // Gold standard (from _Operations/build_comm_access_packet.py):
+  //   content = [RLImage(sym, SYM, SYM), Spacer(1,4), Paragraph(word.upper())]
+  //   inner Table: VALIGN=MIDDLE, ALIGN=CENTER, BOX border = Fitzgerald Key color (3pt)
+  //   outer grid: GAP padding creates white space between cards
+  //
+  // docx equivalent:
+  //   TableCell with Fitzgerald Key border (18 half-pts = 9pt thick border)
+  //   Children: symbol image paragraph (centered) + word label paragraph (centered)
+  //   verticalAlign: CENTER so content sits in middle of cell
+  //   Row height set to exact (CARD_SYM_SIZE + word label) so all cards same height
+  //
+  // Draw It! (no symbol): empty paragraph with line height = CARD_SYM_SIZE, then word label
+  // Hard rule: NOTHING on card except symbol/blank + word. No category bar, no extra text.
+
+  function makeSymbolCard(word, colW) {
+    const fp = getSymbolPath(word, cacheDir);
+    const fitz = getFitzColor(word);
+    const c = [];
+
+    if (fs.existsSync(fp)) {
+      // Symbol: centered image paragraph
+      c.push(new Paragraph({
+        children: [new ImageRun({ type: 'png', data: fs.readFileSync(fp),
+          transformation: { width: CARD_SYM_SIZE, height: CARD_SYM_SIZE },
+          altText: { title: word, description: `Symbol for ${word}`, name: word } })],
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 0, after: 80 },  // 4pt gap below symbol (matches Spacer(1,4))
+      }));
+    } else {
+      // Draw It! — blank space exactly as tall as the symbol. Nothing else in this zone.
+      // line spacing trick: empty paragraph with lineRule=exact, line=CARD_SYM_SIZE*20 twips
+      c.push(new Paragraph({
+        children: [new TextRun({ text: ' ', size: CARD_SYM_SIZE * 2 })], // font size in half-pts = pt*2
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 0, after: 80, line: CARD_SYM_SIZE * 20, lineRule: 'exact' },
+      }));
+    }
+
+    // Word label — ALL CAPS bold, same as gold standard Paragraph(w.upper(), word_lbl)
+    c.push(new Paragraph({
+      children: [new TextRun({ text: word.toUpperCase(), bold: true, font: FONT, size: CARD_WORD_SIZE, color: NAVY })],
+      alignment: AlignmentType.CENTER,
+      spacing: { before: 0, after: 0 },
+    }));
+
+    return new TableCell({
+      children: c,
+      width: { size: colW, type: WidthType.DXA },
+      borders: makeFitzBorder(fitz.hex),
+      verticalAlign: VerticalAlign.CENTER,
+      margins: { top: 120, bottom: 120, left: 80, right: 80 },
+    });
+  }
+
+  // Render symbol card grid — one Table per row so column widths are always correct.
+  // Partial rows reflow to fill the full page width with no blank cells.
+  for (let i = 0; i < LESSON.newWords.length; i += CARD_COLS) {
+    const rowWords = LESSON.newWords.slice(i, i + CARD_COLS);
+    const rowCols = rowWords.length;
+    const rowColW = Math.floor(CW / rowCols);
+    const cells = rowWords.map(item => makeSymbolCard(item.word, rowColW));
+    children.push(new Table({
+      rows: [new TableRow({ children: cells })],
+      width: { size: CW, type: WidthType.DXA },
+      columnWidths: Array(rowCols).fill(rowColW),
+    }));
+  }
+  } // end if (LESSON.newWords.length > 0)
 
   // ════════════════════════════════════════════════════════════
-  // SYMBOL-ONLY CARDS — for reading practice (after symbols taught)
+  // SYMBOL-ONLY CARDS — only render if there are words to match
   // Student reads the word, then finds the matching symbol.
   // ════════════════════════════════════════════════════════════
+  const allSymbolWordsCheck = [...LESSON.newWords, ...(LESSON.heartWords || [])];
+  if (allSymbolWordsCheck.length > 0) {
   children.push(pageBreak());
   children.push(h1(`Reading Practice Cards — Lesson ${LESSON.number}`));
   children.push(guidanceBox('WHEN TO USE THESE', [
@@ -523,55 +614,60 @@ async function buildPacket(LESSON, outputDir) {
     ...(LESSON.heartWords || []).map(hw => ({ word: hw, type: 'heart' })),
   ];
 
-  for (let i = 0; i < allSymbolWords.length; i += COLS) {
-    const rowItems = allSymbolWords.slice(i, i + COLS);
-    const cells = rowItems.map(item => {
+  // Symbol-only cards — symbol + Fitzgerald border only. No word label, no bar, no extra text.
+  // One Table per row so partial rows reflow correctly with no blank cells.
+  for (let i = 0; i < allSymbolWords.length; i += CARD_COLS) {
+    const rowWords = allSymbolWords.slice(i, i + CARD_COLS);
+    const rowCols = rowWords.length;
+    const rowColW = Math.floor(CW / rowCols);
+    const cells = rowWords.map(item => {
       const fp = getSymbolPath(item.word, cacheDir);
+      const fitz = getFitzColor(item.word);
       const c = [];
       if (fs.existsSync(fp)) {
-        c.push(new Paragraph({ children: [new ImageRun({ type: 'png', data: fs.readFileSync(fp), transformation: {width: SYMBOL_SIZE + 20, height: SYMBOL_SIZE + 20}, altText: {title: item.word, description: `Symbol for ${item.word}`, name: item.word} })], alignment: AlignmentType.CENTER, spacing: {after: 0} }));
+        c.push(new Paragraph({ children: [new ImageRun({ type: 'png', data: fs.readFileSync(fp), transformation: { width: CARD_SYM_SIZE + 10, height: CARD_SYM_SIZE + 10 }, altText: { title: item.word, description: `Symbol for ${item.word}`, name: item.word } })], alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 } }));
       } else {
-        // Student's drawing goes here — their version of the word
-        c.push(new Paragraph({ children: [new TextRun({ text: '✏️', font: FONT, size: 20 })], alignment: AlignmentType.CENTER, spacing: {after: 20} }));
-        c.push(new Paragraph({ spacing: {after: 60} }));
-        c.push(new Paragraph({ spacing: {after: 40} }));
+        // No symbol — blank space same height as symbol using large font size trick
+        c.push(new Paragraph({ children: [new TextRun({ text: ' ', size: (CARD_SYM_SIZE + 10) * 2 })], alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: (CARD_SYM_SIZE + 10) * 20, lineRule: 'exact' } }));
       }
-      // Thin line at bottom for teacher to write word after student identifies it (optional)
-      c.push(new Paragraph({ children: [new TextRun({ text: '________________', font: FONT, size: 16, color: 'CCCCCC' })], alignment: AlignmentType.CENTER, spacing: {before: 40, after: 0} }));
-      return new TableCell({ children: c, width: {size: colW, type: WidthType.DXA}, borders, margins: {top: 100, bottom: 80, left: 60, right: 60} });
+      return new TableCell({ children: c, width: { size: rowColW, type: WidthType.DXA }, borders: makeFitzBorder(fitz.hex), verticalAlign: VerticalAlign.CENTER, margins: { top: 120, bottom: 120, left: 80, right: 80 } });
     });
-    while (cells.length < COLS) cells.push(new TableCell({ children: [new Paragraph({spacing: {after: 0}})], width: {size: colW, type: WidthType.DXA}, borders: noBorders }));
-    soRows.push(new TableRow({ children: cells }));
+    children.push(new Table({
+      rows: [new TableRow({ children: cells })],
+      width: { size: CW, type: WidthType.DXA },
+      columnWidths: Array(rowCols).fill(rowColW),
+    }));
   }
-  children.push(new Table({ rows: soRows, width: {size: CW, type: WidthType.DXA}, columnWidths: Array(COLS).fill(colW) }));
 
-  // Word list for matching
+  // Word list — exactly as many columns as actual words, no blank cells
+  // Words shown in ALL CAPS to match card standard
   children.push(spacer(200));
   children.push(p('Word List — Read and Match', {bold: true, size: 26, color: NAVY, after: 80}));
   children.push(rule(TEAL));
   children.push(p('Present these words one at a time. The student reads the word, then indicates the matching symbol above.', {size: 18, color: '666666', italics: true, after: 120}));
 
-  const wlCols = Math.min(allSymbolWords.length, 4);
-  const wlColW = Math.floor(CW / wlCols);
-  const wlRows = [];
-  for (let i = 0; i < allSymbolWords.length; i += wlCols) {
-    const rowItems = allSymbolWords.slice(i, i + wlCols);
-    const cells = rowItems.map(item => {
-      return new TableCell({
-        children: [
-          new Paragraph({ children: [new TextRun({ text: item.word, bold: true, font: FONT, size: 44, color: NAVY })], alignment: AlignmentType.CENTER, spacing: {after: 0} }),
-        ],
-        width: {size: wlColW, type: WidthType.DXA}, borders, margins: {top: 120, bottom: 120, left: 60, right: 60},
-      });
-    });
-    while (cells.length < wlCols) cells.push(new TableCell({ children: [new Paragraph({spacing: {after: 0}})], width: {size: wlColW, type: WidthType.DXA}, borders: noBorders }));
-    wlRows.push(new TableRow({ children: cells }));
+  // Word list — one Table per row so partial rows reflow to full width with no blank cells.
+  for (let i = 0; i < allSymbolWords.length; i += CARD_COLS) {
+    const rowItems = allSymbolWords.slice(i, i + CARD_COLS);
+    const rowCols = rowItems.length;
+    const rowColW = Math.floor(CW / rowCols);
+    const cells = rowItems.map(item => new TableCell({
+      children: [new Paragraph({ children: [new TextRun({ text: item.word.toUpperCase(), bold: true, font: FONT, size: 48, color: NAVY })], alignment: AlignmentType.CENTER, spacing: {after: 0} })],
+      width: { size: rowColW, type: WidthType.DXA }, borders, margins: { top: 140, bottom: 140, left: 60, right: 60 },
+    }));
+    children.push(new Table({
+      rows: [new TableRow({ children: cells })],
+      width: { size: CW, type: WidthType.DXA },
+      columnWidths: Array(rowCols).fill(rowColW),
+    }));
   }
-  children.push(new Table({ rows: wlRows, width: {size: CW, type: WidthType.DXA}, columnWidths: Array(wlCols).fill(wlColW) }));
+  } // end if (allSymbolWordsCheck.length > 0)
 
   // ════════════════════════════════════════════════════════════
-  // REVIEW WORDS, HEART WORDS, MORPHOLOGY — grouped on one page
+  // REVIEW WORDS, HEART WORDS, MORPHOLOGY — only render if there is content
   // ════════════════════════════════════════════════════════════
+  const hasRefContent = LESSON.reviewWords.length > 0 || (LESSON.heartWords && LESSON.heartWords.length > 0) || (LESSON.morphologyNotes && LESSON.morphologyNotes.length > 0);
+  if (hasRefContent) {
   children.push(pageBreak());
   children.push(h1(`Lesson ${LESSON.number} — Reference Materials`));
   children.push(spacer(80));
@@ -601,19 +697,26 @@ async function buildPacket(LESSON, outputDir) {
         ], spacing: {after: 0}})], width: {size: labelW, type: WidthType.DXA}, borders: noBorders, margins: {top: 60, bottom: 60, left: 120, right: 60} }),
       ]})], width: {size: CW, type: WidthType.DXA} }));
 
-      // Word chips — compact inline layout, 5 per row
+      // Word chips — sorted core first, then fringe, within each Fitzgerald category
+      // This matches the recommended binder organization: Fitzgerald tab → core section → fringe section
+      const coreChips = group.words.filter(w => w.type === 'core');
+      const fringeChips = group.words.filter(w => w.type !== 'core');
+      const sortedChips = [...coreChips, ...fringeChips];
       const CHIPS_PER_ROW = 5;
       const chipW = Math.floor(CW / CHIPS_PER_ROW);
-      for (let i = 0; i < group.words.length; i += CHIPS_PER_ROW) {
-        const rowWords = group.words.slice(i, i + CHIPS_PER_ROW);
+      // Use Fitzgerald category color for chip left border (visual grouping cue)
+      const chipGroupBorder = { top: { style: BorderStyle.SINGLE, size: 1, color: 'DDDDDD' }, bottom: { style: BorderStyle.SINGLE, size: 1, color: 'DDDDDD' }, left: { style: BorderStyle.SINGLE, size: 6, color: group.color }, right: { style: BorderStyle.SINGLE, size: 1, color: 'DDDDDD' } };
+      for (let i = 0; i < sortedChips.length; i += CHIPS_PER_ROW) {
+        const rowWords = sortedChips.slice(i, i + CHIPS_PER_ROW);
         const cells = rowWords.map(rw => {
           const tagColor = rw.type === 'core' ? TEAL : AMBER;
           return new TableCell({ children: [
             new Paragraph({children: [new TextRun({text: rw.word, bold: true, font: FONT, size: 22, color: NAVY})], alignment: AlignmentType.CENTER, spacing: {after: 0}}),
             new Paragraph({children: [new TextRun({text: rw.type, font: FONT, size: 14, color: tagColor, italics: true})], alignment: AlignmentType.CENTER, spacing: {after: 0}}),
-          ], width: {size: chipW, type: WidthType.DXA}, borders: fitzBorders, margins: {top: 40, bottom: 40, left: 30, right: 30} });
+          ], width: {size: chipW, type: WidthType.DXA}, borders: chipGroupBorder, margins: {top: 40, bottom: 40, left: 30, right: 30} });
         });
-        while (cells.length < CHIPS_PER_ROW) cells.push(new TableCell({ children: [new Paragraph({spacing: {after: 0}})], width: {size: chipW, type: WidthType.DXA}, borders: noBorders }));
+        // Partial row: pad with truly invisible cells (no border, no content, zero height)
+        while (cells.length < CHIPS_PER_ROW) cells.push(new TableCell({ children: [new Paragraph({spacing: {before: 0, after: 0}})], width: {size: chipW, type: WidthType.DXA}, borders: noBorders, margins: {top: 0, bottom: 0, left: 0, right: 0} }));
         children.push(new Table({ rows: [new TableRow({ children: cells })], width: {size: CW, type: WidthType.DXA}, columnWidths: Array(CHIPS_PER_ROW).fill(chipW) }));
       }
       children.push(spacer(60));
@@ -654,15 +757,14 @@ async function buildPacket(LESSON, outputDir) {
         if (fs.existsSync(fp)) {
           c.push(new Paragraph({ children: [new ImageRun({ type: 'png', data: fs.readFileSync(fp), transformation: {width: SYMBOL_SIZE, height: SYMBOL_SIZE}, altText: {title: hw, description: `Symbol for ${hw}`, name: hw} })], alignment: AlignmentType.CENTER, spacing: {after: 0} }));
         } else {
-          c.push(new Paragraph({ children: [new TextRun({ text: '✏️ Draw it!', font: FONT, size: 14, color: AMBER, bold: true })], alignment: AlignmentType.CENTER, spacing: {after: 20} }));
-          c.push(new Paragraph({ spacing: {after: 60} }));
-          c.push(new Paragraph({ spacing: {after: 60} }));
+          // No symbol — blank space only. Hard rule: nothing on card except symbol/space + word label.
+          c.push(new Paragraph({ spacing: {before: 80, after: SYMBOL_SIZE * 20} }));
         }
         c.push(new Paragraph({ children: [new TextRun({ text: hw, bold: true, font: FONT, size: WORD_LABEL_SIZE, color: NAVY })], alignment: AlignmentType.CENTER, spacing: {before: 60, after: 0} }));
         c.push(new Paragraph({ children: [new TextRun({ text: '♥ heart word', font: FONT, size: 18, color: 'CC3333', italics: true })], alignment: AlignmentType.CENTER, spacing: {before: 20, after: 0} }));
         return new TableCell({ children: c, width: {size: hwColW, type: WidthType.DXA}, borders, margins: {top: 100, bottom: 80, left: 60, right: 60} });
       });
-      while (cells.length < hwCols) cells.push(new TableCell({ children: [new Paragraph({spacing: {after: 0}})], width: {size: hwColW, type: WidthType.DXA}, borders: noBorders }));
+      while (cells.length < hwCols) cells.push(new TableCell({ children: [new Paragraph({spacing: {before: 0, after: 0}})], width: {size: hwColW, type: WidthType.DXA}, borders: noBorders, margins: {top: 0, bottom: 0, left: 0, right: 0} }));
       hwRows.push(new TableRow({ children: cells }));
     }
 
@@ -686,32 +788,38 @@ async function buildPacket(LESSON, outputDir) {
   }
 
   // (Word Location Map removed — now a standalone team tool in the Teacher Guide)
+  } // end if (hasRefContent)
 
   // ════════════════════════════════════════════════════════════
-  // SESSION DATA TRACKER — printable, fill-in-after-each-session
+  // SESSION DATA TRACKER — LANDSCAPE section (Section 2)
+  // Landscape: width=PAGE_H (15840), height=PAGE_W (12240)
+  // Landscape content width: 15840 - 2*1080 = 13680 twips
   // ════════════════════════════════════════════════════════════
-  children.push(pageBreak());
-  children.push(h1(`Session Data Tracker — Lesson ${LESSON.number}`));
-  children.push(p('Fill in after each session. Transfer totals to the compilation spreadsheet in the Teacher Guide.', {size: 18, color: '666666', italics: true, after: 80}));
+  const DT_W = PAGE_H;          // 15840 — landscape physical width
+  const DT_H = PAGE_W;          // 12240 — landscape physical height
+  const CW_L = DT_W - 2 * MARGIN;  // 13680 — landscape content width
 
-  // Student info row
-  const infoFieldW = Math.floor(CW / 3);
-  children.push(new Table({ rows: [new TableRow({ children: [
+  const dtChildren = [];
+
+  dtChildren.push(h1(`Session Data Tracker — Lesson ${LESSON.number}`));
+  dtChildren.push(p('Fill in after each session. Transfer totals to the compilation spreadsheet in the Teacher Guide.', {size: 18, color: '666666', italics: true, after: 80}));
+
+  const infoFieldW = Math.floor(CW_L / 3);
+  dtChildren.push(new Table({ rows: [new TableRow({ children: [
     new TableCell({ children: [p([{text: 'Student: ', bold: true, size: 18, color: NAVY}, {text: '________________________', size: 18, color: 'CCCCCC'}])], width: {size: infoFieldW, type: WidthType.DXA}, borders: noBorders, margins: cellMar }),
     new TableCell({ children: [p([{text: 'Date: ', bold: true, size: 18, color: NAVY}, {text: '_______________', size: 18, color: 'CCCCCC'}])], width: {size: infoFieldW, type: WidthType.DXA}, borders: noBorders, margins: cellMar }),
     new TableCell({ children: [p([{text: 'Session #: ', bold: true, size: 18, color: NAVY}, {text: '________', size: 18, color: 'CCCCCC'}])], width: {size: infoFieldW, type: WidthType.DXA}, borders: noBorders, margins: cellMar }),
-  ]})], width: {size: CW, type: WidthType.DXA} }));
-  children.push(spacer(40));
+  ]})], width: {size: CW_L, type: WidthType.DXA} }));
+  dtChildren.push(spacer(40));
 
-  // SECTION 1: Prompt levels by step
-  children.push(p([{text: '1. Prompt Level by UFLI Step', bold: true, size: 22, color: NAVY}], {after: 40}));
-  children.push(p('Circle the highest level of support needed:  I = Independent  |  G\u2013 = Indirect Cue  |  G+ = Direct Cue  |  VM = Verbal Model  |  RA = Reassess Access', {size: 14, color: '666666', italics: true, after: 60}));
+  dtChildren.push(p([{text: '1. Prompt Level by UFLI Step', bold: true, size: 22, color: NAVY}], {after: 40}));
+  dtChildren.push(p('Circle the highest level of support needed:  I = Independent  |  G\u2013 = Indirect Cue  |  G+ = Direct Cue  |  VM = Verbal Model  |  RA = Reassess Access', {size: 14, color: '666666', italics: true, after: 60}));
 
   const dtSteps = ['Step 1: Phonemic Awareness', 'Step 2: Visual Drill', 'Step 3: Auditory Drill', 'Step 4: Blending Drill', 'Step 5: New Concept', 'Step 6: Word Work', 'Step 7: Heart Words', 'Step 8: Connected Text'];
   const dtLevels = ['I', 'G\u2013', 'G+', 'VM', 'RA'];
-  const dtStepW = 3200; const dtLvlW = Math.floor((CW - dtStepW - 1500) / 5); const dtNotesW = 1500;
+  const dtStepW = 4000; const dtNotesW = 3000;
+  const dtLvlW = Math.floor((CW_L - dtStepW - dtNotesW) / 5);
 
-  // Header
   const dtHeaderCells = [
     new TableCell({ children: [p('Step', {bold: true, size: 16, color: 'FFFFFF'})], width: {size: dtStepW, type: WidthType.DXA}, borders, margins: cellMar, shading: {fill: NAVY, type: ShadingType.CLEAR} }),
   ];
@@ -732,75 +840,69 @@ async function buildPacket(LESSON, outputDir) {
     cells.push(new TableCell({ children: [new Paragraph({spacing: {after: 0}})], width: {size: dtNotesW, type: WidthType.DXA}, borders, margins: cellMar, shading: {fill: sh, type: ShadingType.CLEAR} }));
     dtRows.push(new TableRow({ children: cells }));
   });
-  children.push(new Table({ rows: dtRows, width: {size: CW, type: WidthType.DXA} }));
-  children.push(spacer(80));
+  dtChildren.push(new Table({ rows: dtRows, width: {size: CW_L, type: WidthType.DXA} }));
+  dtChildren.push(spacer(80));
 
-  // SECTION 2: Core word tracking
-  children.push(p([{text: '2. Core Word Use', bold: true, size: 22, color: NAVY}], {after: 40}));
-  children.push(p('Write core words. Mark:  ✓ = used independently  |  M = with model  |  — = not observed  |  ★ = generalized', {size: 14, color: '666666', italics: true, after: 60}));
+  dtChildren.push(p([{text: '2. Core Word Use', bold: true, size: 22, color: NAVY}], {after: 40}));
+  dtChildren.push(p('Write core words. Mark:  ✓ = used independently  |  M = with model  |  — = not observed  |  ★ = generalized', {size: 14, color: '666666', italics: true, after: 60}));
 
-  const cwCols = 5; const cwColW = Math.floor(CW / cwCols);
+  const cwCols = 5; const cwColW = Math.floor(CW_L / cwCols);
   const cwTrackerRows = [];
   for (let r = 0; r < 2; r++) {
-    const cells = [];
-    for (let c = 0; c < cwCols; c++) {
-      cells.push(new TableCell({ children: [
+    const cwCells = [];
+    for (let c2 = 0; c2 < cwCols; c2++) {
+      cwCells.push(new TableCell({ children: [
         p('✓  M  —  ★', {size: 12, color: '999999', align: AlignmentType.RIGHT}),
         p('________________', {size: 16, color: 'CCCCCC', align: AlignmentType.CENTER}),
       ], width: {size: cwColW, type: WidthType.DXA}, borders, margins: {top: 40, bottom: 40, left: 40, right: 40} }));
     }
-    cwTrackerRows.push(new TableRow({ children: cells }));
+    cwTrackerRows.push(new TableRow({ children: cwCells }));
   }
-  children.push(new Table({ rows: cwTrackerRows, width: {size: CW, type: WidthType.DXA}, columnWidths: Array(cwCols).fill(cwColW) }));
-  children.push(spacer(80));
+  dtChildren.push(new Table({ rows: cwTrackerRows, width: {size: CW_L, type: WidthType.DXA}, columnWidths: Array(cwCols).fill(cwColW) }));
+  dtChildren.push(spacer(80));
 
-  // SECTION 3: Reading
-  children.push(p([{text: '3. Reading & Connected Text', bold: true, size: 22, color: NAVY}], {after: 40}));
-  children.push(p([
-    {text: 'Decodable passage: ', bold: true, size: 16, color: NAVY},
-    {text: '☐ Attempted   ☐ Not attempted   |   Word accuracy: ____ / ____ total   |   Accuracy %: ______', size: 16, color: '444444'},
-  ], {after: 40}));
-  children.push(p([
-    {text: 'Support: ', bold: true, size: 16, color: NAVY},
-    {text: '☐ Independent   ☐ Finger tracking   ☐ Partner read-along   ☐ Symbol support   ☐ Re-read needed', size: 16, color: '444444'},
-  ], {after: 40}));
-  children.push(p([
-    {text: 'Behaviors: ', bold: true, size: 16, color: NAVY},
-    {text: '☐ Tracked L→R   ☐ Self-corrected   ☐ Blended independently   ☐ Used picture cues', size: 16, color: '444444'},
-  ], {after: 60}));
+  dtChildren.push(p([{text: '3. Reading & Connected Text', bold: true, size: 22, color: NAVY}], {after: 40}));
+  dtChildren.push(p([{text: 'Decodable passage: ', bold: true, size: 16, color: NAVY}, {text: '☐ Attempted   ☐ Not attempted   |   Word accuracy: ____ / ____ total   |   Accuracy %: ______', size: 16, color: '444444'}], {after: 40}));
+  dtChildren.push(p([{text: 'Support: ', bold: true, size: 16, color: NAVY}, {text: '☐ Independent   ☐ Finger tracking   ☐ Partner read-along   ☐ Symbol support   ☐ Re-read needed', size: 16, color: '444444'}], {after: 40}));
+  dtChildren.push(p([{text: 'Behaviors: ', bold: true, size: 16, color: NAVY}, {text: '☐ Tracked L→R   ☐ Self-corrected   ☐ Blended independently   ☐ Used picture cues', size: 16, color: '444444'}], {after: 60}));
 
-  // SECTION 4: Mastery decision + notes
-  children.push(p([{text: '4. Notes & Mastery Decision', bold: true, size: 22, color: NAVY}], {after: 40}));
-  // Notes lines
+  dtChildren.push(p([{text: '4. Notes & Mastery Decision', bold: true, size: 22, color: NAVY}], {after: 40}));
   for (let i = 0; i < 3; i++) {
-    children.push(p('________________________________________________________________________________________________________', {size: 14, color: 'DDDDDD', after: 20}));
+    dtChildren.push(p('________________________________________________________________________________________________________', {size: 14, color: 'DDDDDD', after: 20}));
   }
-  children.push(spacer(40));
-  children.push(p([
-    {text: 'Mastery Decision: ', bold: true, size: 16, color: NAVY},
-    {text: '☐ Move to next lesson   ☐ Reteach (same lesson)   ☐ Adjust access method   ☐ Consult with team', size: 16, color: '444444'},
-  ]));
+  dtChildren.push(spacer(40));
+  dtChildren.push(p([{text: 'Mastery Decision: ', bold: true, size: 16, color: NAVY}, {text: '☐ Move to next lesson   ☐ Reteach (same lesson)   ☐ Adjust access method   ☐ Consult with team', size: 16, color: '444444'}]));
 
   // ════════════════════════════════════════════════════════════
-  // FINAL PAGE — attribution & copyright
+  // FINAL PAGE — attribution & copyright (Section 3, portrait)
   // ════════════════════════════════════════════════════════════
-  children.push(pageBreak());
-  children.push(spacer(600));
-  children.push(p([
-    {text: 'COMMUNICATE ', bold: true, size: 36, color: TEAL},
-    {text: 'BY DESIGN', bold: true, size: 36, color: AMBER},
-  ], {align: AlignmentType.CENTER, after: 80}));
-  children.push(p('Where AT Meets Practice', {size: 22, color: TEAL, italics: true, align: AlignmentType.CENTER, after: 300}));
-  children.push(rule(NAVY, 2));
-  children.push(spacer(200));
-  children.push(p('Pictographic symbols © Government of Aragón. ARASAAC (arasaac.org). Licensed under CC BY-NC-SA 4.0.', {size: 16, color: '777777', italics: true, after: 80}));
-  children.push(p('Use symbols from your student\'s own AAC system first. These open-source symbols are provided as a universal reference when system-specific symbols are not available.', {size: 16, color: '777777', italics: true, after: 80}));
-  children.push(p('© Communicate by Design. All rights reserved. communicatebydesign.substack.com', {size: 16, color: '777777', italics: true, after: 80}));
-  children.push(p('This product aligns to the UFLI Foundations scope and sequence but is not affiliated with, endorsed by, or produced by UFLI or the University of Florida.', {size: 14, color: '999999', italics: true}));
+  const finalChildren = [];
+  finalChildren.push(spacer(600));
+  finalChildren.push(p([{text: 'COMMUNICATE ', bold: true, size: 36, color: TEAL}, {text: 'BY DESIGN', bold: true, size: 36, color: AMBER}], {align: AlignmentType.CENTER, after: 80}));
+  finalChildren.push(p('Where AT Meets Practice', {size: 22, color: TEAL, italics: true, align: AlignmentType.CENTER, after: 300}));
+  finalChildren.push(rule(NAVY, 2));
+  finalChildren.push(spacer(200));
+  finalChildren.push(p('Pictographic symbols © Government of Aragón. ARASAAC (arasaac.org). Licensed under CC BY-NC-SA 4.0.', {size: 16, color: '777777', italics: true, after: 80}));
+  finalChildren.push(p('Use symbols from your student\'s own AAC system first. These open-source symbols are provided as a universal reference when system-specific symbols are not available.', {size: 16, color: '777777', italics: true, after: 80}));
+  finalChildren.push(p('© Communicate by Design. All rights reserved. communicatebydesign.substack.com', {size: 16, color: '777777', italics: true, after: 80}));
+  finalChildren.push(p('This product aligns to the UFLI Foundations scope and sequence but is not affiliated with, endorsed by, or produced by UFLI or the University of Florida.', {size: 14, color: '999999', italics: true}));
 
   // ════════════════════════════════════════════════════════════
-  // ASSEMBLE DOCUMENT
+  // ASSEMBLE DOCUMENT — 3 sections: portrait / landscape / portrait
+  // Section 1: portrait — cover through reference materials
+  // Section 2: landscape — data tracker (full page wide)
+  // Section 3: portrait — attribution & copyright
   // ════════════════════════════════════════════════════════════
+  const headerDefault = new Header({ children: [new Paragraph({ children: [
+    new TextRun({text: 'Communicate by Design', font: FONT, size: 16, color: TEAL, italics: true}),
+    new TextRun({text: `  |  UFLI Lesson ${LESSON.number}: ${LESSON.phoneme}`, font: FONT, size: 16, color: '999999'}),
+  ], border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC', space: 4 } }, spacing: { after: 0 } })] });
+  const footerDefault = new Footer({ children: [new Paragraph({ children: [
+    new TextRun({text: 'Where AT Meets Practice', font: FONT, size: 14, color: TEAL, italics: true}),
+    new TextRun({text: '  |  Page ', font: FONT, size: 14, color: '999999'}),
+    new TextRun({children: [PageNumber.CURRENT], font: FONT, size: 14, color: '999999'}),
+  ], alignment: AlignmentType.CENTER, border: { top: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC', space: 4 } }, spacing: { before: 0 } })] });
+
   const doc = new Document({
     title: `UFLI Lesson ${LESSON.number} — Per-Lesson Packet`,
     description: `Communicate by Design — UFLI Lesson ${LESSON.number}: ${LESSON.phoneme}`,
@@ -812,19 +914,26 @@ async function buildPacket(LESSON, outputDir) {
         { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true, run: {size: 28, bold: true, font: FONT, color: NAVY}, paragraph: {spacing: {before: 160, after: 100}, outlineLevel: 1} },
       ],
     },
-    sections: [{
-      properties: { page: { size: {width: PAGE_W, height: PAGE_H}, margin: {top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN} } },
-      headers: { default: new Header({ children: [new Paragraph({ children: [
-        new TextRun({text: 'Communicate by Design', font: FONT, size: 16, color: TEAL, italics: true}),
-        new TextRun({text: `  |  UFLI Lesson ${LESSON.number}: ${LESSON.phoneme}`, font: FONT, size: 16, color: '999999'}),
-      ], border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC', space: 4 } }, spacing: { after: 0 } })] }) },
-      footers: { default: new Footer({ children: [new Paragraph({ children: [
-        new TextRun({text: 'Where AT Meets Practice', font: FONT, size: 14, color: TEAL, italics: true}),
-        new TextRun({text: '  |  Page ', font: FONT, size: 14, color: '999999'}),
-        new TextRun({children: [PageNumber.CURRENT], font: FONT, size: 14, color: '999999'}),
-      ], alignment: AlignmentType.CENTER, border: { top: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC', space: 4 } }, spacing: { before: 0 } })] }) },
-      children,
-    }],
+    sections: [
+      {
+        properties: { page: { size: {width: PAGE_W, height: PAGE_H}, margin: {top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN} } },
+        headers: { default: headerDefault },
+        footers: { default: footerDefault },
+        children,
+      },
+      {
+        properties: { page: { size: {width: DT_W, height: DT_H}, margin: {top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN} } },
+        headers: { default: headerDefault },
+        footers: { default: footerDefault },
+        children: dtChildren,
+      },
+      {
+        properties: { page: { size: {width: PAGE_W, height: PAGE_H}, margin: {top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN} } },
+        headers: { default: headerDefault },
+        footers: { default: footerDefault },
+        children: finalChildren,
+      },
+    ],
   });
 
   const paddedNum = String(LESSON.number).padStart(2, '0');

@@ -53,8 +53,8 @@ if os.path.exists(_DEJAVU_BOLD_PATH):
 
 # ── Paths ──
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-SYMBOL_CACHE = os.path.join(SCRIPT_DIR, "symbol_cache")
-SYMBOL_LIBRARY = os.path.join(SCRIPT_DIR, "symbol_library")
+SYMBOL_CACHE = os.path.join(SCRIPT_DIR, "..", "Symbols", "symbol_cache")
+SYMBOL_LIBRARY = os.path.join(SCRIPT_DIR, "..", "Symbols", "symbol_library")
 PRODUCTS_DIR = os.path.join(os.path.dirname(SCRIPT_DIR), "Products", "AAC Trading Cards")
 
 # Card back images (exported from Canva design DAHEmP8Ai3o at 300 DPI)

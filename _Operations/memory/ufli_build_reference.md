@@ -40,9 +40,21 @@ UFLI Lessons 1–4 introduce letters — no new phoneme-grapheme words yet, but 
 - Categories: Yellow=People/Pronouns, Green=Verbs/Actions, Orange=Adjectives/Descriptions, White=Nouns (default), Blue=Prepositions/Time/Location, Pink=Social/Questions/Feelings
 - Module: `fitzgerald_key.js` — classifies all 458 UFLI words. Review words grouped by category with color strips, 5 words per row.
 
+### Symbol Card Build Rule — LOCKED (Apr 2026)
+**ALWAYS use `make_card()` from `build_comm_access_packet.py` as the gold standard before any symbol card build.**
+Card = symbol image (or Draw It! dashed box) + word label (ALL CAPS, bold) + Fitzgerald Key colored border. That is all.
+- NO category bar on card
+- NO core/fringe label on card
+- NO extra text, icons, or sublabels on card
+- Word label ALWAYS present — even on Draw It! cards
+- NO blank filler cells — partial rows reflow to fill width (no bordered empty slot)
+- 3 columns per row (Level 1 — partner-assisted literacy product)
+- Fitzgerald border color from Modified Fitzgerald Key (not generic teal)
+Any deviation from this requires explicit approval and a memory update.
+
 ### Drawing Activity for Missing Symbols
 - 29 of 508 UFLI words have no ARASAAC symbol (mostly CVC nonsense/rare words).
-- `✏️ Draw It!` activity replaces blank `[symbol]` placeholders. Drawing box on card.
+- `✏️ Draw It!` activity replaces blank `[symbol]` placeholders. Drawing box on card; word label still present below.
 - Real words = draw meaning. Made-up/silly words = student invents the picture.
 - Note at top of symbol cards section explains the activity to the communication partner.
 

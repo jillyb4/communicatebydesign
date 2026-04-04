@@ -16,8 +16,9 @@
  */
 
 const path = require("path");
-const { Paragraph, TextRun, BorderStyle, HeadingLevel, AlignmentType } = require("docx");
-const T = require(path.join(__dirname, "..", "..", "..", "_Operations", "cbd_docx_template"));
+const T = require(path.join(__dirname, "..", "..", "..", "_Operations", "Build", "cbd_docx_template"));
+// Use the SAME docx instance as the template to ensure class compatibility
+const { Paragraph, TextRun, BorderStyle, HeadingLevel, AlignmentType } = T;
 
 const CW = T.CONTENT_WIDTH;
 const FONT = "Arial";
@@ -144,6 +145,7 @@ children.push(...T.titlePage({
   skillNumber:  "",
   skillName:    "Figurative Language Analysis",
   gradeRange:   "6–10",
+  productLine:  "A Poetry Reading Unit",
   versions:     "Poetry Reading Unit · NFMA Strategy",
   parts:        "4 Poems · V1 / V2 / V3 Access Levels",
 }));
@@ -382,10 +384,10 @@ children.push(T.makeTable(
 ));
 
 children.push(T.spacer());
-children.push(T.heading2("Semi-Core Words — Verify with SLP Before Day 1"));
+children.push(T.heading2("Semi-Core Words — Verify Before Day 1"));
 children.push(T.p(
   "These five words carry the FEEL step of every NFMA activity. They are likely already on most robust " +
-  "AAC systems, but confirm with the SLP before the unit begins. If absent, add to the CAP fringe list."
+  "AAC systems, but the team should confirm they are accessible before the unit begins. If absent, add to the CAP fringe list."
 ));
 children.push(T.makeTable(
   ["Word", "Fitzgerald Key", "NFMA Role"],
@@ -422,12 +424,12 @@ children.push(T.p(
   "or any other access method participates fully at V1, V2, or V3."
 ));
 
-children.push(T.heading2("CAP Vocabulary — SLP Handoff"));
+children.push(T.heading2("CAP Vocabulary — Team Coordination"));
 children.push(T.p(
-  "Send the Communication Access Packet to the SLP at least two weeks before Day 1. " +
-  "The packet includes all 10 fringe words with Fitzgerald Key categories, ARASAAC symbols " +
-  "where available, and text label cards for abstract literary terms. The SLP should confirm " +
-  "all five semi-core words (hide, pain, proud, alone, free) are on the student's system."
+  "Share the Communication Access Packet with all team members — including the SLP, if one is on the team — " +
+  "at least two weeks before Day 1. The packet includes all 10 fringe words with Fitzgerald Key categories, ARASAAC symbols " +
+  "where available, and text label cards for abstract literary terms. The team should confirm " +
+  "all five semi-core words (hide, pain, proud, alone, free) are accessible on the student's system before instruction begins."
 ));
 
 children.push(T.tableCaption("Table: Fitzgerald Key — color categories for vocabulary in this unit"));

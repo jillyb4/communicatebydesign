@@ -31,7 +31,7 @@ from reportlab.platypus.flowables import Image as RLImage
 
 MNT       = "/sessions/beautiful-wonderful-mendel/mnt/Communicate by Design"
 SCRATCH   = "/sessions/beautiful-wonderful-mendel"
-SYM_CACHE = os.path.join(MNT, "_Operations/symbol_cache")
+SYM_CACHE = os.path.join(MNT, "_Operations/Symbols/symbol_cache")
 UNIT_PDF  = os.path.join(SCRATCH, "Frances_Kelsey_Unit_v2.pdf")
 SYM_PDF   = os.path.join(MNT, "Products/Nonfiction Units/Frances Kelsey/Frances_Kelsey_Symbol_Cards.pdf")
 TRACKER   = os.path.join(MNT, "Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf")

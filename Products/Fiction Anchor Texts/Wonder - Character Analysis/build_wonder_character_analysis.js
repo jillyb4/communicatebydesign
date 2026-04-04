@@ -12,7 +12,7 @@
  */
 
 const path = require("path");
-const T = require(path.join(__dirname, "..", "..", "..", "_Operations", "cbd_docx_template"));
+const T = require(path.join(__dirname, "..", "..", "..", "_Operations", "Build", "cbd_docx_template"));
 
 const CW = T.CONTENT_WIDTH; // 10080 DXA
 

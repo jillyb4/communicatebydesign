@@ -686,7 +686,7 @@ function buildCommunicationBoard(config, vocab, symbolDir, accessLevel = 'level2
  */
 async function buildUnitKit(config, options = {}) {
   const {
-    symbolDir = path.join(__dirname, 'symbol_library'),
+    symbolDir = path.join(__dirname, '..', 'Symbols', 'symbol_library'),
     outputDir = path.join(__dirname, 'Output'),
     accessLevel = 'level2',
     productLine = 'UFLI Foundations',
@@ -854,7 +854,7 @@ async function main() {
 
   const args = process.argv.slice(2);
   const configs = require('./ufli_lesson_configs');
-  const symbolDir = path.join(__dirname, 'symbol_library');
+  const symbolDir = path.join(__dirname, '..', 'Symbols', 'symbol_library');
   const outputDir = path.join(__dirname, 'Output', 'Printable_Kits');
 
   let toBuild = [];
