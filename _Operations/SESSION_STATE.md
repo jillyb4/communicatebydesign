@@ -120,13 +120,15 @@ _Operations/
 ---
 
 ## Dashboard Auto-Refresh Log
-- **Last dashboard refresh:** Apr 3 2026 (scheduled task: cbd-dashboard-refresh — automated run)
-- **Products Live count:** 15 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2)
+- **Last dashboard refresh:** Apr 4 2026 (scheduled task: cbd-dashboard-refresh — automated run)
+- **Products Live count:** 16 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2 · Picture Book: 1)
 - **Vocab DB count:** 773 (Core: 192, Fringe: 581 · UFLI: 605, Nonfiction: 160, Fiction: 24)
 - **Work Items pulled:** 133 total · High-priority not-done: 43 items · 14 Done
 - **Status changes detected this run:**
-  - Keiko cover status corrected → ⚠ pending TPT upload (cover ready but not yet uploaded per Airtable notes)
-  - All the Way to the Top → status updated to READY TO LIST (Build complete Apr 3 · 95% progress)
+  - All the Way to the Top — LIVE on TPT (Apr 4 2026) · TPT ID: 15979429 · moved to Live in dashboard + task marked Done
+  - Keiko cover still ⚠ pending TPT upload (cover ready in Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/)
+  - Autism Acceptance Month tags, Pinterest logo, AT Toolkit pins — all now OVERDUE (were due Apr 1–3)
+  - Alert banner updated with 4 current highest-priority items
   - Wonder Fiction Unit status corrected → Active Build (not LIVE — was incorrectly showing LIVE in task dashboard)
   - 4 new tasks added to Task Dashboard: Upload v2 cover Keiko · Radium Girls SEO update · Lead Magnet PDF · Foundation Core Vocab Anchor Set
   - Cover tasks 15–18 (Zitkala-Ša, Frances Kelsey, Radium Girls, 504 Sit-In) moved to Done — v2 covers built and uploaded
