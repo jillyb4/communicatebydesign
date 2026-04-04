@@ -506,5 +506,118 @@ Concrete nouns/verbs tied to the book's content. Every fringe word has an ARASAA
 
 ---
 
+---
+
+## 7. TPT Search & SEO Intelligence
+
+*Researched Apr 4 2026. Sources: TPT browse pages, web search, competitor scan.*
+
+### What Teachers Are Actually Searching For
+
+These are the search patterns confirmed active on TPT for this product category. Organized from highest-volume category to most specific.
+
+**Tier 1 — High Volume, High Competition (use in title + description, not as sole differentiator):**
+- `interactive read aloud kindergarten`
+- `picture book activities kindergarten`
+- `read aloud activities first grade`
+- `picture book lesson plans`
+- `book companion kindergarten`
+- `read aloud book companion`
+- `picture book read aloud activities`
+- `kindergarten read aloud activities`
+
+**Tier 2 — Mid Volume, Medium Competition (strong match for CbD positioning):**
+- `interactive read aloud activities`
+- `picture book unit plan`
+- `picture book companion` (confirmed TPT browse page — direct match for our product type)
+- `read aloud companion`
+- `picture book unit kindergarten`
+- `shared reading activities kindergarten`
+- `SEL read aloud kindergarten`
+- `social emotional learning picture books activities`
+
+**Tier 3 — Lower Volume, Low Competition (CbD differentiator terms — own these):**
+- `disability picture books activities`
+- `inclusive read aloud kindergarten`
+- `special education read aloud`
+- `aac read aloud`
+- `picture book special education`
+- `diversity inclusion picture books activities`
+- `civil rights picture books kindergarten`
+
+---
+
+### What Competitors Are Building (and NOT Building)
+
+From competitor scan of top TPT sellers in this category:
+
+**What exists and is saturated:**
+- SEL/friendship-themed book companions (*Rainbow Fish*, *Chrysanthemum*, *Each Kindness*) — heavy competition, craft-heavy, not EBP-grounded
+- Seasonal read aloud bundles (back-to-school, winter, spring) — extremely saturated
+- *Last Stop on Market Street* — multiple products, gratitude/community angle
+- *We Are Water Protectors* — 3–4 products exist (mentor text angle, not AAC)
+- *The Snowy Day* — exists (literacy companion, craft-heavy) but NO AAC angle
+- *I Talk Like a River* — 1 product (lesson plan + Google activities), no IRA structure, no AAC
+
+**What is notably MISSING on TPT:**
+- *A Friend for Henry* — **zero products found** for this title. Autism protagonist. Gap confirmed.
+- *Ian's Walk* — **zero products found**. Classic inclusion title. Gap confirmed.
+- *Emmanuel's Dream* — **zero products found**. Gap confirmed.
+- *My Friend Isabelle* — **zero products found**. Gap confirmed.
+- *The Name Jar* — minimal products, no AAC/communication angle
+- *Separate Is Never Equal* — minimal products
+- *Fry Bread* — minimal products (a few, low engagement)
+- Any picture book companion with **AAC access built in** — this does not exist on TPT. Full stop.
+
+**The CbD differentiator is not the title. It's the AAC access layer.** Every competitor builds print-and-go comprehension worksheets with crafts. None build around Aided Language Stimulation, communication boards, Fitzgerald Key vocabulary, or IRA + Dialogic Reading + ALS as the instructional scaffold.
+
+---
+
+### Title + Tag Strategy for Each Companion
+
+**Title formula (≤80 chars):**
+`[Book Title] | AAC Read-Aloud Companion | [Skill] | SPED K-[grade]`
+
+Examples confirmed against "All the Way to the Top" listing:
+- `The Snowy Day | AAC Read-Aloud Companion | Retell + Core Vocab | SPED K-1`
+- `Corduroy | AAC Read-Aloud Companion | Character Feelings | SPED K-1`
+- `A Friend for Henry | AAC Read-Aloud Companion | Autism Inclusion | SPED K-2`
+- `I Talk Like a River | AAC Read-Aloud Companion | Communication Identity | SPED K-2`
+- `Emmanuel's Dream | AAC Read-Aloud Companion | Disability + Civil Rights | SPED 1-2`
+
+**7 keyword tags (use for every listing):**
+1. `picture book companion`
+2. `read aloud activities` + grade (e.g., `read aloud activities kindergarten`)
+3. `interactive read aloud`
+4. `AAC activities`
+5. `special education reading`
+6. `[book-specific tag]` (e.g., `autism inclusion`, `disability history`, `civil rights`)
+7. `[seasonal/hook tag]` (e.g., `disability awareness month`, `ADA`, `Black History Month`)
+
+**Description opener formula (≤180 chars, keyword-dense):**
+`[Book title] AAC read-aloud companion for special education K-[grade]. Interactive read aloud activities with communication boards, symbol cards, and Fitzgerald Key vocabulary.`
+
+---
+
+### Seasonal / Launch Hooks by Title
+
+| Title | Best Hook | Month |
+|---|---|---|
+| All the Way to the Top | ADA Anniversary / Disability Pride Month | July |
+| Emmanuel's Dream | Disability Awareness Month | October |
+| Ian's Walk / A Friend for Henry | Autism Acceptance Month | April |
+| Ruby Bridges / Rosa | Black History Month | February |
+| We Are Water Protectors | Earth Day / Native American Heritage Month | April / November |
+| Separate Is Never Equal | Hispanic Heritage Month | Sep–Oct |
+| The Name Jar | Back to School / Immigrant identity | Aug–Sep |
+| Fry Bread | Native American Heritage Month / Thanksgiving alternative | November |
+| Corduroy / The Snowy Day | Back to school / Winter | Sep / Dec–Jan |
+| Last Stop on Market Street | Gratitude / Thanksgiving / Community | November |
+| Each Kindness | Anti-Bullying Month / SEL back-to-school | Oct / Aug–Sep |
+| All Are Welcome | Back to School / Inclusion | Aug–Sep |
+
+---
+
+*TPT SEO research added Apr 4 2026. Competitor gap confirmed: AAC-lens picture book companions do not exist on TPT. CbD owns this category.*
 *Next step: Add top 5 priority titles to Airtable Launch Pipeline. Build The Snowy Day or Corduroy next.*
 *File location: `Research/CbD_PictureBook_Pipeline_Research.md`*

@@ -105,6 +105,18 @@
 - [ ] **All the Way to the Top — Pinterest first pin** — Create pin using Canva. Update Airtable Products record: Pinterest First Pin Date + Pinterest Pin Count = 1 + Canva Pin Design ID. *(Added Apr 4 2026)*
 - [ ] **GitHub push — picture book companion build scripts** — Commit `build_all_the_way_to_the_top.js` (symbol section removed) + `build_symbol_pages_picbook.py` (NEW) + `build_welcome_packet.py` (NEW). Open GitHub Desktop → commit → push. *(Added Apr 4 2026)*
 - [ ] **Jennifer Keelan bundle** — Pair "All the Way to the Top Companion" (K–3, $5) + Capitol Crawl 1990 ($9.95) = disability rights across grade bands. Create bundle listing once both are live. ⚠️ Both are now live — can build bundle anytime.
+
+### Picture Book Companions — Build Queue (Apr 4 2026)
+*5 new titles in build. All have `build_symbol_pages_picbook.py` complete. Airtable Products records created. Still needed for each: Teacher Packet .docx · Student Activities · Welcome Packet PDF · Student COMPLETE assembled PDF · TPT Preview · Canva cover · TPT listing.*
+
+- [ ] **A Friend for Henry — complete Teacher Packet + Student Activities** — Airtable: `recRlyKIagsefExyM`. Symbol pages + comm board script done. Next: `build_a_friend_for_henry.js` (Teacher Packet docx) + `build_welcome_packet.py` port. K–1, RL.K.3–RL.1.3, belonging/autism. *(Added Apr 4 2026)*
+- [ ] **I Talk Like a River — complete Teacher Packet + Student Activities** — Airtable: `recN6ck156yzuPykm`. Symbol pages + comm board script done. K–2, RL.K.3–RL.2.3, communication identity/stuttering. *(Added Apr 4 2026)*
+- [ ] **Ian's Walk — complete Teacher Packet + Student Activities** — Airtable: `recGCX4KbFeHmkbZ0`. Symbol pages + comm board script done. K–1, RL.K.3–RL.1.3, character perspective/sensory/autism. *(Added Apr 4 2026)*
+- [ ] **Emmanuel's Dream — complete Teacher Packet + Student Activities** — Airtable: `recdW4e84IRXsKSHV`. Symbol pages + comm board script done. 1–2, RL.1.3+RI.1.3, biography/persistence/disability pride. Seasonal hooks: BHM + Disability Pride Month. *(Added Apr 4 2026)*
+- [ ] **My Friend Isabelle — complete Teacher Packet + Student Activities** — Airtable: `recZORJoyxVv4KacC`. Symbol pages + comm board script done. K–1, RL.K.3–RL.1.3, friendship/Down syndrome. Build last. *(Added Apr 4 2026)*
+- [ ] **Add 5 new PB companion vocabulary to `cbd_unit_vocab.js`** — Add pendingBuild stubs for all 5 titles so they appear in Vocabulary Explorer. Run `sync_vocab_to_airtable.js` after full vocab is confirmed at build time. *(Added Apr 4 2026)*
+- [ ] **Canva pins — all 6 picture book companions** — Use `PB_Companions_Canva_BulkImport.csv` (`Distrubution/Pinterest/`) for bulk import. Jill is handling in Canva. All the Way to the Top pin = first priority. *(Added Apr 4 2026)*
+- [ ] **GitHub push — Apr 4 session** — Commit all 5 new `build_symbol_pages_picbook.py` scripts + `PB_Companions_Canva_BulkImport.csv` + updated CLAUDE.md + SESSION_STATE.md. *(Added Apr 4 2026)*
 - [ ] **Substack: "The Capitol Crawl Was a Child's Act of Resistance"** — Jennifer Keelan was 9 years old. Advocacy pillar post. Ties to both Capitol Crawl unit and All the Way to the Top companion. Target: July 2026 (ADA anniversary timing).
 - [ ] **Haben Girma unit** — Completes Disability Rights triple bundle (504 + Capitol Crawl + Haben). Zero TPT competition.
 - [ ] **Alternative Pencil Guide** — Jill actively building. Prerequisite for UFLI product line.

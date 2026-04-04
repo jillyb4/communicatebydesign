@@ -120,22 +120,29 @@ _Operations/
 ---
 
 ## Dashboard Auto-Refresh Log
-- **Last dashboard refresh:** Apr 4 2026 (scheduled task: cbd-dashboard-refresh — automated run)
-- **Products Live count:** 16 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2 · Picture Book: 1)
-- **Vocab DB count:** 773 (Core: 192, Fringe: 581 · UFLI: 605, Nonfiction: 160, Fiction: 24)
-- **Work Items pulled:** 133 total · High-priority not-done: 43 items · 14 Done
+- **Last dashboard refresh:** Apr 4 2026 (scheduled task: cbd-dashboard-refresh — automated run, second pass)
+- **Products Live count:** 16 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2 · Picture Book: 1) — unchanged from prior run
+- **Vocab DB count:** 773 (Core: 192, Fringe: 581 · UFLI: 605, Nonfiction: 160, Fiction: 24) — unchanged, confirmed match
+- **Work Items pulled:** 133 total · High-priority not-done: 43 items
 - **Status changes detected this run:**
-  - All the Way to the Top — LIVE on TPT (Apr 4 2026) · TPT ID: 15979429 · moved to Live in dashboard + task marked Done
-  - Keiko cover still ⚠ pending TPT upload (cover ready in Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/)
-  - Autism Acceptance Month tags, Pinterest logo, AT Toolkit pins — all now OVERDUE (were due Apr 1–3)
-  - Alert banner updated with 4 current highest-priority items
-  - Wonder Fiction Unit status corrected → Active Build (not LIVE — was incorrectly showing LIVE in task dashboard)
-  - 4 new tasks added to Task Dashboard: Upload v2 cover Keiko · Radium Girls SEO update · Lead Magnet PDF · Foundation Core Vocab Anchor Set
-  - Cover tasks 15–18 (Zitkala-Ša, Frances Kelsey, Radium Girls, 504 Sit-In) moved to Done — v2 covers built and uploaded
-  - Alert banner updated: 3 overdue items surfaced (Autism Acceptance Month tags, Pinterest logo, Keiko cover upload)
-- **No Airtable errors** — Products (34 records), Work Items (133 records), Vocabulary (773 records) all pulled successfully
+  - Alert banner refreshed: removed 504 Sit-In cover upload (confirmed uploaded Apr 3 per Products Notes) · replaced with Vocabulary Core Tier tagging task
+  - 504 Sit-In cover confirmed UPLOADED in Products table Notes (Apr 3 2026) — alert banner updated accordingly
+  - Keiko cover still ⚠ pending TPT upload (cover file: CbD_Cover_Keiko_v2.png in Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/)
+  - 4 new tasks added to Task Dashboard (ids 45–48): Vocab Core Tier tagging · Vocab Product Lines fix · Pinterest Family board · Substack Profile Rewrite
+  - Units In Progress KPI updated: Picture Book now shows "6 Picture Book ↗" (1 live + 5 in build)
+  - Vocabulary Dashboard footer date updated to Apr 4 2026
+  - Workflow Visual footer updated to note Apr 4 2026 auto-refresh
+- **Airtable pull results:** Products (39 records) · Work Items (133 records) · Launch Pipeline (83 records) · Vocabulary (773 records)
+- **No Airtable errors this run**
 
 ---
+
+## What Changed This Session (2026-04-04 — Picture Book Pipeline + Canva CSV)
+- **Picture Book pipeline research complete** — `Research/CbD_PictureBook_Pipeline_Research.md` built: 28 title candidates, 4-gate selection framework, priority scoring, TPT SEO gap analysis (zero competition confirmed for 5 titles: A Friend for Henry, I Talk Like a River, Ian's Walk, Emmanuel's Dream, My Friend Isabelle).
+- **5 new picture book companion build scripts written** — `build_symbol_pages_picbook.py` (symbol pages + comm board) created for all 5 titles. Each script: unit-specific vocabulary, FK overrides, same architecture as All the Way to the Top. Saved in `Products/Picture Book Companions/[Title]/`.
+- **Canva bulk import CSV created** — `Distrubution/Pinterest/PB_Companions_Canva_BulkImport.csv` — 6 rows (all 6 companions), 8 columns: book_title, series_label, skill_focus, skill_short, standards, grade_band, hook_text, tpt_tag. Ready for Canva bulk image creation of all 6 pins.
+- **5 new Airtable Products records created** — A Friend for Henry, I Talk Like a River, Ian's Walk, Emmanuel's Dream, My Friend Isabelle — all status: Building, price: $5, product line: Picture Book Companions.
+- **⚠️ Pending for all 5 new titles:** Teacher Packet docx build · Student Activities · Welcome Packet PDF · assembled Student COMPLETE · TPT Preview · Canva cover export · TPT listing.
 
 ## What Changed This Session (2026-04-03 — Picture Book Companion build)
 - **All the Way to the Top Companion — BUILD COMPLETE** — Full file set delivered: Welcome Packet (2pp) · Teacher Packet (9pp, Word export) · Student COMPLETE (12pp assembled) · Communication Board (1pp) · Symbol Pages (2pp) · TPT Preview (10pp). Airtable record created: `recPx1oIQOMEUBP9E` (Ready to List). TPT listing package with Output 0 delivered. Tax code: Digital Images - Streaming / Electronic Download. Price: $5. Target list date: July 26 2026 (ADA anniversary).

@@ -708,6 +708,64 @@ const units = [
     newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // PICTURE BOOK COMPANIONS — K–3 (PENDING BUILD — stubs added Apr 4 2026)
+  // All 5 new titles have symbol pages + comm board scripts built.
+  // Full vocabulary confirmed at build time via framework gates.
+  // Airtable records: recRlyKIagsefExyM / recN6ck156yzuPykm /
+  //                   recGCX4KbFeHmkbZ0 / recdW4e84IRXsKSHV / recZORJoyxVv4KacC
+  // ──────────────────────────────────────────────────────────────────────────────
+
+  {
+    number: 2,
+    unitTitle: 'A Friend for Henry',
+    productLine: 'Picture Book Companion',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'K–1 | RL.K.3–RL.1.3 | Character Feelings + Belonging | Author: Jenn Bailey | Autism inclusion. Core: want/like/feel/same/different/try/go/yes/no. Fringe: friend/class/school/share/play/loud/quiet/just right/new/together. Airtable: recRlyKIagsefExyM.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 3,
+    unitTitle: 'I Talk Like a River',
+    productLine: 'Picture Book Companion',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'K–2 | RL.K.3–RL.2.3 | Communication Identity + Character Feelings | Author: Jordan Scott | Stuttering/communication identity. Core: feel/say/talk/try/hear/go/help/okay/hard. Fringe: voice/word/water/river/listen/loud/quiet/different/together/morning. Airtable: recN6ck156yzuPykm.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 4,
+    unitTitle: "Ian's Walk",
+    productLine: 'Picture Book Companion',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: "K–1 | RL.K.3–RL.1.3 | Character Perspective + Sensory Experience | Author: Laurie Lears | Autism/sensory. Core: see/look/feel/go/want/stop/wait/try/help. Fringe: walk/brother/slow/different/together/bell/brick/fan/lost. Airtable: recGCX4KbFeHmkbZ0.",
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 5,
+    unitTitle: "Emmanuel's Dream",
+    productLine: 'Picture Book Companion',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: "1–2 | RL.1.3 + RI.1.3 | Character Response + Biography | Author: Laurie Ann Thompson | Disability pride/biography. Seasonal: BHM + Disability Pride Month. Core: can/try/go/want/feel/help/change/give/hard. Fringe: dream/brave/strong/leg/disability/ride/far/fast/bicycle/Ghana. Airtable: recdW4e84IRXsKSHV.",
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
+  {
+    number: 6,
+    unitTitle: 'My Friend Isabelle',
+    productLine: 'Picture Book Companion',
+    phoneme: '', grapheme: '',
+    pendingBuild: true,
+    notes: 'K–1 | RL.K.3–RL.1.3 | Friendship + Celebrating Difference | Author: Eliza Woloson | Down syndrome representation. Core: like/feel/play/want/try/good/same/different/help. Fringe: friend/dance/draw/laugh/book/slow/fast/together/love/song. Airtable: recZORJoyxVv4KacC.',
+    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+  },
+
 ];
 
 module.exports = units;
