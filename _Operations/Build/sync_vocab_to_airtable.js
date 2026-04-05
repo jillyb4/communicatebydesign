@@ -55,7 +55,7 @@ const F = {
 // ── Data sources ──────────────────────────────────────────────────────────────
 
 const OPS = path.join(__dirname);
-const UFLI_PATH = path.join(__dirname, '..', 'Products', 'UFLI Phonics', 'ufli_lesson_configs.js');
+const UFLI_PATH = '/Users/jillsmac/Library/Mobile Documents/com~apple~CloudDocs/Communicate by Design/Products/UFLI Phonics/ufli_lesson_configs.js';
 
 const nonfictionUnits   = require(path.join(OPS, 'cbd_unit_vocab.js'));
 const ufliLessons       = require(UFLI_PATH);
