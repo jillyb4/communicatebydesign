@@ -175,7 +175,7 @@
   </div>
   <div class="header-date">
     <strong>Vocabulary Dashboard</strong>
-    April 4, 2026 · Core, Fringe &amp; Heart Words
+    April 5, 2026 · Core, Fringe &amp; Heart Words
   </div>
 </div>
 
@@ -183,7 +183,7 @@
 
 <!-- ─── What This Is ──────────────────── -->
 <div class="note-box" style="margin-top:16px;">
-  <strong>About this dashboard:</strong> Every word in every CbD product is classified on two dimensions — <strong>AAC Access Layer</strong> (core / fringe / heart) and <strong>Instructional Layer</strong> (explicit / background / generative). This dashboard tracks how vocabulary is distributed across product lines, flags high-priority words, and shows where words appear in more than one product line. The authoritative source is the <strong>Airtable Vocabulary table</strong> (501 words currently synced, table ID: tblL2KH04WijW8XUb). Picture Book Companion vocab (~108 words, 6 titles) and Poetry Unit 1 vocab (~28 words) are confirmed in cbd_unit_vocab.js but not yet synced to Airtable — run sync_vocab_to_airtable.js to push them (total will rise to ~637). The interactive search tool is the <a href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">Vocabulary Explorer ↗</a>.
+  <strong>About this dashboard:</strong> Every word in every CbD product is classified on two dimensions — <strong>AAC Access Layer</strong> (core / fringe / heart) and <strong>Instructional Layer</strong> (explicit / background / generative). This dashboard tracks how vocabulary is distributed across product lines, flags high-priority words, and shows where words appear in more than one product line. The authoritative source is the <strong>Airtable Vocabulary table</strong> (501 words currently synced, table ID: tblL2KH04WijW8XUb). Picture Book Companion vocab (~112 words, 6 titles) and Poetry Unit 1 (28 words) are confirmed in cbd_unit_vocab.js and ready to sync — run sync_vocab_to_airtable.js to push them (total will rise to ~641). The interactive search tool is the <a href="../../../Products/UFLI Phonics/cbd-vocabulary-explorer.html">Vocabulary Explorer ↗</a>.
 </div>
 
 <!-- ─── KPI Row ────────────────────────────────────── -->
@@ -191,7 +191,7 @@
   <div class="kpi violet">
     <div class="kpi-num">501</div>
     <div class="kpi-label">Total Words Synced</div>
-    <div class="kpi-sub">Airtable · +~136 pending sync (PB ~108 + Poetry Unit 1 ~28)</div>
+    <div class="kpi-sub">Airtable · +~140 pending sync (PB ~112 + Poetry Unit 1 28)</div>
   </div>
   <div class="kpi blue">
     <div class="kpi-num">Core</div>
@@ -298,18 +298,18 @@
         <tr>
           <td><span class="dot dot-ufli"></span> UFLI Phonics (Lessons 5–34)</td>
           <td><strong style="color:#C084FC;">605</strong></td>
-          <td><span class="pill pill-core">Core ✓</span></td>
-          <td><span class="pill pill-fringe">Fringe ✓</span></td>
-          <td><span class="pill pill-heart">Heart ✓</span></td>
+          <td style="color:#60A5FA; font-weight:bold;">180</td>
+          <td style="color:#FFB703; font-weight:bold;">99</td>
+          <td style="color:#F472B6; font-weight:bold;">326</td>
           <td style="font-size:11px; color:#93C5FD;">go, want, more, help, stop</td>
           <td style="font-size:11px; color:#FDE68A;">sound, letter, word, read, spell</td>
           <td><span class="pill pill-ufli">LIVE May 2026</span></td>
         </tr>
         <tr>
           <td><span class="dot dot-nonfiction"></span> Nonfiction Reading Units (6 units)</td>
-          <td><strong style="color:#FB923C;">160</strong></td>
-          <td><span class="pill pill-core">Core ✓</span></td>
-          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td><strong style="color:#FB923C;">137</strong></td>
+          <td style="color:#60A5FA; font-weight:bold;">28</td>
+          <td style="color:#FFB703; font-weight:bold;">109</td>
           <td style="color:#374151;">—</td>
           <td style="font-size:11px; color:#93C5FD;">think, know, feel, change, tell</td>
           <td style="font-size:11px; color:#FDE68A;">protest, rights, evidence, argue, source</td>
@@ -318,8 +318,8 @@
         <tr>
           <td><span class="dot dot-fiction"></span> Fiction Anchor Texts (Wonder)</td>
           <td><strong style="color:#4ADE80;">24</strong></td>
-          <td><span class="pill pill-core">Core ✓</span></td>
-          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td style="color:#60A5FA; font-weight:bold;">12</td>
+          <td style="color:#FFB703; font-weight:bold;">12</td>
           <td style="color:#374151;">—</td>
           <td style="font-size:11px; color:#93C5FD;">feel, look, say, same, different</td>
           <td style="font-size:11px; color:#FDE68A;">belong, ordinary, face, character, change</td>
@@ -327,19 +327,19 @@
         </tr>
         <tr>
           <td><span class="dot dot-poetry"></span> Poetry Reading Units (Unit 1)</td>
-          <td><strong style="color:#A78BFA;">~28</strong></td>
-          <td><span class="pill pill-core">Core ✓</span></td>
-          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td><strong style="color:#94A3B8;">~28</strong> <small style="color:#64748b;">(not synced)</small></td>
+          <td style="color:#94A3B8; font-weight:bold;">~18</td>
+          <td style="color:#94A3B8; font-weight:bold;">~10</td>
           <td style="color:#374151;">—</td>
           <td style="font-size:11px; color:#93C5FD;">feel, mean, notice, ask, agree</td>
           <td style="font-size:11px; color:#FDE68A;">figurative language, metaphor, imagery, tone, speaker</td>
-          <td><span class="pill pill-poetry">QC Passed · Sync Needed · Listing Pending</span></td>
+          <td><span class="pill pill-poetry">Sync Needed · Listing Pending</span></td>
         </tr>
         <tr>
           <td><span class="dot dot-picbk"></span> Picture Book Companions (6 titles)</td>
-          <td><strong style="color:#F472B6;">~108</strong></td>
-          <td><span class="pill pill-core">Core ✓</span></td>
-          <td><span class="pill pill-fringe">Fringe ✓</span></td>
+          <td><strong style="color:#94A3B8;">~112</strong> <small style="color:#64748b;">(not synced)</small></td>
+          <td style="color:#94A3B8; font-weight:bold;">~63</td>
+          <td style="color:#94A3B8; font-weight:bold;">~49</td>
           <td style="color:#374151;">—</td>
           <td style="font-size:11px; color:#93C5FD;">want, feel, help, go, try</td>
           <td style="font-size:11px; color:#FDE68A;">friend, different, together, voice, dream</td>
@@ -347,7 +347,7 @@
         </tr>
       </tbody>
     </table>
-    <div style="margin-top:10px; font-size:10px; color:#64748b;">Airtable sync: 501 words (UFLI 346 + Nonfiction 137 + Wonder 24). Ready to sync: PB Companions ~108 words (6 titles) + Poetry Unit 1 ~28 words. After running sync_vocab_to_airtable.js total will rise to ~637. Sync script: _Operations/Build/sync_vocab_to_airtable.js · April 4, 2026</div>
+    <div style="margin-top:10px; font-size:10px; color:#64748b;">Airtable sync: 501 words (UFLI 346 + Nonfiction 137 + Wonder 24). Ready to sync: PB Companions ~112 words + Poetry Unit 1 28 words. Run: _Operations/Build/sync_vocab_to_airtable.js · April 5, 2026</div>
   </div>
 </div>
 
@@ -723,7 +723,7 @@
 <div class="container" style="padding-top:0;">
   <div class="footer">
     <span>Communicate by Design · Internal Dashboard · Not for distribution</span>
-    <span>Vocabulary table: tblL2KH04WijW8XUb · 773 words · Last auto-refresh: Apr 4 2026</span>
+    <span>Vocabulary table: tblL2KH04WijW8XUb · 501 synced · Last auto-refresh: Apr 5 2026</span>
   </div>
 </div>
 
