@@ -130,6 +130,11 @@ const UNIT_TITLE_MAP = {
   'What the Voice Carries'                   : 'What the Voice Carries',
   // Picture Book Companions
   'All the Way to the Top'                   : 'All the Way to the Top',
+  'A Friend for Henry'                       : 'A Friend for Henry',
+  'I Talk Like a River'                      : 'I Talk Like a River',
+  "Ian's Walk"                               : "Ian's Walk",
+  "Emmanuel's Dream"                         : "Emmanuel's Dream",
+  'My Friend Isabelle'                       : 'My Friend Isabelle',
 };
 function unitLabel(title) { return UNIT_TITLE_MAP[title] || title; }
 

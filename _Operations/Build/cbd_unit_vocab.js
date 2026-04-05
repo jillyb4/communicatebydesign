@@ -716,54 +716,199 @@ const units = [
   //                   recGCX4KbFeHmkbZ0 / recdW4e84IRXsKSHV / recZORJoyxVv4KacC
   // ──────────────────────────────────────────────────────────────────────────────
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // A FRIEND FOR HENRY — Picture Book Companion
+  // K–1 | RL.K.3–RL.1.3 | Character Feelings + Belonging
+  // Author: Jenn Bailey | Autism inclusion | BUILT Apr 4 2026
+  // Airtable: recRlyKIagsefExyM
+  // Top 5 Core: want, feel, help, go, try
+  // Top 5 Fringe: friend, class, school, together, different
+  // ──────────────────────────────────────────────────────────────────────────────
   {
     number: 2,
     unitTitle: 'A Friend for Henry',
     productLine: 'Picture Book Companion',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: 'K–1 | RL.K.3–RL.1.3 | Character Feelings + Belonging | Author: Jenn Bailey | Autism inclusion. Core: want/like/feel/same/different/try/go/yes/no. Fringe: friend/class/school/share/play/loud/quiet/just right/new/together. Airtable: recRlyKIagsefExyM.',
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    newWords: [
+      // ── Core words (9) ──
+      { word: 'want',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'like',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'feel',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'try',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'go',        type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'yes',       type: 'core',   instructional: 'generative', top5: false },
+      { word: 'no',        type: 'core',   instructional: 'generative', top5: false },
+      { word: 'help',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'share',     type: 'core',   instructional: 'generative', top5: false },
+      // ── Fringe words (10) ──
+      { word: 'friend',    type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'class',     type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'school',    type: 'fringe', instructional: 'background', top5: true  },
+      { word: 'play',      type: 'fringe', instructional: 'generative', top5: false },
+      { word: 'same',      type: 'fringe', instructional: 'explicit',   top5: false },
+      { word: 'different', type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'loud',      type: 'fringe', instructional: 'background', top5: false },
+      { word: 'quiet',     type: 'fringe', instructional: 'background', top5: false },
+      { word: 'together',  type: 'fringe', instructional: 'generative', top5: false },
+      { word: 'new',       type: 'fringe', instructional: 'background', top5: false },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // I TALK LIKE A RIVER — Picture Book Companion
+  // K–2 | RL.K.3–RL.2.3 | Communication Identity + Character Feelings
+  // Author: Jordan Scott | Stuttering/communication identity | BUILT Apr 4 2026
+  // Airtable: recN6ck156yzuPykm
+  // Top 5 Core: feel, say, talk, try, help
+  // Top 5 Fringe: voice, word, river, listen, different
+  // ──────────────────────────────────────────────────────────────────────────────
   {
     number: 3,
     unitTitle: 'I Talk Like a River',
     productLine: 'Picture Book Companion',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: 'K–2 | RL.K.3–RL.2.3 | Communication Identity + Character Feelings | Author: Jordan Scott | Stuttering/communication identity. Core: feel/say/talk/try/hear/go/help/okay/hard. Fringe: voice/word/water/river/listen/loud/quiet/different/together/morning. Airtable: recN6ck156yzuPykm.',
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    newWords: [
+      // ── Core words (9) ──
+      { word: 'feel',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'say',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'talk',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'try',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'hear',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'go',        type: 'core',   instructional: 'generative', top5: false },
+      { word: 'help',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'okay',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'hard',      type: 'core',   instructional: 'generative', top5: false },
+      // ── Fringe words (10) ──
+      { word: 'voice',     type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'word',      type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'water',     type: 'fringe', instructional: 'background', top5: false },
+      { word: 'river',     type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'listen',    type: 'fringe', instructional: 'generative', top5: true  },
+      { word: 'loud',      type: 'fringe', instructional: 'background', top5: false },
+      { word: 'quiet',     type: 'fringe', instructional: 'background', top5: false },
+      { word: 'different', type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'together',  type: 'fringe', instructional: 'generative', top5: false },
+      { word: 'morning',   type: 'fringe', instructional: 'background', top5: false },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // IAN'S WALK — Picture Book Companion
+  // K–1 | RL.K.3–RL.1.3 | Character Perspective + Sensory Experience
+  // Author: Laurie Lears | Autism/sensory | BUILT Apr 4 2026
+  // Airtable: recGCX4KbFeHmkbZ0
+  // Top 5 Core: see, feel, go, want, help
+  // Top 5 Fringe: walk, brother, slow, different, together
+  // ──────────────────────────────────────────────────────────────────────────────
   {
     number: 4,
     unitTitle: "Ian's Walk",
     productLine: 'Picture Book Companion',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: "K–1 | RL.K.3–RL.1.3 | Character Perspective + Sensory Experience | Author: Laurie Lears | Autism/sensory. Core: see/look/feel/go/want/stop/wait/try/help. Fringe: walk/brother/slow/different/together/bell/brick/fan/lost. Airtable: recGCX4KbFeHmkbZ0.",
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    newWords: [
+      // ── Core words (9) ──
+      { word: 'see',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'look',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'feel',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'go',        type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'want',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'stop',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'wait',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'try',       type: 'core',   instructional: 'generative', top5: false },
+      { word: 'help',      type: 'core',   instructional: 'generative', top5: true  },
+      // ── Fringe words (9) ──
+      { word: 'walk',      type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'brother',   type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'slow',      type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'different', type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'together',  type: 'fringe', instructional: 'generative', top5: true  },
+      { word: 'bell',      type: 'fringe', instructional: 'background', top5: false },
+      { word: 'brick',     type: 'fringe', instructional: 'background', top5: false },
+      { word: 'fan',       type: 'fringe', instructional: 'background', top5: false },
+      { word: 'lost',      type: 'fringe', instructional: 'explicit',   top5: false },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // EMMANUEL'S DREAM — Picture Book Companion
+  // 1–2 | RL.1.3 + RI.1.3 | Character Response + Biography
+  // Author: Laurie Ann Thompson | Disability biography | BUILT Apr 4 2026
+  // Seasonal hooks: Black History Month + Disability Pride Month
+  // Airtable: recdW4e84IRXsKSHV
+  // Top 5 Core: can, try, feel, want, help
+  // Top 5 Fringe: dream, disability, brave, strong, bicycle
+  // ──────────────────────────────────────────────────────────────────────────────
   {
     number: 5,
     unitTitle: "Emmanuel's Dream",
     productLine: 'Picture Book Companion',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: "1–2 | RL.1.3 + RI.1.3 | Character Response + Biography | Author: Laurie Ann Thompson | Disability pride/biography. Seasonal: BHM + Disability Pride Month. Core: can/try/go/want/feel/help/change/give/hard. Fringe: dream/brave/strong/leg/disability/ride/far/fast/bicycle/Ghana. Airtable: recdW4e84IRXsKSHV.",
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    newWords: [
+      // ── Core words (9) ──
+      { word: 'can',        type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'try',        type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'go',         type: 'core',   instructional: 'generative', top5: false },
+      { word: 'want',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'feel',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'help',       type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'change',     type: 'core',   instructional: 'generative', top5: false },
+      { word: 'give',       type: 'core',   instructional: 'generative', top5: false },
+      { word: 'hard',       type: 'core',   instructional: 'generative', top5: false },
+      // ── Fringe words (10) ──
+      { word: 'dream',      type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'brave',      type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'strong',     type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'leg',        type: 'fringe', instructional: 'background', top5: false },
+      { word: 'disability', type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'ride',       type: 'fringe', instructional: 'explicit',   top5: false },
+      { word: 'bicycle',    type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'far',        type: 'fringe', instructional: 'background', top5: false },
+      { word: 'fast',       type: 'fringe', instructional: 'background', top5: false },
+      { word: 'Ghana',      type: 'fringe', instructional: 'background', top5: false, notes: 'Proper noun — country in West Africa. Use text label card.' },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // MY FRIEND ISABELLE — Picture Book Companion
+  // K–1 | RL.K.3–RL.1.3 | Friendship + Celebrating Difference
+  // Author: Eliza Woloson | Down syndrome representation | BUILT Apr 4 2026
+  // Airtable: recZORJoyxVv4KacC
+  // Top 5 Core: feel, play, want, help, different
+  // Top 5 Fringe: friend, dance, draw, laugh, together
+  // ──────────────────────────────────────────────────────────────────────────────
   {
     number: 6,
     unitTitle: 'My Friend Isabelle',
     productLine: 'Picture Book Companion',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: 'K–1 | RL.K.3–RL.1.3 | Friendship + Celebrating Difference | Author: Eliza Woloson | Down syndrome representation. Core: like/feel/play/want/try/good/same/different/help. Fringe: friend/dance/draw/laugh/book/slow/fast/together/love/song. Airtable: recZORJoyxVv4KacC.',
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    newWords: [
+      // ── Core words (9) ──
+      { word: 'like',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'feel',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'play',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'want',      type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'try',       type: 'core',   instructional: 'generative', top5: false },
+      { word: 'good',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'same',      type: 'core',   instructional: 'generative', top5: false },
+      { word: 'different', type: 'core',   instructional: 'generative', top5: true  },
+      { word: 'help',      type: 'core',   instructional: 'generative', top5: true  },
+      // ── Fringe words (10) ──
+      { word: 'friend',    type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'dance',     type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'draw',      type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'laugh',     type: 'fringe', instructional: 'explicit',   top5: true  },
+      { word: 'book',      type: 'fringe', instructional: 'background', top5: false },
+      { word: 'slow',      type: 'fringe', instructional: 'background', top5: false },
+      { word: 'fast',      type: 'fringe', instructional: 'background', top5: false },
+      { word: 'together',  type: 'fringe', instructional: 'generative', top5: true  },
+      { word: 'love',      type: 'fringe', instructional: 'generative', top5: false },
+      { word: 'song',      type: 'fringe', instructional: 'background', top5: false },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
 ];

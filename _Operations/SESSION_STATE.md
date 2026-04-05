@@ -120,22 +120,26 @@ _Operations/
 ---
 
 ## Dashboard Auto-Refresh Log
-- **Last dashboard refresh:** Apr 4 2026 (scheduled task: cbd-dashboard-refresh — automated run, second pass)
-- **Products Live count:** 16 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2 · Picture Book: 1) — unchanged from prior run
-- **Vocab DB count:** 773 (Core: 192, Fringe: 581 · UFLI: 605, Nonfiction: 160, Fiction: 24) — unchanged, confirmed match
-- **Work Items pulled:** 133 total · High-priority not-done: 43 items
-- **Status changes detected this run:**
-  - Alert banner refreshed: removed 504 Sit-In cover upload (confirmed uploaded Apr 3 per Products Notes) · replaced with Vocabulary Core Tier tagging task
-  - 504 Sit-In cover confirmed UPLOADED in Products table Notes (Apr 3 2026) — alert banner updated accordingly
-  - Keiko cover still ⚠ pending TPT upload (cover file: CbD_Cover_Keiko_v2.png in Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/)
-  - 4 new tasks added to Task Dashboard (ids 45–48): Vocab Core Tier tagging · Vocab Product Lines fix · Pinterest Family board · Substack Profile Rewrite
-  - Units In Progress KPI updated: Picture Book now shows "6 Picture Book ↗" (1 live + 5 in build)
-  - Vocabulary Dashboard footer date updated to Apr 4 2026
-  - Workflow Visual footer updated to note Apr 4 2026 auto-refresh
-- **Airtable pull results:** Products (39 records) · Work Items (133 records) · Launch Pipeline (83 records) · Vocabulary (773 records)
-- **No Airtable errors this run**
+- **Last dashboard refresh:** Apr 4 2026 (scheduled task: cbd-dashboard-refresh — automated run, third pass)
+- **Products Live count:** 16 (Nonfiction: 6 · AT/AAC IEP Team: 7 · Bundles: 2 · Picture Book: 1) — confirmed via Airtable Products table
+- **Vocab DB count:** 773 (Core: 192, Fringe: 581) — confirmed via Airtable Vocabulary table full pull
+- **Work Items pulled:** 133 total · High-priority not-done: 43 items active
+- **Status changes detected this run (third pass):**
+  - Alert banner refreshed: Autism Acceptance Month tags (overdue Apr 1) + Canva pins AT Toolkit/Comm Partner Guide (overdue Apr 3) + Pinterest logo + Keiko v2 cover as top 4 items
+  - Priority Actions section refreshed: consolidated Apr 8 tasks, combined Apr 10 tasks, maintained 9 rows
+  - 4 new tasks added to Task Dashboard (ids 49–52): Capitol Crawl v2 cover uploaded ✓ (Done) · 504 Sit-In v2 cover uploaded ✓ (Done) · 504 Sit-In Preview PDF (Jun 1 deadline) · Substack #6 IEP Goals (Apr 8)
+  - CbD_Workflow_Visual.html — no changes needed (already current, Apr 4 2026 date confirmed)
+  - CbD_Vocabulary_Dashboard.html — no changes needed (773 words confirmed, Apr 4 2026 date confirmed)
+- **Airtable pull results:** Products (39 records) · Work Items (133 records) · Vocabulary (773 records) · Launch Pipeline: not pulled this pass
+- **Airtable errors:** Work Items filter failed (unknown column name — pulled all and filtered locally); Vocabulary fieldId required table schema lookup — resolved
 
 ---
+
+## What Changed This Session (2026-04-05 — UFLI Airtable Cleanup + Skill Reference Updates)
+- **UFLI Airtable cleanup complete** — 4 old records retired (marked [RETIRED], stage = Retired): UFLI Lessons 5–34 Individual Packets ($1), UFLI Teacher Guide ($5), UFLI Complete Set ($28), UFLI Lessons 5–34 Bundle ($25). 2 new records created: `recCeJ479OD5BEHb5` (FREE, L1–5) + `recas76MabrgRnmL1` (PAID $20, L6–34 + Guide). Both stage: Building, target May 1 2026, Docx Built ✓, QC Passed ✓.
+- **TPT Listings doc bugs fixed** — `TPT_Listings_UFLI_AAC_Companion.md`: (1) FREE title trimmed from 81→80 chars (FREE→Free); (2) Lesson 10 label fixed (CVC CVC Practice → CVC Practice); (3) Lesson 11 label fixed (Nasalized A Nasalized /ă/ → Nasalized /ă/); (4) Lesson 19 label fixed (VC & CVC VC & CVC Practice → VC & CVC Practice).
+- **Picture Book Companion Canva Cover Link populated in Airtable** — All 6 PB Companion Products records now have `Canva Cover Link` = `https://www.canva.com/design/DAHF6DObHZ4/edit`. Canva cover workflow confirmed locked: text = Lane B (bulk CSV auto-fills), images = Lane A (Jill places manually). Design ID `DAHF6DObHZ4` added to CLAUDE.md Canva Designs table.
+- **⚠️ Skill files need manual update on Mac** — `.claude/skills/communicate-by-design/references/products.md` and `references/ufli.md` are read-only in session (iCloud mount). Must update on Mac. Changes needed: UFLI pricing table (retire old, add FREE+$20), UFLI status (covers done, blocker = content consistency), PB Companions section (add 5 new titles + Canva workflow), Substack status (now 4 posts live).
 
 ## What Changed This Session (2026-04-04 — Picture Book Pipeline + Canva CSV)
 - **Picture Book pipeline research complete** — `Research/CbD_PictureBook_Pipeline_Research.md` built: 28 title candidates, 4-gate selection framework, priority scoring, TPT SEO gap analysis (zero competition confirmed for 5 titles: A Friend for Henry, I Talk Like a River, Ian's Walk, Emmanuel's Dream, My Friend Isabelle).
@@ -182,3 +186,5 @@ _Operations/
 - [ ] Delete duplicate symbol_library and node_modules from Finder (iCloud locked — 3 folders)
 - [ ] Wonder: confirm pricing ($8.95/$9.95) and cover color before TPT listing
 - [ ] Run `cbd-dashboard-refresh` task once manually to pre-approve Airtable tool permissions
+- [ ] Update skill files on Mac (read-only in session): `.claude/skills/communicate-by-design/references/products.md` — fix UFLI pricing (retire old, add FREE + $20) + add PB Companions live section. `references/ufli.md` — fix pricing table + status (covers done, blocker = content consistency).
+- [ ] Check `Canva Cover ✓` in Airtable Products for each PB Companion as you finish placing images in Canva bulk template (DAHF6DObHZ4)

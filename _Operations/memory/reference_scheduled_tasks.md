@@ -6,6 +6,28 @@ Last updated: 2026-04-01
 
 ## Active Scheduled Tasks
 
+### `cbd-dashboard-refresh`
+
+| Field | Value |
+|-------|-------|
+| **Name** | cbd-dashboard-refresh |
+| **Schedule** | 3× daily: 8:16 AM, noon, 11:30 PM |
+| **Last Updated** | 2026-04-05 |
+
+**Purpose:** Regenerates all 4 CbD dashboards from Airtable + hardcoded data.
+
+**CRITICAL:** HTML edits to dashboards are overwritten on every run. ALL data corrections must go in this task's prompt — not directly in the HTML files.
+
+**Prompt updates (Apr 5 2026):**
+- PB Companion row: hardcoded with actual word counts (not derived from Airtable — PB vocab not synced yet)
+- Poetry Unit 1: shows 28 words with "(not synced)" note — never pendingBuild, just unsynced
+- Core/Fringe/Heart columns: show actual word counts, not checkmarks
+- KPI corrected: 501 words (was wrong before)
+
+**How to trigger:** Runs automatically 3× daily. To manually refresh: open Scheduled Tasks → find `cbd-dashboard-refresh` → Run now.
+
+---
+
 ### `cbd-pinterest-daily`
 
 | Field | Value |

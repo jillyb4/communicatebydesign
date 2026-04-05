@@ -65,7 +65,10 @@ Products/Nonfiction Units/*/
 !Products/Nonfiction Units/*/build_*.py
 
 Products/AT AAC IEP TEAM Supports/
-Products/Picture Book Companions/
+Products/Picture Book Companions/*/
+!Products/Picture Book Companions/*/build_*.js
+!Products/Picture Book Companions/*/build_*.py
+!Products/Picture Book Companions/build_student_complete.py
 Products/UFLI Phonics/Ready for TPT v3/
 
 # Brand assets (images/PDFs — iCloud handles these)

@@ -67,7 +67,7 @@ const lessons = [
 
   {
     number: 5,
-    phoneme: '',
+    phoneme: 'VC & CVC',
     grapheme: 'VC & CVC',
     newWords: [
       { word: 'at', type: 'core' },
@@ -226,7 +226,7 @@ const lessons = [
 
   {
     number: 10,
-    phoneme: '',
+    phoneme: 'CVC Practice',
     grapheme: 'CVC',
     newWords: [
       { word: 'at', type: 'core' },
@@ -279,7 +279,7 @@ const lessons = [
 
   {
     number: 11,
-    phoneme: '',
+    phoneme: 'Nasalized /ă/',
     grapheme: 'Nasalized A',
     newWords: [
       { word: 'am', type: 'core' },
@@ -764,7 +764,7 @@ const lessons = [
 
   {
     number: 19,
-    phoneme: '',
+    phoneme: 'VC & CVC Practice',
     grapheme: 'VC & CVC',
     newWords: [
       { word: 'at', type: 'core' },
