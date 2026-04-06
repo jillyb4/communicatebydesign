@@ -41,6 +41,7 @@ Working toward AT certification (not yet certified — do NOT call me AT Special
 | **Nonfiction Pinterest Pin template** | DAHFdGbv7rs | 365×548 (2:3 pin) — 7 pages, one per nonfiction unit |
 | **IEP AT Consideration Toolkit AD** | DAHEI1nmrPA | 365×548 (2:3 pin) — 5 pin variants |
 | **Fiction Long Format pin** | DAHFeFD9LBk | 365×548 (2:3 pin) — Wonder, 1 page |
+| **Fiction bulk import pin template** | DAHGBZ-LtRo | 365×548 (2:3 pin) — bulk text auto-fill for all 6 fiction units |
 | **Keiko FREE Pinterest pin** | DAHEiSb8S7k | 365×548 (2:3 pin) — posted directly to Pinterest |
 | **Picture Book Companion cover bulk template** | DAHF6DObHZ4 | 1080×1080 — 6 pages (1 per companion). Text auto-fills via bulk CSV. Images (book cover + symbol preview + 3 worksheet previews) placed manually by Jill. |
 

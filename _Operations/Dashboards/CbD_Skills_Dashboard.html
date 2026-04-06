@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — Skills Coverage Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1B1F3B; color: #fff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; }
+
+  /* Nav */
+  .cbd-nav { background: #0d1020; border-bottom: 1px solid #2d3456; padding: 0 20px; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 200; height: 36px; font-size: 12px; }
+  .cbd-nav-brand { display: flex; align-items: center; gap: 6px; color: #94A3B8; font-size: 11px; letter-spacing: 0.05em; padding-right: 16px; border-right: 1px solid #2d3456; margin-right: 8px; white-space: nowrap; }
+  .cbd-nav-brand span { color: #FFB703; font-weight: 700; }
+  .cbd-nav-tabs { display: flex; align-items: center; gap: 2px; }
+  .cbd-nav-tab { display: flex; align-items: center; padding: 0 12px; height: 36px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .cbd-nav-tab:hover { color: #fff; text-decoration: none; }
+  .cbd-nav-tab.active { color: #FFB703; border-bottom-color: #FFB703; }
+
+  /* Header */
+  .header { background: #13172e; border-bottom: 3px solid #FFB703; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .logo-bubble { width: 38px; height: 38px; background: #FFB703; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .brand { font-size: 18px; font-weight: bold; }
+  .brand span { color: #FFB703; }
+  .tagline { font-size: 11px; color: #94A3B8; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .header-date { font-size: 11px; color: #94A3B8; text-align: right; }
+  .header-date strong { color: #FFB703; display: block; font-size: 13px; }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 20px 24px 48px; }
+
+  /* Section headers */
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 28px 0 14px; }
+  .section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.3px; }
+  .section-line { flex: 1; height: 1px; background: #2d3456; }
+  .section-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .badge-nonfiction { background: #92400e; color: #FCD34D; }
+  .badge-fiction { background: #14532d; color: #86EFAC; }
+  .badge-poetry { background: #3b0764; color: #D8B4FE; }
+  .badge-gap { background: #7f1d1d; color: #FCA5A5; }
+
+  /* Legend */
+  .legend { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; background: #252A4A; border-radius: 8px; padding: 10px 16px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #94A3B8; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .dot-live { background: #4ADE80; }
+  .dot-building { background: #00B4D8; }
+  .dot-idea { background: #64748b; }
+  .dot-gap { background: #1B1F3B; border: 1px dashed #475569; }
+
+  /* Skills table */
+  .skills-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  .skills-table th { background: #0d1020; color: #94A3B8; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 10px; text-align: left; border-bottom: 2px solid #2d3456; white-space: nowrap; }
+  .skills-table th.grade-col { text-align: center; min-width: 38px; width: 38px; }
+  .skills-table td { padding: 7px 10px; border-bottom: 1px solid #2d3456; vertical-align: middle; }
+  .skills-table tr:hover td { background: #1e2340; }
+  .skills-table td.grade-cell { text-align: center; }
+
+  /* Skill name cell */
+  .skill-name { font-weight: 700; font-size: 12px; color: #fff; margin-bottom: 2px; }
+  .skill-standard { font-size: 10px; color: #64748b; font-family: monospace; }
+  .skill-line { font-size: 10px; color: #94A3B8; margin-top: 1px; }
+
+  /* Unit pill */
+  .unit-pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin: 2px 2px; white-space: nowrap; }
+  .pill-live { background: #14532d; color: #4ADE80; border: 1px solid #16a34a; }
+  .pill-building { background: #0c3044; color: #00B4D8; border: 1px solid #0284c7; }
+  .pill-idea { background: #1e2340; color: #64748b; border: 1px solid #334155; }
+  .pill-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .pdot-live { background: #4ADE80; }
+  .pdot-building { background: #00B4D8; }
+  .pdot-idea { background: #64748b; }
+
+  /* Grade coverage cell */
+  .grade-filled { background: rgba(255,183,3,0.18); border-radius: 4px; color: #FFB703; font-size: 10px; font-weight: 700; }
+  .grade-empty { color: #2d3456; font-size: 10px; }
+  .grade-gap { background: rgba(239,68,68,0.08); border-radius: 4px; }
+
+  /* Grade band header row */
+  .grade-band-row th { font-size: 9px; color: #64748b; padding: 4px 6px; text-align: center; background: #13172e; border-bottom: 1px solid #2d3456; letter-spacing: 0.05em; }
+  .grade-band-label { font-size: 9px; color: #64748b; text-align: center; border-bottom: 1px solid #2d3456; background: #13172e; padding: 3px 0; }
+  .band-primary { color: #F472B6; }
+  .band-elem { color: #60A5FA; }
+  .band-middle { color: #34D399; }
+  .band-high { color: #A78BFA; }
+
+  /* Standards axis */
+  .std-col { font-size: 10px; color: #64748b; white-space: nowrap; min-width: 90px; }
+  .std-tag { display: inline-block; background: #13172e; border: 1px solid #2d3456; border-radius: 3px; padding: 1px 5px; font-size: 10px; font-family: monospace; color: #94A3B8; margin: 1px; }
+
+  /* Gap analysis */
+  .gap-table { width: 100%; border-collapse: collapse; }
+  .gap-table th { background: #0d1020; color: #94A3B8; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 10px; text-align: left; border-bottom: 2px solid #2d3456; }
+  .gap-table td { padding: 8px 10px; border-bottom: 1px solid #2d3456; font-size: 11px; vertical-align: top; }
+  .gap-table tr:hover td { background: #1e2340; }
+  .gap-alert { background: rgba(239,68,68,0.08); }
+  .gap-warn { background: rgba(251,191,36,0.05); }
+  .tag-red { display: inline-block; background: #7f1d1d; color: #FCA5A5; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 700; }
+  .tag-yellow { display: inline-block; background: #78350f; color: #FCD34D; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 700; }
+  .tag-green { display: inline-block; background: #14532d; color: #4ADE80; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 700; }
+
+  /* Summary KPIs */
+  .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #252A4A; border-radius: 8px; padding: 14px; border-top: 3px solid; text-align: center; }
+  .kpi.amber { border-color: #FFB703; }
+  .kpi.teal { border-color: #00B4D8; }
+  .kpi.green { border-color: #4ADE80; }
+  .kpi.violet { border-color: #C084FC; }
+  .kpi.pink { border-color: #F472B6; }
+  .kpi-val { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+  .kpi-label { font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Poetry block */
+  .poetry-block { background: #1a0f2e; border: 1px solid #4c1d95; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .poetry-title { color: #C084FC; font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .poetry-unit { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; border-bottom: 1px solid #2d1a4e; }
+  .poetry-unit:last-child { border-bottom: none; }
+  .poetry-num { width: 22px; height: 22px; background: #6B21A8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #D8B4FE; flex-shrink: 0; margin-top: 1px; }
+  .poetry-name { font-weight: 700; font-size: 12px; color: #E9D5FF; margin-bottom: 2px; }
+  .poetry-skill { font-size: 11px; color: #A78BFA; }
+  .poetry-std { font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px; }
+
+  .note { font-size: 10px; color: #64748b; font-style: italic; padding: 6px 0 0 2px; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="cbd-nav">
+  <div class="cbd-nav-brand">💬 <span>COMMUNICATE</span> <span style="color:#fff;font-weight:400">by</span> <span>DESIGN</span></div>
+  <div class="cbd-nav-tabs">
+    <a href="CbD_Launch_Dashboard.html" class="cbd-nav-tab">Operations</a>
+    <a href="CbD_Task_Dashboard.html" class="cbd-nav-tab">Tasks</a>
+    <a href="CbD_Workflow_Visual.html" class="cbd-nav-tab">Pipeline</a>
+    <a href="CbD_Vocabulary_Dashboard.html" class="cbd-nav-tab">Vocabulary</a>
+    <a href="CbD_Skills_Dashboard.html" class="cbd-nav-tab active">Skills</a>
+  </div>
+</nav>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-bubble">💬</div>
+    <div>
+      <div class="brand">COMMUNICATE <span>by DESIGN</span></div>
+      <div class="tagline">Skills Coverage Dashboard</div>
+    </div>
+  </div>
+  <div class="header-date">
+    <strong>Skills & Standards Map</strong>
+    Nonfiction · Fiction · Poetry · Grades K–12
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- KPI Summary -->
+  <div class="kpi-row">
+    <div class="kpi amber">
+      <div class="kpi-val" style="color:#FFB703">6</div>
+      <div class="kpi-label">Nonfiction Skills<br>6 units live</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-val" style="color:#4ADE80">6</div>
+      <div class="kpi-label">Fiction Skills<br>1 live · 5 idea</div>
+    </div>
+    <div class="kpi violet">
+      <div class="kpi-val" style="color:#C084FC">4</div>
+      <div class="kpi-label">Poetry Skills<br>1 building · 3 idea</div>
+    </div>
+    <div class="kpi teal">
+      <div class="kpi-val" style="color:#00B4D8">7</div>
+      <div class="kpi-label">Unique ELA Skills<br>across all lines</div>
+    </div>
+    <div class="kpi pink">
+      <div class="kpi-val" style="color:#F472B6">3–10</div>
+      <div class="kpi-label">Grade Coverage<br>no K–2 ELA yet</div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <strong style="font-size:11px;color:#fff;margin-right:4px">Status:</strong>
+    <div class="legend-item"><div class="legend-dot dot-live"></div> Live on TPT</div>
+    <div class="legend-item"><div class="legend-dot dot-building"></div> Building / QC</div>
+    <div class="legend-item"><div class="legend-dot dot-idea"></div> Idea / Pipeline</div>
+    <div class="legend-item"><div class="legend-dot dot-gap"></div> Grade gap — no coverage</div>
+    <div style="margin-left:auto;font-size:10px;color:#64748b">Grade bands: <span class="band-primary">●</span> Primary K–2 &nbsp; <span class="band-elem">●</span> Elem 3–5 &nbsp; <span class="band-middle">●</span> Middle 6–8 &nbsp; <span class="band-high">●</span> Secondary 9–12</div>
+  </div>
+
+  <!-- NONFICTION SKILLS -->
+  <div class="section-header">
+    <div class="section-title" style="color:#FFB703">📖 Nonfiction Reading Units</div>
+    <span class="section-badge badge-nonfiction">6 units live · Grades 6–10</span>
+    <div class="section-line"></div>
+  </div>
+
+  <table class="skills-table">
+    <thead>
+      <tr class="grade-band-row">
+        <th style="min-width:220px"></th>
+        <th style="min-width:260px"></th>
+        <th style="min-width:80px"></th>
+        <th colspan="3" class="grade-band-label band-primary">PRIMARY K–2</th>
+        <th colspan="3" class="grade-band-label band-elem">ELEM 3–5</th>
+        <th colspan="3" class="grade-band-label band-middle">MIDDLE 6–8</th>
+        <th colspan="2" class="grade-band-label band-high">SEC 9–10</th>
+      </tr>
+      <tr>
+        <th>Skill</th>
+        <th>Unit(s)</th>
+        <th>Standard(s)</th>
+        <th class="grade-col">K</th>
+        <th class="grade-col">1</th>
+        <th class="grade-col">2</th>
+        <th class="grade-col">3</th>
+        <th class="grade-col">4</th>
+        <th class="grade-col">5</th>
+        <th class="grade-col">6</th>
+        <th class="grade-col">7</th>
+        <th class="grade-col">8</th>
+        <th class="grade-col">9</th>
+        <th class="grade-col">10</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="skill-name">Argument Writing</div>
+          <div class="skill-line">Skill #1 · W.x.1</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Keiko: A Whale's Journey</span>
+        </td>
+        <td>
+          <span class="std-tag">W.x.1</span>
+          <span class="std-tag">RI.x.1</span>
+          <span class="std-tag">SL.x.4</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Informative / Explanatory Writing</div>
+          <div class="skill-line">Skill #1 · W.x.2</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Radium Girls</span>
+        </td>
+        <td>
+          <span class="std-tag">W.x.2</span>
+          <span class="std-tag">RI.x.1</span>
+          <span class="std-tag">RI.x.3</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Text Structure Analysis</div>
+          <div class="skill-line">Skill #3 · RI.x.5</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Zitkala-Ša</span>
+        </td>
+        <td>
+          <span class="std-tag">RI.x.5</span>
+          <span class="std-tag">RI.x.3</span>
+          <span class="std-tag">W.x.2a</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Author's Purpose &amp; Perspective</div>
+          <div class="skill-line">Skill #4 · RI.x.6</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>504 Sit-In</span>
+        </td>
+        <td>
+          <span class="std-tag">RI.x.6</span>
+          <span class="std-tag">RI.x.4</span>
+          <span class="std-tag">SL.9-10.3</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Claim, Evidence, Reasoning</div>
+          <div class="skill-line">Skill #5 · RI.x.8</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Frances Kelsey</span>
+        </td>
+        <td>
+          <span class="std-tag">RI.x.8</span>
+          <span class="std-tag">SL.x.3</span>
+          <span class="std-tag">W.x.1</span>
+          <span class="std-tag">W.x.9b</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Sourcing &amp; Corroboration</div>
+          <div class="skill-line">Skill #6 · RI.6-8.8</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Capitol Crawl 1990</span>
+        </td>
+        <td>
+          <span class="std-tag">RI.6-8.8</span>
+          <span class="std-tag">RI.x.1</span>
+          <span class="std-tag">W.x.9b</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">⚠ Nonfiction line is exclusively grades 6–10. Grades K–5 have zero nonfiction ELA skill coverage — opportunity for future expansion.</div>
+
+  <!-- FICTION SKILLS -->
+  <div class="section-header">
+    <div class="section-title" style="color:#4ADE80">📚 Fiction Anchor Text Units</div>
+    <span class="section-badge badge-fiction">1 live · 5 idea · Launch Set of 6</span>
+    <div class="section-line"></div>
+  </div>
+
+  <table class="skills-table">
+    <thead>
+      <tr class="grade-band-row">
+        <th style="min-width:220px"></th>
+        <th style="min-width:200px"></th>
+        <th style="min-width:80px"></th>
+        <th colspan="3" class="grade-band-label band-primary">PRIMARY K–2</th>
+        <th colspan="3" class="grade-band-label band-elem">ELEM 3–5</th>
+        <th colspan="3" class="grade-band-label band-middle">MIDDLE 6–8</th>
+        <th colspan="2" class="grade-band-label band-high">SEC 9–10</th>
+      </tr>
+      <tr>
+        <th>Skill</th>
+        <th>Unit(s)</th>
+        <th>Standard(s)</th>
+        <th class="grade-col">K</th>
+        <th class="grade-col">1</th>
+        <th class="grade-col">2</th>
+        <th class="grade-col">3</th>
+        <th class="grade-col">4</th>
+        <th class="grade-col">5</th>
+        <th class="grade-col">6</th>
+        <th class="grade-col">7</th>
+        <th class="grade-col">8</th>
+        <th class="grade-col">9</th>
+        <th class="grade-col">10</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="skill-name">Character Analysis &amp; Point of View</div>
+          <div class="skill-line">RL.5.3 / RL.5.6</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Wonder</span>
+          <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Out of My Mind</span>
+        </td>
+        <td>
+          <span class="std-tag">RL.5.3</span>
+          <span class="std-tag">RL.5.6</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Character Identity &amp; Perspective</div>
+          <div class="skill-line">RL.4.3 / RL.4.6</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Rules</span>
+        </td>
+        <td>
+          <span class="std-tag">RL.4.3</span>
+          <span class="std-tag">RL.4.6</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Theme &amp; Text Structure</div>
+          <div class="skill-line">RL.5.2 / RL.5.5</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Hatchet</span>
+        </td>
+        <td>
+          <span class="std-tag">RL.5.2</span>
+          <span class="std-tag">RL.5.5</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Theme &amp; Textual Evidence</div>
+          <div class="skill-line">RL.7.1 / RL.7.2</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>The Giver</span>
+        </td>
+        <td>
+          <span class="std-tag">RL.7.1</span>
+          <span class="std-tag">RL.7.2</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="skill-name">Character Motivation &amp; Textual Evidence</div>
+          <div class="skill-line">RL.7.1 / RL.7.3</div>
+        </td>
+        <td>
+          <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Ghost</span>
+        </td>
+        <td>
+          <span class="std-tag">RL.7.1</span>
+          <span class="std-tag">RL.7.3</span>
+        </td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-filled">✓</td>
+        <td class="grade-cell grade-gap"></td>
+        <td class="grade-cell grade-gap"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">⚠ Fiction launch set covers grades 3–8. Grades K–2 and 9–12 have no fiction ELA skill coverage yet. Wonder (Live) is the only unit with grade 3 coverage across all lines.</div>
+
+  <!-- POETRY SKILLS -->
+  <div class="section-header">
+    <div class="section-title" style="color:#C084FC">🎭 Poetry Reading Units</div>
+    <span class="section-badge badge-poetry">4 units planned · Grades 6–10 · NFMA Framework</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="poetry-block">
+    <div class="poetry-title">✦ 4-Unit Phase 1 Pipeline &nbsp;·&nbsp; <span style="color:#A78BFA;font-weight:400;font-size:12px">NOTICE / FEEL / MEAN / ASK (NFMA) framework · All 4 units: Grades 6–10</span></div>
+
+    <div class="poetry-unit">
+      <div class="poetry-num">1</div>
+      <div>
+        <div class="poetry-name">What the Voice Carries — Figurative Language in Poetry</div>
+        <div class="poetry-skill">Skill: Figurative Language &amp; Word Choice</div>
+        <div class="poetry-std"><span class="std-tag">RL.6.4</span><span class="std-tag">RL.7.4</span><span class="std-tag">RL.8.4</span><span class="std-tag">L.5.5a-c</span></div>
+        <div style="margin-top:4px"><span class="unit-pill pill-building"><span class="pill-dot pdot-building"></span>Building — QC passed Apr 3 2026</span></div>
+      </div>
+    </div>
+
+    <div class="poetry-unit">
+      <div class="poetry-num">2</div>
+      <div>
+        <div class="poetry-name">How Form Shapes Feeling — Structure in Poetry</div>
+        <div class="poetry-skill">Skill: Structural Elements &amp; Form</div>
+        <div class="poetry-std"><span class="std-tag">RL.6.5</span><span class="std-tag">RL.7.5</span><span class="std-tag">RL.8.5</span></div>
+        <div style="margin-top:4px"><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Pipeline · Target Jul 2026</span></div>
+      </div>
+    </div>
+
+    <div class="poetry-unit">
+      <div class="poetry-num">3</div>
+      <div>
+        <div class="poetry-name">Who Is Speaking — Speaker's Voice in Poetry</div>
+        <div class="poetry-skill">Skill: Speaker vs. Author · Point of View</div>
+        <div class="poetry-std"><span class="std-tag">RL.6.6</span><span class="std-tag">RL.7.6</span><span class="std-tag">RL.8.6</span></div>
+        <div style="margin-top:4px"><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Pipeline · Target Sep 2026</span></div>
+      </div>
+    </div>
+
+    <div class="poetry-unit">
+      <div class="poetry-num">4</div>
+      <div>
+        <div class="poetry-name">What We Share — Theme Across Poems</div>
+        <div class="poetry-skill">Skill: Theme &amp; Synthesis Across Texts</div>
+        <div class="poetry-std"><span class="std-tag">RL.6.2</span><span class="std-tag">RL.7.2</span><span class="std-tag">RL.9-10.9</span></div>
+        <div style="margin-top:4px"><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Pipeline · Target Nov 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAP ANALYSIS -->
+  <div class="section-header">
+    <div class="section-title" style="color:#FCA5A5">⚠ Grade Coverage Gap Analysis</div>
+    <span class="section-badge badge-gap">Where skills are missing by grade band</span>
+    <div class="section-line"></div>
+  </div>
+
+  <table class="gap-table">
+    <thead>
+      <tr>
+        <th>Grade Band</th>
+        <th>Current Coverage</th>
+        <th>Missing Skills</th>
+        <th>Priority</th>
+        <th>Opportunity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="gap-alert">
+        <td><span style="color:#F472B6;font-weight:700">K–2 · Primary</span></td>
+        <td>Picture Book Companions only (RL.K-3.3/4) — no standalone ELA skill units</td>
+        <td>All RI + RL skills: argument, text structure, character analysis, figurative language, author's purpose</td>
+        <td><span class="tag-red">GAP</span></td>
+        <td>Picture Book Companion expansion · AT/AAC Family sub-line · UFLI phonics (F0–F5)</td>
+      </tr>
+      <tr class="gap-warn">
+        <td><span style="color:#60A5FA;font-weight:700">3–5 · Elementary</span></td>
+        <td>Fiction only: Wonder (gr 3–8), Rules (gr 4–6), Out of My Mind (gr 4–7)</td>
+        <td>RI standards completely absent · No nonfiction skill coverage · No informational text writing</td>
+        <td><span class="tag-yellow">PARTIAL</span></td>
+        <td>Lower-grade nonfiction expansion · Picture Book Companions bridge to gr 3–5 RI</td>
+      </tr>
+      <tr>
+        <td><span style="color:#34D399;font-weight:700">6–8 · Middle</span></td>
+        <td>Full coverage: all 6 nonfiction + all fiction (5 RL standards) + all 4 poetry</td>
+        <td>No gaps — strongest grade band in catalog</td>
+        <td><span class="tag-green">COVERED</span></td>
+        <td>Deepen with additional titles at these grades · Bundle strategy strongest here</td>
+      </tr>
+      <tr class="gap-warn">
+        <td><span style="color:#A78BFA;font-weight:700">9–12 · Secondary</span></td>
+        <td>Nonfiction (gr 9–10 only) · No fiction above gr 8 · Poetry covers gr 6–10</td>
+        <td>RL.9-12 standards completely absent from fiction line · No gr 11–12 coverage in any line</td>
+        <td><span class="tag-yellow">PARTIAL</span></td>
+        <td>Pipeline fiction: Animal Farm, Fahrenheit 451, To Kill a Mockingbird (gr 9–10) · Pipeline nonfiction gr 9–10 expansion</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- STANDARDS CROSSWALK -->
+  <div class="section-header">
+    <div class="section-title" style="color:#94A3B8">Standards Crosswalk — What's Covered</div>
+    <div class="section-line"></div>
+  </div>
+
+  <table class="skills-table">
+    <thead>
+      <tr>
+        <th style="width:120px">Standard</th>
+        <th>Description</th>
+        <th>Nonfiction</th>
+        <th>Fiction</th>
+        <th>Poetry</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="std-tag">RL.x.2</span></td>
+        <td style="color:#94A3B8;font-size:11px">Central idea / theme / summary</td>
+        <td>—</td>
+        <td><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Hatchet · The Giver</span></td>
+        <td><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Unit 4</span></td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RL.x.3</span></td>
+        <td style="color:#94A3B8;font-size:11px">Characters, setting, events; how characters respond</td>
+        <td>—</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Wonder</span> <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Rules · Out of My Mind · Ghost</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RL.x.5</span></td>
+        <td style="color:#94A3B8;font-size:11px">Text structure; how chapters / stanzas fit together</td>
+        <td>—</td>
+        <td><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Hatchet</span></td>
+        <td><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Unit 2</span></td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RL.x.4</span></td>
+        <td style="color:#94A3B8;font-size:11px">Figurative language; word meaning; connotation; tone</td>
+        <td>—</td>
+        <td>—</td>
+        <td><span class="unit-pill pill-building"><span class="pill-dot pdot-building"></span>Unit 1</span></td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RL.x.6</span></td>
+        <td style="color:#94A3B8;font-size:11px">Point of view; narrator perspective</td>
+        <td>—</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Wonder</span> <span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Rules · Out of My Mind</span></td>
+        <td><span class="unit-pill pill-idea"><span class="pill-dot pdot-idea"></span>Unit 3</span></td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RI.x.5</span></td>
+        <td style="color:#94A3B8;font-size:11px">Text structure (informational)</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Zitkala-Ša</span></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RI.x.6</span></td>
+        <td style="color:#94A3B8;font-size:11px">Author's purpose / perspective</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>504 Sit-In</span></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">RI.x.8</span></td>
+        <td style="color:#94A3B8;font-size:11px">Argument / claims / evidence evaluation</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Frances Kelsey · Capitol Crawl</span></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">W.x.1</span></td>
+        <td style="color:#94A3B8;font-size:11px">Argument writing</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Keiko · Frances Kelsey</span></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="std-tag">W.x.2</span></td>
+        <td style="color:#94A3B8;font-size:11px">Informative / explanatory writing</td>
+        <td><span class="unit-pill pill-live"><span class="pill-dot pdot-live"></span>Radium Girls</span></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">Standards marked RL.x.# and RI.x.# use .x. to indicate the standard applies across grade bands (the number after the dot changes by grade). Full grade-specific codes are in each unit's Airtable record.</div>
+
+</div><!-- /container -->
+</body>
+</html>

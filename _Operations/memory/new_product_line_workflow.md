@@ -535,6 +535,117 @@ Before listing on TPT:
 - [ ] Instagram post drafted
 - [ ] Substack post either live or scheduled
 
+---
+
+### TPT Listing Field Workflow (locked 2026-04-05)
+
+**Source of truth:** Airtable Products table (`tbl2YSRQiW7RHEPY5`) — all TPT metadata fields are populated per product during development, not at listing time. Fields:
+
+| Airtable Field | TPT Field | Type | Notes |
+|---|---|---|---|
+| Product SubHeading | Product Name | Text ~80–100 chars | Pipe-separated: Topic \| Differentiator \| SPED Grades. Keyword-heavy for SEO. |
+| — | Product File | Upload (≤1GB direct, ≤500MB via Google Drive) | The deliverable zip or PDF. Uploaded by Jill — not in Airtable. |
+| — | Preview File | Upload (PDF or Video, optional) | Highly recommended. TPT can auto-generate from PDF. Uploaded by Jill. |
+| — | Thumbnails | Upload (up to 4 images) | TPT can auto-generate from PDF, or upload cover PNGs manually. Up to 4. |
+| Description | Description | Rich text (no strict char limit) | SEO-optimized. Opening line keyword-dense. No strict limit — be thorough. |
+| Price | Price | $ | Per product line pricing table in CLAUDE.md |
+| Tax Code | Tax Code | Drop-down | "Digital Images - Streaming / Electronic Download" for CbD digital products |
+| Grade Levels | Grade Levels | Checkboxes | e.g. "Kindergarten, 1st, 2nd, 3rd" — spell out exact grade names |
+| Subject Areas | Subject Areas | Checkboxes — verified options only (see below) | Never invent values. Use only verified TPT options from the list below. |
+| Resource Types | Resource Types | Checkboxes (max 3) — verified options only | See verified list below. Max 3. |
+| Teaching Duration | Teaching Duration | Drop-down — exact labels | See verified list below. CbD multi-read units = "1 Month" |
+| Answer Key | Answer Key | Drop-down — exact labels | CbD units with rubrics = "Included with Rubric" |
+| Page Count | Number of Pages | Number | Teacher + Student + Welcome combined |
+| Standards | Standards | Text | e.g. "RL.K.3, RL.1.3, RL.2.3, RL.3.3" |
+
+**What Jill handles manually at listing time (not in Airtable):** Product File upload · Preview File upload · Thumbnails (auto-generate from PDF or upload PNGs). Everything else copies from the spreadsheet.
+
+**Output format for listing:** Single-sheet Excel (`TPT_Listings_[Line].xlsx`) — one row per product, columns match TPT field order. Built via `build_[line]_tpt_v[N].py`. Green row = Live. Copy/paste directly from spreadsheet into TPT listing form.
+
+---
+
+### Verified TPT Dropdown Values (locked 2026-04-05)
+
+**CRITICAL RULE:** Only use values from these lists. Never invent a value — TPT will reject or not surface listings with invalid field entries.
+
+**Teaching Duration** (drop-down, select one):
+N/A · 30 Minutes · 40 Minutes · 45 Minutes · 50 Minutes · 55 Minutes · 1 Hour · 90 Minutes · 2 Hours · 3 Hours · 2 Days · 3 Days · 4 Days · 1 Week · 2 Weeks · 3 Weeks · 1 Month · 2 Months · 3 Months · 1 Semester · 1 Year · Lifelong Tool
+
+**Answer Key** (drop-down, select one):
+N/A · Included · Not Included · Included with Rubric · Rubric Only · Does Not Apply
+
+**Subject Areas — English Language Arts** (checkboxes):
+Alphabet · Balanced Literacy · Close Reading · Creative Writing · ELA Test Prep · Grammar · Handwriting · Informational Text · Library Skills · Literature · Novel Studies · Phonics & Phonological Awareness · Poetry · Reading · Reading Strategies · Science of Reading · Short Stories · Sight Words · Spelling · Vocabulary · Writing · Other (ELA)
+
+**Subject Areas — Supports > Special Education** (checkboxes):
+Applied Behavior Analysis · Data · Life Skills · Neurodiversity · Screenings and Assessments · Social Skills · Visual Supports · Other (Special education)
+
+**Subject Areas — Supports > Speech Therapy** (checkboxes):
+AAC · Fluency and Stuttering · Language · Speech Articulation · Voice · Other (Speech therapy)
+
+**Subject Areas — Social Emotional** (checkboxes):
+Character Education · Classroom Community · School Counseling · School Psychology · Social Emotional Learning
+
+**Subject Areas — Social Studies** (checkboxes):
+AAPI History · African History · Ancient History · Asian Studies · Australian History · Black History · Civics · Criminal Justice - Law · Economics · Elections - Voting · European History · Geography · Government · Latino and Hispanic Studies · Middle Ages · Native Americans · Psychology · Religion · U.S. History · World History · Other (Social Studies)
+
+**Subject Areas — Theme > Holiday** (checkboxes):
+AAPI History Month · April Fools' Day · Arbor Day · Black History Month · Christmas-Chanukah-Kwanzaa · Cinco de Mayo · Day of the Dead / Dia de los Muertos · Diwali · Earth Day · Easter · Father's Day · Groundhog Day · Halloween · Hispanic Heritage Month · July 4/Independence Day · Juneteenth · Labor Day · Lunar New Year · Mardi Gras · Martin Luther King Day · Memorial Day · Mother's Day · New Year · Passover · Presidents' Day · Ramadan · St. Patrick's Day · Thanksgiving · Valentine's Day · Veterans Day · Women's History Month
+
+**Subject Areas — Theme > Seasonal** (checkboxes):
+Autumn · Back to School · End of Year · Spring · Summer · Winter
+
+**Subject Areas — Specialty** (checkboxes — partial, includes):
+Career and Technical Education · Child Care · Coaching · Cooking · Leadership · Occupational Therapy · Physical Therapy · Professional Development · Service Learning · Vocational Education · Other (Specialty)
+
+**Subject Areas — Teacher Tools** (checkboxes — partial):
+Awards and Certificates · Classroom Management · Homeschool Curricula · Leadership Lessons · Lectures · Lessons · Outlines · Reflective Journals for Teachers · Rubrics · Syllabi · Teacher Manuals · Teacher Planners · Thematic Unit Plans · Tools for Common Core
+
+**Resource Types** (checkboxes, max 3 — verified options):
+Printables · Handouts · Worksheets · Graphic Organizers · Scaffolded Notes · Interactive Notebooks · Guided Reading Books · Independent Work Packet · Task Cards · Workbooks · Flash Cards · Scripts · Projects · Research · Simulations · Songs · Webquests · Rubrics · Study Guides · Homework · Assessment · Movie Guides
+
+**Standard CbD subject area selections by product line:**
+
+| Product Line | Subject Areas to Select |
+|---|---|
+| Picture Book Companions | Reading, Literature, Neurodiversity, Other (Special education), AAC + one social/SEL option per title |
+| Nonfiction Reading Units (grades 6–10) | Reading, Informational Text, Close Reading, Neurodiversity, Other (Special education), AAC + relevant Social Studies topic |
+| Fiction Anchor Texts | Reading, Literature, Novel Studies, Neurodiversity, Other (Special education), AAC |
+| UFLI Phonics | Phonics & Phonological Awareness, Science of Reading, Reading, Other (Special education), AAC |
+| AT/AAC IEP Tools | Other (Special education), Applied Behavior Analysis, Data, Neurodiversity, AAC, Language |
+| Poetry Reading Units | Poetry, Reading, Literature, Close Reading, Other (Special education), AAC |
+
+**Standard CbD resource type selections:**
+Most products: `Handouts, Printables, Worksheets`
+UFLI Phonics packets: `Handouts, Printables, Scaffolded Notes`
+AT/AAC tools: `Handouts, Printables, Graphic Organizers`
+
+---
+
+### Pinterest Upload Workflow (locked 2026-04-05)
+
+**File:** `Distrubution/Pinterest/[Line]_Pinterest_BulkUpload.csv`
+
+**Fields and sources:**
+
+| CSV Column | Source | Notes |
+|---|---|---|
+| Title | Airtable Product Name (short) + grade/type qualifier | **Book/topic title first.** Formula: `[Title] \| AAC Read-Aloud Companion \| Special Education K–[X]`. Never lead with skill or framework. |
+| Description | Airtable Description (condensed) + hashtags | 500 chars max. Lead with what it does (not a hook). Include: book title, AAC, special education, grade level, topic. End with 5–7 hashtags. |
+| Link | Airtable TPT URL field | Full TPT product URL. Always https://www.teacherspayteachers.com/Product/... |
+| Board | Pinterest board name | One board per pin. Do not split same product across multiple boards. |
+| Image Path/URL | Blank in CSV — Jill fills after Canva export | Export cover PNG from Canva → paste path or upload manually in Pinterest. |
+| Alt Text | Cover description for screen readers | Format: "AAC read-aloud companion cover for [Book Title] — [color scheme] showing [what's visible on cover]" |
+| Published Date | Leave blank or set to upload date | Pinterest schedules from this field if populated. |
+
+**Product Tag (Pinterest Shopping):** After uploading each pin, use Pinterest's Product Tags → "Use a Link" → paste the same TPT URL from the Link column. This shows the $[price] badge on the pin and links directly to purchase.
+
+**Canva export workflow:** Export Canva cover as PNG (1080×1080 for square pins). File naming: `[BookTitle]_PB_Companion_Pinterest.png`. Save to `Distrubution/Pinterest/[Line]/` alongside the CSV.
+
+**Pinterest SEO rule:** Pinterest works like a search engine. Teachers search the book title first. Title MUST lead with the book/topic name — never with skill, framework, or brand name. Board name should match what teachers search (e.g., "Picture Book AAC Companion" not "Communicate by Design").
+
+**Populate at development time:** Both the TPT listing fields and Pinterest CSV fields should be populated in Airtable during product development — not assembled at listing time. This enables same-day listing on TPT + same-day Pinterest upload with no scramble.
+
 ### Vocabulary Explorer Launch Gate (required at go-live)
 
 When the product goes live on TPT:
