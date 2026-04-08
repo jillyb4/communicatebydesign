@@ -72,7 +72,7 @@ Strategic context only (things that don't belong in Airtable):
 
 | Area | What's Happening | Key Date |
 |------|-----------------|----------|
-| **TPT store** | 14 products LIVE. UFLI (36 products) is next major launch. | May 2026 |
+| **TPT store** | **22 products LIVE (Apr 5 2026).** AT/AAC IEP Team (7) · Nonfiction (6) · Picture Book Companions (6) · Bundles (2) · Fiction (1). UFLI (36 products) is next major launch. | May 2026 |
 | **All the Way to the Top Companion** | K–3 picture book companion. Price: $5. **LIVE on TPT (Apr 4 2026).** TPT ID: 15979429. URL: teacherspayteachers.com/Product/All-the-Way-to-the-Top-AAC-Read-Aloud-Companion-Disability-Rights-SPED-K-3-15979429. Airtable record: `recPx1oIQOMEUBP9E` (update to Live). ⚠️ Run sync_vocab_to_airtable.js now that it's listed. File set: Welcome Packet (2pp) · Teacher Packet (9pp, Word export) · Student COMPLETE (12pp assembled: Student Activities 8pp + Comm Board 1pp + Symbol Pages 2pp + Tracker 1pp) · Communication Board (1pp) · Symbol Pages (2pp: Core + Fringe) · TPT Preview (10pp). Build scripts: `build_all_the_way_to_the_top.js` (docx) · `build_symbol_pages_picbook.py` (symbol pages + comm board, Python/ReportLab) · `build_welcome_packet.py` (welcome PDF). TPT listing package: Output 0 complete. Tax code: Digital Images - Streaming / Electronic Download. Page count: 12pp student + 9pp teacher + 2pp welcome = 23pp total. Lesson length: 3 readings over 3–5 weeks. ⚠️ Jill: Upload to TPT, target ADA anniversary July 26 2026. After listing: run sync_vocab_to_airtable.js + update Airtable record to Live. Jennifer Keelan bundle: pair with Capitol Crawl for Disability Pride Month July 2026. Framework: IRA + Dialogic Reading + ALS. Standard: RL.K-3.3 + RL.K-3.4. Vocab: 8 core + 10 fringe = 18 words. | July 2026 (ADA anniversary) |
 | **504 Sit-In + Capitol Crawl bundle** | Bundle both for Disability Pride Month. Both LIVE. | July 2026 |
 | **UFLI Phonics** | Two-product structure LOCKED (2026-04-03): FREE = Lessons 1–5 · PAID $20 = Lessons 6–34 + Teacher/Partner Guide. Old individual/$1/bundle pricing RETIRED. Folders assembled in `UFLI/Output/TPT_FREE_Lessons1-5/` and `TPT_PAID_Lessons6-34/`. TPT listings: `Products/UFLI Phonics/TPT_Listings_UFLI_AAC_Companion.md`. Covers in Canva (Jill handling). | May 2026 |
@@ -82,7 +82,7 @@ Strategic context only (things that don't belong in Airtable):
 | **Re-upload nonfiction zips** | All 6 units need Session 16 content update re-uploaded to TPT. | — |
 | **AT certification** | In planning. | — |
 | **Vocabulary Framework** | Built Session 18. Applies to ALL product lines. Quick ref: `_Operations/memory/vocabulary_selection_reference.md`. Full research: `Research/CbD_Vocabulary_Selection_Framework.md`. New Product Line Workflow: `_Operations/memory/new_product_line_workflow.md`. |
-| **Fiction Line — Wonder** | Unit 1: Wonder: Character Analysis (RL.6.3/7.3, grades 3–8). **Session 21 status:** COMPLETE.docx ✓ rebuilt (34.6 KB) · Printable_Packet.pdf ✓ 13 pages (Layer 5 student response pages added — 5 pages, one per Part) · build_wonder_assembly.py ✓ NEW (merges docx-exported PDF + Packet → FULL.pdf). **⚠️ Jill action required:** Word → Save As PDF → `python3 build_wonder_assembly.py` → FULL.pdf. Symbol subs LOCKED: belong→include, ordinary→usual, face→face. Annotation codes LOCKED: [TRAIT]/[WHY]/[CHANGE]. Spec now 5 layers (was 4). ⚠️ Delete `Wonder_Character_Analysis_Printable_Kit.docx` from Finder. Pricing TBD ($8.95/$9.95). Cover color TBD (bright/light). Rubric not yet built. Airtable record pending until pricing/cover locked. | — |
+| **Fiction Line — Wonder** | Unit 1: Wonder: Character Analysis (RL.6.3/7.3, grades 3–8). **Session 21 status:** COMPLETE.docx ✓ rebuilt (34.6 KB) · Printable_Packet.pdf ✓ 13 pages (Layer 5 student response pages added — 5 pages, one per Part) · build_wonder_assembly.py ✓ NEW (merges docx-exported PDF + Packet → FULL.pdf). **⚠️ Jill action required:** Word → Save As PDF → `python3 build_wonder_assembly.py` → FULL.pdf. Symbol subs LOCKED: belong→include, ordinary→usual, face→face. Annotation codes LOCKED: [TRAIT]/[WHY]/[CHANGE]. Spec now 5 layers (was 4). ⚠️ Delete `Wonder_Character_Analysis_Printable_Kit.docx` from Finder. **Price LOCKED: $6.00.** Cover color TBD (bright/light). Rubric not yet built. Airtable record updated Apr 5 2026 (price, tags, page count, grade levels, resource types). | — |
 | **Poetry Reading Units** | NEW line approved 2026-03-30. 4 units in Airtable Launch Pipeline. Architecture: access-layer model (same poem across V1/V2/V3 — NOT text-versioned like nonfiction). CbD-original strategy: NOTICE/FEEL/MEAN/ASK (NFMA). $9.95/unit. **Color LOCKED 2026-03-30:** docs = #6B21A8 (Deep Violet, WCAG AAA on white) · digital/Canva = #C084FC (Bright Violet, navy only). All 5 pre-build gates PASSED. Unit 1 Pre-Build Planning complete: `Products/Poetry Reading Units/Unit 1 - What the Voice Carries/Unit1_PreBuild_Planning.md`. ⚠️ Still needed before docx build: rubric behavioral descriptions (in progress). Full plan: `Research/CbD_Poetry_Unit_Line_Initial_Build_Plan.md`. | Unit 1: May 2026 · Unit 2: Jul · Unit 3: Sep · Unit 4: Nov |
 
 → Full pipeline: **Airtable Launch Pipeline table** (`tblKDEYyrRdPOtbhX`) — 68 records. The Excel `CbD_TPT_Launch_Calendar.xlsx` has been fully migrated to Airtable (Session 17) and is now deprecated.
@@ -104,6 +104,9 @@ Strategic context only (things that don't belong in Airtable):
 | Pinterest Pin Count | `fld0w7mq9rfixZ5n9` | Number | How many designs exist; auto-ages product off rotation at 5 |
 | Pinterest Outbound Clicks (30d) | `fldKH1CQdumKHy25Q` | Number | From Pinterest Analytics weekly; drives List B priority |
 | Canva Pin Design ID | `fldIzVfpce6fDpV7x` | Text | Canva design ID(s) used; find in canva.com/design/[ID]/edit |
+| Pinterest Pin URL | `fldx9FesXwfqZhWYp` | Text | **THE TRIGGER FIELD.** Paste live Pinterest pin URL here after uploading. Once populated, the daily brief automatically treats the product as pinned and moves it to List B fresh-pin rotation — no other step needed. |
+
+**Pinterest auto-detect rule (locked 2026-04-05):** When `fldx9FesXwfqZhWYp` (Pinterest Pin URL) is populated in Airtable, the daily brief task automatically: treats the product as pinned · moves it off List A · adds it to List B fresh-pin rotation · never asks for confirmation. Jill's only action after pinning: paste the pin URL into this Airtable field.
 
 ## Digital Interactive Line (Session 18 — NEW)
 
@@ -167,6 +170,16 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 | 2 passages | $9.95 |
 | 3 passages | $10.95 |
 | 4+ passages | $11.95 |
+
+## Fiction Anchor Text Pricing — LOCKED 2026-04-05
+| Product | Price |
+|---------|-------|
+| All fiction anchor text units | $6.00 |
+
+## Picture Book Companion Pricing — LOCKED 2026-04-05
+| Product | Price |
+|---------|-------|
+| All picture book companions | $5.00 |
 
 ## UFLI Phonics Pricing — UPDATED 2026-04-03
 

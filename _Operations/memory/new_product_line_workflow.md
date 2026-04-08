@@ -531,7 +531,8 @@ Before listing on TPT:
 - [ ] Cover Index updated (`Distrubution/Teachers Pay Teachers/CbD_TPT_Cover_Index.md`)
 - [ ] Output 0 completed (TPT title ≤80 chars, description ≤180 chars, 7 keyword tags)
 - [ ] Airtable Products record updated: Workflow Stage = "Ready to List" or "Cover Ready"
-- [ ] Pinterest board planned
+- [ ] Pinterest board planned (one board per product line — named for teacher search term, not internal CbD name)
+- [ ] Pinterest pin created and Pin URL added to Airtable field `fldx9FesXwfqZhWYp`
 - [ ] Instagram post drafted
 - [ ] Substack post either live or scheduled
 
@@ -673,6 +674,9 @@ A product going live is not the end of the workflow. These steps keep the ecosys
 
 - [ ] Vocabulary Explorer status updated: `status: 'In Production'` → `status: 'Live'` + TPT URL added in `rebuild_vocab_explorer.js` PRODUCTS_BLOCK
 - [ ] Run `node _Operations/rebuild_vocab_explorer.js` → Live badge active in explorer
+- [ ] Pinterest pin created for this product
+- [ ] **Pinterest Pin URL added to Airtable Products field `fldx9FesXwfqZhWYp`** — this is the trigger that tells the daily brief the product is pinned. Once this field is populated, the brief automatically moves the product to List B (fresh pin rotation) on the next morning run. No other Pinterest tracking step needed.
+- [ ] Pinterest First Pin Date (`fldwrWqdlHarNopcD`) and Pin Count (`fld0w7mq9rfixZ5n9`) update automatically from the brief task after pin URL is set
 - [ ] Run `AIRTABLE_API_KEY=xxx node _Operations/sync_vocab_to_airtable.js` → Airtable Vocabulary table confirmed in sync
 - [ ] Airtable Products table record updated: Workflow Stage → "Live"
 - [ ] Cover moved from `Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/` → `TPT Image Covers Uploaded/`
