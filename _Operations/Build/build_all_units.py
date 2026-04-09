@@ -34,8 +34,8 @@ from reportlab.platypus.flowables import Image as RLImage
 # ── Paths ─────────────────────────────────────────────────────────────────────
 # Updated 2026-03-29: session path updated to current session
 
-MNT       = "/sessions/kind-gracious-keller/mnt/Communicate by Design"
-SCRATCH   = "/sessions/kind-gracious-keller"
+MNT       = "/sessions/kind-fervent-planck/mnt/Communicate by Design"
+SCRATCH   = "/sessions/kind-fervent-planck"
 SYM_CACHE = os.path.join(MNT, "_Operations/Symbols/symbol_cache")
 TRACKER   = os.path.join(MNT, "Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf")
 NF_ROOT   = os.path.join(MNT, "Products/Nonfiction Units")

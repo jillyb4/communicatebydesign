@@ -62,16 +62,85 @@ The symbol card spec was violated three times in one session because the spec li
 - **Do NOT add secondary `require("docx")` imports in build scripts:** Only use `const T = require(".../cbd_docx_template")`. Adding a second `require("node_modules/docx")` can silently corrupt document assembly even though the ZIP and XML validate. If you need Paragraph/TextRun classes, use `T.Paragraph`, `T.TextRun` — they are exported by the template.
 - **keepNext on H2:** The current docx npm version does not support `keepNext: true` on Paragraph — the property is silently ignored. Do not attempt. Handle orphan headings with explicit page breaks or accept the behavior.
 
+## Nonfiction TPT Folder Architecture — LOCKED (Apr 2026)
+
+Each nonfiction unit's `[Unit]_TPT/` folder contains **exactly 4 files**. No more, no less.
+
+| File | Built by | Notes |
+|------|----------|-------|
+| `[Unit]_COMPLETE.docx` | `build_*.js` | Full teacher + student + AK document |
+| `[Unit]_Student_Print_Materials.docx` | `build_*.js` (same script, second output) | Student-facing content only — NO teacher content, NO AK |
+| `[Unit]_Welcome_to_the_Product.pdf` | `build_welcome_nonfiction.py` | 3 intro pages + Teacher AK pages from DRAFT.md |
+| `[Unit]_Communication_Access_Packet.pdf` | `build_all_units.py` (CAP build only) | Symbol cards + Priority Vocab + Session Tracker |
+
+**Critical build order:** Run `build_*.js` → export COMPLETE.docx to PDF in Word → run CAP build → run `build_welcome_nonfiction.py` LAST. The welcome build must always run after the CAP build because `build_all_units.py`'s `assemble_tpt_folder()` function is outdated and will overwrite welcome PDFs if triggered.
+
+**NEVER call `assemble_tpt_folder()` from `build_all_units.py`.** That function is outdated: it copies COMPLETE.docx to the wrong location (SameFileError when COMPLETE.docx is already in the TPT folder), calls the old `build_welcome_pdf()` that produces only 2 pages, and produces the wrong file set. Call only `build_comm_access_packet()` directly.
+
+### Student Print Materials — Index-Marker Pattern (all nonfiction build scripts)
+
+Every `build_*.js` script captures `children.length` at key boundaries to enable student/AK separation:
+
+```js
+// STUDENT MATERIALS: ANNOTATION GUIDE
+const handoutStart = children.length; // start of student handout section
+
+// VERSION 1
+const v1Start = children.length;
+
+// VERSION 2
+const v2Start = children.length;
+
+// VERSION 3
+const v3Start = children.length;
+
+// TEACHER ANSWER KEY
+const akStart = children.length;
+
+// --- assembly ---
+const handoutElements = children.slice(handoutStart, v1Start);
+const v1Elements = children.slice(v1Start, v2Start);
+const v2Elements = children.slice(v2Start, v3Start);
+const v3Elements = children.slice(v3Start, akStart);
+const studentChildren = [...handoutElements, ...v1Elements, ...v2Elements, ...v3Elements];
+// studentChildren never contains AK content
+```
+
+**If `both()` is used in the script:** Capture `const studentHandoutsEnd = studentHandouts.length` immediately before the AK section begins, then use `studentHandouts.slice(0, studentHandoutsEnd)` for student file assembly. Never let `both()` calls inside the AK section pollute the student array.
+
+### Welcome PDF — `build_welcome_nonfiction.py`
+
+- Script: `_Operations/Build/build_welcome_nonfiction.py`
+- Reads `*_DRAFT.md` for each unit, extracts `## Teacher Answer Key` section via `page4_answer_key()`
+- Output page counts (verified Apr 2026): Frances Kelsey=11pp, Radium Girls=8pp, Keiko=7pp, Zitkala-Sa=4pp, 504 Sit-In=7pp, Capitol Crawl=4pp
+- **ALWAYS run this last** — after `build_all_units.py` has completed its CAP build
+- Never run `assemble_tpt_folder()` before or after — it will overwrite the output
+
+### CAP Build — Scratch PDF Naming
+
+`build_all_units.py` expects COMPLETE PDFs in `/sessions/[session-id]/` (scratch), not in TPT subfolders. Copy the Word-exported PDF to scratch using the expected filename:
+
+| Unit | Expected scratch filename |
+|------|--------------------------|
+| Frances Kelsey | `Frances_Kelsey_Unit_COMPLETE.pdf` |
+| Zitkala-Sa | `Zitkala_Sa_Unit_COMPLETE.pdf` |
+| 504 Sit-In | `504_Sit_In_Unit_COMPLETE.pdf` |
+| Capitol Crawl | `Capitol_Crawl_Lesson_COMPLETE.pdf` |
+| Keiko | `Keiko_Unit_COMPLETE.pdf` |
+| Radium Girls | `Radium_Girls_Unit_COMPLETE.pdf` |
+
+---
+
 ## Build Scripts Reference
 
 | Product | Build Script | Output |
 |---------|-------------|--------|
-| 504 Sit-In | `_Operations/build_504_sit_in.js` | 504_Sit_In_COMPLETE.docx |
-| Frances Kelsey | `Products/Nonfiction Units/Frances Kelsey/build_frances_kelsey.js` | Frances_Kelsey_Unit_v2.docx |
-| Capitol Crawl | `Products/Nonfiction Units/Capitol Crawl/build_capitol_crawl.js` | — |
-| Zitkala-Ša | `Products/Nonfiction Units/Zitkala-Sa/build_zitkala_sa.js` | — |
-| Radium Girls | `Products/Nonfiction Units/Radium Girls/build_radium_girls.js` | — |
-| Keiko | `Products/Nonfiction Units/Keiko/build_keiko.js` | — |
+| 504 Sit-In | `Products/Nonfiction Units/504 Sit In/build_504_sit_in.js` | `504_Sit_In_TPT/504_Sit_In_COMPLETE.docx` + `504_Sit_In_Student_Print_Materials.docx` |
+| Frances Kelsey | `Products/Nonfiction Units/Frances Kelsey/build_frances_kelsey.js` | `Frances_Kelsey_TPT/Frances_Kelsey_COMPLETE.docx` + `Frances_Kelsey_Student_Print_Materials.docx` |
+| Capitol Crawl | `Products/Nonfiction Units/Capitol Crawl/build_capitol_crawl.js` | `Capitol_Crawl_TPT/Capitol_Crawl_COMPLETE.docx` + `Capitol_Crawl_Student_Print_Materials.docx` |
+| Zitkala-Ša | `Products/Nonfiction Units/Zitkala-Sa/build_zitkala_sa.js` | `Zitkala_Sa_TPT/Zitkala_Sa_COMPLETE.docx` + `Zitkala_Sa_Student_Print_Materials.docx` |
+| Radium Girls | `Products/Nonfiction Units/Radium Girls/build_radium_girls.js` | `Radium_Girls_TPT/Radium_Girls_COMPLETE.docx` + `Radium_Girls_Student_Print_Materials.docx` |
+| Keiko | `Products/Nonfiction Units/Keiko/build_keiko.js` | `Keiko_TPT/Keiko_COMPLETE.docx` + `Keiko_Student_Print_Materials.docx` |
 | UFLI Teacher Guide | `Products/UFLI Phonics/UFLI/build_teacher_guide.js` | UFLI_Teacher_Guide_and_Communication_Partner_Guide.docx |
 | UFLI Per-Lesson | `Products/UFLI Phonics/UFLI/build_ufli_packet.js` + `ufli_lesson_configs.js` | Output/UFLI_Lesson[XX]_[letter]_Packet.docx |
 | Letter Card Library | `build_letter_cards.py` (ReportLab) | UFLI_Letter_Cards_Lowercase.pdf |

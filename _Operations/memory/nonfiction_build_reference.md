@@ -36,15 +36,16 @@ Run these phases in order for every unit:
 | Phase | Step | Notes |
 |-------|------|-------|
 | 1 | Draft `.md` content | All 22 sections required |
-| 2 | Run `build_*.js` → `*_COMPLETE.docx` | Uses `cbd_docx_template.js` |
-| 3 | Convert `.docx` → unit PDF (LibreOffice headless) | Required for packet + preview builds |
-| 4 | **Build Communication Access Packet** | Run `_Operations/build_all_units.py` (multi-unit; all 6 units configured) or `_Operations/build_comm_access_packet.py` (Frances Kelsey single-unit reference). Word lists confirmed in Per-Unit Word Lists table below. → outputs `*_Communication_Access_Packet.pdf` |
-| 5 | Build TPT Preview PDF | Run `python3 _Operations/build_all_previews.py` (all units) or `--unit [key]` (single). **Source must be Word-exported PDF** in `_TPT/` folder — NOT LibreOffice. Preview outputs to `_TPT/` folder (with COMPLETE.pdf, CAP, etc.) AND to `Preview PDFs/` central folder. Standard: 11 pages (10 for 504 Sit-In). See Preview Standard below. |
-| 6 | QC — Unit | Run unit QC checklist below |
-| 7 | QC — Communication Access Packet | Run packet QC checklist below |
-| 8 | **Assemble TPT Folder** | `build_all_units.py` creates `[UNIT]_TPT/` with: COMPLETE.docx, Symbol_Cards.pdf (if exists), Communication_Access_Packet.pdf, Welcome_and_Terms.pdf. Zip the folder for upload. |
-| 9 | TPT Listing Package | Output 0 first, then full listing |
-| 10 | Upload to TPT | Zip `[UNIT]_TPT/` → upload; verify live listing |
+| 2 | Run `build_*.js` → `*_COMPLETE.docx` + `*_Student_Print_Materials.docx` | Uses `cbd_docx_template.js`. Both files output directly to `[Unit]_TPT/` folder. |
+| 3 | Convert `*_COMPLETE.docx` → unit PDF **in Word** | Word → File → Save As → PDF. **NEVER LibreOffice for nonfiction units.** LibreOffice breaks table formatting and creates blank MCQ pages. Save to `[Unit]_TPT/[Unit]_COMPLETE.pdf`. |
+| 4 | **Build Communication Access Packet** | Copy Word-exported PDF to scratch (`/sessions/[id]/`) with expected filename (see `build_system_reference.md`). Run `_Operations/Build/build_all_units.py` — call `build_comm_access_packet()` ONLY. **NEVER call `assemble_tpt_folder()`** — it is outdated, causes SameFileError, and overwrites the welcome PDF. → outputs `[Unit]_TPT/[Unit]_Communication_Access_Packet.pdf` |
+| 5 | **Build Welcome PDF** | Run `python3 _Operations/Build/build_welcome_nonfiction.py`. **Always run this LAST — after CAP build.** Reads DRAFT.md, builds 3 intro pages + Teacher AK pages. → outputs `[Unit]_TPT/[Unit]_Welcome_to_the_Product.pdf` |
+| 6 | Build TPT Preview PDF | Run `python3 _Operations/Build/build_all_previews.py` (all units) or `--unit [key]` (single). **Source must be Word-exported PDF** in `_TPT/` folder — NOT LibreOffice. Preview outputs to `_TPT/` folder AND to `Preview PDFs/` central folder. Standard: 11 pages (10 for 504 Sit-In). See Preview Standard below. |
+| 7 | QC — Unit | Run unit QC checklist below |
+| 8 | QC — Communication Access Packet | Run packet QC checklist below |
+| 9 | **Verify TPT Folder** | `[Unit]_TPT/` must contain exactly 4 files: `*_COMPLETE.docx` · `*_Student_Print_Materials.docx` · `*_Welcome_to_the_Product.pdf` · `*_Communication_Access_Packet.pdf`. Delete any stale duplicates, lock files, or old PDFs before zipping. |
+| 10 | TPT Listing Package | Output 0 first, then full listing |
+| 11 | Upload to TPT | Zip `[Unit]_TPT/` (4 files only) → upload; verify live listing |
 
 ---
 
@@ -205,16 +206,28 @@ Run programmatically before TPT listing:
 | Capitol Crawl | #6 | — |
 
 ## Nonfiction Unit Folder Standard
-Each unit folder contains:
+
+Each unit folder contains the build script, draft, listing files, and a `[Unit]_TPT/` subfolder.
+
+**Unit folder (root):**
 - `build_*.js` — build script
 - `*_Unit_DRAFT.md` or `*_Lesson_DRAFT.md` — source content
-- `*_COMPLETE.docx` — built product
-- `*_Complete.zip` — TPT package
-- `*_Printable_Kit.docx` — printable kit
-- `*_Symbol_Cards.pdf` — symbol card set
-- `*_Communication_Access_Packet.pdf` — AAC Communication Access Packet (built after docx, before QC)
 - `*_TPT_Listing_Package.md` — TPT listing copy **must contain Output 0 as first section**
 - Unit-specific images, Pinterest pins, trading card files
+
+**`[Unit]_TPT/` subfolder — exactly 4 files for TPT upload:**
+| File | Description |
+|------|-------------|
+| `[Unit]_COMPLETE.docx` | Full teacher + student + AK document |
+| `[Unit]_Student_Print_Materials.docx` | Student-facing content only (no teacher content, no AK) |
+| `[Unit]_Welcome_to_the_Product.pdf` | 3 intro pages + Teacher AK (built by `build_welcome_nonfiction.py`) |
+| `[Unit]_Communication_Access_Packet.pdf` | Symbol cards + Priority Vocab + Session Tracker |
+
+**Also present in `[Unit]_TPT/` but NOT uploaded (working files):**
+- `[Unit]_COMPLETE.pdf` — Word-exported PDF used by CAP builder and preview script
+- `[Unit]_TPT_Preview.pdf` — watermarked preview PDF for TPT product thumbnail
+
+**Jill manual step — before zipping for upload:** Delete any stale files (duplicate PDFs, `.docx~` lock files, `.tmp` files, old filenames) from the TPT folder. Only zip the 4 upload files listed above.
 
 ## TPT Listing Package — Output 0 Standard (REQUIRED — every product, every listing)
 
@@ -298,7 +311,7 @@ All pages receive a diagonal "PREVIEW" watermark (navy, 10% opacity, 72pt Helvet
 - Footer: unit title · Communicate by Design · Where AT Meets Practice · TPT store URL
 
 ## Build Script Output Note
-All nonfiction build scripts output COMPLETE .docx to `../` (Nonfiction Units root), NOT into the unit folder. After rebuilding, move/copy the output into the unit folder.
+All nonfiction build scripts output COMPLETE.docx and Student_Print_Materials.docx directly into the `[Unit]_TPT/` subfolder inside the unit folder. The output path is `path.join(__dirname, "[Unit]_TPT", "[Unit]_COMPLETE.docx")` — NOT `../` (Nonfiction Units root). The old `../` pattern was corrected in Apr 2026 when the TPT subfolder architecture was standardized.
 
 ## UFLI QC Evaluation Rubric
 Full rubric: `_Operations/UFLI_QC_Evaluation_Rubric.md`
