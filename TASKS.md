@@ -34,6 +34,19 @@
 - [ ] **Pinterest: Populate Canva Pin Design ID in Airtable** — Products table, `Canva Pin Design ID` field (`fldIzVfpce6fDpV7x`). Add IDs: IEP AT Consideration Toolkit = `DAHEI1nmrPA`; Keiko (FREE) = `DAHEiSb8S7k`; Nonfiction units = `DAHFdGbv7rs`; Wonder = `DAHFeFD9LBk`. *(Added 2026-04-01)*
 - [ ] **Pinterest: Update Outbound Clicks weekly** — Every Friday, open Pinterest Analytics → Overview → filter Outbound Clicks (past 30 days) → update `Pinterest Outbound Clicks (30d)` field in Products table for top performers. This drives List B prioritization in the daily brief. *(Added 2026-04-01)*
 
+### Airtable Data — Remaining Gaps (2026-04-08)
+- [ ] **Airtable: Paste Pinterest URLs for 5 AT/AAC products** — Products are pinned (✓ checked) but live URLs not stored. Paste into `Pinterest URL` field (`fldx9FesXwfqZhWYp`) for: AAC Data Collection Forms, AAC Communication Partner Quick Guide, Visual Schedule Template Pack, AT & AAC Toolkit Bundle, Finding Symbols Freebie. Once pasted, daily brief auto-moves them to List B rotation. *(Added 2026-04-08)*
+- [x] **Airtable: Fix Wonder Notes field** — Stale "Price TBD" text removed. Notes field now reflects $6.00 locked price + Apr 8 SEO update. *(Done 2026-04-08)*
+- [ ] **Airtable: Add TPT Product IDs for 5 built-not-listed PB Companions** — A Friend for Henry, Emmanuel's Dream, I Talk Like a River, Ian's Walk, My Friend Isabelle all have TPT URLs but no Product IDs. Add IDs when listing on TPT. *(Added 2026-04-08)*
+
+### TPT SEO + Store Fixes — From Apr 8 Session
+- [ ] **TPT: Apply Wonder SEO rewrite to live listing** — New title: `Wonder Novel Study | Adaptive SDI and AAC | SPED Grades 3-8`. New description opening + full description written Apr 8. Copy from session transcript → paste into TPT listing editor. *(Added 2026-04-08)*
+- [ ] **TPT: Fix My Friend Isabelle listing title** — Current title is broken/unformatted (`My Friend Isabelle AAC read-aloud companion — special education grades K-1. AAC`). Rewrite to match PB Companion pattern: `My Friend Isabelle | AAC Read-Aloud Companion | Friendship + Inclusion | SPED K-1`. *(Added 2026-04-08)*
+- [ ] **TPT: Delete duplicate A Friend for Henry listing** — Two listings appear in MyProductStats.csv (rows 18 and 22). One is a duplicate. Log into TPT → identify which is the correct listing → delete the duplicate. *(Added 2026-04-08)*
+- [ ] **TPT: Investigate deleted items** — MyProductStats.csv row 23 shows deleted items: 136 page views, 84 previews, 20 downloads, $43 earned, 2.0 rating, 1 vote. That's the best-performing content in the store history. Identify what was deleted and whether any should be relisted or rebuilt. *(Added 2026-04-08)*
+- [ ] **TPT: Freebie strategy — A Friend for Henry** — Decision to make: pull one activity page (vocabulary preview + communication board) as a standalone free download to capture "A Friend for Henry AAC" search traffic (zero competition). If yes: build listing, Output 0, post in SPED Facebook groups. *(Added 2026-04-08)*
+- [ ] **Facebook group push — Keiko freebie** — Post free Keiko unit in 2-3 SPED Facebook groups as an answer to a real question in the thread. Template: *"I actually built something for this — [link]. Free download."* This is the fastest path to followers + first reviews right now. *(Added 2026-04-08)*
+
 ### TPT Listing Data Cleanup — Tonight (2026-04-04)
 *All fields except these have been populated in Airtable Products table.*
 - [ ] **TPT: Verify and enter page counts** — Airtable TPT Number of Pages field now exists. Pull from TPT "Product Details" for each live product and enter exact counts: AT Checklist, Finding Symbols, Universal AAC Tracker, AAC Data Collection Forms, Visual Schedule Pack. (IEP AT Toolkit = 28pp ✓ already set; All the Way to the Top = 23pp ✓; AAC Partner Quick Guide = 12pp ✓). *(Added 2026-04-04)*
@@ -44,6 +57,15 @@
 - [ ] **TPT: Verify Product Type + Tax Code on live listings** — Airtable now has these fields populated. Cross-check against live TPT listing settings tonight (especially Tax Code — should be "Digital Images - Streaming / Electronic Download" for symbol-card products, "Digital Books" for text-heavy units). *(Added 2026-04-04)*
 - [ ] **TPT: Set Custom Category on live listings** — Custom Category is store-specific (Airtable has field but values must match what you create inside your TPT store settings). Go to TPT store → Store Settings → Custom Categories → create any needed, then assign to listings. *(Added 2026-04-04)*
 
+### Nonfiction Units — Symbol Pages + AAC Fixes (2026-04-08)
+- [x] **Nonfiction symbol pages built for all 6 units** — Gold-standard format (matches PB Companion spec). Saved to each unit's `_TPT/` subfolder as `*_Symbol_Pages.pdf`. Build script permanently saved to `_Operations/Build/build_nonfiction_symbol_pages.py`. *(Done 2026-04-08)*
+- [x] **Zitkala-Ša AAC section fixed** — `build_zitkala_sa.js` updated to use `AAC.aacSupportSection()`. DOCX patched in-place with gold-standard Communication Access section + full vocab table (20 core + 19 fringe). *(Done 2026-04-08)*
+- [x] **504 Sit-In AAC section fixed** — `build_504_sit_in.js` updated to use `AAC.aacSupportSection()`. Full rebuild ran clean. New DOCX in `504_Sit_In_TPT/`. *(Done 2026-04-08)*
+- [ ] **⚠️ Jill: Re-export Zitkala-Ša COMPLETE.pdf from Word** — DOCX was patched in-place. Open `Zitkala_Sa_TPT/Zitkala_Sa_COMPLETE.docx` in Word → File → Save As → PDF. Required before re-uploading to TPT. *(Added 2026-04-08)*
+- [ ] **⚠️ Jill: Re-export 504 Sit-In COMPLETE.pdf from Word** — DOCX was fully rebuilt. Open `504_Sit_In_TPT/504_Sit_In_Unit_COMPLETE.docx` in Word → File → Save As → PDF. Required before re-uploading to TPT. *(Added 2026-04-08)*
+- [ ] **⚠️ Jill: Trash old Frances Kelsey Symbol_Cards.pdf** — In Finder: `Frances Kelsey/Frances_Kelsey_TPT/Frances_Kelsey_Symbol_Cards.pdf` — delete this. Replaced by `Frances_Kelsey_Symbol_Pages.pdf`. *(Added 2026-04-08)*
+- [ ] **GitHub push — Apr 8 nonfiction fixes** — Files changed: `Products/Nonfiction Units/Zitkala-Sa/build_zitkala_sa.js`, `Products/Nonfiction Units/504 Sit In/build_504_sit_in.js`, `_Operations/Build/build_nonfiction_symbol_pages.py` (NEW). Open GitHub Desktop → commit → push. *(Added 2026-04-08)*
+
 ### Other Active
 - [x] **UFLI: Airtable cleanup complete** — 4 old records retired, 2 new records created (FREE `recCeJ479OD5BEHb5` + PAID $20 `recas76MabrgRnmL1`). Two-product structure now reflected in Airtable. *(Done 2026-04-05)*
 - [x] **Picture Book Companions: Canva Cover Link populated in Airtable** — All 6 PB Companion records updated with bulk template URL (DAHF6DObHZ4). *(Done 2026-04-05)*
@@ -52,7 +74,7 @@
 - [ ] **Run `cbd-dashboard-refresh` task manually once** — Scheduled Tasks → find `cbd-dashboard-refresh` → Run now → approve Airtable MCP connection. Pre-approves tool permissions so 8:15 AM / noon / 11:30 PM auto-runs go through without pausing. *(Added 2026-04-03)*
 - [ ] **UFLI: Resolve formatting/consistency issues** — Both UFLI products blocked on lesson packet formatting/consistency, NOT covers (covers are done in Canva). Consistency across lesson packets must pass before listing either product. *(Added 2026-04-03)*
 - [ ] **⚠️ Run `sync_vocab_to_airtable.js` — READY NOW** — All PB Companion vocab fully populated in `cbd_unit_vocab.js` (Apr 5 2026); Poetry Unit 1 (28 words) also ready. Will add ~140 new records to Airtable Vocabulary table (501 → ~641). Run from `_Operations/Build/`: `node sync_vocab_to_airtable.js`. Does NOT need to wait for TPT listing. *(Updated 2026-04-05)*
-- [ ] **GitHub push — Sessions 21–25 code changes** — Open GitHub Desktop → commit → push origin. Files changed: `_Operations/Build/sync_vocab_to_airtable.js` (pendingBuild skip + Poetry/PictureBook product line routing + 5 new PB title UNIT_TITLE_MAP entries), `_Operations/Build/cbd_unit_vocab.js` (Poetry Unit 1 words, ALL 6 PB Companion word lists fully populated — pendingBuild removed, Wonder stubs Units 2–6), `_Operations/Dashboards/CbD_Vocabulary_Dashboard.html` (word counts updated), `CLAUDE.md` (PB vocab status, Vocabulary table count, dashboard task note, TPT tag note). *(Updated 2026-04-05)*
+- [ ] **GitHub push — Sessions 21–25 + Apr 8 code changes** — Open GitHub Desktop → commit → push origin. Files changed: `_Operations/Build/sync_vocab_to_airtable.js`, `_Operations/Build/cbd_unit_vocab.js`, `_Operations/Dashboards/CbD_Vocabulary_Dashboard.html`, `CLAUDE.md`, `Products/Nonfiction Units/Zitkala-Sa/build_zitkala_sa.js`, `Products/Nonfiction Units/504 Sit In/build_504_sit_in.js`, `_Operations/Build/build_nonfiction_symbol_pages.py` (NEW). *(Updated 2026-04-08)*
 - [ ] **Substack: Fix price typo before publishing** — "AT Consideration Is a Legal Requirement" post has $6 — must be $4 (matches live TPT listing ID 15795702). Fix before publishing. *(Added 2026-03-29)*
 - [ ] **Weekly TPT Traffic Check** — Every Saturday, pull Traffic tab on TPT dashboard (This week vs. Last week). Watch: (1) Facebook click-throughs — goal is 15+ sustained after Mar 28 surge; (2) Direct traffic trend — flag if drops below 80/week for 3+ consecutive weeks; (3) Conversion rate — currently 0.00%, needs product page optimization pass. Report template saved: `Marketing/TPT_Traffic_Report_2026-03-28.html`. *(Added 2026-03-28)*
 - [ ] **Product page conversion audit** — 373 click-throughs this month, $0.00 earned = 0% conversion. Review top-traffic product listings: cover image, description opener (first 180 chars), pricing display, and thumbnail. Start with AT Checklist + AT Toolkit (highest direct traffic products). *(Added 2026-03-28)*
@@ -75,7 +97,7 @@
 - [ ] **TPT cross-linking audit** — Confirm freebies (Checklist, Finding Symbols) link TO paid products. Confirm Toolkit links FROM Checklist.
 - [ ] **TPT Awards section** — Manual entry needed (content drafted).
 - [ ] **AT certification** — Working toward; not yet started.
-- [ ] **Nonfiction bundle** — Create Keiko + Radium Girls bundle listing on TPT.
+- [x] **Nonfiction bundle** — LIVE ✓ TPT ID: 15922531. *(Confirmed 2026-04-08)*
 - [x] **Earth Day keyword push** — Update Keiko listing with Earth Day keywords ✓ (completed 2026-03-26)
 - [ ] **Add tag gold mines to TPT listings** — "aactivities" (all AAC products), "ulfi" (all UFLI products), "drawn to aac" (AAC tags), "special education lesson plans template" (nonfiction descriptions). Free wins — just paste into TPT tag fields.
 - [ ] **Daily SellerSpy searches** — 5 free/day. Next batch: "core vocabulary", "adapted reading", "IEP tools", "phonics AAC", "disability history". Add results to `CbD_SEO_Keyword_Research.xlsx`.

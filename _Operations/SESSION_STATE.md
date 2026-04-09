@@ -37,8 +37,8 @@ Diagnose:
 | 504 Sit-In | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
 | Frances Kelsey | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
 | Capitol Crawl 1990 | LIVE | $9.95 | v2 cover uploaded ✓ Apr 3 |
-| Wonder – Character Analysis | LIVE | TBD | Pricing + cover color not yet locked |
-| Nonfiction Bundle — Keiko + Radium Girls | LIVE | $18.00 | Needs cover + Pinterest |
+| Wonder — Fiction Anchor Text Unit | LIVE | $6.00 | LIVE Apr 2026 · TPT ID: 15945146 · Price LOCKED $6 |
+| Nonfiction Bundle — Keiko + Radium Girls | LIVE | $18.00 | TPT ID: 15922531 · Needs Pinterest pin |
 
 ## Built But NOT Yet Listed on TPT
 | Product | Status | Blocker | Next Step |
@@ -135,6 +135,41 @@ _Operations/
 
 ---
 
+## What Changed This Session (2026-04-08 — Nonfiction Symbol Pages + AAC Section Fixes)
+
+- **Nonfiction symbol pages built for all 6 units** — New gold-standard symbol pages PDF (`*_Symbol_Pages.pdf`) built for every nonfiction unit using the exact same spec as the picture book companion and Wonder symbol pages (Python/ReportLab, 3-col × 4-row grid, 2"×2" cards, FK-colored border, ARASAAC symbol, ALL CAPS word label — nothing else). Files saved to each unit's `_TPT/` subfolder. Build script: `/sessions/focused-beautiful-johnson/build_nonfiction_symbol_pages.py` (session temp — should be moved to `_Operations/Build/` if permanent).
+  - Frances Kelsey: 5 pages (3 core + 2 fringe) — old `Symbol_Cards.pdf` replaced
+  - 504 Sit-In: 4 pages (2 core + 2 fringe)
+  - Keiko: 5 pages (3 core + 2 fringe)
+  - Radium Girls: 5 pages (3 core + 2 fringe)
+  - Capitol Crawl: 4 pages (2 core + 2 fringe)
+  - Zitkala-Ša: 4 pages (2 core + 2 fringe) — rebuilt after word list fix
+- **Old Frances Kelsey `Symbol_Cards.pdf` retired** — Replaced by new `Frances_Kelsey_Symbol_Pages.pdf`. Old file still exists (iCloud permission blocked delete) — Jill: trash `Frances_Kelsey_TPT/Frances_Kelsey_Symbol_Cards.pdf` in Finder.
+- **Zitkala-Ša fringe word list corrected** — Build script was missing all Tier 2 structural fringe words. Corrected list: cause, effect, problem, solution, structure, organize, result, evidence, policy, identity, culture + boarding school, assimilation, reservation, hair cutting, spirit, testimony, zitkala, dakota (19 fringe total).
+- **Zitkala-Ša `build_zitkala_sa.js` updated** — Added `cbd_aac_support.js` require + replaced old plain-text AAC Support paragraphs + makeTable with proper `AAC.aacSupportSection()` call. Now matches the Radium Girls / Keiko gold standard. DOCX patched in-place (draft file missing — patch applied via python-docx). Old orphan "IEP Goal Stems" heading + 3 plain goal paragraphs also removed from DOCX.
+- **504 Sit-In `build_504_sit_in.js` updated** — Added `cbd_aac_support.js` require + replaced old custom AAC Users block (heading2 + bullets + custom makeTable + IEP bullets) with proper `AAC.aacSupportSection()` call using confirmed 504 word lists. Full rebuild ran successfully (draft exists). New DOCX copied to `504_Sit_In_TPT/` folder.
+- **Root cause documented** — Zitkala-Ša and 504 Sit-In were built before `cbd_aac_support.js` existed. Both build scripts and DOCXs now match gold standard. ⚠️ Both units need Word → Save As PDF re-export before re-uploading to TPT.
+- **⚠️ Pending: move build script to permanent location** — `build_nonfiction_symbol_pages.py` is in session temp (`/sessions/focused-beautiful-johnson/`). Move to `_Operations/Build/build_nonfiction_symbol_pages.py` for permanent access.
+
+## What Changed This Session (2026-04-08 — TPT Discounts + Tailwind Exploration)
+
+- **TPT 10% new follower discount** — Active. Automatically applied when a new buyer follows the CbD store on TPT.
+- **TPT Spring Sale — 10% off, one week** — Active sale running for one week. All live products discounted 10%. Note: stacks with new follower discount if applicable.
+- **Tailwind for Pinterest** — Jill started exploring Tailwind (tailwindapp.com) as a scheduling/distribution tool for Pinterest. 4 Pinterest fields added to Airtable last session (Pin Title, Pin Description, Alt Text, Canva Media URL) — these will feed Tailwind scheduling workflow. Next step TBD: evaluate Tailwind trial, determine if it replaces or supplements the daily brief task.
+
+## What Changed This Session (2026-04-08 — Airtable TPT ID + Data Audit Cleanup)
+
+- **TPT Product IDs fully populated for all live products** — All 22 live products now have TPT Product ID in Airtable Products table. IDs added this session: Zitkala-Ša (15846486), Radium Girls (15849285), 504 Sit-In (15848748), Keiko (15817061), Frances Kelsey (15849346), Nonfiction Bundle — Keiko + Radium Girls (15922531), AT & AAC Toolkit Bundle (15798556), AAC Communication Partner Quick Guide (15789219), AAC Data Collection Forms (15790089), Visual Schedule Template Pack (15785835), Universal AAC Communication Data Tracker (15922302). Frances Kelsey TPT URL also corrected in Airtable.
+- **Wonder marked Live in Airtable** — `fldvrDOZ3rnYGdljl` (TPT Listed ✓) = true, Workflow Stage = Live. TPT Product ID 15945146 confirmed. Wonder is now the first Fiction Anchor Text unit live on TPT.
+- **Poetry Unit (What the Voice Carries) Airtable fields fixed** — Learning Target rewritten from raw standard text to student-facing "I can" format: "I can determine the meaning of figurative and connotative language in a poem and analyze how word choices shape meaning and tone." Skill, Standard, SubHeading, and Grade Levels (6th/7th/8th) all populated. Record: `receS8L09qmIxUmcO`.
+- **4 new Pinterest fields added to Airtable Products table** — Pinterest Pin Title (`fldQV0iXyTZNZE1bq`), Pinterest Pin Description (`fldBoDY3YOfkBeIfl`), Pinterest Alt Text (`fldQHiO3oo2D10n0a`), Pinterest Canva Media URL (`fldK5T4kf7Oxmv0W9`). All 22 products populated with Pin Title, Pin Description, and Alt Text from Tailwind CSV.
+- **Skill/Essential Question/Learning Target populated for all instructional products** — PB Companions (6), Nonfiction (6), Fiction/Wonder, Poetry Unit 1 all now have these fields in Airtable. AT/AAC tool products intentionally left blank (not instructional units).
+- **AAC Resource Book List created** — `Research/CbD_AAC_Resource_Book_List.md` — living curation reference, separate from build pipeline. 5 sections, 10 MaiStoryBook titles + key existing titles cross-referenced. Template for ongoing additions.
+- **PB Companion pipeline extended to 38 titles** — `Research/CbD_PictureBook_Pipeline_Research.md` updated: new #8 (A Day with No Words) and #9 (This is How We Talk) added as Category A; 8 MaiStoryBook titles added as new Category E (#31–38). Renumbering confirmed clean.
+- **A Friend for Henry confirmed FREE (lead magnet)** — $0 price in Airtable is intentional — it is the entry-point freebie for the Picture Book Companions line.
+- **Wonder Notes field** — still contains stale "Price TBD ($8.95/$9.95)" text. Price is LOCKED at $6.00. Update Notes field manually or flag for next session.
+- **5 AT/AAC products still missing Pinterest URLs** — Products have been pinned (Pinterest ✓ checked) but live pin URLs not yet stored in Airtable `fldx9FesXwfqZhWYp`. Jill action: paste URLs for AAC Data Collection Forms, AAC Communication Partner Quick Guide, Visual Schedule Template Pack, AT & AAC Toolkit Bundle, Finding Symbols Freebie.
+
 ## What Changed This Session (2026-04-05 — UFLI Airtable Cleanup + Skill Reference Updates)
 - **UFLI Airtable cleanup complete** — 4 old records retired (marked [RETIRED], stage = Retired): UFLI Lessons 5–34 Individual Packets ($1), UFLI Teacher Guide ($5), UFLI Complete Set ($28), UFLI Lessons 5–34 Bundle ($25). 2 new records created: `recCeJ479OD5BEHb5` (FREE, L1–5) + `recas76MabrgRnmL1` (PAID $20, L6–34 + Guide). Both stage: Building, target May 1 2026, Docx Built ✓, QC Passed ✓.
 - **TPT Listings doc bugs fixed** — `TPT_Listings_UFLI_AAC_Companion.md`: (1) FREE title trimmed from 81→80 chars (FREE→Free); (2) Lesson 10 label fixed (CVC CVC Practice → CVC Practice); (3) Lesson 11 label fixed (Nasalized A Nasalized /ă/ → Nasalized /ă/); (4) Lesson 19 label fixed (VC & CVC VC & CVC Practice → VC & CVC Practice).
@@ -184,7 +219,8 @@ _Operations/
 - [ ] Export Poetry Canva cover (DAHFebI7Z2k) → TPT listing
 - [ ] Resolve UFLI formatting/consistency issues across lesson packets
 - [ ] Delete duplicate symbol_library and node_modules from Finder (iCloud locked — 3 folders)
-- [ ] Wonder: confirm pricing ($8.95/$9.95) and cover color before TPT listing
+- [ ] Wonder: fix Notes field in Airtable — remove stale "Price TBD ($8.95/$9.95)" text. Price LOCKED at $6.00.
+- [ ] Wonder: confirm cover color before next session (product is live — cover still TBD)
 - [ ] Run `cbd-dashboard-refresh` task once manually to pre-approve Airtable tool permissions
 - [ ] Update skill files on Mac (read-only in session): `.claude/skills/communicate-by-design/references/products.md` — fix UFLI pricing (retire old, add FREE + $20) + add PB Companions live section. `references/ufli.md` — fix pricing table + status (covers done, blocker = content consistency).
 - [ ] Check `Canva Cover ✓` in Airtable Products for each PB Companion as you finish placing images in Canva bulk template (DAHF6DObHZ4)

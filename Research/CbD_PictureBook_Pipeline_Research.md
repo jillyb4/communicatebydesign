@@ -180,12 +180,38 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
+**8. A Day with No Words — Tiffany Hammond / Kate Cosgrove**
+- Grade: K–2 | Standard: RL.K.3 / RL.1.3 (character: feelings, connection, communication)
+- Status: Pipeline candidate — needs full gate review
+- Core vocab anchors: want, go, feel, see, help, all, more, can, together, look
+- Fringe vocab: tablet, device, words, park, store, family, share, notice, busy
+- Why it fits: Aidan is nonspeaking and communicates via tablet — the book centers him as a full, connected person navigating his day with his family. Written by a nonspeaking person's parent (Tiffany Hammond, @fidgetsandfreckles — major AAC community voice). This is the most visible and community-trusted AAC device representation in current K–2 picture books. Nothing like it exists in the current CbD pipeline. Strong core vocabulary throughout (every action/feeling in the text anchors to Foundation Core). Zero gap on TPT for an AAC-access companion.
+- EBP activities: 3-read IRA · ALS throughout ("Aidan wants ___. Aidan feels ___") · Symbol-supported response: "How does Aidan show he cares?" · Predictable Chart Writing: "I can share ___" (whole class, any access method)
+- HLPs: 12, 15, 16, 18 | IRIS: AAC Implementation in the Classroom
+- TPT competition: Very low — high community awareness, underserved on TPT
+- Priority: **5** — only title in pipeline where AAC device use is the explicit, joyful center of the story; fills a critical gap
+
+---
+
+**9. This is How We Talk — Jessica Slice / Parwinder Singh**
+- Grade: K–1 | Standard: RL.K.3 / RL.K.2 (retell + central message: all communication is valid)
+- Status: Pipeline candidate — needs full gate review
+- Core vocab anchors: talk, feel, can, all, same, different, more, help, want, go, together, my
+- Fringe vocab: sign, stim, clap, device, write, gesture, smile, quiet, loud, community
+- Why it fits: Jessica Slice is a disabled author. The book explicitly and joyfully names every communication method — speaking, signing, writing, stimming, clapping, using devices — as equally valid. This is your brand thesis in picture book form: AT, AAC, and SGD as an ecosystem, not a hierarchy. The repetitive structure ("This is how we talk" / "This is how we talk too") = perfect ALS and Predictable Chart Writing anchor. Every double-page spread is a response opportunity.
+- EBP activities: 3-read IRA · ALS throughout · Predictable Chart Writing: "This is how I talk: ___" (whole-class; student selects their communication method — any access method) · Symbol sort: "Ways to talk" (sorting symbols for each communication method shown in the book)
+- HLPs: 15, 16, 18 | IRIS: AAC Implementation in the Classroom
+- TPT competition: Very low — recent publication, disability-authored, no AAC companion exists
+- Priority: **5** — brand thesis made visible; whole-class inclusion message; exceptional ALS platform
+
+---
+
 ### CATEGORY B — Civil Rights + Advocacy
 *Connects to CbD nonfiction line (grades 6–10). Child as agent of change — the Jennifer Keelan model.*
 
 ---
 
-**8. The Story of Ruby Bridges — Robert Coles / George Ford**
+**10. The Story of Ruby Bridges — Robert Coles / George Ford**
 - Grade: 1–2 | Standard: RI.1.3 / RI.2.3 + RI.1.6 / RI.2.6 (nonfiction biography; author's purpose)
 - Core vocab anchors: go, brave, change, want, help, feel, right, stop, can
 - Fringe vocab: school, integrate, protest, marshal, prayer, courage, New Orleans
@@ -197,7 +223,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**9. Rosa — Nikki Giovanni / Bryan Collier**
+**11. Rosa — Nikki Giovanni / Bryan Collier**
 - Grade: 1–2 | Standard: RI.1.6 / RI.2.6 (author's purpose + point of view)
 - Core vocab anchors: stop, go, change, want, right, brave, can, feel, say
 - Fringe vocab: bus, Montgomery, arrest, tired, refuse, Rosa, civil rights
@@ -209,7 +235,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**10. We Are Water Protectors — Carole Lindstrom / Michaela Goade**
+**12. We Are Water Protectors — Carole Lindstrom / Michaela Goade**
 - Grade: K–2 | Standard: RL.K.3 / RL.1.6 (character agency; author's purpose)
 - Core vocab anchors: protect, go, stop, help, water, we, can, want, change
 - Fringe vocab: water, pipeline, land, Indigenous, protect, black snake, prayer, river
@@ -221,7 +247,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**11. Click, Clack, Moo: Cows That Type — Doreen Cronin / Betsy Lewin**
+**13. Click, Clack, Moo: Cows That Type — Doreen Cronin / Betsy Lewin**
 - Grade: K–1 | Standard: RL.K.3 / RL.1.3 (character responses; problem/solution)
 - Core vocab anchors: want, help, stop, can, go, more, all, change, say, tell
 - Fringe vocab: cows, type, farmer, barn, strike, electric blanket, note, cold
@@ -232,7 +258,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**12. Separate Is Never Equal — Duncan Tonatiuh**
+**14. Separate Is Never Equal — Duncan Tonatiuh**
 - Grade: 1–2 | Standard: RI.1.3 / RI.2.3 + RI.2.6 (nonfiction; connection of events; author's purpose)
 - Core vocab anchors: equal, change, right, want, help, go, brave, say, can
 - Fringe vocab: segregation, lawsuit, school, Méndez, Mexican-American, separate, equal
@@ -249,7 +275,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**13. The Snowy Day — Ezra Jack Keats**
+**15. The Snowy Day — Ezra Jack Keats**
 - Grade: K | Standard: RL.K.3 (character actions/feelings) + RL.K.2 (retell)
 - Core vocab anchors: go, play, make, see, come, stop, up, down, in, out, big, little
 - Fringe vocab: snow, stick, snowball, footprints, snowsuit, cold
@@ -260,7 +286,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**14. Last Stop on Market Street — Matt de la Peña / Christian Robinson**
+**16. Last Stop on Market Street — Matt de la Peña / Christian Robinson**
 - Grade: 1–2 | Standard: RL.1.3 / RL.2.3 (character feelings + author's purpose)
 - Core vocab anchors: go, see, feel, why, want, help, different, beautiful, can
 - Fringe vocab: bus, soup kitchen, neighborhood, blind, magic, city, grandmother
@@ -271,7 +297,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**15. Swimmy — Leo Lionni**
+**17. Swimmy — Leo Lionni**
 - Grade: K–1 | Standard: RL.K.2 / RL.1.2 (retell + central message: together we are stronger)
 - Core vocab anchors: go, swim, together, one, all, big, little, scared, happy, can
 - Fringe vocab: fish, ocean, tuna, cave, anemone, seaweed, together, school
@@ -282,7 +308,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**16. Corduroy — Don Freeman**
+**18. Corduroy — Don Freeman**
 - Grade: K–1 | Standard: RL.K.3 (character feelings + want/need)
 - Core vocab anchors: want, find, help, go, look, feel, home, friend, need, can
 - Fringe vocab: bear, button, department store, escalator, night watchman, girl
@@ -293,7 +319,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**17. Rosie Revere, Engineer — Andrea Beaty / David Roberts**
+**19. Rosie Revere, Engineer — Andrea Beaty / David Roberts**
 - Grade: 1–2 | Standard: RL.1.3 / RL.2.3 (character: try, fail, try again; feelings)
 - Core vocab anchors: make, try, fail, go, feel, can, help, want, do, more
 - Fringe vocab: engineer, invention, cheese-copter, uncle, hat, giggle, gizmo
@@ -304,7 +330,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**18. The Dot — Peter H. Reynolds**
+**20. The Dot — Peter H. Reynolds**
 - Grade: 1–2 | Standard: RL.1.3 / RL.2.3 (character feelings + change over time)
 - Core vocab anchors: make, try, feel, can, change, show, go, help, do, more
 - Fringe vocab: dot, art, teacher, frame, courage, mark, swirl, signature
@@ -315,7 +341,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**19. Tops and Bottoms — Janet Stevens**
+**21. Tops and Bottoms — Janet Stevens**
 - Grade: K–1 | Standard: RL.K.2 / RL.1.2 (retell + lesson: working together, problem-solving)
 - Core vocab anchors: go, make, help, all, top, bottom, more, want, get, can
 - Fringe vocab: hare, bear, carrot, lettuce, celery, garden, deal, lazy
@@ -331,7 +357,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**20. The Name Jar — Yangsook Choi**
+**22. The Name Jar — Yangsook Choi**
 - Grade: K–2 | Standard: RL.K.3 / RL.1.3 (character feelings + identity)
 - Core vocab anchors: feel, want, help, say, name, can, go, different, same, my
 - Fringe vocab: name, Korea, pronounce, jar, paper, class, American, language
@@ -342,7 +368,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**21. Grandfather's Journey — Allen Say**
+**23. Grandfather's Journey — Allen Say**
 - Grade: 1–2 | Standard: RL.1.3 / RL.2.3 + RL.1.2 (character feelings + lesson)
 - Core vocab anchors: go, home, miss, feel, love, want, stay, leave, remember
 - Fringe vocab: Japan, California, journey, grandfather, mountain, city, war, return
@@ -353,7 +379,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**22. Each Kindness — Jacqueline Woodson / E.B. Lewis**
+**24. Each Kindness — Jacqueline Woodson / E.B. Lewis**
 - Grade: 1–2 | Standard: RL.1.3 / RL.2.3 (character feelings; regret; cause and effect)
 - Core vocab anchors: feel, want, help, say, sorry, change, can, try, go, no
 - Fringe vocab: kindness, ripple, pond, new girl, Maya, regret, chance
@@ -364,7 +390,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**23. All Are Welcome — Alexandra Penfold / Suzanne Kaufman**
+**25. All Are Welcome — Alexandra Penfold / Suzanne Kaufman**
 - Grade: K–1 | Standard: RL.K.3 / RL.K.2 (retell + central message)
 - Core vocab anchors: welcome, all, we, can, go, help, together, safe, feel, come
 - Fringe vocab: school, hijab, wheelchair, celebration, prayer, holiday, different, community
@@ -375,7 +401,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**24. Mama's Nightingale: A Story of Immigration and Separation — Edwidge Danticat / Leslie Staub**
+**26. Mama's Nightingale: A Story of Immigration and Separation — Edwidge Danticat / Leslie Staub**
 - Grade: 1–2 | Standard: RL.1.3 / RL.2.3 (character feelings + character response)
 - Core vocab anchors: miss, feel, help, want, can, go, home, sad, love, write
 - Fringe vocab: prison, Haiti, nightingale, story, immigration, family, letter, court
@@ -386,7 +412,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**25. Amina's Voice — Hena Khan**
+**27. Amina's Voice — Hena Khan**
 - Grade: 2–3 | Standard: RL.2.3 (character feelings + change)
 - Core vocab anchors: feel, want, help, can, scared, try, change, go, speak
 - Fringe vocab: mosque, Muslim, Pakistan, vandalism, community, sing, voice, courage
@@ -396,7 +422,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**26. The Proudest Blue: A Story of Hijab and Family — Ibtihaj Muhammad / S.K. Ali / Hatem Aly**
+**28. The Proudest Blue: A Story of Hijab and Family — Ibtihaj Muhammad / S.K. Ali / Hatem Aly**
 - Grade: K–2 | Standard: RL.K.3 / RL.1.3 (character feelings + sibling perspective)
 - Core vocab anchors: proud, feel, want, can, say, look, beautiful, go, help, my
 - Fringe vocab: hijab, blue, school, first day, teasing, sister, strength, proud
@@ -407,7 +433,7 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**27. Fry Bread: A Native American Family Story — Kevin Noble Maillard / Juana Martinez-Neal**
+**29. Fry Bread: A Native American Family Story — Kevin Noble Maillard / Juana Martinez-Neal**
 - Grade: K–2 | Standard: RL.K.2 / RL.1.2 (retell + central message)
 - Core vocab anchors: make, all, together, feel, love, home, can, go, help, warm
 - Fringe vocab: fry bread, Native American, tribe, family, history, round, recipe, share
@@ -418,13 +444,76 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 
 ---
 
-**28. The Bear Ate Your Sandwich — Julia Sarcone-Roach**
+**30. The Bear Ate Your Sandwich — Julia Sarcone-Roach**
 - Grade: K–1 | Standard: RL.K.3 / RL.K.6 (character; narrator's perspective — unreliable narrator)
 - Core vocab anchors: go, eat, find, feel, see, my, stop, come, want, all, more
 - Fringe vocab: sandwich, bear, woods, city, park, bench, lunch, tell
 - Why it fits: Hilarious unreliable narrator (the bear tells his story to explain why the sandwich is gone). Strong for RL.K.6 (point of view). The humor and repetitive structure make it an engagement anchor. Every core word gets a workout in the narrative.
 - EBP activities: IRA · Dialogic Recall: "What really happened?" · Symbol-sort: "What the bear said / What really happened"
 - Priority: **3** — lighter lift, high engagement, great K gateway title
+
+---
+
+### CATEGORY E — Explicit AAC/Communication Representation (Awareness + Resource Use)
+*Sourced from MaiStoryBook curated list (April 2026). These titles feature AAC device users or nonspeaking characters. They have not yet been run through all 4 build gates. Gate review needed before any enter the build queue. Listed here for pipeline awareness and for the CbD AAC Resource Book List.*
+
+---
+
+**31. Bitsy Bat, Team Star — Kaz Windness**
+- Grade: K–1 | AAC character: Enzo Owl, nonspeaking, uses AAC device + sign language
+- Fringe character note: AAC user is a supporting character (not narrator). Protagonist Bitsy Bat learns empathy and teamwork. Similar structure to *A Friend for Henry* (peer perspective on disability).
+- Gate status: Not yet reviewed. Core vocab potential: good (want, feel, try, help, same, different, can). Teamwork + empathy vocabulary = classroom relevance.
+- Priority: **3** — gate review needed; strong classroom engagement potential
+
+---
+
+**32. My Brother Otto and the Birthday Party — Meg Raby**
+- Grade: K–1 | AAC character: Otto, autistic, uses AAC (implied device/board); sibling narrator
+- Note: Sensory-focused narrative. Otto navigates a birthday party; sibling Piper explains accommodations. Strong for inclusive classroom conversations about sensory differences and access needs.
+- Gate status: Not yet reviewed. Core vocab potential: moderate (feel, stop, help, want, go, loud, too much).
+- Priority: **3** — gate review needed; sensory vocabulary angle is underserved
+
+---
+
+**33. Jo's Special Gifts — Mariam Shapera**
+- Grade: K–1 | AAC character: Jo, autistic, uses AAC (headphones + AAC device implied)
+- Note: Celebrates neurodiversity and special interests. Honors Jo's way of experiencing the world. Gate status: Not yet reviewed. Less well-known title — community credibility TBD.
+- Priority: **2** — gate review needed; lower profile; assess after higher-priority titles
+
+---
+
+**34. I'm Non-speaking, But I Hear You — Erechia Kano**
+- Grade: K–1 | AAC character: Sadie, nonspeaking girl; communication through actions and presence
+- Note: Quiet, expressive. Affirms that connection and understanding exist beyond speech. Gate status: Not yet reviewed. Less well-known title.
+- Priority: **2** — gate review needed; assess after higher-priority titles
+
+---
+
+**35. We Are the Scrappy Ones — Rebekah Taussig**
+- Grade: K–2 | AAC/disability rep: ensemble cast; children with various disabilities navigating inaccessible world
+- Note: Author is disabled (wheelchair user, writer of *Sitting Pretty*). Celebrates resilience and adaptability. Not device-specific — broader disability identity. Gate status: Not yet reviewed.
+- Priority: **3** — gate review needed; Taussig community credibility is high
+
+---
+
+**36. A Voice Like Yours — Frank Murphy**
+- Grade: K–1 | Communication theme: broad — art, action, non-speech communication as voice
+- Note: Not disability-specific. Encourages children to value their unique voice. Overlaps with *I Talk Like a River* thematically. Gate status: Not yet reviewed. Lower differentiation from existing pipeline.
+- Priority: **2** — gate review needed; possible overlap with *I Talk Like a River* already at Priority 5
+
+---
+
+**37. You Can Say Hi With Only a Smile — Merriam Sarcia Saunders**
+- Grade: K–1 | Communication theme: many ways to communicate — speaking, signing, devices, smiling
+- Note: Broad communication inclusion — similar territory to *This is How We Talk* (already Priority 5 in pipeline). Gate status: Not yet reviewed. Possible overlap.
+- Priority: **2** — gate review needed; assess differentiation from *This is How We Talk*
+
+---
+
+**38. More than Words — Roz Maclean**
+- Grade: K–1 | Communication theme: Nathan observes classmates communicating in many ways (signing, gestures, smiles, devices)
+- Note: Observational narrator — similar structure to peer-perspective books in pipeline. Gate status: Not yet reviewed. Less well-known.
+- Priority: **2** — gate review needed; assess against similar titles
 
 ---
 
@@ -438,6 +527,8 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 | 5 | **A Friend for Henry** | Autism protagonist · core vocab richest in genre · low TPT competition |
 | 5 | **I Talk Like a River** | Communication IS the topic · perfect AAC brand alignment |
 | 5 | **Fry Bread** | Repetitive structure = best ALS platform · Indigenous rep underserved |
+| 5 | **A Day with No Words** | Only title where AAC device use is explicit + joyful center · community-trusted · fills critical gap |
+| 5 | **This is How We Talk** | Brand thesis made visible · all communication methods named · exceptional ALS platform |
 | 4 | **Emmanuel's Dream** | Disability + civil rights · non-Western · low TPT |
 | 4 | **Ian's Walk** | Autism rep · sensory vocab · inclusive classroom classic |
 | 4 | **We Are Water Protectors** | Caldecott Medal · Indigenous · lyrical repetitive text |
@@ -446,7 +537,8 @@ Organized by strategic category. Each title assessed against all 4 gates. Priori
 | 4 | **Click, Clack, Moo** | Communication as power · civil rights metaphor · K–1 |
 | 4 | **Last Stop on Market Street** | Caldecott · diversity · why/because vocabulary |
 | 4 | **The Name Jar** | Language identity = AAC identity |
-| 3 | The Dot · Rosa · Ruby Bridges · Swimmy · Separate Is Never Equal · Each Kindness · Grandfather's Journey · Rosie Revere · Tops and Bottoms · Mama's Nightingale · The Proudest Blue · Amina's Voice · The Bear Ate Your Sandwich | Strong titles — build after core set |
+| 3 | The Dot · Rosa · Ruby Bridges · Swimmy · Separate Is Never Equal · Grandfather's Journey · Rosie Revere · Tops and Bottoms · Mama's Nightingale · The Proudest Blue · Amina's Voice · The Bear Ate Your Sandwich · Bitsy Bat, Team Star · My Brother Otto · We Are the Scrappy Ones | Gate review needed or build after core set |
+| 2 | Jo's Special Gifts · I'm Non-speaking, But I Hear You · A Voice Like Yours · You Can Say Hi With Only a Smile · More than Words | Gate review needed — assess differentiation before queuing |
 
 ---
 
