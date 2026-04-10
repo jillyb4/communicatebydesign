@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — 6-Week Launch Analysis</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1B1F3B;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 32px 24px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* Header */
+  .header { border-bottom: 3px solid #FFB703; padding-bottom: 24px; margin-bottom: 32px; }
+  .header h1 { font-size: 26px; color: #FFB703; font-weight: bold; letter-spacing: 0.5px; }
+  .header .sub { color: #00B4D8; font-size: 14px; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .header .period { color: #94A3B8; font-size: 13px; margin-top: 8px; }
+
+  /* Section */
+  .section { margin-bottom: 36px; }
+  .section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #FFB703;
+    font-weight: bold;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #252A4A;
+  }
+
+  /* Cards row */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .card {
+    background: #252A4A;
+    border-radius: 8px;
+    padding: 16px;
+    border-left: 3px solid #006DA0;
+  }
+  .card.amber { border-left-color: #FFB703; }
+  .card.teal { border-left-color: #00B4D8; }
+  .card.warn { border-left-color: #ef4444; }
+  .card.green { border-left-color: #4ade80; }
+  .card .label { font-size: 11px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .card .value { font-size: 24px; font-weight: bold; color: #ffffff; }
+  .card .sub-value { font-size: 12px; color: #94A3B8; margin-top: 3px; }
+
+  /* Platform blocks */
+  .platform { background: #252A4A; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .platform-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .platform-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: bold;
+  }
+  .pi-tpt { background: #e94240; }
+  .pi-pin { background: #E60023; }
+  .pi-fb { background: #1877F2; }
+  .pi-ig { background: #E1306C; }
+  .pi-sub { background: #FF6719; }
+  .platform-name { font-size: 15px; font-weight: bold; color: #ffffff; }
+  .platform-status { font-size: 12px; color: #94A3B8; }
+
+  .stat-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .stat-chip {
+    background: #1B1F3B;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #00B4D8;
+    border: 1px solid #006DA0;
+  }
+  .stat-chip.amber { color: #FFB703; border-color: #FFB703; }
+  .stat-chip.red { color: #f87171; border-color: #ef4444; }
+  .stat-chip.green { color: #4ade80; border-color: #4ade80; }
+
+  /* Analysis blocks */
+  .analysis-block {
+    background: #1B1F3B;
+    border-left: 3px solid #006DA0;
+    border-radius: 0 6px 6px 0;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .analysis-block.signal { border-left-color: #4ade80; }
+  .analysis-block.gap { border-left-color: #ef4444; }
+  .analysis-block.watch { border-left-color: #FFB703; }
+  .analysis-block h4 { font-size: 13px; font-weight: bold; color: #FFB703; margin-bottom: 6px; }
+  .analysis-block.signal h4 { color: #4ade80; }
+  .analysis-block.gap h4 { color: #f87171; }
+  .analysis-block p { font-size: 13px; color: #CBD5E1; line-height: 1.6; }
+
+  /* Funnel */
+  .funnel { display: flex; flex-direction: column; gap: 4px; margin: 16px 0; }
+  .funnel-step {
+    display: flex; align-items: center; gap: 12px;
+    background: #252A4A;
+    border-radius: 6px;
+    padding: 10px 16px;
+  }
+  .funnel-label { font-size: 13px; font-weight: bold; width: 130px; flex-shrink: 0; }
+  .funnel-bar-wrap { flex: 1; background: #1B1F3B; border-radius: 4px; height: 10px; }
+  .funnel-bar { height: 10px; border-radius: 4px; }
+  .funnel-num { font-size: 13px; color: #94A3B8; width: 60px; text-align: right; flex-shrink: 0; }
+  .funnel-arrow { text-align: center; color: #94A3B8; font-size: 12px; padding-left: 16px; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { text-align: left; color: #94A3B8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 10px; border-bottom: 1px solid #1B1F3B; }
+  td { padding: 8px 10px; border-bottom: 1px solid #1B1F3B; color: #CBD5E1; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .tag-green { color: #4ade80; font-size: 11px; }
+  .tag-amber { color: #FFB703; font-size: 11px; }
+  .tag-red { color: #f87171; font-size: 11px; }
+
+  /* Week 7–12 table */
+  .action-row { background: #1B1F3B; border-radius: 6px; padding: 14px; margin-bottom: 10px; }
+  .action-row h4 { color: #00B4D8; font-size: 13px; font-weight: bold; margin-bottom: 6px; }
+  .action-row p { color: #CBD5E1; font-size: 13px; }
+  .action-row .why { color: #94A3B8; font-size: 12px; margin-top: 4px; font-style: italic; }
+
+  /* Footer */
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #252A4A; color: #94A3B8; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="sub">Communicate by Design</div>
+    <h1>6-Week Launch Analysis</h1>
+    <div class="period">Launch Window: March 1 – April 10, 2026 &nbsp;·&nbsp; Generated April 10, 2026</div>
+  </div>
+
+  <!-- SNAPSHOT -->
+  <div class="section">
+    <div class="section-title">Launch Snapshot</div>
+    <div class="cards">
+      <div class="card amber">
+        <div class="label">TPT Revenue</div>
+        <div class="value">$1.35</div>
+        <div class="sub-value">1 sale · 1 buyer · YTD</div>
+      </div>
+      <div class="card">
+        <div class="label">TPT Products Live</div>
+        <div class="value">22</div>
+        <div class="sub-value">+7 in final week (Apr 5)</div>
+      </div>
+      <div class="card">
+        <div class="label">TPT Store Views</div>
+        <div class="value">93</div>
+        <div class="sub-value">YTD · 48 in last 6 days</div>
+      </div>
+      <div class="card teal">
+        <div class="label">Wishlist Adds</div>
+        <div class="value">11</div>
+        <div class="sub-value">8.1% wishlist rate on views</div>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="label">Pinterest Impressions</div>
+        <div class="value">1,366</div>
+        <div class="sub-value">Since first pin (Mar 17)</div>
+      </div>
+      <div class="card teal">
+        <div class="label">Pinterest Outbound Clicks</div>
+        <div class="value">5</div>
+        <div class="sub-value">Picture Book board leads (4)</div>
+      </div>
+      <div class="card">
+        <div class="label">Facebook Views</div>
+        <div class="value">1.9K</div>
+        <div class="sub-value">Mar 13–Apr 9 · 99.6% non-followers</div>
+      </div>
+      <div class="card warn">
+        <div class="label">FB Follows</div>
+        <div class="value">1</div>
+        <div class="sub-value">Net new in period</div>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="label">Substack Subscribers</div>
+        <div class="value">2</div>
+        <div class="sub-value">First sub: ~Mar 4</div>
+      </div>
+      <div class="card">
+        <div class="label">Substack Posts Published</div>
+        <div class="value">5</div>
+        <div class="sub-value">90d views: 179</div>
+      </div>
+      <div class="card">
+        <div class="label">Instagram Views</div>
+        <div class="value">185</div>
+        <div class="sub-value">Mar 13–Apr 9 · reach: 49</div>
+      </div>
+      <div class="card green">
+        <div class="label">New Follower Discount</div>
+        <div class="value">Active</div>
+        <div class="sub-value">10% · Spring Sale running</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM BREAKDOWN -->
+  <div class="section">
+    <div class="section-title">Platform-by-Platform Read</div>
+
+    <!-- TPT -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-icon pi-tpt">T</div>
+        <div>
+          <div class="platform-name">Teachers Pay Teachers</div>
+          <div class="platform-status">Primary revenue channel · 22 products live</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <span class="stat-chip amber">$1.35 earned YTD</span>
+        <span class="stat-chip">93 total views</span>
+        <span class="stat-chip">1 sale</span>
+        <span class="stat-chip green">11 wishlist adds</span>
+        <span class="stat-chip">AAC Data Forms = only product with a sale</span>
+      </div>
+      <table>
+        <tr><th>Product</th><th>Views</th><th>Wishlist</th><th>Sale</th></tr>
+        <tr><td>FREE AT Consideration Checklist</td><td>12</td><td>3</td><td class="tag-amber">Free</td></tr>
+        <tr><td>A Friend for Henry (PB Companion)</td><td>13</td><td>0</td><td class="tag-red">None</td></tr>
+        <tr><td>Ian's Walk (PB Companion)</td><td>7</td><td>1</td><td class="tag-red">None</td></tr>
+        <tr><td>FREE Universal AAC Data Tracker</td><td>8</td><td>2</td><td class="tag-amber">Free</td></tr>
+        <tr><td>Finding Symbols (Free)</td><td>4</td><td>4</td><td class="tag-amber">Free</td></tr>
+        <tr><td>AAC Data Collection Forms</td><td>5</td><td>1</td><td class="tag-green">$1.35 ✓</td></tr>
+        <tr><td>IEP AT Consideration Toolkit</td><td>6</td><td>0</td><td class="tag-red">None</td></tr>
+        <tr><td>Frances Kelsey / Other nonfiction</td><td>1–5 each</td><td>0</td><td class="tag-red">None</td></tr>
+      </table>
+      <p style="font-size:12px; color:#94A3B8; margin-top:10px;">⚠️ A Friend for Henry went live April 5 and immediately became the highest-viewed paid product with 13 views in under a week — all organic, no Pinterest yet.</p>
+    </div>
+
+    <!-- Pinterest -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-icon pi-pin">P</div>
+        <div>
+          <div class="platform-name">Pinterest</div>
+          <div class="platform-status">Launched mid-March · ~26 pins live · daily brief running</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <span class="stat-chip">1,366 impressions (3/17–4/10)</span>
+        <span class="stat-chip amber">5 outbound clicks to TPT</span>
+        <span class="stat-chip">17 saves total</span>
+        <span class="stat-chip teal">275 impressions on Apr 8 (peak)</span>
+      </div>
+      <table>
+        <tr><th>Board</th><th>Impressions</th><th>Clicks</th><th>Outbound</th><th>Saves</th></tr>
+        <tr><td>Adapted Nonfiction & Inclusive Literacy</td><td>339</td><td>17</td><td>1</td><td>9</td></tr>
+        <tr><td>Picture Book AAC Companion</td><td>175</td><td>20</td><td class="tag-green">4 ✓</td><td>8</td></tr>
+        <tr><td>Free Special Education Resources</td><td>152</td><td>1</td><td>0</td><td>0</td></tr>
+        <tr><td>Fiction Reading for Inclusive Classrooms</td><td>107</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>Assistive Technology for Special Education</td><td>80</td><td>2</td><td>0</td><td>0</td></tr>
+        <tr><td>Education Policy and Access</td><td>68</td><td>3</td><td>0</td><td>1</td></tr>
+      </table>
+      <p style="font-size:12px; color:#94A3B8; margin-top:10px;">Picture Book board has 20 pin clicks and 4 outbound clicks in just one week (pins went live Apr 5). Nonfiction board has been up longer but only 1 outbound click. Picture Books are converting better proportionally.</p>
+    </div>
+
+    <!-- Facebook -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-icon pi-fb">f</div>
+        <div>
+          <div class="platform-name">Facebook Page</div>
+          <div class="platform-status">Mar 13–Apr 9 · 28 days</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <span class="stat-chip">1,900 views</span>
+        <span class="stat-chip">1,318 unique viewers</span>
+        <span class="stat-chip amber">99.6% non-followers</span>
+        <span class="stat-chip red">4 total interactions</span>
+        <span class="stat-chip red">1 net follow</span>
+        <span class="stat-chip">51 page visits</span>
+      </div>
+      <p style="font-size:13px; color:#CBD5E1;">1,900 views with only 1 follow and 4 interactions is a classic cold-reach pattern — content is getting shown (likely via groups or organic reach) but is not converting to followers. The page is not yet building a retained audience. The spike visible in the views chart likely corresponds to a post or group drop.</p>
+    </div>
+
+    <!-- Instagram -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-icon pi-ig">IG</div>
+        <div>
+          <div class="platform-name">Instagram</div>
+          <div class="platform-status">Mar 13–Apr 9 · @communicatebydesignaac</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <span class="stat-chip">185 views</span>
+        <span class="stat-chip">49 reach</span>
+        <span class="stat-chip">52% from followers</span>
+        <span class="stat-chip red">1 interaction</span>
+        <span class="stat-chip red">Follows: N/A (data unavailable)</span>
+      </div>
+      <p style="font-size:13px; color:#CBD5E1;">Reach is entirely contained within existing followers (small base). Non-follower reach dropped 52.2% in this period. Instagram is currently a low-priority channel — it's a closed loop speaking to an already-small follower list with minimal external discovery.</p>
+    </div>
+
+    <!-- Substack -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-icon pi-sub">S</div>
+        <div>
+          <div class="platform-name">Substack</div>
+          <div class="platform-status">communicatebydesign.substack.com · 5 posts live</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <span class="stat-chip red">2 subscribers</span>
+        <span class="stat-chip">179 views (90d)</span>
+        <span class="stat-chip">24 views past 7 days</span>
+        <span class="stat-chip red">0 paid subscribers</span>
+        <span class="stat-chip amber">Goal: 200 for paid tier unlock</span>
+      </div>
+      <table>
+        <tr><th>Post</th><th>Pillar</th><th>Status</th></tr>
+        <tr><td>Welcome post</td><td>Brand/intro</td><td class="tag-amber">Live</td></tr>
+        <tr><td>Keiko behind-the-scenes</td><td>🟢 Nonfiction Origin</td><td class="tag-amber">Live</td></tr>
+        <tr><td>"That Statistic Is 33 Years Old"</td><td>🔴 Policy Hot Take</td><td class="tag-amber">Live</td></tr>
+        <tr><td>"AT Consideration Is a Legal Requirement"</td><td>🔴 Policy Hot Take</td><td class="tag-amber">Live · Apr 2</td></tr>
+        <tr><td>"Who Gets to Decide If the Voice Is Real?"</td><td>🔴 Policy Hot Take</td><td class="tag-green">Live · Apr 10</td></tr>
+      </table>
+      <p style="font-size:12px; color:#94A3B8; margin-top:10px;">2 subscribers after 5 posts and ~6 weeks = the FB group drop strategy has not yet been activated consistently. The content quality is there. Distribution is the gap.</p>
+    </div>
+  </div>
+
+  <!-- FUNNEL -->
+  <div class="section">
+    <div class="section-title">Funnel Health: Social → Substack → TPT</div>
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-label" style="color:#00B4D8;">FB Reach</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%; background:#1877F2;"></div></div>
+        <div class="funnel-num">1,900 views</div>
+      </div>
+      <div class="funnel-arrow">↓ ~0.003% conversion to follow</div>
+      <div class="funnel-step">
+        <div class="funnel-label" style="color:#00B4D8;">FB Follows</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:0.5%; background:#1877F2;"></div></div>
+        <div class="funnel-num">1 follow</div>
+      </div>
+      <div class="funnel-arrow">↓ (Substack not yet linked in posts)</div>
+      <div class="funnel-step">
+        <div class="funnel-label" style="color:#FF6719;">Substack Subs</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:0.2%; background:#FF6719;"></div></div>
+        <div class="funnel-num">2 subs</div>
+      </div>
+      <div class="funnel-arrow">↓ (Pinterest = 5 outbound clicks)</div>
+      <div class="funnel-step">
+        <div class="funnel-label" style="color:#e94240;">TPT Views</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:5%; background:#e94240;"></div></div>
+        <div class="funnel-num">93 views</div>
+      </div>
+      <div class="funnel-arrow">↓ 1.08% conversion rate on views</div>
+      <div class="funnel-step">
+        <div class="funnel-label" style="color:#4ade80;">TPT Sales</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:1%; background:#4ade80;"></div></div>
+        <div class="funnel-num">1 sale</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#94A3B8; margin-top:8px;">The funnel is not yet connected. Facebook is getting reach but not linking to Substack or TPT in a consistent, trackable way. Pinterest is the only channel generating outbound clicks to TPT right now — and it only launched 5 days ago.</p>
+  </div>
+
+  <!-- WHAT'S WORKING -->
+  <div class="section">
+    <div class="section-title">What's Working</div>
+
+    <div class="analysis-block signal">
+      <h4>📌 Pinterest is the fastest-moving channel</h4>
+      <p>In 5 days (Apr 5–10), the Picture Book board alone generated 175 impressions, 20 pin clicks, and 4 outbound clicks to TPT. That's 80% of all outbound TPT clicks across all channels in the entire 6-week period. Pinterest is the only channel right now with a clear click-to-TPT path, and it just launched.</p>
+    </div>
+
+    <div class="analysis-block signal">
+      <h4>📚 Picture Book Companions are the surprise leader</h4>
+      <p>A Friend for Henry went live April 5 and immediately pulled 13 TPT views — more than any paid nonfiction unit has received in the full 6 weeks. Ian's Walk got 7 views. These are brand new listings with no Pinterest yet and no promotion. The organic search discovery on these titles is real.</p>
+    </div>
+
+    <div class="analysis-block signal">
+      <h4>❤️ Wishlist rate is healthy</h4>
+      <p>11 wishlist adds on 93 views = an 11.8% wishlist rate. Industry average for a new TPT store is closer to 3–5%. Buyers are interested — they're saving products for later. This is a demand signal that is not yet converting to purchases, likely because the store is too new and untrusted. Reviews are the unlock.</p>
+    </div>
+
+    <div class="analysis-block signal">
+      <h4>✍️ Substack content quality is on-brand and strong</h4>
+      <p>5 posts published in 6 weeks is a solid cadence for launch. All three Policy Hot Take posts align with the flywheel strategy. The content is ready to distribute — the distribution step (dropping links in FB groups) is the missing activation.</p>
+    </div>
+
+    <div class="analysis-block signal">
+      <h4>🔵 Pinterest impressions are accelerating</h4>
+      <p>From 0 impressions in January/February to 275 on April 8 and 271 on April 6. The curve is steep and recent. Pinterest's algorithm rewards consistent fresh pins — the daily brief infrastructure is exactly the right setup to sustain this momentum.</p>
+    </div>
+  </div>
+
+  <!-- GAPS -->
+  <div class="section">
+    <div class="section-title">What Needs Attention</div>
+
+    <div class="analysis-block gap">
+      <h4>🔴 The funnel is broken between Facebook and everything else</h4>
+      <p>1,900 Facebook views, 1 follow, 0 trackable clicks to TPT or Substack. Facebook is reaching people but there's no consistent call-to-action in the posts that routes them anywhere. Every FB post needs a Substack link drop or a direct TPT link — not as an afterthought, as the closing line.</p>
+    </div>
+
+    <div class="analysis-block gap">
+      <h4>🔴 Substack distribution has not been activated</h4>
+      <p>2 subscribers after 5 posts and 179 views is a content-reaches-nobody problem, not a content-quality problem. The FB group strategy outlined in the growth workflow has not been consistently executed. The posts exist. They need to be dropped into the 7.5M-viewer groups where the questions live. This is the single highest-leverage action available right now.</p>
+    </div>
+
+    <div class="analysis-block gap">
+      <h4>🔴 Zero reviews on TPT</h4>
+      <p>1 sale, 0 reviews. A new store with no reviews is asking buyers to take a risk. The wishlist rate proves interest — reviews are what convert wishlists into sales. The buyer who purchased the AAC Data Collection Forms needs a follow-up request for a review. That one review matters more than any other marketing action right now.</p>
+    </div>
+
+    <div class="analysis-block gap">
+      <h4>🟡 Nonfiction units are not finding buyers yet</h4>
+      <p>Six nonfiction units have been live for up to 6 weeks with 1–5 views each and zero sales. This is a discovery problem, not a product problem. They don't have Pinterest pins yet (or very few). The Substack posts that exist (Keiko, the policy posts) don't link to the products. The seasonal content hooks (Women's History Month for Radium Girls/Frances Kelsey in March, Native American history for Zitkala-Ša) passed without a corresponding push.</p>
+    </div>
+
+    <div class="analysis-block gap">
+      <h4>🟡 Instagram is a closed loop</h4>
+      <p>185 views, 52% from existing followers, 1 interaction. Instagram is not currently a discovery channel — it's a broadcast to an existing small audience. Without a carousel carousel strategy (each post ending with "link in bio → Substack"), it's not moving anyone down the funnel. Low priority for now; focus effort on Pinterest and Facebook where the reach is real.</p>
+    </div>
+  </div>
+
+  <!-- MOMENTUM SIGNALS -->
+  <div class="section">
+    <div class="section-title">Momentum Signals: What to Double Down on in Weeks 7–12</div>
+
+    <div class="analysis-block watch">
+      <h4>🃏 Picture Book Companions have organic discovery momentum</h4>
+      <p>A Friend for Henry pulling 13 views in under a week with no promotion is a signal. These titles have almost zero TPT competition (verified in pipeline research). The Pinterest board is already the fastest-converting board. Add the remaining 4 PB titles to Pinterest immediately, and test whether "AAC companion" + book title searches are driving the organic views.</p>
+    </div>
+
+    <div class="analysis-block watch">
+      <h4>📌 Pinterest algorithm is just warming up</h4>
+      <p>Pinterest content compounds over time — a pin published today keeps gaining impressions for months. The infrastructure (daily brief, Airtable tracking, board structure) is correct. The 16 products still waiting for a first pin are a backlog with compounding return. At the current pace of 3 pins per brief, that backlog clears in ~5 weeks — every pin added is a long-tail asset.</p>
+    </div>
+
+    <div class="analysis-block watch">
+      <h4>📧 One Substack post dropped in the right FB group = step change</h4>
+      <p>The FB group audience (7.5M+ viewers) dwarfs every other channel combined. The content is written. The strategy is documented. "Who Gets to Decide If the Voice Is Real?" (published today, Apr 10) is exactly the kind of policy hot take that triggers engagement in SPED Facebook groups. Drop it today. Track what happens to the view count.</p>
+    </div>
+
+    <div class="analysis-block watch">
+      <h4>🏆 Wishlist-to-sale conversion becomes the Week 7–12 KPI</h4>
+      <p>11 wishlist adds on a brand-new store is a strong signal. Conversion to purchase is gated by trust (no reviews) and possibly by the Spring Sale pricing. When the sale ends, monitor whether wishlist converts. The first 3 reviews — from any product — will change the store's conversion rate measurably.</p>
+    </div>
+
+    <div class="analysis-block watch">
+      <h4>📅 May 2026 UFLI launch is the next major inflection point</h4>
+      <p>36 products launching in May with a free entry point (Lessons 1–5) and a $20 paid product is the first time the catalog will have genuine volume. UFLI will reach a broader SoR/ELA audience beyond the AT/AAC niche. The Substack Pillar 3 posts (Instructional Practice / UFLI) should begin in April so there's an email audience ready when the products drop.</p>
+    </div>
+  </div>
+
+  <!-- WEEKS 7–12 PRIORITIES -->
+  <div class="section">
+    <div class="section-title">Recommended Priority Actions — Weeks 7–12</div>
+
+    <div class="action-row">
+      <h4>1. Activate the Substack FB group drop — today</h4>
+      <p>Post #5 ("Who Gets to Decide If the Voice Is Real?") is live. Drop the link in the highest-traffic SPED Facebook group where facilitated communication or AAC skepticism has come up. Use the template: <em>"Someone posted about this last week — I wrote the full answer here: [link]. Short version: [one sentence]."</em></p>
+      <div class="why">Why: This is the single highest-leverage action available. No cost, no build time — content is ready.</div>
+    </div>
+
+    <div class="action-row">
+      <h4>2. Email your one buyer and ask for a review</h4>
+      <p>The buyer of AAC Data Collection Forms ($1.35 sale) has had the product for weeks. A personal email asking for a review — even one sentence — is worth more than any other marketing spend right now. One honest review changes the trust signal for every subsequent visitor.</p>
+      <div class="why">Why: Zero reviews is the #1 conversion blocker on TPT for a new store.</div>
+    </div>
+
+    <div class="action-row">
+      <h4>3. Pin the 5 remaining PB Companions immediately</h4>
+      <p>A Friend for Henry's organic view momentum proves demand. The other 4 titles (Ian's Walk, I Talk Like a River, Emmanuel's Dream, My Friend Isabelle) need Pinterest pins this week. Picture Book board is already your best-converting board at 4 outbound clicks in 5 days.</p>
+      <div class="why">Why: Pinterest compounds. A pin published now keeps generating impressions through summer.</div>
+    </div>
+
+    <div class="action-row">
+      <h4>4. Write and publish one Teach It Tuesday post (Pillar 2) before UFLI launch</h4>
+      <p>The policy posts have been strong but all 3 published Policy Hot Takes means the Substack is skewing heavy on advocacy. A practical "here's what to do Monday" post — the Auditory Confirmation Loop is the perfect first one — will attract a different segment of the audience (classroom teachers, paras) who are less policy-oriented.</p>
+      <div class="why">Why: Diversifying pillar types broadens audience and begins the UFLI pipeline seeding.</div>
+    </div>
+
+    <div class="action-row">
+      <h4>5. Set a seasonal hook for May UFLI launch</h4>
+      <p>Asian Pacific American Heritage Month is May. Fred Korematsu nonfiction unit is Airtable pipeline Item 7 (target: May). A Substack post about Korematsu + AAPI + literacy access could drive traffic to both the existing Keiko unit (AAPI representation) and prime the audience for the Korematsu unit launch in May. Two products, one post.</p>
+      <div class="why">Why: Seasonal timing is the highest-ROI content strategy for TPT. Build the post now.</div>
+    </div>
+  </div>
+
+  <!-- BENCHMARK CONTEXT -->
+  <div class="section">
+    <div class="section-title">Benchmark Context</div>
+    <div class="platform" style="background:#1B1F3B; border: 1px solid #252A4A;">
+      <p style="font-size:13px; color:#CBD5E1; line-height:1.8;">
+        A new TPT store in a niche market (AT/AAC/SPED) typically sees <strong style="color:#ffffff;">$0 revenue for the first 30–60 days</strong> and earns its first sale through either organic search discovery or a direct referral. The single sale in week 6 — with no social referral confirmed — is likely organic TPT search. That's a positive signal for SEO.
+        <br><br>
+        The business strategy VC scorecard pegged a base case of <strong style="color:#ffffff;">$5,350/month net</strong> at scale. Six weeks in with 22 products, $1.35 earned is not behind that trajectory — the trajectory assumes product volume, reviews, and distribution all operational simultaneously. None of those three are fully operational yet.
+        <br><br>
+        The <strong style="color:#4ade80;">strongest leading indicator</strong> is the wishlist rate (11.8%) combined with Pinterest's acceleration curve. The store is getting discovered — it just hasn't yet built the trust layer that converts discovery into purchase.
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Communicate by Design · Where AT Meets Practice · communicatebydesign.substack.com · teacherspayteachers.com/store/communicate-by-design<br>
+    Data sources: TPT Product Insights CSV (Jan 1–Apr 10, 2026 + Apr 5–10, 2026) · Pinterest Analytics CSV (Jan 10–Apr 10 + Apr 3–10) · Facebook Performance (Mar 13–Apr 9) · Instagram Performance (Mar 13–Apr 9) · Substack Dashboard (90d + 7d views)
+  </div>
+
+</div>
+</body>
+</html>

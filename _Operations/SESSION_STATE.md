@@ -49,6 +49,10 @@ Diagnose:
 
 ---
 
+## Strategic Priorities (Locked Apr 10 2026)
+1. **TPT Product Lines** — primary revenue driver. All product builds, listings, and launches are #1.
+2. **Substack** — #2. Goal: **200 followers to unlock paid monthly subscriber feature.** Every post + FB drop must actively drive toward this number. Check follower count at start of each Substack session.
+
 ## Key Decisions Made (Do Not Re-Litigate)
 - UFLI pricing LOCKED: FREE (Lessons 1–5) / $20 (Lessons 6–34). Old $1/lesson pricing RETIRED.
 - UFLI covers: ✓ DONE in Canva. Pinterest/reel: ✓ Linked. Blocker is content consistency, not covers.
@@ -134,6 +138,14 @@ _Operations/
 - **Airtable errors:** Work Items filter failed (unknown column name — pulled all and filtered locally); Vocabulary fieldId required table schema lookup — resolved
 
 ---
+
+## What Changed This Session (2026-04-10 — Substack Post #5 Published)
+
+- **Substack Post #5 LIVE** — "Who Gets to Decide If the Voice Is Real?" published April 10, 2026. URL: https://communicatebydesign.substack.com/p/who-gets-to-decide-if-the-voice-is. Pillar: 🔴 Policy & Advocacy. Topic: facilitated spelling skepticism, presuming competence of student AND partner, ASL interpreter analogy, partner training standards, evidence double standard for low-tech vs. partner-supported AAC. Personal: Jill's daughter (Tobii eye gaze, 13 yrs speech therapy) questioned by adults AND peers. *Out of My Mind* / Whiz Kids scene as anchor. Draft saved: `Substack/Substack_Draft_WhoGetsToDecide_Voice.md`.
+- **Airtable Work Item created** — Record `recOmsKtrwrGpNqq9` (Status: Done, Type: Content, Priority: High, Category: Operations).
+- **CLAUDE.md updated** — Substack pipeline now shows 5 live posts. Jennifer Keelan age corrected to 9 (was 8).
+- **TASKS.md updated** — Post #5 marked done. Two follow-up tasks added: FB group drop + Canva photo overlay quote.
+- **⚠️ Pending Jill actions (from this session):** Drop post link in 2–3 SPED Facebook groups · Make Canva photo overlay quote (navy bg, "The voice is there. The question is whether we've decided to hear it.").
 
 ## What Changed This Session (2026-04-08 — Nonfiction Symbol Pages + AAC Section Fixes)
 

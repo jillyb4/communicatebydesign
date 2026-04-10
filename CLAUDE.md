@@ -247,9 +247,11 @@ Monitor special education Facebook groups (7.5M+ viewers) for real practitioner 
 | 🟢 **Nonfiction** | Green | Behind-the-scenes essays tied to seasonal unit launches |
 | 🟡 **Real Questions, Real Answers** | Yellow | FB group questions answered as posts |
 
-**Live posts:** Welcome (March 2026) · Keiko behind-the-scenes (March 15) · "That Statistic Is 33 Years Old" (March 25) ✅
-**Next up:** 🔴 "AT Consideration Is a Legal Requirement. So Why Does Every IEP Team Skip It?" — Late Mar
-**July (ADA Anniversary):** 🔴 "The Capitol Crawl Was a Child's Act of Resistance" — Jennifer Keelan was 8. Ties to Capitol Crawl unit (6–10) + All the Way to the Top companion (K–3). Launch hook for both products.
+**Live posts:** Welcome (March 2026) · Keiko behind-the-scenes (March 15) · "That Statistic Is 33 Years Old" (March 25) · "AT Consideration Is a Legal Requirement…" (April 2) · "Who Gets to Decide If the Voice Is Real?" (April 10) ✅
+- Post #5 URL: https://communicatebydesign.substack.com/p/who-gets-to-decide-if-the-voice-is
+- Pillar: 🔴 Policy & Advocacy. Topic: facilitated spelling skepticism, presuming competence of student AND partner, ASL interpreter analogy, partner training standards needed. Personal: Jill's daughter (Tobii eye gaze, 13 yrs speech therapy) questioned by adults AND peers. *Out of My Mind* Whiz Kids scene. Draft saved: `Substack/Substack_Draft_WhoGetsToDecide_Voice.md`
+**July (ADA Anniversary):** 🔴 "The Capitol Crawl Was a Child's Act of Resistance" — Jennifer Keelan was 9. Ties to Capitol Crawl unit (6–10) + All the Way to the Top companion (K–3). Launch hook for both products.
+**Substack priority:** #2 after TPT product lines. **Goal: 200 followers to unlock paid monthly subscriber feature.** Every post and FB group drop should drive toward this threshold. Current count: unknown — check Substack dashboard.
 → Full pipeline + growth workflow: `Substack/CbD_Substack_Growth_Workflow.md`
 
 ---
