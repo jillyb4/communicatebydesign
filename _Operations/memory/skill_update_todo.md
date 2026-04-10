@@ -1,7 +1,20 @@
 # CbD Skill Update To-Do
-**Last updated:** 2026-04-05
+**Last updated:** 2026-04-10
+**Audit completed:** 2026-04-10 — full gap analysis vs. current state
 **Location of skills on Mac:** `~/.claude/skills/communicate-by-design/`
 **Note:** Skill files are read-only in Cowork sessions — all edits must be made directly on Mac in Finder/text editor, OR package a new .skill file and reinstall.
+
+---
+
+## Sync Audit Summary (Apr 10 2026)
+| File | Status |
+|------|--------|
+| `SKILL.md` frontmatter | ✅ Current — triggers already include Poetry + PB Companions |
+| `references/ufli.md` | ✅ Current — updated Apr 5 |
+| `references/products.md` | ⚠️ STALE — see updates below |
+| `references/fiction.md` | ⚠️ STALE — Wonder is LIVE, color still TBD |
+| `references/substack.md` | ⚠️ STALE — 4 posts listed, now 5 live + paid tier strategy missing |
+| `references/picture-book-companions.md` | ⚠️ STALE — 5 titles now built (not just 1), 3-file architecture, LibreOffice rule |
 
 ---
 

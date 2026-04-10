@@ -1,18 +1,31 @@
 # CbD Session State
-**Last updated:** 2026-04-10
+**Last updated:** 2026-04-10 (Session — Skill Update + Business Plan)
 **Read this file FIRST at every session start — before doing any work.**
 
 ---
 
+## What Changed This Session (2026-04-10 — Skill Update)
+
+- **Business Plan created:** `CbD_Business_Plan_April2026.docx` — 8 sections, full financial model (Low $2,880 / Base $9,000 / High $20,200 net), 6-week launch metrics captured, 90-day roadmap.
+- **Skill file updated:** Rebuilt `communicate-by-design-updated.skill` (60 KB). Four stale reference files corrected:
+  - `fiction.md` — Wonder LIVE ($6, TPT 15945146), pricing locked, 6-unit set documented
+  - `products.md` — Wonder + Poetry Unit 1 LIVE, Fiction + Poetry pricing tables added, Substack 5 posts with URLs, paid tier strategy
+  - `substack.md` — Posts 4+5 LIVE, Post #6 pipeline, paid tier ($8/mo or $80/yr at 200 subscribers)
+  - `picture-book-companions.md` — 1 LIVE + 5 built, 3-file architecture, LibreOffice PDF rule, all 6 titles with IDs
+- **Skill file saved to workspace:** `Communicate by Design/communicate-by-design-updated.skill` — double-click to install
+- **SESSION_STATE.md:** Stale session ID in iCloud mount check replaced with `[current-session-id]` placeholder
+
+---
+
 ## ⛔ iCloud Mount Check — MUST PASS BEFORE ANY WORK
-Run: `ls "/sessions/relaxed-stoic-goodall/mnt/Communicate by Design/"`
+Run: `ls "/sessions/[current-session-id]/mnt/Communicate by Design/"`
 
 **If it fails → FULL STOP. Do not proceed. Do not work from memory. Do not answer product questions.**
 
 Tell Jill: "The Communicate by Design folder is not mounted. We need to fix this before starting."
 
 Diagnose:
-- Run `ls /sessions/relaxed-stoic-goodall/mnt/` — what is mounted?
+- Run `ls /sessions/[current-session-id]/mnt/` — what is mounted?
 - If folder is missing: Jill needs to reopen Cowork and re-select the Communicate by Design folder
 - If folder is there but empty/stale: iCloud may not have synced — check System Settings → Apple ID → iCloud → wait for sync, then retry
 - Do NOT start work until this check passes and SESSION_STATE.md is readable
@@ -140,6 +153,13 @@ _Operations/
 - **Airtable errors:** Work Items filter failed (unknown column name — pulled all and filtered locally); Vocabulary fieldId required table schema lookup — resolved
 
 ---
+
+## What Changed This Session (2026-04-10 — Business Plan Synthesis)
+
+- **CbD_Business_Plan_April2026.docx CREATED** — Unified business plan synthesizing 5 source documents: Product Update & Launch Strategy (Mar 24) · Business Model Overview (Apr 3) · Revenue Analysis Prompt · 6-Week Launch Analysis HTML (Apr 10) · Business Budget xlsx. Saved to root of Communicate by Design folder. 8 sections: Who We Are · Product Lines · Instructional Frameworks · Distribution & Marketing · Launch Performance (real metrics) · Financial Model · 90-Day Roadmap · Partnerships. Styled in full CbD brand (Navy/Teal/Amber). This is now the authoritative single business plan document.
+- **Financial model captured** — Low/Base/High 12-month projection: Low $2,880 / Base $9,000 / High $20,200 net. Revenue scorecard included (7 dimensions). Key assumption: base case requires FB group strategy activated + UFLI launch executed + 2–3 TPT reviews earned by July.
+- **6-Week launch metrics locked** — As of Apr 10: $1.35 YTD revenue · 23 products live · 93 TPT views · 11 wishlist adds (11.8% rate) · 1,366 Pinterest impressions · 5 outbound clicks · 1,900 FB views · 2 Substack subscribers. Pinterest is fastest-moving channel (4 outbound clicks from Picture Book board in 5 days). Zero TPT reviews is #1 conversion blocker.
+- **Key action confirmed** — Drop Post #5 FB group link TODAY. Email one buyer for review TODAY. These two actions are highest ROI with zero build time.
 
 ## What Changed This Session (2026-04-10 — Dashboard Audit + Skills Dashboard)
 
