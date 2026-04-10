@@ -1,5 +1,5 @@
 # CbD Session State
-**Last updated:** 2026-04-03
+**Last updated:** 2026-04-10
 **Read this file FIRST at every session start — before doing any work.**
 
 ---
@@ -31,13 +31,14 @@ Diagnose:
 | Universal AAC Data Tracker | LIVE FREE | FREE | — |
 | AT & AAC Toolkit Bundle | LIVE | $10.00 | — |
 | Keiko: A Whale's Journey | LIVE | $9.95 | v2 cover uploaded ✓ Apr 3 |
-| All the Way to the Top Companion | LIVE | $5.00 | Listed Apr 4 2026 · TPT ID: 15979429 · ⚠️ Run sync_vocab_to_airtable.js · ⚠️ Add Pinterest pin |
+| All the Way to the Top Companion | LIVE | $5.00 | Listed Apr 4 2026 · TPT ID: 15979429 · Vocab synced ✓ |
 | Radium Girls | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
 | Zitkala-Ša | LIVE | $9.95 | v2 cover uploaded ✓ Apr 3 |
 | 504 Sit-In | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
 | Frances Kelsey | LIVE | $11.95 | v2 cover uploaded ✓ Apr 3 |
 | Capitol Crawl 1990 | LIVE | $9.95 | v2 cover uploaded ✓ Apr 3 |
 | Wonder — Fiction Anchor Text Unit | LIVE | $6.00 | LIVE Apr 2026 · TPT ID: 15945146 · Price LOCKED $6 |
+| Poetry Unit 1 — What the Voice Carries | LIVE | $9.95 | LIVE Apr 10 2026 · TPT ID: 16037413 · ⚠️ Pinterest 3 pins + IG + FB pending |
 | Nonfiction Bundle — Keiko + Radium Girls | LIVE | $18.00 | TPT ID: 15922531 · Needs Pinterest pin |
 
 ## Built But NOT Yet Listed on TPT
@@ -45,7 +46,7 @@ Diagnose:
 |---------|--------|---------|-----------|
 | UFLI AAC Companion — Lessons 1–5 FREE | Content blocker | Formatting/consistency issues across lesson packets | Resolve consistency → list FREE |
 | UFLI AAC Companion — Lessons 6–34 + Guide $20 | Content blocker | Same consistency issue | Resolve consistency → list $20 |
-| Poetry Unit 1 — What the Voice Carries | QC PASSED ✓ | Jill: re-export PDF from Word | PDF → GitHub → Canva cover export → TPT listing |
+
 
 ---
 
@@ -81,7 +82,8 @@ _Operations/
 │   ├── CbD_Launch_Dashboard.html
 │   ├── CbD_Task_Dashboard.html
 │   ├── CbD_Workflow_Visual.html
-│   └── CbD_Vocabulary_Dashboard.html  ← NEW Apr 3
+│   ├── CbD_Vocabulary_Dashboard.html  ← NEW Apr 3
+│   └── CbD_Skills_Dashboard.html       ← NEW Apr 10 (Skills & grade band coverage)
 ├── Symbols/                      ← AUTHORITATIVE — never duplicate
 │   ├── symbol_library/           ← 400 symbols
 │   └── symbol_cache/             ← 741 ARASAAC PNGs
@@ -138,6 +140,17 @@ _Operations/
 - **Airtable errors:** Work Items filter failed (unknown column name — pulled all and filtered locally); Vocabulary fieldId required table schema lookup — resolved
 
 ---
+
+## What Changed This Session (2026-04-10 — Dashboard Audit + Skills Dashboard)
+
+- **All 5 dashboards fully audited and updated** — Operations, Tasks, Workflow, Vocabulary, Skills all current as of Apr 10 2026.
+- **Operations Dashboard:** KPI corrected to 23 products live. All 6 Picture Book Companions now listed in product table (was only showing 1). KPI breakdown updated. Keiko v2 cover warning removed. Notes column is now forward-looking only.
+- **Skills Dashboard (NEW `CbD_Skills_Dashboard.html`):** Poetry Reading Units section converted from card layout to proper grade-band table (K–10 columns, ✓ marks per grade). Picture Book Companions section added entirely (section header, grade-band table K–3, 6 titles, KPI card, Standards Crosswalk column). 6th KPI card added.
+- **Picture Book Companions badge corrected:** "1 live · 5 built" → "6 live" across Skills Dashboard and Operations Dashboard.
+- **Vocabulary count confirmed 641** — all sync warnings removed from all dashboards. Airtable Work Item created.
+- **CLAUDE.md updated:** TPT store 23 products, Poetry row rewritten to LIVE, Wonder row updated to LIVE, vocab table updated to 641 synced, Skills Dashboard added to folder structure.
+- **TASKS.md updated:** Vocab sync marked done, Skills Dashboard completion logged, new task added to update `cbd-dashboard-refresh` scheduled task prompt.
+- **⚠️ Pending Jill actions from this session:** Pinterest 3 pins + IG carousel + FB post for Poetry Unit 1 · FB group drop for Substack Post #5 · Update `cbd-dashboard-refresh` task prompt (knows about Poetry LIVE + 641 vocab + Skills Dashboard).
 
 ## What Changed This Session (2026-04-10 — Substack Post #5 Published)
 

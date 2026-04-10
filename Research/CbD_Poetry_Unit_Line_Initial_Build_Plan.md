@@ -573,4 +573,26 @@ The following tasks gate everything else. None of them are build tasks — they 
 When those are done, build begins with the research foundation → vocabulary list → NFMA activity design → main unit docx → student packet → CAP → symbol cards.
 
 ---
-*This document reflects research conducted 2026-03-30. All decisions are provisional until Jill confirms. Build does NOT begin from this document alone.*
+
+## Part 12: External Resources — Poetry Line (Updated Apr 10, 2026)
+
+### Primary Resource for Poem Sourcing
+
+**Poetry Foundation** — https://www.poetryfoundation.org/
+- Full text of contemporary and classic poems, free to browse
+- Filter by theme, form, grade level, or poet
+- Poet biographies and teaching resources
+- **Check here first before sourcing any poem for a CbD unit** — confirms full text, copyright status, and common teaching context
+- Particularly useful for: public domain verification, disability-affirming contemporary poets, poems with strong figurative language or imagery content
+
+### Peer Publications to Monitor
+
+**Science of Reading Classroom** (Substack, Bob Sparks)
+- Post: "Demystifying Poetry: A Routine for ANY Grade Level" — Apr 8, 2026
+- Describes a full TPCASTT-based classroom routine: read-aloud → prosody practice → paraphrase → figurative language annotation → theme statement → literary analysis paragraph
+- **Why it matters to CbD:** Every step in this routine assumes oral or written output. This post is the direct reference point for the NFMA Substack argument — CbD's position is *extension*, not critique. Bobsparks is a respected SOR voice; mentioning or restacking their work positions CbD as a collaborative peer, not an outlier.
+- CbD's argument in one line: TPCASTT's architecture is organized around production; NFMA's architecture is organized around observation and inquiry. That structural difference is the reason one framework leaves AAC users behind.
+- **Substack post drafted:** "When the Framework Demands a Confession" — 🔵 Instructional Practice, ~820 words. Ready for Jill review. Apr 10, 2026.
+
+---
+*This document reflects research conducted 2026-03-30, updated Apr 10, 2026. All decisions are provisional until Jill confirms. Build does NOT begin from this document alone.*

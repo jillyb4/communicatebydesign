@@ -73,7 +73,20 @@ Each nonfiction unit's `[Unit]_TPT/` folder contains **exactly 4 files**. No mor
 | `[Unit]_Welcome_to_the_Product.pdf` | `build_welcome_nonfiction.py` | 3 intro pages + Teacher AK pages from DRAFT.md |
 | `[Unit]_Communication_Access_Packet.pdf` | `build_all_units.py` (CAP build only) | Symbol cards + Priority Vocab + Session Tracker |
 
-**Critical build order:** Run `build_*.js` → export COMPLETE.docx to PDF in Word → run CAP build → run `build_welcome_nonfiction.py` LAST. The welcome build must always run after the CAP build because `build_all_units.py`'s `assemble_tpt_folder()` function is outdated and will overwrite welcome PDFs if triggered.
+**Critical build order:** Run `build_*.js` → export COMPLETE.docx to PDF (see below) → run CAP build → run `build_welcome_nonfiction.py` LAST.
+
+**Automated PDF export (replaces manual Word → Save As — locked Apr 10 2026):**
+Use `_Operations/Build/export_docx_to_pdf.py` — calls the actual Word engine via docx2pdf/osascript, identical output to File → Save As → PDF. NEVER LibreOffice for nonfiction/poetry/fiction units.
+```bash
+# Single file:
+python3 _Operations/Build/export_docx_to_pdf.py "Products/Poetry Reading Units/Unit 1 - What the Voice Carries/WhatTheVoiceCarries_COMPLETE.docx"
+
+# Entire product line:
+python3 _Operations/Build/export_docx_to_pdf.py --product-line poetry
+python3 _Operations/Build/export_docx_to_pdf.py --product-line nonfiction
+python3 _Operations/Build/export_docx_to_pdf.py --product-line fiction
+```
+Requires: `pip install docx2pdf --break-system-packages` + Microsoft Word for Mac installed. The welcome build must always run after the CAP build because `build_all_units.py`'s `assemble_tpt_folder()` function is outdated and will overwrite welcome PDFs if triggered.
 
 **NEVER call `assemble_tpt_folder()` from `build_all_units.py`.** That function is outdated: it copies COMPLETE.docx to the wrong location (SameFileError when COMPLETE.docx is already in the TPT folder), calls the old `build_welcome_pdf()` that produces only 2 pages, and produces the wrong file set. Call only `build_comm_access_packet()` directly.
 

@@ -242,6 +242,30 @@ Research anchor: Section 1.2 from AAC Phonics Research doc (Barker, Saunders & B
 
 ---
 
+## Subscription Tiers — Content Plan (Locked Apr 10, 2026)
+
+**Threshold to activate paid tier: 200 free subscribers.**
+Current strategy: every post + every FB group drop drives toward this number. Do not activate paid tier before reaching 200.
+
+### Free Tier (All Subscribers)
+All 5-pillar posts — public, no paywall. Every post Jill publishes is free to read. Free is the growth engine; paid is the retention layer.
+
+### Paid Tier (After 200 Subscribers)
+Suggested price: **$8/month or $80/year**
+
+Paid subscribers get three things free subscribers don't:
+
+**1. Monthly Resource Drop**
+One classroom-ready tool or template per month. Not a full TPT product — a single-use, immediately actionable resource. Examples: a partner script card, a NFMA annotation template, a one-page AAC vocabulary reference for a specific unit, an IEP goal stem bank for a skill type. These are things that take 10 minutes to use on Monday morning. Build these from existing product material — they extend the value of what's already built without creating net-new work.
+
+**2. Early TPT Access**
+Paid subscribers get a 48-hour preview link before any new TPT product goes live. They see it first. This creates a loyalty signal and a pre-launch review window — early buyers become early reviewers, which drives TPT ranking.
+
+**3. Monthly Q&A Thread**
+One Substack thread per month where Jill answers 5 subscriber questions. Questions submitted via comments or email. This is the highest-value offer — direct access to Jill's expertise — and it costs nothing to produce beyond 30–45 minutes of focused writing once a month.
+
+---
+
 ## The Big Picture
 
 **The flywheel:**
@@ -253,6 +277,20 @@ Real FB question → 700-word Substack post → Link dropped in FB group thread 
 
 ---
 
+---
+
+## External Resources & Peer Publications (Added Apr 10, 2026)
+
+### For Poetry Content
+
+**Poetry Foundation** — https://www.poetryfoundation.org/
+Full text of contemporary and classic poems. Use for sourcing poem quotes, checking copyright, and finding poems to reference in Substack posts about poetry instruction. Every poem featured in a CbD post should be verified here first — for accurate text and copyright status.
+
+**Science of Reading Classroom** (Substack — Bob Sparks)
+Well-respected SOR practitioner publication. Post "Demystifying Poetry: A Routine for ANY Grade Level" (Apr 8, 2026) describes a full TPCASTT-based classroom routine. This post is the reference point for the CbD Substack post "When the Framework Demands a Confession" — which argues that TPCASTT's output-dependent architecture is why AAC users need a structurally different framework (NFMA). CbD's relationship to this publication is collegial: extension and peer dialogue, not critique. Restacking their posts or mentioning them by name is appropriate and may drive reciprocal visibility.
+
+---
+
 *Communicate by Design — Where AT Meets Practice*
 *communicatebydesign.substack.com*
-*Last updated: March 25, 2026*
+*Last updated: Apr 10, 2026*

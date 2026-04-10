@@ -112,6 +112,7 @@ body { background: #1B1F3B; font-family: Arial, Helvetica, sans-serif; min-heigh
     <a class="cbd-nav-tab active" href="CbD_Task_Dashboard.html">✅ Tasks</a>
     <a class="cbd-nav-tab" href="CbD_Workflow_Visual.html">🔧 Workflow</a>
     <a class="cbd-nav-tab" href="CbD_Vocabulary_Dashboard.html">📖 Vocabulary</a>
+    <a class="cbd-nav-tab" href="CbD_Skills_Dashboard.html">🎓 Skills</a>
   </div>
   <div class="cbd-nav-divider"></div>
   <div class="cbd-nav-ext">
@@ -190,13 +191,14 @@ const TASKS = [
   { id:38, col:"done",    cat:"Operations",   priority:"medium", wstage:5, deadline:null,       title:"Picture Book Companion color locked — Dusty Rose-Coral #D4614E", detail:"✅ Locked Apr 3 2026" },
 
   // ── THIS WEEK ─────────────────────────────────────────────────────────
-  { id:3,  col:"now",     cat:"Poetry",       priority:"high",   wstage:3, deadline:"Apr 7",    title:"Poetry Unit 1 — Word export → PDF + GitHub push + TPT listing", detail:"QC passed Apr 3. Jill: File → Save As PDF from Word → run build_wonder_assembly.py → GitHub Desktop → Canva cover export → TPT listing" },
+  { id:3,  col:"done",    cat:"Poetry",       priority:"high",   wstage:5, deadline:"Apr 10",   title:"Poetry Unit 1 — LIVE on TPT",                   detail:"✅ LIVE Apr 10. TPT ID: 16037413. $9.95. Tailwind distribution package included. Post #6 scheduled Apr 14." },
   { id:4,  col:"now",     cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 5",    title:"Autism Acceptance Month tags — AT/AAC products",  detail:"OVERDUE Apr 1. Add seasonal tags to all AT/AAC IEP Team listings on TPT" },
   { id:5,  col:"now",     cat:"Pinterest",    priority:"high",   wstage:1, deadline:"Apr 5",    title:"Canva pins: AT Toolkit + Comm Partner Guide",      detail:"OVERDUE Apr 3. Autism Acceptance Month · both AT/AAC products · 2 pins" },
-  { id:6,  col:"now",     cat:"TPT Store",    priority:"medium", wstage:0, deadline:"Apr 7",    title:"Keiko v2 cover — upload to TPT",                  detail:"Cover ready in Brand Assets/Nonfiction Lesson/TPT Image Cover Pending/" },
-  { id:39, col:"now",     cat:"Substack",     priority:"high",   wstage:0, deadline:"Apr 7",    title:"Tools I Wish Someone Had Handed Me (Substack #5)", detail:"AT/AAC Family pillar · Draft personal narrative · Due Apr 7" },
-  { id:40, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 10",   title:"Pinterest: AAC Resources for Families board — 10+ pins", detail:"Manual session — search + repin to AAC Resources for Families board" },
-  { id:41, col:"now",     cat:"Substack",     priority:"high",   wstage:0, deadline:"Apr 10",   title:"Substack: My Student Has an AAC Device — Why Isn't Anyone Using It?", detail:"Draft + drop link in SPED FB groups using comment template. Due Apr 10" },
+  { id:6,  col:"done",    cat:"Canva Covers", priority:"medium", wstage:5, deadline:null,       title:"Keiko — both covers uploaded to TPT",              detail:"✅ v1 + v2 covers both live on TPT" },
+  { id:39, col:"done",    cat:"Substack",     priority:"high",   wstage:4, deadline:"Apr 10",   title:"Substack #5 — Who Gets to Decide If the Voice Is Real?", detail:"✅ Published Apr 10. Policy & Advocacy pillar. FB group drop pending today." },
+  { id:40, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 15",   title:"Pinterest: 3 pins for Poetry Unit 1 + IG carousel + FB post", detail:"Per Tailwind distribution package for What the Voice Carries. Canva pin design ID: DAHFebI7Z2k." },
+  { id:41, col:"now",     cat:"Substack",     priority:"high",   wstage:0, deadline:"Apr 10",   title:"FB group drop — Post #5 'Who Gets to Decide If the Voice Is Real?'", detail:"Drop link in SPED Facebook groups today. Comment template: 'I actually wrote about this — [link]. The short version: [one sentence].'" },
+  { id:61, col:"now",     cat:"Substack",     priority:"high",   wstage:1, deadline:"Apr 14",   title:"Substack #6 — Auditory Confirmation Loop (scheduled)", detail:"Scheduled task cbd-substack-auditory-confirmation-loop fires 9AM Apr 14. Draft saved. Review before send." },
 
   // ── UP NEXT ───────────────────────────────────────────────────────────
   { id:7,  col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,       title:"Re-upload nonfiction zips — 6 units (Session 16 content)", detail:"All 6 units: updated Communication Access, partner modes, access verb language" },
@@ -212,7 +214,7 @@ const TASKS = [
   { id:49, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:null,       title:"Ian's Walk — Canva cover + TPT listing package",  detail:"Bulk CSV row ready. Jill places 5 images manually in Canva bulk template." },
   { id:50, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:null,       title:"Emmanuel's Dream — Canva cover + TPT listing package", detail:"Bulk CSV row ready. Jill places 5 images manually in Canva bulk template." },
   { id:51, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:null,       title:"My Friend Isabelle — Canva cover + TPT listing package", detail:"Bulk CSV row ready. Jill places 5 images manually in Canva bulk template." },
-  { id:52, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:null,       title:"sync_vocab_to_airtable.js — run now (All the Way to the Top is LIVE)", detail:"Syncs PB Companion vocab (~112 words, 6 titles) + Poetry Unit 1 (~28 words) to Airtable Vocabulary table → total ~641" },
+  { id:52, col:"done",    cat:"Operations",   priority:"medium", wstage:5, deadline:null,       title:"sync_vocab_to_airtable.js — COMPLETE (641 words synced)", detail:"✅ PB Companions 112 words + Poetry Unit 1 28 words synced Apr 10. Total: 641 words in Airtable Vocabulary table." },
   { id:53, col:"queue",   cat:"Operations",   priority:"high",   wstage:0, deadline:null,       title:"Upload CbD logo as Pinterest profile photo",      detail:"Log into Pinterest → Settings → edit profile photo" },
   { id:54, col:"queue",   cat:"Pinterest",    priority:"medium", wstage:0, deadline:"Apr 20",   title:"Teacher Appreciation Week — freebies pin + bundle sale pin", detail:"Build 2 pins in Canva, post manually · Apr 20 deadline" },
   { id:55, col:"queue",   cat:"Pinterest",    priority:"medium", wstage:0, deadline:"Apr 15",   title:"Better Hearing & Speech Month tags — AT/AAC products (May)", detail:"Add SLP + BHSM seasonal tags to all AT/AAC listings on TPT · deadline Apr 15" },
