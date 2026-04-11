@@ -2,6 +2,122 @@
 
 Deep build notes for CbD. Pull this file when doing code/build work.
 
+---
+
+## Student Worksheet Template System — ReportLab v2.1 (Locked 2026-04-11)
+
+**All new units (started after 2026-04-11) MUST use this system for student activity pages.**
+Do NOT retrofit Units 1–6 nonfiction or PB Companions 1–6 — those builds are LOCKED.
+
+### Core Philosophy (Hard Rules — Never Violate)
+These worksheets do not specify how a student responds. Symbol cards glued to the page, eye gaze + scribe, pencil, typed output on a device — all are equally valid and demonstrate the same skill. The worksheet's job is accessible language design, not access method instruction.
+
+- **NO** `access_note` defaults that instruct students HOW to respond ("write, type, or use your device" = WRONG)
+- `access_note` parameter: optional, prints nothing by default. Only use to point to language support (e.g., "Key vocabulary is in your communication packet.")
+- **NO** filled response areas, NO gray boxes. Print-first: white background throughout.
+- Zone identity = 3pt colored left-bar (`LINEBEFORE`) only — not filled headers.
+- Sentence frames carry the AAC access load. The CAP is the vocabulary document.
+
+### File
+`_Operations/Build/cbd_worksheet_templates.py` — v2.1
+
+### Template Catalog — 8 Templates (v2.1)
+| # | Function | Purpose | Instructional Activity |
+|---|----------|---------|----------------------|
+| 1 | `make_mcq_page()` | Multiple choice, 4 options, ○ circles | Close Reading & Annotation |
+| 2 | `make_short_answer_page()` | Open response with optional sentence frame | Write-Ables, Inferencing Scaffolds |
+| 3 | `make_cer_page()` | Claim-Evidence-Reasoning (amber/teal/navy left bars) | CER Framework, Critical Response Scaffolds |
+| 4 | `make_evidence_sort_page()` | 3-column evidence sort / text interaction | Story Grammar, VSDs |
+| 5 | `make_vocab_preview_page()` | Vocabulary pre-teaching with ARASAAC symbols | IRA Vocabulary Stops, Descriptive Teaching |
+| 6 | `make_annotation_guide_page()` | Annotation codes reference (3-code system) | Close Reading & Annotation |
+| 7 | `make_descriptor_board_page()` | Attribute grid (Appearance/Action/Emotion) + composition zone | Describe to Draw, Descriptive Teaching Model |
+| 8 | `make_partner_prompt_card()` | Teacher/partner-facing CROWD/ALM prompt cards | Dialogic Reading, ALM — goes in Teacher Packet NOT Student Activities PDF |
+
+**Instructional Activity → Template mapping is tracked in Airtable** (`tblHJlkbCF7c4tCNP` → `Worksheet Template` field).
+Check Airtable before building any new unit's student pages — the mapping is already done for all 13 activities.
+
+**3 activities have NO student worksheet:**
+- Story Bags & Multisensory Grounding — tactile/object-based, no page
+- Shared Reading with ALM — partner card only (`make_partner_prompt_card()` in teacher build)
+- Dialogic Reading with CROWD Prompts — partner card only (`make_partner_prompt_card()` in teacher build)
+
+### WorksheetDoc — Always Create First
+```python
+from cbd_worksheet_templates import WorksheetDoc, make_mcq_page, make_cer_page
+
+doc = WorksheetDoc(
+    output_path="path/to/output.pdf",
+    unit_title="Fred Korematsu: The Man Who Said No",
+    product_line="Nonfiction Reading Unit",
+    version_label="V1",   # or None — shown in header only
+)
+story = []
+story += make_mcq_page(doc, "Part 1 Comprehension Check", questions=[...])
+story += make_short_answer_page(doc, "Short Answer", questions=[...])
+story += make_cer_page(doc, "Claim-Evidence-Reasoning", prompt="Was...")
+doc.build(story)
+```
+
+### Data Formats — Both Key Styles Accepted
+```python
+# MCQ — either format works:
+{"text": "Question stem", "choices": [("A", "Option one"), ("B", "Option two"), ...]}
+{"stem": "Question stem", "options": ["A  Option one", "B  Option two", ...]}
+
+# Short answer — either format works:
+{"text": "Question", "frame": "I think ___ because ___.," "lines": 4}
+{"prompt": "Question", "sentence_frame": "I think ___ because ___.", "lines": 4}
+```
+
+### Version Differentiation — Content Parameters, Not Separate Templates
+V1/V2/V3 differences use the SAME template functions with different data passed in.
+There is NO `make_short_answer_v3_page()` — there is only `make_short_answer_page()`.
+
+| What changes | How |
+|---|---|
+| Version label in header | `WorksheetDoc(version_label="V3")` |
+| Word bank strip above questions | `word_bank=["evidence", "approve", "safe", ...]` |
+| Sentence frame below question | `sentence_frame="Kelsey refused because ___."` |
+| Fewer writing lines | `lines=2` vs default 4 |
+| V1/V2 — no word bank | `word_bank=None` (default) — nothing printed |
+
+**`word_bank` parameter** — available on `make_short_answer_page()` and `make_cer_page()`.
+- Words should come from the CAP — not introduce new vocabulary.
+- Reduces retrieval demand; comprehension task stays the same.
+- V3 scaffold only. V1/V2: pass `word_bank=None` or omit.
+
+```python
+# V3 short answer with word bank:
+make_short_answer_page(doc, "Part 1 — V3", questions=[...],
+    word_bank=["evidence", "approve", "safe", "test", "protect"])
+
+# V3 CER with word bank:
+make_cer_page(doc, "CER — V3", prompt="Was Kelsey right?",
+    claim_frame="Kelsey was _____ because _____.",
+    word_bank=["evidence", "approve", "safe", "test", "protect"])
+
+# V1/V2 — same function, no word bank:
+make_short_answer_page(doc, "Part 1 — V1", questions=[...])
+```
+
+### Symbol Size — LOCKED
+`SYM_SIZE = 88` pts — matches `build_comm_access_packet.py`. Never change.
+`SYM_COL_W = 1.5 * inch` — holds 88pt image with padding. Never change.
+
+### New-Unit Trigger — Phase 1 Gate Checklist Item
+At Phase 1 Gate (before any build starts), confirm:
+> ☐ Student worksheet pages → `cbd_worksheet_templates.py`
+> ☐ Teacher content, passages, partner scripts, vocab tables, CAP → `.js` docx build
+> ☐ These are TWO SEPARATE outputs — do not merge activity pages into the docx
+
+### Integration with .js Docx Builds
+1. `.js` build → `[Unit]_COMPLETE.docx` + `[Unit]_Student_Print_Materials.docx` (teacher + passage content)
+2. `cbd_worksheet_templates.py` → `[Unit]_Student_Activities.pdf` (all response pages)
+3. Both go into the 4-file TPT zip
+4. To merge into a single Student Packet PDF: use `pypdf.PdfWriter` (see `build_all_units.py` pattern)
+
+---
+
 ## Symbol Pages — Hard Build Rules — LOCKED (Apr 2026)
 
 ### ⛔ STOP — Read this before touching any symbol page code

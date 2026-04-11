@@ -1,10 +1,29 @@
 # CbD Session State
-**Last updated:** 2026-04-10 (Session — Skill Update + Business Plan)
+**Last updated:** 2026-04-11 (Session — UDL 3.0, Build Lock, Worksheet Template System)
 **Read this file FIRST at every session start — before doing any work.**
 
 ---
 
-## What Changed This Session (2026-04-10 — Skill Update)
+## What Changed This Session (2026-04-11)
+
+- **UDL Guidelines updated to v3.0:** All frameworks now cite `CAST. (2024). UDL Guidelines v3.0`. Authoritative citation in CLAUDE.md. PDF filed: `Research/CAST_UDL_Guidelines_3.0_WithNumbers.pdf`. Full alignment map: `Research/CbD_UDL_Alignment_Map.md`.
+- **Build Lock established:** Nonfiction Units 1–6 and PB Companions 1–6 are LOCKED. No rebuilds. Improvements apply forward only (Unit 7+ and PB Companion 7+). Rule documented in CLAUDE.md "Build Lock Rule" section.
+- **Student Worksheet Template System created:** `_Operations/Build/cbd_worksheet_templates.py` v2.1 — ReportLab PDF templates for all student activity pages. ALL new units use this. Locked design: modality-neutral (no access method instruction), print-first, no fills in response areas.
+  - Templates: MCQ, Short Answer, CER, Evidence Sort, Vocab Preview, Annotation Guide
+  - Philosophy: worksheets don't say HOW to respond — sentence frames + CAP carry access load
+  - Both key formats accepted (stem/options OR text/choices, prompt/sentence_frame OR text/frame)
+  - Symbol size locked: `SYM_SIZE = 88` pts
+- **New-unit trigger documented:** Phase 1 Gate now requires `cbd_worksheet_templates.py` checkbox for student activity pages. Trigger applies to: Nonfiction Unit 7+, PB Companion 7+, Fiction Unit 2+, Poetry Unit 2+, all UFLI new builds.
+- **`build_system_reference.md` updated:** v2.1 spec, corrected design rules, integration workflow.
+- **.gitignore updated:** Added `__pycache__/`, `*.pyc`, `*_demo.pdf` exclusions.
+- **Manual cleanup needed (iCloud permissions block sandbox deletion):**
+  - Delete from Finder: `_Operations/Build/cbd_worksheet_demo.pdf`
+  - Delete from Finder: `_Operations/Build/cbd_worksheet_templates_v2_demo.pdf`
+  - Delete from Finder: `_Operations/Build/__pycache__/` folder
+
+---
+
+## What Changed Previous Session (2026-04-10 — Skill Update)
 
 - **Business Plan created:** `CbD_Business_Plan_April2026.docx` — 8 sections, full financial model (Low $2,880 / Base $9,000 / High $20,200 net), 6-week launch metrics captured, 90-day roadmap.
 - **Skill file updated:** Rebuilt `communicate-by-design-updated.skill` (60 KB). Four stale reference files corrected:
@@ -13,7 +32,6 @@
   - `substack.md` — Posts 4+5 LIVE, Post #6 pipeline, paid tier ($8/mo or $80/yr at 200 subscribers)
   - `picture-book-companions.md` — 1 LIVE + 5 built, 3-file architecture, LibreOffice PDF rule, all 6 titles with IDs
 - **Skill file saved to workspace:** `Communicate by Design/communicate-by-design-updated.skill` — double-click to install
-- **SESSION_STATE.md:** Stale session ID in iCloud mount check replaced with `[current-session-id]` placeholder
 
 ---
 

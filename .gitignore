@@ -57,6 +57,15 @@ _Operations/Print References/
 # node_modules inside _Operations
 _Operations/node_modules/
 
+# Python cache files (auto-generated — never commit)
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Build test/demo artifacts (not production files)
+_Operations/Build/*_demo.pdf
+
 # ---- FINAL PRODUCT FOLDERS (built outputs, not code) ----
 # These are the ready-to-upload product files — iCloud has them
 Products/AAC Trading Cards/

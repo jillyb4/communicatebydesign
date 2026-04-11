@@ -258,6 +258,70 @@ Monitor special education Facebook groups (7.5M+ viewers) for real practitioner 
 
 ---
 
+## Build Lock Rule (Locked 2026-04-11)
+Nonfiction Units 1–6 and Picture Book Companions 1–6 are LOCKED. Do NOT rebuild, reformat, or alter existing files.
+- Existing `.docx`, `.pdf`, CAP, and Welcome PDF files are authoritative — do not touch
+- Build scripts stay in their folders as reference only — no rebuilds unless a critical factual error is found
+- All framework improvements (new guidelines, new vocabulary rules, new partner callouts) apply FORWARD ONLY — starting with Unit 7 nonfiction and PB Companion 7
+- "The current unit is the gold standard for the next unit. It is not a candidate for rework."
+- When in doubt: preserve the existing build, document the delta for the next unit
+
+## Student Worksheet Template System (Locked 2026-04-11)
+
+**All new units use `cbd_worksheet_templates.py` for student-facing activity pages. No exceptions.**
+
+**File:** `_Operations/Build/cbd_worksheet_templates.py` — v2.1
+**Purpose:** ReportLab PDF template system. Single source of truth for all student worksheet page layouts across every product line.
+
+### Design philosophy (hard rules — never violate)
+- Worksheets do NOT specify how a student responds. Symbol cards, eye gaze + scribe, pencil, typed output — all valid, all demonstrate the same skill.
+- NO access_note defaults that instruct students on HOW to respond ("write, type, or use your device" = wrong)
+- `access_note` parameter is optional. If used, it points to language support only — e.g., "Key vocabulary is in your communication packet." Never modality instructions.
+- NO filled response areas, NO gray boxes. Print-first: white background, thin colored left-bar borders for zone identity, ruled lines only.
+- Sentence frames + vocabulary design carry the AAC access load — not symbols on the worksheet.
+- The CAP is the vocabulary document. The worksheet trusts it is in hand.
+
+### Templates available
+| Function | Purpose |
+|----------|---------|
+| `make_mcq_page()` | Multiple choice, 4 options, ○ circles |
+| `make_short_answer_page()` | Open response with optional sentence frame |
+| `make_cer_page()` | Claim-Evidence-Reasoning organizer (amber/teal/navy left bars) |
+| `make_evidence_sort_page()` | 3-column evidence sort / text interaction |
+| `make_vocab_preview_page()` | Key vocabulary pre-teaching with ARASAAC symbols |
+| `make_annotation_guide_page()` | Annotation codes reference (e.g. [TRAIT]/[WHY]/[CHANGE]) |
+
+### Key data format (both key styles accepted)
+- MCQ: `{"text": ..., "choices": [("A", "..."), ...]}` OR `{"stem": ..., "options": [...]}`
+- Short answer: `{"text": ..., "frame": ..., "lines": 4}` OR `{"prompt": ..., "sentence_frame": ...}`
+
+### Symbol size — LOCKED
+`SYM_SIZE = 88` (pts) — matches `build_comm_access_packet.py`. Never change.
+
+### New-unit trigger — WHEN TO USE THIS SYSTEM
+**Any product started after 2026-04-11 MUST use `cbd_worksheet_templates.py` for student activity pages.** This includes:
+- Nonfiction Unit 7+ (Fred Korematsu and all subsequent)
+- PB Companion 7+
+- All Fiction Anchor Text units (Wonder was pre-template — Unit 2+ use templates)
+- All Poetry Reading Units (Unit 2+)
+- UFLI student activity pages (any new builds)
+
+**The checklist item at Phase 1 Gate (before any build starts):**
+> ☐ Student worksheet pages will be built with `cbd_worksheet_templates.py` — NOT inside the .js docx build
+
+**The .js docx build still handles:** teacher content, partner scripts, passages (V1/V2/V3), vocab tables, CAP, IEP goal stems, answer keys, accessibility/about/terms end matter.
+**`cbd_worksheet_templates.py` handles:** all student response pages (MCQ, short answer, CER, evidence sort, vocab preview, annotation guide).
+
+The two outputs are assembled in the final product file set — the docx handles teacher-facing content, the ReportLab PDF handles student activity pages.
+
+## UDL Guidelines Reference (Updated 2026-04-11)
+All CbD frameworks now reference UDL Guidelines **v3.0** (CAST, 2024). The authoritative citation is:
+> CAST. (2024). *Universal Design for Learning Guidelines version 3.0*. https://udlguidelines.cast.org
+
+Key 3.0 additions most relevant to CbD: **5.4** (address biases in modes of expression — CbD's strongest alignment point), **6.5** (challenge exclusionary practices — partner training), **1.3** (represent diversity of identities — disability-rep fiction pipeline), **2.4** (address language bias — agency framing in all passages).
+Full alignment map: `Research/CbD_UDL_Alignment_Map.md`
+PDF filed: `Research/CAST_UDL_Guidelines_3.0_WithNumbers.pdf`
+
 ## Hard Rules (Never Violate)
 - Do NOT call Jill an "AT Specialist" or "AAC Specialist" — not yet certified
 - Do NOT mention OPTN Pediatric Transplantation Committee work
