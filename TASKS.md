@@ -2,6 +2,15 @@
 > ⚠️ **Primary tracking has moved to Airtable** — Base: `appeaT8hkeXWqQKIj`, table: Work Items. This file is a backup reference. At session start, read Airtable for current state.
 
 
+## Research Library & Ongoing Learning (Added 2026-04-11)
+
+- [x] **Airtable Research Library created** — Table `tblKpzHsm4HHe3qsa` in CbD base. 10 existing research files migrated in. Fields: Title, Authors, Year, Journal, DOI/URL, Topic Area, Key Findings, CbD Application, CbD File, Full Text Access, Used in Substack, Used in Product, Date Added. *(Done 2026-04-11)*
+- [ ] **⚠️ Run cbd-research-scan task now** — Click "Run now" in Scheduled sidebar to pre-approve tools (Airtable, Gmail, web search) before first automated Monday run. *(Added 2026-04-11)*
+- [ ] **⚠️ Send Romano et al. email** — Gmail draft waiting. Add Nicole Romano's email (Penn State CSD department) and send. Requesting full text of writing/AAC LSHSS 2026 article. *(Added 2026-04-11)*
+- [ ] **Add new research to Airtable as you find it** — Use Research Library table. When dropping a DOI or article in chat, Claude will check for duplicates and log it. *(Ongoing)*
+
+---
+
 ## Poetry Reading Units — Pre-Build Gates
 *New product line approved 2026-03-30. Unit 1 target: May 2026. Full plan: `Research/CbD_Poetry_Unit_Line_Initial_Build_Plan.md`*
 

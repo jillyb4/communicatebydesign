@@ -4,7 +4,15 @@
 
 ---
 
-## What Changed This Session (2026-04-11 — Worksheet Template System v2.1 Complete)
+## What Changed This Session (2026-04-11 — Research Library + Weekly Scan)
+
+- **Airtable Research Library created:** New table `tblKpzHsm4HHe3qsa` in base `appeaT8hkeXWqQKIj`. Fields: Title, Authors, Year, Journal/Source, DOI/URL, Topic Area (15 multiselect tags), Key Findings, CbD Application, CbD File, Full Text Access, Used in Substack, Used in Product, Date Added.
+- **10 existing research files migrated to Airtable:** All research from `Research/` folder inventoried and logged. Includes Romano et al. 2026 (LSHSS writing/AAC study — paywalled, email sent to Nicole Romano 4/11/2026), Spencer & Petersen 2020, OpenAAC State of AAC 2026, UFLI framework, AAC phonics/literacy, core vocabulary, alternative pencils, picture book companions, poetry units, and i-Ready concerns.
+- **Weekly Research Scan scheduled:** Task `cbd-research-scan` runs every Monday at 7:30 AM. Searches PubMed + key journals for new AAC/literacy/writing/complex communicators research, checks for duplicates, logs new articles to Airtable, saves scan summary to `Research/WeeklyScans/scan_[date].md`, and creates a Gmail draft summary to jillyb4@gmail.com.
+- **⚠️ Action needed:** Click "Run now" on `cbd-research-scan` in Scheduled sidebar to pre-approve tools before first automated run Monday 4/14.
+- **Romano et al. 2026 email draft:** Gmail draft created to Nicole Romano (Penn State CSD) requesting full text of writing/AAC article. Jill needs to add Nicole's email address before sending.
+
+## What Changed Previous Session (2026-04-11 — Worksheet Template System v2.1 Complete)
 
 - **`cbd_worksheet_templates.py` v2.1 — COMPLETE AND COMMITTED** — All 8 templates locked and tested. Word bank implemented on `make_short_answer_page()` and `make_cer_page()`. Sentence frame convention locked (use `...` or `:`, never single `___` blank). "Key Words" label (not "Word Bank"). Design is modality-neutral: no access method instruction anywhere.
 - **Version differentiation rule locked:** V1/V2/V3 differences use the SAME template functions with different content params — NOT separate template functions. `word_bank=None` = V1/V2. `word_bank=[...]` = V3 only. Words must come from CAP, not introduce new vocabulary.
