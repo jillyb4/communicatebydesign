@@ -28,6 +28,17 @@
 - [ ] **⚠️ Substack: Publish "When the Framework Demands a Confession"** — Draft saved: `Substack/Substack_Draft_WhenTheFrameworkDemandsAConfession.md`. Ready for Jill review. Pillar: 🔵 Instructional Practice. FB drop target: threads about poetry for students with disabilities. Restack Bob Sparks post for reciprocal visibility. *(Added 2026-04-10)*
 - [ ] **⚠️ FB group drop — Post #5 "Who Gets to Decide If the Voice Is Real?"** — Do TODAY. URL: https://communicatebydesign.substack.com/p/who-gets-to-decide-if-the-voice-is *(Carried forward 2026-04-10)*
 
+## Worksheet Template System — Next Steps (2026-04-11)
+*`cbd_worksheet_templates.py` v2.1 is locked and committed. The templates exist — now they need to be integrated into real unit builds.*
+
+- [x] **Template system created and committed** — v2.1, 8 templates, modality-neutral, print-first, word_bank on short answer + CER, sentence frame convention locked. *(Done 2026-04-11)*
+- [ ] **GitHub Desktop: push origin** — Commit was made in sandbox. Open GitHub Desktop → push origin to sync to remote. *(Added 2026-04-11)*
+- [ ] **Finder cleanup: delete test PDFs** — 4 test PDFs + `__pycache__/` in `_Operations/Build/`. Cannot delete from sandbox (iCloud permissions). Delete manually in Finder: `cbd_worksheet_demo.pdf` · `cbd_worksheet_templates_v2_demo.pdf` · `cbd_word_bank_test.pdf` · `cbd_keywords_test.pdf` · `__pycache__/`. *(Added 2026-04-11)*
+- [ ] **Airtable: verify "Worksheet Template" field on all 13 Instructional Activities** — Field was added in Session this session. Open Airtable `tblHJlkbCF7c4tCNP` → confirm all 13 records have Worksheet Template field populated. 3 activities should show "No student worksheet." *(Added 2026-04-11)*
+- [ ] **Build first real unit using template system** — First unit that hits Phase 1 Gate after 2026-04-11 uses `cbd_worksheet_templates.py` for student activity pages. Candidate: **Nonfiction Unit 7 (Fred Korematsu, May 2026)**. At Phase 1 Gate: check `☐ Student worksheet pages → cbd_worksheet_templates.py`. *(Added 2026-04-11)*
+- [ ] **Poetry Unit 2: use template system from the start** — When Unit 2 ("Who Is Speaking," Jul 2026) hits Phase 1 Gate, student pages go through `cbd_worksheet_templates.py`. V3 short answer + CER pages get `word_bank=` populated. *(Added 2026-04-11)*
+- [ ] **Fiction Unit 2 (The Giver): use template system** — Wonder was pre-template. Unit 2 forward: all student activity pages through `cbd_worksheet_templates.py`. *(Added 2026-04-11)*
+
 ## Active
 
 ### Pinterest — Manual Actions Required (2026-04-01)

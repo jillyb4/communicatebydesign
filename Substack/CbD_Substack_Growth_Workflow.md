@@ -5,18 +5,34 @@
 
 ## Part 1: Brand & Voice Audit
 
-### What the 3 Posts Tell Us
+### Primary Audience (Locked Apr 11, 2026)
 
-**Voice:** You write like a practitioner who has run too many IEP meetings where the research was ignored. Evidence-based but never academic. You name the thing people are quietly thinking ("we weren't measuring a ceiling — we were measuring the floor we'd built") and back it with citations. There's a consistent structure: name the wrong assumption → show the evidence that dismantles it → tell people what to do about it.
+Communicate by Design writes for two people.
 
-**Audience:** Primarily special educators, SLPs, and paraprofessionals who are skilled, committed practitioners — but who haven't been given the research, the legal grounding, or the tools they need to do what they already want to do. Secondary audience: families who are learning to advocate. They are reading between tasks, not in deep study mode.
+The first is the parent of a child who uses AAC — someone who presumes their child is competent, who is watching skills develop in ways the system hasn't figured out how to measure yet, and who is looking for tools, language, and evidence to support what they already know is true about their kid.
 
-**Goals across the 3 posts:**
+The second is the teacher — general education or special education — who wants materials designed for all students from the start, not adapted after the fact. Someone who knows something isn't working in the way literacy is being taught or assessed for their students who use AAC, but hasn't been given a different framework to try.
+
+These two readers are the same person in different rooms. They share the same belief: that communication is a right, that competence should be presumed, and that the gap is never the student.
+
+IEP team members — SLPs, paras, OTs, RBTs, BCBAs, clinicians — are part of every conversation. The evidence base serves them directly. But the primary voice is always: here is what we know, here is what it looks like, go try it with your student or your child.
+
+**Use this as the filter for every post:** If a parent of an AAC user and a classroom teacher both walk away with something they can try, the post is working. If only a credentialed specialist can use it, rewrite it.
+
+---
+
+### What the Posts Tell Us (Voice Audit)
+
+**Voice:** Evidence-based but never academic. Names the thing people are quietly thinking and backs it with citations. Consistent structure: name the wrong assumption → show the evidence that dismantles it → tell people what to do about it. Written as an ally — the gap is always the system or the missing tool, never the person.
+
+**Goals across post types:**
 - *Welcome post:* Position and trust-build. No sell.
-- *Keiko post:* Demonstrate the product origin story — shows what CbD materials look like before they're on TPT.
-- *Statistic post:* Pure authority. Says the quiet part out loud, gives people the research they didn't know they needed.
+- *Origin story posts (Keiko):* Demonstrate what CbD materials look like before they're on TPT.
+- *Policy posts:* Pure authority. Says the quiet part out loud, gives people the research they didn't know they needed.
+- *Instructional Practice posts:* One concrete idea, one research anchor, one thing to try Monday.
+- *Community posts (Poetry Month and beyond):* Open a conversation. Invite people to name what they're already doing.
 
-**The consistent promise:** "Here is what the evidence actually says — and here is what to do with it in Monday's IEP meeting."
+**The consistent promise:** Here is what we know. Here is what it looks like. Go try it.
 
 ---
 

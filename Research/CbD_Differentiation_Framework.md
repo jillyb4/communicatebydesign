@@ -98,15 +98,18 @@ Specifically relevant to V3 design:
 
 ### Layer 4: UDL and Access Mandate
 
-**Primary framework: Universal Design for Learning (CAST, 2018)**
+**Primary framework: Universal Design for Learning (CAST, 2024) — Guidelines v3.0**
 
 UDL Principle 1 — Multiple Means of Representation — is the research base for CbD's three-version model. UDL's core principle: barriers to learning are in the design of instruction, not in individual learners. V1 is not the "real" version — it is one access pathway. V3 is a different access pathway to the same standard.
 
-| UDL Checkpoint | Description | CbD Implementation |
-|---------------|-------------|-------------------|
-| **1.1** | Offer options for perceiving information | Three text versions; Key Vocabulary instruction in V3 |
-| **1.2** | Offer options for language and symbols | Symbol + text together; Fitzgerald Key color coding |
-| **1.3** | Offer options for comprehension | Background knowledge activation; structured response frameworks |
+| UDL 3.0 Guideline/Consideration | Description | CbD Implementation |
+|----------------------------------|-------------|-------------------|
+| **1.1** Customize display of information | Support learner-specific information presentation | Three text versions (V1/V2/V3 Lexile bands) |
+| **1.2** Multiple ways to perceive information | Offer multiple perceptual pathways | Symbol + text together; partner read-aloud for V3 |
+| **1.3** Diversity of perspectives and identities *(new 3.0)* | Represent authentic identities | Disability-affirming, agency-first passage language; disability-rep fiction pipeline |
+| **2.1** Clarify vocabulary, symbols, language structures | Explicit vocabulary support | Descriptive Teaching Model in V3; Key Vocabulary before reading |
+| **2.4** Address biases in language and symbols *(new 3.0)* | Remove linguistic barriers rooted in bias | People-first / identity-first per subject preference; no inspiration framing |
+| **2.5** Illustrate through multiple media | Visual + symbolic support | Fitzgerald Key color coding; ARASAAC symbols |
 
 ---
 
@@ -415,7 +418,7 @@ Beck, I. L., McKeown, M. G., & Kucan, L. (2013). *Bringing words to life: Robust
 
 Browder, D. M., Ahlgrim-Delzell, L., Courtade, G., Gibbs, S. L., & Flowers, C. (2008). Evaluation of the effectiveness of an early literacy program for students with significant developmental disabilities. *Exceptional Children, 75*(1), 33–52.
 
-CAST. (2018). *Universal Design for Learning guidelines version 2.2*. http://udlguidelines.cast.org
+CAST. (2024). *Universal Design for Learning Guidelines version 3.0*. https://udlguidelines.cast.org
 
 Common Core State Standards Initiative. (2010). *Common core state standards for English language arts and literacy in history/social studies, science, and technical subjects*. NGA Center/CCSSO.
 

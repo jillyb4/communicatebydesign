@@ -76,10 +76,15 @@ There is NO `make_short_answer_v3_page()` — there is only `make_short_answer_p
 | What changes | How |
 |---|---|
 | Version label in header | `WorksheetDoc(version_label="V3")` |
-| Word bank strip above questions | `word_bank=["evidence", "approve", "safe", ...]` |
-| Sentence frame below question | `sentence_frame="Kelsey refused because ___."` |
+| Key words strip above questions | `word_bank=["evidence", "approve", "safe", ...]` |
+| Sentence frame below question | `sentence_frame="Kelsey refused because..."` |
 | Fewer writing lines | `lines=2` vs default 4 |
 | V1/V2 — no word bank | `word_bank=None` (default) — nothing printed |
+
+**Sentence frame convention (hard rule):** Frames must end with `...` or `:` — never a single `___` blank. A single blank implies one-word fill-in, which doesn't match multi-word CAP vocabulary and telegraphs a wrong response strategy.
+  - ✓ `"Kelsey refused because..."` → student continues onto the writing lines
+  - ✓ `"The author's claim is: "` → student writes below
+  - ✗ `"Kelsey refused because ___."` → implies one word, conflicts with key words strip
 
 **`word_bank` parameter** — available on `make_short_answer_page()` and `make_cer_page()`.
 - Words should come from the CAP — not introduce new vocabulary.

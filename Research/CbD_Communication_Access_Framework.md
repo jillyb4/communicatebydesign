@@ -1,5 +1,5 @@
 # CbD Communication Access Framework
-*Communicate by Design | Compiled: 2026-03-29 | Version 1.0*
+*Communicate by Design | Compiled: 2026-03-29 | Version 1.1 — UDL citation updated to v3.0 (2026-04-11)*
 
 ---
 

@@ -4,7 +4,21 @@
 
 ---
 
-## What Changed This Session (2026-04-11)
+## What Changed This Session (2026-04-11 — Worksheet Template System v2.1 Complete)
+
+- **`cbd_worksheet_templates.py` v2.1 — COMPLETE AND COMMITTED** — All 8 templates locked and tested. Word bank implemented on `make_short_answer_page()` and `make_cer_page()`. Sentence frame convention locked (use `...` or `:`, never single `___` blank). "Key Words" label (not "Word Bank"). Design is modality-neutral: no access method instruction anywhere.
+- **Version differentiation rule locked:** V1/V2/V3 differences use the SAME template functions with different content params — NOT separate template functions. `word_bank=None` = V1/V2. `word_bank=[...]` = V3 only. Words must come from CAP, not introduce new vocabulary.
+- **`build_system_reference.md` updated:** Version Differentiation section added with code examples. Sentence frame hard rule documented with ✓ / ✗ examples.
+- **CLAUDE.md updated:** Full Student Worksheet Template System section locked.
+- **GitHub committed:** `cbd_worksheet_templates.py` v2.1 committed to main. Open GitHub Desktop → push origin.
+- **Manual cleanup still needed (iCloud permissions block sandbox deletion):**
+  - Delete from Finder: `_Operations/Build/cbd_worksheet_demo.pdf`
+  - Delete from Finder: `_Operations/Build/cbd_worksheet_templates_v2_demo.pdf`
+  - Delete from Finder: `_Operations/Build/cbd_word_bank_test.pdf`
+  - Delete from Finder: `_Operations/Build/cbd_keywords_test.pdf`
+  - Delete from Finder: `_Operations/Build/__pycache__/` folder
+
+## What Changed Previous Session (2026-04-11 — UDL 3.0, Build Lock, Worksheet Template System)
 
 - **UDL Guidelines updated to v3.0:** All frameworks now cite `CAST. (2024). UDL Guidelines v3.0`. Authoritative citation in CLAUDE.md. PDF filed: `Research/CAST_UDL_Guidelines_3.0_WithNumbers.pdf`. Full alignment map: `Research/CbD_UDL_Alignment_Map.md`.
 - **Build Lock established:** Nonfiction Units 1–6 and PB Companions 1–6 are LOCKED. No rebuilds. Improvements apply forward only (Unit 7+ and PB Companion 7+). Rule documented in CLAUDE.md "Build Lock Rule" section.

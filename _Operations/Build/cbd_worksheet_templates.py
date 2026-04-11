@@ -370,13 +370,17 @@ def _zone_label_row(label: str, sublabel: str, bar_color,
     return t
 
 
-def _word_bank(words: list, usable_width: float, label: str = "Word Bank") -> Table:
+def _word_bank(words: list, usable_width: float, label: str = "Key Words") -> Table:
     """
-    Renders a word bank strip — a bordered row of words students can circle,
-    point to, or reference when composing their response.
+    Renders a vocabulary reference strip — a bordered row of words students can
+    circle, point to, or reference when composing their response.
 
     Print-first: white background, teal left bar (3pt), light gray outer box.
     Words are laid out inline, bold, separated by a thin divider.
+
+    Label is "Key Words" (not "Word Bank") — the strip is a reference, not a
+    one-word fill-in cue. Sentence frames should use "..." or ":" as a
+    continuation marker, never a single ___ blank.
 
     This is a V3 scaffold. V1/V2 pages pass word_bank=None — nothing is printed.
     The words here should be the same vocabulary from the CAP — not new words.
