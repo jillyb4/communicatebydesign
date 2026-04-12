@@ -48,10 +48,33 @@
 - [ ] **Poetry Unit 2: use template system from the start** — When Unit 2 ("Who Is Speaking," Jul 2026) hits Phase 1 Gate, student pages go through `cbd_worksheet_templates.py`. V3 short answer + CER pages get `word_bank=` populated. *(Added 2026-04-11)*
 - [ ] **Fiction Unit 2 (The Giver): use template system** — Wonder was pre-template. Unit 2 forward: all student activity pages through `cbd_worksheet_templates.py`. *(Added 2026-04-11)*
 
+## Exceptional Children's Week — Apr 13–17, 2026
+*Theme: "Turn the Page to Possibility: Literacy Success in Special Education." Full content plan: `Marketing/EC_Week_2026_Content_Plan.md`. Story slides: `Marketing/EC_Week_2026_Story_Slides.md`.*
+
+- [ ] **⚠️ MON Apr 13 — Build IG carousel (5 slides) + 3 Story slides in Canva** — Literacy engagement methods. Carousel hook: "Every student deserves to be a reader. Not a version of a reader." CTA: TPT store. *(Added 2026-04-11)*
+- [ ] **⚠️ MON Apr 13 — Post FB Page post** — Literacy engagement theme. Text in content plan. *(Added 2026-04-11)*
+- [ ] **⚠️ TUE Apr 14 — Post #6 fires at 9AM. Build IG static post + 3 Story slides + post to Stories** — AT theme. Story 1 drops with Substack link the moment post goes live. Highest-leverage day of EC Week. *(Added 2026-04-11)*
+- [ ] **⚠️ TUE Apr 14 — FB Page post + FB Group drop for Post #6** — Drop in AT/AAC and SPED groups: *"I actually wrote about this — [link]. The short version: AT removes barriers, but only when partners know how to close the loop."* *(Added 2026-04-11)*
+- [ ] **⚠️ WED Apr 15 — Post PB Companion reel to IG** — 7-slide scroll reel, teal background, all 6 PB Companion covers. Set to 4 sec/slide = 28 sec total. Voiceover script locked Apr 12. Hook: "If you teach K through 3 — these were made for your whole class." CTA: A Friend for Henry FREE on TPT, search Communicate by Design. Add final CTA slide before posting. Link in bio → A Friend for Henry TPT listing. *(Added 2026-04-12)*
+- [ ] **⚠️ WED Apr 15 — Add CTA slide to PB reel in Canva** — Final slide needed: "FREE on TPT → A Friend for Henry / Search: Communicate by Design." Without this there is no conversion moment. *(Added 2026-04-12)*
+- [ ] **⚠️ WED Apr 15 — Post FB Page post** — PB Companion theme. Frame: whole-class AAC-inclusive read-alouds — disability rep is true for this launch set but not the line identity going forward. *(Updated 2026-04-12)*
+- [ ] **⚠️ THU Apr 16 — Build IG carousel (5 slides) + 3 Story slides in Canva** — Diverse voices, nonfiction line. Carousel: Jennifer Keelan, Zitkala-Ša, Judy Heumann, Fred Korematsu. CTA: nonfiction units. *(Added 2026-04-11)*
+- [ ] **⚠️ THU Apr 16 — Post FB Page post** — Diverse voices theme. Text in content plan. *(Added 2026-04-11)*
+- [ ] **⚠️ FRI Apr 17 — Build IG carousel (5 slides) + 3 Story slides in Canva** — Community reading + partner scripts in PB Companions. CTA: Substack subscribe. *(Added 2026-04-11)*
+- [ ] **⚠️ FRI Apr 17 — Post FB Page post + end-of-week FB Group drop** — Community reading theme + week close. Drop store link in SPED groups. *(Added 2026-04-11)*
+
+---
+
 ## Active
 
+### Year 2 — Deferred Items
+- [ ] **Pinterest website claim** — Requires own domain + $50 one-time fee. Not worth it until CbD has a real website. Defer to Year 2 when domain is purchased. At that point: add Pinterest meta tag to site header → verify in Pinterest Business Hub → unlocks ad tracking + conversion data. *(Deferred 2026-04-12)*
+- [ ] **CbD website / domain** — Year 2 priority. Required before Pinterest claim, Google Search Console full setup, and email list migration off Substack. *(Deferred 2026-04-12)*
+
+---
+
 ### Pinterest — Manual Actions Required (2026-04-01)
-- [ ] **Pinterest bio correction** — Bio currently reads "AT specialist" — violates hard brand rule. Change to: *"Special educator & advocate. Resources for families, teachers & IEP teams supporting students who use AAC. Where AT meets practice. Free guides + TPT store 👇"* — Edit at pinterest.com/CommunicatebyDesign → Edit Profile. *(Added 2026-04-01)*
+- [x] **Pinterest bio correction** — Fixed 2026-04-12. Bio updated to: *"Special educator & advocate. Resources for families, teachers & IEP teams supporting students who use AAC. Where AT meets practice. Free guides + TPT store 👇"* *(Done 2026-04-12)*
 - [ ] **Pinterest brand board — fill to 16 pins** — "Communicate by Design Resources" board has only 1 pin. Every product pin (16 total confirmed) must be saved here. Do manually: open each product pin → Save → select "Communicate by Design Resources." *(Added 2026-04-01)*
 - [ ] **Pinterest AAC Resources board — add repins** — "AAC Resources for Families & IEP Teams" board has 0 pins and is the first thin-board priority. Search `AAC communication families home IEP` on Pinterest → save 5–10 relevant repins to this board. *(Added 2026-04-01)*
 - [ ] **Pinterest: Verify Products table Pinterest ✓ field** — Daily task now correctly queries Products table (`tbl2YSRQiW7RHEPY5`, field `fldhVp0lOxQaB9PUB`). Work Items table field was incorrectly used before — all 12 showed "true" there, masking real state. Confirm Products table Pinterest ✓ reflects actual pin status. *(Added 2026-04-01)*
@@ -66,7 +89,7 @@
 - [ ] **Airtable: Add TPT Product IDs for 5 built-not-listed PB Companions** — A Friend for Henry, Emmanuel's Dream, I Talk Like a River, Ian's Walk, My Friend Isabelle all have TPT URLs but no Product IDs. Add IDs when listing on TPT. *(Added 2026-04-08)*
 
 ### TPT SEO + Store Fixes — From Apr 8 Session
-- [ ] **TPT: Apply Wonder SEO rewrite to live listing** — New title: `Wonder Novel Study | Adaptive SDI and AAC | SPED Grades 3-8`. New description opening + full description written Apr 8. Copy from session transcript → paste into TPT listing editor. *(Added 2026-04-08)*
+- [x] **TPT: Apply Wonder SEO rewrite to live listing** — Updated 2026-04-12. Live title: "Wonder | Novel Study Adaptive SDI and AAC | SPED Grades 3-8". *(Done 2026-04-12)*
 - [ ] **TPT: Fix My Friend Isabelle listing title** — Current title is broken/unformatted (`My Friend Isabelle AAC read-aloud companion — special education grades K-1. AAC`). Rewrite to match PB Companion pattern: `My Friend Isabelle | AAC Read-Aloud Companion | Friendship + Inclusion | SPED K-1`. *(Added 2026-04-08)*
 - [ ] **TPT: Delete duplicate A Friend for Henry listing** — Two listings appear in MyProductStats.csv (rows 18 and 22). One is a duplicate. Log into TPT → identify which is the correct listing → delete the duplicate. *(Added 2026-04-08)*
 - [ ] **TPT: Investigate deleted items** — MyProductStats.csv row 23 shows deleted items: 136 page views, 84 previews, 20 downloads, $43 earned, 2.0 rating, 1 vote. That's the best-performing content in the store history. Identify what was deleted and whether any should be relisted or rebuilt. *(Added 2026-04-08)*
@@ -77,7 +100,8 @@
 *All fields except these have been populated in Airtable Products table.*
 - [ ] **TPT: Verify and enter page counts** — Airtable TPT Number of Pages field now exists. Pull from TPT "Product Details" for each live product and enter exact counts: AT Checklist, Finding Symbols, Universal AAC Tracker, AAC Data Collection Forms, Visual Schedule Pack. (IEP AT Toolkit = 28pp ✓ already set; All the Way to the Top = 23pp ✓; AAC Partner Quick Guide = 12pp ✓). *(Added 2026-04-04)*
 - [ ] **TPT: Pull and enter Product Description** — Description field is not in Airtable (rich text with HTML — Notes field holds a summary but not the full copy). If you want full descriptions tracked: open each live TPT listing → copy description → paste into Notes field. Or leave as-is and use TPT as source of truth for copy. *(Added 2026-04-04)*
-- [ ] **⚠️ TPT: Build master 20-tag store strategy** — TPT accounts have 20 custom tag slots for the ENTIRE store (not per product). Current per-product tags in Airtable Products records are placeholders only. Need: define master 20 store-wide tags covering all CbD product lines (AAC, adapted reading, SPED, picture books, nonfiction 6-10, UFLI phonics, IEP support, disability representation, communication access, etc.) → update all Airtable Products records → apply at TPT listing time. *(Added 2026-04-05)*
+- [x] **⚠️ TPT: Build master 20-tag store strategy** — DONE 2026-04-12. 20 tags locked in priority order. Quick assignment guide per product line documented. Next step: apply tags to each live TPT listing and update Airtable placeholders. *(Done 2026-04-12)*
+- [ ] **TPT: Apply master 20 tags to all live listings** — Use tag assignment guide from Apr 12 session. AT/AAC → tags 1,2,3,4,11,14,16,19 · Nonfiction → 1,2,4,5,9,17,18,20 · Fiction → 1,2,5,13,17,18,20 · PB Companions → 1,2,8,12,13,15 · UFLI → 1,2,4,10,12 · Poetry → 1,2,5,17,18,20. *(Added 2026-04-12)*
 - [ ] **TPT: Verify Custom Tags live on TPT** — TPT Custom Tags field populated in Airtable. Open each live listing on TPT tonight → confirm tags match or update as needed. Total tag budget: 20 tags across all products. *(Added 2026-04-04)*
 - [ ] **TPT: Verify thumbnails + preview files uploaded** — TPT Thumbnails (up to 4 square images) and Preview File must be pulled from TPT directly — not trackable in Airtable. Open each listing → confirm cover + 3 preview thumbnails are uploaded. Flag any missing. *(Added 2026-04-04)*
 - [ ] **TPT: Verify Product Type + Tax Code on live listings** — Airtable now has these fields populated. Cross-check against live TPT listing settings tonight (especially Tax Code — should be "Digital Images - Streaming / Electronic Download" for symbol-card products, "Digital Books" for text-heavy units). *(Added 2026-04-04)*
@@ -93,15 +117,15 @@
 - [x] **build_system_reference.md updated** — Nonfiction TPT folder architecture, index-marker pattern, welcome build order, and CAP scratch naming all documented. *(Done 2026-04-09)*
 - [x] **nonfiction_build_reference.md updated** — Phase 3 corrected (Word not LibreOffice), Phase 8 replaced with new 4-file TPT folder spec, Build Script Output Note corrected. *(Done 2026-04-09)*
 - [x] **Airtable updated** — All 6 nonfiction product Notes fields updated with ⚠️ APR 2026 FILE UPDATE re-upload notice. *(Done 2026-04-09)*
-- [ ] **⚠️ Jill: Re-upload all 6 nonfiction units to TPT** — For each unit: (1) delete stale files from `_TPT/` folder in Finder (duplicates, lock files, `.tmp`); (2) confirm 4 files present; (3) zip + upload. Zitkala-Ša and 504 Sit-In: re-export COMPLETE.docx → PDF from Word FIRST. *(Added 2026-04-09)*
+- [x] **⚠️ Jill: Re-upload all 6 nonfiction units to TPT** — All 6 re-uploaded 2026-04-12. *(Done 2026-04-12)*
 - [ ] **GitHub push — nonfiction build script fixes** — Files changed this session: `build_keiko.js`, `build_capitol_crawl.js`, `build_504_sit_in.js`, `build_zitkala_sa.js`. Add to existing GitHub push task below. *(Added 2026-04-09)*
 
 ### Nonfiction Units — Symbol Pages + AAC Fixes (2026-04-08)
 - [x] **Nonfiction symbol pages built for all 6 units** — Gold-standard format (matches PB Companion spec). Saved to each unit's `_TPT/` subfolder as `*_Symbol_Pages.pdf`. Build script permanently saved to `_Operations/Build/build_nonfiction_symbol_pages.py`. *(Done 2026-04-08)*
 - [x] **Zitkala-Ša AAC section fixed** — `build_zitkala_sa.js` updated to use `AAC.aacSupportSection()`. DOCX patched in-place with gold-standard Communication Access section + full vocab table (20 core + 19 fringe). *(Done 2026-04-08)*
 - [x] **504 Sit-In AAC section fixed** — `build_504_sit_in.js` updated to use `AAC.aacSupportSection()`. Full rebuild ran clean. New DOCX in `504_Sit_In_TPT/`. *(Done 2026-04-08)*
-- [ ] **⚠️ Jill: Re-export Zitkala-Ša COMPLETE.pdf from Word** — DOCX was patched in-place. Open `Zitkala_Sa_TPT/Zitkala_Sa_COMPLETE.docx` in Word → File → Save As → PDF. Required before re-uploading to TPT. *(Added 2026-04-08)*
-- [ ] **⚠️ Jill: Re-export 504 Sit-In COMPLETE.pdf from Word** — DOCX was fully rebuilt. Open `504_Sit_In_TPT/504_Sit_In_Unit_COMPLETE.docx` in Word → File → Save As → PDF. Required before re-uploading to TPT. *(Added 2026-04-08)*
+- [x] **⚠️ Jill: Re-export Zitkala-Ša COMPLETE.pdf from Word** — Done 2026-04-12. *(Done 2026-04-12)*
+- [x] **⚠️ Jill: Re-export 504 Sit-In COMPLETE.pdf from Word** — Done 2026-04-12. *(Done 2026-04-12)*
 - [ ] **⚠️ Jill: Trash old Frances Kelsey Symbol_Cards.pdf** — In Finder: `Frances Kelsey/Frances_Kelsey_TPT/Frances_Kelsey_Symbol_Cards.pdf` — delete this. Replaced by `Frances_Kelsey_Symbol_Pages.pdf`. *(Added 2026-04-08)*
 - [ ] **GitHub push — Apr 8 nonfiction fixes** — Files changed: `Products/Nonfiction Units/Zitkala-Sa/build_zitkala_sa.js`, `Products/Nonfiction Units/504 Sit In/build_504_sit_in.js`, `_Operations/Build/build_nonfiction_symbol_pages.py` (NEW). Open GitHub Desktop → commit → push. *(Added 2026-04-08)*
 
