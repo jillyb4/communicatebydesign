@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EC Week 2026 — Content Calendar</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f4f8; color: #1B1F3B; padding: 24px; }
+  h1 { color: #1B1F3B; font-size: 22px; font-weight: bold; margin-bottom: 4px; }
+  .subtitle { color: #006DA0; font-size: 14px; margin-bottom: 24px; }
+  .week-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 32px; }
+  .day-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
+  .day-header { padding: 12px 14px 10px; }
+  .day-label { font-size: 11px; font-weight: bold; color: white; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-name { font-size: 18px; font-weight: bold; color: white; line-height: 1.1; }
+  .day-date { font-size: 12px; color: white; opacity: 0.8; margin-top: 2px; }
+  .day-theme { font-size: 11px; color: white; opacity: 0.9; margin-top: 6px; font-style: italic; border-top: 1px solid rgba(255,255,255,0.25); padding-top: 6px; }
+  .day-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+  .platform-block { }
+  .platform-label { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; color: #94A3B8; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+  .platform-icon { width: 16px; height: 16px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; color: white; font-weight: bold; flex-shrink: 0; }
+  .ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .fb { background: #1877F2; }
+  .sub { background: #FF6719; }
+  .platform-content { font-size: 12px; color: #1B1F3B; line-height: 1.45; }
+  .cta-bar { background: #FFF8E7; border-left: 3px solid #FFB703; padding: 7px 10px; border-radius: 0 6px 6px 0; font-size: 11px; color: #1B1F3B; margin-top: auto; }
+  .cta-bar strong { color: #B45309; }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+  .done { background: #22C55E; }
+  .ready { background: #FFB703; }
+  .pending { background: #94A3B8; }
+  .legend { display: flex; gap: 16px; margin-bottom: 16px; font-size: 12px; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+
+  /* Day colors */
+  .mon .day-header { background: #006DA0; }
+  .tue .day-header { background: #1B1F3B; }
+  .wed .day-header { background: #D4614E; }
+  .thu .day-header { background: #6B21A8; }
+  .fri .day-header { background: #16803B; }
+
+  .highlight { background: #FFF3CD; border-radius: 4px; padding: 2px 5px; font-weight: bold; font-size: 11px; color: #92400E; }
+  .fire { font-size: 13px; }
+
+  /* Bottom summary */
+  .summary-table { width: 100%; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; }
+  .summary-table table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .summary-table th { background: #1B1F3B; color: white; padding: 10px 14px; text-align: left; font-size: 12px; }
+  .summary-table td { padding: 10px 14px; border-bottom: 1px solid #f0f4f8; vertical-align: top; }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:hover td { background: #f8fafc; }
+  .tag { display: inline-block; background: #E0F2FE; color: #0369A1; border-radius: 4px; padding: 1px 6px; font-size: 11px; margin: 1px; }
+  .tag.amber { background: #FEF3C7; color: #92400E; }
+  .tag.green { background: #DCFCE7; color: #15803D; }
+  .tag.purple { background: #F3E8FF; color: #7E22CE; }
+  .tag.coral { background: #FEE2E2; color: #991B1B; }
+  h2 { font-size: 15px; color: #1B1F3B; margin-bottom: 12px; margin-top: 28px; }
+</style>
+</head>
+<body>
+
+<h1>🎓 Exceptional Children's Week 2026</h1>
+<p class="subtitle">April 13–17 · "Turn the Page to Possibility: Literacy Success in Special Education" · Communicate by Design</p>
+
+<div class="legend">
+  <span class="legend-item"><span class="status-dot done"></span> Done / Ready to post</span>
+  <span class="legend-item"><span class="status-dot ready"></span> Built — needs Canva/record</span>
+  <span class="legend-item"><span class="status-dot pending"></span> Still to build</span>
+</div>
+
+<div class="week-grid">
+
+  <!-- MONDAY -->
+  <div class="day-card mon">
+    <div class="day-header">
+      <div class="day-label">Day 1</div>
+      <div class="day-name">Monday</div>
+      <div class="day-date">April 13</div>
+      <div class="day-theme">Literacy Engagement Methods</div>
+    </div>
+    <div class="day-body">
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon ig">IG</span> Instagram
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>5-slide carousel + 3 Story slides<br>
+          <em>Hook: "Every student deserves to be a reader. Not a version of a reader."</em><br>
+          CTA → TPT store
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> Facebook Page
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>Post: Literacy engagement intro. "Same text. Same expectation. Different path in."
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> FB Groups
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>Drop if relevant thread found. Template in content plan.
+        </div>
+      </div>
+      <div class="cta-bar"><strong>CTA:</strong> TPT store — V1/V2/V3 access model</div>
+    </div>
+  </div>
+
+  <!-- TUESDAY -->
+  <div class="day-card tue">
+    <div class="day-header">
+      <div class="day-label">Day 2 <span class="fire">⚡</span></div>
+      <div class="day-name">Tuesday</div>
+      <div class="day-date">April 14</div>
+      <div class="day-theme">Assistive Technology — HIGHEST LEVERAGE DAY</div>
+    </div>
+    <div class="day-body">
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon" style="background:#FF6719;">S</span> Substack
+        </div>
+        <div class="platform-content">
+          <span class="status-dot done"></span><strong>Post #6 auto-fires 9 AM</strong> — "Auditory Confirmation Loop." Scheduled task: <code>cbd-substack-auditory-confirmation-loop</code>
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon ig">IG</span> Instagram
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>Static post + 3 Story slides. Drop Story 1 with Substack link the moment post goes live.<br>
+          <em>"AT isn't a last resort. It's the first step."</em>
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> Facebook
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>Page post + FB Group drop.<br>
+          Template: <em>"I actually wrote about this today — [link]. AT removes barriers, but only when partners know how to close the loop."</em>
+        </div>
+      </div>
+      <div class="cta-bar"><strong>CTA:</strong> Substack Post #6 link — drive subscribers toward 200</div>
+    </div>
+  </div>
+
+  <!-- WEDNESDAY -->
+  <div class="day-card wed">
+    <div class="day-header">
+      <div class="day-label">Day 3</div>
+      <div class="day-name">Wednesday</div>
+      <div class="day-date">April 15</div>
+      <div class="day-theme">Student Identity + PB Companions</div>
+    </div>
+    <div class="day-body">
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon ig">IG</span> Instagram
+        </div>
+        <div class="platform-content">
+          <span class="status-dot ready"></span><strong>PB Companion reel — READY TO POST</strong><br>
+          7 slides · 4 sec each · 28 sec · Voiceover recorded ✓<br>
+          ⚠️ Add CTA slide in Canva first<br>
+          ⚠️ Update link in bio → A Friend for Henry (FREE)
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> Facebook Page
+        </div>
+        <div class="platform-content">
+          <span class="status-dot ready"></span>Post copy ready in EC_Week_Wed_Apr15 docx.<br>
+          Frame: whole-class AAC-inclusive read-alouds.
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> FB Groups
+        </div>
+        <div class="platform-content">
+          <span class="status-dot ready"></span>Drop copy ready in docx. Search K–3 / picture book / AAC threads.
+        </div>
+      </div>
+      <div class="cta-bar"><strong>CTA:</strong> A Friend for Henry FREE on TPT · Search: Communicate by Design</div>
+    </div>
+  </div>
+
+  <!-- THURSDAY -->
+  <div class="day-card thu">
+    <div class="day-header">
+      <div class="day-label">Day 4</div>
+      <div class="day-name">Thursday</div>
+      <div class="day-date">April 16</div>
+      <div class="day-theme">Diverse Voices — Nonfiction Line</div>
+    </div>
+    <div class="day-body">
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon ig">IG</span> Instagram
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>5-slide carousel + 3 Story slides<br>
+          <em>Hook: "Whose stories are we teaching? And who gets to read them?"</em><br>
+          Feature: Jennifer Keelan · Zitkala-Ša · Judy Heumann · Fred Korematsu
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> Facebook Page
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>Post: Diverse voices. "Same story. Every student." Link to nonfiction units in comments.
+        </div>
+      </div>
+      <div class="cta-bar"><strong>CTA:</strong> TPT nonfiction units — 6 live now</div>
+    </div>
+  </div>
+
+  <!-- FRIDAY -->
+  <div class="day-card fri">
+    <div class="day-header">
+      <div class="day-label">Day 5</div>
+      <div class="day-name">Friday</div>
+      <div class="day-date">April 17</div>
+      <div class="day-theme">Community Reading</div>
+    </div>
+    <div class="day-body">
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon ig">IG</span> Instagram
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>5-slide carousel + 3 Story slides<br>
+          <em>Hook: "The IEP team is the reading community. Are they equipped to be one?"</em><br>
+          Partner scripts · PB Companion 3-reading structure
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> Facebook Page
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span>End-of-week post + thank you. TPT store + Substack links.
+        </div>
+      </div>
+      <div class="platform-block">
+        <div class="platform-label">
+          <span class="platform-icon fb">f</span> FB Groups — Week Close
+        </div>
+        <div class="platform-content">
+          <span class="status-dot pending"></span><em>"I've been posting all week for Exceptional Children's Week — [store link]. Adapted reading with AAC built in."</em>
+        </div>
+      </div>
+      <div class="cta-bar"><strong>CTA:</strong> Subscribe to Substack — drive toward 200 subscribers</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ALSO TODAY -->
+<h2>⚠️ Also Due Today (Sunday Apr 12)</h2>
+<div class="summary-table" style="margin-bottom:28px;">
+  <table>
+    <tr>
+      <th>Platform</th>
+      <th>Action</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td><strong>Facebook Groups</strong></td>
+      <td>Drop Post #5 "Who Gets to Decide If the Voice Is Real?" — overdue since Apr 10.<br><em>Template: "I actually wrote about this — [link]. The short version: [one sentence]."</em><br>URL: communicatebydesign.substack.com/p/who-gets-to-decide-if-the-voice-is</td>
+      <td><span class="status-dot pending"></span>Pending</td>
+    </tr>
+    <tr>
+      <td><strong>Scheduled Tasks</strong></td>
+      <td>Click "Run now" on <code>cbd-research-scan</code> in Scheduled sidebar — pre-approves tools before first automated Monday 7:30 AM run</td>
+      <td><span class="status-dot pending"></span>Pending</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SUMMARY TABLE -->
+<h2>📋 Week at a Glance</h2>
+<div class="summary-table">
+  <table>
+    <tr>
+      <th>Day</th>
+      <th>Theme</th>
+      <th>IG</th>
+      <th>Facebook</th>
+      <th>Substack</th>
+      <th>Product Hook</th>
+      <th>CTA</th>
+    </tr>
+    <tr>
+      <td><strong>Mon 4/13</strong></td>
+      <td>Literacy engagement</td>
+      <td>5-slide carousel + 3 Stories</td>
+      <td>Page post</td>
+      <td>—</td>
+      <td><span class="tag">V1/V2/V3 model</span></td>
+      <td>TPT store</td>
+    </tr>
+    <tr>
+      <td><strong>Tue 4/14 ⚡</strong></td>
+      <td>Assistive Technology</td>
+      <td>Static post + 3 Stories</td>
+      <td>Page post + Group drop</td>
+      <td><span class="tag green">Post #6 auto 9AM</span></td>
+      <td><span class="tag">AT/AAC line</span> <span class="tag amber">UFLI</span></td>
+      <td>Substack link</td>
+    </tr>
+    <tr>
+      <td><strong>Wed 4/15</strong></td>
+      <td>Student identity</td>
+      <td><span class="tag coral">Reel — READY ✓</span></td>
+      <td>Page post + Group drop</td>
+      <td>—</td>
+      <td><span class="tag coral">PB Companions</span></td>
+      <td>A Friend for Henry FREE</td>
+    </tr>
+    <tr>
+      <td><strong>Thu 4/16</strong></td>
+      <td>Diverse voices</td>
+      <td>5-slide carousel + 3 Stories</td>
+      <td>Page post</td>
+      <td>—</td>
+      <td><span class="tag amber">Nonfiction (6 units)</span></td>
+      <td>TPT nonfiction</td>
+    </tr>
+    <tr>
+      <td><strong>Fri 4/17</strong></td>
+      <td>Community reading</td>
+      <td>5-slide carousel + 3 Stories</td>
+      <td>Page post + Group drop</td>
+      <td>—</td>
+      <td><span class="tag coral">PB Companions</span></td>
+      <td>Substack subscribe</td>
+    </tr>
+  </table>
+</div>
+
+<p style="margin-top:20px; font-size:11px; color:#94A3B8; text-align:center;">Communicate by Design · EC Week 2026 · Generated Apr 12, 2026</p>
+
+</body>
+</html>

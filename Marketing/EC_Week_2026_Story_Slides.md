@@ -241,7 +241,7 @@ Below in amber:
 **Visual concept:** Navy background. Two-part contrast layout. Top half: strikethrough text in slate (the wrong frame). Bottom half: bold white text (the right frame). Amber divider line between them.
 
 **Text top (slate, with strikethrough styling or just smaller/dimmer):**
-> "The SLP handles the AAC."
+> "AAC is someone else's job."
 
 **Amber divider line**
 
@@ -250,8 +250,8 @@ Below in amber:
 > Every adult. Every day.
 
 **Interactive element:** Poll sticker
-> Does your whole team have AAC tools — not just the SLP?
-> ✅ Working on it / ❌ It's mostly the SLP
+> Does your whole team have AAC tools — every adult in the room?
+> ✅ Working on it / ❌ Not yet
 
 ---
 

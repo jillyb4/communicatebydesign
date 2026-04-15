@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — Internal Home</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1020; color: #e2e8f0; min-height: 100vh; }
+
+  /* ── Nav ── */
+  .cbd-nav { background: #0d1020; border-bottom: 1px solid #2d3456; padding: 0 20px; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 200; height: 36px; font-size: 12px; }
+  .cbd-nav-brand { display: flex; align-items: center; gap: 6px; color: #94A3B8; font-size: 11px; letter-spacing: 0.05em; padding-right: 16px; border-right: 1px solid #2d3456; margin-right: 8px; white-space: nowrap; }
+  .cbd-nav-brand span { color: #FFB703; font-weight: 700; }
+  .cbd-nav-tabs { display: flex; align-items: center; gap: 2px; }
+  .cbd-nav-tab { display: flex; align-items: center; gap: 5px; padding: 0 12px; height: 36px; color: #94A3B8; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+  .cbd-nav-tab:hover { color: #fff; text-decoration: none; border-bottom-color: #2d3456; }
+  .cbd-nav-tab.active { color: #FFB703; border-bottom-color: #FFB703; }
+  .cbd-nav-ext { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .cbd-nav-ext-link { display: flex; align-items: center; gap: 4px; padding: 0 10px; height: 36px; color: #64748b; text-decoration: none; font-size: 11px; transition: color 0.15s; white-space: nowrap; }
+  .cbd-nav-ext-link:hover { color: #00B4D8; text-decoration: none; }
+
+  /* ── Hero ── */
+  .hero { padding: 48px 40px 32px; text-align: center; border-bottom: 1px solid #1e2544; }
+  .hero-icon { font-size: 40px; margin-bottom: 12px; }
+  .hero h1 { font-size: 28px; font-weight: 800; color: #FFB703; letter-spacing: -0.5px; }
+  .hero h1 span { color: #fff; }
+  .hero p { font-size: 13px; color: #64748b; margin-top: 8px; }
+
+  /* ── Grid ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+
+  .card { background: #141929; border: 1px solid #1e2544; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.1s; display: flex; flex-direction: column; gap: 8px; }
+  .card:hover { border-color: #FFB703; transform: translateY(-2px); text-decoration: none; color: inherit; }
+  .card-icon { font-size: 28px; }
+  .card-title { font-size: 15px; font-weight: 700; color: #fff; }
+  .card-desc { font-size: 12px; color: #64748b; line-height: 1.5; }
+  .card-tag { display: inline-block; margin-top: 4px; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; letter-spacing: 0.3px; }
+  .tag-internal { background: #1e2544; color: #94A3B8; }
+  .tag-external { background: #172033; color: #00B4D8; }
+  .tag-tpt { background: #1a2e1a; color: #4ade80; }
+
+  /* ── Section headers ── */
+  .section-label { grid-column: 1 / -1; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #2d3456; padding-top: 8px; border-top: 1px solid #1e2544; }
+  .section-label:first-child { border-top: none; padding-top: 0; }
+
+  /* ── Footer ── */
+  footer { text-align: center; padding: 24px; font-size: 11px; color: #2d3456; border-top: 1px solid #1e2544; }
+</style>
+</head>
+<body>
+
+<nav class="cbd-nav">
+  <div class="cbd-nav-brand">💬 <span>CbD</span> Internal</div>
+  <div class="cbd-nav-tabs">
+    <a class="cbd-nav-tab active" href="CbD_Home.html">🏠 Home</a>
+    <a class="cbd-nav-tab" href="CbD_Launch_Dashboard.html">📊 Operations</a>
+    <a class="cbd-nav-tab" href="CbD_Task_Dashboard.html">✅ Tasks</a>
+    <a class="cbd-nav-tab" href="CbD_Workflow_Visual.html">🔧 Workflow</a>
+    <a class="cbd-nav-tab" href="CbD_Vocabulary_Dashboard.html">📖 Vocabulary</a>
+    <a class="cbd-nav-tab" href="CbD_Skills_Dashboard.html">🎓 Skills</a>
+    <a class="cbd-nav-tab" href="CbD_TPT_Tag_Grid.html">🏷️ TPT Tags</a>
+  </div>
+  <div class="cbd-nav-ext">
+    <a class="cbd-nav-ext-link" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">Airtable ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">TPT ↗</a>
+    <a class="cbd-nav-ext-link" href="https://communicatebydesign.substack.com" target="_blank">Substack ↗</a>
+    <a class="cbd-nav-ext-link" href="https://www.canva.com" target="_blank">Canva ↗</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">💬</div>
+  <h1>Communicate <span>by Design</span></h1>
+  <p>Internal operations hub · Where AT meets practice · April 2026</p>
+</div>
+
+<div class="grid">
+
+  <!-- INTERNAL DASHBOARDS -->
+  <div class="section-label">Internal Dashboards</div>
+
+  <a class="card" href="CbD_Launch_Dashboard.html">
+    <div class="card-icon">📊</div>
+    <div class="card-title">Operations Dashboard</div>
+    <div class="card-desc">Live product status, KPIs, active alerts, launch pipeline, and revenue tracking across all product lines.</div>
+    <span class="card-tag tag-internal">Internal</span>
+  </a>
+
+  <a class="card" href="CbD_Task_Dashboard.html">
+    <div class="card-icon">✅</div>
+    <div class="card-title">Task Board</div>
+    <div class="card-desc">Kanban-style task tracking across all active work items — product builds, platform actions, and operations.</div>
+    <span class="card-tag tag-internal">Internal</span>
+  </a>
+
+  <a class="card" href="CbD_Workflow_Visual.html">
+    <div class="card-icon">🔧</div>
+    <div class="card-title">Workflow Visual</div>
+    <div class="card-desc">Pipeline workflow from concept to live — phase gates, build steps, and production checkpoints for every product line.</div>
+    <span class="card-tag tag-internal">Internal</span>
+  </a>
+
+  <a class="card" href="CbD_Vocabulary_Dashboard.html">
+    <div class="card-icon">📖</div>
+    <div class="card-title">Vocabulary Dashboard</div>
+    <div class="card-desc">641-word AAC vocabulary framework reference — core, fringe, heart words across all product lines. Fitzgerald Key alignment.</div>
+    <span class="card-tag tag-internal">Internal</span>
+  </a>
+
+  <a class="card" href="CbD_Skills_Dashboard.html">
+    <div class="card-icon">🎓</div>
+    <div class="card-title">Skills Dashboard</div>
+    <div class="card-desc">Instructional framework reference — SDI, UDL, ALS, Dialogic Reading, Descriptive Teaching Model, Communication Partner.</div>
+    <span class="card-tag tag-internal">Internal</span>
+  </a>
+
+  <a class="card" href="CbD_TPT_Tag_Grid.html">
+    <div class="card-icon">🏷️</div>
+    <div class="card-title">TPT Tag Grid</div>
+    <div class="card-desc">All 23 products with assigned TPT Tags, Subject Areas, and Custom Categories. Use this when editing TPT listings. Quarterly review: Jul 1.</div>
+    <span class="card-tag tag-tpt">TPT</span>
+  </a>
+
+  <!-- TPT PLATFORM -->
+  <div class="section-label">TPT Platform</div>
+
+  <a class="card" href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank">
+    <div class="card-icon">🛒</div>
+    <div class="card-title">TPT Store</div>
+    <div class="card-desc">23 products live. Buyer-facing store page. Check traffic, reviews, and sales here.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <a class="card" href="https://www.teacherspayteachers.com/MyProducts/ListProducts" target="_blank">
+    <div class="card-icon">📋</div>
+    <div class="card-title">My Product Listings</div>
+    <div class="card-desc">Edit listings, assign tags and custom categories, update files, and manage product status.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <a class="card" href="https://www.teacherspayteachers.com/CustomCategories/Manage" target="_blank">
+    <div class="card-icon">🗂️</div>
+    <div class="card-title">Custom Categories Manager</div>
+    <div class="card-desc">Enter and manage the 53 store categories. Delete duplicates (grade bands, heritage months) before assigning to listings.</div>
+    <span class="card-tag tag-tpt">TPT</span>
+  </a>
+
+  <!-- CONTENT & DISTRIBUTION -->
+  <div class="section-label">Content & Distribution</div>
+
+  <a class="card" href="https://airtable.com/appeaT8hkeXWqQKIj" target="_blank">
+    <div class="card-icon">📋</div>
+    <div class="card-title">Airtable Base</div>
+    <div class="card-desc">Authoritative source for all products, tasks, launch pipeline, vocabulary, and instructional activities. 5 tables.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <a class="card" href="https://communicatebydesign.substack.com" target="_blank">
+    <div class="card-icon">✍️</div>
+    <div class="card-title">Substack</div>
+    <div class="card-desc">5 posts live. Next: Post #6 "Auditory Confirmation Loop" — Tue Apr 14. Goal: 200 free subscribers to unlock paid tier.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <a class="card" href="https://www.canva.com" target="_blank">
+    <div class="card-icon">🎨</div>
+    <div class="card-title">Canva</div>
+    <div class="card-desc">IG templates, Pinterest pins, TPT covers, story slides. EC Week Canva builds needed Apr 13–17.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <a class="card" href="https://www.pinterest.com/CommunicatebyDesign" target="_blank">
+    <div class="card-icon">📌</div>
+    <div class="card-title">Pinterest</div>
+    <div class="card-desc">Daily brief runs at 8 AM. 2 List A first pins + 1 List B fresh pin per day. Paste pin URLs into Airtable after posting.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <a class="card" href="https://www.instagram.com/communicatebydesignaac" target="_blank">
+    <div class="card-icon">📸</div>
+    <div class="card-title">Instagram</div>
+    <div class="card-desc">@communicatebydesignaac — EC Week carousels + Stories Apr 13–17. 5 carousels + 15 story slides planned.</div>
+    <span class="card-tag tag-external">External ↗</span>
+  </a>
+
+  <!-- KEY REFERENCE FILES -->
+  <div class="section-label">Key Reference Files</div>
+
+  <a class="card" href="../../../Distrubution/Teachers Pay Teachers/CbD_TPT_Custom_Categories.md">
+    <div class="card-icon">📑</div>
+    <div class="card-title">TPT Custom Categories List</div>
+    <div class="card-desc">53 locked categories with copy-paste names and 255-char descriptions. Use when entering categories into TPT manager.</div>
+    <span class="card-tag tag-internal">Reference</span>
+  </a>
+
+  <a class="card" href="../../../Marketing/EC_Week_2026_Content_Plan.md">
+    <div class="card-icon">📅</div>
+    <div class="card-title">EC Week Content Plan</div>
+    <div class="card-desc">Apr 13–17 full content plan — carousel copy, captions, FB posts, and FB group drops for all 5 days.</div>
+    <span class="card-tag tag-internal">Reference</span>
+  </a>
+
+  <a class="card" href="../../../Marketing/EC_Week_2026_Story_Slides.md">
+    <div class="card-icon">📱</div>
+    <div class="card-title">EC Week Story Slides</div>
+    <div class="card-desc">15 Instagram Story slides (3/day) with exact text, Canva layout notes, and interactive element specs.</div>
+    <span class="card-tag tag-internal">Reference</span>
+  </a>
+
+  <a class="card" href="../../../Marketing/EC_Week_2026_Calendar.html">
+    <div class="card-icon">🗓️</div>
+    <div class="card-title">EC Week Calendar</div>
+    <div class="card-desc">Visual week-at-a-glance calendar for Exceptional Children's Week Apr 13–17, 2026.</div>
+    <span class="card-tag tag-internal">Reference</span>
+  </a>
+
+  <a class="card" href="../../../Substack/CbD_Substack_Post_Format_GoldStandard.md">
+    <div class="card-icon">📐</div>
+    <div class="card-title">Substack Gold Standard</div>
+    <div class="card-desc">Locked post format — structure, length, tone, Tailwind distribution package rules for every Substack post.</div>
+    <span class="card-tag tag-internal">Reference</span>
+  </a>
+
+</div>
+
+<footer>
+  Communicate by Design · Internal Hub · Updated April 2026 · For internal use only — do not share externally
+</footer>
+
+</body>
+</html>

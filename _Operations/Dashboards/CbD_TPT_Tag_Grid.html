@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPT Tag Assignment Grid — Communicate by Design</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; color: #1B1F3B; font-size: 13px; }
+
+  header { background: #1B1F3B; color: white; padding: 20px 32px; }
+  header h1 { font-size: 20px; font-weight: 700; letter-spacing: 0.3px; }
+  header p { font-size: 12px; color: #9ca3c8; margin-top: 4px; }
+
+  .legend { display: flex; gap: 20px; padding: 12px 32px; background: white; border-bottom: 1px solid #e2e6ef; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot-tag { background: #006DA0; }
+  .dot-cat { background: #FFB703; }
+  .dot-subj { background: #5B8C5A; }
+
+  .notice { background: #FFF8E7; border-left: 4px solid #FFB703; padding: 10px 32px; font-size: 12px; color: #5a4200; }
+  .notice strong { font-weight: 600; }
+  .notice.red { background: #FFF0F0; border-left-color: #c0392b; color: #5a0000; }
+
+  .table-wrap { padding: 24px 32px; overflow-x: auto; }
+
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+  th { background: #1B1F3B; color: white; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+  th.col-num { width: 32px; text-align: center; }
+  th.col-product { min-width: 220px; }
+  th.col-price { width: 60px; }
+  th.col-tags { min-width: 240px; }
+  th.col-subj { min-width: 160px; }
+  th.col-cats { min-width: 240px; }
+  th.col-format { min-width: 120px; }
+
+  tr:nth-child(even) td { background: #f9fafc; }
+  tr:hover td { background: #eef3f9; }
+
+  td { padding: 10px 12px; vertical-align: top; border-bottom: 1px solid #eaecf2; }
+  td.num { text-align: center; color: #888; font-size: 11px; font-weight: 600; }
+
+  .product-name { font-weight: 600; color: #1B1F3B; line-height: 1.4; }
+  .product-line { font-size: 10px; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .price { font-weight: 700; color: #1B1F3B; white-space: nowrap; }
+  .price.free { color: #5B8C5A; }
+
+  .tags-list, .cats-list, .subj-list, .fmt-list { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 500; white-space: nowrap; }
+  .tag-tpt { background: #dbeafe; color: #1e40af; }
+  .tag-subj { background: #dcfce7; color: #14532d; }
+  .tag-cat { background: #fef3c7; color: #78350f; }
+  .tag-fmt { background: #f3e8ff; color: #581c87; }
+
+  .section-row td { background: #2d3456 !important; color: #94A3B8; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 5px 12px; }
+
+  .ref-box { background: #1B1F3B; color: #e2e8f0; border-radius: 8px; padding: 20px 32px; margin: 0 32px 24px; font-size: 11px; line-height: 1.7; }
+  .ref-box h3 { color: #FFB703; font-size: 12px; margin-bottom: 8px; }
+  .ref-box .ref-section { margin-bottom: 12px; }
+  .ref-box .ref-label { color: #00B4D8; font-weight: 700; }
+
+  footer { text-align: center; padding: 20px; font-size: 11px; color: #888; border-top: 1px solid #e2e6ef; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏷️ TPT Tag Assignment Grid — Communicate by Design</h1>
+  <p>All 23 products · TPT listing order · Verified dropdown values only · Updated April 2026</p>
+</header>
+
+<div class="notice red">
+  <strong>⛔ HARD RULE:</strong> Only use values that exist exactly as written in TPT's dropdowns. Do NOT add new options, invent categories, or use values not confirmed from TPT screenshots. Subject Area = up to 3 · Tag = up to 6 · Format = up to 3 · Custom Category = from the 53-category master list only.
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-tag"></div> Tag (Theme/Audience/Language/Resource Type/Supports/Specialty/Speech Therapy) — up to 6</div>
+  <div class="legend-item"><div class="dot dot-subj"></div> Subject Area — up to 3 (verified TPT options only)</div>
+  <div class="legend-item"><div class="dot dot-cat"></div> Custom Category — from 53-category master list only</div>
+</div>
+
+<!-- VERIFIED DROPDOWN REFERENCE -->
+<div class="ref-box">
+  <h3>✅ Verified TPT Dropdown Values (from screenshots — use ONLY these)</h3>
+
+  <div class="ref-section">
+    <span class="ref-label">Subject Area (select up to 3):</span><br>
+    ELA: Reading · Literature · Poetry · Spelling · Vocabulary · Writing · Writing-Essays · Writing-Expository · Other (ELA)<br>
+    Health<br>
+    Math: Algebra · Algebra 2 · Applied Math · Arithmetic · Basic Operations · Calculus · Decimals · Financial Literacy · Fractions · Geometry · Graphing · Math Test Prep · Measurement · Mental Math · Money Math · Numbers · Order of Operations · Place Value · PreCalculus · Statistics<br>
+    Science: Anatomy · Archaeology · Astronomy · Basic Principles · Biology · Chemistry · Computer Science - Technology · Earth Sciences · Engineering · Environment · Family Consumer Sciences · Forensics · General Science<br>
+    Social Emotional: Character Education · Classroom Community · School Counseling · School Psychology · Social Emotional Learning<br>
+    Social Studies: AAPI History · African History · Ancient History · Asian Studies · Australian History · Black History · British History · Criminal Justice - Law · Economics · Elections - Voting · European History · Geography · Government · Latino and Hispanic Studies · Middle Ages · Native Americans · Psychology · Religion · U.S. History · World History · Other (Social Studies)<br>
+    World Languages: Chinese · French · Gaeilge · German · Hebrew · Italian · Japanese · Latin · Portuguese · Russian · Spanish · Other (World Language)<br>
+    For All Subjects · Not Subject Specific
+  </div>
+
+  <div class="ref-section">
+    <span class="ref-label">Tag (select up to 6) — confirmed sections:</span><br>
+    Audience: Homeschool · Parents · Staff &amp; Administrators · TPT Sellers<br>
+    Language: En español · En français · English (UK)<br>
+    Programs &amp; Methods &gt; Programs: Advanced Placement (AP) · Early Intervention · GATE / Gifted and Talented · International Baccalaureate (IB) · Montessori<br>
+    Supports &gt; ESL, EFL, and ELL · Special Education: Applied Behavior Analysis · Data · Life Skills · Neurodiversity · Screenings and Assessments · Social Skills · Visual Supports · Other (Special education)<br>
+    Specialty: Career and Technical Education · Child Care · Coaching · Cooking · Leadership · Occupational Therapy · Physical Therapy · Professional Development · Service Learning · Vocational Education · Other (Specialty)<br>
+    Speech Therapy: AAC · Fluency and Stuttering · Language · Speech Articulation · Voice · Other (Speech therapy)<br>
+    Resource Type: Activities · Assessment · Bell Ringers · Bibliographies · Bulletin Board Ideas · Centers · Classroom Forms · Classroom Management · Clip Art · Critical Thinking and Problem Solving · Cultural Activities · DBQs · Escape Rooms · Flash Cards · Games · Graphic Organizers · Guided Reading Books · Handouts · Homework · Independent Work Packet · Interactive Notebooks · Laboratory · Leadership Lessons · Lectures · Lessons · Literature Circles · Movie Guides · Outlines · Posters · Printables · Professional Documents · Project-based Learning · Projects · Reflective Journals for Teachers · Research · Rubrics · Scaffolded Notes · Scripts · Simulations · Songs · Study Guides · Study Skills · Task Cards · Teacher Manuals · Teacher Planners · Test Preparation · Thematic Unit Plans · Tools for Common Core · Tools for Sellers · Unit Plans · Webquests · Word Walls · Workbooks · Worksheets · Yearlong Curriculum<br>
+    Theme &gt; Holiday: AAPI History Month · April Fools' Day · Arbor Day · Black History Month · Christmas-Chanukah-Kwanzaa · Cinco de Mayo · Day of the Dead / Dia de los Muertos · Diwali · Earth Day · Easter · Father's Day · Groundhog Day · Halloween · Hispanic Heritage Month · July 4/Independence Day · Juneteenth · Labor Day · Lunar New Year · Mardi Gras · Martin Luther King Day · Memorial Day · Mother's Day · New Year · Passover · Presidents' Day · Ramadan · St. Patrick's Day · Thanksgiving · Valentine's Day · Veterans Day · Women's History Month<br>
+    Theme &gt; Seasonal: Autumn · Back to School · End of Year · Spring · Summer · Winter
+  </div>
+
+  <div class="ref-section">
+    <span class="ref-label">Format (select up to 3) — confirm in TPT UI before entering:</span> Microsoft Word · PDF · Google Docs™ · PowerPoint · PPTX · ZIP (confirm exact strings in TPT — screenshot not yet captured for full Format dropdown)
+  </div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+  <tr>
+    <th class="col-num">#</th>
+    <th class="col-product">Product</th>
+    <th class="col-price">Price</th>
+    <th class="col-subj">Subject Area (≤3)</th>
+    <th class="col-tags">Tags (≤6)</th>
+    <th class="col-cats">Custom Categories (3–6)</th>
+  </tr>
+</thead>
+<tbody>
+
+<!-- POETRY -->
+<tr class="section-row"><td colspan="6">Poetry Reading Units</td></tr>
+<tr>
+  <td class="num">1</td>
+  <td><div class="product-name">What the Voice Carries | Poetry &amp; Figurative Language | Adapted ELA | SPED 5-7th</div><div class="product-line">Poetry Reading Units</div></td>
+  <td><div class="price">$9.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Literature</span><span class="tag tag-subj">Poetry</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">Figurative Language and Poetry</span><span class="tag tag-tpt">Back to School</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Figurative Language and Poetry</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">For the Special Educator</span><span class="tag tag-cat">SDI - Specially Designed Instruction</span><span class="tag tag-cat">Communication Access Packets</span></div></td>
+</tr>
+
+<!-- PICTURE BOOK COMPANIONS -->
+<tr class="section-row"><td colspan="6">Picture Book Companions (K–3)</td></tr>
+<tr>
+  <td class="num">2</td>
+  <td><div class="product-name">Ian's Walk | AAC Read-Aloud Companion | Character Perspective | SPED K-1</div><div class="product-line">Picture Book Companions</div></td>
+  <td><div class="price">$5.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Social Emotional Learning</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Activities</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Evidence-Based Read-Aloud (K-3)</span><span class="tag tag-cat">Picture Book Companions (K-3)</span><span class="tag tag-cat">Students With Autism</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">3</td>
+  <td><div class="product-name">My Friend Isabelle | AAC Read-Aloud Companion | SPED K-1</div><div class="product-line">Picture Book Companions</div></td>
+  <td><div class="price">$5.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Social Emotional Learning</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Activities</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Evidence-Based Read-Aloud (K-3)</span><span class="tag tag-cat">Picture Book Companions (K-3)</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span><span class="tag tag-cat">Students Who Use AAC</span></div></td>
+</tr>
+<tr>
+  <td class="num">4</td>
+  <td><div class="product-name">I Talk Like a River | AAC Companion | Communication Identity | SPED K-2</div><div class="product-line">Picture Book Companions</div></td>
+  <td><div class="price">$5.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Social Emotional Learning</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Activities</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Evidence-Based Read-Aloud (K-3)</span><span class="tag tag-cat">Picture Book Companions (K-3)</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">Students With Complex Communication Needs</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">5</td>
+  <td><div class="product-name">Emmanuel's Dream | AAC Read-Aloud Companion | Biography + Persistence | SPED 1-2</div><div class="product-line">Picture Book Companions</div></td>
+  <td><div class="price">$5.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Activities</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Evidence-Based Read-Aloud (K-3)</span><span class="tag tag-cat">Picture Book Companions (K-3)</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">Students With Physical Disabilities</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">6</td>
+  <td><div class="product-name">A Friend for Henry | AAC Read-Aloud Companion | Belonging | SPED K-1</div><div class="product-line">Picture Book Companions</div></td>
+  <td><div class="price free">FREE</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Social Emotional Learning</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Activities</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Evidence-Based Read-Aloud (K-3)</span><span class="tag tag-cat">Picture Book Companions (K-3)</span><span class="tag tag-cat">FREE Resources - Start Here</span><span class="tag tag-cat">Students With Autism</span><span class="tag tag-cat">Communication Access Packets</span></div></td>
+</tr>
+<tr>
+  <td class="num">7</td>
+  <td><div class="product-name">All the Way to the Top | AAC Read-Aloud Companion | Disability Rights | SPED K-3</div><div class="product-line">Picture Book Companions</div></td>
+  <td><div class="price">$5.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Activities</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Disability Pride Month (July)</span></div>
+  <p style="font-size:10px;color:#888;margin-top:4px;">Note: "Disability Pride Month (July)" is in Theme &gt; Holiday if confirmed in Tag dropdown</p></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Evidence-Based Read-Aloud (K-3)</span><span class="tag tag-cat">Picture Book Companions (K-3)</span><span class="tag tag-cat">AT Consideration and Evaluation</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">Disability Pride Month (July)</span></div></td>
+</tr>
+
+<!-- FICTION -->
+<tr class="section-row"><td colspan="6">Fiction Anchor Text Units</td></tr>
+<tr>
+  <td class="num">8</td>
+  <td><div class="product-name">Wonder | Novel Study Adaptive SDI and AAC | SPED Grades 3-8</div><div class="product-line">Fiction Anchor Text Units</div></td>
+  <td><div class="price">$6.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Literature</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Fiction and Narrative Text</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">SDI - Specially Designed Instruction</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+
+<!-- NONFICTION BUNDLES -->
+<tr class="section-row"><td colspan="6">Bundles</td></tr>
+<tr>
+  <td class="num">9</td>
+  <td><div class="product-name">Nonfiction Bundle | Keiko + Radium Girls | Adapted Reading | SPED Grades 6-10</div><div class="product-line">Bundle</div></td>
+  <td><div class="price">$18.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">Bundles and Value Sets</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">10</td>
+  <td><div class="product-name">AT &amp; AAC Toolkit Bundle | Assistive Technology | IEP Special Education</div><div class="product-line">Bundle</div></td>
+  <td><div class="price">$10.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">Data</span><span class="tag tag-tpt">Visual Supports</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Classroom Forms</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">Bundles and Value Sets</span><span class="tag tag-cat">IEP Goal Writing</span><span class="tag tag-cat">AT Consideration and Evaluation</span><span class="tag tag-cat">For IEP Teams</span></div></td>
+</tr>
+
+<!-- AT/AAC IEP TEAM -->
+<tr class="section-row"><td colspan="6">AT/AAC IEP Team Tools</td></tr>
+<tr>
+  <td class="num">11</td>
+  <td><div class="product-name">FREE Universal AAC Data Tracker | IEP Goal Tracking | Special Education AAC</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price free">FREE</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Data</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Screenings and Assessments</span><span class="tag tag-tpt">Classroom Forms</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">Data Collection and Progress Monitoring</span><span class="tag tag-cat">FREE Resources - Start Here</span><span class="tag tag-cat">For IEP Teams</span><span class="tag tag-cat">AAC Implementation</span></div></td>
+</tr>
+
+<!-- NONFICTION UNITS -->
+<tr class="section-row"><td colspan="6">Nonfiction Reading Units (Grades 6–10)</td></tr>
+<tr>
+  <td class="num">12</td>
+  <td><div class="product-name">Capitol Crawl Nonfiction Lesson | Disability Rights | SPED Grades 6-10</div><div class="product-line">Nonfiction Reading Units</div></td>
+  <td><div class="price">$9.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Disability Pride Month (July)</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">Disability Pride Month (July)</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">13</td>
+  <td><div class="product-name">Frances Kelsey CER Nonfiction Unit | Women's History FDA | SPED Grades 6-10</div><div class="product-line">Nonfiction Reading Units</div></td>
+  <td><div class="price">$11.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Women's History Month</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">CER - Claim Evidence Reasoning</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">14</td>
+  <td><div class="product-name">Radium Girls Nonfiction Unit | Women's History | Adapted Reading | SPED 6-10</div><div class="product-line">Nonfiction Reading Units</div></td>
+  <td><div class="price">$11.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Women's History Month</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">15</td>
+  <td><div class="product-name">504 Sit-In Nonfiction Unit | Disability History | SPED AAC Grades 6-10</div><div class="product-line">Nonfiction Reading Units</div></td>
+  <td><div class="price">$11.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">U.S. History</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Disability Pride Month (July)</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">Disability Pride Month (July)</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">16</td>
+  <td><div class="product-name">Zitkala-Ša Nonfiction Unit | Native American History | Adapted Reading SPED 6-10</div><div class="product-line">Nonfiction Reading Units</div></td>
+  <td><div class="price">$9.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Native Americans</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+<tr>
+  <td class="num">17</td>
+  <td><div class="product-name">Keiko &amp; Free Willy Nonfiction Unit | Adapted Reading | SPED AAC Grades 6-10</div><div class="product-line">Nonfiction Reading Units</div></td>
+  <td><div class="price">$9.95</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Reading</span><span class="tag tag-subj">Environment</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Lessons</span><span class="tag tag-tpt">Graphic Organizers</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">Nonfiction Reading Units</span><span class="tag tag-cat">Adapted Reading - Three Lexile Levels</span><span class="tag tag-cat">Communication Access Packets</span><span class="tag tag-cat">For the Special Educator</span></div></td>
+</tr>
+
+<!-- AT/AAC IEP TEAM CONTINUED -->
+<tr class="section-row"><td colspan="6">AT/AAC IEP Team Tools (continued)</td></tr>
+<tr>
+  <td class="num">18</td>
+  <td><div class="product-name">Finding Symbols for AAC Visual Supports | Free Reference Guide for IEP Teams</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price free">FREE</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Visual Supports</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Handouts</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">FREE Resources - Start Here</span><span class="tag tag-cat">Symbol-Supported Vocabulary</span><span class="tag tag-cat">For IEP Teams</span><span class="tag tag-cat">Communication Partner Training</span></div></td>
+</tr>
+<tr>
+  <td class="num">19</td>
+  <td><div class="product-name">FREE AT Consideration Checklist | Assistive Technology IEP | Special Education</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price free">FREE</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Classroom Forms</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Screenings and Assessments</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">AT Consideration and Evaluation</span><span class="tag tag-cat">AT Consideration - Required at Every IEP</span><span class="tag tag-cat">FREE Resources - Start Here</span><span class="tag tag-cat">For IEP Teams</span></div></td>
+</tr>
+<tr>
+  <td class="num">20</td>
+  <td><div class="product-name">IEP AT Consideration Toolkit | Assistive Technology Forms | Special Education</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price">$4.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Classroom Forms</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Screenings and Assessments</span><span class="tag tag-tpt">Data</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">AT Consideration and Evaluation</span><span class="tag tag-cat">AT Consideration - Required at Every IEP</span><span class="tag tag-cat">IDEA Compliance Tools</span><span class="tag tag-cat">For IEP Teams</span></div></td>
+</tr>
+<tr>
+  <td class="num">21</td>
+  <td><div class="product-name">AAC Data Collection Forms | Goal Tracking for IEP Teams | Special Education</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price">$3.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Data</span><span class="tag tag-tpt">Classroom Forms</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Screenings and Assessments</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">Data Collection and Progress Monitoring</span><span class="tag tag-cat">IEP Goal Writing</span><span class="tag tag-cat">For IEP Teams</span><span class="tag tag-cat">AAC Implementation</span></div></td>
+</tr>
+<tr>
+  <td class="num">22</td>
+  <td><div class="product-name">AAC Communication Partner Quick Guide | Aided Language Input | Special Education</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price">$3.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Handouts</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Neurodiversity</span><span class="tag tag-tpt">Professional Development</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">Communication Partner Training</span><span class="tag tag-cat">AAC Implementation</span><span class="tag tag-cat">For IEP Teams</span><span class="tag tag-cat">Capacity Building for IEP Teams</span></div></td>
+</tr>
+<tr>
+  <td class="num">23</td>
+  <td><div class="product-name">Visual Schedule Template Pack | Special Education | AAC &amp; AT Supports</div><div class="product-line">AT/AAC IEP Team</div></td>
+  <td><div class="price">$4.00</div></td>
+  <td><div class="subj-list"><span class="tag tag-subj">Not Subject Specific</span></div></td>
+  <td><div class="tags-list"><span class="tag tag-tpt">Visual Supports</span><span class="tag tag-tpt">Other (Special education)</span><span class="tag tag-tpt">AAC</span><span class="tag tag-tpt">Classroom Management</span><span class="tag tag-tpt">Neurodiversity</span></div></td>
+  <td><div class="cats-list"><span class="tag tag-cat">AT/AAC IEP Team Tools</span><span class="tag tag-cat">Visual Supports and Schedules</span><span class="tag tag-cat">Students Who Use AAC</span><span class="tag tag-cat">For IEP Teams</span><span class="tag tag-cat">For the Paraeducator / Para</span></div></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="notice" style="margin: 0 32px 24px; border-radius: 6px;">
+  <strong>⚠️ Format column not shown:</strong> Format values (Microsoft Word, PDF, Google Docs™, PowerPoint, etc.) need to be confirmed from TPT's Format dropdown directly — the full Format dropdown was not captured in screenshots. Enter Format in TPT UI based on what you see in the dropdown. Do not guess format strings.
+</div>
+
+<div class="notice" style="margin: 0 32px 24px; border-radius: 6px; background:#fff0f0; border-left-color:#c0392b; color:#5a0000;">
+  <strong>⚠️ Categories to DELETE from TPT before using this grid:</strong> Auditory Confirmation Loop · Multi-Access Response Design · Partner Scripting Tools · Fringe Vocabulary Focus · Core Vocabulary Focus · Presumed Competence · PreK-Kindergarten · Students in Early Intervention (PreK-K) — these either need to be replaced with the 53 approved categories or removed entirely.
+</div>
+
+<footer>
+  Communicate by Design · TPT Tag Assignment Grid · Verified dropdown values from TPT screenshots · Quarterly review: Jul 1, 2026
+</footer>
+
+</body>
+</html>

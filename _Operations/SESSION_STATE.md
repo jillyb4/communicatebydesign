@@ -4,7 +4,15 @@
 
 ---
 
-## What Changed This Session (2026-04-11 — Research Library + Weekly Scan)
+## What Changed This Session (2026-04-12 — TPT Taxonomy Locked in Airtable)
+
+- **TPT Tag Grid rebuilt** — `Distrubution/Teachers Pay Teachers/CbD_TPT_Tag_Grid.html` and `_Operations/Dashboards/CbD_TPT_Tag_Grid.html` (both in sync). All 23 products assigned Subject Area, Tags, Custom Categories using ONLY verified TPT screenshot values. Hard rule documented at top of grid: never invent, rename, or add options.
+- **Airtable TPT Format field (`fldB9lPPVDht1pW8D`) — CORRECT** — 22 verified options matching TPT Format dropdown exactly (Audio, Digital: Boom Cards, Digital: Canva, Digital: Prezi, Digital: Seesaw, Digital: Other (Digital), Easel: Easel Activities, Easel: Easel Assessments, eBook, Fonts, Google Apps, Image, Interactive Whiteboards: Activboard Activities, Interactive Whiteboards: ActiveInspire Flipchart, Interactive Whiteboards: SMART Notebook, Microsoft: Microsoft Excel, Microsoft: Microsoft OneDrive, Microsoft: Microsoft PowerPoint, Microsoft: Microsoft Publisher, Microsoft: Microsoft Word, PDF, Video). Do not touch.
+- **Airtable TPT Tags field (`fldA8BMhXXrDkrjji`) — OLD, singleLineText — DELETE MANUALLY** — Was a plain text field, cannot hold dropdown choices. New field created: **`TPT Tags (NEW)` (`fldGl1bOucir0OQZO`)** — multipleSelects, 129 exact TPT Tag options (Audience, Language, Programs & Methods, Resource Type, Supports, Specialty, Speech Therapy, Theme/Holiday, Theme/Seasonal). After deleting old field, rename new field to "TPT Tags."
+- **Airtable TPT Subject Areas field (`fldDXxOjBk4YZJyfF`) — STILL HAS INVENTED VALUES** — Current bad values: English Language Arts, Special Education, Speech Therapy, Life Skills, Social Skills, Phonics, Vocabulary. These do not exist in TPT's Subject Area dropdown. ⚠️ Needs to be replaced with full verified TPT Subject Area list (see Key Decisions below).
+- **HARD RULE established and documented:** Airtable TPT fields (Subject Areas, Tags, Format, Custom Categories) must contain ONLY exact strings from TPT's dropdown UI. Never invent, abbreviate, or rename. Screenshots are the source of truth.
+
+## What Changed Previous Session (2026-04-11 — Research Library + Weekly Scan)
 
 - **Airtable Research Library created:** New table `tblKpzHsm4HHe3qsa` in base `appeaT8hkeXWqQKIj`. Fields: Title, Authors, Year, Journal/Source, DOI/URL, Topic Area (15 multiselect tags), Key Findings, CbD Application, CbD File, Full Text Access, Used in Substack, Used in Product, Date Added.
 - **10 existing research files migrated to Airtable:** All research from `Research/` folder inventoried and logged. Includes Romano et al. 2026 (LSHSS writing/AAC study — paywalled, email sent to Nicole Romano 4/11/2026), Spencer & Petersen 2020, OpenAAC State of AAC 2026, UFLI framework, AAC phonics/literacy, core vocabulary, alternative pencils, picture book companions, poetry units, and i-Ready concerns.
@@ -108,6 +116,8 @@ Diagnose:
 2. **Substack** — #2. Goal: **200 followers to unlock paid monthly subscriber feature.** Every post + FB drop must actively drive toward this number. Check follower count at start of each Substack session.
 
 ## Key Decisions Made (Do Not Re-Litigate)
+- **TPT taxonomy fields in Airtable (LOCKED 2026-04-12):** Subject Areas, Tags, Format, Custom Categories must use ONLY exact TPT dropdown strings from screenshots. No inventing, abbreviating, or renaming. TPT Tag Grid HTML is the authoritative reference doc. Format field is correct (22 options). Tags (NEW) field created with 129 options — delete old singleLineText TPT Tags field and rename TPT Tags (NEW) → TPT Tags. Subject Areas still needs old invented values removed.
+- **Verified TPT Subject Area options (from screenshots):** ELA: Reading · Literature · Poetry · Writing · Vocabulary · Spelling · Writing-Expository · Writing-Essays · Other (ELA) | Social Emotional: Social Emotional Learning · Character Education · Classroom Community · School Counseling · School Psychology | Social Studies: U.S. History · Native Americans · Black History · AAPI History · African History · Ancient History · Asian Studies · Economics · Elections - Voting · European History · Geography · Government · Latino and Hispanic Studies · Middle Ages · Psychology · Religion · World History · Australian History · British History · Criminal Justice - Law · Other (Social Studies) | Science: Environment · Anatomy · Archaeology · Astronomy · Basic Principles · Biology · Chemistry · Computer Science - Technology · Earth Sciences · Engineering · Family Consumer Sciences · Forensics · General Science | Math (full list confirmed) | World Languages (full list confirmed) | For All Subjects · Not Subject Specific
 - UFLI pricing LOCKED: FREE (Lessons 1–5) / $20 (Lessons 6–34). Old $1/lesson pricing RETIRED.
 - UFLI covers: ✓ DONE in Canva. Pinterest/reel: ✓ Linked. Blocker is content consistency, not covers.
 - Poetry color LOCKED: docs = #6B21A8 / digital = #C084FC

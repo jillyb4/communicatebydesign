@@ -307,7 +307,7 @@ It's the last day of Exceptional Children's Week. Today's theme: community readi
 
 Community reading only works if every student can participate. Not observe. Participate.
 
-That requires tools every adult in the room can use — not just the SLP. The para who never got AAC training. The gen ed teacher who has 28 other students. The family who wants to read the same book at home.
+That requires tools every adult in the room can use — the para who never got AAC training, the gen ed teacher who has 28 other students, the family who wants to read the same book at home. Every partner. Every day.
 
 Every Communicate by Design picture book companion includes partner scripts for three structured reads, a full communication access packet, and symbol support — so the whole community is actually equipped.
 
