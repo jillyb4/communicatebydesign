@@ -527,6 +527,7 @@ def make_mcq_page(doc: WorksheetDoc, title: str, questions: list,
 
 def make_short_answer_page(doc: WorksheetDoc, title: str, questions: list,
                             word_bank: list = None,
+                            annotation_codes: list = None,
                             access_note: str = None) -> list:
     """
     Short answer page with optional sentence frames and optional word bank.
@@ -537,6 +538,13 @@ def make_short_answer_page(doc: WorksheetDoc, title: str, questions: list,
         Students circle, point to, or reference these words when composing
         their response. Words should come from the CAP — not new vocabulary.
         Pass None (default) for V1/V2 — nothing is printed.
+
+    annotation_codes : list of (code_str, fk_color_str) tuples or None
+        Optional persistent reference strip above the footer — small FK-bordered
+        chips showing the annotation codes for this unit. Students keep these in
+        view while writing so they don't have to flip back to the annotation guide.
+        Example: [("[TRAIT]", "green"), ("[WHY]", "blue"), ("[CHANGE]", "orange")]
+        Pass None (default) if the unit doesn't use annotation codes.
 
     Each question dict:
       prompt / text    : str
@@ -591,6 +599,9 @@ def make_short_answer_page(doc: WorksheetDoc, title: str, questions: list,
         ]))
         story.append(KeepTogether(q_table))
 
+    if annotation_codes:
+        story.append(_annotation_chip_strip(annotation_codes, doc.usable_width))
+        story.append(Spacer(1, 4))
     story.append(doc.thin_rule(space_before=4, space_after=3))
     story.append(doc.footer())
     story.append(PageBreak())
@@ -606,6 +617,7 @@ def make_cer_page(doc: WorksheetDoc, title: str, prompt: str,
                   evidence_slots: int = 2,
                   reasoning_lines: int = 3,
                   word_bank: list = None,
+                  annotation_codes: list = None,
                   access_note: str = None) -> list:
     """
     Claim-Evidence-Reasoning organizer.
@@ -687,6 +699,9 @@ def make_cer_page(doc: WorksheetDoc, title: str, prompt: str,
     story += _writing_lines(usable, count=reasoning_lines)
     story.append(Spacer(1, 8))
 
+    if annotation_codes:
+        story.append(_annotation_chip_strip(annotation_codes, usable))
+        story.append(Spacer(1, 4))
     story.append(doc.thin_rule(space_before=4, space_after=3))
     story.append(doc.footer())
     story.append(PageBreak())
@@ -1326,6 +1341,247 @@ def make_partner_prompt_card(doc: WorksheetDoc,
         story.append(Spacer(1, 6))
 
     story.append(Spacer(1, 8))
+    story.append(doc.thin_rule(space_before=4, space_after=3))
+    story.append(doc.footer())
+    story.append(PageBreak())
+    return story
+
+
+# ═══════════════════════════════════════════════════════════
+#  HELPER: ANNOTATION CHIP STRIP
+# ═══════════════════════════════════════════════════════════
+
+def _annotation_chip_strip(codes: list, usable_width: float) -> Table:
+    """
+    A persistent reference strip of annotation code chips — rendered above the
+    footer on any student response page that uses annotation codes.
+
+    Students keep this in view while writing so they don't have to flip back
+    to the annotation guide page.
+
+    Print-safe: white fill, FK-colored 1.5pt border, navy label text.
+    Never FK background fill.
+
+    codes : list of (code_str, fk_color_str) tuples
+        Example: [("[TRAIT]", "green"), ("[WHY]", "blue"), ("[CHANGE]", "orange")]
+        fk_color_str must be a key in FKC_BORDER ("green","orange","yellow",
+        "blue","pink","white").
+    """
+    label_style = ParagraphStyle("chip_label",
+        fontName="Helvetica-Bold", fontSize=7.5,
+        textColor=NAVY, leading=10, alignment=TA_CENTER)
+    header_style = ParagraphStyle("chip_hdr",
+        fontName="Helvetica-Oblique", fontSize=7,
+        textColor=SLATE, leading=9)
+
+    chip_cells = []
+    for code_str, fk_col in codes:
+        border_col = FKC_BORDER.get(fk_col, FKC_BORDER["white"])
+        chip = Table(
+            [[Paragraph(code_str, label_style)]],
+            colWidths=[1.1 * inch],
+            rowHeights=[0.22 * inch]
+        )
+        chip.setStyle(TableStyle([
+            ("BOX",           (0,0), (0,0), 1.5, border_col),
+            ("BACKGROUND",    (0,0), (0,0), WHITE),
+            ("ALIGN",         (0,0), (0,0), "CENTER"),
+            ("VALIGN",        (0,0), (0,0), "MIDDLE"),
+            ("TOPPADDING",    (0,0), (0,0), 2),
+            ("BOTTOMPADDING", (0,0), (0,0), 2),
+            ("LEFTPADDING",   (0,0), (0,0), 4),
+            ("RIGHTPADDING",  (0,0), (0,0), 4),
+        ]))
+        chip_cells.append(chip)
+
+    # Wrapper: label column + chip row
+    header_cell = Paragraph("Annotation codes:", header_style)
+    all_cells   = [header_cell] + chip_cells
+    col_widths  = [1.0 * inch] + [1.15 * inch] * len(codes)
+
+    strip = Table([all_cells], colWidths=col_widths)
+    strip.setStyle(TableStyle([
+        ("BACKGROUND",    (0,0), (-1,-1), WHITE),
+        ("VALIGN",        (0,0), (-1,-1), "MIDDLE"),
+        ("TOPPADDING",    (0,0), (-1,-1), 0),
+        ("BOTTOMPADDING", (0,0), (-1,-1), 0),
+        ("LEFTPADDING",   (0,0), (-1,-1), 0),
+        ("RIGHTPADDING",  (0,0), (-1,-1), 6),
+    ]))
+    return strip
+
+
+# ═══════════════════════════════════════════════════════════
+#  TEMPLATE 9: BEFORE / AFTER PAGE
+# ═══════════════════════════════════════════════════════════
+
+def make_before_after_page(doc: WorksheetDoc, title: str,
+                            col_a_label: str, col_b_label: str,
+                            prompt: str = None,
+                            connector: str = "→",
+                            col_a_color=None, col_b_color=None,
+                            rows: int = 6,
+                            annotation_codes: list = None,
+                            access_note: str = None) -> list:
+    """
+    Two-column comparison page: Before/After, Cause/Effect, Then/Now, etc.
+    Column headers: white fill + colored border + navy bold text.
+    Column bodies: white, ruled lines, navy 3pt left accent bar.
+    No fills anywhere students write.
+
+    col_a_label : str  — left column header  (e.g. "Before Memories")
+    col_b_label : str  — right column header (e.g. "After Memories")
+    prompt      : str  — the literary question (asks the question, never narrates)
+    connector   : str  — symbol between columns (default "→"; use "↔" for contrast)
+    col_a_color : color — border color for left header  (default SLATE)
+    col_b_color : color — border color for right header (default TEAL)
+    rows        : int  — number of ruled writing lines per column (default 6)
+
+    annotation_codes : list of (code_str, fk_color_str) or None
+        Persistent chip strip above footer. Same as make_short_answer_page().
+
+    Example call:
+        make_before_after_page(doc,
+            title="Part 3 — What Jonas Feels",
+            col_a_label="Before Memories",
+            col_b_label="After Memories",
+            col_b_color=TEAL,
+            prompt="How does Jonas change after he receives the memory of color?",
+            annotation_codes=[("[THEME]", "green"), ("[SHIFT]", "orange")],
+        )
+    """
+    S        = doc.S
+    usable   = doc.usable_width
+    col_a_color = col_a_color or colors.HexColor("#475569")  # dark slate
+    col_b_color = col_b_color or TEAL
+    story    = doc.page_header_block(title)
+
+    if access_note:
+        story.append(Paragraph(access_note, S["access_note"]))
+        story.append(Spacer(1, 6))
+
+    if prompt:
+        prompt_tbl = Table(
+            [[Paragraph(prompt, S["cer_prompt"])]],
+            colWidths=[usable]
+        )
+        prompt_tbl.setStyle(TableStyle([
+            ("LINEBEFORE",    (0,0), (0,0), 3, TEAL),
+            ("BACKGROUND",    (0,0), (0,0), WHITE),
+            ("TOPPADDING",    (0,0), (0,0), 5),
+            ("BOTTOMPADDING", (0,0), (0,0), 5),
+            ("LEFTPADDING",   (0,0), (0,0), 8),
+            ("RIGHTPADDING",  (0,0), (0,0), 0),
+        ]))
+        story.append(prompt_tbl)
+        story.append(Spacer(1, 10))
+
+    # Column widths — connector column is narrow, fixed
+    CONN_W  = 0.35 * inch
+    col_w   = (usable - CONN_W) / 2
+    HDR_H   = 0.36 * inch
+
+    # ── Column A header ───────────────────────────────────────────────────────
+    hdr_a = Table(
+        [[Paragraph(f"<b>{col_a_label}</b>",
+            ParagraphStyle("ba_hdr", fontName="Helvetica-Bold",
+                fontSize=11, textColor=NAVY, leading=15))]],
+        colWidths=[col_w], rowHeights=[HDR_H]
+    )
+    hdr_a.setStyle(TableStyle([
+        ("BOX",           (0,0), (0,0), 2.0, col_a_color),
+        ("BACKGROUND",    (0,0), (0,0), WHITE),
+        ("VALIGN",        (0,0), (0,0), "MIDDLE"),
+        ("LEFTPADDING",   (0,0), (0,0), 10),
+        ("RIGHTPADDING",  (0,0), (0,0), 6),
+        ("TOPPADDING",    (0,0), (0,0), 0),
+        ("BOTTOMPADDING", (0,0), (0,0), 0),
+    ]))
+
+    # ── Column B header ───────────────────────────────────────────────────────
+    hdr_b = Table(
+        [[Paragraph(f"<b>{col_b_label}</b>",
+            ParagraphStyle("ba_hdr2", fontName="Helvetica-Bold",
+                fontSize=11, textColor=NAVY, leading=15))]],
+        colWidths=[col_w], rowHeights=[HDR_H]
+    )
+    hdr_b.setStyle(TableStyle([
+        ("BOX",           (0,0), (0,0), 2.0, col_b_color),
+        ("BACKGROUND",    (0,0), (0,0), WHITE),
+        ("VALIGN",        (0,0), (0,0), "MIDDLE"),
+        ("LEFTPADDING",   (0,0), (0,0), 10),
+        ("RIGHTPADDING",  (0,0), (0,0), 6),
+        ("TOPPADDING",    (0,0), (0,0), 0),
+        ("BOTTOMPADDING", (0,0), (0,0), 0),
+    ]))
+
+    # ── Connector ─────────────────────────────────────────────────────────────
+    conn_para = Paragraph(
+        f"<b>{connector}</b>",
+        ParagraphStyle("conn", fontName="Helvetica-Bold", fontSize=16,
+            textColor=AMBER, leading=20, alignment=TA_CENTER)
+    )
+    conn_cell = Table([[conn_para]], colWidths=[CONN_W], rowHeights=[HDR_H])
+    conn_cell.setStyle(TableStyle([
+        ("BACKGROUND",    (0,0), (0,0), WHITE),
+        ("VALIGN",        (0,0), (0,0), "MIDDLE"),
+        ("TOPPADDING",    (0,0), (0,0), 0),
+        ("BOTTOMPADDING", (0,0), (0,0), 0),
+        ("LEFTPADDING",   (0,0), (0,0), 0),
+        ("RIGHTPADDING",  (0,0), (0,0), 0),
+    ]))
+
+    # Header row
+    hdr_row = Table([[hdr_a, conn_cell, hdr_b]],
+                    colWidths=[col_w, CONN_W, col_w])
+    hdr_row.setStyle(TableStyle([
+        ("BACKGROUND",    (0,0), (-1,-1), WHITE),
+        ("VALIGN",        (0,0), (-1,-1), "MIDDLE"),
+        ("TOPPADDING",    (0,0), (-1,-1), 0),
+        ("BOTTOMPADDING", (0,0), (-1,-1), 0),
+        ("LEFTPADDING",   (0,0), (-1,-1), 0),
+        ("RIGHTPADDING",  (0,0), (-1,-1), 0),
+    ]))
+    story.append(hdr_row)
+
+    # ── Column bodies — ruled writing lines, white, navy left bar ─────────────
+    line_h    = 0.33 * inch
+    body_rows = []
+    for _ in range(rows):
+        # Left column cell
+        cell_a = [
+            HRFlowable(width="92%", thickness=0.5, color=RULE_COLOR, spaceAfter=1),
+            Spacer(1, line_h - 8),
+        ]
+        # Right column cell
+        cell_b = [
+            HRFlowable(width="92%", thickness=0.5, color=RULE_COLOR, spaceAfter=1),
+            Spacer(1, line_h - 8),
+        ]
+        body_rows.append([cell_a, Spacer(CONN_W, 1), cell_b])
+
+    body_tbl = Table(body_rows, colWidths=[col_w, CONN_W, col_w])
+    body_style = [
+        ("BACKGROUND",    (0,0), (-1,-1), WHITE),
+        ("VALIGN",        (0,0), (-1,-1), "TOP"),
+        ("TOPPADDING",    (0,0), (-1,-1), 6),
+        ("BOTTOMPADDING", (0,0), (-1,-1), 4),
+        ("LEFTPADDING",   (0,0), (-1,-1), 8),
+        ("RIGHTPADDING",  (0,0), (-1,-1), 6),
+        # Outer box on each column body
+        ("BOX",           (0,0), (0,-1), 0.75, BORDER_LIGHT),
+        ("BOX",           (2,0), (2,-1), 0.75, BORDER_LIGHT),
+        # Navy left accent bar on each column
+        ("LINEBEFORE",    (0,0), (0,-1), 3, NAVY),
+        ("LINEBEFORE",    (2,0), (2,-1), 3, NAVY),
+    ]
+    body_tbl.setStyle(TableStyle(body_style))
+    story.append(body_tbl)
+    story.append(Spacer(1, 8))
+
+    if annotation_codes:
+        story.append(_annotation_chip_strip(annotation_codes, usable))
+        story.append(Spacer(1, 4))
     story.append(doc.thin_rule(space_before=4, space_after=3))
     story.append(doc.footer())
     story.append(PageBreak())

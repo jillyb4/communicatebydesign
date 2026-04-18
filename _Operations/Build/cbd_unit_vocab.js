@@ -660,12 +660,45 @@ const units = [
 
   {
     number: 2,
-    unitTitle: 'The Giver: Character and Society',
+    unitTitle: 'The Giver: Theme Analysis',
     productLine: 'Fiction Anchor Text Unit',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: 'Standards: RL.7.1/7.2. Grades 6–8. Pairs with Fred Korematsu nonfiction. Target May 2026 alongside UFLI launch.',
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    pendingBuild: false,
+    notes: 'Standards: RL.6.2 · RL.7.2 · RL.8.2 · RL.7.1. Grades 6–8. Whole book. Pairs with Fred Korematsu nonfiction. Target May 2026. Skill: Theme. Unit question: According to The Giver, what makes us fully human — and what happens when those things are taken away? Built 2026-04-17.',
+    // Two-dimension vocabulary: AAC Access Layer (core/fringe) × Instructional Layer (explicit/background/generative)
+    // Top 5 Core: change, because, choose, free, believe
+    // Top 5 Fringe: memory, rule, release, sameness, community
+    newWords: [
+      // CORE WORDS (likely on most AAC systems)
+      { word: 'feel',      type: 'core',   fitzgerald: 'yellow',  instructional: 'generative', top5core: false, symbolNeeded: false, notes: 'Emotion vocabulary — central to theme' },
+      { word: 'think',     type: 'core',   fitzgerald: 'yellow',  instructional: 'generative', top5core: false, symbolNeeded: false, notes: 'Cognitive verb — inference scaffold' },
+      { word: 'know',      type: 'core',   fitzgerald: 'yellow',  instructional: 'generative', top5core: false, symbolNeeded: false, notes: 'Core epistemic verb' },
+      { word: 'change',    type: 'core',   fitzgerald: 'yellow',  instructional: 'explicit',   top5core: true,  symbolNeeded: false, notes: 'TOP 5 CORE — central to theme; society resists it' },
+      { word: 'believe',   type: 'core',   fitzgerald: 'yellow',  instructional: 'explicit',   top5core: true,  symbolNeeded: false, notes: 'TOP 5 CORE — belief/values theme thread' },
+      { word: 'remember',  type: 'core',   fitzgerald: 'yellow',  instructional: 'background', top5core: false, symbolNeeded: false, notes: 'Memory as theme — Jonas receives memories' },
+      { word: 'choose',    type: 'core',   fitzgerald: 'yellow',  instructional: 'explicit',   top5core: true,  symbolNeeded: false, notes: 'TOP 5 CORE — choice is absent in the community; restored at end' },
+      { word: 'want',      type: 'core',   fitzgerald: 'yellow',  instructional: 'generative', top5core: false, symbolNeeded: false, notes: 'Desire vocabulary — used throughout for preference access' },
+      { word: 'free',      type: 'core',   fitzgerald: 'yellow',  instructional: 'explicit',   top5core: true,  symbolNeeded: false, notes: 'TOP 5 CORE — freedom is the central loss in the community' },
+      { word: 'because',   type: 'core',   fitzgerald: 'blue',    instructional: 'explicit',   top5core: true,  symbolNeeded: false, notes: 'TOP 5 CORE — causation connector for theme evidence chart' },
+      { word: 'if',        type: 'core',   fitzgerald: 'blue',    instructional: 'generative', top5core: false, symbolNeeded: false, notes: 'Conditional reasoning — synthesis sentence frames' },
+      { word: 'real',      type: 'core',   fitzgerald: 'yellow',  instructional: 'explicit',   top5core: false, symbolNeeded: false, notes: 'Reality vs. constructed reality — core theme vocabulary' },
+      { word: 'together',  type: 'core',   fitzgerald: 'yellow',  instructional: 'background', top5core: false, symbolNeeded: false, notes: 'Community concept — belonging theme thread' },
+      { word: 'alone',     type: 'core',   fitzgerald: 'yellow',  instructional: 'explicit',   top5core: false, symbolNeeded: false, notes: 'Isolation — Jonas\'s burden as Receiver' },
+      // FRINGE WORDS (pre-program with AAC team before unit begins — symbol required)
+      { word: 'memory',    type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: true,  symbolNeeded: true,  notes: 'TOP 5 FRINGE — the central mechanism of the novel' },
+      { word: 'rule',      type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: true,  symbolNeeded: true,  notes: 'TOP 5 FRINGE — Rules of Sameness govern the community' },
+      { word: 'community', type: 'fringe', fitzgerald: 'green',   instructional: 'background', top5fringe: true,  symbolNeeded: true,  notes: 'TOP 5 FRINGE — the social structure Jonas lives in' },
+      { word: 'assignment',type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: false, symbolNeeded: true,  notes: 'Career assignment ceremony — rite of passage' },
+      { word: 'release',   type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: true,  symbolNeeded: true,  notes: 'TOP 5 FRINGE — euphemism for death; reveals what society hides' },
+      { word: 'sameness',  type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: true,  symbolNeeded: true,  notes: 'TOP 5 FRINGE — the organizing principle of the community; the loss that creates theme' },
+      { word: 'color',     type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: false, symbolNeeded: true,  notes: 'Symbol for perception/individuality — Jonas begins seeing color' },
+      { word: 'ceremony',  type: 'fringe', fitzgerald: 'green',   instructional: 'background', top5fringe: false, symbolNeeded: true,  notes: 'Annual ceremony — Assignment, naming, release rituals' },
+      { word: 'sacrifice', type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: false, symbolNeeded: true,  notes: 'What Jonas and the Giver must do to change the community' },
+      { word: 'human',     type: 'fringe', fitzgerald: 'green',   instructional: 'explicit',   top5fringe: false, symbolNeeded: true,  notes: 'Central to unit question: what makes us fully human' },
+      { word: 'Jonas',     type: 'fringe', fitzgerald: 'orange',  instructional: 'background', top5fringe: false, symbolNeeded: false, notes: 'Protagonist name — proper noun, no symbol required' },
+      { word: 'Giver',     type: 'fringe', fitzgerald: 'orange',  instructional: 'background', top5fringe: false, symbolNeeded: false, notes: 'Title character — proper noun, no symbol required' },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
   {

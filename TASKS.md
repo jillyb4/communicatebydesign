@@ -65,6 +65,49 @@
 
 ---
 
+## Picture Book Companions — Marketing Assets (2026-04-17)
+
+- [x] **[symbol] placeholder bug fixed — all 6 PB Companion build scripts** — `pictureChoiceRow()` + `sequenceBox()` now call `symbolImg()` with `{text,sym}` objects. SCRATCH path corrected. All 6 scripts verified clean. *(Done 2026-04-17)*
+- [x] **Student Activities rebuilt for all 6 titles** — docx + PDF (LibreOffice) + Student COMPLETE reassembled. *(Done 2026-04-17)*
+- [x] **3-image marketing standard corrected** — Image 3 = Student Activities p.1, NOT Symbol Cards. All scripts, CSV, index, and CLAUDE.md updated. *(Done 2026-04-17)*
+- [x] **All 12 marketing PNGs re-exported and uploaded to Canva** — 6 CommBoard + 6 StudentActivities PNGs in Canva media library. *(Done 2026-04-17)*
+- [x] **Canva Image 2 template ID locked** — `DAHHIU6OBVI` (2 image placeholders + book_title). *(Done 2026-04-17)*
+- [x] **Canva Image 3 template ID locked** — `DAHHIb2bM_A` (3 image placeholders). *(Done 2026-04-17)*
+- [ ] **⚠️ Canva Image 2: run bulk import** — Upload `PB_Companions_Canva_BulkImport.csv`. Wire: Placeholder 1 = image2_filename (CommBoard), text = book_title. All 6 CommBoard PNGs already in Canva media library. *(Added 2026-04-17)*
+- [ ] **⚠️ Canva Image 3: identify partner info page + export PNG** — Third slot in `DAHHIb2bM_A` needs partner script page from Teacher Quick Start. Decide which page → export PNG → upload to Canva → run bulk import for Image 3. *(Added 2026-04-17)*
+- [ ] **⚠️ Canva Image 3: run bulk import** — Wire: Placeholder 1 = Student Activities (Image3_StudentActivities), Placeholder 2 = second student activity page, Placeholder 3 = partner info. After partner PNG is ready. *(Added 2026-04-17)*
+- [ ] **⚠️ Delete old Image3_SymbolCards.png files from Finder** — 6 stale files in `Marketing/Product Images/PB Companions/` — read-only from sandbox. Delete manually. *(Added 2026-04-17)*
+- [x] **Update CBD_Canva_Pin_Design_Index.md with Image 2 + Image 3 template IDs** — DAHHIU6OBVI (Image 2 ✅) and DAHHIb2bM_A (Image 3 ⚠️ slot 3 pending) added. Share URL workflow added to index. *(Done 2026-04-17)*
+
+## Tailwind CSV Workflow — Canva Images (2026-04-17)
+*3-image marketing standard locked for all 3 product lines. Tailwind CSV workflow formalized. Full reference: `Distrubution/Pinterest/CbD_Tailwind_Strategy.md`.*
+
+### PB Companions — Canva Images 2 + 3
+- [ ] **⚠️ Canva Image 2: run bulk import** — Template `DAHHIU6OBVI`. All 6 CommBoard PNGs already in Canva media library. Wire: Placeholder 1 = `image2_filename`, text = `book_title`. Use `PB_Companions_Canva_BulkImport.csv`. *(Added 2026-04-17)*
+- [ ] **⚠️ Canva Image 3: pick partner info page** — Third slot in `DAHHIb2bM_A` = partner script page from Teacher Quick Start. Decide which page → export PNG → upload to Canva → update CSV → run bulk import. *(Added 2026-04-17)*
+- [ ] **⚠️ After each bulk import: copy Canva Share URLs → paste into Airtable** — Image 1 → `fldYDDTNbdlE8AfNv` · Image 2 → `fldwAZkqxIEBReiNp` · Image 3 → `fldK2TRQ7xkodA4w8`. Do for all 6 PB Companion products. *(Added 2026-04-17)*
+- [ ] **⚠️ Delete stale Image3_SymbolCards.png files** — 6 files in `Marketing/Product Images/PB Companions/` — iCloud read-only from sandbox. Delete manually in Finder. *(Added 2026-04-17)*
+
+### Nonfiction — Canva Images 2 + 3
+- [ ] **Build Nonfiction Image 2 Canva template** — Branded frame (1080×1080, navy bg, CbD wordmark, product title). One image placeholder = CAP cover page PNG. *(Added 2026-04-17)*
+- [ ] **Build Nonfiction Image 3 Canva template** — Same branded frame. One image placeholder = Student Activity page PNG (CER or short answer page from Student Print Materials). *(Added 2026-04-17)*
+- [ ] **Export CAP cover PNGs for all 6 nonfiction units** — p.1 of each `[Unit]_Communication_Access_Packet.pdf` → PNG → filename: `[Key]_Image2_CAP.png`. Upload to Canva media library. *(Added 2026-04-17)*
+- [ ] **Export Student Activity PNGs for all 6 nonfiction units** — Specific activity page from `[Unit]_Student_Print_Materials.docx` → PNG → filename: `[Key]_Image3_StudentActivities.png`. Upload to Canva media library. *(Added 2026-04-17)*
+- [ ] **Run Nonfiction Canva bulk imports** — Once templates built and PNGs uploaded: run bulk import for Image 2 + Image 3 using `Nonfiction_Canva_BulkImport.csv`. *(Added 2026-04-17)*
+- [ ] **After import: paste Canva Share URLs into Airtable for all 6 nonfiction products** — 3 URLs per product (Image 1/2/3). *(Added 2026-04-17)*
+
+### Fiction — Canva Images 2 + 3
+- [ ] **Build Fiction Image 2 Canva template** — Branded frame (1080×1080). Image placeholder = student activity page (sentence frames, annotation guide, or character analysis page from Printable Packet). *(Added 2026-04-17)*
+- [ ] **Build Fiction Image 3 Canva template** — Branded frame (1080×1080). Image placeholder = comm access page (symbol vocab strip or CAP vocabulary page from Printable Packet). *(Added 2026-04-17)*
+- [ ] **Export Student Activity + Comm Access PNGs for Wonder** — 2 specific pages from `Wonder_Character_Analysis_Printable_Packet.pdf` → PNG → upload to Canva. *(Added 2026-04-17)*
+- [ ] **Run Fiction Canva bulk import (Wonder first)** — Once template built: run bulk import for Image 2 + Image 3 using `Fiction_Canva_BulkImport.csv`. Wonder TPT URL pre-filled. *(Added 2026-04-17)*
+- [ ] **After import: paste Canva Share URLs into Airtable for Wonder** — Image 1 URL from `DAHGBZ-LtRo` page 1 · Image 2 + Image 3 from new fiction templates. Fields: `fldYDDTNbdlE8AfNv` / `fldwAZkqxIEBReiNp` / `fldK2TRQ7xkodA4w8`. *(Added 2026-04-17)*
+
+### Tailwind CSV — Generate and Schedule
+- [ ] **Generate Wonder Tailwind CSV** — 3 rows (one per image). Pull from Airtable: TPT URL, Image 1/2/3 Share URLs, Pin Title, Pin Description, Alt Text. Use `TEMPLATE_Tailwind_3Pin.csv` as starting point. Save to `Distrubution/Pinterest/Tailwind CSVs/Wonder_Tailwind_[date].csv`. *(Added 2026-04-17)*
+- [ ] **Generate PB Companions Tailwind CSVs** — One per title (6 CSVs) once Image 2 + Image 3 Canva imports are done. *(Added 2026-04-17)*
+- [ ] **Generate Nonfiction Tailwind CSVs** — One per unit (6 CSVs) once Image 2 + Image 3 templates are built and data is in Airtable. *(Added 2026-04-17)*
+
 ## Active
 
 ### Year 2 — Deferred Items
@@ -194,6 +237,134 @@
 - [ ] **Archive Launch Calendar Excel** — `CbD_TPT_Launch_Calendar.xlsx` has been fully migrated to Airtable (Session 17). Move to `_Operations/Archive/` or delete. Do NOT use as a reference — Airtable Launch Pipeline table (`tblKDEYyrRdPOtbhX`) is now authoritative.
 - [ ] **Ahrefs 7-day trial** — Start April 27. Run 7-day competitor research plan (see SEO spreadsheet → Ahrefs tab). CANCEL by May 2 at 9am PT.
 - [x] **TPT title rewrites** — All 6 DONE ✓ (Radium Girls, Keiko, Frances Kelsey, 504 Sit-In, AT Checklist, Visual Schedule). Implemented March 24.
+
+## Fiction Line — Active (Session 25 — Apr 17 2026)
+
+### Jill: Manual Finder Cleanup Required (cannot do from sandbox — iCloud permissions)
+
+**Wonder folder — delete these stale files:**
+- [ ] `Wonder_Character_Analysis_TPT/` subfolder (replaced by `TPT Product Files/`)
+- [ ] `Wonder_Character_Analysis_TPT_Listing_Package.md` in unit root (replaced by `Marketing/Wonder_Marketing_Plan.md`)
+- [ ] Any loose build scripts in unit root (should be in `Builds/`)
+- [ ] `Wonder_Character_Analysis_TPT.zip` in unit root — re-zip from `TPT Product Files/` when ready
+
+**The Giver folder — delete these stale files:**
+- [ ] `The_Giver_Theme_Analysis_TPT/` subfolder (replaced by `TPT Product Files/`)
+- [ ] `The_Giver_TPT_Listing_Package.md` in unit root (replaced by `Marketing/The_Giver_Marketing_Plan.md`)
+- [ ] Any loose build scripts in unit root
+
+**Shared locations — delete:**
+- [ ] `Marketing/Product Images/Fiction Anchor Texts/` folder (images now per-unit in `Marketing/Images/`)
+- [ ] `Distrubution/Pinterest/Fiction_Canva_BulkImport.csv` (now per-unit CSVs in each `Marketing/`)
+- [ ] `Distrubution/Teachers Pay Teachers/Fiction_TPT_BulkImport.csv` (superseded by Marketing_Plan.md)
+- [ ] `Products/Fiction Anchor Texts/Preview PDFs/` folder (previews now in each `TPT Product Files/`)
+
+### Wonder — TPT Listing Fixes
+- [ ] **⚠️ Wonder: Re-zip TPT Product Files/** — `Wonder_Character_Analysis_TPT.zip` in unit root is stale (built before folder reorganization). Delete it, then re-zip from `TPT Product Files/` → `Wonder_Character_Analysis_TPT.zip`. Required before next TPT re-upload. Do this BEFORE pasting the clean description below. *(Added Apr 17 2026)*
+- [ ] **⚠️ Wonder: Paste clean TPT description from Marketing_Plan.md** — Current live description has old V1/V2/V3 language. Open `Marketing/Wonder_Marketing_Plan.md` → Section 1 Full Description → paste into TPT listing editor. *(Added Apr 17 2026)*
+- [ ] **⚠️ Wonder: Run `export_docx_to_pdf.py` on Teaching_Materials.docx** — Required before zipping TPT Product Files. *(Added Apr 17 2026)*
+- [ ] **Wonder: Export marketing PNGs** — Run `python3 _Operations/Build/export_fiction_marketing_images.py --title "Wonder"` → 5 PNGs saved to `Marketing/Images/`. Upload to Canva + TPT. *(Added Apr 17 2026)*
+
+### The Giver — Launch Prep (May 2026)
+- [ ] **⚠️ The Giver: Run `export_docx_to_pdf.py` on Teaching_Materials.docx** — Word engine only, before zipping. *(Added Apr 17 2026)*
+- [ ] **⚠️ The Giver: Rename existing zip** — `TPT Product Files.zip` in unit root was auto-named by macOS. Rename it to `The_Giver_Theme_Analysis_TPT.zip` and move inside `TPT Product Files/`. *(Added Apr 17 2026)*
+- [ ] **The Giver: Build Canva cover** — Open `DAHGBZ-LtRo` bulk template → add The Giver page → export Image 1. *(Added Apr 17 2026)*
+- [ ] **The Giver: Export marketing PNGs** — Run `python3 _Operations/Build/export_fiction_marketing_images.py --title "The Giver"` → 5 PNGs in `Marketing/Images/`. *(Added Apr 17 2026)*
+- [ ] **The Giver: List on TPT** — All copy/paste in `Marketing/The_Giver_Marketing_Plan.md`. Add TPT ID + URL to Section 1 metadata table + Canva CSV when live. *(Added Apr 17 2026)*
+- [ ] **The Giver: Update Airtable** — `rec0xE48ML7QOfAYL` → Workflow Stage: Live. *(Added Apr 17 2026)*
+- [ ] **Pair The Giver launch with Fred Korematsu nonfiction (May APAHM)** — Both units ask: what happens when a society silences the truth? Drop both in FB groups same week. *(Added Apr 17 2026)*
+
+### Nonfiction Units — Finder Cleanup (Apr 17 reorganization)
+*All 6 nonfiction units were reorganized into 4-folder structure via copy (not move — iCloud permissions). Old originals still exist. Clean up in Finder when convenient — no urgency, nothing is broken.*
+
+- [ ] **Keiko:** Delete `build_keiko.js` from unit root · `Keiko_TPT/` subfolder · `Keiko_TPT_Listing_Package.md` from unit root · `Keiko_Unit_DRAFT.md` and `Keiko_Welcome_to_the_Product.pdf` from unit root (now in `Product Files/`)
+- [ ] **504 Sit In:** Delete `build_504_sit_in.js` from unit root · `504_Sit_In_TPT/` subfolder · `504_Sit_In_TPT_Listing_Package.md` from unit root · `504_Sit_In_TPT_Preview.pdf` and `504_Sit_In_Unit_DRAFT.md` from unit root
+- [ ] **Capitol Crawl:** Delete `build_capitol_crawl.js` from unit root · `Capitol_Crawl_TPT/` subfolder · `Capitol_Crawl_TPT_Listing_Package.md` from unit root · loose `Capitol_Crawl_Communication_Access_Packet.pdf`, `Capitol_Crawl_Lesson_DRAFT.md`, `Capitol_Crawl_Welcome_to_the_Product.pdf` from unit root
+- [ ] **Frances Kelsey:** Delete `build_frances_kelsey.js` from unit root · `Frances_Kelsey_TPT/` subfolder · `Frances_Kelsey_TPT_Listing_Package.md` from unit root · loose `Frances_Kelsey_Communication_Access_Packet.pdf`, `Frances_Kelsey_Unit_DRAFT.md`, `Frances_Kelsey_Unit_v2.docx`, `Frances_Kelsey_Welcome_to_the_Product.pdf` from unit root · `~$ances_Kelsey_COMPLETE.docx` Word lock file from `TPT Product Files/`
+- [ ] **Radium Girls:** Delete `build_radium_girls.js` from unit root · `Radium_Girls_TPT/` subfolder · `Radium_Girls_TPT_Listing_Package.md` from unit root · `Radium_Girls_Unit_DRAFT.md` from unit root
+- [ ] **Zitkala-Sa:** Delete `build_zitkala_sa.js` from unit root · `fix_draft.py` from unit root AND from `Builds/` (one-time script, done, no future use) · `Zitkala_Sa_TPT/` subfolder · `Zitkala_Sa_TPT_Listing_Package.md` from unit root · loose `Zitkala_Sa_Communication_Access_Packet.pdf`, `Zitkala_Sa_Unit_DRAFT.md`, `Zitkala_Sa_Unit_DRAFT_NEW.md`, `Zitkala_Sa_Welcome_to_the_Product.pdf` from unit root
+
+### Poetry Unit 1 — Finder Cleanup (Apr 17 reorganization)
+- [ ] **Poetry Unit 1:** Delete `Unit 1 What the Voice Carries/` inner subfolder (contents now in `TPT Product Files/`) · `Unit 1 What the Voice Carries.zip` from unit root · `Unit1_TPT_Listing_Package.md` from unit root · all build scripts from unit root (now in `Builds/`) · `Unit1_PreBuild_Planning.md` and `Unit1_QC_Report_2026-04-03.md` from unit root (now in `Product Files/`)
+
+### Full Finder Cleanup — All Product Lines (Apr 17 2026 Reorganization)
+*Captured in `daily--clean-up-files` scheduled task. Run manually to get a status report anytime.*
+
+**Nonfiction Units:**
+- [ ] Delete `Frances Kelsey/Frances_Kelsey_TPT/` subfolder
+- [ ] Delete all `.~lock.*.pdf#` and `lu*.tmp` files across all 6 unit folders
+- [ ] Delete build scripts still at unit roots (all should be in `Builds/`)
+
+**Fiction Anchor Texts:**
+- [ ] Delete `Wonder - Character Analysis/Wonder_Character_Analysis_TPT/` subfolder
+- [ ] Delete `The Giver - Theme Analysis/The_Giver_Theme_Analysis_TPT/` subfolder
+- [ ] Delete loose `*_TPT_Listing_Package.md` at unit roots
+- [ ] Delete loose build scripts at unit roots
+- [ ] Delete shared `Marketing/Product Images/Fiction Anchor Texts/` folder
+
+**Picture Book Companions:**
+- [ ] Delete `TPT [Title]/` stale subfolder in each of the 6 title folders
+- [ ] Delete `All the Way to the Top/` nested subfolder inside that title
+- [ ] Move loose build scripts at each title root → `Builds/`
+- [ ] Move loose PDFs at each title root → `Product Files/` or `TPT Product Files/`
+- [ ] Delete all `.~lock.*` and `lu*.tmp` LibreOffice temp files
+
+**_Operations:**
+- [ ] Delete `_Operations/cbd-skill.skill`
+- [ ] Delete `_Operations/communicate-by-design-updated.skill`
+- [ ] Delete `_Operations/theme-showcase.pdf`
+- [ ] Delete `_Operations/QC/504_Sit_In_Diagnostic_Evaluation.md` (copied to unit `Product Files/`)
+- [ ] Delete `_Operations/QC/Radium_Girls_Content_Extraction.txt` (copied to unit `Product Files/`)
+- [ ] Delete `_Operations/QC/Zitkala-Sa_Inclusive_Design_Diagnostic.md` (copied to unit `Product Files/`)
+
+### Brand Assets Cleanup — Move Cover PNGs to Product Folders (Apr 17 2026)
+*Rule: everything for a product lives inside that product's folder — covers belong in each unit's `Marketing/`. Nonfiction covers already copied from sandbox. AT/AAC, UFLI, and working squares need Finder moves (not synced to sandbox).*
+
+**Already done (nonfiction — copied from sandbox):**
+- [x] `CbD_Cover_FrancesKelsey_v2.png` → `Frances Kelsey/Marketing/`
+- [x] `CbD_Cover_Keiko_v2.png` → `Keiko/Marketing/`
+- [x] `CbD_Cover_RadiumGirls_v2.png` → `Radium Girls/Marketing/`
+- [x] `CbD_Cover_ZitkalaSa_v2.png` → `Zitkala-Sa/Marketing/`
+- [x] `CbD_Cover_504SitIn_v2.png` → `504 Sit In/Marketing/`
+- [x] `CbD_Cover_CapitolCrawl_v2.png` → `Capitol Crawl/Marketing/`
+- [x] Alternate covers from `UNIT NONFICTION TPT (1)/` → each unit's `Marketing/`
+- [x] Bundle cover → `Distrubution/Teachers Pay Teachers/`
+
+**Jill: Move in Finder (AT/AAC — Marketing/ folders already created and waiting):**
+- [ ] `Brand Assets/AT ACC Products/cbd-tpt-cover-at-consideration-toolkit.png` → `Products/AT AAC IEP TEAM Supports/IEP Toolkit/Marketing/`
+- [ ] `Brand Assets/AT ACC Products/cbd-tpt-cover-family-aac-guide.png` → `Products/AT AAC IEP TEAM Supports/AAC Communication Partner/Marketing/`
+- [ ] `Brand Assets/AT ACC Products/TPT Image Cover Uploaded/cbd-tpt-cover-at-bundle.png` → `Products/AT AAC IEP TEAM Supports/IEP Toolkit/Marketing/`
+- [ ] `Brand Assets/AT ACC Products/TPT Image Cover Pending/cbd-tpt-cover-aac-cpg-v2.png` → `Products/AT AAC IEP TEAM Supports/AAC Communication Partner/Marketing/`
+- [ ] `Brand Assets/AT ACC Products/TPT Image Cover Pending/cbd-tpt-cover-at-checklist.png` → `Products/AT AAC IEP TEAM Supports/AT Checklist/Marketing/`
+- [ ] `Brand Assets/AT ACC Products/TPT Image Cover Pending/cbd-tpt-cover-cpg-preview-mockup.png` → `Products/AT AAC IEP TEAM Supports/AAC Communication Partner/Marketing/`
+- [ ] `Brand Assets/AT ACC Products/TPT Image Cover Pending/cbd-tpt-cover-visual-schedule-template-pack.png` → `Products/AT AAC IEP TEAM Supports/Visual Schedule Template Pack (Editable)/Marketing/`
+
+**Jill: Move in Finder (UFLI + misc):**
+- [ ] `Brand Assets/UFLI Lessons/` contents → `Products/UFLI Phonics/Marketing/` (create Marketing/ first if needed)
+- [ ] `Brand Assets/working square product covers/` contents → `Marketing/Canva/` (these are shared design assets, not tied to one product)
+- [ ] `Brand Assets/cbd-skill.skill` → `_Operations/` (Cowork tool file)
+- [ ] `Brand Assets/cbd-theme.md` → `_Operations/` (Cowork tool file)
+- [ ] `Brand Assets/theme-showcase.pdf` → `_Operations/` (Cowork tool file)
+
+**After all moves: delete emptied subfolders from Brand Assets in Finder** — `AT ACC Products/`, `Nonfiction Lesson/TPT Image Cover Pending/`, `Nonfiction Lesson/TPT Image Coveres Uploaded/`, `Nonfiction Lesson/UNIT NONFICTION TPT (1)/`, `UFLI Lessons/`, `working square product covers/`. Keep: `Brand Assets/CbD-Brand-Guidelines.docx` + `CbD-Brand-Guidelines.pdf` + `Logo/` + `Nonfiction Lesson/CbD_Nonfiction_Cover_GoldStandard.md` — these are brand references, not product files.
+
+### Marketing Folder Restructure — Follow-up (Apr 17 2026)
+*Pinterest moved from `Distrubution/Pinterest/` to `Marketing/Pinterest/`. CLAUDE.md updated. One manual step remains.*
+
+- [ ] **⚠️ Update `cbd-pinterest-daily-brief` scheduled task prompt** — The task saves daily briefs to `Distrubution/Pinterest/Daily Briefs/` (old path). Update to `Marketing/Pinterest/Daily Briefs/`. Open Scheduled Tasks panel → find `cbd-pinterest-daily-brief` → edit prompt → update the save path. *(Added Apr 17 2026)*
+
+### _Operations/QC — Finder Cleanup (Apr 17)
+*Product-specific QC files copied to their unit `Product Files/` folders. Originals still in `_Operations/QC/` — delete in Finder.*
+
+- [ ] **Delete from `_Operations/QC/`:** `504_Sit_In_Diagnostic_Evaluation.md` · `Radium_Girls_Content_Extraction.txt` · `Zitkala-Sa_Inclusive_Design_Diagnostic.md` — all 3 now live in their unit's `Product Files/` folder. *(Added Apr 17 2026)*
+- **Keep in `_Operations/QC/`:** `PictureBook_Companion_QC_Checklist.md` · `UFLI_QC_Evaluation_Rubric.md` — these are shared templates, not product-specific records.
+
+### Picture Book Companions — Finder Cleanup (Apr 17 reorganization)
+- [ ] **All 6 PB Companion titles:** Delete old `TPT [Title]/` subfolder from each title folder (contents now in `TPT Product Files/`) · loose build scripts from each title root (now in `Builds/`) · `.tmp` files in A Friend for Henry, I Talk Like a River, Ian's Walk, Emmanuel's Dream, My Friend Isabelle folders · `lu*.tmp` files (LibreOffice artifacts)
+- [ ] **All the Way to the Top:** Delete loose `AllTheWayToTheTop_COMPLETE.docx`, `AllTheWayToTheTop_Communication_Board.pdf`, `AllTheWayToTheTop_Symbol_Pages.pdf`, `AllTheWayToTheTop_Unit_DRAFT.md`, `AllTheWayToTheTop_Unit_PLAN.md`, `AllTheWayToTheTop_Welcome_Packet.pdf` from title root (now in `Product Files/`) · old nested `All the Way to the Top/` subfolder
+
+### GitHub Push — Apr 17 Session
+- [ ] **GitHub: commit + push Apr 17 session files** — Files changed: `_Operations/Build/build_fiction_previews.py` (NEW) · `_Operations/Build/export_fiction_marketing_images.py` (per-unit output path) · `Products/Fiction Anchor Texts/Wonder - Character Analysis/Marketing/Wonder_Marketing_Plan.md` (rewritten) · `Products/Fiction Anchor Texts/Wonder - Character Analysis/Marketing/Wonder_Canva_BulkImport.csv` (NEW) · `Products/Fiction Anchor Texts/The Giver - Theme Analysis/Marketing/The_Giver_Marketing_Plan.md` (rewritten) · `Products/Fiction Anchor Texts/The Giver - Theme Analysis/Marketing/The_Giver_Canva_BulkImport.csv` (NEW) · `_Operations/memory/fiction_printable_packet_spec.md` (folder structure section added) · `CLAUDE.md` (fiction section updated). Open GitHub Desktop → commit → push. *(Added Apr 17 2026)*
 
 ## Fiction Line — Active (Session 20 additions)
 

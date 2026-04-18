@@ -133,15 +133,15 @@ body { background: #1B1F3B; font-family: Arial, Helvetica, sans-serif; min-heigh
     </div>
   </div>
   <div class="stats">
-    <div class="stat"><div class="stat-num" style="color:#ef4444">4</div><div class="stat-label">This Week</div></div>
-    <div class="stat"><div class="stat-num" style="color:#00B4D8">17</div><div class="stat-label">Up Next</div></div>
+    <div class="stat"><div class="stat-num" style="color:#ef4444">6</div><div class="stat-label">This Week</div></div>
+    <div class="stat"><div class="stat-num" style="color:#00B4D8">19</div><div class="stat-label">Up Next</div></div>
     <div class="stat"><div class="stat-num" style="color:#a78bfa">4</div><div class="stat-label">Someday</div></div>
-    <div class="stat"><div class="stat-num" style="color:#34d399">23</div><div class="stat-label">Done</div></div>
+    <div class="stat"><div class="stat-num" style="color:#34d399">26</div><div class="stat-label">Done</div></div>
   </div>
 </div>
 
 <div class="board-wrap"><div class="board" id="board"></div></div>
-<div class="hint">⚪ Circle = check off done · Priority + workflow badges are clickable · Move cards with ← → · Columns scroll · All changes save in your browser</div>
+<div class="hint">⚪ Circle = check off done · Priority + workflow badges are clickable · Move cards with ← → · Columns scroll · Refreshed April 16, 2026</div>
 
 <script>
 const WORKFLOWS = {
@@ -192,35 +192,41 @@ const TASKS = [
   { id:38, col:"done",    cat:"Operations",   priority:"medium", wstage:5, deadline:null,       title:"Picture Book Companion color locked — Dusty Rose-Coral #D4614E", detail:"✅ Locked Apr 3 2026" },
 
   // ── THIS WEEK ─────────────────────────────────────────────────────────
-  { id:3,  col:"done",    cat:"Poetry",       priority:"high",   wstage:5, deadline:"Apr 10",   title:"Poetry Unit 1 — LIVE on TPT",                   detail:"✅ LIVE Apr 10. TPT ID: 16037413. $9.95. Tailwind distribution package included. Post #6 scheduled Apr 14." },
-  { id:4,  col:"now",     cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 5",    title:"Autism Acceptance Month tags — AT/AAC products",  detail:"OVERDUE Apr 1. Add seasonal tags to all AT/AAC IEP Team listings on TPT" },
-  { id:5,  col:"now",     cat:"Pinterest",    priority:"high",   wstage:1, deadline:"Apr 5",    title:"Canva pins: AT Toolkit + Comm Partner Guide",      detail:"OVERDUE Apr 3. Autism Acceptance Month · both AT/AAC products · 2 pins" },
+  { id:3,  col:"done",    cat:"Poetry",       priority:"high",   wstage:5, deadline:"Apr 10",   title:"Poetry Unit 1 — LIVE on TPT",                   detail:"✅ LIVE Apr 10. TPT ID: 16037413. $9.95. Tailwind distribution package included." },
+  { id:4,  col:"now",     cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 16",   title:"Autism Acceptance Month tags — AT/AAC products",  detail:"OVERDUE. Add seasonal tags to all AT/AAC IEP Team listings on TPT" },
+  { id:5,  col:"now",     cat:"Pinterest",    priority:"high",   wstage:1, deadline:"Apr 16",   title:"Canva pins: AT Toolkit + Comm Partner Guide + Finding Symbols + 504 Sit-In",      detail:"Both AT/AAC products + 2 nonfiction products at 0 views · build in Canva, post manually" },
   { id:6,  col:"done",    cat:"Canva Covers", priority:"medium", wstage:5, deadline:null,       title:"Keiko — both covers uploaded to TPT",              detail:"✅ v1 + v2 covers both live on TPT" },
-  { id:39, col:"done",    cat:"Substack",     priority:"high",   wstage:4, deadline:"Apr 10",   title:"Substack #5 — Who Gets to Decide If the Voice Is Real?", detail:"✅ Published Apr 10. Policy & Advocacy pillar. FB group drop pending today." },
-  { id:40, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 15",   title:"Pinterest: 3 pins for Poetry Unit 1 + IG carousel + FB post", detail:"Per Tailwind distribution package for What the Voice Carries. Canva pin design ID: DAHFebI7Z2k." },
+  { id:39, col:"done",    cat:"Substack",     priority:"high",   wstage:4, deadline:"Apr 10",   title:"Substack #5 — Who Gets to Decide If the Voice Is Real?", detail:"✅ Published Apr 10. Policy & Advocacy pillar. FB group drop done." },
+  { id:40, col:"now",     cat:"Pinterest",    priority:"high",   wstage:0, deadline:"Apr 17",   title:"Pinterest: 3 pins for Poetry Unit 1 + IG carousel + FB post", detail:"Per Tailwind distribution package for What the Voice Carries. Canva pin design ID: DAHFebI7Z2k." },
   { id:41, col:"done",    cat:"Substack",     priority:"high",   wstage:4, deadline:"Apr 10",   title:"FB group drop — Post #5 'Who Gets to Decide If the Voice Is Real?'", detail:"✅ Done Apr 10/11. Comment template used in SPED Facebook groups." },
-  { id:61, col:"now",     cat:"Substack",     priority:"high",   wstage:1, deadline:"Apr 14",   title:"Substack #6 — Auditory Confirmation Loop (scheduled)", detail:"Scheduled task cbd-substack-auditory-confirmation-loop fires 9AM Apr 14. Draft saved. Review before send." },
+  { id:61, col:"done",    cat:"Substack",     priority:"high",   wstage:4, deadline:"Apr 14",   title:"Substack #6 — Auditory Confirmation Loop — PUBLISHED", detail:"✅ Published Apr 14. Scheduled task cbd-substack-auditory-confirmation-loop executed." },
+  { id:62, col:"now",     cat:"Operations",   priority:"high",   wstage:0, deadline:"Apr 16",   title:"EC Week Thu Apr 16 — IG carousel + 3 Story slides (diverse voices, nonfiction)", detail:"Exceptional Children's Week (Apr 13-17) · Day 4 theme: diverse voices + nonfiction. Build in Canva." },
+  { id:63, col:"now",     cat:"Operations",   priority:"high",   wstage:0, deadline:"Apr 16",   title:"EC Week Thu Apr 16 — FB Page post (diverse voices)", detail:"Exceptional Children's Week Day 4 · Draft and schedule FB Page post on nonfiction + diverse voices." },
+  { id:64, col:"now",     cat:"Operations",   priority:"high",   wstage:0, deadline:"Apr 17",   title:"EC Week Fri Apr 17 — community reading + Substack CTA + end-of-week group drop", detail:"Highest-leverage day for subscriber growth · Substack CTA · Schedule as FB end-of-week drop." },
+  { id:65, col:"now",     cat:"TPT Store",    priority:"high",   wstage:0, deadline:"Apr 17",   title:"Ian's Walk — TPT listing (product built + Pinterest pinned)", detail:"Status: Ready to List in Airtable · Pinterest pin: ✓ (1 pin posted) · Needs TPT listing submitted." },
 
   // ── UP NEXT ───────────────────────────────────────────────────────────
-  { id:7,  col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,       title:"Re-upload nonfiction zips — 6 units (Session 16 content)", detail:"All 6 units: updated Communication Access, partner modes, access verb language" },
-  { id:9,  col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,       title:"V3 passage audit — all 6 nonfiction units",       detail:"V3 = core words + highest-frequency fringe only" },
-  { id:10, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,       title:"Preview PDFs — AT Checklist + AT Toolkit",        detail:"Build previews for highest-traffic AT/AAC products" },
+  { id:7,  col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,       title:"Re-upload nonfiction zips — 6 units (Session 16 content)", detail:"All 6 units: updated Communication Access, partner modes, access verb language. Delete stale files first — 4 files per unit." },
+  { id:9,  col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,       title:"V3 passage audit — all 6 nonfiction units",       detail:"V3 = core words + highest-frequency fringe only · In Build per Airtable" },
+  { id:10, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,       title:"Preview PDFs — AT Checklist + AT Toolkit",        detail:"Build previews for highest-traffic AT/AAC products · In Build per Airtable" },
   { id:42, col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,       title:"Capitol Crawl — update TPT title + desc + tags",  detail:"Paste new title → desc opening → 7 keyword tags in TPT seller dashboard" },
   { id:43, col:"queue",   cat:"TPT Store",    priority:"high",   wstage:0, deadline:null,       title:"Frances Kelsey — update TPT desc opening + 7 tags", detail:"Paste new description opening as first sentence. Title change optional." },
   { id:44, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,       title:"504 Sit-In — update TPT desc opening + 7 tags",   detail:"Description opening rewrite only — title stays as-is" },
   { id:45, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:null,       title:"Nonfiction units — add bundle callouts to all 6 descriptions", detail:"Edit 4 paired listings + add freebie callout to all 6" },
-  { id:46, col:"done",    cat:"Build Queue",  priority:"medium", wstage:5, deadline:null,       title:"PB Companions — all 5 titles LIVE on TPT", detail:"✅ All 5 PB Companions listed and LIVE. A Friend for Henry (FREE) · I Talk Like a River · Ian's Walk · Emmanuel's Dream · My Friend Isabelle. Pinterest pins posted for all." },
-  { id:52, col:"done",    cat:"Operations",   priority:"medium", wstage:5, deadline:null,       title:"sync_vocab_to_airtable.js — COMPLETE (641 words synced)", detail:"✅ PB Companions 112 words + Poetry Unit 1 28 words synced Apr 10. Total: 641 words in Airtable Vocabulary table." },
+  { id:46, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:3, deadline:null,       title:"PB Companions — Visual QC pass needed (all 5 built titles)", detail:"A Friend for Henry · I Talk Like a River · Ian's Walk · Emmanuel's Dream · My Friend Isabelle — QC visual pass in Word before finalizing. Canva covers + TPT Preview PDFs for each." },
+  { id:52, col:"done",    cat:"Operations",   priority:"medium", wstage:5, deadline:null,       title:"sync_vocab_to_airtable.js — COMPLETE (501 words synced)", detail:"✅ UFLI 346 + Nonfiction 137 + Wonder 24 = 501 words in Airtable. PB Companions ~112 + Poetry Unit 1 28 ready to sync — run sync_vocab_to_airtable.js." },
   { id:53, col:"queue",   cat:"Operations",   priority:"high",   wstage:0, deadline:null,       title:"Upload CbD logo as Pinterest profile photo",      detail:"Log into Pinterest → Settings → edit profile photo" },
   { id:54, col:"queue",   cat:"Pinterest",    priority:"medium", wstage:0, deadline:"Apr 20",   title:"Teacher Appreciation Week — freebies pin + bundle sale pin", detail:"Build 2 pins in Canva, post manually · Apr 20 deadline" },
-  { id:55, col:"queue",   cat:"Pinterest",    priority:"medium", wstage:0, deadline:"Apr 15",   title:"Better Hearing & Speech Month tags — AT/AAC products (May)", detail:"Add SLP + BHSM seasonal tags to all AT/AAC listings on TPT · deadline Apr 15" },
+  { id:55, col:"queue",   cat:"TPT Store",    priority:"medium", wstage:0, deadline:"May 2026", title:"Better Hearing & Speech Month tags — AT/AAC products (May)", detail:"Add SLP + BHSM seasonal tags to all AT/AAC listings on TPT · target before May 1" },
   { id:56, col:"queue",   cat:"Operations",   priority:"medium", wstage:0, deadline:null,       title:"Resolve Pinterest 'Adapted Nonfiction & Inclusive Literacy' duplicate board", detail:"Log into Pinterest → review both nonfiction boards → merge or delete duplicate" },
-  { id:13, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:0, deadline:"May 2026", title:"UFLI — covers (36 products)",                     detail:"Target May 2026 launch. Jill handling in Canva." },
+  { id:13, col:"queue",   cat:"Canva Covers", priority:"medium", wstage:1, deadline:"May 2026", title:"UFLI — covers (36 products)",                     detail:"Target May 2026 launch. Jill handling in Canva. In Build per Airtable." },
   { id:14, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:1, deadline:null,       title:"Alternative Pencil Guide",                        detail:"Jill actively building. Prerequisite for UFLI." },
-  { id:57, col:"queue",   cat:"Substack",     priority:"medium", wstage:0, deadline:"Apr 15",   title:"'Just Use the Phonemic Keyboard' — Substack #5",  detail:"Gather 2–3 real quotes from discourse · AAC + UFLI crossover topic" },
+  { id:57, col:"queue",   cat:"Substack",     priority:"medium", wstage:0, deadline:null,       title:"When the Framework Demands a Confession — Substack #7 (TPCASTT vs. NFMA)", detail:"Draft ready: Substack/Substack_Draft_WhenTheFrameworkDemandsAConfession.md · Needs Jill review + publish date" },
   { id:19, col:"queue",   cat:"Substack",     priority:"medium", wstage:0, deadline:"Jul 2026", title:"Capitol Crawl — A Child's Act of Resistance (Substack)", detail:"Jennifer Keelan was 8. Ties to Capitol Crawl + All the Way to the Top. ADA anniversary July 2026." },
-  { id:58, col:"queue",   cat:"Operations",   priority:"high",   wstage:0, deadline:null,       title:"Vocabulary table — tag Core Tier (Starting/Growing/Full) on all 192 Core words", detail:"Manual work in Airtable Vocabulary table · Core Tier field" },
-  { id:59, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:"Apr 8",    title:"Lead Magnet 1: 'The AAC Instruction Gap Audit' PDF", detail:"Draft 10 questions → format as PDF → set up in Substack as subscriber freebie with TPT follow-up" },
+  { id:58, col:"queue",   cat:"Operations",   priority:"high",   wstage:0, deadline:null,       title:"Vocabulary table — tag Core Tier (Starting/Growing/Full) on all 192 Core words", detail:"Manual work in Airtable Vocabulary table · Core Tier field · tblL2KH04WijW8XUb" },
+  { id:59, col:"queue",   cat:"Build Queue",  priority:"high",   wstage:0, deadline:null,       title:"Lead Magnet 1: 'The AAC Instruction Gap Audit' PDF", detail:"Draft 10 questions → format as PDF → set up in Substack as subscriber freebie with TPT follow-up" },
+  { id:66, col:"queue",   cat:"Operations",   priority:"high",   wstage:0, deadline:null,       title:"Run sync_vocab_to_airtable.js — add PB Companions + Poetry Unit 1 (~140 words)", detail:"PB Companions ~112 words + Poetry Unit 1 28 words confirmed in cbd_unit_vocab.js and ready to sync. Will bring total from 501 to ~641." },
+  { id:67, col:"queue",   cat:"Build Queue",  priority:"medium", wstage:0, deadline:null,       title:"add TPT SEO Title and Description to PB Companion listings", detail:"Airtable Products table has TPT metadata fields (placeholder tags). Needs master 20-tag store strategy before going live." },
 
   // ── SOMEDAY ───────────────────────────────────────────────────────────
   { id:22, col:"someday", cat:"Long Horizon", priority:"low",    wstage:0, deadline:null,       title:"AT certification",                               detail:"Working toward; not yet started. Research path first." },

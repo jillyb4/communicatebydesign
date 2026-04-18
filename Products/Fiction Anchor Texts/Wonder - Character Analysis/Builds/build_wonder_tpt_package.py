@@ -219,8 +219,8 @@ def build_welcome_pdf() -> bytes:
         Paragraph("How to Use This Product", h2),
         HRFlowable(width="100%", thickness=0.75, color=AMBER, spaceAfter=5),
         Paragraph(
-            "<b>Step 1 — Send the Printable Packet to your SLP before the unit begins.</b> "
-            "Allow 1–2 weeks for fringe vocabulary to be programmed on student AAC systems. "
+            "<b>Step 1 — Share the Printable Packet with your student's AAC team before the unit begins.</b> "
+            "Allow 1–2 weeks for fringe vocabulary to be available on student AAC systems. "
             "The fringe word list is on the symbol card page inside the Printable Packet. "
             "Core words are likely already on student systems — confirm before Lesson 1.",
             item),

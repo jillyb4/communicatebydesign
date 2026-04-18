@@ -8,7 +8,7 @@
  * Skill: Character Analysis (RL.6.3 / RL.7.3)
  * Scope: Whole book — grades 3–8
  *
- * Output: Wonder_Character_Analysis_COMPLETE.docx
+ * Output: Wonder_Character_Analysis_Teaching_Materials.docx
  */
 
 const path = require("path");
@@ -43,10 +43,10 @@ const PRODUCT_LINE  = "Fiction Anchor Text Unit";
 // Single source of truth for vocab table AAC access language.
 // Update here → updates everywhere. Do not inline these strings.
 // ─────────────────────────────────────────────────────────────────────────
-const AAC_CORE          = "Part of most AAC ecosystems";
-const AAC_CORE_CONFIRM  = "Part of most AAC ecosystems — confirm location before unit";
-const AAC_CORE_VERIFY   = "Part of most AAC ecosystems — verify location";
-const AAC_CORE_KIND     = "Part of most AAC ecosystems — confirm 'kind' vs 'kindness'";
+const AAC_CORE          = "Core — part of most AAC ecosystems";
+const AAC_CORE_CONFIRM  = "Core — part of most AAC ecosystems";
+const AAC_CORE_VERIFY   = "Core — part of most AAC ecosystems";
+const AAC_CORE_KIND     = "Core — part of most AAC ecosystems";
 
 // ─────────────────────────────────────────────────────────────────────────
 // BUILD CHILDREN ARRAY
@@ -160,6 +160,23 @@ children.push(T.callout(
   "Every student is working toward the same RL standard. The story grammar scaffold is how we get them there."
 ));
 
+children.push(h2k("UDL 3.0 and HLP Alignment"));
+children.push(T.p(
+  "This unit is designed to CAST Universal Design for Learning Guidelines 3.0 (CAST, 2024). " +
+  "Every activity implements multiple means of action and expression (UDL Guideline 4.1: vary and honor all response methods; Guideline 4.2: optimize access to AT/AAC tools) " +
+  "and multiple means of representation (Guideline 2.1: clarify vocabulary and language structures; Guideline 2.5: illustrate through multiple media). " +
+  "The communication access framework in this unit directly implements Guideline 5.4 — addressing biases related to modes of expression. " +
+  "Oral response is not the default or the expectation. Every response opportunity has a non-speech pathway. " +
+  "Partner guidance embedded at point of use implements Guideline 6.5: challenging the exclusionary practice of expecting AAC users to participate without trained communication partner support."
+));
+children.push(T.p(
+  "CEC High-Leverage Practice alignment: " +
+  "HLP 12 (Systematic and explicit instruction — character description taught explicitly, not assumed); " +
+  "HLP 13 (Adapt curriculum tasks and materials — character boards, comparison structures, response boards); " +
+  "HLP 14 (Teach cognitive and metacognitive strategies — 'Describe to Draw' as generative comprehension strategy); " +
+  "HLP 16 (Use explicit instruction / shared reading — Mode 2 during novel reading is the evidence-based delivery condition for complex communicators)."
+));
+
 children.push(h2k("Narrative Language and AAC"));
 children.push(T.p(
   "Narrative macrostructure — the quality and organization of how a student processes a story — accounts for significant variance in reading comprehension " +
@@ -188,8 +205,11 @@ children.push(T.p(
 children.push(h2k("Visual Scene Displays in Narrative Contexts"));
 children.push(T.p(
   "Visual Scene Displays (VSDs) embedded in narrative contexts increase participation of complex communicators, " +
-  "enable rapid vocabulary acquisition, and reduce cognitive load by situating vocabulary within the actual scene (Drager et al., 2003). " +
-  "This unit uses VSDs for key scenes in Wonder rather than decontextualized symbol cards."
+  "enable rapid vocabulary acquisition, and reduce cognitive load by situating vocabulary within the actual scene (Drager et al., 2003; PMC8375490). " +
+  "Research shows VSDs are more effective than decontextualized symbol cards for fiction comprehension because they situate vocabulary within the narrative moment where meaning was made. " +
+  "This unit currently uses symbol cards and character description boards for vocabulary access. " +
+  "VSDs for key Wonder scenes are planned for a future version of this unit. " +
+  "Where possible, partner with visual references (character images, illustrated descriptions) alongside symbol cards to approximate the contextual embedding that VSDs provide."
 ));
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -269,7 +289,7 @@ children.push(h2k("Learning Target"));
 children.push(T.p(
   "I can describe and compare characters in Wonder, explain what motivates their actions, and trace how a character changes from the beginning to the end of the story."
 ));
-children.push(T.tableCaption("This learning target is the same across V1, V2, and V3. The scaffold varies. The expectation does not."));
+children.push(T.tableCaption("This learning target applies to every student in the room. The scaffold varies. The expectation does not."));
 children.push(T.makeTable(
   ["Standard", "Grade-Level Anchor"],
   [
@@ -336,6 +356,14 @@ children.push(T.makeTable(
 
 children.push(T.spacer());
 children.push(h2k("Core and Fringe Vocabulary for Wonder — Character Analysis"));
+children.push(T.p(
+  "Fringe vocabulary in fiction is descriptive — words that help readers picture and understand what characters experience: " +
+  "appearance, action, emotion, and setting. " +
+  "This is different from nonfiction fringe vocabulary, which is domain-specific (topic terms, content words). " +
+  "Fiction fringe words describe what characters look like, what they do, how they feel, and what the world around them is like. " +
+  "Character names are always fringe words — specific proper nouns that are rarely pre-programmed. " +
+  "Coordinate with the student's AAC team to confirm fringe vocabulary is available before the unit begins."
+));
 
 children.push(T.makeTable(
   ["Word", "★ Core / Fringe", "Why It Matters in Wonder", "AAC Access Note"],
@@ -352,25 +380,25 @@ children.push(T.makeTable(
     ["happy",                "★ Core",  "Resolution; Summer scenes; end of book", AAC_CORE],
     ["alone",                "★ Core",  "Auggie's experience; also Via's isolation", AAC_CORE],
     ["kind",                 "★ Core",  "The central moral theme of the novel", AAC_CORE_KIND],
-    ["different",            "Fringe",  "Auggie looks different — THE central descriptor", "Symbol needed"],
-    ["belong",               "Fringe",  "Auggie's journey; belonging to a group", "Symbol needed"],
-    ["invisible",            "Fringe",  "Auggie's wish; metaphor throughout", "Symbol needed"],
-    ["brave",                "Fringe",  "Auggie's trait; also Summer's act of sitting with him", "Symbol needed"],
-    ["loyal",                "Fringe",  "Jack's defining trait; tested and restored", "May be core combo: 'always friend'"],
-    ["bully",                "Fringe",  "Julian's behavior; important for plot", "Symbol needed"],
-    ["face looks different", "Fringe",  "Description of Auggie without using his name", "Visual reference — pair with illustration"],
-    ["ordinary",             "Fringe",  "Theme: everyone is ordinary in their own way", "Symbol or core combo"],
-    ["friend",               "Fringe",  "Central goal; Summer; Jack", AAC_CORE_VERIFY],
-    ["helmet",               "Fringe",  "Early plot point; symbol of hiding and protection", "Symbol needed — specific object"],
+    ["different",            "Fringe",  "Auggie looks different — THE central descriptor", "Fringe — SDI target; include in communication packet"],
+    ["belong",               "Fringe",  "Auggie's journey; belonging to a group", "Fringe — SDI target; include in communication packet"],
+    ["invisible",            "Fringe",  "Auggie's wish; metaphor throughout", "Fringe — SDI target; include in communication packet"],
+    ["brave",                "Fringe",  "Auggie's trait; also Summer's act of sitting with him", "Fringe — SDI target; include in communication packet"],
+    ["loyal",                "Fringe",  "Jack's defining trait; tested and restored", "Fringe — SDI target; include in communication packet"],
+    ["bully",                "Fringe",  "Julian's behavior; important for plot", "Fringe — SDI target; include in communication packet"],
+    ["face looks different", "Fringe",  "Description of Auggie without using his name", "Fringe — SDI target; include in communication packet"],
+    ["ordinary",             "Fringe",  "Theme: everyone is ordinary in their own way", "Fringe — SDI target; include in communication packet"],
+    ["friend",               "Fringe",  "Central goal; Summer; Jack", "Fringe — SDI target; include in communication packet"],
+    ["helmet",               "Fringe",  "Early plot point; symbol of hiding and protection", "Fringe — SDI target; include in communication packet"],
     ["school",               "Fringe",  "Primary setting", AAC_CORE],
-    ["choose",               "Fringe",  "Precept: 'When given the choice, choose kind'", "Core combo: 'choose' + 'kind'"],
+    ["choose",               "Fringe",  "Precept: 'When given the choice, choose kind'", "Fringe — SDI target; include in communication packet"],
   ],
   col4(0.16, 0.16, 0.40, 0.28)
 ));
 children.push(T.tableCaption(
   "★ Core = high-frequency, cross-context words, part of most AAC ecosystems. " +
   "Fringe = Wonder-specific vocabulary requiring system preparation. " +
-  "Coordinate with the student's SLP or AAC team before the unit to confirm vocabulary is available. This is a team responsibility, not an SLP-only task."
+  "Coordinate with the student's AAC team before the unit to confirm vocabulary is available."
 ));
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -824,21 +852,15 @@ children.push(T.tableCaption("If a word is not available, prepare a physical sym
 // END MATTER
 // ═══════════════════════════════════════════════════════════════════════
 
-// NOTE: Accessibility Statement is NOT included in the fiction unit docx.
-// It belongs in the Welcome Packet (TPT folder), not in the main instructional document.
+// NOTE: About the Creator, Terms of Use, and Accessibility Statement are NOT included
+// in the fiction unit Teaching Materials docx. They live in the Welcome to the Product PDF only.
 // See fiction_reference.md for this rule.
-
-children.push(T.heading1("About the Creator"));
-children.push(...T.aboutTheCreator());
-
-children.push(T.heading1("Terms of Use"));
-children.push(...T.termsOfUse());
 
 // ─────────────────────────────────────────────────────────────────────────
 // ASSEMBLE AND WRITE
 // ─────────────────────────────────────────────────────────────────────────
 
-const outputPath = path.join(__dirname, "Wonder_Character_Analysis_COMPLETE.docx");
+const outputPath = path.join(__dirname, "Wonder_Character_Analysis_Teaching_Materials.docx");
 
 T.assembleAndWrite(
   `${UNIT_TITLE}: ${UNIT_SUBTITLE}`,

@@ -1,29 +1,36 @@
 """
-Wonder: Character Analysis — Fiction Printable Packet
+The Giver: Theme Analysis — Fiction Printable Packet
 Communicate by Design
 
-Builds: Wonder_Character_Analysis_Printable_Packet.pdf
+Builds: The_Giver_Theme_Analysis_Printable_Packet.pdf
 Spec:   _Operations/memory/fiction_printable_packet_spec.md
 
 Structure:
   p1       Layer 1  — Communication Environment Setup
   p2       Layer 2  — Core word symbol cards (Set A, 12 words, 3×4 grid)
   p3       Layer 2  — Fringe word symbol cards (Set A, 12 words, in chapter order)
-  p4       Layer 3  — Board A: Character Description (landscape)
+  p4       Layer 3  — Board A: Theme Evidence Vocabulary (landscape)
   p5       Layer 3  — Board B: Emotion + Reasoning (portrait)
   p6       Layer 3  — Board C: Literary Discussion Moves (portrait)
   p7       Layer 4a — Unit Vocabulary Map
   p8–9     Layer 4b — AAC Session Tracker (appended unchanged)
-  p10      Layer 5  — Student Response: Part 1 — Describe to Draw
-  p11      Layer 5  — Student Response: Part 2 — Same and Different
-  p12      Layer 5  — Student Response: Part 3 — Why Did They Do That?
-  p13      Layer 5  — Student Response: Part 4 — Before and After
-  p14      Layer 5  — Student Response: Part 5 — The Big Idea
+  p10      Layer 5  — Student Response: Part 1 — Rules of Sameness
+  p11      Layer 5  — Student Response: Part 2 — First Memories
+  p12      Layer 5  — Student Response: Part 3 — What Jonas Feels
+  p13      Layer 5  — Student Response: Part 4 — The Ending
+  p14      Layer 5  — Student Response: Part 5 — Whole-Book Synthesis
 
-Symbol substitutions (approved, 2026-03-29):
-  belong          → include  (arasaac_include_11702.png)
-  ordinary        → usual    (arasaac_usual_2547.png)
-  face looks diff → face     (arasaac_face_2684.png)
+Symbol notes:
+  believe   → no direct symbol; use arasaac_think.png (closest available)
+  free      → arasaac_free.png (verified present)
+  memory    → no symbol in cache; draw-your-own placeholder
+  rule      → no symbol in cache; draw-your-own placeholder
+  community → no symbol in cache; draw-your-own placeholder
+  release   → no symbol in cache; draw-your-own placeholder
+  sameness  → arasaac_same.png (closest — coordinate with AAC team)
+  color     → no symbol in cache; draw-your-own placeholder
+  sacrifice → no symbol in cache; draw-your-own placeholder
+  human     → arasaac_human.png (verified present)
 """
 
 import os, io, textwrap
@@ -44,11 +51,11 @@ from reportlab.platypus.flowables import Image as RLImage
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 MNT        = os.path.join(SCRIPT_DIR, "..", "..", "..")   # Communicate by Design/
-SYM_CACHE  = os.path.join(MNT, "_Operations/symbol_cache")
+SYM_CACHE  = os.path.join(MNT, "_Operations/Symbols/symbol_cache")
 TRACKER    = os.path.join(MNT, "Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf")
-OUT_PATH   = os.path.join(SCRIPT_DIR, "Wonder_Character_Analysis_Printable_Packet.pdf")
+OUT_PATH   = os.path.join(SCRIPT_DIR, "The_Giver_Theme_Analysis_Printable_Packet.pdf")
 
-UNIT_TITLE = "Wonder: Character Analysis"
+UNIT_TITLE = "The Giver: Theme Analysis"
 
 # ── Brand colors ──────────────────────────────────────────────────────────────
 
@@ -59,8 +66,6 @@ SLATE = colors.HexColor("#94A3B8")
 WHITE = colors.white
 
 # ── Fitzgerald Key ─────────────────────────────────────────────────────────────
-# Per spec: Green=Verbs/Actions, Orange=Descriptions/Adj, Yellow=People/Pronouns,
-#           Brown=Nouns, Blue=Little Words/Prepositions, Pink=Social/Feelings
 
 FK_BG = {
     "green":  colors.HexColor("#E8F5E9"),
@@ -84,116 +89,106 @@ FK_BORDER = {
 # ── Fitzgerald category per word ──────────────────────────────────────────────
 
 WORD_FK = {
-    # Set A Core — 12 words
-    "feel":    "green",   # verb
-    "want":    "green",   # verb
-    "think":   "green",   # verb
-    "know":    "green",   # verb
-    "change":  "green",   # verb
-    "because": "blue",    # connector/little word
-    "maybe":   "orange",  # description
-    "sad":     "pink",    # feeling
-    "scared":  "pink",    # feeling
-    "happy":   "pink",    # feeling
-    "alone":   "orange",  # description
-    "kind":    "orange",  # description
-    # Set A Fringe — 12 words (organized by chapter order in unit)
-    "ordinary":           "orange",   # description
-    "helmet":             "brown",    # noun
-    "school":             "brown",    # noun
-    "face looks different": "orange", # description
-    "bully":              "brown",    # noun (person)
-    "brave":              "orange",   # description
-    "friend":             "yellow",   # people/pronoun category
-    "belong":             "green",    # verb
-    "loyal":              "orange",   # description
-    "invisible":          "orange",   # description
-    "choose":             "green",    # verb
-    "different":          "orange",   # description
-    # Board extras (used in Boards A/B/C)
-    "big":     "orange", "small":   "orange", "young":  "orange",
-    "old":     "orange", "wears":   "green",  "carries": "green",
-    "runs":    "green",  "hides":   "green",  "fights":  "green",
-    "cries":   "green",  "laughs":  "green",  "helps":   "green",
-    "leaves":  "green",  "saves":   "green",  "lies":    "green",
-    "tells the truth": "green",
-    "angry":   "pink",   "confused":"orange", "proud":   "orange",
-    "worried": "pink",
-    "probably":"blue",
-    "i think":   "white", "i feel":   "white",
-    "the character": "yellow",
-    "i agree": "white",  "i disagree": "white",
+    # Set A Core — 14 words
+    "feel":     "green",   # verb
+    "think":    "green",   # verb
+    "know":     "green",   # verb
+    "change":   "green",   # verb
+    "believe":  "green",   # verb
+    "remember": "green",   # verb
+    "choose":   "green",   # verb
+    "want":     "green",   # verb
+    "free":     "orange",  # description
+    "because":  "blue",    # connector/little word
+    "if":       "blue",    # connector
+    "real":     "orange",  # description
+    "together": "orange",  # description
+    "alone":    "orange",  # description
+    # Set A Fringe — 12 words
+    "memory":     "brown",   # noun
+    "rule":       "brown",   # noun
+    "community":  "brown",   # noun
+    "assignment": "brown",   # noun
+    "release":    "green",   # verb/action
+    "sameness":   "orange",  # description
+    "color":      "brown",   # noun
+    "ceremony":   "brown",   # noun
+    "sacrifice":  "green",   # verb/noun
+    "human":      "yellow",  # people
+    # Boards extra
+    "sad":      "pink",  "scared":   "pink",  "happy":    "pink",
+    "angry":    "pink",  "confused": "orange","proud":    "orange",
+    "worried":  "pink",  "brave":    "orange",
+    "maybe":    "orange","probably": "blue",
+    "i think":  "white", "i feel":   "white",
+    "i agree":  "white", "i disagree": "white",
     "the evidence shows": "white", "on page": "white",
-    "the author says": "white", "this shows": "white",
-    "[trait]": "orange", "[why]": "blue", "[change]": "green",
+    "the author says": "white",    "this shows": "white",
+    "the character": "yellow",
+    "[theme]":  "green", "[evidence]": "blue", "[shift]": "orange",
 }
 
 def fk(word):
-    """Return Fitzgerald Key color name for word."""
     return WORD_FK.get(word.lower(), "white")
 
 # ── Symbol path lookup ────────────────────────────────────────────────────────
-# Maps canonical word → filename in symbol_cache. Substitution words noted.
 
 SYMBOL_FILE = {
     # Set A Core
-    "feel":    "arasaac_feel.png",
-    "want":    "arasaac_want.png",
-    "think":   "arasaac_think.png",
-    "know":    "arasaac_know.png",
-    "change":  "arasaac_change.png",
-    "because": "arasaac_because.png",
-    "maybe":   "arasaac_maybe.png",
-    "sad":     "arasaac_sad.png",
-    "scared":  "arasaac_scared.png",
-    "happy":   "arasaac_happy.png",
-    "alone":   "arasaac_alone_7253.png",
-    "kind":    "arasaac_kind.png",
-    # Set A Fringe — in chapter order
-    "ordinary":             "arasaac_usual_2547.png",    # ★ substitute
-    "helmet":               "arasaac_helmet_2691.png",
-    "school":               "arasaac_school.png",
-    "face looks different": "arasaac_face_2684.png",     # ★ face symbol used
-    "bully":                "arasaac_bully_12321.png",
-    "brave":                "arasaac_brave.png",
-    "friend":               "arasaac_friend.png",
-    "belong":               "arasaac_include_11702.png", # ★ substitute
-    "loyal":                "arasaac_loyal_33006.png",
-    "invisible":            "arasaac_invisible_32755.png",
-    "choose":               "arasaac_choose.png",
-    "different":            "arasaac_different.png",
+    "feel":     "arasaac_feel.png",
+    "think":    "arasaac_think.png",
+    "know":     "arasaac_know.png",
+    "change":   "arasaac_change.png",
+    "believe":  "arasaac_think.png",        # ★ closest available
+    "remember": "arasaac_remember.png",
+    "choose":   "arasaac_choose.png",
+    "want":     "arasaac_want.png",
+    "free":     "arasaac_free.png",
+    "because":  "arasaac_because.png",
+    "if":       "arasaac_if.png",
+    "real":     "arasaac_real.png",
+    "together": "arasaac_together.png",
+    "alone":    "arasaac_alone_7253.png",
+    # Set A Fringe — chapter order
+    "sameness": "arasaac_same.png",         # ★ closest available
+    "community": "arasaac_group.png",       # ★ group = community
+    "rule":     "arasaac_law.png",          # ★ law = rule
+    "memory":   "arasaac_forget.png",       # ★ forget = memory (concept of remembering/forgetting)
+    "assignment": "arasaac_job.png",        # ★ job = assignment
+    "release":  "arasaac_let.png",          # ★ let (go) = release
+    "color":    "arasaac_paint.png",        # ★ paint = color
+    "ceremony": None,                       # draw-your-own — no close match
+    "human":    "arasaac_human.png",
+    "sacrifice": None,                      # draw-your-own — no close match
     # Board extras
-    "big":      "arasaac_big.png",
-    "small":    "arasaac_small.png",
-    "old":      "arasaac_old.png",
-    "carries":  "arasaac_carry.png",
-    "runs":     "arasaac_run.png",
-    "fights":   "arasaac_fight.png",
-    "cries":    "arasaac_cry.png",
-    "laughs":   "arasaac_laugh.png",
-    "helps":    "arasaac_help.png",
-    "lies":     "arasaac_lie.png",
-    "confused": "arasaac_confused.png",
-    "proud":    "arasaac_proud.png",
-    "worried":  "arasaac_worried.png",
-    "agree":    "arasaac_agree.png",
-    "disagree": "arasaac_disagree.png",
-    "page":     "arasaac_page.png",
-    "show":     "arasaac_show.png",
-    "tell":     "arasaac_tell.png",
+    "sad":       "arasaac_sad.png",
+    "scared":    "arasaac_scared.png",
+    "happy":     "arasaac_happy.png",
+    "angry":     "arasaac_mad.png",         # ★ mad = angry
+    "confused":  "arasaac_confused.png",
+    "proud":     "arasaac_proud.png",
+    "worried":   "arasaac_worried.png",
+    "brave":     "arasaac_brave.png",
+    "maybe":     "arasaac_maybe.png",
+    "agree":     "arasaac_agree.png",
+    "disagree":  "arasaac_disagree.png",
+    "page":      "arasaac_page.png",
+    "show":      "arasaac_show.png",
+    "tell":      "arasaac_tell.png",
 }
 
 def sym_path(word):
-    """Return full path to symbol PNG if it exists, else None."""
     fname = SYMBOL_FILE.get(word.lower())
+    if fname is None:
+        return None   # explicit draw-your-own
     if fname:
         p = os.path.join(SYM_CACHE, fname)
         return p if os.path.exists(p) else None
-    # Fallback: try arasaac_[word].png
+    # Fallback
     p = os.path.join(SYM_CACHE, f"arasaac_{word.lower().replace(' ', '_')}.png")
     return p if os.path.exists(p) else None
 
-# ── Running header + footer (flowable) ────────────────────────────────────────
+# ── Running header + footer ────────────────────────────────────────────────────
 
 def header_flowable():
     hl = ParagraphStyle("hl", fontName="Helvetica-Oblique",
@@ -234,9 +229,9 @@ def build_layer1_pdf() -> bytes:
         leftMargin=0.55*inch, rightMargin=0.55*inch,
         topMargin=0.35*inch, bottomMargin=0.35*inch)
 
-    H1 = ParagraphStyle("h1", fontName="Helvetica-Bold",
+    H1   = ParagraphStyle("h1", fontName="Helvetica-Bold",
         fontSize=12, textColor=NAVY, leading=15, spaceAfter=3)
-    H2 = ParagraphStyle("h2", fontName="Helvetica-Bold",
+    H2   = ParagraphStyle("h2", fontName="Helvetica-Bold",
         fontSize=9, textColor=TEAL, leading=12, spaceBefore=5, spaceAfter=2)
     BODY = ParagraphStyle("body", fontName="Helvetica",
         fontSize=8, textColor=NAVY, leading=11, spaceAfter=2)
@@ -253,8 +248,8 @@ def build_layer1_pdf() -> bytes:
     story = [header_flowable(),
              HRFlowable(width="100%", thickness=1.5, color=TEAL, spaceAfter=5)]
 
-    # Title
-    story.append(Paragraph("Communication Environment Setup  —  Print once. Laminate. Keep in hand during instruction.", H1))
+    story.append(Paragraph(
+        "Communication Environment Setup  —  Print once. Laminate. Keep in hand during instruction.", H1))
 
     # ── Partner Modes ─────────────────────────────────────────────────────────
     story.append(Paragraph("PARTNER MODE GUIDE", H2))
@@ -268,7 +263,8 @@ def build_layer1_pdf() -> bytes:
                    "<b>Use during:</b> targeted communication skill instruction.", SMALL)],
         [Paragraph("<b>Mode 2: Partnership</b>", LABEL),
          Paragraph("No demands. Follow student lead. Note spontaneous communications. "
-                   "<b>Use during:</b> shared reading, discussion, text exploration.", SMALL)],
+                   "<b>Use during:</b> shared reading of The Giver, discussion, text exploration. "
+                   "NEVER use Mode 1 during the novel read.", SMALL)],
         [Paragraph("<b>Mode 3: Facilitated Participation</b>", LABEL),
          Paragraph("Enable access only — do not interpret or prompt. "
                    "<b>Use during:</b> student engaging independently with text.", SMALL)],
@@ -287,7 +283,7 @@ def build_layer1_pdf() -> bytes:
     ]))
     story.append(mode_table)
 
-    # ── Prompt Hierarchy (Mode 1) ─────────────────────────────────────────────
+    # ── Prompt Hierarchy ─────────────────────────────────────────────────────
     story.append(Paragraph("PROMPT HIERARCHY  —  Mode 1 Only", H2))
 
     ph_data = [
@@ -340,18 +336,14 @@ def build_layer1_pdf() -> bytes:
         "Access method available and within reach?",
         "Symbols and board positioned correctly?",
     ]
-    b_row = []
     b_style = ParagraphStyle("bs", fontName="Helvetica", fontSize=8,
         textColor=NAVY, leading=11)
     b_yn = ParagraphStyle("byn", fontName="Helvetica-Bold", fontSize=7.5,
         textColor=TEAL, leading=10)
+    b_rows = []
     for item in barrier_items:
-        b_row.append([
-            Paragraph(item, b_style),
-            Paragraph("○ Yes   ○ No", b_yn),
-        ])
-    b_table = Table(b_row, colWidths=[4.5*inch, 1.4*inch],
-                    repeatRows=0)
+        b_rows.append([Paragraph(item, b_style), Paragraph("○ Yes   ○ No", b_yn)])
+    b_table = Table(b_rows, colWidths=[4.5*inch, 1.4*inch])
     b_table.setStyle(TableStyle([
         ("BOX", (0,0), (-1,-1), 1, TEAL),
         ("INNERGRID", (0,0), (-1,-1), 0.5, colors.HexColor("#CBD5E1")),
@@ -364,23 +356,23 @@ def build_layer1_pdf() -> bytes:
     ]))
     story.append(b_table)
 
-    # ── Tools + Access quick reference ────────────────────────────────────────
+    # ── Tools in this packet ──────────────────────────────────────────────────
     story.append(Paragraph("TOOLS IN THIS PACKET", H2))
     t_row_style = ParagraphStyle("trs", fontName="Helvetica", fontSize=7.5,
         textColor=NAVY, leading=10)
     t_lbl_style = ParagraphStyle("tls", fontName="Helvetica-Bold", fontSize=7.5,
         textColor=NAVY, leading=10)
     tools_compact = [
-        ("p.2", "Core Word Symbol Cards (12)",
+        ("p.2", "Core Word Symbol Cards (12 words)",
          "SDI targets — confirm with AAC team before adding to device"),
-        ("p.3", "Fringe Word Symbol Cards (12)",
+        ("p.3", "Fringe Word Symbol Cards (12 words)",
          "Chapter order — consult full team before selecting access method"),
-        ("p.4", "Board A — Character Description",
-         "LOOKS LIKE / DOES / FEELS / WANTS — use Parts 1–4"),
+        ("p.4", "Board A — Theme Evidence Vocabulary",
+         "WHAT HAPPENS / WHAT IT SHOWS / HOW JONAS FEELS / WHAT CHANGES — use Parts 1–4"),
         ("p.5", "Board B — Emotion + Reasoning",
          "Emotional vocab + reasoning connectors — use throughout"),
         ("p.6", "Board C — Literary Discussion Moves",
-         "Discussion + evidence + [TRAIT][WHY][CHANGE] codes"),
+         "Discussion + evidence + [THEME][EVIDENCE][SHIFT] codes"),
         ("p.7", "Vocabulary Map",
          "Unit-wide library tracker — fill team-wide, not per session"),
         ("p.8–9", "AAC Session Tracker",
@@ -393,7 +385,7 @@ def build_layer1_pdf() -> bytes:
             Paragraph(f"<b>{tool}</b>", t_lbl_style),
             Paragraph(use, t_row_style),
         ])
-    tools_table = Table(t_rows, colWidths=[0.55*inch, 2.3*inch, 4.35*inch])
+    tools_table = Table(t_rows, colWidths=[0.55*inch, 2.6*inch, 4.1*inch])
     tools_table.setStyle(TableStyle([
         ("ROWBACKGROUNDS", (0,0), (-1,-1),
          [colors.HexColor("#F0F9FF"), colors.white]),
@@ -420,49 +412,35 @@ def build_layer1_pdf() -> bytes:
 # LAYER 2 — Symbol Cards (Set A, 3×4 grid, 2"×2" cards)
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Set A Core — 12 words (organized by Fitzgerald Key category)
+# Set A Core — 12 words (Fitzgerald Key category order)
 SET_A_CORE = [
-    "feel", "want", "think", "know", "change", "choose",  # verbs
-    "sad", "scared", "happy", "alone",                     # feelings/descriptions
-    "maybe", "kind",                                        # descriptions/connectors
+    "feel", "think", "know", "change",    # verbs
+    "choose", "believe", "remember", "want",  # verbs cont.
+    "free", "real", "alone", "because",   # descriptions + connector
 ]
 
-# Set A Fringe — 12 words (organized by chapter order in Wonder)
+# Set A Fringe — 12 words (chapter/section order in The Giver)
 SET_A_FRINGE = [
-    "ordinary",           # Part 1 "Wonder" — Auggie's opening wish
-    "helmet",             # Part 1 — Auggie's space helmet
-    "school",             # Part 1 "The Auggie Tour" — first day of school
-    "face looks different",  # Part 1 — description of Auggie's appearance
-    "bully",              # Part 1 — Julian and others
-    "brave",              # Parts 2–3 — courage theme
-    "friend",             # Part 2 — Jack Will
-    "belong",             # Parts 3–4 — belonging theme
-    "loyal",              # Part 4 "Jack Will" — Halloween section
-    "invisible",          # Multiple parts — feeling unseen
-    "different",          # Throughout — central theme
-    "kind",               # Part 8 "August" — Mr. Tushman's speech
+    "community",   # Ch. 1–2 — the world Jonas lives in
+    "sameness",    # Ch. 3   — Sameness as the community's organizing principle
+    "rule",        # Ch. 4–5 — Rules of Sameness govern everything
+    "ceremony",    # Ch. 7   — Assignment Ceremony
+    "memory",      # Ch. 11  — Jonas first receives a memory from the Giver
+    "assignment",  # Ch. 7   — Jonas receives the Assignment of Receiver
+    "color",       # Ch. 12  — Jonas begins seeing color
+    "release",     # Ch. 19  — Jonas learns what release truly means
+    "human",       # Ch. 20  — What it means to be fully human
+    "sacrifice",   # Ch. 21–23 — Jonas and Gabriel's escape
+    "together",    # Ch. 23  — "Elsewhere" — together vs. alone
+    "free",        # Ch. 23  — final chapters; appears in both sets by design
 ]
 
-# Override: 'kind' appears in both core and fringe slots — remove from core if
-# it would cause a duplicate. Per vocab spec, 'kind' is tagged as core.
-# Fringe list uses 'kind' as a placeholder for book-arc sequence only.
-# Final authoritative lists per cbd_unit_vocab.js entry #7:
-SET_A_CORE = [
-    "feel", "want", "think", "know", "change", "because",
-    "maybe", "sad", "scared", "happy", "alone", "kind",
-]
-SET_A_FRINGE = [
-    "ordinary", "helmet", "school", "face looks different",
-    "bully", "brave", "friend", "belong",
-    "loyal", "invisible", "choose", "different",
-]
+# Note: 'free' appears in both core and fringe — for the fringe card page,
+# use it as the final word to connect the ending to the theme.
+# In the core card page, use it in the description row.
 
 def build_layer2_symbol_cards_pdf(title: str, words: list,
                                    section_note: str = "") -> bytes:
-    """
-    Build a 3-column × 4-row grid of 2"×2" symbol cards.
-    words: list of exactly 12 words (pad or trim to 12).
-    """
     buf = io.BytesIO()
     doc = SimpleDocTemplate(buf, pagesize=letter,
         leftMargin=0.4*inch, rightMargin=0.4*inch,
@@ -470,25 +448,25 @@ def build_layer2_symbol_cards_pdf(title: str, words: list,
 
     COLS     = 3
     ROWS     = 4
-    CARD_H   = int(2 * inch)   # 144pt
+    CARD_H   = int(2 * inch)
     SYM_SIZE = 88
 
-    word_lbl = ParagraphStyle("wl", fontName="Helvetica-Bold",
+    word_lbl  = ParagraphStyle("wl",  fontName="Helvetica-Bold",
         fontSize=11, textColor=NAVY, leading=14, alignment=TA_CENTER)
-    small_lbl = ParagraphStyle("sl", fontName="Helvetica-Bold",
-        fontSize=9, textColor=NAVY, leading=11, alignment=TA_CENTER)
-    sec_head = ParagraphStyle("sh", fontName="Helvetica-Bold",
+    small_lbl = ParagraphStyle("sl",  fontName="Helvetica-Bold",
+        fontSize=9,  textColor=NAVY, leading=11, alignment=TA_CENTER)
+    sec_head  = ParagraphStyle("sh",  fontName="Helvetica-Bold",
         fontSize=10.5, textColor=NAVY, leading=14, spaceAfter=3)
     note_style = ParagraphStyle("ns", fontName="Helvetica-Oblique",
         fontSize=7.5, textColor=colors.HexColor("#475569"), leading=10,
         spaceAfter=4, borderColor=TEAL, borderWidth=0.5,
         borderPadding=(3,5,3,5), backColor=colors.HexColor("#F0F9FF"))
+
     GAP          = 5
     CARD_OUTER_W = (7.7 / 3) * inch
     CARD_INNER_W = CARD_OUTER_W - 2 * GAP
     CARD_INNER_H = CARD_H       - 2 * GAP
 
-    # Pad to 12
     padded = list(words)[:12]
     while len(padded) < 12:
         padded.append("")
@@ -501,14 +479,12 @@ def build_layer2_symbol_cards_pdf(title: str, words: list,
         cat    = fk(w)
         border = FK_BORDER[cat]
         sp     = sym_path(w)
-        # Choose label style based on word length
         lbl_style = small_lbl if len(w) > 10 else word_lbl
         content = []
         if sp:
             content.append(RLImage(sp, width=SYM_SIZE, height=SYM_SIZE))
         else:
-            # Draw-your-own box: fills most of the card, outlined with dashed border
-            DRAW_SIZE = CARD_INNER_H - 24   # leave room for label row
+            DRAW_SIZE = CARD_INNER_H - 24
             draw_box = Table([[Paragraph("✏", ParagraphStyle(
                 "db", fontName="Helvetica", fontSize=22,
                 textColor=colors.HexColor("#AAAAAA"),
@@ -566,126 +542,99 @@ def build_layer2_symbol_cards_pdf(title: str, words: list,
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# LAYER 3 — Communication Boards (canvas-based for precise layout)
+# LAYER 3 — Communication Boards (canvas-based)
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Board data
+# Board A: Theme Evidence Vocabulary (The Giver — theme-specific, replaces character board)
 BOARD_A_ROWS = [
-    ("LOOKS LIKE", [
-        ("big",              "orange"),
-        ("small",            "orange"),
-        ("young",            "orange"),
-        ("old",              "orange"),
-        ("carries",          "green"),
-        ("face looks different", "orange"),
+    ("WHAT HAPPENS", [
+        ("change",   "green"),
+        ("rule",     "brown"),
+        ("release",  "green"),
+        ("choose",   "green"),
+        ("remember", "green"),
+        ("free",     "orange"),
     ]),
-    ("DOES", [
-        ("runs",    "green"),
-        ("hides",   "green"),
-        ("fights",  "green"),
-        ("helps",   "green"),
-        ("lies",    "green"),
-        ("tells the truth", "green"),
+    ("WHAT IT SHOWS", [
+        ("real",      "orange"),
+        ("human",     "yellow"),
+        ("sameness",  "orange"),
+        ("memory",    "brown"),
+        ("together",  "orange"),
+        ("alone",     "orange"),
     ]),
-    ("FEELS", [
-        ("sad",     "pink"),
-        ("scared",  "pink"),
-        ("happy",   "pink"),
-        ("alone",   "orange"),
-        ("brave",   "orange"),
-        ("worried", "pink"),
+    ("JONAS FEELS", [
+        ("sad",      "pink"),
+        ("scared",   "pink"),
+        ("happy",    "pink"),
+        ("confused", "orange"),
+        ("proud",    "orange"),
+        ("brave",    "orange"),
     ]),
-    ("WANTS", [
-        ("want",      "green"),
-        ("belong",    "green"),
-        ("friend",    "yellow"),
-        ("choose",    "green"),
-        ("invisible", "orange"),
-        ("different", "orange"),
+    ("THEME WORDS", [
+        ("feel",    "green"),
+        ("think",   "green"),
+        ("know",    "green"),
+        ("believe", "green"),
+        ("because", "blue"),
+        ("if",      "blue"),
     ]),
 ]
 
 BOARD_B_EMOTIONAL = [
     "feel", "sad", "scared", "happy", "alone",
     "angry", "confused", "proud", "brave", "worried",
-    "kind", "different", "belong", "invisible",
+    "real", "free", "together", "human",
 ]
-BOARD_B_REASONING = ["because", "maybe", "probably", "think", "know", "change"]
+BOARD_B_REASONING = ["because", "if", "maybe", "think", "know", "change"]
 
 BOARD_C_DISCUSSION = ["i think", "i feel", "the character", "i agree", "i disagree", "because"]
 BOARD_C_EVIDENCE   = ["the evidence shows", "on page", "the author says", "this shows"]
-BOARD_C_CODES      = ["[TRAIT]", "[WHY]", "[CHANGE]"]
+# Theme-specific annotation codes for The Giver
+BOARD_C_CODES      = [
+    ("[THEME]",    "a theme idea — what Lois Lowry wants us to understand",     "green"),
+    ("[EVIDENCE]", "evidence from the text that supports the theme",             "blue"),
+    ("[SHIFT]",    "a shift — something changes that moves the theme forward",   "orange"),
+]
 
 
 def _draw_header_footer_canvas(c, pg_w, pg_h, is_landscape=False):
-    """Draw running header + footer on a canvas page."""
     M = 0.45 * inch
-
-    # Header line
     c.setStrokeColor(TEAL)
     c.setLineWidth(1.5)
     c.line(M, pg_h - M - 16, pg_w - M, pg_h - M - 16)
-
-    # Header text
     c.setFillColor(NAVY)
     c.setFont("Helvetica-Oblique", 8.5)
     c.drawString(M, pg_h - M - 12, UNIT_TITLE)
-    c.setFont("Helvetica-Bold", 8.5)
-    c.setFillColor(TEAL)
-    c.drawRightString(pg_w - M, pg_h - M - 12, "COMMUNICATE ")
-    c.setFillColor(AMBER)
-    bw = c.stringWidth("COMMUNICATE ", "Helvetica-Bold", 8.5)
-    c.drawRightString(pg_w - M + bw - c.stringWidth("COMMUNICATE ", "Helvetica-Bold", 8.5),
-                      pg_h - M - 12, "BY DESIGN")
-
-    # Simpler header — just draw the combined string
-    c.setFillColor(TEAL)
-    cbd_text = "COMMUNICATE"
     byw_text = " BY DESIGN"
-    total_w = c.stringWidth(cbd_text + byw_text, "Helvetica-Bold", 8.5)
-    right_x = pg_w - M
+    cbd_text = "COMMUNICATE"
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(TEAL)
+    right_x = pg_w - M
     c.drawRightString(right_x - c.stringWidth(byw_text, "Helvetica-Bold", 8.5),
                       pg_h - M - 12, cbd_text)
     c.setFillColor(AMBER)
     c.drawRightString(right_x, pg_h - M - 12, byw_text)
-
-    # Footer line
     c.setStrokeColor(TEAL)
     c.setLineWidth(0.5)
     c.line(M, M + 14, pg_w - M, M + 14)
-
-    # Footer text
     c.setFillColor(SLATE)
     c.setFont("Helvetica", 6.5)
-    ft = footer_text()
-    c.drawCentredString(pg_w / 2, M + 4, ft)
+    c.drawCentredString(pg_w / 2, M + 4, footer_text())
 
 
 def _draw_board_cell_canvas(c, x, y, w, h, word, fk_color, sym_file=None,
                              label_override=None):
-    """
-    Draw a single board cell at (x,y) bottom-left, size w×h.
-    Symbol centered in upper portion, word label in lower portion.
-    """
-    bg_col     = FK_BG.get(fk_color, FK_BG["white"])
+    """Print-safe: white fill, FK color as border only. Reads in B&W."""
     border_col = FK_BORDER.get(fk_color, FK_BORDER["white"])
-
-    # Background
-    c.setFillColor(bg_col)
+    c.setFillColor(colors.white)
     c.rect(x, y, w, h, fill=1, stroke=0)
-
-    # Border
     c.setStrokeColor(border_col)
     c.setLineWidth(2.5)
     c.rect(x, y, w, h, fill=0, stroke=1)
-
     label = (label_override or word).upper()
     SYM = min(int(h * 0.58), int(w * 0.75), 72)
-    LABEL_H = 18  # reserved for label at bottom
-
-    # Symbol
+    LABEL_H = 18
     sp = sym_file or sym_path(word)
     if sp and os.path.exists(sp):
         sym_x = x + (w - SYM) / 2
@@ -693,7 +642,6 @@ def _draw_board_cell_canvas(c, x, y, w, h, word, fk_color, sym_file=None,
         c.drawImage(sp, sym_x, sym_y, SYM, SYM,
                     preserveAspectRatio=True, mask="auto")
     else:
-        # Draw-your-own: outlined box, white fill, pencil cue
         ph_size = min(SYM, 40)
         bx = x + (w - ph_size) / 2
         by = y + LABEL_H + (h - LABEL_H - ph_size) / 2
@@ -702,12 +650,10 @@ def _draw_board_cell_canvas(c, x, y, w, h, word, fk_color, sym_file=None,
         c.setLineWidth(0.75)
         c.setDash(3, 3)
         c.rect(bx, by, ph_size, ph_size, fill=1, stroke=1)
-        c.setDash()  # reset dash
+        c.setDash()
         c.setFillColor(colors.HexColor("#AAAAAA"))
         c.setFont("Helvetica", 10)
         c.drawCentredString(x + w / 2, by + ph_size / 2 - 5, "✏")
-
-    # Label (may need to wrap if long)
     c.setFillColor(NAVY)
     max_font = 10
     font_size = max_font
@@ -720,8 +666,8 @@ def _draw_board_cell_canvas(c, x, y, w, h, word, fk_color, sym_file=None,
 
 
 def build_layer3_board_a_pdf() -> bytes:
-    """Board A: Character Description (landscape, 4 rows × 6 cells)."""
-    PG_W, PG_H = rl_landscape(letter)   # 792 × 612
+    """Board A: Theme Evidence Vocabulary (landscape, 4 rows × 6 cells)."""
+    PG_W, PG_H = rl_landscape(letter)
     M_X, M_TOP, M_BOT = 0.4*inch, 0.5*inch, 0.45*inch
 
     buf = io.BytesIO()
@@ -729,44 +675,38 @@ def build_layer3_board_a_pdf() -> bytes:
 
     _draw_header_footer_canvas(c, PG_W, PG_H, is_landscape=True)
 
-    # Board title
     HEADER_Y = PG_H - M_TOP - 22
     c.setFillColor(NAVY)
     c.setFont("Helvetica-Bold", 13)
-    c.drawString(M_X, HEADER_Y, "Board A — Character Description")
+    c.drawString(M_X, HEADER_Y, "Board A — Theme Evidence Vocabulary")
     c.setFont("Helvetica", 8)
     c.setFillColor(SLATE)
     c.drawString(M_X, HEADER_Y - 13,
-        "Select one word from each row to describe the character. Partner records the description.")
+        "Select words across rows to build theme evidence statements. "
+        "Use Parts 1–4 Theme Evidence Chart. Partner records.")
 
-    # Grid layout
     GRID_TOP  = HEADER_Y - 26
-    GRID_BOT  = M_BOT + 22       # leave room for footer
+    GRID_BOT  = M_BOT + 22
     GRID_H    = GRID_TOP - GRID_BOT
-    N_ROWS    = len(BOARD_A_ROWS)   # 4
-    N_COLS    = 6                   # items per row
-    LABEL_COL = 1.0 * inch          # category label column width
+    N_ROWS    = len(BOARD_A_ROWS)
+    N_COLS    = 6
+    LABEL_COL = 1.0 * inch
     AVAIL_W   = PG_W - 2*M_X - LABEL_COL
     CELL_W    = AVAIL_W / N_COLS
     CELL_H    = GRID_H / N_ROWS
 
-    note_style_small = (
-        "Print at 11\"×17\" for gaze-accessible cell size (2\"×2\" minimum)."
-    )
     c.setFont("Helvetica-Oblique", 7)
     c.setFillColor(colors.HexColor("#64748B"))
-    c.drawRightString(PG_W - M_X, M_BOT + 16, note_style_small)
+    c.drawRightString(PG_W - M_X, M_BOT + 16,
+        "Print at 11\"×17\" for gaze-accessible cell size (2\"×2\" minimum).")
 
     for row_idx, (cat_label, cells) in enumerate(BOARD_A_ROWS):
         row_y_top = GRID_TOP - row_idx * CELL_H
         row_y_bot = row_y_top - CELL_H
-
-        # Category label cell (left column)
         c.setFillColor(NAVY)
         c.rect(M_X, row_y_bot, LABEL_COL, CELL_H, fill=1, stroke=0)
         c.setFillColor(WHITE)
-        c.setFont("Helvetica-Bold", 10)
-        # Rotate text for vertical category label
+        c.setFont("Helvetica-Bold", 9)
         c.saveState()
         cx = M_X + LABEL_COL / 2
         cy = row_y_bot + CELL_H / 2
@@ -774,13 +714,9 @@ def build_layer3_board_a_pdf() -> bytes:
         c.rotate(90)
         c.drawCentredString(0, -4, cat_label)
         c.restoreState()
-
-        # Cell border on label
         c.setStrokeColor(colors.HexColor("#FFFFFF"))
         c.setLineWidth(1.5)
         c.rect(M_X, row_y_bot, LABEL_COL, CELL_H, fill=0, stroke=1)
-
-        # Content cells
         for col_idx, (word, fk_col) in enumerate(cells):
             cell_x = M_X + LABEL_COL + col_idx * CELL_W
             _draw_board_cell_canvas(c, cell_x, row_y_bot, CELL_W, CELL_H,
@@ -792,15 +728,13 @@ def build_layer3_board_a_pdf() -> bytes:
 
 def build_layer3_board_b_pdf() -> bytes:
     """Board B: Emotion + Reasoning (portrait, 2 sections)."""
-    PG_W, PG_H = letter   # 612 × 792
+    PG_W, PG_H = letter
     M_X, M_TOP, M_BOT = 0.4*inch, 0.5*inch, 0.45*inch
 
     buf = io.BytesIO()
     c = rl_canvas.Canvas(buf, pagesize=(PG_W, PG_H))
-
     _draw_header_footer_canvas(c, PG_W, PG_H)
 
-    # Title
     HEADER_Y = PG_H - M_TOP - 22
     c.setFillColor(NAVY)
     c.setFont("Helvetica-Bold", 13)
@@ -810,26 +744,30 @@ def build_layer3_board_b_pdf() -> bytes:
     c.drawString(M_X, HEADER_Y - 13,
         "Use throughout: Before Reading (spontaneous, Mode 2) and during activities (Mode 1).")
 
-    AVAIL_W = PG_W - 2 * M_X
-    GRID_TOP = HEADER_Y - 26
+    AVAIL_W    = PG_W - 2 * M_X
+    GRID_TOP   = HEADER_Y - 26
     FOOTER_TOP = M_BOT + 22
 
-    # ── Emotional vocabulary section ──────────────────────────────────────────
     EMO_COLS = 7
     EMO_ROWS = 2
-    emo_words = BOARD_B_EMOTIONAL  # 14 words → 7×2
+    emo_words = list(BOARD_B_EMOTIONAL)
     while len(emo_words) < EMO_COLS * EMO_ROWS:
-        emo_words = list(emo_words) + [""]
+        emo_words.append("")
 
-    # Section label
+    # Section bar — print-safe: white fill, teal border, navy text
+    c.setFillColor(colors.white)
+    c.setStrokeColor(TEAL)
+    c.setLineWidth(1.5)
+    c.rect(M_X, GRID_TOP - 16, AVAIL_W, 16, fill=1, stroke=1)
+    # Teal left accent bar (3pt) for visual identity
     c.setFillColor(TEAL)
-    c.rect(M_X, GRID_TOP - 16, AVAIL_W, 16, fill=1, stroke=0)
-    c.setFillColor(WHITE)
+    c.rect(M_X, GRID_TOP - 16, 3, 16, fill=1, stroke=0)
+    c.setFillColor(NAVY)
     c.setFont("Helvetica-Bold", 8.5)
-    c.drawString(M_X + 5, GRID_TOP - 12, "EMOTIONAL VOCABULARY")
+    c.drawString(M_X + 8, GRID_TOP - 12, "EMOTIONAL VOCABULARY")
 
     EMO_CELL_W = AVAIL_W / EMO_COLS
-    EMO_CELL_H = 86  # pts ≈ 1.2"
+    EMO_CELL_H = 86
     emo_grid_top = GRID_TOP - 16
 
     for row_i in range(EMO_ROWS):
@@ -843,22 +781,24 @@ def build_layer3_board_b_pdf() -> bytes:
             _draw_board_cell_canvas(c, cell_x, cell_y, EMO_CELL_W, EMO_CELL_H,
                                      word, fk(word))
 
-    # ── Reasoning connectors section ──────────────────────────────────────────
     reasoning_top = emo_grid_top - EMO_ROWS * EMO_CELL_H - 10
-
+    # Section bar — print-safe: white fill, navy border, navy text
+    c.setFillColor(colors.white)
+    c.setStrokeColor(NAVY)
+    c.setLineWidth(1.5)
+    c.rect(M_X, reasoning_top - 16, AVAIL_W, 16, fill=1, stroke=1)
     c.setFillColor(NAVY)
-    c.rect(M_X, reasoning_top - 16, AVAIL_W, 16, fill=1, stroke=0)
-    c.setFillColor(WHITE)
+    c.rect(M_X, reasoning_top - 16, 3, 16, fill=1, stroke=0)
     c.setFont("Helvetica-Bold", 8.5)
-    c.drawString(M_X + 5, reasoning_top - 12,
-        "REASONING CONNECTORS  —  These carry the inference and motivation work of Parts 3–4")
+    c.drawString(M_X + 8, reasoning_top - 12,
+        "REASONING CONNECTORS  —  These carry the inference and theme work of Parts 2–4")
 
-    RSN_COLS = len(BOARD_B_REASONING)  # 6
+    RSN_COLS   = len(BOARD_B_REASONING)
     RSN_CELL_W = AVAIL_W / RSN_COLS
     remaining_h = reasoning_top - 16 - FOOTER_TOP
-    RSN_CELL_H = min(remaining_h, 108)  # up to 1.5"
-
+    RSN_CELL_H  = min(remaining_h, 108)
     rsn_grid_top = reasoning_top - 16
+
     for col_i, word in enumerate(BOARD_B_REASONING):
         cell_x = M_X + col_i * RSN_CELL_W
         cell_y = rsn_grid_top - RSN_CELL_H
@@ -875,13 +815,12 @@ def build_layer3_board_b_pdf() -> bytes:
 
 
 def build_layer3_board_c_pdf() -> bytes:
-    """Board C: Literary Discussion Moves (portrait)."""
+    """Board C: Literary Discussion Moves (portrait) — The Giver annotation codes."""
     PG_W, PG_H = letter
     M_X, M_TOP, M_BOT = 0.4*inch, 0.5*inch, 0.45*inch
 
     buf = io.BytesIO()
     c = rl_canvas.Canvas(buf, pagesize=(PG_W, PG_H))
-
     _draw_header_footer_canvas(c, PG_W, PG_H)
 
     HEADER_Y = PG_H - M_TOP - 22
@@ -893,30 +832,33 @@ def build_layer3_board_c_pdf() -> bytes:
     c.drawString(M_X, HEADER_Y - 13,
         "Use during all unit activities. Laminate and keep on the student's workspace.")
 
-    AVAIL_W   = PG_W - 2 * M_X
-    GRID_TOP  = HEADER_Y - 26
+    AVAIL_W    = PG_W - 2 * M_X
+    GRID_TOP   = HEADER_Y - 26
     FOOTER_TOP = M_BOT + 22
 
     # ── Discussion moves (6 cells, 3×2) ──────────────────────────────────────
-    DISC_COLS = 3
-    disc_words = BOARD_C_DISCUSSION   # 6 items
+    DISC_COLS  = 3
     DISC_CELL_W = AVAIL_W / DISC_COLS
     DISC_CELL_H = 90
 
+    # Section bar — print-safe
+    c.setFillColor(colors.white)
+    c.setStrokeColor(TEAL)
+    c.setLineWidth(1.5)
+    c.rect(M_X, GRID_TOP - 16, AVAIL_W, 16, fill=1, stroke=1)
     c.setFillColor(TEAL)
-    c.rect(M_X, GRID_TOP - 16, AVAIL_W, 16, fill=1, stroke=0)
-    c.setFillColor(WHITE)
+    c.rect(M_X, GRID_TOP - 16, 3, 16, fill=1, stroke=0)
+    c.setFillColor(NAVY)
     c.setFont("Helvetica-Bold", 8.5)
-    c.drawString(M_X + 5, GRID_TOP - 12, "DISCUSSION MOVES")
+    c.drawString(M_X + 8, GRID_TOP - 12, "DISCUSSION MOVES")
 
     disc_grid_top = GRID_TOP - 16
-    for i, phrase in enumerate(disc_words):
+    for i, phrase in enumerate(BOARD_C_DISCUSSION):
         row_i = i // DISC_COLS
         col_i = i % DISC_COLS
         cell_x = M_X + col_i * DISC_CELL_W
         cell_y = disc_grid_top - (row_i + 1) * DISC_CELL_H
-        # Text-heavy cell — draw manually
-        fk_col = "blue"
+        fk_col     = "blue"
         bg_col     = FK_BG[fk_col]
         border_col = FK_BORDER[fk_col]
         c.setFillColor(bg_col)
@@ -938,25 +880,26 @@ def build_layer3_board_c_pdf() -> bytes:
 
     # ── Evidence citing (4 cells, 2×2) ───────────────────────────────────────
     ev_top = disc_grid_top - 2 * DISC_CELL_H - 8
-
+    c.setFillColor(colors.white)
+    c.setStrokeColor(NAVY)
+    c.setLineWidth(1.5)
+    c.rect(M_X, ev_top - 16, AVAIL_W, 16, fill=1, stroke=1)
     c.setFillColor(NAVY)
-    c.rect(M_X, ev_top - 16, AVAIL_W, 16, fill=1, stroke=0)
-    c.setFillColor(WHITE)
+    c.rect(M_X, ev_top - 16, 3, 16, fill=1, stroke=0)
     c.setFont("Helvetica-Bold", 8.5)
-    c.drawString(M_X + 5, ev_top - 12, "CITING EVIDENCE")
+    c.drawString(M_X + 8, ev_top - 12, "CITING EVIDENCE")
 
     EV_COLS   = 2
-    ev_words  = BOARD_C_EVIDENCE
     EV_CELL_W = AVAIL_W / EV_COLS
     EV_CELL_H = 85
-
     ev_grid_top = ev_top - 16
-    for i, phrase in enumerate(ev_words):
+
+    for i, phrase in enumerate(BOARD_C_EVIDENCE):
         row_i = i // EV_COLS
         col_i = i % EV_COLS
         cell_x = M_X + col_i * EV_CELL_W
         cell_y = ev_grid_top - (row_i + 1) * EV_CELL_H
-        fk_col = "green"
+        fk_col     = "green"
         bg_col     = FK_BG[fk_col]
         border_col = FK_BORDER[fk_col]
         c.setFillColor(bg_col)
@@ -973,26 +916,24 @@ def build_layer3_board_c_pdf() -> bytes:
         c.setFont("Helvetica-Bold", font_size)
         c.drawCentredString(cell_x + EV_CELL_W/2, cell_y + EV_CELL_H/2 - 4, phrase.upper())
 
-    # ── Annotation codes (3 cells, horizontal) ───────────────────────────────
+    # ── Annotation codes (3 cells, horizontal) — The Giver-specific ──────────
     ann_top = ev_grid_top - 2 * EV_CELL_H - 8
     remaining_h = ann_top - 16 - FOOTER_TOP
-    ANN_CELL_H = min(remaining_h, 100)
-    ANN_CELL_W = AVAIL_W / 3
+    ANN_CELL_H  = min(remaining_h, 100)
+    ANN_CELL_W  = AVAIL_W / 3
 
-    c.setFillColor(colors.HexColor("#1B1F3B"))
-    c.rect(M_X, ann_top - 16, AVAIL_W, 16, fill=1, stroke=0)
-    c.setFillColor(WHITE)
+    c.setFillColor(colors.white)
+    c.setStrokeColor(NAVY)
+    c.setLineWidth(1.5)
+    c.rect(M_X, ann_top - 16, AVAIL_W, 16, fill=1, stroke=1)
+    c.setFillColor(NAVY)
+    c.rect(M_X, ann_top - 16, 3, 16, fill=1, stroke=0)
     c.setFont("Helvetica-Bold", 8.5)
-    c.drawString(M_X + 5, ann_top - 12,
-        "ANNOTATION CODES  —  Wonder: Character Analysis  (LOCKED 2026-03-29)")
+    c.drawString(M_X + 8, ann_top - 12,
+        "THEME EVIDENCE CHART CODES  —  The Giver: Theme Analysis")
 
-    ann_descriptions = {
-        "[TRAIT]":  ("who the character is",  "orange"),
-        "[WHY]":    ("why they act that way",  "blue"),
-        "[CHANGE]": ("how the character changes", "green"),
-    }
     ann_grid_top = ann_top - 16
-    for i, (code, (desc, fk_col)) in enumerate(ann_descriptions.items()):
+    for i, (code, desc, fk_col) in enumerate(BOARD_C_CODES):
         cell_x = M_X + i * ANN_CELL_W
         cell_y = ann_grid_top - ANN_CELL_H
         bg_col     = FK_BG[fk_col]
@@ -1004,19 +945,27 @@ def build_layer3_board_c_pdf() -> bytes:
         c.rect(cell_x, cell_y, ANN_CELL_W, ANN_CELL_H, fill=0, stroke=1)
         # Code label (large)
         c.setFillColor(NAVY)
-        c.setFont("Helvetica-Bold", 16)
-        c.drawCentredString(cell_x + ANN_CELL_W/2, cell_y + ANN_CELL_H - 28, code)
-        # Description (smaller)
-        c.setFont("Helvetica", 9)
+        c.setFont("Helvetica-Bold", 14)
+        c.drawCentredString(cell_x + ANN_CELL_W/2, cell_y + ANN_CELL_H - 24, code)
+        # Description (two lines wrapping)
+        desc_words = desc.split(" — ")
+        c.setFont("Helvetica", 8)
         c.setFillColor(colors.HexColor("#475569"))
-        c.drawCentredString(cell_x + ANN_CELL_W/2, cell_y + 16, desc)
-        # Symbol if any
-        sp = sym_path(code.lower().strip("[]"))
-        if sp and os.path.exists(sp):
-            sym_sz = 40
-            c.drawImage(sp, cell_x + (ANN_CELL_W - sym_sz)/2,
-                         cell_y + (ANN_CELL_H - sym_sz)/2 - 5,
-                         sym_sz, sym_sz, mask="auto")
+        if len(desc_words) > 1:
+            c.drawCentredString(cell_x + ANN_CELL_W/2, cell_y + 24,
+                                desc_words[0])
+            # wrap long descriptions
+            wrapped_d = textwrap.wrap(desc_words[1], 22)
+            line_y = cell_y + 14
+            for dl in wrapped_d[:2]:
+                c.drawCentredString(cell_x + ANN_CELL_W/2, line_y, dl)
+                line_y -= 10
+        else:
+            wrapped_d = textwrap.wrap(desc, 22)
+            line_y = cell_y + 24
+            for dl in wrapped_d[:2]:
+                c.drawCentredString(cell_x + ANN_CELL_W/2, line_y, dl)
+                line_y -= 10
 
     c.setFont("Helvetica-Oblique", 7)
     c.setFillColor(colors.HexColor("#64748B"))
@@ -1032,18 +981,17 @@ def build_layer3_board_c_pdf() -> bytes:
 # ─────────────────────────────────────────────────────────────────────────────
 
 ALL_UNIT_WORDS = [
-    # Core words (type = core)
-    ("feel",    "core"),   ("want",    "core"), ("think",   "core"),
-    ("know",    "core"),   ("change",  "core"), ("because", "core"),
-    ("maybe",   "core"),   ("sad",     "core"), ("scared",  "core"),
-    ("happy",   "core"),   ("alone",   "core"), ("kind",    "core"),
-    # Fringe words (type = fringe) — chapter order
-    ("ordinary",             "fringe"), ("helmet",    "fringe"),
-    ("school",               "fringe"), ("face looks different", "fringe"),
-    ("bully",                "fringe"), ("brave",     "fringe"),
-    ("friend",               "fringe"), ("belong",    "fringe"),
-    ("loyal",                "fringe"), ("invisible", "fringe"),
-    ("choose",               "fringe"), ("different", "fringe"),
+    # Core words
+    ("feel",     "core"), ("think",    "core"), ("know",     "core"),
+    ("change",   "core"), ("believe",  "core"), ("remember", "core"),
+    ("choose",   "core"), ("want",     "core"), ("free",     "core"),
+    ("because",  "core"), ("if",       "core"), ("real",     "core"),
+    ("together", "core"), ("alone",    "core"),
+    # Fringe words — chapter order
+    ("community",  "fringe"), ("sameness",   "fringe"), ("rule",       "fringe"),
+    ("ceremony",   "fringe"), ("memory",     "fringe"), ("assignment", "fringe"),
+    ("color",      "fringe"), ("release",    "fringe"), ("human",      "fringe"),
+    ("sacrifice",  "fringe"), ("together",   "fringe"), ("Jonas",      "fringe"),
 ]
 
 
@@ -1053,7 +1001,7 @@ def build_layer4a_vocab_map_pdf() -> bytes:
         leftMargin=0.55*inch, rightMargin=0.55*inch,
         topMargin=0.4*inch, bottomMargin=0.4*inch)
 
-    H1 = ParagraphStyle("h1", fontName="Helvetica-Bold",
+    H1   = ParagraphStyle("h1", fontName="Helvetica-Bold",
         fontSize=13, textColor=NAVY, leading=17, spaceAfter=4)
     BODY = ParagraphStyle("body", fontName="Helvetica",
         fontSize=8, textColor=NAVY, leading=11, spaceAfter=5)
@@ -1063,7 +1011,7 @@ def build_layer4a_vocab_map_pdf() -> bytes:
         backColor=colors.HexColor("#FFFBEB"), spaceAfter=6)
     LABEL = ParagraphStyle("lbl", fontName="Helvetica-Bold",
         fontSize=8.5, textColor=WHITE, leading=11, alignment=TA_CENTER)
-    CELL = ParagraphStyle("cell", fontName="Helvetica",
+    CELL  = ParagraphStyle("cell", fontName="Helvetica",
         fontSize=8, textColor=NAVY, leading=10)
     CELL_C = ParagraphStyle("cellc", fontName="Helvetica",
         fontSize=10, textColor=colors.HexColor("#94A3B8"), leading=12, alignment=TA_CENTER)
@@ -1075,14 +1023,12 @@ def build_layer4a_vocab_map_pdf() -> bytes:
     story = [header_flowable(),
              HRFlowable(width="100%", thickness=1.5, color=TEAL, spaceAfter=5)]
 
-    story.append(Paragraph(
-        f"Building a Vocabulary Library: {UNIT_TITLE}", H1))
+    story.append(Paragraph(f"Building a Vocabulary Library: {UNIT_TITLE}", H1))
     story.append(Paragraph(
         "These words belong to this student's permanent vocabulary library — "
         "not just this unit. Words marked <b>Generalized</b> are ready to add "
         "to their AAC system or communication book.", NOTE))
 
-    # Column headers
     COLS_W = [1.4*inch, 0.75*inch, 0.9*inch, 0.9*inch, 1.1*inch, 1.1*inch, 1.65*inch]
     headers = ["Word", "Type", "Introduced\n○", "Modeled\n○", "Spontaneous\nUse  ○",
                "Generalized\n★", "Notes"]
@@ -1094,29 +1040,21 @@ def build_layer4a_vocab_map_pdf() -> bytes:
         data.append([
             Paragraph(word, CELL),
             Paragraph(wtype, type_style),
-            Paragraph("○", CELL_C),
-            Paragraph("○", CELL_C),
-            Paragraph("○", CELL_C),
-            Paragraph("○", CELL_C),
+            Paragraph("○", CELL_C), Paragraph("○", CELL_C),
+            Paragraph("○", CELL_C), Paragraph("○", CELL_C),
             Paragraph("", CELL),
         ])
 
     tbl = Table(data, colWidths=COLS_W, repeatRows=1)
     ts  = [
-        # Header row
         ("BACKGROUND",    (0,0), (-1,0), NAVY),
         ("ALIGN",         (0,0), (-1,0), "CENTER"),
-        ("VALIGN",        (0,0), (-1,0), "MIDDLE"),
         ("VALIGN",        (0,0), (-1,-1), "MIDDLE"),
-        # Alternating rows
         ("ROWBACKGROUNDS", (0,1), (-1,-1),
          [colors.HexColor("#F8FAFC"), colors.white]),
-        # Divider between core and fringe
-        ("LINEBELOW",     (0,12), (-1,12), 1.5, AMBER),
-        # Borders
+        ("LINEBELOW",     (0,14), (-1,14), 1.5, AMBER),  # after 14 core words
         ("BOX",           (0,0), (-1,-1), 1, NAVY),
         ("INNERGRID",     (0,0), (-1,-1), 0.5, colors.HexColor("#CBD5E1")),
-        # Padding
         ("TOPPADDING",    (0,0), (-1,-1), 3),
         ("BOTTOMPADDING", (0,0), (-1,-1), 3),
         ("LEFTPADDING",   (0,0), (-1,-1), 5),
@@ -1140,85 +1078,94 @@ def build_layer4a_vocab_map_pdf() -> bytes:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# LAYER 5 — Student Response Pages (one per Part, all students)
+# LAYER 5 — Student Response Pages (5 parts — theme focus)
 # ─────────────────────────────────────────────────────────────────────────────
 
 STUDENT_PARTS = [
     {
         "num": 1,
-        "title": "Describe to Draw",
-        "skill": "Character Description",
+        "title": "Rules of Sameness",
+        "skill": "Theme Introduction",
         "prompt": (
-            "Choose a character from Wonder. Use the vocabulary strip to describe them. "
-            "Draw the character OR write describing words in the box below. "
-            "Your partner can help you select words."
+            "What rules does Jonas's community follow? "
+            "Describe the community. "
+            "How does it feel different from the world you know?"
         ),
-        "vocab": ["big", "small", "alone", "ordinary", "helmet", "face looks different", "school"],
-        "response": "draw",
+        "vocab": ["rule", "sameness", "community", "change", "free", "together", "alone"],
+        "response": "lines",
     },
     {
         "num": 2,
-        "title": "Same and Different",
-        "skill": "Character Comparison",
+        "title": "First Memories",
+        "skill": "Theme Evidence",
         "prompt": (
-            "Choose two characters from Wonder. How are they the same? How are they different? "
-            "Write or draw your ideas in the chart. Use vocabulary from the strip."
+            "Jonas receives his first memory from the Giver. "
+            "What does the memory show him? "
+            "Why is this important evidence for the theme?"
         ),
-        "vocab": ["friend", "different", "belong", "kind", "ordinary", "bully", "invisible"],
-        "response": "tchart",
+        "vocab": ["memory", "feel", "real", "change", "because", "human", "know"],
+        "response": "sentence",
+        "frame": "The memory of ________________________ shows that ________________________ because ________________________.",
     },
     {
         "num": 3,
-        "title": "Why Did They Do That?",
-        "skill": "Character Motivation",
+        "title": "What Jonas Feels",
+        "skill": "Theme Evidence",
         "prompt": (
-            "Choose a moment in Wonder. Why did the character act or feel that way? "
-            "Use the sentence frame to get started. Then write more below."
+            "Jonas begins to feel things the community cannot. "
+            "Show what Jonas feels before receiving memories and after. "
+            "How do his feelings connect to the theme?"
         ),
-        "vocab": ["because", "maybe", "think", "want", "scared", "brave", "kind", "loyal"],
-        "response": "sentence",
-        "frame": "[Character] ________________________ felt/did ________________________ because ________________________.",
-    },
-    {
-        "num": 4,
-        "title": "Before and After",
-        "skill": "Character Change",
-        "prompt": (
-            "How does a character change in Wonder? "
-            "Show what they were like at the beginning and at the end. "
-            "Mark key moments with [CHANGE] as you re-read."
-        ),
-        "vocab": ["change", "feel", "different", "brave", "belong", "choose", "kind"],
+        "vocab": ["feel", "sad", "scared", "happy", "confused", "brave", "alone", "free"],
         "response": "beforeafter",
     },
     {
-        "num": 5,
-        "title": "The Big Idea",
-        "skill": "Literary Synthesis",
+        "num": 4,
+        "title": "The Ending",
+        "skill": "Theme Evidence",
         "prompt": (
-            "What is R.J. Palacio trying to teach us in Wonder? "
-            "Use at least one piece of evidence from the text. "
-            "Use the sentence starters below to begin."
+            "What does Jonas choose to do at the end of The Giver? "
+            "Why does he make this choice? "
+            "What does his choice show about the theme?"
         ),
-        "vocab": ["think", "feel", "because", "change", "kind", "different", "brave"],
+        "vocab": ["choose", "free", "believe", "sacrifice", "because", "together", "human"],
         "response": "lines",
         "frames": [
-            "I think the big idea is _______________________________________________",
-            "because in the story ___________________________________________________.",
-            "This shows that _______________________________________________________.",
+            "Jonas chose to _______________________________________________",
+            "because he believed _____________________________________________.",
+            "This shows that ________________________________________________.",
+        ],
+    },
+    {
+        "num": 5,
+        "title": "Whole-Book Synthesis",
+        "skill": "Theme Synthesis",
+        "prompt": (
+            "According to The Giver, what makes us fully human — "
+            "and what happens when those things are taken away? "
+            "Use evidence from at least two parts of the book."
+        ),
+        "vocab": ["think", "feel", "because", "change", "real", "free", "human", "if"],
+        "response": "lines",
+        "frames": [
+            "I think Lois Lowry wants us to understand that ___________________",
+            "_________________________ because in the story _________________",
+            "___________________________. For example, when _________________",
+            "_________________________. This shows that ______________________.",
         ],
     },
 ]
 
+THEME_CODES = [("[THEME]", "green"), ("[EVIDENCE]", "blue"), ("[SHIFT]", "orange")]
+
 
 def _draw_vocab_chip_canvas(c, x, y, word, chip_w, chip_h):
-    """Draw a single Fitzgerald Key vocabulary chip at (x, y) bottom-left."""
+    """Print-safe: white fill, FK color as border only. Reads in B&W."""
     fk_col = fk(word)
-    bg  = FK_BG.get(fk_col, colors.HexColor("#F5F5F5"))
     bdr = FK_BORDER.get(fk_col, colors.HexColor("#AAAAAA"))
-    c.setFillColor(bg)
+    c.setFillColor(colors.white)
     c.setStrokeColor(bdr)
-    c.setLineWidth(1)
+    c.setLineWidth(1.5)
     c.roundRect(x, y, chip_w, chip_h, 3, fill=1, stroke=1)
     c.setFillColor(NAVY)
     fs = 7.5
@@ -1228,15 +1175,61 @@ def _draw_vocab_chip_canvas(c, x, y, word, chip_w, chip_h):
     c.drawCentredString(x + chip_w / 2, y + chip_h / 2 - fs * 0.35, word)
 
 
+def _draw_response_box(c, M_X, AVAIL_W, y_top, box_h, label="Your response:"):
+    """
+    Draw a clearly delineated response area:
+    - Light gray fill so it reads as 'fill this in'
+    - Solid navy left accent bar (matches prompt box visual language)
+    - Visible label in top-left corner
+    - Ruled lines at 32pt spacing — wide enough for all access methods
+    - Lines are dark enough to see when printed (#94A3B8, 0.75pt)
+    """
+    BAR_W   = 5
+    LINE_COLOR = colors.HexColor("#94A3B8")   # slate — visible when printed
+    LINE_W  = 0.75
+    LINE_SP = 32   # pts — wide lines, works for pencil, stylus, e-trans scribe
+    INNER_X = M_X + BAR_W + 6   # left indent past accent bar
+    INNER_W = AVAIL_W - BAR_W - 10
+
+    # White background — no fill where students write
+    c.setFillColor(colors.white)
+    c.rect(M_X, y_top - box_h, AVAIL_W, box_h, fill=1, stroke=0)
+
+    # Solid navy left accent bar
+    c.setFillColor(NAVY)
+    c.rect(M_X, y_top - box_h, BAR_W, box_h, fill=1, stroke=0)
+
+    # Outer border — navy, 1pt, clearly visible
+    c.setStrokeColor(NAVY)
+    c.setLineWidth(1.0)
+    c.rect(M_X, y_top - box_h, AVAIL_W, box_h, fill=0, stroke=1)
+
+    # Label in top-left
+    c.setFillColor(SLATE)
+    c.setFont("Helvetica-Oblique", 7.5)
+    c.drawString(INNER_X, y_top - 11, label)
+
+    # Ruled lines starting below label, at 32pt intervals
+    line_start_y = y_top - 20
+    line_bottom  = y_top - box_h + 10
+    lcount = 0
+    ly = line_start_y
+    while ly > line_bottom:
+        c.setStrokeColor(LINE_COLOR)
+        c.setLineWidth(LINE_W)
+        c.line(INNER_X, ly, M_X + AVAIL_W - 8, ly)
+        ly -= LINE_SP
+        lcount += 1
+
+
 def _draw_student_page(c, PG_W, PG_H, part):
-    """Render one student response page onto canvas c."""
     M_X     = 0.55 * inch
     M_TOP   = 0.42 * inch
     M_BOT   = 0.38 * inch
     AVAIL_W = PG_W - 2 * M_X
-    y       = PG_H - M_TOP          # current y (top edge, work downward)
+    y       = PG_H - M_TOP
 
-    # ── Running header ───────────────────────────────────────────────────────
+    # ── Running header ────────────────────────────────────────────────────────
     c.setFillColor(NAVY)
     c.setFont("Helvetica-Oblique", 8.5)
     c.drawString(M_X, y - 10, UNIT_TITLE)
@@ -1248,13 +1241,12 @@ def _draw_student_page(c, PG_W, PG_H, part):
     c.drawRightString(PG_W - M_X - comm_w - 3, y - 10, "BY DESIGN  ·")
     y -= 14
 
-    # Thin teal rule
     c.setStrokeColor(TEAL)
     c.setLineWidth(1.5)
     c.line(M_X, y, PG_W - M_X, y)
     y -= 8
 
-    # ── Part label bar ───────────────────────────────────────────────────────
+    # ── Part label bar ────────────────────────────────────────────────────────
     BAR_H = 20
     c.setFillColor(NAVY)
     c.rect(M_X, y - BAR_H, AVAIL_W, BAR_H, fill=1, stroke=0)
@@ -1264,61 +1256,65 @@ def _draw_student_page(c, PG_W, PG_H, part):
                  f"PART {part['num']}  ·  {part['skill'].upper()}  ·  Student Response Page")
     y -= BAR_H + 4
 
-    # ── Activity title ───────────────────────────────────────────────────────
+    # ── Activity title ────────────────────────────────────────────────────────
     c.setFillColor(TEAL)
     c.setFont("Helvetica-Bold", 14)
     c.drawString(M_X, y - 15, part["title"])
     y -= 22
 
-    # ── Student info row (Name / Date / Character) ───────────────────────────
+    # ── Student info row ──────────────────────────────────────────────────────
     INFO_H = 22
     c.setStrokeColor(colors.HexColor("#CBD5E1"))
-    c.setLineWidth(0.5)
+    c.setLineWidth(0.75)
     for (label, x_frac, w_frac) in [
-        ("Name / AAC User:", 0,    0.50),
-        ("Date:",           0.51,  0.22),
-        ("Character:",      0.74,  0.26),
+        ("Name:",    0,    0.40),
+        ("Class:",   0.41, 0.25),
+        ("Teacher:", 0.67, 0.17),
+        ("Date:",    0.85, 0.15),
     ]:
         bx = M_X + AVAIL_W * x_frac
         bw = AVAIL_W * w_frac
-        c.setFillColor(colors.HexColor("#F8FAFC"))
+        c.setFillColor(colors.white)
         c.rect(bx, y - INFO_H, bw, INFO_H, fill=1, stroke=1)
         c.setFillColor(SLATE)
         c.setFont("Helvetica", 7.5)
         c.drawString(bx + 4, y - INFO_H + 8, label)
-    y -= INFO_H + 7
+    y -= INFO_H + 6
 
-    # ── Prompt box ───────────────────────────────────────────────────────────
-    # Estimate chars per line: Helvetica 8.5pt ≈ 4.7pt/char; text area = AVAIL_W - 16
+    # ── Prompt box ────────────────────────────────────────────────────────────
     chars_per_line = max(60, int((AVAIL_W - 16) / 4.7))
     wrapped = textwrap.wrap(part["prompt"], chars_per_line)
-    PROMPT_LINE_H = 11
+    PROMPT_LINE_H = 12
     PROMPT_PAD    = 8
-    PROMPT_H      = max(36, len(wrapped) * PROMPT_LINE_H + 2 * PROMPT_PAD)
+    PROMPT_H      = max(40, len(wrapped) * PROMPT_LINE_H + 2 * PROMPT_PAD)
 
     c.setFillColor(colors.HexColor("#EFF6FF"))
     c.rect(M_X, y - PROMPT_H, AVAIL_W, PROMPT_H, fill=1, stroke=0)
     c.setFillColor(TEAL)
-    c.rect(M_X, y - PROMPT_H, 4, PROMPT_H, fill=1, stroke=0)  # left accent bar
+    c.rect(M_X, y - PROMPT_H, 5, PROMPT_H, fill=1, stroke=0)
+    # Teal border on prompt box
+    c.setStrokeColor(TEAL)
+    c.setLineWidth(1.0)
+    c.rect(M_X, y - PROMPT_H, AVAIL_W, PROMPT_H, fill=0, stroke=1)
     c.setFillColor(NAVY)
-    c.setFont("Helvetica", 8.5)
+    c.setFont("Helvetica", 9)
     ty = y - PROMPT_PAD - PROMPT_LINE_H
     for line in wrapped:
-        c.drawString(M_X + 12, ty, line)
+        c.drawString(M_X + 13, ty, line)
         ty -= PROMPT_LINE_H
-    y -= PROMPT_H + 7
+    y -= PROMPT_H + 6
 
-    # ── Vocabulary strip (FK chips) ──────────────────────────────────────────
+    # ── Vocabulary strip ──────────────────────────────────────────────────────
     c.setFillColor(SLATE)
-    c.setFont("Helvetica-Oblique", 7)
-    c.drawString(M_X, y - 8, "Vocabulary:")
-    y -= 11
+    c.setFont("Helvetica-Bold", 7.5)
+    c.drawString(M_X, y - 9, "Vocabulary:")
+    y -= 12
 
     vocab_words  = part["vocab"]
     N_CHIPS      = len(vocab_words)
-    CHIP_H       = 20
-    CHIP_GAP     = 4
-    CHIP_W       = min(78, (AVAIL_W - (N_CHIPS - 1) * CHIP_GAP) / N_CHIPS)
+    CHIP_H       = 22
+    CHIP_GAP     = 5
+    CHIP_W       = min(80, (AVAIL_W - (N_CHIPS - 1) * CHIP_GAP) / N_CHIPS)
     strip_w      = N_CHIPS * CHIP_W + (N_CHIPS - 1) * CHIP_GAP
     chip_x_start = M_X + (AVAIL_W - strip_w) / 2
 
@@ -1327,189 +1323,172 @@ def _draw_student_page(c, PG_W, PG_H, part):
         _draw_vocab_chip_canvas(c, cx, y - CHIP_H, word, CHIP_W, CHIP_H)
     y -= CHIP_H + 8
 
-    # ── Annotation code reminder strip (small, above footer) ─────────────────
-    FOOTER_RESERVED = 28
-    ANN_Y = M_BOT + FOOTER_RESERVED - 2
-
-    ann_items = [("[TRAIT]", "orange"), ("[WHY]", "blue"), ("[CHANGE]", "green")]
+    # ── Theme code reminder strip (above footer) ──────────────────────────────
+    FOOTER_RESERVED = 30
+    ANN_Y = M_BOT + FOOTER_RESERVED + 2
     ax = M_X
-    c.setFont("Helvetica-Bold", 6.5)
-    for code, fk_col in ann_items:
+    c.setFont("Helvetica-Bold", 7)
+    for code, fk_col in THEME_CODES:
         bg  = FK_BG.get(fk_col)
         bdr = FK_BORDER.get(fk_col)
-        cw  = c.stringWidth(code, "Helvetica-Bold", 6.5) + 8
+        cw  = c.stringWidth(code, "Helvetica-Bold", 7) + 10
         c.setFillColor(bg)
         c.setStrokeColor(bdr)
-        c.setLineWidth(0.8)
-        c.roundRect(ax, ANN_Y - 12, cw, 12, 2, fill=1, stroke=1)
+        c.setLineWidth(1.0)
+        c.roundRect(ax, ANN_Y - 14, cw, 14, 3, fill=1, stroke=1)
         c.setFillColor(NAVY)
-        c.drawString(ax + 4, ANN_Y - 9, code)
-        ax += cw + 4
+        c.drawString(ax + 5, ANN_Y - 10, code)
+        ax += cw + 5
 
-    # ── Response area ────────────────────────────────────────────────────────
+    # ── Response area ─────────────────────────────────────────────────────────
     RESPONSE_H = y - M_BOT - FOOTER_RESERVED
     resp_type  = part.get("response", "lines")
 
     if resp_type == "draw":
-        # Large box with faint write/draw label
-        c.setFillColor(colors.white)
-        c.setStrokeColor(colors.HexColor("#CBD5E1"))
-        c.setLineWidth(1)
-        c.rect(M_X, y - RESPONSE_H, AVAIL_W, RESPONSE_H, fill=1, stroke=1)
-        # Faint writing lines at top third
-        line_zone_h = min(RESPONSE_H * 0.35, 70)
-        c.setStrokeColor(colors.HexColor("#E2E8F0"))
-        c.setLineWidth(0.4)
-        for li in range(4):
-            ly = y - line_zone_h + li * 20
-            if ly > y - 8:
-                ly = y - 8
-            if ly < y - RESPONSE_H + 10:
-                break
-            c.line(M_X + 8, ly, M_X + AVAIL_W - 8, ly)
-        # "Write or draw here" watermark
-        c.setFillColor(colors.HexColor("#E2E8F0"))
-        c.setFont("Helvetica-Oblique", 11)
-        c.drawCentredString(M_X + AVAIL_W / 2, y - RESPONSE_H / 2 - 5, "Write or draw here")
+        # Top third: writing lines. Bottom two-thirds: open draw space.
+        WRITE_H = min(int(RESPONSE_H * 0.38), 90)
+        DRAW_H  = RESPONSE_H - WRITE_H - 6
 
-    elif resp_type == "tchart":
-        col_w  = (AVAIL_W - 4) / 2
-        body_h = RESPONSE_H - 20
-        # Headers
-        c.setFillColor(NAVY)
-        c.rect(M_X, y - 20, col_w, 20, fill=1, stroke=0)
-        c.setFillColor(WHITE)
-        c.setFont("Helvetica-Bold", 10)
-        c.drawCentredString(M_X + col_w / 2, y - 14, "SAME")
-        c.setFillColor(TEAL)
-        c.rect(M_X + col_w + 4, y - 20, col_w, 20, fill=1, stroke=0)
-        c.setFillColor(WHITE)
-        c.drawCentredString(M_X + col_w + 4 + col_w / 2, y - 14, "DIFFERENT")
-        # Bodies
+        # Writing lines section
+        _draw_response_box(c, M_X, AVAIL_W, y, WRITE_H, label="Write your ideas:")
+
+        # Draw section below
+        draw_y = y - WRITE_H - 6
         c.setFillColor(colors.white)
-        c.setStrokeColor(colors.HexColor("#CBD5E1"))
-        c.setLineWidth(0.8)
-        c.rect(M_X, y - 20 - body_h, col_w, body_h, fill=1, stroke=1)
-        c.rect(M_X + col_w + 4, y - 20 - body_h, col_w, body_h, fill=1, stroke=1)
-        # Sub-labels
+        c.rect(M_X, draw_y - DRAW_H, AVAIL_W, DRAW_H, fill=1, stroke=0)
+        c.setFillColor(NAVY)
+        c.rect(M_X, draw_y - DRAW_H, 5, DRAW_H, fill=1, stroke=0)
+        c.setStrokeColor(NAVY)
+        c.setLineWidth(1.0)
+        c.rect(M_X, draw_y - DRAW_H, AVAIL_W, DRAW_H, fill=0, stroke=1)
         c.setFillColor(SLATE)
         c.setFont("Helvetica-Oblique", 7.5)
-        c.drawString(M_X + 6, y - 30, "Both characters...")
-        c.drawString(M_X + col_w + 10, y - 30, "Only one character...")
-        # Faint character name prompts at top of each column
+        c.drawString(M_X + 11, draw_y - 11, "Draw here:")
         c.setFillColor(colors.HexColor("#E2E8F0"))
-        c.setFont("Helvetica-Oblique", 8)
-        c.drawCentredString(M_X + col_w / 2, y - 20 - body_h / 2, "Character 1 + Character 2")
-        c.drawCentredString(M_X + col_w + 4 + col_w / 2, y - 20 - body_h / 2, "Character 1  ≠  Character 2")
+        c.setFont("Helvetica-Oblique", 13)
+        c.drawCentredString(M_X + AVAIL_W / 2, draw_y - DRAW_H / 2 - 6, "✏  Draw here")
 
     elif resp_type == "sentence":
-        frame = part.get("frame", "[Character] _________ felt/did _________ because _________.")
+        frame = part.get("frame", "________________________ because ________________________.")
         # Sentence frame box
-        SF_H = 30
-        c.setFillColor(colors.HexColor("#FFFBEB"))
-        c.setStrokeColor(AMBER)
-        c.setLineWidth(1.5)
-        c.rect(M_X, y - SF_H, AVAIL_W, SF_H, fill=1, stroke=1)
-        c.setFillColor(NAVY)
-        c.setFont("Helvetica", 8.5)
-        c.drawString(M_X + 8, y - SF_H + 11, frame)
-        y -= SF_H + 6
-        # Writing lines
-        remaining = y - M_BOT - FOOTER_RESERVED
+        SF_PAD  = 10
+        SF_LINE_H = 15
+        SF_H    = SF_PAD * 2 + SF_LINE_H
         c.setFillColor(colors.white)
-        c.setStrokeColor(colors.HexColor("#CBD5E1"))
-        c.setLineWidth(0.8)
-        c.rect(M_X, y - remaining, AVAIL_W, remaining, fill=1, stroke=1)
-        c.setStrokeColor(colors.HexColor("#E2E8F0"))
-        c.setLineWidth(0.5)
-        line_sp = 22
-        for li in range(int(remaining / line_sp) - 1):
-            ly = y - (li + 1) * line_sp
-            if ly < y - remaining + 8:
-                break
-            c.line(M_X + 8, ly, M_X + AVAIL_W - 8, ly)
+        c.setStrokeColor(AMBER)
+        c.setLineWidth(2.0)
+        c.rect(M_X, y - SF_H, AVAIL_W, SF_H, fill=1, stroke=1)
+        # Amber left bar on frame
+        c.setFillColor(AMBER)
+        c.rect(M_X, y - SF_H, 5, SF_H, fill=1, stroke=0)
+        c.setFillColor(NAVY)
+        c.setFont("Helvetica", 9)
+        c.drawString(M_X + 13, y - SF_PAD - SF_LINE_H + 3, frame)
+        y -= SF_H + 8
+
+        remaining = y - M_BOT - FOOTER_RESERVED
+        _draw_response_box(c, M_X, AVAIL_W, y, remaining, label="Tell me more:")
 
     elif resp_type == "beforeafter":
-        col_w  = (AVAIL_W - 4) / 2
-        body_h = RESPONSE_H - 20
-        # Headers
-        c.setFillColor(colors.HexColor("#64748B"))
-        c.rect(M_X, y - 20, col_w, 20, fill=1, stroke=0)
-        c.setFillColor(WHITE)
-        c.setFont("Helvetica-Bold", 10)
-        c.drawCentredString(M_X + col_w / 2, y - 14, "BEFORE")
-        c.setFillColor(TEAL)
-        c.rect(M_X + col_w + 4, y - 20, col_w, 20, fill=1, stroke=0)
-        c.setFillColor(WHITE)
-        c.drawCentredString(M_X + col_w + 4 + col_w / 2, y - 14, "AFTER")
-        # Bodies
+        col_w  = (AVAIL_W - 8) / 2
+        body_h = RESPONSE_H - 24
+        HDR_H  = 24
+
+        # BEFORE header — print-safe: white fill, slate border, dark text
         c.setFillColor(colors.white)
-        c.setStrokeColor(colors.HexColor("#CBD5E1"))
-        c.setLineWidth(0.8)
-        c.rect(M_X, y - 20 - body_h, col_w, body_h, fill=1, stroke=1)
-        c.rect(M_X + col_w + 4, y - 20 - body_h, col_w, body_h, fill=1, stroke=1)
-        # Sub-labels
-        c.setFillColor(SLATE)
-        c.setFont("Helvetica-Oblique", 7.5)
-        c.drawString(M_X + 6, y - 30, "At the beginning of the story...")
-        c.drawString(M_X + col_w + 10, y - 30, "By the end of the story...")
-        # Amber arrow centered between columns
+        c.setStrokeColor(colors.HexColor("#475569"))
+        c.setLineWidth(2.0)
+        c.rect(M_X, y - HDR_H, col_w, HDR_H, fill=1, stroke=1)
+        c.setFillColor(NAVY)
+        c.setFont("Helvetica-Bold", 10)
+        c.drawCentredString(M_X + col_w / 2, y - HDR_H + 7, "BEFORE MEMORIES")
+
+        # AFTER header — print-safe: white fill, teal border, dark text
+        c.setFillColor(colors.white)
+        c.setStrokeColor(TEAL)
+        c.setLineWidth(2.0)
+        c.rect(M_X + col_w + 8, y - HDR_H, col_w, HDR_H, fill=1, stroke=1)
+        c.setFillColor(NAVY)
+        c.drawCentredString(M_X + col_w + 8 + col_w / 2, y - HDR_H + 7, "AFTER MEMORIES")
+
+        # Column bodies — white, no fill where students write
+        for col_x in [M_X, M_X + col_w + 8]:
+            c.setFillColor(colors.white)
+            c.rect(col_x, y - HDR_H - body_h, col_w, body_h, fill=1, stroke=0)
+            c.setFillColor(NAVY)
+            c.rect(col_x, y - HDR_H - body_h, 5, body_h, fill=1, stroke=0)
+            c.setStrokeColor(NAVY)
+            c.setLineWidth(1.0)
+            c.rect(col_x, y - HDR_H - body_h, col_w, body_h, fill=0, stroke=1)
+            c.setFillColor(SLATE)
+            c.setFont("Helvetica-Oblique", 7.5)
+            c.drawString(col_x + 10, y - HDR_H - 12, "Jonas felt / knew...")
+            # Ruled lines inside column
+            line_y = y - HDR_H - 22
+            line_bot = y - HDR_H - body_h + 8
+            while line_y > line_bot:
+                c.setStrokeColor(colors.HexColor("#94A3B8"))
+                c.setLineWidth(0.75)
+                c.line(col_x + 10, line_y, col_x + col_w - 8, line_y)
+                line_y -= 32
+
+        # Arrow between columns
         c.setFillColor(AMBER)
-        c.setFont("Helvetica-Bold", 20)
-        arrow_y = y - 20 - body_h / 2 - 8
-        c.drawCentredString(M_X + AVAIL_W / 2, arrow_y, "→")
+        c.setFont("Helvetica-Bold", 22)
+        c.drawCentredString(M_X + AVAIL_W / 2, y - HDR_H - body_h / 2 - 10, "→")
 
     elif resp_type == "lines":
         frames = part.get("frames", [])
-        SF_H_PER  = 22
-        total_sf_h = len(frames) * SF_H_PER + 8
-        c.setFillColor(colors.HexColor("#FFFBEB"))
-        c.setStrokeColor(AMBER)
-        c.setLineWidth(1.5)
-        c.rect(M_X, y - total_sf_h, AVAIL_W, total_sf_h, fill=1, stroke=1)
-        c.setFillColor(NAVY)
-        c.setFont("Helvetica", 8.5)
-        for fi, fr_text in enumerate(frames):
-            c.drawString(M_X + 8, y - (fi + 1) * SF_H_PER + 7, fr_text)
-        y -= total_sf_h + 6
-        remaining = y - M_BOT - FOOTER_RESERVED
-        c.setFillColor(colors.white)
-        c.setStrokeColor(colors.HexColor("#CBD5E1"))
-        c.setLineWidth(0.8)
-        c.rect(M_X, y - remaining, AVAIL_W, remaining, fill=1, stroke=1)
-        c.setStrokeColor(colors.HexColor("#E2E8F0"))
-        c.setLineWidth(0.5)
-        line_sp = 22
-        for li in range(int(remaining / line_sp) - 1):
-            ly = y - (li + 1) * line_sp
-            if ly < y - remaining + 8:
-                break
-            c.line(M_X + 8, ly, M_X + AVAIL_W - 8, ly)
 
-    # ── Footer ───────────────────────────────────────────────────────────────
+        if frames:
+            # Sentence frame box — taller, 28pt per frame line, with room for text
+            SF_LINE_H  = 28
+            SF_PAD     = 10
+            total_sf_h = len(frames) * SF_LINE_H + SF_PAD * 2
+
+            c.setFillColor(colors.white)
+            c.rect(M_X, y - total_sf_h, AVAIL_W, total_sf_h, fill=1, stroke=0)
+            c.setFillColor(AMBER)
+            c.rect(M_X, y - total_sf_h, 5, total_sf_h, fill=1, stroke=0)
+            c.setStrokeColor(AMBER)
+            c.setLineWidth(2.0)
+            c.rect(M_X, y - total_sf_h, AVAIL_W, total_sf_h, fill=0, stroke=1)
+
+            c.setFillColor(NAVY)
+            c.setFont("Helvetica", 9)
+            for fi, fr_text in enumerate(frames):
+                line_y = y - SF_PAD - (fi + 1) * SF_LINE_H + 14
+                # Wrap if needed
+                max_chars = max(40, int((AVAIL_W - 24) / 5.0))
+                fparts = textwrap.wrap(fr_text, max_chars)
+                for fp in fparts[:1]:   # one line per frame — keep it clean
+                    c.drawString(M_X + 13, line_y, fp)
+                # Underline the blank portion of this frame line (visual affordance)
+                c.setStrokeColor(colors.HexColor("#94A3B8"))
+                c.setLineWidth(0.75)
+                c.line(M_X + 13, line_y - 3, M_X + AVAIL_W - 10, line_y - 3)
+
+            y -= total_sf_h + 8
+
+        remaining = y - M_BOT - FOOTER_RESERVED
+        _draw_response_box(c, M_X, AVAIL_W, y, remaining, label="Tell me more:")
+
+    # ── Footer ────────────────────────────────────────────────────────────────
     c.setStrokeColor(TEAL)
-    c.setLineWidth(0.5)
-    c.line(M_X, M_BOT + 14, PG_W - M_X, M_BOT + 14)
+    c.setLineWidth(0.75)
+    c.line(M_X, M_BOT + 16, PG_W - M_X, M_BOT + 16)
     c.setFillColor(SLATE)
     c.setFont("Helvetica", 6.5)
-    c.drawCentredString(PG_W / 2, M_BOT + 4, footer_text())
+    c.drawCentredString(PG_W / 2, M_BOT + 5, footer_text())
 
 
 def build_layer5_student_response_pages_pdf() -> bytes:
-    """
-    Layer 5 — Student Response Pages (one per Part, all students).
-    Five pages: Describe to Draw · Same and Different · Why Did They Do That?
-                Before and After · The Big Idea
-    AAC access built in via vocabulary strip + annotation code reminder.
-    """
     buf = io.BytesIO()
     c   = rl_canvas.Canvas(buf, pagesize=letter)
     PG_W, PG_H = letter
-
     for part in STUDENT_PARTS:
         _draw_student_page(c, PG_W, PG_H, part)
         c.showPage()
-
     c.save()
     return buf.getvalue()
 
@@ -1523,8 +1502,7 @@ def build_packet():
 
     print("Building Layer 1 — Communication Environment Setup...")
     l1 = PdfReader(io.BytesIO(build_layer1_pdf()))
-    for p in l1.pages:
-        writer.add_page(p)
+    for p in l1.pages: writer.add_page(p)
     print(f"  Added {len(l1.pages)} page(s)")
 
     print("Building Layer 2 — Core Word Symbol Cards...")
@@ -1533,12 +1511,10 @@ def build_packet():
         SET_A_CORE,
         section_note=(
             "These 12 core words are SDI instruction targets. "
-            "Core vocabulary is likely already on the student's system. "
-            "Confirm with the AAC team before adding to the device."
+            "Core vocabulary is likely already on the student's system."
         )
     )))
-    for p in l2a.pages:
-        writer.add_page(p)
+    for p in l2a.pages: writer.add_page(p)
     print(f"  Added {len(l2a.pages)} page(s)")
 
     print("Building Layer 2 — Fringe Word Symbol Cards...")
@@ -1546,45 +1522,41 @@ def build_packet():
         "Fringe Word Symbol Cards — Unit-Specific Vocabulary",
         SET_A_FRINGE,
         section_note=(
-            "Words are organized by when they first appear in Wonder. "
+            "Words are organized by when they first appear in The Giver. "
             "Students may use printed cards, symbols from an existing symbol set, "
             "or programmed device pages. "
-            "Consult the full AAC team before selecting access method for fringe words."
+            "⚠️ Several words in this set (memory, rule, community, release, color, "
+            "ceremony, sacrifice) have draw-your-own placeholders — "
+            "add ARASAAC symbols when available or create custom cards."
         )
     )))
-    for p in l2b.pages:
-        writer.add_page(p)
+    for p in l2b.pages: writer.add_page(p)
     print(f"  Added {len(l2b.pages)} page(s)")
 
-    print("Building Layer 3 — Board A: Character Description...")
+    print("Building Layer 3 — Board A: Theme Evidence Vocabulary...")
     l3a = PdfReader(io.BytesIO(build_layer3_board_a_pdf()))
-    for p in l3a.pages:
-        writer.add_page(p)
+    for p in l3a.pages: writer.add_page(p)
     print(f"  Added {len(l3a.pages)} page(s)")
 
     print("Building Layer 3 — Board B: Emotion + Reasoning...")
     l3b = PdfReader(io.BytesIO(build_layer3_board_b_pdf()))
-    for p in l3b.pages:
-        writer.add_page(p)
+    for p in l3b.pages: writer.add_page(p)
     print(f"  Added {len(l3b.pages)} page(s)")
 
     print("Building Layer 3 — Board C: Literary Discussion Moves...")
     l3c = PdfReader(io.BytesIO(build_layer3_board_c_pdf()))
-    for p in l3c.pages:
-        writer.add_page(p)
+    for p in l3c.pages: writer.add_page(p)
     print(f"  Added {len(l3c.pages)} page(s)")
 
     print("Building Layer 4a — Vocabulary Map...")
     l4a = PdfReader(io.BytesIO(build_layer4a_vocab_map_pdf()))
-    for p in l4a.pages:
-        writer.add_page(p)
+    for p in l4a.pages: writer.add_page(p)
     print(f"  Added {len(l4a.pages)} page(s)")
 
     print("Appending Layer 4b — AAC Session Tracker...")
     if os.path.exists(TRACKER):
         tracker = PdfReader(TRACKER)
-        for p in tracker.pages:
-            writer.add_page(p)
+        for p in tracker.pages: writer.add_page(p)
         print(f"  Added {len(tracker.pages)} page(s)")
     else:
         print(f"  ⚠️  Tracker not found at: {TRACKER}")
@@ -1592,8 +1564,7 @@ def build_packet():
 
     print("Building Layer 5 — Student Response Pages...")
     l5 = PdfReader(io.BytesIO(build_layer5_student_response_pages_pdf()))
-    for p in l5.pages:
-        writer.add_page(p)
+    for p in l5.pages: writer.add_page(p)
     print(f"  Added {len(l5.pages)} page(s)")
 
     with open(OUT_PATH, "wb") as f:
@@ -1607,27 +1578,36 @@ def build_packet():
     print("  p1     Layer 1  — Communication Environment Setup")
     print("  p2     Layer 2  — Core word symbol cards (12 words)")
     print("  p3     Layer 2  — Fringe word symbol cards (12 words, chapter order)")
-    print("  p4     Layer 3  — Board A: Character Description (landscape)")
+    print("  p4     Layer 3  — Board A: Theme Evidence Vocabulary (landscape)")
     print("  p5     Layer 3  — Board B: Emotion + Reasoning")
-    print("  p6     Layer 3  — Board C: Literary Discussion Moves")
-    print("  p7     Layer 4a — Vocabulary Map")
+    print("  p6     Layer 3  — Board C: Literary Discussion Moves + Theme Codes")
+    print("  p7     Layer 4a — Vocabulary Map (14 core + 12 fringe)")
     print("  p8–9   Layer 4b — AAC Session Tracker")
-    print("  p10    Layer 5  — Student Response: Part 1 — Describe to Draw")
-    print("  p11    Layer 5  — Student Response: Part 2 — Same and Different")
-    print("  p12    Layer 5  — Student Response: Part 3 — Why Did They Do That?")
-    print("  p13    Layer 5  — Student Response: Part 4 — Before and After")
-    print("  p14    Layer 5  — Student Response: Part 5 — The Big Idea")
+    print("  p10    Layer 5  — Student Response: Part 1 — Rules of Sameness")
+    print("  p11    Layer 5  — Student Response: Part 2 — First Memories")
+    print("  p12    Layer 5  — Student Response: Part 3 — What Jonas Feels")
+    print("  p13    Layer 5  — Student Response: Part 4 — The Ending")
+    print("  p14    Layer 5  — Student Response: Part 5 — Whole-Book Synthesis")
     print()
-    print("Symbol substitutions used:")
-    print("  belong          → include  (arasaac_include_11702.png)")
-    print("  ordinary        → usual    (arasaac_usual_2547.png)")
-    print("  face looks diff → face     (arasaac_face_2684.png)")
+    print("Symbol notes:")
+    print("  believe   → arasaac_think.png  (closest available)")
+    print("  sameness  → arasaac_same.png   (closest available)")
+    print("  community → arasaac_group.png  (closest available)")
+    print("  rule      → arasaac_law.png    (closest available)")
+    print("  memory    → arasaac_forget.png (remember/forget concept)")
+    print("  assignment→ arasaac_job.png    (closest available)")
+    print("  release   → arasaac_let.png    (let go — closest available)")
+    print("  color     → arasaac_paint.png  (closest available)")
+    print("  angry     → arasaac_mad.png    (closest available)")
+    print("  ceremony, sacrifice → draw-your-own placeholders (no close match found)")
+    print("  human     → arasaac_human.png (direct match)")
     print()
     print("Next steps:")
-    print("  1. Open PDF and run packet QC checklist")
+    print("  1. Open PDF — run packet QC checklist")
     print("     (_Operations/memory/fiction_printable_packet_spec.md)")
-    print("  2. Delete Wonder_Character_Analysis_Printable_Kit.docx (wrong format — manual Finder)")
-    print("  3. Confirm symbol substitutions with Jill")
+    print("  2. Flag draw-your-own cards to AAC team for custom symbol creation")
+    print("  3. Assemble TPT folder: Teaching Materials.docx + Printable Packet PDF")
+    print("  4. Build Welcome PDF, then prepare TPT listing")
 
 
 if __name__ == "__main__":

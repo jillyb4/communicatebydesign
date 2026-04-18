@@ -5,6 +5,56 @@
 
 ---
 
+## Standard Product Folder Structure (LOCKED 2026-04-17)
+
+Every fiction unit uses this identical folder layout. Apply to all new units at build time.
+
+```
+[Title] - [Skill]/
+├── Builds/                          ← all build scripts for this unit
+│   ├── build_[unit].js
+│   ├── build_[unit]_printable_packet.py
+│   └── build_[unit]_welcome.py
+├── Product Files/                   ← source-of-truth product files
+│   ├── [Unit]_Teaching_Materials.docx
+│   ├── [Unit]_Printable_Packet.pdf
+│   └── [Unit]_Welcome_to_the_Product.pdf
+├── TPT Product Files/               ← upload-ready set (4 files + zip)
+│   ├── [Unit]_Teaching_Materials.docx
+│   ├── [Unit]_Printable_Packet.pdf
+│   ├── [Unit]_Welcome_to_the_Product.pdf
+│   ├── [Unit]_TPT_Preview.pdf
+│   └── [Unit]_TPT.zip
+└── Marketing/
+    ├── [Unit]_Marketing_Plan.md     ← ALL copy: TPT title/description/tags, pins, socials, FB drop, bundle strategy
+    ├── [Unit]_Canva_BulkImport.csv  ← one row, for this unit only
+    ├── [Unit]_Tailwind.csv          ← when built
+    └── Images/
+        ├── [Unit]_Image2_CommBoard.png
+        ├── [Unit]_Image3_SymbolCards.png
+        ├── [Unit]_Image4_PartnerSetup.png
+        ├── [Unit]_Image5_StudentActivity1.png
+        └── [Unit]_Image6_StudentActivity2.png
+```
+
+**Rules:**
+- Everything for a product lives inside that product's folder — no files scattered across Distribution/ or Marketing/
+- Marketing_Plan.md is the single file you open for any copy/paste task (TPT listing, pin text, FB drop, Canva import path)
+- Canva CSV is per-unit — one row, lives in Marketing/ not in Distribution/Pinterest/
+- Images are per-unit — in Marketing/Images/ not in a shared Marketing/ folder elsewhere
+- Build scripts live in Builds/ — not in the root of the unit folder
+
+**Stale items to clean up in Finder (cannot delete via code — iCloud permissions):**
+- Old `[Unit]_TPT/` subfolder (now replaced by `TPT Product Files/`)
+- Old `[Unit]_TPT_Listing_Package.md` in unit root (now `Marketing/[Unit]_Marketing_Plan.md`)
+- Old build scripts in unit root (now in `Builds/`)
+- Old loose docx/pdf files in unit root (now in `Product Files/`)
+- Shared `Marketing/Product Images/Fiction Anchor Texts/` folder (images now per-unit)
+- Shared `Distrubution/Pinterest/Fiction_Canva_BulkImport.csv` (now per-unit)
+- Shared `Distrubution/Teachers Pay Teachers/Fiction_TPT_BulkImport.csv` (superseded — use per-unit Marketing_Plan.md)
+
+---
+
 ## What It Is
 
 A purpose-designed printable (**13 pages for Wonder; 7–9 pages baseline**) that gives any team — regardless of a
@@ -156,14 +206,15 @@ These words appear on: Communication Board (Layer 3) only — NOT all on symbol 
 **Fringe word cards** (1–2 pages):
 - Set A fringe words only — the unit-specific SDI instruction targets
 - Organized by WHERE IN THE BOOK they first appear (chapter/section), NOT alphabetically
-- Section header: "Unit-Specific Vocabulary — Coordinate with AAC team before
-  instruction begins"
+- Section header: "Unit-Specific Vocabulary — Fringe SDI Targets"
 - Language note: "Students may use printed cards, symbols from an existing symbol
-  set, or programmed device pages. Consult the full team before selecting access
-  method for fringe words."
+  set, or programmed device pages."
 
 **No device-assumption language anywhere.** Never: "pre-program," "program your
 device," "SGD required." Never assume fringe words are on a student's current system.
+**No team direction language on student-facing or vocabulary-facing pages.** Never:
+"confirm with AAC team," "consult the team," "check with your SLP." These belong
+in teacher guidance only, not on cards or packet pages.
 
 ---
 
@@ -336,6 +387,59 @@ Run before marking packet complete. Every item must pass.
 
 ---
 
+---
+
+## Print Standards — LOCKED (2026-04-17)
+
+These rules apply to every page of every fiction printable packet. No exceptions.
+
+### Color treatment
+- **FK color = border only.** All symbol card cells, communication board cells,
+  vocabulary chips, and annotation code chips use white fill + FK colored border.
+  Never use FK background fills — they print as undifferentiated gray on B&W copiers
+  and waste ink on color printers.
+- **Section header bars** (Board B/C category labels): white fill + colored left
+  accent bar (3pt) + navy text. Never solid fill with reversed white text.
+- **Column headers** (Before/After, T-chart, comparison columns): white fill +
+  colored border + navy text. Never solid fill with reversed white text.
+- **The only solid fills allowed:** the Part label bar (navy, white text) and the
+  teal left accent bar on response boxes — these are structural, not decorative.
+
+### Response and writing areas
+- **No fill where students write.** Response boxes, sentence frame boxes, draw
+  boxes, column bodies: white only. No gray (#F8FAFC), no amber wash (#FFFBEB),
+  no tinted fill of any kind.
+- Structure comes from borders and the navy left accent bar, not from fill.
+- Ruled lines on white: #94A3B8 at 0.75pt, 32pt spacing — wide enough for all
+  access methods (pencil, stylus, e-trans scribe).
+
+### Prompt language
+- **Prompts ask the question. They do not narrate the page.**
+- Never: "Use the sentence frame to get started," "Use the vocabulary strip,"
+  "Use the starters below to begin," "Write or draw your ideas in the chart."
+  The page shows those affordances. The prompt asks the literary question only.
+- One exception: if referencing evidence count is part of the standard
+  ("Use evidence from at least two parts of the book") — that is content, not navigation.
+
+### Student info row
+- **Fields: Name · Class · Teacher · Date.** Four fields, full width of the page.
+- **Never:** "Name / AAC User," "AAC Student," or any disability-identifying label.
+  Every student in the class fills in the same four fields. The worksheet does not
+  signal who it was designed for.
+- **Fill: white only.** No tinted background (#F0F9FF or similar) on the info row.
+- This is locked across all fiction packets, all product lines, and the template system.
+
+### AAC access language
+- **AAC Access Note column** in vocab tables: two values only.
+  - Core words: `"Core — part of most AAC ecosystems"`
+  - Fringe words: `"Fringe — SDI target; include in communication packet"`
+  No "confirm with," "coordinate with," "consult," or team direction of any kind.
+- **Section notes** on symbol card pages: state what the words are and how they
+  may be used. Never direct the team to consult anyone.
+- **No team direction language anywhere on student-facing pages.**
+
+---
+
 ## Build Method
 
 **Tool:** Python/ReportLab — same toolchain as `_Operations/build_comm_access_packet.py`.
@@ -343,13 +447,70 @@ Gives precise layout control for cell sizing, gaze-access boards, and PDF append
 
 **Per-unit script:** `build_[unit]_printable_packet.py` (in unit folder)
 **Session Tracker source:** `Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf`
-**Symbol source:** `_Operations/symbol_cache/arasaac_[word].png`
+**Symbol source:** `_Operations/Symbols/symbol_cache/arasaac_[word].png`
+⚠️ Use the full path `_Operations/Symbols/symbol_cache/` — NOT `_Operations/symbol_cache/` (wrong path, causes broken placeholder images)
+
+### REQUIRED: Check the template system before designing any student activity page
+
+Before writing any new canvas function or custom layout for Layer 5 student response pages:
+
+1. **Read `_Operations/Build/cbd_worksheet_templates.py`** — the full template catalog.
+2. **Check this list first:**
+   - `make_mcq_page()` — multiple choice
+   - `make_short_answer_page()` — open response + optional sentence frame + word bank + annotation codes
+   - `make_cer_page()` — Claim-Evidence-Reasoning + annotation codes
+   - `make_evidence_sort_page()` — 3-column sort
+   - `make_vocab_preview_page()` — pre-teaching with Descriptive Teaching Model
+   - `make_annotation_guide_page()` — annotation code reference page
+   - `make_descriptor_board_page()` — Describe to Draw / attribute board
+   - `make_before_after_page()` — 2-column comparison (Before/After, Cause/Effect, etc.)
+   - `make_partner_prompt_card()` — CROWD/ALM partner guide (Teacher Packet only)
+3. If the layout you need is already there → **use it, do not recreate it**.
+4. If a genuinely new layout is needed → **add it to `cbd_worksheet_templates.py` as a named function first**, then call it from the unit build script. Never build one-off inline layouts inside a unit script.
+
+This rule exists so every unit inherits every future improvement to print standards, color treatment, and language automatically.
 
 **Build order (within full unit workflow):**
 1. Unit docx complete + QC passed
-2. Run printable packet script → `[Unit]_Fiction_Printable_Packet.pdf`
-3. Run packet QC checklist (above)
-4. Assemble TPT folder: unit docx + printable packet PDF + welcome/terms
+2. Check template catalog (above) before writing any Layer 5 page code
+3. Run printable packet script → `[Unit]_Fiction_Printable_Packet.pdf`
+4. Run packet QC checklist (above)
+5. Assemble TPT folder: unit docx + printable packet PDF + welcome/terms
+6. **Build TPT preview PDF** — run BEFORE creating any TPT listing:
+   - `python3 _Operations/Build/build_fiction_previews.py --unit [key]`
+   - Output: `TPT Product Files/[Unit]_TPT_Preview.pdf` — lives with all other upload files, nowhere else
+   - Preview = 8 pages: branded cover + 6 pages from printable packet (partner setup · symbol cards · Board A · Board C · Part 1 student page · Part 5 synthesis) + branded back
+   - To add a new unit to the registry: add an entry to `UNITS` in `build_fiction_previews.py`
+7. Run `python3 _Operations/Build/export_fiction_marketing_images.py --title "[Unit]"` → exports 5 marketing PNGs to **`[Unit Folder]/Marketing/Images/`** (per-unit — NOT a shared folder)
+8. Upload all 5 PNGs to Canva media library
+9. Open Canva fiction bulk pin template `DAHGBZ-LtRo` → add unit page → export cover PNG (Image 1)
+   - **Canva bulk import CSV:** `[Unit Folder]/Marketing/[Unit]_Canva_BulkImport.csv` (per-unit — NOT in Distrubution/Pinterest/)
+   - Fill: Product Name, SubHeading, Essential Question, Skill, Standard, Learning Target, TPT Grade Levels, tpt_url, image2_filename (CommBoard), image3_filename (StudentActivity1)
+   - Upload image PNGs to Canva media library first, then run Bulk Create → import CSV
+10. All TPT copy lives in **`[Unit Folder]/Marketing/[Unit]_Marketing_Plan.md`** — TPT title/description/tags, all 3 Pinterest pins, Instagram caption, FB drop, seasonal hooks, bundle strategy. No shared TPT bulk import CSV.
+11. Hand off to Jill: she completes Image 1 + Image 2/3 Canva templates, then gives Claude 3 Canva image URLs + TPT product URL → Claude builds 3 Pinterest pins + social post
+
+---
+
+## 5-Image Marketing Standard — LOCKED (2026-04-17)
+
+| Image | Content | Source |
+|-------|---------|--------|
+| **Image 1** | Cover | Canva bulk template `DAHGBZ-LtRo` — Jill exports |
+| **Image 2** | Communication Board A — Character/Theme Vocabulary (landscape) | Printable Packet p.4 (idx 3) |
+| **Image 3** | Core Word Symbol Cards — Set A | Printable Packet p.2 (idx 1) |
+| **Image 4** | Partner/Communication Environment Setup page | Printable Packet p.1 (idx 0) |
+| **Image 5** | Student Activity Part 1 — first response page | Printable Packet p.9 (idx 8) |
+| **Image 6** | Student Activity Part 2 — second response page | Printable Packet p.10 (idx 9) |
+
+**Export script:** `_Operations/Build/export_fiction_marketing_images.py`
+**Output folder (LOCKED 2026-04-17):** `[Unit Folder]/Marketing/Images/` — per-unit, NOT a shared folder
+**Naming:** `[Key]_Image2_CommBoard.png` · `[Key]_Image3_SymbolCards.png` · `[Key]_Image4_PartnerSetup.png` · `[Key]_Image5_StudentActivity1.png` · `[Key]_Image6_StudentActivity2.png`
+
+To add a new unit to the registry, add an entry to `FICTION_UNITS` in the export script.
+
+**Marketing Plan (replaces all shared CSVs):** `[Unit Folder]/Marketing/[Unit]_Marketing_Plan.md`
+One file per unit. Contains ALL copy: TPT title/description/tags, all 3 Pinterest pin titles+descriptions+alt text, Instagram caption, FB group drop, seasonal hooks, bundle strategy, pre-listing checklist, metadata table with TPT ID + URL. Open this file for any copy/paste task — nothing else needed.
 
 **Wonder script (first fiction unit):**
 `Products/Fiction Anchor Texts/Wonder - Character Analysis/build_wonder_printable_packet.py`

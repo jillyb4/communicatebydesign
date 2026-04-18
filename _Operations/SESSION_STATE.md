@@ -4,6 +4,65 @@
 
 ---
 
+## What Changed This Session (2026-04-17 — Tailwind Workflow + 3-Image Standard + Airtable Fields)
+
+### Tailwind CSV Workflow — Fully Built (locked 2026-04-17)
+- **Formal workflow established:** Tailwind CSV is generated AFTER TPT listing. Sequence: Build → QC → TPT listing → paste TPT URL in Airtable → Canva bulk imports (Images 1/2/3) → get Share/View URLs from Canva → paste into Airtable → write pin metadata → generate Tailwind CSV → schedule in Tailwind → paste Pinterest Pin URL into Airtable after live.
+- **Tailwind CSV column structure locked:** `pin_title`, `pin_description`, `alt_text`, `destination_url` (TPT URL), `image_url` (Canva Share URL — 1 per row), `board`, `schedule_date`. 3 rows per product (one per image).
+- **Tailwind CSVs folder created:** `Distrubution/Pinterest/Tailwind CSVs/` — one CSV per product at launch. Template CSV saved: `TEMPLATE_Tailwind_3Pin.csv`.
+- **Pin description angles locked by image:** Pin 1 (Cover) = what it is + who it's for. Pin 2 (CommBoard/CAP) = communication access angle. Pin 3 (Student Activities) = standards/evidence angle.
+
+### 3-Image Marketing Standard — All 3 Product Lines Documented (locked 2026-04-17)
+- **PB Companions (confirmed):** Image 1 = Cover `DAHF6DObHZ4` · Image 2 = CommBoard `DAHHIU6OBVI` · Image 3 = Student Activities `DAHHIb2bM_A`. All 12 PNGs in Canva media library.
+- **Nonfiction (templates pending):** Image 1 = Pin graphic `DAHFdGbv7rs` (text auto-fills via CSV). Image 2 = CAP cover PNG in branded frame (Canva template TBD). Image 3 = Student Activity page PNG in branded frame (Canva template TBD). Bulk CSV updated: `Nonfiction_Canva_BulkImport.csv` now has `tpt_url`, `image2_filename`, `image3_filename` columns.
+- **Fiction (templates pending):** Image 1 = Pin graphic `DAHGBZ-LtRo` (text auto-fills). Image 2 = Student Activity page PNG (Canva template TBD). Image 3 = Comm Access preview PNG (Canva template TBD). Bulk CSV updated: `Fiction_Canva_BulkImport.csv` now has same 3 columns. Wonder TPT URL pre-filled.
+- **Full reference doc:** `Distrubution/Pinterest/CbD_Tailwind_Strategy.md` — fully rebuilt with complete 3-image tables per product line, Canva Share URL instructions, Tailwind CSV workflow, and Airtable field map.
+- **CBD_Canva_Pin_Design_Index.md updated:** Image 2 = `DAHHIU6OBVI` (confirmed ✅), Image 3 = `DAHHIb2bM_A` (partial ⚠️ — slot 3 partner info pending). Share URL workflow added.
+
+### Airtable — 3 New Fields Added to Products Table (2026-04-17)
+| Field | ID | Purpose |
+|-------|----|---------|
+| Canva Image 1 Share URL | `fldYDDTNbdlE8AfNv` | Canva view/share link for Image 1 (TPT cover). Paste after bulk import. Feeds Tailwind CSV. |
+| Canva Image 2 Share URL | `fldwAZkqxIEBReiNp` | Canva view/share link for Image 2 (CommBoard for PB Companions; CAP cover for Nonfiction). Feeds Tailwind CSV. |
+| Canva Image 3 Share URL | `fldK2TRQ7xkodA4w8` | Canva view/share link for Image 3 (Student Activities). Feeds Tailwind CSV. |
+
+### Pending from This Session (Jill Actions)
+- [ ] PB Companions Image 2: run Canva bulk import (all 6 CommBoard PNGs already in Canva library)
+- [ ] PB Companions Image 3: pick partner info page from Teacher Quick Start → export PNG → upload to Canva → run bulk import
+- [ ] After each Canva bulk import: copy Share/View URL → paste into Airtable for each product (fields above)
+- [ ] Nonfiction Image 2+3: build Canva branded frame templates → export CAP cover PNGs + Student Activity PNGs → bulk import
+- [ ] Fiction Image 2+3: build Canva branded frame templates → export student activity + comm access PNGs → bulk import
+- [ ] Delete stale `Image3_SymbolCards.png` files from Finder (6 files, read-only from sandbox)
+
+---
+
+## What Changed This Session (2026-04-17 — PB Companion Build Fixes + Canva Marketing Assets)
+
+- **[symbol] placeholder bug FIXED in all 6 PB Companion build scripts** — All 5 remaining scripts (I Talk Like a River, Ian's Walk, Emmanuel's Dream, My Friend Isabelle, All the Way to the Top) patched. Root cause: `pictureChoiceRow()` and `sequenceBox()` were using hardcoded `new TextRun({ text: "[symbol]" })` instead of calling `symbolImg()`. All call sites updated to pass `{text, sym}` objects with phrase→single-word symbol mappings. SCRATCH path corrected from `/sessions/sharp-beautiful-mendel` → `/sessions/peaceful-modest-mayer` in all scripts. All the Way to the Top 1 remaining count was the fallback TextRun itself — confirmed no broken call sites.
+- **Student Activities rebuilt for all 6 titles** — docx built from corrected scripts → LibreOffice headless PDF → all saved to TPT subfolders.
+- **Student COMPLETE PDFs rebuilt for all 6 titles** — Reassembled from updated Student Activities + Comm Board + Symbol Pages + Session Tracker (v2). All 12pp (AllTheWayToTheTop 14pp).
+- **3-IMAGE MARKETING STANDARD CORRECTED (locked Apr 17 2026):** Image 3 is Student Activities p.1 (Activity 1 page), NOT Symbol Cards. Previous definition was wrong.
+  - Image 1 = Cover (Canva DAHF6DObHZ4)
+  - Image 2 = Communication Board (p.1 of `[Key]_Communication_Board.pdf`)
+  - Image 3 = Student Activities p.1 — Activity 1 (`[Key]_Student_Activities.pdf`)
+- **All 12 marketing PNGs re-exported** — 6 Image2_CommBoard.png + 6 Image3_StudentActivities.png saved to `Marketing/Product Images/PB Companions/`. Old Image3_SymbolCards.png files remain (read-only — Jill can delete from Finder).
+- **`export_pb_marketing_images.py` updated** — Image 3 now exports from `Student_Activities.pdf` p.1.
+- **`PB_Companions_Canva_BulkImport.csv` updated** — `image3_filename` column now references `_Image3_StudentActivities.png` for all 6 titles.
+- **`CBD_Canva_Pin_Design_Index.md` updated** — 3-image standard table corrected.
+- **CLAUDE.md updated** — 3-image standard corrected throughout.
+- **Canva Image 2 template resolved** — `DAHHIU6OBVI` ("PB Image 2 TEMPLATE", 1080×1080, 1 page, 2 image placeholders + book_title text variable).
+- **Canva Image 3 template resolved** — `DAHHIb2bM_A` ("PB Image 3 TEMPLATE", 1080×1080, 1 page, 3 image placeholders).
+- **All 12 marketing PNGs uploaded to Canva media library** — Canva asset IDs:
+  | Title | CommBoard (Image 2) | StudentActivities (Image 3) |
+  |-------|--------------------|-----------------------------|
+  | A Friend for Henry | MAHHIZBKpRQ | MAHHIeyyL4I |
+  | I Talk Like a River | MAHHIcWMA_k | MAHHIbWnbJY |
+  | Ian's Walk | MAHHIbYQTzM | MAHHIXjThV0 |
+  | Emmanuel's Dream | MAHHIUTjNzg | MAHHIUEBD94 |
+  | My Friend Isabelle | MAHHIkJtDrU | MAHHIvBPKhE |
+  | All the Way to the Top | MAHHIguFuhk | MAHHIqqaMC8 |
+- **Image 3 template (DAHHIb2bM_A) has 3 PNG slots** — third slot = partner info. Partner info PNG not yet exported — needs a page from Teacher Quick Start (partner script page). Pending Jill decision on which page.
+
 ## What Changed This Session (2026-04-12 — TPT Taxonomy Locked in Airtable)
 
 - **TPT Tag Grid rebuilt** — `Distrubution/Teachers Pay Teachers/CbD_TPT_Tag_Grid.html` and `_Operations/Dashboards/CbD_TPT_Tag_Grid.html` (both in sync). All 23 products assigned Subject Area, Tags, Custom Categories using ONLY verified TPT screenshot values. Hard rule documented at top of grid: never invent, rename, or add options.

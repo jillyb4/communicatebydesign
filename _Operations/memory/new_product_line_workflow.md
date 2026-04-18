@@ -506,6 +506,16 @@ Follow the standard production workflow in `CbD_Production_Workflows.xlsx`.
 5. Build CAP (vocabulary list, symbols, partner guidance)
 6. Apply RL.K-3.3 and RL.K-3.4 standards
 7. Build preview PDF
+8. **Export marketing PNGs (required — 3 images per product):**
+   - **Image 1:** Canva cover — export from Canva bulk template `DAHF6DObHZ4` as 1080×1080 PNG
+   - **Image 2:** Communication Board PDF → export p.1 as PNG using `fitz` (see export script below)
+   - **Image 3:** Symbol Pages PDF → export p.1 (Core Words page) as PNG using `fitz`
+   - Save all 3 to: `Marketing/Product Images/PB Companions/[Key]_Image1_Cover.png` etc.
+   - Naming convention: `[CamelCaseTitle]_Image1_Cover.png` · `_Image2_CommBoard.png` · `_Image3_SymbolCards.png`
+   - Image 2 and Image 3 source files: `[Title]/TPT [Folder]/[Key]_Communication_Board.pdf` and `[Key]_Symbol_Pages.pdf`
+   - **Export script:** `_Operations/Build/export_pb_marketing_images.py` (see build scripts section)
+   - Upload all 3 to Tailwind media library + TPT listing images (Image 1 = main cover, Images 2–3 = additional)
+   - **Canva bulk edit for Image 2 and Image 3:** Jill builds the Canva template for Image 2 (Comm Board) and Image 3 (Symbol Cards). Once templates exist, use Canva bulk import CSV `Distrubution/Pinterest/PB_Companions_Canva_BulkImport.csv` to auto-fill text. Images (the actual board/card screenshots) must be placed manually per title in Canva editor (Lane A — cannot bulk-import images). Text variables (title, grade, standards) auto-fill via CSV (Lane B).
 
 ### Build Completion Checklist (All Types)
 
@@ -642,6 +652,20 @@ AT/AAC tools: `Handouts, Printables, Graphic Organizers`
 **Product Tag (Pinterest Shopping):** After uploading each pin, use Pinterest's Product Tags → "Use a Link" → paste the same TPT URL from the Link column. This shows the $[price] badge on the pin and links directly to purchase.
 
 **Canva export workflow:** Export Canva cover as PNG (1080×1080 for square pins). File naming: `[BookTitle]_PB_Companion_Pinterest.png`. Save to `Distrubution/Pinterest/[Line]/` alongside the CSV.
+
+**Canva bulk edit — where images must live:**
+For Canva bulk import to work with images, the image files must be:
+1. **Uploaded to your Canva media library first** — Canva bulk import can only reference images already in your Canva account. It cannot pull from local folders, iCloud, or URLs.
+2. In the bulk CSV, the image column value must match the **exact filename as uploaded to Canva** (no path, just the filename).
+3. Workflow: export PNGs from PDFs (via `export_pb_marketing_images.py`) → upload batch to Canva media library → reference filenames in the CSV → run bulk import.
+4. Text variables (title, grade, hook text, standards) auto-fill via CSV. Images are Lane A — Jill places manually in the Canva editor after bulk text fills, OR can be referenced in the CSV if Canva supports image columns in the template's bulk fields (verify per template).
+
+**Practical shortcut for Image 2 and Image 3 Canva templates:**
+Once Jill builds the Canva templates for Image 2 (Comm Board overlay) and Image 3 (Symbol Cards overlay), the workflow is:
+- Export the Communication Board and Symbol Cards PNGs for each title (already done via `export_pb_marketing_images.py`)
+- Upload all PNGs to Canva media library
+- In Canva bulk import CSV, reference the PNG filename in the image field
+- Text fields (title, grade) auto-fill; the board/card image auto-places into the template frame
 
 **Pinterest SEO rule:** Pinterest works like a search engine. Teachers search the book title first. Title MUST lead with the book/topic name — never with skill, framework, or brand name. Board name should match what teachers search (e.g., "Picture Book AAC Companion" not "Communicate by Design").
 
