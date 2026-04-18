@@ -701,14 +701,53 @@ const units = [
     reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
+  // ──────────────────────────────────────────────────────────────────────────────
+  // RULES: IDENTITY AND BELONGING — Fiction Anchor Text Unit 3
+  // Grades 4–6 | RL.4.3 · RL.4.6 · RL.5.3 | Character Analysis + Point of View
+  // Author: Cynthia Lord | AAC disability rep (Jason uses word cards)
+  // BUILT: April 2026
+  // Airtable: TBD (add after TPT listing)
+  // Top 5 Core: belong, feel, choose, change, hide
+  // Top 5 Fringe: rule, normal, honest, word card, embarrassed
+  // Symbol subs LOCKED: belong→include, normal→same
+  // Annotation codes LOCKED: [RULE] / [BELONG] / [CHANGE]
+  // ──────────────────────────────────────────────────────────────────────────────
   {
     number: 3,
     unitTitle: 'Rules: Identity and Belonging',
     productLine: 'Fiction Anchor Text Unit',
     phoneme: '', grapheme: '',
-    pendingBuild: true,
-    notes: 'Standards: RL.4.3/4.6. Grades 4–6. AAC sibling/disability rep — identity and belonging theme. Pairs with Judy Heumann nonfiction.',
-    newWords: [], reviewWords: [], heartWords: [], morphologyNotes: [],
+    notes: 'Standards: RL.4.3/4.6/5.3. Grades 4–6. AAC disability rep — Jason uses word cards (low-tech AAC). Identity and belonging theme. Pairs with Judy Heumann nonfiction.',
+    newWords: [
+      // ── Set A Core (12 words) — SDI instruction targets ──
+      { word: 'belong',    type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: true,  symbolSub: 'include', notes: 'TOP 5 CORE — locked symbol sub: belong→include' },
+      { word: 'want',      type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: false, notes: 'Core verb — already on most systems' },
+      { word: 'feel',      type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: true,  notes: 'TOP 5 CORE — emotional processing throughout' },
+      { word: 'think',     type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: false, notes: 'Core verb — theme analysis and inference' },
+      { word: 'know',      type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: false, notes: 'Core verb — Catherine's growing awareness' },
+      { word: 'change',    type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: true,  notes: 'TOP 5 CORE — [CHANGE] annotation code maps to this word' },
+      { word: 'choose',    type: 'core',   fitzgerald: 'green',  instructional: 'generative', top5core: true,  notes: 'TOP 5 CORE — Catherine's arc is about choice' },
+      { word: 'hide',      type: 'core',   fitzgerald: 'green',  instructional: 'explicit',   top5core: true,  notes: 'TOP 5 CORE — [RULE] codes often map to hiding' },
+      { word: 'same',      type: 'core',   fitzgerald: 'orange', instructional: 'generative', top5core: false, notes: 'Description — used in "same as" belonging constructions' },
+      { word: 'different', type: 'core',   fitzgerald: 'orange', instructional: 'generative', top5core: false, notes: 'Description — identity and belonging contrast' },
+      { word: 'fair',      type: 'core',   fitzgerald: 'orange', instructional: 'explicit',   top5core: false, notes: 'Description — fairness is a recurring theme' },
+      { word: 'because',   type: 'core',   fitzgerald: 'blue',   instructional: 'generative', top5core: false, notes: 'Connector — carries all evidence/reasoning statements' },
+
+      // ── Set A Fringe (12 words) — chapter order ──
+      { word: 'normal',      type: 'fringe', fitzgerald: 'orange', instructional: 'explicit',   top5fringe: true,  symbolSub: 'same', notes: 'TOP 5 FRINGE — locked symbol sub: normal→same (closest available). Ch.1 — Catherine's opening desire.' },
+      { word: 'rule',        type: 'fringe', fitzgerald: 'brown',  instructional: 'explicit',   top5fringe: true,  symbolSub: 'law',  notes: 'TOP 5 FRINGE — locked symbol sub: rule→law (closest available). Central motif of the novel.' },
+      { word: 'clinic',      type: 'fringe', fitzgerald: 'brown',  instructional: 'background', top5fringe: false, symbolNeeded: true, notes: 'Ch.3–4 — occupational therapy clinic. No standard symbol — draw-your-own.' },
+      { word: 'word card',   type: 'fringe', fitzgerald: 'brown',  instructional: 'explicit',   top5fringe: true,  symbolNeeded: true, notes: 'TOP 5 FRINGE — Jason\'s AAC system. No standard symbol — draw-your-own. Critical for disability representation teaching point.' },
+      { word: 'embarrassed', type: 'fringe', fitzgerald: 'pink',   instructional: 'explicit',   top5fringe: true,  notes: 'TOP 5 FRINGE — Catherine\'s core emotion at clinic. Verify arasaac_embarrassed.png present.' },
+      { word: 'honest',      type: 'fringe', fitzgerald: 'orange', instructional: 'explicit',   top5fringe: true,  notes: 'TOP 5 FRINGE — Jason asks Catherine to be honest; pivotal character moment. Ch.8–9.' },
+      { word: 'Catherine',   type: 'fringe', fitzgerald: 'yellow', instructional: 'background', top5fringe: false, symbolNeeded: true, notes: 'Proper noun — protagonist. Draw-your-own or photo card.' },
+      { word: 'Jason',       type: 'fringe', fitzgerald: 'yellow', instructional: 'background', top5fringe: false, symbolNeeded: true, notes: 'Proper noun — AAC user, central relationship. Draw-your-own or photo card.' },
+      { word: 'David',       type: 'fringe', fitzgerald: 'yellow', instructional: 'background', top5fringe: false, symbolNeeded: true, notes: 'Proper noun — Catherine\'s brother. Draw-your-own.' },
+      { word: 'Kristi',      type: 'fringe', fitzgerald: 'yellow', instructional: 'background', top5fringe: false, symbolNeeded: true, notes: 'Proper noun — neighbor Catherine wants as friend. Draw-your-own.' },
+      { word: 'proud',       type: 'fringe', fitzgerald: 'orange', instructional: 'explicit',   top5fringe: false, notes: 'Ch.18+ — Catherine becoming proud of Jason. Emotional arc marker.' },
+      { word: 'brave',       type: 'fringe', fitzgerald: 'orange', instructional: 'explicit',   top5fringe: false, notes: 'Ch.20+ — Catherine choosing to stand by Jason. Resolution emotion.' },
+    ],
+    reviewWords: [], heartWords: [], morphologyNotes: [],
   },
 
   {

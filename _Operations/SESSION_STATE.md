@@ -1,6 +1,47 @@
 # CbD Session State
-**Last updated:** 2026-04-11 (Session — UDL 3.0, Build Lock, Worksheet Template System)
+**Last updated:** 2026-04-18 (Session — Folder Audit + Shared Resources + Path Fixes)
 **Read this file FIRST at every session start — before doing any work.**
+
+---
+
+## What Changed This Session (2026-04-18 — Folder Audit, Shared Resources, Path Corrections)
+
+### Folder Structure — Now Clean and Enforced
+- All 6 nonfiction units: perfect 4-folder structure (`Builds/` · `Product Files/` · `TPT Product Files/` · `Marketing/`). No stale files at unit roots visible from sandbox.
+- All 2 fiction units (Wonder, The Giver): same 4-folder structure confirmed.
+- `_Operations/QC/`: per-product files moved to unit `Product Files/` last session. QC folder now holds shared templates only (rule enforced in CLAUDE.md Hard Rules).
+- Brand Assets: moved to `Marketing/Brand Assets/`. Only brand references remain (Brand Guidelines PDFs, Logo folder). All product covers moved to unit `Marketing/` folders.
+
+### AAC Communication Session Tracker — Moved to Shared Inserts
+- **Problem found:** tracker was floating loose in `Products/Nonfiction Units/` root and `Keiko/Product Files/`, and `build_student_complete.py` was pulling it from the AT/AAC product folder (fragile path).
+- **Fix:** Authoritative copy moved to `_Operations/_Shared_Inserts/AAC_Communication_Session_Tracker.pdf`.
+- **`build_student_complete.py` path updated** — now points to `_Operations/_Shared_Inserts/` (was pointing into AT/AAC product folder).
+- **`_Shared_Inserts/README.md` updated** — tracker documented in the inserts table.
+- **Finder cleanup still needed:** delete `Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf` and `Products/Nonfiction Units/Keiko/Product Files/AAC_Communication_Session_Tracker.pdf`.
+
+### Marketing Folder Paths — All References Updated
+- Pinterest moved from `Distrubution/Pinterest/` → `Marketing/Pinterest/` (done last session by Jill in Finder).
+- Tailwind moved from `Distrubution/Pinterest/Tailwind CSVs/` → `Marketing/Tailwind/` (done by Jill in Finder).
+- `cbd-pinterest-daily-brief` scheduled task prompt updated — save path now `Marketing/Pinterest/Daily Briefs/`. *(Done 2026-04-18)*
+- All stale `Distrubution/Pinterest/` references in TASKS.md corrected to `Marketing/Pinterest/` or `Marketing/Tailwind/`.
+- CLAUDE.md was already clean — no stale paths found there.
+
+### Two Claude Projects Issue Resolved
+- "Communicate by Design" project = correct, keep. Contains `communicate-by-design.md` (project memory).
+- "Communicate by Design TPT" project = old duplicate. Delete from Claude.ai interface. The `.skill` file inside it is superseded by the installed skill at `.claude/skills/communicate-by-design/`.
+
+### `fiction-color-options.html` — Identified and Decision Made
+- Loose file at `Products/Fiction Anchor Texts/` root. Decision: delete. Color exploration is complete; fiction brand color is TBD and tracked in CLAUDE.md, not in an HTML file.
+
+### Pending Finder Actions (Jill — cannot do from sandbox)
+- Delete `Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf`
+- Delete `Products/Nonfiction Units/Keiko/Product Files/AAC_Communication_Session_Tracker.pdf`
+- Delete `Marketing/Brand Assets/theme-showcase.pdf`
+- Delete `Products/Capitol Crawl/Capitol_Crawl_TPT.zip` (stale zip at unit root)
+- Delete `Products/Fiction Anchor Texts/fiction-color-options.html`
+- Delete `Products/Fiction Anchor Texts/Wonder - Character Analysis/Wonder_Character_Analysis_TPT.zip` (stale)
+- Rename `Products/Fiction Anchor Texts/The Giver - Theme Analysis/TPT Product Files.zip` → `The_Giver_Theme_Analysis_TPT.zip` and move inside `TPT Product Files/`
+- Delete "Communicate by Design TPT" project from Claude.ai
 
 ---
 
@@ -9,14 +50,14 @@
 ### Tailwind CSV Workflow — Fully Built (locked 2026-04-17)
 - **Formal workflow established:** Tailwind CSV is generated AFTER TPT listing. Sequence: Build → QC → TPT listing → paste TPT URL in Airtable → Canva bulk imports (Images 1/2/3) → get Share/View URLs from Canva → paste into Airtable → write pin metadata → generate Tailwind CSV → schedule in Tailwind → paste Pinterest Pin URL into Airtable after live.
 - **Tailwind CSV column structure locked:** `pin_title`, `pin_description`, `alt_text`, `destination_url` (TPT URL), `image_url` (Canva Share URL — 1 per row), `board`, `schedule_date`. 3 rows per product (one per image).
-- **Tailwind CSVs folder created:** `Distrubution/Pinterest/Tailwind CSVs/` — one CSV per product at launch. Template CSV saved: `TEMPLATE_Tailwind_3Pin.csv`.
+- **Tailwind CSVs folder created:** `Marketing/Tailwind/` — one CSV per product at launch. Template CSV saved: `TEMPLATE_Tailwind_3Pin.csv`.
 - **Pin description angles locked by image:** Pin 1 (Cover) = what it is + who it's for. Pin 2 (CommBoard/CAP) = communication access angle. Pin 3 (Student Activities) = standards/evidence angle.
 
 ### 3-Image Marketing Standard — All 3 Product Lines Documented (locked 2026-04-17)
 - **PB Companions (confirmed):** Image 1 = Cover `DAHF6DObHZ4` · Image 2 = CommBoard `DAHHIU6OBVI` · Image 3 = Student Activities `DAHHIb2bM_A`. All 12 PNGs in Canva media library.
 - **Nonfiction (templates pending):** Image 1 = Pin graphic `DAHFdGbv7rs` (text auto-fills via CSV). Image 2 = CAP cover PNG in branded frame (Canva template TBD). Image 3 = Student Activity page PNG in branded frame (Canva template TBD). Bulk CSV updated: `Nonfiction_Canva_BulkImport.csv` now has `tpt_url`, `image2_filename`, `image3_filename` columns.
 - **Fiction (templates pending):** Image 1 = Pin graphic `DAHGBZ-LtRo` (text auto-fills). Image 2 = Student Activity page PNG (Canva template TBD). Image 3 = Comm Access preview PNG (Canva template TBD). Bulk CSV updated: `Fiction_Canva_BulkImport.csv` now has same 3 columns. Wonder TPT URL pre-filled.
-- **Full reference doc:** `Distrubution/Pinterest/CbD_Tailwind_Strategy.md` — fully rebuilt with complete 3-image tables per product line, Canva Share URL instructions, Tailwind CSV workflow, and Airtable field map.
+- **Full reference doc:** `Marketing/Tailwind/CbD_Tailwind_Strategy.md` — fully rebuilt with complete 3-image tables per product line, Canva Share URL instructions, Tailwind CSV workflow, and Airtable field map.
 - **CBD_Canva_Pin_Design_Index.md updated:** Image 2 = `DAHHIU6OBVI` (confirmed ✅), Image 3 = `DAHHIb2bM_A` (partial ⚠️ — slot 3 partner info pending). Share URL workflow added.
 
 ### Airtable — 3 New Fields Added to Products Table (2026-04-17)

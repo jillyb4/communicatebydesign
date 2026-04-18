@@ -144,6 +144,42 @@ UNITS = {
             "bundle_line2":   "Fiction Anchor Text Bundle · SDI grades 3–8",
         },
     },
+
+    "rules": {
+        "folder":       "Rules - Identity and Belonging",
+        "tpt_folder":   "TPT Product Files",
+        "packet_pdf":   "Rules_Identity_and_Belonging_Printable_Packet.pdf",
+        "output":       "Rules_TPT_Preview.pdf",
+        "source_pages": [0, 1, 3, 5, 8, 12],
+        "config": {
+            "title_line1":   "Rules: Identity and Belonging",
+            "title_line2":   "Fiction Anchor Text Unit · Grades 4–6",
+            "subtitle":      "A Fiction Anchor Text Unit  |  Character Analysis  |  SPED Grades 4–6",
+            "skill_badge":   "RL.4.3 · RL.4.6 · RL.5.3  —  Character Analysis + Point of View",
+            "anchor_text":   "Rules by Cynthia Lord",
+            "full_pages":    43,
+            "price":         "$6.00",
+            "preview_items": [
+                "✦  Communication Environment Setup — partner modes, prompt hierarchy, barrier check",
+                "✦  Core word symbol cards (12 words, Fitzgerald Key coded)",
+                "✦  Communication Board A: Character Description Board — Catherine & Jason (landscape)",
+                "✦  Communication Board C: Literary Discussion Moves + annotation codes",
+                "✦  Student Activity — Part 1: The Rules (character introduction)",
+                "✦  Student Activity — Part 5: Whole-Book Character Analysis (synthesis)",
+            ],
+            "full_items": [
+                "Teaching Materials  ·  5-part whole-novel unit  ·  Partner guidance at point of use",
+                "AAC communication boards (3)  ·  Symbol cards (24 words)  ·  Vocabulary Map",
+                "Annotation code system: [RULE] · [BELONG] · [CHANGE]",
+                "IEP goal stems  ·  AAC communication goals  ·  Answer key  ·  Rubric",
+                "Communication Access Packet  ·  Session Tracker  ·  WCAG 2.2 AA",
+            ],
+            "seasonal_note1": "Rules is already in your classroom — now every student has access",
+            "seasonal_note2": "Character Analysis  ·  SPED Grades 4–6  ·  AAC-Accessible",
+            "bundle_line1":   "Bundle with Wonder: Character Analysis — Fiction Anchor Text Units 1 & 3",
+            "bundle_line2":   "Fiction Anchor Text Bundle · SDI grades 3–8",
+        },
+    },
 }
 
 

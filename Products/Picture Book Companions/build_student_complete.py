@@ -20,8 +20,7 @@ from pypdf import PdfWriter, PdfReader
 BASE = os.path.dirname(os.path.abspath(__file__))
 
 TRACKER_PATH = os.path.join(
-    BASE, "..", "AT AAC IEP TEAM Supports",
-    "AAC Communication Data and Trackers",
+    BASE, "..", "..", "_Operations", "_Shared_Inserts",
     "AAC_Communication_Session_Tracker.pdf"
 )
 

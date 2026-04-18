@@ -12,6 +12,7 @@ Built once here. Pull into any product as needed. Never bury in a unit.
 | `CbD_Insert_Terms.docx` | Terms of Use — what you can/cannot do, license, copyright | Every product |
 | `CbD_Insert_Words_to_Add.docx` | Words to Add to the Device — student-led, continuous modeling (UFLI only) | UFLI products only |
 | `CbD_Insert_VocabPreview_PictureBook.docx` | Vocabulary Preview Routine — 5-min pre-reading routine, unit-specific words filled in at build time | K–3 Picture Book Companions (Teacher Packet, Page 1) |
+| `AAC_Communication_Session_Tracker.pdf` | Generic AAC session data tracker — appended to Student COMPLETE PDF for all PB Companions. Authoritative copy here. Do NOT store in unit folders or product folders. | PB Companions Student COMPLETE (via `build_student_complete.py`), any product line that assembles a student packet. |
 
 ## Order in Products (LOCKED — CbD Standard)
 

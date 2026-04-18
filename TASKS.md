@@ -80,7 +80,7 @@
 - [x] **Update CBD_Canva_Pin_Design_Index.md with Image 2 + Image 3 template IDs** — DAHHIU6OBVI (Image 2 ✅) and DAHHIb2bM_A (Image 3 ⚠️ slot 3 pending) added. Share URL workflow added to index. *(Done 2026-04-17)*
 
 ## Tailwind CSV Workflow — Canva Images (2026-04-17)
-*3-image marketing standard locked for all 3 product lines. Tailwind CSV workflow formalized. Full reference: `Distrubution/Pinterest/CbD_Tailwind_Strategy.md`.*
+*3-image marketing standard locked for all 3 product lines. Tailwind CSV workflow formalized. Full reference: `Marketing/Tailwind/CbD_Tailwind_Strategy.md`.*
 
 ### PB Companions — Canva Images 2 + 3
 - [ ] **⚠️ Canva Image 2: run bulk import** — Template `DAHHIU6OBVI`. All 6 CommBoard PNGs already in Canva media library. Wire: Placeholder 1 = `image2_filename`, text = `book_title`. Use `PB_Companions_Canva_BulkImport.csv`. *(Added 2026-04-17)*
@@ -104,7 +104,7 @@
 - [ ] **After import: paste Canva Share URLs into Airtable for Wonder** — Image 1 URL from `DAHGBZ-LtRo` page 1 · Image 2 + Image 3 from new fiction templates. Fields: `fldYDDTNbdlE8AfNv` / `fldwAZkqxIEBReiNp` / `fldK2TRQ7xkodA4w8`. *(Added 2026-04-17)*
 
 ### Tailwind CSV — Generate and Schedule
-- [ ] **Generate Wonder Tailwind CSV** — 3 rows (one per image). Pull from Airtable: TPT URL, Image 1/2/3 Share URLs, Pin Title, Pin Description, Alt Text. Use `TEMPLATE_Tailwind_3Pin.csv` as starting point. Save to `Distrubution/Pinterest/Tailwind CSVs/Wonder_Tailwind_[date].csv`. *(Added 2026-04-17)*
+- [ ] **Generate Wonder Tailwind CSV** — 3 rows (one per image). Pull from Airtable: TPT URL, Image 1/2/3 Share URLs, Pin Title, Pin Description, Alt Text. Use `TEMPLATE_Tailwind_3Pin.csv` as starting point. Save to `Marketing/Tailwind/Wonder_Tailwind_[date].csv`. *(Added 2026-04-17)*
 - [ ] **Generate PB Companions Tailwind CSVs** — One per title (6 CSVs) once Image 2 + Image 3 Canva imports are done. *(Added 2026-04-17)*
 - [ ] **Generate Nonfiction Tailwind CSVs** — One per unit (6 CSVs) once Image 2 + Image 3 templates are built and data is in Airtable. *(Added 2026-04-17)*
 
@@ -121,7 +121,7 @@
 - [ ] **Pinterest brand board — fill to 16 pins** — "Communicate by Design Resources" board has only 1 pin. Every product pin (16 total confirmed) must be saved here. Do manually: open each product pin → Save → select "Communicate by Design Resources." *(Added 2026-04-01)*
 - [ ] **Pinterest AAC Resources board — add repins** — "AAC Resources for Families & IEP Teams" board has 0 pins and is the first thin-board priority. Search `AAC communication families home IEP` on Pinterest → save 5–10 relevant repins to this board. *(Added 2026-04-01)*
 - [ ] **Pinterest: Verify Products table Pinterest ✓ field** — Daily task now correctly queries Products table (`tbl2YSRQiW7RHEPY5`, field `fldhVp0lOxQaB9PUB`). Work Items table field was incorrectly used before — all 12 showed "true" there, masking real state. Confirm Products table Pinterest ✓ reflects actual pin status. *(Added 2026-04-01)*
-- [ ] **Pinterest: Confirm full board names** — April 1 screenshot confirmed 9 boards but some names truncated. Log into Pinterest → verify exact full names → update `Distrubution/Pinterest/CBD_Pinterest_Daily_Task.md` board table. *(Added 2026-04-01)*
+- [ ] **Pinterest: Confirm full board names** — April 1 screenshot confirmed 9 boards but some names truncated. Log into Pinterest → verify exact full names → update `Marketing/Pinterest/CBD_Pinterest_Daily_Task.md` board table. *(Added 2026-04-01)*
 - [ ] **Pinterest: Run `cbd-pinterest-daily-brief` manually once** — Opens Scheduled section → Run now → approve Airtable MCP connection. Pre-approves tools so 8 AM auto-runs go through without pausing. *(Added 2026-04-01)*
 - [ ] **Pinterest: Populate Canva Pin Design ID in Airtable** — Products table, `Canva Pin Design ID` field (`fldIzVfpce6fDpV7x`). Add IDs: IEP AT Consideration Toolkit = `DAHEI1nmrPA`; Keiko (FREE) = `DAHEiSb8S7k`; Nonfiction units = `DAHFdGbv7rs`; Wonder = `DAHFeFD9LBk`. *(Added 2026-04-01)*
 - [ ] **Pinterest: Update Outbound Clicks weekly** — Every Friday, open Pinterest Analytics → Overview → filter Outbound Clicks (past 30 days) → update `Pinterest Outbound Clicks (30d)` field in Products table for top performers. This drives List B prioritization in the daily brief. *(Added 2026-04-01)*
@@ -317,6 +317,11 @@
 - [ ] Delete `_Operations/QC/Radium_Girls_Content_Extraction.txt` (copied to unit `Product Files/`)
 - [ ] Delete `_Operations/QC/Zitkala-Sa_Inclusive_Design_Diagnostic.md` (copied to unit `Product Files/`)
 
+**AAC Communication Session Tracker — stale copies to delete:**
+- [x] Authoritative copy moved to `_Operations/_Shared_Inserts/AAC_Communication_Session_Tracker.pdf` *(Done 2026-04-18)*
+- [ ] Delete `Products/Nonfiction Units/AAC_Communication_Session_Tracker.pdf` — stale copy at line root
+- [ ] Delete `Products/Nonfiction Units/Keiko/Product Files/AAC_Communication_Session_Tracker.pdf` — stale copy in unit folder
+
 ### Brand Assets Cleanup — Move Cover PNGs to Product Folders (Apr 17 2026)
 *Rule: everything for a product lives inside that product's folder — covers belong in each unit's `Marketing/`. Nonfiction covers already copied from sandbox. AT/AAC, UFLI, and working squares need Finder moves (not synced to sandbox).*
 
@@ -351,7 +356,7 @@
 ### Marketing Folder Restructure — Follow-up (Apr 17 2026)
 *Pinterest moved from `Distrubution/Pinterest/` to `Marketing/Pinterest/`. CLAUDE.md updated. One manual step remains.*
 
-- [ ] **⚠️ Update `cbd-pinterest-daily-brief` scheduled task prompt** — The task saves daily briefs to `Distrubution/Pinterest/Daily Briefs/` (old path). Update to `Marketing/Pinterest/Daily Briefs/`. Open Scheduled Tasks panel → find `cbd-pinterest-daily-brief` → edit prompt → update the save path. *(Added Apr 17 2026)*
+- [x] **⚠️ Update `cbd-pinterest-daily-brief` scheduled task prompt** — Updated 2026-04-18. Save path corrected to `Marketing/Pinterest/Daily Briefs/`. *(Done 2026-04-18)*
 
 ### _Operations/QC — Finder Cleanup (Apr 17)
 *Product-specific QC files copied to their unit `Product Files/` folders. Originals still in `_Operations/QC/` — delete in Finder.*
@@ -409,7 +414,7 @@
 - [x] **My Friend Isabelle — docx + PDF built** — All 3 files + Student COMPLETE. Airtable: `recZORJoyxVv4KacC`. *(Done Apr 4 2026)*
 - [ ] **Visual QC pass — all 5 new PB Companion titles** — Open each Teacher Packet + Student Activities docx in Word. Verify: headings render, page breaks land correctly, vocab table displays, student tracker table is clean, partner script callout box shows. Flag any issues. *(Added Apr 4 2026)*
 - [x] **TPT Preview PDFs — 5 new PB titles** — DONE ✓ Apr 4 2026. `build_pb_previews.py` built. 5-page preview: branded navy/rose cover + Teacher Quick Start p.1 + Student Activities p.1 + Communication Board + Symbol Cards p.1. All watermarked. Run: `python3 _Operations/Build/build_pb_previews.py`. Airtable Preview PDF ✓ set on all 5 records. *(Done Apr 4 2026)*
-- [ ] **Canva covers — 5 new PB titles** — Jill handling in Canva. Use `PB_Companions_Canva_BulkImport.csv` (`Distrubution/Pinterest/`) for bulk import. All the Way to the Top pin is first priority for Pinterest. *(Added Apr 4 2026)*
+- [ ] **Canva covers — 5 new PB titles** — Jill handling in Canva. Use `PB_Companions_Canva_BulkImport.csv` (`Marketing/Canva/`) for bulk import. All the Way to the Top pin is first priority for Pinterest. *(Added Apr 4 2026)*
 - [ ] **TPT listing packages — 5 new PB titles** — Output 0 required for each: title ≤80 chars + description opener ≤180 chars + 7 keyword tags. Build after Canva covers exported. *(Added Apr 4 2026)*
 - [ ] **Airtable: Update Docx Built ✓ for 5 new PB titles** — Set Docx Built checkbox = true for all 5 Airtable Products records (see IDs above). *(Added Apr 4 2026)*
 - [ ] **Add 5 new PB companion vocabulary to `cbd_unit_vocab.js`** — Add pendingBuild stubs for all 5 titles so they appear in Vocabulary Explorer. Run `sync_vocab_to_airtable.js` after full vocab is confirmed at build time. *(Added Apr 4 2026)*
