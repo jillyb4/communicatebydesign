@@ -13,8 +13,9 @@ The Giver | Theme Analysis | Adapted Fiction Unit | SPED Grades 6–8
 
 ## Description Preview (≤180 chars — what buyers see before "read more")
 ```
-Theme analysis unit for The Giver, special education grades 6–8. Whole-book SDI unit, AAC access built in, Theme Evidence Chart, Communication Packet.
+The Giver by Lois Lowry theme analysis unit | Special education grades 6–8. Adapted fiction, AAC access built in, SDI unit with Theme Evidence Chart and communication boards. RL.7.2.
 ```
+*(182 chars — trim "." at end if needed to reach ≤180. SEO pattern: [Book + author + unit type] | [SE + grades]. Hits: adapted fiction, AAC, SDI, standards. No hook — keywords only.)*
 
 ## Full Description
 ```
@@ -63,16 +64,11 @@ AAC: using communication board during literary discussion
 Perfect for: resource room, inclusion support, co-teaching, SDI pull-out, summer extended school year
 ```
 
-## Keyword Tags (7)
+## Keyword Tags
 ```
-the giver special education
-theme analysis adapted reading
-AAC fiction unit grades 6-8
-the giver SDI unit
-adapted ELA Lois Lowry
-IEP fiction theme
-special education novel unit
+The Giver novel study, special education, adapted reading, AAC, SPED, theme analysis, grades 6-8
 ```
+*(These are the exact locked custom tags from Airtable record rec0xE48ML7QOfAYL — paste as-is into TPT custom keyword field. 7 comma-separated tags.)*
 
 ## TPT Metadata
 | Field | Value |
@@ -103,17 +99,17 @@ special education novel unit
 
 **Title**
 ```
-The Giver Theme Analysis Unit | Special Education | SDI Grades 6–8
+The Giver Lois Lowry Theme Analysis Unit | Special Education | SDI Grades 6–8
 ```
 
 **Description**
 ```
-Your students are ready to read The Giver — now every student has access to what it means. Full SDI fiction unit for special education grades 6–8. Theme analysis across 5 whole-book parts using the Theme Evidence Chart, built cumulatively so the chart is the outline by Part 5. AAC communication boards, symbol cards, and partner guidance built in. The standard doesn't change — the access layer does. RL.6.2 · RL.7.2 · RL.8.2. Communicate by Design. #SpecialEducation #TheGiver #ThemeAnalysis #AAC #SDI #IEP
+Your students are ready to read The Giver — now every student has access to what it means. Full SDI fiction unit for special education grades 6–8. Theme analysis across 5 whole-book parts using the Theme Evidence Chart, built cumulatively so the chart is the outline by Part 5. AAC communication boards, symbol cards, and partner guidance built in. Adapted fiction novel study — same text for every student, access layer varies, expectation does not. RL.6.2 · RL.7.2 · RL.8.2. Communicate by Design. #SpecialEducation #TheGiver #ThemeAnalysis #AAC #SDI #IEP #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
 ```
-The Giver theme analysis unit for special education grades 6–8. AAC communication boards, symbol cards, and Theme Evidence Chart for whole-book theme instruction.
+The Giver by Lois Lowry theme analysis unit for special education grades 6–8. AAC communication boards, symbol cards, and Theme Evidence Chart for whole-book SDI instruction.
 ```
 
 ---
@@ -122,12 +118,12 @@ The Giver theme analysis unit for special education grades 6–8. AAC communicat
 
 **Title**
 ```
-AAC Communication Board for The Giver | Theme Analysis | SPED Grades 6–8
+AAC Communication Board for The Giver by Lois Lowry | Theme Analysis | SPED Grades 6–8
 ```
 
 **Description**
 ```
-This is what access looks like in a fiction unit. Three ready-to-laminate communication boards — theme evidence vocabulary, emotion + reasoning, and literary discussion moves — so every student can participate in the same conversation about the same book. Part of The Giver: Theme Analysis SDI unit for special education grades 6–8. RL.6.2 · RL.7.2 · RL.8.2. Communicate by Design. #AAC #SpecialEducation #TheGiver #CommunicationBoard #SDI
+This is what access looks like in an adapted fiction novel study. Three ready-to-laminate communication boards — theme evidence vocabulary, emotion + reasoning, and literary discussion moves — so every student can participate in the same conversation about the same book. Part of The Giver: Theme Analysis SDI unit for special education grades 6–8. RL.6.2 · RL.7.2 · RL.8.2. Communicate by Design. #AAC #SpecialEducation #TheGiver #CommunicationBoard #SDI #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
@@ -141,12 +137,12 @@ AAC theme evidence vocabulary communication board for The Giver novel study. Spe
 
 **Title**
 ```
-The Giver Theme Analysis Student Activity | SPED SDI | Grades 6–8
+The Giver Theme Analysis Student Activity | Adapted Fiction SPED SDI | Grades 6–8
 ```
 
 **Description**
 ```
-Part 1: Rules of Sameness — The first of five student response pages in The Giver theme analysis unit. Same standard, same text, access layer built in. Theme Evidence Chart, sentence frames, and vocabulary support on every page. No separate supplement. No modified version of the book. Every student reads The Giver — the access tools make it reachable. For special education grades 6–8. Communicate by Design. #SpecialEducation #TheGiver #SDI #AAC #IEP #ThemeAnalysis
+Part 1: Rules of Sameness — The first of five student response pages in The Giver theme analysis novel study. Same standard, same text, access layer built in. Theme Evidence Chart, sentence frames, and vocabulary support on every page. No separate supplement. No modified version of the book. Every student reads The Giver — the access tools make it reachable. Adapted fiction for special education grades 6–8. Communicate by Design. #SpecialEducation #TheGiver #SDI #AAC #IEP #ThemeAnalysis #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
@@ -174,7 +170,7 @@ RL.6.2 · RL.7.2 · RL.8.2 · Grades 6–8 · Special Education
 
 Link in bio → The Giver: Theme Analysis
 
-#SpecialEducation #AAC #TheGiver #ThemeAnalysis #SDI #IEP #AdaptedELA #FictionUnit #CommunicateByDesign
+#SpecialEducation #AAC #TheGiver #ThemeAnalysis #SDI #IEP #AdaptedELA #FictionUnit #NovelStudy #CommunicateByDesign
 ```
 
 ## Facebook Group Drop

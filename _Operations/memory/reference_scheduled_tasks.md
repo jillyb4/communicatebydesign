@@ -1,10 +1,34 @@
 # CbD Scheduled Tasks Reference
 
-Last updated: 2026-04-01
+Last updated: 2026-04-18
 
 ---
 
 ## Active Scheduled Tasks
+
+### `cbd-base-hygiene`
+
+| Field | Value |
+|-------|-------|
+| **Name** | cbd-base-hygiene |
+| **Schedule** | Every Friday at 8:03 AM |
+| **Created** | 2026-04-18 |
+
+**Purpose:** Weekly Airtable base hygiene check. Audits the Products and Vocabulary tables for fill-rate gaps that would block the Pinterest brief, Tailwind CSV generation, or vocabulary dashboard. Outputs a tiered report (🔴 Blocking / 🟡 Needs Attention / 🔵 Vocabulary) to `_Operations/Hygiene Reports/CbD_Base_Hygiene_[YYYY-MM-DD].md`.
+
+**Checks run:**
+1. Live products with empty Pinterest URL → blocks daily brief auto-detect
+2. TPT-listed products with empty Canva Image 1 Share URL → blocks Tailwind
+3. Pinterest ✓ checkbox / Pinterest URL mismatch → auto-corrects the checkbox
+4. Live products missing Canva Pin Design ID → blocks fresh-pin rotation
+5. Vocabulary: words with empty Word Type, Core words missing Core Tier tag
+
+**Output folder:** `_Operations/Hygiene Reports/` (created on first run if missing)
+
+**⚠️ Pre-approve:** Run manually once first (Scheduled sidebar → Run now) to pre-approve the Airtable MCP tool before the first automated Friday run.
+
+---
+
 
 ### `cbd-dashboard-refresh`
 

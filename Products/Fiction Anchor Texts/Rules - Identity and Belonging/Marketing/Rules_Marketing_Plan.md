@@ -10,11 +10,13 @@
 ```
 Rules | Identity and Belonging | Adapted Fiction Unit | SPED Grades 4–6
 ```
+*(71 chars — under 80 ✓. Leads with book title. Includes grade band and SPED.)*
 
 ## Description Preview (≤180 chars — what buyers see before "read more")
 ```
-Character analysis unit for Rules by Cynthia Lord, special education grades 4–6. SDI unit, AAC access built in, Belonging Evidence Chart, Communication Packet.
+Rules by Cynthia Lord character analysis unit | Special education grades 4–6. Adapted fiction, AAC access built in, Belonging Evidence Chart, SDI unit. RL.4.3 · RL.5.3.
 ```
+*(168 chars ✓. SEO pattern: [Book + unit type] | [SE + grades]. Hits: adapted fiction, AAC, SDI, standards. No hook — keywords only.)*
 
 ## Full Description
 ```
@@ -70,16 +72,11 @@ AAC: partner-supported response using sentence frames
 Perfect for: resource room, inclusion support, co-teaching, SDI pull-out, summer extended school year
 ```
 
-## Keyword Tags (7)
+## Keyword Tags
 ```
-rules Cynthia Lord special education
-character analysis adapted reading
-AAC fiction unit grades 4-6
-rules SDI unit special education
-adapted ELA disability representation
-IEP fiction character analysis
-special education novel unit
+Rules novel study, special education, adapted reading, AAC, SPED, character analysis, grades 4-6
 ```
+*(These are the exact locked custom tags from Airtable record recnwj9W2F99YBmzb — paste as-is into TPT custom keyword field. 7 comma-separated tags.)*
 
 ## TPT Metadata
 | Field | Value |
@@ -95,7 +92,7 @@ special education novel unit
 | Standards | RL.4.3, RL.4.6, RL.5.3 |
 | Price | $6.00 |
 | TPT ID | [ADD WHEN LIVE] |
-| Airtable | [ADD WHEN LIVE] |
+| Airtable | recnwj9W2F99YBmzb |
 
 ---
 
@@ -110,17 +107,18 @@ special education novel unit
 
 **Title**
 ```
-Rules by Cynthia Lord | Character Analysis | Special Education | SDI Grades 4–6
+Rules Cynthia Lord Character Analysis Unit | Special Education | SDI Grades 4–6
 ```
+*(Keyword-first: book title + author + skill + SE + grades. Under 100 chars ✓)*
 
 **Description**
 ```
-Your students are reading Rules — now every student has access to what it means. Full SDI fiction unit for special education grades 4–6. Character analysis across 5 whole-book parts using the Belonging Evidence Chart, built cumulatively so the chart is the outline by Part 5. AAC communication boards, symbol cards, and partner guidance built in. Jason uses word cards — this unit treats him as a full communicator, not a plot device. The standard doesn't change — the access layer does. RL.4.3 · RL.4.6 · RL.5.3. Communicate by Design. #SpecialEducation #RulesCynthiaLord #CharacterAnalysis #AAC #SDI #IEP
+Your students are reading Rules — now every student has access to what it means. Full SDI fiction unit for special education grades 4–6. Character analysis across 5 whole-book parts using the Belonging Evidence Chart, built cumulatively so the chart is the outline by Part 5. AAC communication boards, symbol cards, and partner guidance built in. Jason uses word cards — this unit treats him as a full communicator, not a plot device. The standard doesn't change — the access layer does. RL.4.3 · RL.4.6 · RL.5.3. Communicate by Design. #SpecialEducation #RulesCynthiaLord #CharacterAnalysis #AAC #SDI #IEP #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
 ```
-Rules by Cynthia Lord character analysis unit for special education grades 4–6. AAC communication boards, symbol cards, and Belonging Evidence Chart for whole-book instruction.
+Rules by Cynthia Lord character analysis unit for special education grades 4–6. AAC communication boards, symbol cards, and Belonging Evidence Chart for whole-book SDI instruction.
 ```
 
 ---
@@ -134,12 +132,12 @@ AAC Communication Board for Rules by Cynthia Lord | Character Analysis | SPED Gr
 
 **Description**
 ```
-This is what access looks like in a fiction unit about a character who uses AAC. Three ready-to-laminate communication boards — Character Description Board (Catherine & Jason side by side), Emotion + Belonging, and Literary Discussion Moves — so every student can participate in the same conversation about the same book. Part of Rules: Identity and Belonging SDI unit for special education grades 4–6. RL.4.3 · RL.5.3. Communicate by Design. #AAC #SpecialEducation #RulesCynthiaLord #CommunicationBoard #SDI #DisabilityRep
+This is what access looks like in a fiction unit — when one of the characters uses AAC. Three ready-to-laminate communication boards for Rules by Cynthia Lord: Board A is a Character Description Board with Catherine and Jason side by side (LOOKS LIKE / DOES / FEELS / WANTS), so every student tracks both characters. Board B: Emotion + Belonging. Board C: Literary Discussion Moves. Part of the Rules: Identity and Belonging SDI unit for special education grades 4–6. Adapted fiction, AAC access built in. RL.4.3 · RL.5.3. Communicate by Design. #AAC #SpecialEducation #RulesCynthiaLord #CommunicationBoard #SDI #AdaptedELA #NovelStudy #DisabilityRep
 ```
 
 **Alt Text**
 ```
-AAC character description communication board for Rules by Cynthia Lord novel study. Special education grades 4–6, landscape layout showing Catherine and Jason columns with Fitzgerald Key symbol cards.
+AAC character description communication board for Rules by Cynthia Lord novel study. Special education grades 4–6, landscape layout with Catherine and Jason columns and Fitzgerald Key symbol cards.
 ```
 
 ---
@@ -148,12 +146,12 @@ AAC character description communication board for Rules by Cynthia Lord novel st
 
 **Title**
 ```
-Rules Cynthia Lord Student Activity | SPED SDI | Grades 4–6 Character Analysis
+Rules Cynthia Lord Student Activity | SPED SDI Adapted Fiction | Grades 4–6 Character Analysis
 ```
 
 **Description**
 ```
-Part 1: The Rules — The first of five student response pages in the Rules character analysis unit. Same standard, same text, access layer built in. Belonging Evidence Chart, sentence frames, and vocabulary support on every page. No separate supplement. No modified version of the book. Every student reads Rules — the access tools make it reachable. For special education grades 4–6. Communicate by Design. #SpecialEducation #RulesCynthiaLord #SDI #AAC #IEP #CharacterAnalysis
+Part 1: The Rules — The first of five student response pages in the Rules: Identity and Belonging character analysis unit. Same standard, same text, access layer built in. Belonging Evidence Chart, sentence frames, and vocabulary support on every page. No separate supplement. No modified version of the book. Every student reads Rules — the access tools make it reachable. Adapted fiction unit for special education grades 4–6. Communicate by Design. #SpecialEducation #RulesCynthiaLord #SDI #AAC #IEP #CharacterAnalysis #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
@@ -183,7 +181,7 @@ RL.4.3 · RL.4.6 · RL.5.3 · Grades 4–6 · Special Education
 
 Link in bio → Rules: Identity and Belonging
 
-#SpecialEducation #AAC #RulesCynthiaLord #CharacterAnalysis #SDI #IEP #AdaptedELA #FictionUnit #CommunicateByDesign #DisabilityRep
+#SpecialEducation #AAC #RulesCynthiaLord #CharacterAnalysis #SDI #IEP #AdaptedELA #FictionUnit #CommunicateByDesign #DisabilityRep #NovelStudy
 ```
 
 ## Facebook Group Drop

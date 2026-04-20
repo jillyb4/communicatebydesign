@@ -27,7 +27,7 @@ Working toward AT certification (not yet certified — do NOT call me AT Special
 | **Substack** | communicatebydesign.substack.com |
 | **TPT** | teacherspayteachers.com/store/communicate-by-design |
 | **Instagram** | @communicatebydesignaac |
-| **Airtable** | Base ID: `appeaT8hkeXWqQKIj` — 5 tables: Work Items, Products, Launch Pipeline, Instructional Activities, **Vocabulary** (new). Primary cowork hub for all tasks, products, content, and pipeline. Read this at session start. |
+| **Airtable** | Base ID: `appeaT8hkeXWqQKIj` — 4 tables: Products, Launch Pipeline, Instructional Activities, Vocabulary. Primary cowork hub for all products and pipeline. Read this at session start. Work Items table deleted Apr 18 2026 — tasks tracked in TASKS.md. |
 | **GitHub** | github.com/jillyb4/communicatebydesign — Code backup repo. Git initialized INSIDE iCloud CbD folder. `.gitignore` tracks code only (.js/.py/.html/.md/.jsx/.json); excludes binaries, symbol_cache, QC, node_modules, images, PDFs, Office docs. After any code changes: open GitHub Desktop → commit → Push origin. *(Set up 2026-03-29)* |
 
 ## Canva Designs
@@ -91,13 +91,18 @@ Strategic context only (things that don't belong in Airtable):
 
 → Full pipeline: **Airtable Launch Pipeline table** (`tblKDEYyrRdPOtbhX`) — 68 records. The Excel `CbD_TPT_Launch_Calendar.xlsx` has been fully migrated to Airtable (Session 17) and is now deprecated.
 
-## Airtable Structure (Session 17–18)
+## Airtable Structure (Updated Apr 18 2026 — 4 tables)
+
+**Work Items table deleted Apr 18 2026.** Tasks now tracked in `TASKS.md` only.
+
+**Two-table rule (locked Apr 18 2026):**
+- **Launch Pipeline** = ideas and future products (status: 💡 Pipeline, 🔨 Building). Move to Products when build actively starts.
+- **Products** = active builds + live products (Workflow Stage: Idea → Planning → Building → Ready to List → Live). One record per product, with Linked Product field connecting back to Launch Pipeline.
 
 | Table | ID | Records | Purpose |
 |-------|----|---------|---------|
-| Work Items | `tblZFoHoKnkJqySSQ` | ~70 | Tasks, content, platform actions. All have Product Line assigned. Includes 16 Substack pipeline posts + 10 live-product action items added Session 17. |
-| Products | `tbl2YSRQiW7RHEPY5` | 32 | One record per product. Pipeline milestone checkboxes (Docx Built, QC Passed, Preview PDF, Canva Cover, TPT Listed, Pinterest, Instagram, Facebook, In Bundle). Linked to Work Items via "Work Items" field `fldQqKF1j3rZKRifK`. |
-| Launch Pipeline | `tblKDEYyrRdPOtbhX` | 68 | All pipeline product ideas across every product line — migrated from `CbD_TPT_Launch_Calendar.xlsx` (Session 17). Linked to Products table. Fields: Product Name, Product Line, Status, Estimated Price, Target Date, Seasonal Hook, Strategic Notes, Grade Band, RL/ELA Standards, CbD Target Skills, Priority Score, Linked Product. |
+| Products | `tbl2YSRQiW7RHEPY5` | ~32 | One record per product. Workflow Stage: Idea/Planning/Building/Ready to List/Live. Pipeline milestone checkboxes (Docx Built, QC Passed, Preview PDF, Canva Cover, TPT Listed, Pinterest, Instagram, Facebook, In Bundle). Linked to Launch Pipeline via "Linked Product" field. |
+| Launch Pipeline | `tblKDEYyrRdPOtbhX` | ~68 | All pipeline product ideas across every product line. Linked to Products table via "Linked Product" field. Fields: Product Name, Product Line, Status, Estimated Price, Target Date, Seasonal Hook, Strategic Notes, Grade Band, RL/ELA Standards, CbD Target Skills, Priority Score, Linked Product. |
 | Instructional Activities | `tblHJlkbCF7c4tCNP` | 13 | Evidence-based instructional activities with HLP references, UDL principles, AAC framework connections. Linked to Launch Pipeline. Original 6: ALM Shared Reading, Visual Scene Displays, Descriptive Teaching Model, Predictable Chart Writing/Write-Ables, Story Bags & Multisensory Grounding, Critical Response Scaffolds. Fiction additions (Session 19): Story Grammar, Inferencing Scaffolds, Describe to Draw. Nonfiction + Picture Book additions (Session 20): Close Reading & Annotation (HLP 16), CER Framework (HLP 14), IRA with Planned Vocabulary Stops (HLP 12+16), Dialogic Reading with CROWD Prompts (HLP 14). ALM updated to include Picture Book Companions. |
 | **Vocabulary** | `tblL2KH04WijW8XUb` | **641 (all synced ✓ Apr 10 2026)** | Master AAC vocabulary database. All lines synced: UFLI Phonics (Lessons 5–34) + Nonfiction (6 units) + Wonder fiction + Poetry Unit 1 (28 words) + PB Companions (6 titles, ~112 words) = 641 total. Sync script: `_Operations/Build/sync_vocab_to_airtable.js`. Run after any new product line vocab is added. Fields: Word, Word Type (Core/Fringe/Heart), Fitzgerald Category, Fitzgerald Color Hex, UFLI Lessons, First UFLI Lesson, Nonfiction Units, Product Lines, Product Count, Appears in Both Lines, Priority Vocabulary, Notes. **Next vocab action: tag Core Tier field on ~192 core words.** |
 
@@ -145,12 +150,10 @@ Vocabulary-driven digital product ecosystem. Two companion HTML tools:
 
 **Products table covers:** AT/AAC IEP Team (7), AT/AAC Family (6), Nonfiction (7), UFLI Phonics (4), Bundle (3), Trading Cards (5), Picture Book Companions (6), Fiction Anchor Texts (1), Poetry Reading Units (1) = 40 product records
 
-**Task Category field (`flddTbX7EhIE1EV28`):** Separate singleSelect on Work Items — "Product Work" or "Operations". Operations tasks have no Product Line (blank). Product Work tasks carry a Product Line. Do NOT use Operations in the Product Line field — Operations is NOT a product line.
-
 **Pending Airtable manual work:**
-- Link Work Items records to their specific Products table records (can do in Airtable UI)
-- Delete 3 blank/empty Work Items records (MCP cannot delete — do manually: recacRAoUpf2Pm7K6, reccV2W1OY0Z4xHgI, recm3WsrttywsUP6p)
-- Remove "Operations" from the Product Line field's choice list (manual in Airtable field settings — no longer used there)
+- Delete stale Rules Products record `recFijTcTx0p4uGuh` (Idea stage, wrong price $8.95 — correct record is already in Products)
+- Delete "Fiction Anchor Text — First Product (TBD)" Launch Pipeline record `reco12sjHgA0qbF74` (placeholder, superseded)
+- Delete UFLI Unit 1–15 individual Launch Pipeline records (15 records — superseded by two-product structure: FREE Lessons 1–5, PAID Lessons 6–34)
 
 ## Scheduled Tasks
 

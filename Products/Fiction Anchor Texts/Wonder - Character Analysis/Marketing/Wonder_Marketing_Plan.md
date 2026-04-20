@@ -13,8 +13,9 @@ Wonder | Character Analysis | Adapted Fiction Unit | SPED Grades 3–8
 
 ## Description Preview (≤180 chars — what buyers see before "read more")
 ```
-Character analysis unit for Wonder by R.J. Palacio, special education grades 3–8. SDI fiction unit with AAC communication boards, symbol cards, and partner guidance built in.
+Wonder by R.J. Palacio character analysis unit | Special education grades 3–8. Adapted fiction, AAC access built in, SDI unit with communication boards and symbol cards. RL.5.3.
 ```
+*(177 chars ✓. SEO pattern: [Book + author + unit type] | [SE + grades]. Hits: adapted fiction, AAC, SDI, standards. No hook — keywords only.)*
 
 ## Full Description
 ```
@@ -68,16 +69,11 @@ AAC: using communication board during literary discussion
 Perfect for: resource room, inclusion support, co-teaching, SDI pull-out, summer extended school year
 ```
 
-## Keyword Tags (7)
+## Keyword Tags
 ```
-wonder R.J. Palacio special education
-character analysis adapted reading
-AAC fiction unit grades 3-8
-wonder SDI unit
-adapted ELA character traits
-IEP fiction character
-special education novel unit
+Wonder novel study, special education, adapted reading, AAC, SPED, character analysis, grades 3-8
 ```
+*(These are the exact locked custom tags from Airtable record reccsVcc4bkuaiIJ9 — paste as-is into TPT custom keyword field. 7 comma-separated tags.)*
 
 ## TPT Metadata
 | Field | Value |
@@ -108,17 +104,17 @@ special education novel unit
 
 **Title**
 ```
-Wonder Character Analysis Unit | Special Education | SDI Grades 3–8
+Wonder R.J. Palacio Character Analysis Unit | Special Education | SDI Grades 3–8
 ```
 
 **Description**
 ```
-Your students are already reading Wonder — now every student has access to what it means. Full SDI fiction unit for special education grades 3–8. Character analysis across 5 whole-book parts using annotation codes [TRAIT] [WHY] [CHANGE]. AAC communication boards, symbol cards, and partner guidance built in. The standard doesn't change — the access layer does. RL.5.3 · RL.5.6. Communicate by Design. #SpecialEducation #Wonder #CharacterAnalysis #AAC #SDI #IEP
+Your students are already reading Wonder — now every student has access to what it means. Full SDI fiction unit for special education grades 3–8. Character analysis across 5 whole-book parts using annotation codes [TRAIT] [WHY] [CHANGE]. AAC communication boards, symbol cards, and partner guidance built in. Adapted fiction, same text for every student — the access layer varies, the expectation does not. RL.5.3 · RL.5.6. Communicate by Design. #SpecialEducation #Wonder #CharacterAnalysis #AAC #SDI #IEP #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
 ```
-Wonder character analysis unit for special education grades 3–8. AAC communication boards, symbol cards, and annotation codes for whole-book character instruction.
+Wonder by R.J. Palacio character analysis unit for special education grades 3–8. AAC communication boards, symbol cards, and annotation codes for whole-book SDI instruction.
 ```
 
 ---
@@ -127,12 +123,12 @@ Wonder character analysis unit for special education grades 3–8. AAC communica
 
 **Title**
 ```
-AAC Communication Board for Wonder | Character Analysis | SPED Grades 3–8
+AAC Communication Board for Wonder by R.J. Palacio | Character Analysis | SPED Grades 3–8
 ```
 
 **Description**
 ```
-This is what access looks like in a fiction unit. Three ready-to-laminate communication boards — character description, emotion + reasoning, and literary discussion moves — so every student can participate in the same conversation about the same book. Part of the Wonder: Character Analysis SDI unit for special education grades 3–8. RL.5.3 · RL.5.6. Communicate by Design. #AAC #SpecialEducation #Wonder #CommunicationBoard #SDI
+This is what access looks like in an adapted fiction unit. Three ready-to-laminate communication boards — character description, emotion + reasoning, and literary discussion moves — so every student can participate in the same conversation about the same book. Part of the Wonder: Character Analysis SDI novel study for special education grades 3–8. RL.5.3 · RL.5.6. Communicate by Design. #AAC #SpecialEducation #Wonder #CommunicationBoard #SDI #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
@@ -146,12 +142,12 @@ AAC character description communication board for Wonder novel study. Special ed
 
 **Title**
 ```
-Wonder Character Analysis Student Activity | SPED SDI | Grades 3–8
+Wonder Character Analysis Student Activity | Adapted Fiction SPED SDI | Grades 3–8
 ```
 
 **Description**
 ```
-Part 1: Who Is Auggie? — The first of five student response pages in the Wonder character analysis unit. Same standard, same text, access layer built in. Annotation codes, sentence frames, and vocabulary support on every page. No separate supplement. No modified version of the book. Every student reads Wonder — the access tools make it reachable. For special education grades 3–8. Communicate by Design. #SpecialEducation #Wonder #SDI #AAC #IEP #CharacterAnalysis
+Part 1: Who Is Auggie? — The first of five student response pages in the Wonder character analysis novel study. Same standard, same text, access layer built in. Annotation codes, sentence frames, and vocabulary support on every page. No separate supplement. No modified version of the book. Every student reads Wonder — the access tools make it reachable. Adapted fiction for special education grades 3–8. Communicate by Design. #SpecialEducation #Wonder #SDI #AAC #IEP #CharacterAnalysis #AdaptedELA #NovelStudy
 ```
 
 **Alt Text**
@@ -179,7 +175,7 @@ RL.5.3 · RL.5.6 · Grades 3–8 · Special Education
 
 Link in bio → Wonder: Character Analysis
 
-#SpecialEducation #AAC #Wonder #CharacterAnalysis #SDI #IEP #AdaptedELA #FictionUnit #CommunicateByDesign
+#SpecialEducation #AAC #Wonder #CharacterAnalysis #SDI #IEP #AdaptedELA #FictionUnit #NovelStudy #CommunicateByDesign
 ```
 
 ## Facebook Group Drop
