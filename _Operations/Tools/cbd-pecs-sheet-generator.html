@@ -125,6 +125,31 @@
   .checks label { display: flex; align-items: center; gap: 7px; font-size: 12.5px; cursor: pointer; }
   .checks input { accent-color: var(--teal); width: 15px; height: 15px; }
 
+  /* ── BUILT-IN HELP ──────────────────────────────────────────
+     This file gets emailed to people who have never seen it. The
+     instructions travel inside it so there is no second file to lose. */
+  details.help {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 0; margin-bottom: 18px;
+  }
+  details.help > summary {
+    cursor: pointer; list-style: none; padding: 15px 18px;
+    font: bold 13px Arial, Helvetica, sans-serif;
+    color: var(--amber); text-transform: uppercase; letter-spacing: 1.1px;
+  }
+  details.help > summary::-webkit-details-marker { display: none; }
+  details.help > summary::before { content: '▸ '; }
+  details.help[open] > summary::before { content: '▾ '; }
+  .help-body { padding: 0 18px 18px; font-size: 13px; line-height: 1.65; color: #D8DEF0; }
+  .help-body h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--teal); margin: 14px 0 5px;
+  }
+  .help-body ol, .help-body ul { margin: 0 0 0 20px; }
+  .help-body li { margin-bottom: 5px; }
+  .help-body strong { color: #fff; }
+  .help-body .warn { color: var(--amber); }
+
   /* ── STATUS BANNER ──────────────────────────────────────── */
   .banner {
     border-radius: 9px; padding: 11px 14px; margin-bottom: 16px;
@@ -251,6 +276,51 @@
 </header>
 
 <div class="wrap">
+
+  <details class="help noprint" id="help">
+    <summary>How to use this</summary>
+    <div class="help-body">
+      <p>Type words. Get a page of picture cards. Cut them out. That is the whole tool.</p>
+
+      <h3>Making a sheet</h3>
+      <ol>
+        <li>Type your words in the box below — one per line, or separated by commas.</li>
+        <li>Click <strong>Add words</strong>. A picture is found for each one.</li>
+        <li>If a picture is wrong, click <strong>Other symbols</strong> on that card and pick a
+            better one, or type a different word in the small search box. The printed label
+            stays whatever you typed.</li>
+        <li>Set the card size and how much space you want for cutting.</li>
+        <li>Click <strong>Print sheet</strong>.</li>
+      </ol>
+
+      <h3 class="warn">One thing that matters when you print</h3>
+      <p>In the print window, set <strong>Scale</strong> to <strong>100%</strong> — not
+         "Fit to page." Fit to page shrinks everything, and the cards stop being the size
+         they say they are.</p>
+
+      <h3>Good to know</h3>
+      <ul>
+        <li><strong>You need internet</strong> the first time you look up a word — that is how
+            the pictures are found.</li>
+        <li><strong>Nothing is saved anywhere but your own browser.</strong> No account, no
+            upload, no student information leaves this page. The only thing sent out is the
+            vocabulary word itself, to look up a picture for it.</li>
+        <li><strong>Card borders are colored by word type</strong> — green for actions, gray for
+            things, yellow for people, orange for describing words, blue for little words, pink
+            for social words. Cut apart, the color helps show how words fit together.</li>
+        <li><strong>Check the student's own system first.</strong> If they already use a device,
+            book, or cards, match those pictures where you can. A student who learned one
+            picture for "break" should not have to learn a second one.</li>
+        <li>A student may select a card, point to it, use gaze to indicate it, hand it to you,
+            or answer some other way entirely. All of it counts.</li>
+      </ul>
+
+      <h3>If the pictures do not appear</h3>
+      <p>You are probably offline, or a school network is blocking the picture site. Cards will
+         still print as empty boxes you can draw in. Reconnect and click
+         <strong>Retry lookups</strong>.</p>
+    </div>
+  </details>
 
   <div id="banner" class="banner"></div>
 
@@ -897,6 +967,14 @@ async function exportForGoogleDocs() {
     o.value = name; o.textContent = name;
     sel.appendChild(o);
   }
+  const help = document.getElementById('help');
+  let seen = null;
+  try { seen = localStorage.getItem(STORAGE_KEY + '_help'); } catch (e) {}
+  help.open = (seen !== 'closed');          // a brand-new user sees the instructions
+  help.addEventListener('toggle', () => {
+    try { localStorage.setItem(STORAGE_KEY + '_help', help.open ? 'open' : 'closed'); } catch (e) {}
+  });
+
   restore();
   render();
   document.getElementById('input').addEventListener('keydown', e => {
