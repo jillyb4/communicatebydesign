@@ -593,6 +593,8 @@ Communicate by Design/
     │   └── CbD_Vocabulary_Dashboard.html ← Vocabulary framework reference (NEW Apr 3)
     ├── Tools/                   ← standalone classroom utilities (not products, not dashboards)
     │   └── cbd-pecs-sheet-generator.html  ← type words → pull ARASAAC symbols → print a symbol card sheet
+    │                                        (also exports an .html that Drive converts to a Google Doc,
+    │                                         symbols embedded, cards true size — for sharing with the team)
     ├── Symbols/                 ← AUTHORITATIVE — do not duplicate
     │   ├── symbol_library/      ← 400 word-to-symbol mappings
     │   └── symbol_cache/        ← 741 ARASAAC PNGs

@@ -326,6 +326,14 @@
       <label><input type="checkbox" id="showLabels" checked onchange="save();render()"> Show word labels</label>
       <label><input type="checkbox" id="showHead"   checked onchange="save();render()"> Show sheet header + Name/Date</label>
     </div>
+    <div class="row" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
+      <button class="ghost" onclick="exportForGoogleDocs()">Export for Google Docs</button>
+      <p class="hint" style="flex:1;min-width:240px">
+        Saves an <code>.html</code> file. In Google Drive: <strong>New → File upload</strong>, then
+        right-click it → <strong>Open with → Google Docs</strong>. The symbols come across as real
+        images and the cards stay 1.5". Share it with your team like any other Doc.
+      </p>
+    </div>
   </div>
 
   <!-- ── PREVIEW ───────────────────────────────────────── -->
@@ -752,6 +760,106 @@ function renderBanner() {
 }
 
 function render() { renderList(); renderSheet(); renderBanner(); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   GOOGLE DOCS EXPORT
+
+   Google Drive converts an uploaded .html file into a Doc, fetching every
+   remote image and embedding it. Two things that matter:
+
+   - It converts TABLES reliably, not flexbox. The on-screen sheet uses
+     inline-block cards, so the export is serialised separately as a table.
+   - Image sources must be public URLs. A symbol resolved from the local
+     cache is a file path Google cannot reach, so those are looked up on
+     ARASAAC first to get a public URL.
+   ══════════════════════════════════════════════════════════════════════ */
+
+function isLocal(url) { return !!url && url.indexOf('http') !== 0; }
+
+async function exportForGoogleDocs() {
+  const o = opts();
+
+  if (!items.length) { alert('Add some words first.'); return; }
+
+  // Swap local cache paths for public ARASAAC URLs where we can.
+  let unresolved = 0;
+  const resolved = [];
+  for (const it of items) {
+    let url = it.url;
+    if (isLocal(url)) {
+      url = null;
+      for (const t of searchTerms(it.term || it.label)) {
+        try {
+          const ids = await arasaacSearch(t);
+          if (ids.length) { url = imgUrl(ids[0]); break; }
+        } catch (e) { break; }
+      }
+      if (!url) unresolved++;
+    }
+    resolved.push({ label: it.label, url, copies: it.copies, fk: fkCategory(it.term || it.label) });
+  }
+
+  const size    = parseFloat(o.size);
+  const cols    = Math.max(1, Math.floor(6.5 / size));   // Docs default 1in margins => 6.5in of text
+  const symPx   = Math.round(size * 96 * (o.showLabels ? 0.60 : 0.78));
+  const labelPt = Math.max(6, Math.round(size * 6.2));
+
+  // Expand copies into a flat list of cards, then chunk into table rows.
+  const cards = [];
+  for (const r of resolved) for (let c = 0; c < r.copies; c++) cards.push(r);
+  while (cards.length % cols !== 0) cards.push(null);     // pad the last row
+
+  const cellStyle = (fk) => {
+    const b = o.border === 'none'  ? 'none'
+            : o.border === 'black' ? '3px solid #000000'
+            : o.border === 'gray'  ? '1px solid #B0B0B0'
+            : '3px solid ' + FK_COLOR[fk];
+    return 'width:' + size + 'in;height:' + size + 'in;border:' + b +
+           ';text-align:center;vertical-align:middle;padding:2px';
+  };
+
+  let rows = '';
+  for (let i = 0; i < cards.length; i += cols) {
+    let tds = '';
+    for (const c of cards.slice(i, i + cols)) {
+      if (!c) { tds += '<td style="width:' + size + 'in;border:none"></td>'; continue; }
+      const sym = c.url
+        ? '<img src="' + c.url + '" width="' + symPx + '" height="' + symPx + '">'
+        : '<span style="color:#aaa;font-size:8pt">draw it</span>';
+      const lbl = o.showLabels
+        ? '<br><b style="font-size:' + labelPt + 'pt">' + esc(castLabel(c.label, o.labelCase)) + '</b>'
+        : '';
+      tds += '<td style="' + cellStyle(c.fk) + '">' + sym + lbl + '</td>';
+    }
+    rows += '<tr>' + tds + '</tr>';
+  }
+
+  const head = o.showHead
+    ? (o.title ? '<h1 style="font-size:15pt">' + esc(o.title) + '</h1>' : '') +
+      '<p style="font-size:10pt">Name: ______________________     Date: ______________</p>'
+    : '';
+
+  const html =
+    '<html><head><meta charset="utf-8"><title>' +
+      esc(o.title || 'Symbol Cards') + '</title></head><body>' +
+      head +
+      '<table style="border-collapse:collapse">' + rows + '</table>' +
+      '<p style="font-size:7pt;color:#666">' + esc(ARASAAC_ATTRIB) + '</p>' +
+    '</body></html>';
+
+  const name = (o.title || 'Symbol Cards').replace(/[^\w \-]/g, '').trim() || 'Symbol Cards';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+  a.download = name + ' (Google Docs).html';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+
+  if (unresolved) {
+    alert(unresolved + ' card(s) use a symbol from your local cache that Google cannot reach, ' +
+          'and no ARASAAC match was found for them. Those print as draw-it boxes in the Doc. ' +
+          'The printed sheet from this page still shows them correctly.');
+  }
+}
 
 /* ══════════════════════════════════════════════════════════════════════
    INIT
