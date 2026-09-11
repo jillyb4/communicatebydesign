@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communicate by Design — Symbol Card Sheet Generator</title>
+<!--
+  ============================================================================
+  Communicate by Design — Symbol Card Sheet Generator
+  ============================================================================
+  Standalone classroom tool. Type words or phrases, pull symbols, print a sheet.
+
+  HOW TO RUN:
+    Double-click this file. It opens in any browser. Nothing to install.
+    Keep it at _Operations/Tools/ so the local symbol cache path resolves.
+
+  SYMBOL SOURCES (in order):
+    1. Local cache  — ../Symbols/symbol_cache/arasaac_{word}.png  (works offline)
+    2. ARASAAC API  — live search, with a fallback chain for multi-word phrases
+    3. Draw-it box  — blank card when no symbol is found
+
+  LICENSE:
+    Pictographic symbols are the property of the Government of Aragón and were
+    created by Sergio Palao for ARASAAC (https://arasaac.org), distributed under
+    CC BY-NC-SA 4.0. Attribution prints on every sheet — do not remove it.
+
+  CARD SPEC (matches the locked Communicate by Design symbol card standard):
+    Symbol image + word label + Fitzgerald Key colored border only.
+    No category bar, no star, no part-of-speech label.
+  ============================================================================
+-->
+<style>
+  :root {
+    --navy:   #1B1F3B;
+    --teal:   #00B4D8;
+    --teal-d: #006DA0;
+    --amber:  #FFB703;
+    --white:  #FFFFFF;
+    --slate:  #94A3B8;
+    --card:   #252A4A;
+    --line:   #3A4068;
+
+    /* Fitzgerald Key border colors — ported from build_nonfiction_symbol_pages.py */
+    --fk-green:  #2E7D32;
+    --fk-orange: #E65100;
+    --fk-yellow: #F57F17;
+    --fk-blue:   #1565C0;
+    --fk-pink:   #880E4F;
+    --fk-white:  #757575;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    font-size: 14px;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────── */
+  header {
+    background: var(--navy);
+    border-bottom: 3px solid var(--amber);
+    padding: 14px 22px;
+    display: flex; align-items: center; gap: 14px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .brand-icon {
+    width: 38px; height: 38px; flex: 0 0 38px;
+    background: var(--amber); border-radius: 9px;
+    display: grid; place-items: center;
+    font-size: 20px; line-height: 1;
+  }
+  .brand h1 { font-size: 17px; letter-spacing: .2px; }
+  .brand p  { font-size: 11.5px; color: var(--slate); margin-top: 2px; }
+  .spacer { flex: 1; }
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 20px 22px 80px; }
+  .panel {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px; margin-bottom: 18px;
+  }
+  .panel h2 {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 1.1px;
+    color: var(--amber); margin-bottom: 12px;
+  }
+  .hint { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+  /* ── INPUT ──────────────────────────────────────────────── */
+  textarea {
+    width: 100%; min-height: 84px; resize: vertical;
+    background: #1B1F3B; color: var(--white);
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 11px 12px; font: 14px/1.5 Arial, Helvetica, sans-serif;
+  }
+  textarea:focus, input:focus, select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-top: 12px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .7px; color: var(--slate);
+  }
+  select, input[type="text"], input[type="number"] {
+    background: #1B1F3B; color: var(--white);
+    border: 1px solid var(--line); border-radius: 7px;
+    padding: 8px 10px; font: 13px Arial, Helvetica, sans-serif;
+  }
+  input[type="number"] { width: 68px; }
+
+  button {
+    background: var(--amber); color: var(--navy);
+    border: 0; border-radius: 8px; padding: 10px 18px;
+    font: bold 13px Arial, Helvetica, sans-serif; cursor: pointer;
+  }
+  button:hover { filter: brightness(1.08); }
+  button.ghost {
+    background: transparent; color: var(--teal);
+    border: 1px solid var(--teal); font-weight: normal;
+  }
+  button.ghost:hover { background: rgba(0,180,216,.12); filter: none; }
+  button.tiny { padding: 5px 9px; font-size: 11.5px; border-radius: 6px; }
+
+  .checks { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
+  .checks label { display: flex; align-items: center; gap: 7px; font-size: 12.5px; cursor: pointer; }
+  .checks input { accent-color: var(--teal); width: 15px; height: 15px; }
+
+  /* ── STATUS BANNER ──────────────────────────────────────── */
+  .banner {
+    border-radius: 9px; padding: 11px 14px; margin-bottom: 16px;
+    font-size: 12.5px; line-height: 1.55; display: none;
+  }
+  .banner.show { display: block; }
+  .banner.warn  { background: rgba(255,183,3,.13); border: 1px solid var(--amber); color: #FFE3A3; }
+  .banner.info  { background: rgba(0,180,216,.12); border: 1px solid var(--teal);  color: #B6ECFA; }
+
+  /* ── WORD LIST EDITOR ───────────────────────────────────── */
+  .item {
+    display: flex; gap: 13px; align-items: flex-start;
+    padding: 12px; border: 1px solid var(--line); border-radius: 9px;
+    margin-bottom: 9px; background: rgba(27,31,59,.55);
+  }
+  .thumb {
+    width: 62px; height: 62px; flex: 0 0 62px;
+    background: var(--white); border-radius: 6px;
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .thumb img { max-width: 100%; max-height: 100%; }
+  .thumb .none { font-size: 10px; color: #888; text-align: center; padding: 3px; }
+  .item-body { flex: 1; min-width: 0; }
+  .item-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .item-label {
+    font-size: 15px; font-weight: bold; border: 0; background: transparent;
+    color: var(--white); padding: 3px 6px; border-radius: 5px; min-width: 140px;
+  }
+  .item-label:hover { background: rgba(255,255,255,.07); }
+  .item-meta { font-size: 11.5px; color: var(--slate); margin-top: 5px; }
+  .item-meta code { color: var(--teal); font-size: 11.5px; }
+  .item-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; align-items: center; }
+  .copies { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--slate); }
+
+  .alts { display: none; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+  .alts.show { display: flex; }
+  .alt {
+    width: 56px; height: 56px; background: var(--white); border: 2px solid transparent;
+    border-radius: 6px; padding: 3px; cursor: pointer; display: grid; place-items: center;
+  }
+  .alt:hover { border-color: var(--teal); }
+  .alt.sel { border-color: var(--amber); }
+  .alt img { max-width: 100%; max-height: 100%; }
+
+  /* ── SHEET PREVIEW ──────────────────────────────────────── */
+  .sheet-shell {
+    background: var(--white); border-radius: 12px; padding: 0.5in;
+    color: #000; overflow-x: auto;
+  }
+  .sheet { width: 7.5in; margin: 0 auto; }
+  .sheet-head { margin-bottom: .22in; }
+  .sheet-head h3 { font-size: 15pt; color: var(--navy); }
+  .sheet-head .fields {
+    margin-top: .1in; font-size: 10pt; color: #333;
+    display: flex; gap: .35in; flex-wrap: wrap;
+  }
+  .sheet-head .fields span { border-bottom: 1px solid #999; min-width: 2in; padding-bottom: 1px; }
+
+  /* font-size:0 removes the whitespace gaps between inline-block cards.
+     orphans/widows:1 is load-bearing — the browser default of 2 forces two rows
+     of cards onto the next page whenever the last row does not fit, silently
+     throwing away a whole printable row. */
+  .cards { font-size: 0; orphans: 1; widows: 1; }
+
+  .pcard {
+    background: #fff; overflow: hidden;
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+    vertical-align: top; margin: 0 0.0625in 0.0625in 0;
+    break-inside: avoid; page-break-inside: avoid;
+    padding: 0.05in;
+  }
+  /* min-height:0 lets the symbol zone shrink; the label keeps its natural height.
+     No hard-coded heights — the card's padding and border are absorbed automatically,
+     so every border style and card size lays out correctly. */
+  .pcard .sym { flex: 1 1 auto; min-height: 0; width: 100%; display: grid; place-items: center; overflow: hidden; }
+  .pcard .sym img { width: 100%; height: 100%; object-fit: contain; }
+  .pcard .drawit {
+    width: 100%; height: 100%; border: 1px dashed #bbb; border-radius: 3px;
+    display: grid; place-items: center; color: #aaa; font-size: 7pt;
+  }
+  .pcard .lbl {
+    flex: 0 0 auto; width: 100%; text-align: center; color: var(--navy);
+    font-weight: bold; line-height: 1.1; padding-top: 0.03in;
+    overflow-wrap: break-word;
+  }
+  .attrib {
+    margin-top: .16in; padding-top: .07in; border-top: 1px solid #ddd;
+    font-size: 6.5pt; color: #666; line-height: 1.35;
+  }
+  .empty-state { color: #888; font-size: 13px; padding: 30px; text-align: center; }
+
+  /* ── PRINT ──────────────────────────────────────────────── */
+  @page { size: letter portrait; margin: 0.5in; }
+  @media print {
+    body { background: #fff; color: #000; }
+    header, .wrap > .panel, .banner, .noprint { display: none !important; }
+    .wrap { max-width: none; padding: 0; margin: 0; }
+    .sheet-shell { padding: 0; border-radius: 0; }
+    .sheet { width: 100%; }
+    .pcard { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    /* The ARASAAC attribution is required on every printed sheet. In flow it
+       takes a page of its own whenever the cards happen to fill the last page
+       exactly. Fixed, it costs no flow space, prints on every page, and never
+       forces a break — the matching padding below keeps cards clear of it. */
+    .attrib {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      margin: 0; background: #fff;
+    }
+    .cards { padding-bottom: 0.30in; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand-icon">💬</div>
+  <div class="brand">
+    <h1>Symbol Card Sheet Generator</h1>
+    <p>Communicate by Design · type words → pull symbols → print</p>
+  </div>
+  <div class="spacer"></div>
+  <button class="noprint" onclick="window.print()">Print sheet</button>
+</header>
+
+<div class="wrap">
+
+  <div id="banner" class="banner"></div>
+
+  <!-- ── WORDS ─────────────────────────────────────────── -->
+  <div class="panel">
+    <h2>1 · Words</h2>
+    <textarea id="input" placeholder="back stretch, hand rub, squeezes&#10;&#10;One per line, or separated by commas."></textarea>
+    <div class="row">
+      <button onclick="addWords()">Add words</button>
+      <button class="ghost" onclick="retryAll()">Retry lookups</button>
+      <button class="ghost" onclick="clearAll()">Clear all</button>
+      <div class="spacer"></div>
+      <div class="field">
+        <label for="preset">Quick sets</label>
+        <select id="preset" onchange="loadPreset(this.value)">
+          <option value="">Choose a set…</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint" style="margin-top:10px">
+      Multi-word phrases work. If ARASAAC has no symbol for the whole phrase, the
+      search falls back to the main word — <code>back stretch</code> finds
+      <em>stretch</em>, <code>squeezes</code> finds <em>squeeze</em> — and the card
+      keeps the label you typed.
+    </p>
+  </div>
+
+  <!-- ── CARDS ─────────────────────────────────────────── -->
+  <div class="panel">
+    <h2>2 · Cards <span id="count" style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0"></span></h2>
+    <div id="list"></div>
+    <p id="listEmpty" class="hint">No cards yet. Add words above.</p>
+  </div>
+
+  <!-- ── SHEET OPTIONS ─────────────────────────────────── -->
+  <div class="panel">
+    <h2>3 · Sheet</h2>
+    <div class="row">
+      <div class="field">
+        <label for="size">Card size</label>
+        <select id="size" onchange="save();render()">
+          <option value="1">1" × 1"</option>
+          <option value="1.5" selected>1.5" × 1.5"</option>
+          <option value="2">2" × 2"</option>
+          <option value="2.5">2.5" × 2.5"</option>
+          <option value="3">3" × 3"</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="case">Label style</label>
+        <select id="case" onchange="save();render()">
+          <option value="upper" selected>ALL CAPS</option>
+          <option value="lower">lowercase</option>
+          <option value="title">Title Case</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="border">Border</label>
+        <select id="border" onchange="save();render()">
+          <option value="fk" selected>Fitzgerald Key color</option>
+          <option value="black">Black</option>
+          <option value="gray">Light gray (cut guide)</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="title">Sheet title</label>
+        <input type="text" id="title" placeholder="e.g. Movement Break Choices"
+               oninput="save();render()" style="width:220px">
+      </div>
+    </div>
+    <div class="checks">
+      <label><input type="checkbox" id="showLabels" checked onchange="save();render()"> Show word labels</label>
+      <label><input type="checkbox" id="showHead"   checked onchange="save();render()"> Show sheet header + Name/Date</label>
+    </div>
+  </div>
+
+  <!-- ── PREVIEW ───────────────────────────────────────── -->
+  <div class="panel noprint" style="padding-bottom:8px">
+    <h2>4 · Print preview</h2>
+    <p class="hint">This is exactly what prints. Set your browser's print scale to 100% —
+      not "Fit to page" — or the cards will not measure true.</p>
+  </div>
+  <div class="sheet-shell">
+    <div class="sheet" id="sheet"></div>
+  </div>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   CONFIG
+   ══════════════════════════════════════════════════════════════════════ */
+
+// Local symbol cache, relative to this file at _Operations/Tools/
+const LOCAL_CACHE = '../Symbols/symbol_cache/';
+
+const ARASAAC_SEARCH = 'https://api.arasaac.org/v1/pictograms/en/search/';
+const ARASAAC_IMG    = 'https://static.arasaac.org/pictograms/';
+const ARASAAC_ATTRIB =
+  'Pictographic symbols used are the property of the Government of Aragón and have been ' +
+  'created by Sergio Palao for ARASAAC (https://arasaac.org), distributed under CC BY-NC-SA 4.0.';
+
+const STORAGE_KEY = 'cbd_pecs_sheet_v1';
+
+const PRESETS = {
+  'Movement & sensory breaks': ['back stretch','hand rub','squeezes','deep breath','wall push','jumping','walk','swing','rocking','heavy work','quiet corner','weighted blanket'],
+  'Core starter words':        ['I','want','more','stop','go','help','like','not','look','all done','turn','my'],
+  'Feelings':                  ['happy','sad','angry','tired','scared','excited','sick','calm','frustrated','proud'],
+  'Break & regulation choices':['break','water','bathroom','music','headphones','fidget','lights off','sit','stand','help me'],
+  'Classroom requests':        ['help','question','bathroom','water','pencil','finished','wait','my turn','again','different'],
+};
+
+/* ══════════════════════════════════════════════════════════════════════
+   FITZGERALD KEY
+   Ported from _Operations/Build/fitzgerald_key.js (GENERAL sets), with a
+   movement/sensory extension so break-menu verbs classify as actions
+   instead of defaulting to noun.
+   ══════════════════════════════════════════════════════════════════════ */
+
+const FK = {
+  yellow: new Set(['i','you','he','she','we','they','my','your','our','their','who','someone','everyone','people','human','me','him','his','us','it','friend','teacher','mom','dad','nurse','name']),
+  green:  new Set(['think','feel','know','want','need','help','stop','fight','change','show','prove','mean','say','tell','believe','make','do','go','get','give','like','live','care','move','swim','learn','die','protect','paint','lie','approve','deny','claim','review','test','occupy','demand','sign','agree','disagree','crawl','protest','verify','organize','contradict','cause','read','write','work','use','find','try','put','take','see','look','hear','play','come','turn','open','close','start','begin','finish','keep','bring','send','build','break','grow','eat','drink','sleep','walk','stand','sit','wait','watch','listen','talk','speak','ask','answer','explain','describe','compare','analyze','evaluate','identify','observe','support','include','follow','choose','decide','create','share','connect','push','pull',
+    // movement / sensory / regulation extension
+    'stretch','rub','squeeze','press','breathe','jump','march','roll','wiggle','shake','swing','bounce','hug','tap','lift','carry','climb','rock','spin','crash','massage','brush','wash','blow','chew','drum','clap','stomp','reach','bend','twist','relax','calm']),
+  orange: new Set(['good','bad','right','wrong','different','same','more','less','true','false','strong','weak','big','small','little','free','safe','sick','healthy','wild','dangerous','reliable','accessible','new','old','important','best','hard','easy','long','short','fast','slow','happy','sad','angry','afraid','sure','ready','able','enough','many','few','all','some','every','each','tired','scared','excited','frustrated','proud','loud','quiet','heavy','deep','soft','hot','cold']),
+  blue:   new Set(['because','before','after','then','first','last','but','if','about','and','that','which','when','where','today','now','here','there','in','on','at','up','down','to','from','with','for','of','by','into','out','over','under','between','through','during','until','while','also','too','next','again','still','already','always','never','sometimes','or','so']),
+  pink:   new Set(['yes','no','please','thank','thanks','sorry','hi','hello','bye','why','what','how','question','okay','ok','wow','done','finished','all done','my turn','help me','break']),
+};
+
+const FK_COLOR = {
+  yellow: '#F57F17', green: '#2E7D32', orange: '#E65100',
+  blue:   '#1565C0', pink:  '#880E4F', white: '#757575',
+};
+
+// Classify on the whole phrase first, then on its head word.
+function fkCategory(phrase) {
+  const p = String(phrase).toLowerCase().trim();
+  const tryWord = (w) => {
+    for (const cat of ['yellow','green','orange','blue','pink']) if (FK[cat].has(w)) return cat;
+    return null;
+  };
+  let hit = tryWord(p);
+  if (hit) return hit;
+  const words = p.split(/[\s\-_]+/).filter(Boolean);
+  for (let i = words.length - 1; i >= 0; i--) {
+    hit = tryWord(words[i]) || tryWord(singular(words[i]));
+    if (hit) return hit;
+  }
+  return 'white';
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SEARCH TERM FALLBACK CHAIN
+   "back stretch" → back stretch, stretch, back
+   "squeezes"     → squeezes, squeeze
+   ══════════════════════════════════════════════════════════════════════ */
+
+const STOPWORDS = new Set(['a','an','the','my','your','our','their','some','of','to','and','is','are']);
+
+// Order matters. Only strip "es" where the base genuinely ends in s/z/x/ch/sh
+// (glasses, boxes, watches) — otherwise a plain -s plural like "squeezes"
+// gets over-stripped to "squeez" and finds nothing.
+function singular(w) {
+  if (/ies$/.test(w) && w.length > 4)           return w.slice(0, -3) + 'y'; // bunnies  -> bunny
+  if (/(sses|shes|ches|xes|zzes)$/.test(w))     return w.slice(0, -2);        // glasses  -> glass
+  if (/s$/.test(w) && !/(ss|us|is)$/.test(w))   return w.slice(0, -1);        // squeezes -> squeeze
+  return w;
+}
+
+function searchTerms(phrase) {
+  const p = String(phrase).toLowerCase().trim();
+  const terms = [p];
+  const words = p.split(/[\s\-_]+/).filter(Boolean);
+  const content = words.filter(w => !STOPWORDS.has(w));
+  if (content.length && content.join(' ') !== p) terms.push(content.join(' '));
+  for (let i = content.length - 1; i >= 0; i--) {
+    terms.push(content[i]);
+    const s = singular(content[i]);
+    if (s !== content[i]) terms.push(s);
+  }
+  const sp = singular(p);
+  if (sp !== p) terms.push(sp);
+  return [...new Set(terms.filter(Boolean))];
+}
+
+function slug(s) { return String(s).toLowerCase().trim().replace(/[\s\-]+/g, '_').replace(/[^a-z0-9_]/g, ''); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   SYMBOL LOOKUP
+   ══════════════════════════════════════════════════════════════════════ */
+
+let apiReachable = null;   // null = untested, true/false once known
+
+// Try to load a file from the local cache. Resolves to a URL or null.
+function probeLocal(term) {
+  return new Promise(resolve => {
+    const url = LOCAL_CACHE + 'arasaac_' + slug(term) + '.png';
+    const img = new Image();
+    img.onload  = () => resolve(img.naturalWidth > 0 ? url : null);
+    img.onerror = () => resolve(null);
+    img.src = url;
+  });
+}
+
+async function arasaacSearch(term) {
+  const res = await fetch(ARASAAC_SEARCH + encodeURIComponent(term), { mode: 'cors' });
+  if (!res.ok) return [];
+  const data = await res.json();
+  if (!Array.isArray(data)) return [];
+  return data.map(p => p._id).filter(Boolean);
+}
+
+function imgUrl(id) { return ARASAAC_IMG + id + '/' + id + '_500.png'; }
+
+// Full resolution: local cache first, then ARASAAC down the fallback chain.
+async function resolveSymbol(item) {
+  const terms = searchTerms(item.term || item.label);
+
+  // Local cache first — this is the offline path, and it is faster than the network.
+  for (const t of terms) {
+    const local = await probeLocal(t);
+    if (local) return { url: local, candidates: [], matched: t, source: 'cache' };
+  }
+
+  // Once ARASAAC is known unreachable, stop retrying it on every word.
+  if (apiReachable === false) {
+    return { url: null, candidates: [], matched: null, source: 'offline' };
+  }
+
+  for (const t of terms) {
+    try {
+      const ids = await arasaacSearch(t);
+      apiReachable = true;
+      if (ids.length) {
+        return {
+          url: imgUrl(ids[0]),
+          candidates: ids.slice(0, 12).map(imgUrl),
+          matched: t,
+          source: 'arasaac',
+        };
+      }
+    } catch (e) {
+      apiReachable = false;
+      return { url: null, candidates: [], matched: null, source: 'offline' };
+    }
+  }
+  return { url: null, candidates: [], matched: null, source: 'none' };
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════════════════════ */
+
+let items = [];
+let nextId = 1;
+
+function addWords() {
+  const raw = document.getElementById('input').value;
+  const words = raw.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+  if (!words.length) return;
+  document.getElementById('input').value = '';
+  for (const w of words) {
+    const item = { id: nextId++, label: w, term: '', copies: 1, url: null,
+                   candidates: [], matched: null, source: 'loading', altsOpen: false };
+    items.push(item);
+    lookup(item);
+  }
+  render();
+}
+
+async function lookup(item) {
+  item.source = 'loading';
+  render();
+  const r = await resolveSymbol(item);
+  Object.assign(item, r);
+  save();
+  render();
+}
+
+function loadPreset(name) {
+  if (!name) return;
+  document.getElementById('preset').value = '';
+  document.getElementById('input').value = PRESETS[name].join('\n');
+  addWords();
+}
+
+// Re-run every lookup from scratch — use after fixing a connection, or after
+// dropping new PNGs into the local symbol cache.
+function retryAll() {
+  apiReachable = null;
+  for (const it of items) {
+    if (it.source !== 'cache' && !it.candidates.length) lookup(it);
+  }
+}
+
+function clearAll() {
+  if (items.length && !confirm('Remove all cards from this sheet?')) return;
+  items = [];
+  save(); render();
+}
+
+function removeItem(id) { items = items.filter(i => i.id !== id); save(); render(); }
+function setCopies(id, v) {
+  const it = items.find(i => i.id === id);
+  it.copies = Math.max(1, Math.min(60, parseInt(v) || 1));
+  save(); render();
+}
+function setLabel(id, v)  { items.find(i => i.id === id).label = v; save(); render(); }
+function setTerm(id, v)   { const it = items.find(i => i.id === id); it.term = v.trim(); lookup(it); }
+function toggleAlts(id)   { const it = items.find(i => i.id === id); it.altsOpen = !it.altsOpen; render(); }
+function pickAlt(id, idx) {
+  const it = items.find(i => i.id === id);
+  if (!it.candidates || !it.candidates[idx]) return;
+  it.url = it.candidates[idx];
+  it.altsOpen = false;
+  save(); render();
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PERSISTENCE
+   ══════════════════════════════════════════════════════════════════════ */
+
+function opts() {
+  return {
+    size:       document.getElementById('size').value,
+    labelCase:  document.getElementById('case').value,
+    border:     document.getElementById('border').value,
+    title:      document.getElementById('title').value,
+    showLabels: document.getElementById('showLabels').checked,
+    showHead:   document.getElementById('showHead').checked,
+  };
+}
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ items, opts: opts() }));
+  } catch (e) { /* private browsing — sheet still works, just not remembered */ }
+}
+
+function restore() {
+  let data = null;
+  try { data = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch (e) {}
+  if (!data) return;
+  if (Array.isArray(data.items)) {
+    items = data.items;
+    nextId = items.reduce((m, i) => Math.max(m, i.id), 0) + 1;
+  }
+  const o = data.opts || {};
+  if (o.size)      document.getElementById('size').value  = o.size;
+  if (o.labelCase) document.getElementById('case').value  = o.labelCase;
+  if (o.border)    document.getElementById('border').value= o.border;
+  if (o.title)     document.getElementById('title').value = o.title;
+  if (o.showLabels !== undefined) document.getElementById('showLabels').checked = o.showLabels;
+  if (o.showHead   !== undefined) document.getElementById('showHead').checked   = o.showHead;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RENDER
+   ══════════════════════════════════════════════════════════════════════ */
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+function castLabel(text, mode) {
+  if (mode === 'upper') return text.toUpperCase();
+  if (mode === 'lower') return text.toLowerCase();
+  return text.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
+}
+
+function borderFor(item, mode) {
+  if (mode === 'none')  return '0';
+  if (mode === 'black') return '2.5pt solid #000';
+  if (mode === 'gray')  return '0.75pt dashed #B0B0B0';
+  return '3pt solid ' + FK_COLOR[fkCategory(item.term || item.label)];
+}
+
+function renderList() {
+  const list  = document.getElementById('list');
+  const empty = document.getElementById('listEmpty');
+  document.getElementById('count').textContent =
+    items.length ? '· ' + items.length + ' word' + (items.length > 1 ? 's' : '') : '';
+  empty.style.display = items.length ? 'none' : 'block';
+
+  list.innerHTML = items.map(it => {
+    let thumb;
+    if (it.source === 'loading')  thumb = '<div class="none">…</div>';
+    else if (it.url)              thumb = '<img src="' + esc(it.url) + '" alt="">';
+    else                          thumb = '<div class="none">no symbol</div>';
+
+    let meta;
+    if (it.source === 'loading')      meta = 'Searching…';
+    else if (it.source === 'cache')   meta = 'From local cache · matched <code>' + esc(it.matched) + '</code>';
+    else if (it.source === 'arasaac') meta = 'From ARASAAC · matched <code>' + esc(it.matched) + '</code>';
+    else if (it.source === 'offline') meta = 'No connection to ARASAAC — prints as a draw-it box.';
+    else                              meta = 'No symbol found — prints as a draw-it box. Try a different search word below.';
+
+    const alts = (it.candidates || []).map((u, idx) =>
+      '<div class="alt' + (u === it.url ? ' sel' : '') + '" onclick="pickAlt(' + it.id + ',' + idx + ')">' +
+      '<img src="' + esc(u) + '" alt=""></div>').join('');
+
+    return '' +
+      '<div class="item">' +
+        '<div class="thumb">' + thumb + '</div>' +
+        '<div class="item-body">' +
+          '<div class="item-top">' +
+            '<input class="item-label" value="' + esc(it.label) + '" ' +
+                   'onchange="setLabel(' + it.id + ', this.value)" title="Label printed on the card">' +
+          '</div>' +
+          '<div class="item-meta">' + meta + '</div>' +
+          '<div class="item-actions">' +
+            (it.candidates && it.candidates.length > 1
+              ? '<button class="ghost tiny" onclick="toggleAlts(' + it.id + ')">Other symbols (' + it.candidates.length + ')</button>'
+              : '') +
+            '<input type="text" placeholder="search a different word" value="' + esc(it.term) + '" ' +
+                   'onchange="setTerm(' + it.id + ', this.value)" style="width:190px;font-size:12px;padding:5px 8px">' +
+            '<span class="copies">copies ' +
+              '<input type="number" min="1" max="60" value="' + it.copies + '" ' +
+                     'onchange="setCopies(' + it.id + ', this.value)"></span>' +
+            '<button class="ghost tiny" onclick="removeItem(' + it.id + ')">Remove</button>' +
+          '</div>' +
+          '<div class="alts' + (it.altsOpen ? ' show' : '') + '">' + alts + '</div>' +
+        '</div>' +
+      '</div>';
+  }).join('');
+}
+
+function renderSheet() {
+  const o    = opts();
+  const size = parseFloat(o.size);
+  const sheet = document.getElementById('sheet');
+
+  if (!items.length) {
+    sheet.innerHTML = '<div class="empty-state">Add words to build a sheet.</div>';
+    return;
+  }
+
+  // Label size scales with the card. Heights are left to flexbox.
+  const labelPt = Math.max(6, Math.round(size * 6.2));
+
+  let head = '';
+  if (o.showHead) {
+    head =
+      '<div class="sheet-head">' +
+        (o.title ? '<h3>' + esc(o.title) + '</h3>' : '') +
+        '<div class="fields"><span>Name</span><span>Date</span></div>' +
+      '</div>';
+  }
+
+  let cards = '';
+  for (const it of items) {
+    const border = borderFor(it, o.border);
+    const sym = it.url
+      ? '<img src="' + esc(it.url) + '" alt="' + esc(it.label) + '">'
+      : '<div class="drawit">draw it</div>';
+    const lbl = o.showLabels
+      ? '<div class="lbl" style="font-size:' + labelPt + 'pt">' +
+          esc(castLabel(it.label, o.labelCase)) + '</div>'
+      : '';
+    const card =
+      '<div class="pcard" style="width:' + size + 'in;height:' + size + 'in;border:' + border + '">' +
+        '<div class="sym">' + sym + '</div>' + lbl +
+      '</div>';
+    for (let c = 0; c < it.copies; c++) cards += card;
+  }
+
+  sheet.innerHTML =
+    head +
+    '<div class="cards">' + cards + '</div>' +
+    '<div class="attrib">' + esc(ARASAAC_ATTRIB) + '<br>' +
+      'Sheet generated with the Communicate by Design Symbol Card Sheet Generator.</div>';
+}
+
+function renderBanner() {
+  const b = document.getElementById('banner');
+  const anyOffline = items.some(i => i.source === 'offline');
+  if (anyOffline) {
+    b.className = 'banner warn show';
+    b.innerHTML =
+      '<strong>ARASAAC could not be reached.</strong> Cards fall back to the local symbol cache, ' +
+      'and anything not cached prints as a draw-it box. Check your connection, then edit a ' +
+      'search word to retry. If you are online and this persists, your browser is blocking the ' +
+      'request from a local file — open the folder in a terminal and run ' +
+      '<code>python3 -m http.server 8000</code>, then visit ' +
+      '<code>localhost:8000/_Operations/Tools/cbd-pecs-sheet-generator.html</code>.';
+    return;
+  }
+  const anyNone = items.some(i => i.source === 'none');
+  if (anyNone) {
+    b.className = 'banner info show';
+    b.innerHTML =
+      'Some words have no ARASAAC match. Type a different search word on those cards — ' +
+      'the printed label stays what you typed.';
+    return;
+  }
+  b.className = 'banner';
+}
+
+function render() { renderList(); renderSheet(); renderBanner(); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════════════════════════════ */
+
+(function init() {
+  const sel = document.getElementById('preset');
+  for (const name of Object.keys(PRESETS)) {
+    const o = document.createElement('option');
+    o.value = name; o.textContent = name;
+    sel.appendChild(o);
+  }
+  restore();
+  render();
+  document.getElementById('input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) addWords();
+  });
+})();
+</script>
+</body>
+</html>

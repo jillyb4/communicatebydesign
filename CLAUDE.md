@@ -591,6 +591,8 @@ Communicate by Design/
     │   ├── CbD_Task_Dashboard.html       ← Kanban task board
     │   ├── CbD_Workflow_Visual.html      ← Pipeline workflow
     │   └── CbD_Vocabulary_Dashboard.html ← Vocabulary framework reference (NEW Apr 3)
+    ├── Tools/                   ← standalone classroom utilities (not products, not dashboards)
+    │   └── cbd-pecs-sheet-generator.html  ← type words → pull ARASAAC symbols → print a symbol card sheet
     ├── Symbols/                 ← AUTHORITATIVE — do not duplicate
     │   ├── symbol_library/      ← 400 word-to-symbol mappings
     │   └── symbol_cache/        ← 741 ARASAAC PNGs
@@ -620,6 +622,7 @@ Key files: `_Operations/SESSION_STATE.md` (read first) · `_Operations/CbD_Produ
 - Symbol cache: `_Operations/Symbols/symbol_cache/` (NOT `_Operations/symbol_cache/`)
 - Build scripts: `_Operations/Build/[script]` (NOT `_Operations/[script]`)
 - Dashboards: `_Operations/Dashboards/[file]` (NOT anywhere else)
+- Standalone classroom tools: `_Operations/Tools/[file]` — must stay there; the symbol cache path is relative (`../Symbols/symbol_cache/`)
 - Product build scripts stay in their product folder and require Build/ using the 3-level path
 - Vocabulary data: `_Operations/Build/cbd_unit_vocab.js` (all non-UFLI lines)
 
