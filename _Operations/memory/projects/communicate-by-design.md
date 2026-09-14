@@ -547,3 +547,83 @@ Four research-backed frameworks now govern all text-based product builds. All fo
 ├── WGU-Education/      — WGU coursework
 └── _To Delete/
 ```
+
+---
+
+## Symbol Card Sheet Generator (Session 26 — Sep 2026)
+
+A standalone browser tool, not a product build. Type words → pull ARASAAC symbols →
+print cards at true physical size. For quick classroom needs by Jill, paras, RBTs
+and BCBAs.
+
+**File:** `_Operations/Tools/cbd-pecs-sheet-generator.html`
+**Full spec:** `_Operations/memory/symbol_card_tool_reference.md`
+**Branch:** `claude/pecs-sheet-generator-lp7uox` — not yet merged to main
+
+**What it does:** sizes 1"–3" (default 1.5"), cutting space between cards (default
+3/16"), Fitzgerald Key borders, ALL CAPS labels, per-word copy counts, alternate
+symbol picker, per-card search override. Multi-word phrases fall back to the head
+word — "back stretch" finds *stretch* — while the card keeps the typed label.
+Exports an `.html` that Google Drive converts into a shared Doc with symbols
+embedded and cards still 1.5in.
+
+**Handoff:** email the file. Recipient needs a browser, internet, a printer. No
+Claude, no account, no install, no code. Instructions live inside the file so they
+cannot be lost when it is forwarded. The file never contacts Claude or Anthropic at
+runtime — the only outbound request is to ARASAAC for a picture.
+
+**New folder category:** `_Operations/Tools/` — standalone classroom utilities.
+Not products, not dashboards. Distinct from `_Operations/Build/` (which makes
+products) and `_Operations/Dashboards/`.
+
+**Not an official product yet.** Five open decisions before it could be: the name
+(PECS is trademarked and "CbD" should not appear in a public filename), no links
+back to TPT or Substack, no Accessibility Statement / About the Creator / Terms of
+Use, distribution route, and support burden. Recommendation on distribution was
+both, TPT first — TPT sells files and this is a file, so a free download drives
+follower growth before the May UFLI launch; then host it so updates do not require
+a re-upload.
+
+### Strategic decision — do NOT move CbD into code
+
+Asked whether CbD should move over to code to function better. Answer was no, and
+it should stay no unless something changes. The bottleneck is content and marketing
+throughput (Canva covers, TPT re-uploads, Pinterest pins, IG carousels, QC passes),
+not tooling. The existing ~29 build scripts already cover the genuinely repetitive,
+rule-governed work. More code means more maintenance competing with work that sells,
+on a one-person operation. The repo staying a code backup that gitignores binaries
+is the correct scope.
+
+What *did* change is narrower: there is now a second kind of artifact — a browser
+tool — alongside the document builds. That is an addition, not a migration.
+
+### Working-window rule (Claude Code vs. a claude.ai Project)
+
+They do not share anything automatically. Claude Code sessions know CbD because they
+read `CLAUDE.md` from the repo at startup; a claude.ai Project has its own separate
+knowledge and cannot see those conversations. The only bridge is what gets written
+into files.
+
+- **If the answer is a file in the repo → work in Claude Code.** It can read, write,
+  run and test. This session drove a real browser, measured printed PDFs, and caught
+  bugs that a chat window would have shipped.
+- **If the answer is words to paste somewhere → work in the Project.** Substack
+  drafts, TPT listing copy, marketing plans, strategy.
+
+Anything decided in a Claude Code session that should survive must land in
+`CLAUDE.md` or `_Operations/memory/` or it is gone.
+
+### Reusable findings (not specific to this tool)
+
+- **Google Docs conversion.** Drive turns an uploaded `.html` into a Doc and fetches
+  remote images into it — a way to deliver any printable to a team as a shared Doc.
+  It discards `border-spacing`; gaps must be built from empty spacer columns/rows,
+  and it floors a cell at ~20pt.
+- **Mulberry Symbols** (CC BY-SA, commercial use permitted, unlike ARASAAC's NC) is
+  reachable on raw.githubusercontent.com with a full 3,435-symbol index at
+  `scripts/data/symbol-info-en.csv`. Naming is `stretch_,_to`, not `stretch`.
+  Guessing filenames without the index returns wrong symbols. Never mix symbol sets
+  on one student's board.
+- **Print layout must be measured, not eyeballed.** Browser-default `widows: 2`
+  silently discards a printable row per page. Found only by generating a PDF and
+  measuring the drawn boxes.

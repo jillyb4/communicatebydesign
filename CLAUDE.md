@@ -87,6 +87,7 @@ Strategic context only (things that don't belong in Airtable):
 | **Vocabulary Framework** | Built Session 18. Applies to ALL product lines. Quick ref: `_Operations/memory/vocabulary_selection_reference.md`. Full research: `Research/CbD_Vocabulary_Selection_Framework.md`. New Product Line Workflow: `_Operations/memory/new_product_line_workflow.md`. |
 | **Fiction Line — Wonder** | Unit 1: Wonder: Character Analysis (RL.5.3/5.6, grades 3–8). **LIVE on TPT (Apr 2026).** TPT ID: 15945146. Price: $6.00 LOCKED. Airtable: `reccsVcc4bkuaiIJ9` (Live ✓). **Final rebuild Apr 17 2026** — print-safe (FK borders only), Name/Class/Teacher/Date info row, clean prompts, no AAC team language. TPT folder current. ⚠️ Jill manual steps: (1) Run `python3 _Operations/Build/export_docx_to_pdf.py` on Teaching_Materials.docx; (2) Delete 3 stale files from TPT folder in Finder (Answer_Key.pdf, COMPLETE.docx, _Wonder_Welcome.pdf). TPT Listing Package built: `Wonder_Character_Analysis_TPT_Listing_Package.md`. Symbol subs LOCKED: belong→include, ordinary→usual, face→face. Annotation codes LOCKED: [TRAIT]/[WHY]/[CHANGE]. **Confirmed 6-unit launch set in Airtable.** Bundle: pair w/ The Giver when Unit 2 launches (May). | — |
 | **Fiction Line — The Giver** | Unit 2: The Giver: Theme Analysis (RL.6.2/7.2/8.2, grades 6–8). **Building.** Airtable: `rec0xE48ML7QOfAYL` (Building). Price: $6.00 LOCKED. **Final rebuild Apr 17 2026** — Teaching_Materials.docx ✓ (42.9 KB) · Printable_Packet.pdf ✓ 13pp · Welcome_to_the_Product.pdf ✓. All print-safe (FK borders only), Name/Class/Teacher/Date info row, clean prompts. TPT folder current. TPT Listing Package: `The_Giver_TPT_Listing_Package.md`. ⚠️ Jill manual steps before TPT listing: (1) Run `python3 _Operations/Build/export_docx_to_pdf.py` on Teaching_Materials.docx; (2) Build Canva cover (add to DAHGBZ-LtRo bulk template). Launch: May 2026, pairs with Fred Korematsu nonfiction (APAHM). | May 2026 |
+| **Symbol Card Sheet Generator** | Standalone browser tool built Session 26 (Sep 2026). Type words → pull ARASAAC symbols → print cards at true size (1"–3", default 1.5"). Multi-word fallback ("back stretch" → stretch), Fitzgerald Key borders, per-card copies, alternate-symbol picker, cutting space, and a Google Docs export. Instructions live inside the file; hand it to a para by emailing it — no install, no Claude, no account. File: `_Operations/Tools/cbd-pecs-sheet-generator.html`. Branch `claude/pecs-sheet-generator-lp7uox` (not yet merged). **Working and classroom-ready. NOT an official product yet** — 5 open decisions (name/PECS trademark, no links out, no end matter, distribution, support burden) in `_Operations/memory/symbol_card_tool_reference.md`. Drive folder for team sheets: "Symbol Card Sheets" (private, not shared). | Phase 0 pending |
 | **Poetry Reading Units** | NEW line LIVE 2026-04-10. Unit 1 "What the Voice Carries" LIVE on TPT. URL: https://www.teacherspayteachers.com/Product/What-the-Voice-Carries-Poetry-Figurative-Language-Adapted-ELA-SPED-5-7th-16037413 · TPT ID: 16037413 · Price: $9.95. Airtable: `receS8L09qmIxUmcO` (Live ✓). File set: COMPLETE.docx + COMPLETE.pdf (Word-gen, 24pp) + Student_Packet.pdf (13pp) + CAP.pdf (12pp) + Welcome_to_the_Product.pdf (4pp). Architecture: access-layer model (same poem V1/V2/V3). NFMA framework. **⚠️ Next: Pinterest 3 pins + IG carousel + FB post.** Unit 2: Jul 2026 · Unit 3: Sep · Unit 4: Nov. Full plan: `Research/CbD_Poetry_Unit_Line_Initial_Build_Plan.md`. | Unit 2: Jul 2026 |
 
 → Full pipeline: **Airtable Launch Pipeline table** (`tblKDEYyrRdPOtbhX`) — 68 records. The Excel `CbD_TPT_Launch_Calendar.xlsx` has been fully migrated to Airtable (Session 17) and is now deprecated.
@@ -592,9 +593,8 @@ Communicate by Design/
     │   ├── CbD_Workflow_Visual.html      ← Pipeline workflow
     │   └── CbD_Vocabulary_Dashboard.html ← Vocabulary framework reference (NEW Apr 3)
     ├── Tools/                   ← standalone classroom utilities (not products, not dashboards)
-    │   └── cbd-pecs-sheet-generator.html  ← type words → pull ARASAAC symbols → print a symbol card sheet
-    │                                        (also exports an .html that Drive converts to a Google Doc,
-    │                                         symbols embedded, cards true size — for sharing with the team)
+    │   └── cbd-pecs-sheet-generator.html  ← Symbol Card Sheet Generator
+    │                                        → full spec: `_Operations/memory/symbol_card_tool_reference.md`
     ├── Symbols/                 ← AUTHORITATIVE — do not duplicate
     │   ├── symbol_library/      ← 400 word-to-symbol mappings
     │   └── symbol_cache/        ← 741 ARASAAC PNGs
@@ -607,6 +607,7 @@ Communicate by Design/
     │   ├── fiction_printable_packet_spec.md
     │   ├── vocabulary_selection_reference.md
     │   ├── new_product_line_workflow.md
+    │   ├── symbol_card_tool_reference.md
     │   └── [other reference files]
     ├── QC/                      ← SHARED TEMPLATES ONLY — checklists/rubrics used across multiple products
     │   ├── PictureBook_Companion_QC_Checklist.md   ← stays here (shared template)

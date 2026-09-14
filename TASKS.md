@@ -108,6 +108,33 @@
 - [ ] **Generate PB Companions Tailwind CSVs** — One per title (6 CSVs) once Image 2 + Image 3 Canva imports are done. *(Added 2026-04-17)*
 - [ ] **Generate Nonfiction Tailwind CSVs** — One per unit (6 CSVs) once Image 2 + Image 3 templates are built and data is in Airtable. *(Added 2026-04-17)*
 
+---
+
+## Symbol Card Sheet Generator (Session 26 — Sep 2026)
+*Standalone browser tool. File: `_Operations/Tools/cbd-pecs-sheet-generator.html` · Full spec: `_Operations/memory/symbol_card_tool_reference.md` · Branch: `claude/pecs-sheet-generator-lp7uox`*
+
+- [x] **Tool built and verified** — type words → ARASAAC symbols → print cards at true size. Sizes 1"–3" (default 1.5"), Fitzgerald Key borders, per-word copies, alternate-symbol picker, per-card search override. Multi-word fallback: "back stretch" → *stretch*, label stays as typed. *(2026-09-11)*
+- [x] **Cutting space between cards** — was 1/16", unusable with scissors. Now a setting: tight 1/16" / standard 3/16" (default) / wide 5/16". Verified by measuring the printed PDF. *(2026-09-11)*
+- [x] **Google Docs export** — Drive converts the exported `.html` into a Doc with symbols embedded and cards still 1.5in. Gap built from spacer columns/rows because Google discards `border-spacing`. Verified by round trip. *(2026-09-11)*
+- [x] **Instructions built into the file** — "How to use this" panel, open for first-time visitors, hidden when printing. Makes the file self-contained when emailed. *(2026-09-11)*
+- [x] **Handoff verified** — opened as a bare double-clicked file with no symbol cache, calling a live cross-origin API: all words resolved, zero CORS failures. Recipient needs only a browser, internet, printer. *(2026-09-11)*
+- [x] **Drive folder created** — "Symbol Card Sheets" with a START HERE doc. **Private — not shared with anyone.** Jill chose Commenter access for the team but no emails were provided, so nothing was shared. *(2026-09-11)*
+
+### Open — before this could be an official free product
+*Run CLAUDE.md → New Product Line Workflow Phase 0 first. Nothing below is decided.*
+
+- [ ] **Decide the name** — "PECS" is a trademarked protocol (Pyramid Educational Consultants) and the filename `cbd-pecs-sheet-generator.html` also breaks the spell-out-CbD rule. Suggested: name it *Symbol Card Maker*, capture PECS search traffic in TPT tags/description instead of the product name. *(Added 2026-09-14)*
+- [ ] **Add links out** — tool currently references the TPT store and Substack zero times. For a free funnel product that is the point missing, and the file travels without Jill once emailed. *(Added 2026-09-14)*
+- [ ] **Add end matter** — Accessibility Statement → About the Creator → Terms of Use, in that order, per CbD standard for teacher-facing materials. *(Added 2026-09-14)*
+- [ ] **Decide distribution** — recommendation: both, TPT first (free download drives follower growth before the May UFLI launch), then host it so updates need no re-upload; link from Substack, IG bio, Pinterest. *(Added 2026-09-14)*
+- [ ] **Merge the branch** — `claude/pecs-sheet-generator-lp7uox` is not merged to main. No PR opened. *(Added 2026-09-14)*
+
+### Jill's manual steps
+- [ ] **Generate a real sheet on your Mac** — ARASAAC is blocked from the Claude Code container, so no session here can pick actual symbols. First real sheet has to be made locally. *(Added 2026-09-14)*
+- [ ] **Replace or delete the Drive sample** — the "Movement Break Choices" sample was deleted because its symbols were arbitrary placeholders. Folder now holds only the START HERE doc. *(Added 2026-09-14)*
+- [ ] **Share the Drive folder if wanted** — set Commenter for named people, or switch General access to your school domain at Commenter in Drive's Share dialog. *(Added 2026-09-14)*
+
+
 ## Active
 
 ### Year 2 — Deferred Items
