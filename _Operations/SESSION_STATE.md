@@ -324,7 +324,7 @@ _Operations/
 
 ## What Changed This Session (2026-04-10 — Substack Post #5 Published)
 
-- **Substack Post #5 LIVE** — "Who Gets to Decide If the Voice Is Real?" published April 10, 2026. URL: https://communicatebydesign.substack.com/p/who-gets-to-decide-if-the-voice-is. Pillar: 🔴 Policy & Advocacy. Topic: facilitated spelling skepticism, presuming competence of student AND partner, ASL interpreter analogy, partner training standards, evidence double standard for low-tech vs. partner-supported AAC. Personal: Jill's daughter (Tobii eye gaze, 13 yrs speech therapy) questioned by adults AND peers. *Out of My Mind* / Whiz Kids scene as anchor. Draft saved: `Substack/Substack_Draft_WhoGetsToDecide_Voice.md`.
+- **Substack Post #5 LIVE** — "Who Gets to Decide If the Voice Is Real?" published April 10, 2026. URL: https://communicatebydesign.substack.com/p/who-gets-to-decide-if-the-voice-is. Pillar: 🔴 Policy & Advocacy. Topic: facilitated spelling skepticism, presuming competence of student AND partner, ASL interpreter analogy, partner training standards, evidence double standard for low-tech vs. partner-supported AAC. Personal anchor: family experience of an AAC user's communication being doubted by adults and peers. *Out of My Mind* / Whiz Kids scene as anchor. Draft saved: `Substack/Substack_Draft_WhoGetsToDecide_Voice.md`.
 - **Airtable Work Item created** — Record `recOmsKtrwrGpNqq9` (Status: Done, Type: Content, Priority: High, Category: Operations).
 - **CLAUDE.md updated** — Substack pipeline now shows 5 live posts. Jennifer Keelan age corrected to 9 (was 8).
 - **TASKS.md updated** — Post #5 marked done. Two follow-up tasks added: FB group drop + Canva photo overlay quote.
