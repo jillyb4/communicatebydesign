@@ -250,6 +250,46 @@
   .present-foot button { padding: 11px 22px; font-size: 14px; }
   .chosen-note { color: var(--amber); font-size: clamp(12px, 2vh, 20px); font-weight: bold; }
 
+
+  /* ── CHOICE LOG ────────────────────────────────────────────
+     Stat tiles, not a chart: a handful of counts over a small set. Numbers
+     wear text tokens; the amber is the label, not the datum. */
+  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .stat {
+    flex: 1 1 130px; min-width: 130px; background: rgba(27,31,59,.55);
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+  }
+  .stat .n { font-size: 26px; font-weight: bold; color: var(--white); line-height: 1.1; }
+  .stat .k {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: .7px;
+    color: var(--slate); margin-top: 4px;
+  }
+  .stat .sub { font-size: 11px; color: var(--slate); margin-top: 3px; }
+
+  .logtab { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .logtab th {
+    text-align: left; color: var(--slate); font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: .6px; padding: 6px 8px; border-bottom: 1px solid var(--line);
+  }
+  .logtab td { padding: 7px 8px; border-bottom: 1px solid rgba(58,64,104,.5); }
+  .logtab tr:last-child td { border-bottom: 0; }
+  .logwrap { max-height: 320px; overflow: auto; }
+  .mark {
+    background: transparent; color: var(--slate); border: 1px solid var(--line);
+    border-radius: 6px; padding: 4px 9px; font-size: 11px; cursor: pointer;
+  }
+  .mark[aria-pressed="true"] { background: var(--teal-d); color: #fff; border-color: var(--teal-d); }
+  .mark.warn[aria-pressed="true"] { background: #8a5a00; border-color: #8a5a00; color: #fff; }
+
+  /* Partner controls in the device view: small, low, away from the boxes. */
+  .pmark { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .pmark .lbl { color: var(--slate); font-size: 11px; }
+  .pmark button {
+    background: transparent; color: var(--slate); border: 1px solid var(--line);
+    border-radius: 7px; padding: 6px 11px; font-size: 12px;
+  }
+  .pmark button[aria-pressed="true"] { background: var(--teal-d); color: #fff; border-color: var(--teal-d); }
+
   /* ── BOARD PRINT ───────────────────────────────────────────
      The low-tech version: laminate, velcro, no device required. */
   .board-shell { background: #fff; border-radius: 12px; padding: .5in; color: #000; }
@@ -469,6 +509,21 @@
             Guided Access. Opening a downloaded file directly in Safari works but is fiddly.</li>
       </ul>
 
+      <h3>The choice log</h3>
+      <p>When a student picks something, it is recorded — the word, the time, what it was
+         chosen from, and how long it took. It is a record of <strong>what they
+         communicated</strong>, not a score.</p>
+      <ul>
+        <li><strong>Nothing is marked right or wrong</strong>, because there is no correct
+            answer to a choice. You will not find an accuracy figure anywhere in this tool.</li>
+        <li><strong>Mark it spontaneous or prompted</strong> from the buttons under the board.
+            Language becoming self-initiated is the thing worth watching over months.</li>
+        <li><strong>"Could not" is about the room, not the student.</strong> If choices often
+            cannot be honored, the options on the board are the thing to change.</li>
+        <li><strong>It stays on this device.</strong> Nothing is uploaded. The CSV is written
+            only when you click Export. Use initials or a code, not a full name.</li>
+      </ul>
+
       <h3>If the pictures do not appear</h3>
       <p>You are probably offline, or a school network is blocking the picture site. Cards will
          still print as empty boxes you can draw in. Reconnect and click
@@ -662,8 +717,34 @@
       </p>
     </div>
 
+    <div class="panel noprint">
+      <h2>5 · Choice log <span style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0">· what the student communicated</span></h2>
+      <div class="stats" id="logStats"></div>
+      <div class="row" style="margin-bottom:10px">
+        <div class="field">
+          <label for="logWho">Whose log (optional)</label>
+          <input type="text" id="logWho" placeholder="initials or a code" style="width:180px"
+                 oninput="try{localStorage.setItem('cbd_log_who',this.value)}catch(e){}">
+        </div>
+        <div class="spacer"></div>
+        <button class="ghost" onclick="exportLog()">Export CSV</button>
+        <button class="ghost" onclick="clearLog()">Clear log</button>
+      </div>
+      <div class="logwrap"><table class="logtab" id="logTable"></table></div>
+      <p class="hint" style="margin-top:10px">
+        This log stays in this browser on this device. Nothing is uploaded, and the CSV is
+        only written when you click Export. Use initials or a code rather than a full name.
+      </p>
+      <p class="hint" style="margin-top:6px">
+        It records <strong>what was communicated</strong> — the word, when, what it was chosen
+        from, and how long it took — not whether the student was right. There is no correct
+        answer to a choice. <strong>Honored</strong> is a check on the room, not on the student:
+        if choices often cannot be honored, the option set is the thing to change.
+      </p>
+    </div>
+
     <div class="panel noprint" style="padding-bottom:8px">
-      <h2>5 · Print preview</h2>
+      <h2>6 · Print preview</h2>
       <p class="hint">Print at 100%, not "Fit to page."</p>
     </div>
     <div class="board-shell">
@@ -683,6 +764,14 @@
   <div class="present-boxes" id="presentBoxes"></div>
   <div class="present-foot">
     <span class="chosen-note" id="chosenNote"></span>
+    <div class="pmark" id="pmark" hidden>
+      <span class="lbl">Was it:</span>
+      <button id="mSpon" onclick="markLast('initiation','spontaneous')" aria-pressed="false">Spontaneous</button>
+      <button id="mProm" onclick="markLast('initiation','prompted')"    aria-pressed="false">Prompted</button>
+      <span class="lbl" style="margin-left:10px">Outcome:</span>
+      <button id="mHon"  onclick="markLast('outcome','honored')"   aria-pressed="false">Honored</button>
+      <button id="mNot"  onclick="markLast('outcome','could_not')" aria-pressed="false">Could not</button>
+    </div>
     <button class="ghost" id="resetChoice" onclick="resetChoice()" hidden>Choose again</button>
   </div>
 </div>
@@ -1468,10 +1557,14 @@ function renderPresent() {
 
   const note = document.getElementById('chosenNote');
   const reset = document.getElementById('resetChoice');
+  const pm = document.getElementById('pmark');
   if (board.choice && board.chosen !== null) {
     note.textContent = 'Chose: ' + (board.opts[board.chosen] || {}).label;
-    reset.hidden = false;
-  } else { note.textContent = ''; reset.hidden = true; }
+    reset.hidden = false; if (pm) pm.hidden = false;
+  } else {
+    note.textContent = ''; reset.hidden = true; if (pm) pm.hidden = true;
+    if (board.choice) choicesShownAt = Date.now();   // latency clock starts now
+  }
 }
 
 function speakBox(i) {
@@ -1488,11 +1581,160 @@ function chooseOption(oi) {
   primeSpeech();
   board.chosen = oi;
   const o = board.opts[oi] || {};
+  logChoice(o);
   renderPresent();
+  syncMarkButtons();
   say((board.labels[board.slots.length - 1] || '') + ', ' + (o.label || ''));
 }
 
-function resetChoice() { board.chosen = null; renderPresent(); }
+function resetChoice() {
+  // A revision is still communication — mark the superseded act rather than
+  // deleting it, so the record shows the student refining a message.
+  if (choiceLog.length) { choiceLog[choiceLog.length - 1].revised = true; persistLog(); renderLog(); }
+  board.chosen = null;
+  renderPresent();
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CHOICE LOG
+
+   What gets measured here is language growth, not compliance. A choice has
+   no correct answer, so nothing is scored right or wrong and there is no
+   accuracy figure anywhere in this file.
+
+   Recorded per communicative act:
+     word        what the student said
+     options     what it was said from — a choice of two is not a choice of six
+     latency     how long from the options appearing to the tap
+     initiation  spontaneous or prompted — is language becoming self-initiated
+     outcome     honored, or could not be
+
+   "Outcome" audits the room, not the student. A board where choices often
+   cannot be honored has the wrong options on it.
+   ══════════════════════════════════════════════════════════════════════ */
+
+const LOG_KEY = 'cbd_choice_log_v1';
+let choiceLog = [];
+let choicesShownAt = 0;          // set when the tiles render, for latency
+
+function loadLog() {
+  try { choiceLog = JSON.parse(localStorage.getItem(LOG_KEY) || '[]'); } catch (e) { choiceLog = []; }
+  if (!Array.isArray(choiceLog)) choiceLog = [];
+  try { document.getElementById('logWho').value = localStorage.getItem('cbd_log_who') || ''; } catch (e) {}
+}
+function persistLog() {
+  try { localStorage.setItem(LOG_KEY, JSON.stringify(choiceLog.slice(-500))); } catch (e) {}
+}
+
+function logChoice(o) {
+  let who = '';
+  try { who = document.getElementById('logWho').value.trim(); } catch (e) {}
+  choiceLog.push({
+    id: Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+    ts: new Date().toISOString(),
+    who,
+    word: o.label || '',
+    options: board.opts.map(x => x.label),
+    latencyMs: choicesShownAt ? (Date.now() - choicesShownAt) : null,
+    board: board.title || board.labels.join('/'),
+    initiation: 'unmarked',
+    outcome: 'unmarked',
+    revised: false,
+  });
+  persistLog(); renderLog();
+}
+
+// The adult marks the act from the device view; the student's side stays clean.
+function markLast(field, value) {
+  if (!choiceLog.length) return;
+  const e = choiceLog[choiceLog.length - 1];
+  e[field] = (e[field] === value) ? 'unmarked' : value;
+  persistLog(); renderLog(); syncMarkButtons();
+}
+
+function syncMarkButtons() {
+  const e = choiceLog[choiceLog.length - 1] || {};
+  const set = (id, on) => { const b = document.getElementById(id); if (b) b.setAttribute('aria-pressed', String(!!on)); };
+  set('mSpon', e.initiation === 'spontaneous');
+  set('mProm', e.initiation === 'prompted');
+  set('mHon',  e.outcome === 'honored');
+  set('mNot',  e.outcome === 'could_not');
+}
+
+function clearLog() {
+  if (choiceLog.length && !confirm('Delete all ' + choiceLog.length + ' logged choices? This cannot be undone.')) return;
+  choiceLog = []; persistLog(); renderLog();
+}
+
+function exportLog() {
+  if (!choiceLog.length) { alert('Nothing logged yet.'); return; }
+  const head = ['when','who','chose','chosen_from','seconds_to_choose','board','initiation','outcome','revised'];
+  const rows = choiceLog.map(e => [
+    e.ts, e.who || '', e.word, (e.options || []).join(' | '),
+    e.latencyMs == null ? '' : (e.latencyMs / 1000).toFixed(1),
+    e.board || '', e.initiation, e.outcome, e.revised ? 'yes' : 'no',
+  ]);
+  const esc = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const csv = [head, ...rows].map(r => r.map(esc).join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  a.download = 'choice log ' + new Date().toISOString().slice(0, 10) + '.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+function renderLog() {
+  const host = document.getElementById('logStats');
+  const tab  = document.getElementById('logTable');
+  if (!host || !tab) return;
+
+  const n     = choiceLog.length;
+  const words = new Set(choiceLog.map(e => (e.word || '').toLowerCase()).filter(Boolean));
+  const init  = choiceLog.filter(e => e.initiation !== 'unmarked');
+  const spon  = init.filter(e => e.initiation === 'spontaneous').length;
+  const out   = choiceLog.filter(e => e.outcome !== 'unmarked');
+  const hon   = out.filter(e => e.outcome === 'honored').length;
+  const pct   = (a, b) => b ? Math.round(a / b * 100) + '%' : '—';
+
+  host.innerHTML =
+    tile(n, 'Communicative acts', n ? 'logged on this device' : 'nothing yet') +
+    tile(words.size, 'Different words', 'vocabulary diversity') +
+    tile(pct(spon, init.length), 'Spontaneous', init.length ? spon + ' of ' + init.length + ' marked' : 'none marked yet') +
+    tile(pct(hon, out.length),  'Honored',     out.length  ? hon  + ' of ' + out.length  + ' marked' : 'none marked yet');
+
+  if (!n) { tab.innerHTML = ''; return; }
+  const rows = choiceLog.slice().reverse().slice(0, 40).map(e => {
+    const t = new Date(e.ts);
+    const when = t.toLocaleDateString() + ' ' + t.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const secs = e.latencyMs == null ? '—' : (e.latencyMs / 1000).toFixed(1) + 's';
+    return '<tr>' +
+      '<td style="white-space:nowrap;color:var(--slate)">' + esc(when) + '</td>' +
+      '<td><strong>' + esc(e.word) + '</strong>' + (e.revised ? ' <span style="color:var(--slate);font-size:11px">(changed)</span>' : '') + '</td>' +
+      '<td style="color:var(--slate)">of ' + (e.options || []).length + '</td>' +
+      '<td style="color:var(--slate)">' + secs + '</td>' +
+      '<td><button class="mark" aria-pressed="' + (e.initiation === 'spontaneous') + '" ' +
+          'onclick="markEntry(\'' + e.id + '\',\'initiation\',\'spontaneous\')">Spontaneous</button></td>' +
+      '<td><button class="mark warn" aria-pressed="' + (e.outcome === 'could_not') + '" ' +
+          'onclick="markEntry(\'' + e.id + '\',\'outcome\',\'could_not\')">Could not</button></td>' +
+    '</tr>';
+  }).join('');
+  tab.innerHTML =
+    '<thead><tr><th>When</th><th>Chose</th><th>From</th><th>Took</th>' +
+    '<th>Self-initiated</th><th>Not honored</th></tr></thead><tbody>' + rows + '</tbody>';
+}
+
+function tile(n, k, sub) {
+  return '<div class="stat"><div class="n">' + esc(String(n)) + '</div>' +
+         '<div class="k">' + esc(k) + '</div><div class="sub">' + esc(sub) + '</div></div>';
+}
+
+function markEntry(id, field, value) {
+  const e = choiceLog.find(x => x.id === id);
+  if (!e) return;
+  e[field] = (e[field] === value) ? 'unmarked' : value;
+  persistLog(); renderLog(); syncMarkButtons();
+}
+
 
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -1637,6 +1879,8 @@ async function exportForGoogleDocs() {
     bp.appendChild(o);
   }
   restoreBoard();
+  loadLog();
+  renderLog();
   let lastMode = 'print';
   try { lastMode = localStorage.getItem('cbd_mode') || 'print'; } catch (e) {}
   setMode(lastMode);
