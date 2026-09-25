@@ -120,6 +120,20 @@
 - [x] **Handoff verified** — opened as a bare double-clicked file with no symbol cache, calling a live cross-origin API: all words resolved, zero CORS failures. Recipient needs only a browser, internet, printer. *(2026-09-11)*
 - [x] **Drive folder created** — "Symbol Card Sheets" with a START HERE doc. **Private — not shared with anyone.** Jill chose Commenter access for the team but no emails were provided, so nothing was shared. *(2026-09-11)*
 
+### Session 27 (Sep 25 2026) — board mode, choice log, merged
+
+- [x] **Merged to `main`** — clean fast-forward, 1290 insertions, nothing overwritten. Local branch deleted. *(2026-09-25)*
+- [x] **First–Then board mode** — First/Then · Now/Next · Now/Next/Then or custom. Slots pull symbols through the same engine as the card sheet. *(2026-09-25)*
+- [x] **Student choice option** — last slot becomes a 2–6 option choice board; pick is spoken back and left standing. *(2026-09-25)*
+- [x] **Board prints as well as displays** — laminate + velcro, with choice options as cut-out cards sized to the option count so a set stays on one row. *(2026-09-25)*
+- [x] **Speech** — browser speechSynthesis, on-device on iOS, primed by the first tap. *(2026-09-25)*
+- [x] **Choice log** — acts, distinct words, spontaneous vs prompted, honored vs could-not. No accuracy figure anywhere. CSV export. Stays on the device. *(2026-09-25)*
+- [x] **Latency guidance** — "not a target" in the column header plus a visible note; the CSV caveat is in the help. *(2026-09-25)*
+
+- [ ] **Delete the remote branch `claude/pecs-sheet-generator-lp7uox`** — Jill said it was deleted but the GitHub API still lists it. Harmless (same commit as main); the container's git proxy refuses delete refspecs so it cannot be done from a session. *(Added 2026-09-25)*
+- [ ] **Decide on hosting** — the Guided Access path needs the tool hosted (Add to Home Screen, then lock). Netlify Drop or similar. This also unblocks the distribution decision below. *(Added 2026-09-25)*
+- [ ] **Consider: pull board options from unit vocabulary** — the quick boards are routine-based; they could draw on `cbd_unit_vocab.js`. Not started, not scoped. *(Added 2026-09-25)*
+
 ### Open — before this could be an official free product
 *Run CLAUDE.md → New Product Line Workflow Phase 0 first. Nothing below is decided.*
 

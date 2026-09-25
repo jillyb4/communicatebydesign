@@ -1,12 +1,20 @@
 # Symbol Card Sheet Generator — Reference
 
 **File:** `_Operations/Tools/cbd-pecs-sheet-generator.html`
-**Built:** Session 26 (Sep 2026) · Branch `claude/pecs-sheet-generator-lp7uox`
+**Built:** Session 26 (Sep 2026). **On `main`** — the working branch was merged
+2026-09-25 and deleted locally; the remote branch still exists and is harmless
+(same commit as main).
 **Status:** Working, classroom-ready. NOT yet an official product — see Open Decisions.
 
-A standalone browser tool, separate from the product build system. Type words or
-phrases → pull symbols → print a sheet of cards at a true physical size. Built for
-quick classroom needs by Jill, paras, RBTs and BCBAs — not for a TPT product build.
+A standalone browser tool, separate from the product build system. Two modes in one
+file, because "email one file" is what makes it usable by a para and a second tool
+would halve that:
+
+1. **Print symbol cards** — type words → print a sheet of cards at true size.
+2. **First–Then board** — a two- or three-slot board that prints for velcro or runs
+   on a device with speech, optionally letting the student choose what comes next.
+
+Built for quick classroom needs by Jill, paras, RBTs and BCBAs — not a TPT build.
 
 ---
 
@@ -107,6 +115,108 @@ unresolved exports as a draw-it box and the count is reported to the user.
 
 ---
 
+## First–Then board
+
+### Labels are a choice, not a constant
+
+Presets: **First / Then** (reads as standard in US ABA practice, so BCBAs and RBTs
+recognise it), **Now / Next** (UK and structured-teaching settings), **Now / Next /
+Then**, or custom. Match whatever the student already uses — a student who learned
+one wording should not have to learn a second. Same rule as the symbols.
+
+### The choice toggle changes what the thing IS
+
+This is the distinction to hold onto, and the tool states it in its own help:
+
+- **Adult sets both slots** → a *receptive* support. It tells a student what is
+  happening and what is coming, and helps with transitions. It is **not** the
+  student communicating.
+- **Student picks the last slot** → *expressive* communication. A request, a
+  preference, a decision.
+
+So the pick is spoken back and left standing. A choice that gets overridden teaches
+that choosing does not matter. Options cap at six: more than six stops being a
+choice and starts being a search.
+
+### Speech
+
+Browser `speechSynthesis` — no audio files, and iOS voices are on-device so it works
+with no connection. iOS will not speak until a real tap has happened, so the first
+tap primes it. Rate 0.9; a touch slower reads better aloud.
+
+Saying the choice back is the **auditory confirmation loop** from the UFLI lessons,
+applied to choice-making: student selects → hears it confirmed → partner responds.
+
+### Printed board
+
+Laminate and velcro — works with no device at all. Full page (wall/table) or half
+page (desk/binder). When the choice toggle is on, the last slot prints as a dashed
+empty box and the options print as loose cut-out cards beneath it.
+
+**Cut-out cards size themselves to the option count** so a set always stays on one
+row: `min(2, 7.44 / n - 0.1875)` inches. Every card carries a right margin including
+the last, so the row is `n × (w + gap)`, not `n × w + (n-1) × gap` — and landing
+exactly on the 7.5in content width lets rounding wrap the last card onto a page of
+its own, hence 7.44.
+
+### Guided Access
+
+Speech and the board work offline, but getting it onto an iPad wants the tool
+**hosted** → Add to Home Screen → Guided Access. Opening a downloaded file from the
+Files app works but is fiddly. This feature leans on the hosting decision in Open
+Decisions below.
+
+---
+
+## Choice log
+
+Language growth, never compliance — per the CbD Data Framework. **There is no
+accuracy figure anywhere in the file**, because a choice has no correct answer and
+nothing is scored right or wrong.
+
+Recorded per communicative act: the word, timestamp, the option set it was chosen
+from (a choice of two is not a choice of six), latency, and the board it came from.
+
+Two marks the partner adds from the device view, kept small and low so the student's
+side stays clean:
+
+| Mark | Why |
+|---|---|
+| spontaneous / prompted | Is language becoming self-initiated — the indicator worth watching over months |
+| honored / could not | **Audits the room, not the student.** A board whose choices often cannot be honored has the wrong options on it |
+
+Pressing "choose again" marks the superseded act `revised` rather than deleting it:
+a student refining a message is communication, not an error.
+
+**Summary is four stat tiles, not a chart** — acts, distinct words, spontaneous
+share, honored share. A handful of counts over a small set does not earn a plot, and
+a bare stat tile needs no hover layer.
+
+### Latency is the most misreadable number here
+
+Falling time probably means growing fluency with a familiar board, but it reads at a
+glance like a speed metric, and a tool that quietly invites coaching for speed has
+turned itself back into compliance data. The caveat is **visible, not a tooltip** —
+the person most likely to misread the column is the least likely to hover. The header
+carries a permanent "not a target"; the note under the table says a long pause is
+often a student weighing two things they genuinely want, while a very quick tap can
+be a reach for whatever was nearest, and that a shift should send you to look at what
+changed *around* the student first.
+
+The CSV has nowhere to put prose, so the help says to hand the note along with the
+file. A column called `seconds_to_choose` with no context is exactly how this becomes
+a speed target in someone else's hands.
+
+### Privacy
+
+`localStorage` on that device only. Nothing is uploaded; the CSV is written only on
+an explicit Export click; the field asks for initials or a code rather than a name.
+That keeps the "no student information leaves this page" promise literally true.
+**On a shared classroom iPad every student's log shares one browser** — export and
+clear between students.
+
+---
+
 ## Fitzgerald Key classification
 
 Ported from `_Operations/Build/fitzgerald_key.js` (GENERAL sets), plus a
@@ -179,6 +289,23 @@ Nothing below is decided. See CLAUDE.md → New Product Line Workflow (Phase 0).
    re-upload, and put that link in Substack, the Instagram bio, and Pinterest.
 5. **Support burden.** A free public tool generates questions. Real cost on a
    one-person operation.
+
+---
+
+## Layout bugs worth remembering
+
+All three were found by measuring, not by looking:
+
+1. **Browser-default `widows: 2`** silently discards a printable row of cards per
+   page. Set `orphans: 1; widows: 1` on the card container.
+2. **Wrapping the panels in a mode container broke `.wrap > .panel`** in the print
+   rule, so the whole UI started printing onto the card sheet. The selector must be
+   `.panel` at any depth.
+3. **An image sized by percentage against an auto grid row is circular.** The row is
+   sized by its content, the content by the row, so Chrome falls back to the image's
+   aspect ratio and it overflows its box. The board's image area uses the flex
+   pattern the cards already prove in print; on screen a definite track
+   (`minmax(0, 1fr)`) also breaks the cycle.
 
 ---
 

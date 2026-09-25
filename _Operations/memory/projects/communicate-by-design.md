@@ -627,3 +627,50 @@ Anything decided in a Claude Code session that should survive must land in
 - **Print layout must be measured, not eyeballed.** Browser-default `widows: 2`
   silently discards a printable row per page. Found only by generating a PDF and
   measuring the drawn boxes.
+
+### Session 27 (Sep 25 2026) — board, choice log, merged to main
+
+**Merged to `main`.** The working branch was merged 2026-09-25 (clean fast-forward,
+1290 insertions, nothing overwritten) and deleted locally. The remote branch still
+exists — the delete is blocked by the container's git proxy, which refuses delete
+refspecs. It is harmless: same commit as main.
+
+**The tool is now two modes in one file** — print symbol cards, and a First–Then
+board. One file because "email one file" is what makes it usable by a para; a second
+tool would halve that.
+
+**First–Then board.** Labels are a preset, not a constant: First/Then reads as
+standard in US ABA practice, Now/Next in UK and structured-teaching settings, plus
+Now/Next/Then and custom. Match what the student already uses.
+
+The choice toggle **changes what the thing is**, and this is the part to hold onto:
+with the adult setting both slots it is a receptive support for transitions and is
+not the student communicating; let the student pick and the last slot becomes
+expressive communication. So the pick is spoken back and left standing — a choice
+that gets overridden teaches that choosing does not matter. Options cap at six.
+
+Prints for laminate and velcro as well as running on a device, so it works with no
+device at all. Speech is the browser's own, on-device on iOS, and saying the choice
+back is the UFLI auditory confirmation loop applied to choice-making.
+
+**Choice log — language growth, never compliance.** No accuracy figure anywhere in
+the file, because a choice has no correct answer. Records the word, when, the set it
+was chosen from, and latency. The partner marks spontaneous/prompted (is language
+becoming self-initiated) and honored/could-not — and that second one **audits the
+room, not the student**: a board whose choices often cannot be honored has the wrong
+options on it. "Choose again" marks the superseded act revised rather than deleting
+it, because a student refining a message is communication.
+
+Summary is four stat tiles, not a chart. Log lives in that browser only; CSV written
+only on an explicit Export; asks for initials, not a name. On a shared classroom iPad
+every student's log shares one browser — export and clear between students.
+
+**Latency needed guarding.** It is the most misreadable number in the log: falling
+time probably means growing fluency, but it reads like a speed metric, and a tool
+that invites coaching for speed has turned back into compliance data. The caveat is
+visible rather than a tooltip — the person most likely to misread the column is the
+least likely to hover.
+
+**Full detail:** `_Operations/memory/symbol_card_tool_reference.md`, which now also
+carries the three print bugs worth remembering (widows:2 discarding a row, a child
+selector printing the whole UI, and percentage heights against auto grid rows).
