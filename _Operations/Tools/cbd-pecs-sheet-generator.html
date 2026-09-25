@@ -274,6 +274,14 @@
   .logtab td { padding: 7px 8px; border-bottom: 1px solid rgba(58,64,104,.5); }
   .logtab tr:last-child td { border-bottom: 0; }
   .logwrap { max-height: 320px; overflow: auto; }
+  .th-sub {
+    display: block; font-size: 9.5px; letter-spacing: .3px;
+    text-transform: none; color: var(--amber); font-weight: normal; margin-top: 2px;
+  }
+  .latency-note {
+    margin-top: 12px; padding: 11px 13px; border-left: 3px solid var(--amber);
+    background: rgba(255,183,3,.07); border-radius: 0 8px 8px 0;
+  }
   .mark {
     background: transparent; color: var(--slate); border: 1px solid var(--line);
     border-radius: 6px; padding: 4px 9px; font-size: 11px; cursor: pointer;
@@ -520,8 +528,14 @@
             Language becoming self-initiated is the thing worth watching over months.</li>
         <li><strong>"Could not" is about the room, not the student.</strong> If choices often
             cannot be honored, the options on the board are the thing to change.</li>
+        <li><strong>"Took" is not a target.</strong> Time usually shortens as a board becomes
+            familiar, but a long pause is often a student weighing two things they want, and a
+            fast tap can be a reach for whatever was nearest. Watch it across weeks in the same
+            setup, never coach for speed, and when it shifts look at what changed around the
+            student first.</li>
         <li><strong>It stays on this device.</strong> Nothing is uploaded. The CSV is written
-            only when you click Export. Use initials or a code, not a full name.</li>
+            only when you click Export. Use initials or a code, not a full name. The CSV has no
+            room for the note above — if you hand the file to someone, hand them the note too.</li>
       </ul>
 
       <h3>If the pictures do not appear</h3>
@@ -731,6 +745,15 @@
         <button class="ghost" onclick="clearLog()">Clear log</button>
       </div>
       <div class="logwrap"><table class="logtab" id="logTable"></table></div>
+      <p class="hint latency-note">
+        <strong>About "Took":</strong> this is not a target, and faster is not better. Time
+        usually shortens as a board becomes familiar, so it is worth watching across weeks in
+        the same setup — but a long pause is often a student weighing two things they genuinely
+        want, and a very quick tap can be a reach for whatever was nearest rather than a choice.
+        If it changes suddenly, look at what changed around the student — new options, a
+        different partner, a noisier room, symbols in new positions — before reading anything
+        into the number. <strong>Never coach for speed.</strong>
+      </p>
       <p class="hint" style="margin-top:10px">
         This log stays in this browser on this device. Nothing is uploaded, and the CSV is
         only written when you click Export. Use initials or a code rather than a full name.
@@ -1719,7 +1742,8 @@ function renderLog() {
     '</tr>';
   }).join('');
   tab.innerHTML =
-    '<thead><tr><th>When</th><th>Chose</th><th>From</th><th>Took</th>' +
+    '<thead><tr><th>When</th><th>Chose</th><th>From</th>' +
+    '<th>Took<span class="th-sub">not a target</span></th>' +
     '<th>Self-initiated</th><th>Not honored</th></tr></thead><tbody>' + rows + '</tbody>';
 }
 
