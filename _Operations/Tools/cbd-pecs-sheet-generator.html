@@ -150,6 +150,124 @@
   .help-body strong { color: #fff; }
   .help-body .warn { color: var(--amber); }
 
+
+  /* ── MODE TABS ─────────────────────────────────────────────
+     Two tools, one file. The handoff story ("email one file") is what makes
+     this usable by a para, so a second tool would halve its value. */
+  .modes {
+    display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .modes button {
+    background: transparent; color: var(--slate);
+    border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 20px; font: bold 13px Arial, Helvetica, sans-serif;
+  }
+  .modes button[aria-selected="true"] {
+    background: var(--amber); color: var(--navy); border-color: var(--amber);
+  }
+  .modes button:not([aria-selected="true"]):hover {
+    color: var(--white); border-color: var(--teal);
+  }
+
+  /* ── BOARD SETUP ───────────────────────────────────────────
+     Slots are deliberately large on screen. A First-Then board that is hard
+     to read at arm's length has failed before anyone touches it. */
+  .slots { display: flex; gap: 14px; flex-wrap: wrap; }
+  .slot {
+    flex: 1 1 240px; min-width: 240px;
+    border: 1px solid var(--line); border-radius: 10px;
+    background: rgba(27,31,59,.55); padding: 14px;
+  }
+  .slot h3 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
+    color: var(--teal); margin-bottom: 9px;
+  }
+  .slot-label {
+    width: 100%; font: bold 17px Arial, Helvetica, sans-serif;
+    background: #1B1F3B; color: var(--white);
+    border: 1px solid var(--line); border-radius: 7px;
+    padding: 9px 11px; margin-bottom: 10px; text-align: center;
+  }
+  .slot-sym {
+    width: 100%; aspect-ratio: 1; background: #fff; border-radius: 8px;
+    display: grid; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); place-items: stretch; overflow: hidden; margin-bottom: 10px;
+  }
+  .slot-sym img { align-self: stretch; justify-self: stretch; width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+  .slot-sym .none { color: #999; font-size: 12px; display: grid; place-items: center; text-align: center; }
+
+  .opt-row { display: flex; gap: 7px; align-items: center; margin-bottom: 7px; }
+  .opt-row .thumb-sm {
+    width: 42px; height: 42px; flex: 0 0 42px; background: #fff;
+    border-radius: 6px; display: grid; place-items: center; overflow: hidden;
+  }
+  .opt-row .thumb-sm img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+
+  /* ── PRESENT VIEW (the device / Guided Access view) ────────
+     Full bleed, enormous targets, nothing to mis-tap. */
+  .present {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--navy); display: none;
+    flex-direction: column; padding: 2.2vh 2.2vw;
+  }
+  .present.show { display: flex; }
+  .present-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.6vh; flex: 0 0 auto;
+  }
+  .present-head .ttl { font-size: clamp(15px, 2.4vh, 26px); font-weight: bold; color: var(--amber); }
+  .present-exit {
+    background: transparent; color: var(--slate); border: 1px solid var(--line);
+    border-radius: 8px; padding: 8px 14px; font-size: 12px;
+  }
+  .present-boxes { flex: 1 1 auto; display: flex; gap: 2vw; min-height: 0; }
+  .pbox {
+    flex: 1 1 0; display: flex; flex-direction: column; min-width: 0;
+    background: var(--card); border: 4px solid var(--line); border-radius: 18px;
+    padding: 1.4vh 1.2vw; cursor: pointer;
+  }
+  .pbox.speakable:active { border-color: var(--amber); }
+  .pbox .plabel {
+    flex: 0 0 auto; text-align: center; color: var(--white);
+    font-size: clamp(18px, 4.2vh, 46px); font-weight: bold;
+    letter-spacing: .5px; margin-bottom: 1vh;
+  }
+  .pbox .pimg { flex: 1 1 auto; min-height: 0; background: #fff; border-radius: 12px; display: grid; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); place-items: stretch; overflow: hidden; }
+  .pbox .pimg img { align-self: stretch; justify-self: stretch; width: 100%; height: 100%; object-fit: contain; padding: 1.2vh; }
+  .pbox .pimg .empty { color: #b9c0d4; font-size: clamp(12px, 2vh, 20px); text-align: center; padding: 10px; display: grid; place-items: center; }
+
+  /* Choice tiles fill the Next box until the student picks. */
+  .choices { flex: 1 1 auto; min-height: 0; display: grid; gap: 1.2vh; grid-template-columns: repeat(auto-fit, minmax(38%, 1fr)); }
+  .choice {
+    background: #fff; border: 4px solid transparent; border-radius: 12px;
+    display: flex; flex-direction: column; cursor: pointer; overflow: hidden; padding: .8vh;
+  }
+  .choice:active { border-color: var(--amber); }
+  .choice .ci { flex: 1 1 auto; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); place-items: stretch; overflow: hidden; }
+  .choice .ci img { align-self: stretch; justify-self: stretch; width: 100%; height: 100%; object-fit: contain; }
+  .choice .cl { flex: 0 0 auto; text-align: center; color: var(--navy); font-weight: bold; font-size: clamp(11px, 2vh, 22px); }
+
+  .present-foot { flex: 0 0 auto; margin-top: 1.4vh; display: flex; gap: 10px; align-items: center; justify-content: center; }
+  .present-foot button { padding: 11px 22px; font-size: 14px; }
+  .chosen-note { color: var(--amber); font-size: clamp(12px, 2vh, 20px); font-weight: bold; }
+
+  /* ── BOARD PRINT ───────────────────────────────────────────
+     The low-tech version: laminate, velcro, no device required. */
+  .board-shell { background: #fff; border-radius: 12px; padding: .5in; color: #000; }
+  .bprint-title { font-size: 15pt; color: var(--navy); font-weight: bold; margin-bottom: .18in; }
+  .bboxes { display: flex; gap: .25in; }
+  .bbox { flex: 1 1 0; border: 4pt solid var(--navy); border-radius: 10pt; padding: .12in; display: flex; flex-direction: column; }
+  .bbox .bl {
+    text-align: center; font-weight: bold; color: #fff; background: var(--navy);
+    border-radius: 5pt; padding: .07in 0; margin-bottom: .1in;
+  }
+  .bbox .bi { flex: 1 1 auto; min-height: 0; width: 100%; display: grid; place-items: center; overflow: hidden; }
+  .bbox .bi img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
+  .bbox .bi .blank { align-self: stretch; justify-self: stretch; border: 1.5pt dashed #bbb; border-radius: 7pt; }
+  .bcut-h {
+    margin-top: .3in; padding-top: .1in; border-top: 1.5pt dashed #999;
+    font-size: 9pt; color: #444; font-weight: bold;
+  }
+
   /* ── STATUS BANNER ──────────────────────────────────────── */
   .banner {
     border-radius: 9px; padding: 11px 14px; margin-bottom: 16px;
@@ -245,11 +363,22 @@
   @page { size: letter portrait; margin: 0.5in; }
   @media print {
     body { background: #fff; color: #000; }
-    header, .wrap > .panel, .banner, .noprint { display: none !important; }
+    /* .panel at any depth — the mode wrappers mean these are no longer
+       direct children of .wrap, and a child selector silently printed the
+       whole UI onto the sheet. */
+    header, .panel, .banner, .noprint { display: none !important; }
     .wrap { max-width: none; padding: 0; margin: 0; }
     .sheet-shell { padding: 0; border-radius: 0; }
     .sheet { width: 100%; }
     .pcard { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    /* One file, two printable outputs — print whichever mode is open. */
+    .modes, .present { display: none !important; }
+    body.board-mode .sheet-shell { display: none !important; }
+    body:not(.board-mode) .board-shell { display: none !important; }
+    .board-shell { padding: 0; border-radius: 0; }
+    .bbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.board-mode .attrib { position: static; padding-bottom: 0; }
 
     /* The ARASAAC attribution is required on every printed sheet. In flow it
        takes a page of its own whenever the cards happen to fill the last page
@@ -276,6 +405,11 @@
 </header>
 
 <div class="wrap">
+
+  <div class="modes noprint" role="tablist">
+    <button role="tab" aria-selected="true"  onclick="setMode('print')" id="tab-print">Print symbol cards</button>
+    <button role="tab" aria-selected="false" onclick="setMode('board')" id="tab-board">First–Then board</button>
+  </div>
 
   <details class="help noprint" id="help">
     <summary>How to use this</summary>
@@ -315,6 +449,26 @@
             or answer some other way entirely. All of it counts.</li>
       </ul>
 
+      <h3>The First–Then board (second tab)</h3>
+      <p>Two boxes: what is happening now, and what comes next. Print it and laminate it,
+         or open it on a device where tapping a box says it out loud.</p>
+      <ul>
+        <li><strong>Labels are yours to set.</strong> First / Then, Now / Next, or your own
+            words. Use whatever this student already knows — a student who learned one
+            wording should not have to learn a second.</li>
+        <li><strong>Two different jobs.</strong> With the adult setting both boxes, the board
+            tells a student what is coming — it helps with transitions, and it is not the
+            student communicating. Turn on <em>let the student choose what comes next</em> and
+            the second box becomes something else entirely: the student is now telling
+            <em>you</em> something.</li>
+        <li><strong>If they choose, honor it.</strong> A choice that gets overridden teaches
+            that choosing does not matter, which is the opposite of the point.</li>
+        <li><strong>Two to six options.</strong> More than six stops being a choice and starts
+            being a search.</li>
+        <li><strong>On an iPad:</strong> add the page to the Home Screen first, then turn on
+            Guided Access. Opening a downloaded file directly in Safari works but is fiddly.</li>
+      </ul>
+
       <h3>If the pictures do not appear</h3>
       <p>You are probably offline, or a school network is blocking the picture site. Cards will
          still print as empty boxes you can draw in. Reconnect and click
@@ -323,6 +477,8 @@
   </details>
 
   <div id="banner" class="banner"></div>
+
+  <div id="mode-print">
 
   <!-- ── WORDS ─────────────────────────────────────────── -->
   <div class="panel">
@@ -424,6 +580,111 @@
     <div class="sheet" id="sheet"></div>
   </div>
 
+  </div><!-- /mode-print -->
+
+  <!-- ══ FIRST–THEN BOARD ══════════════════════════════════ -->
+  <div id="mode-board" hidden>
+
+    <div class="panel noprint">
+      <h2>1 · Board</h2>
+      <div class="row">
+        <div class="field">
+          <label for="bStyle">Labels</label>
+          <select id="bStyle" onchange="applyStyle()">
+            <option value="first">First / Then</option>
+            <option value="now">Now / Next</option>
+            <option value="now3">Now / Next / Then</option>
+            <option value="custom">Custom — type your own</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bTitle">Board title (optional)</label>
+          <input type="text" id="bTitle" placeholder="e.g. Morning routine"
+                 oninput="saveBoard();renderBoardPrint()" style="width:220px">
+        </div>
+        <div class="spacer"></div>
+        <div class="field">
+          <label for="bPreset">Quick boards</label>
+          <select id="bPreset" onchange="loadBoardPreset(this.value)">
+            <option value="">Choose…</option>
+          </select>
+        </div>
+      </div>
+      <p class="hint" style="margin-top:10px">
+        No single label is standard — <strong>First / Then</strong> is most common in ABA practice,
+        <strong>Now / Next</strong> in UK and structured-teaching settings. Match whatever this
+        student already uses. A student who learned one wording should not have to learn a second.
+      </p>
+      <div class="checks">
+        <label><input type="checkbox" id="bChoice" onchange="saveBoard();renderBoard()">
+          Let the student choose what comes next</label>
+        <label><input type="checkbox" id="bSpeak" checked onchange="saveBoard()">
+          Speak the label when a box is tapped</label>
+      </div>
+    </div>
+
+    <div class="panel noprint">
+      <h2>2 · Slots</h2>
+      <div class="slots" id="slots"></div>
+    </div>
+
+    <div class="panel noprint" id="choicePanel" hidden>
+      <h2>3 · Choices <span style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0">· what the student picks from</span></h2>
+      <textarea id="bOpts" placeholder="iPad, bubbles, swing, music&#10;&#10;2 to 6 options, one per line or comma separated."></textarea>
+      <div class="row">
+        <button onclick="addOptions()">Add options</button>
+        <button class="ghost" onclick="clearOptions()">Clear</button>
+      </div>
+      <div id="optList" style="margin-top:12px"></div>
+      <p class="hint" style="margin-top:8px">
+        A choice is only a choice if it is honored. If the selection gets overridden, the board
+        is teaching that choosing does not matter — the opposite of what it is for.
+      </p>
+    </div>
+
+    <div class="panel noprint">
+      <h2>4 · Use it</h2>
+      <div class="row">
+        <button onclick="presentBoard()">Open on this device</button>
+        <button class="ghost" onclick="window.print()">Print the board</button>
+        <div class="field">
+          <label for="bSize">Printed size</label>
+          <select id="bSize" onchange="saveBoard();renderBoardPrint()">
+            <option value="full" selected>Full page — wall or table</option>
+            <option value="half">Half page — desk or binder</option>
+          </select>
+        </div>
+      </div>
+      <p class="hint" style="margin-top:10px">
+        <strong>On a device:</strong> opens full screen. To lock an iPad to it, add the page to the
+        Home Screen first, then turn on Guided Access. <strong>Printed:</strong> laminate it and add
+        velcro — the choice options print as loose cards underneath. Works with no device at all.
+      </p>
+    </div>
+
+    <div class="panel noprint" style="padding-bottom:8px">
+      <h2>5 · Print preview</h2>
+      <p class="hint">Print at 100%, not "Fit to page."</p>
+    </div>
+    <div class="board-shell">
+      <div id="boardPrint"></div>
+    </div>
+
+  </div><!-- /mode-board -->
+
+</div>
+
+<!-- ══ PRESENT (full screen) ═══════════════════════════════ -->
+<div class="present noprint" id="present">
+  <div class="present-head">
+    <div class="ttl" id="presentTitle"></div>
+    <button class="present-exit" onclick="exitPresent()">Close</button>
+  </div>
+  <div class="present-boxes" id="presentBoxes"></div>
+  <div class="present-foot">
+    <span class="chosen-note" id="chosenNote"></span>
+    <button class="ghost" id="resetChoice" onclick="resetChoice()" hidden>Choose again</button>
+  </div>
 </div>
 
 <script>
@@ -697,6 +958,199 @@ function restore() {
   if (o.showHead   !== undefined) document.getElementById('showHead').checked   = o.showHead;
 }
 
+
+/* ══════════════════════════════════════════════════════════════════════
+   FIRST–THEN BOARD
+
+   A second tool sharing this file's symbol engine. Two jobs that are NOT
+   the same thing, and the difference matters:
+
+   - A First–Then board is a RECEPTIVE support. The adult sets both slots.
+     It tells a student what is happening and what comes next. It is not
+     the student communicating.
+   - A choice board is EXPRESSIVE communication. The student selects. That
+     is a request, a preference, a decision.
+
+   Turning on "let the student choose" converts the second slot from the
+   first into the second. Honor what they pick.
+   ══════════════════════════════════════════════════════════════════════ */
+
+const BOARD_KEY = 'cbd_board_v1';
+
+const LABEL_STYLES = {
+  first: ['First', 'Then'],
+  now:   ['Now', 'Next'],
+  now3:  ['Now', 'Next', 'Then'],
+};
+
+// Quick boards drawn from routines these teams actually run.
+const BOARD_PRESETS = {
+  'Work then break':      { style:'first', slots:['work','break'],            choice:false, opts:[] },
+  'Work then choice':     { style:'first', slots:['work',''],                 choice:true,  opts:['iPad','bubbles','swing','music'] },
+  'Reading lesson':       { style:'now3',  slots:['read','answer','finished'],choice:false, opts:[] },
+  'Clean up then choose': { style:'now',   slots:['clean up',''],             choice:true,  opts:['outside','blocks','book','snack'] },
+  'Sensory break':        { style:'first', slots:['','break'],                choice:true,  opts:['squeezes','stretch','swing','quiet corner'] },
+};
+
+let board = {
+  style: 'first',
+  title: '',
+  labels: ['First', 'Then'],
+  slots:  [ blankSlot(), blankSlot() ],
+  choice: false,
+  speak:  true,
+  size:   'full',
+  opts:   [],        // [{id,label,term,url,source}]
+  chosen: null,      // index into opts once a student picks
+};
+let optId = 1;
+
+function blankSlot() { return { word:'', term:'', url:null, source:'idle', candidates:[], altsOpen:false }; }
+
+/* ── mode switching ──────────────────────────────────────────────────── */
+
+function setMode(m) {
+  const isBoard = (m === 'board');
+  document.getElementById('mode-print').hidden = isBoard;
+  document.getElementById('mode-board').hidden = !isBoard;
+  document.getElementById('tab-print').setAttribute('aria-selected', String(!isBoard));
+  document.getElementById('tab-board').setAttribute('aria-selected', String(isBoard));
+  document.body.classList.toggle('board-mode', isBoard);   // routes @media print
+  try { localStorage.setItem('cbd_mode', m); } catch (e) {}
+  if (isBoard) { renderBoard(); renderBoardPrint(); }
+}
+
+/* ── setup ───────────────────────────────────────────────────────────── */
+
+function applyStyle() {
+  const v = document.getElementById('bStyle').value;
+  board.style = v;
+  if (v !== 'custom') {
+    board.labels = LABEL_STYLES[v].slice();
+    const want = board.labels.length;
+    while (board.slots.length < want) board.slots.push(blankSlot());
+    board.slots.length = want;
+  }
+  saveBoard(); renderBoard(); renderBoardPrint();
+}
+
+function setSlotLabel(i, v) { board.labels[i] = v; saveBoard(); renderBoardPrint(); }
+
+function setSlotWord(i, v) {
+  const sl = board.slots[i];
+  sl.word = v.trim();
+  if (!sl.word) { Object.assign(sl, blankSlot()); saveBoard(); renderBoard(); renderBoardPrint(); return; }
+  lookupInto(sl, sl.word);
+}
+
+function setSlotTerm(i, v) {
+  const sl = board.slots[i];
+  sl.term = v.trim();
+  lookupInto(sl, sl.term || sl.word);
+}
+
+// Reuses resolveSymbol — same cache-then-ARASAAC path, same fallback chain.
+async function lookupInto(target, phrase) {
+  target.source = 'loading';
+  renderBoard();
+  const r = await resolveSymbol({ label: phrase, term: target.term || '' });
+  Object.assign(target, { url: r.url, candidates: r.candidates, matched: r.matched, source: r.source });
+  saveBoard(); renderBoard(); renderBoardPrint();
+}
+
+function toggleSlotAlts(i) { board.slots[i].altsOpen = !board.slots[i].altsOpen; renderBoard(); }
+function pickSlotAlt(i, idx) {
+  const sl = board.slots[i];
+  if (sl.candidates && sl.candidates[idx]) { sl.url = sl.candidates[idx]; sl.altsOpen = false; }
+  saveBoard(); renderBoard(); renderBoardPrint();
+}
+
+/* ── choice options ──────────────────────────────────────────────────── */
+
+function addOptions() {
+  const raw = document.getElementById('bOpts').value;
+  const words = raw.split(/[\n,]+/).map(x => x.trim()).filter(Boolean);
+  if (!words.length) return;
+  document.getElementById('bOpts').value = '';
+  for (const w of words) {
+    if (board.opts.length >= 6) break;          // more than six is a field, not a choice
+    const o = { id: optId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
+    board.opts.push(o);
+    lookupInto(o, w);
+  }
+  saveBoard(); renderBoard();
+}
+
+function removeOption(id) { board.opts = board.opts.filter(o => o.id !== id); saveBoard(); renderBoard(); renderBoardPrint(); }
+function clearOptions()   { board.opts = []; board.chosen = null; saveBoard(); renderBoard(); renderBoardPrint(); }
+
+function loadBoardPreset(name) {
+  if (!name) return;
+  document.getElementById('bPreset').value = '';
+  const p = BOARD_PRESETS[name];
+  board.style  = p.style;
+  board.labels = LABEL_STYLES[p.style].slice();
+  board.choice = p.choice;
+  board.slots  = p.slots.map(() => blankSlot());
+  board.opts   = [];
+  board.chosen = null;
+  document.getElementById('bStyle').value  = p.style;
+  document.getElementById('bChoice').checked = p.choice;
+  document.getElementById('bTitle').value   = name;
+  board.title = name;
+  p.slots.forEach((w, i) => { if (w) { board.slots[i].word = w; lookupInto(board.slots[i], w); } });
+  for (const w of (p.opts || [])) {
+    const o = { id: optId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
+    board.opts.push(o); lookupInto(o, w);
+  }
+  saveBoard(); renderBoard(); renderBoardPrint();
+}
+
+/* ── speech ──────────────────────────────────────────────────────────────
+   Built-in browser speech: no audio files, and iOS voices are on-device so
+   it works with no connection. iOS will not speak until a real tap has
+   happened, so the first tap primes it. */
+
+let speechPrimed = false;
+function primeSpeech() {
+  if (speechPrimed || !('speechSynthesis' in window)) return;
+  try { speechSynthesis.speak(new SpeechSynthesisUtterance('')); speechPrimed = true; } catch (e) {}
+}
+function say(text) {
+  if (!board.speak || !text || !('speechSynthesis' in window)) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.rate = 0.9;                                  // a touch slower reads better aloud
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ── persistence ─────────────────────────────────────────────────────── */
+
+function saveBoard() {
+  board.title = document.getElementById('bTitle').value;
+  board.choice = document.getElementById('bChoice').checked;
+  board.speak  = document.getElementById('bSpeak').checked;
+  board.size   = document.getElementById('bSize').value;
+  try { localStorage.setItem(BOARD_KEY, JSON.stringify(board)); } catch (e) {}
+}
+
+function restoreBoard() {
+  let d = null;
+  try { d = JSON.parse(localStorage.getItem(BOARD_KEY) || 'null'); } catch (e) {}
+  if (!d) return;
+  board = Object.assign(board, d);
+  if (!Array.isArray(board.slots) || !board.slots.length) board.slots = [blankSlot(), blankSlot()];
+  if (!Array.isArray(board.labels)) board.labels = ['First','Then'];
+  optId = board.opts.reduce((m,o) => Math.max(m, o.id||0), 0) + 1;
+  document.getElementById('bStyle').value   = board.style || 'first';
+  document.getElementById('bTitle').value   = board.title || '';
+  document.getElementById('bChoice').checked= !!board.choice;
+  document.getElementById('bSpeak').checked = board.speak !== false;
+  document.getElementById('bSize').value    = board.size || 'full';
+}
+
 /* ══════════════════════════════════════════════════════════════════════
    RENDER
    ══════════════════════════════════════════════════════════════════════ */
@@ -845,6 +1299,203 @@ function renderBanner() {
 function render() { renderList(); renderSheet(); renderBanner(); }
 
 /* ══════════════════════════════════════════════════════════════════════
+   BOARD RENDER
+   ══════════════════════════════════════════════════════════════════════ */
+
+function symStatus(o) {
+  if (o.source === 'loading') return 'Searching…';
+  if (o.source === 'cache')   return 'From local cache';
+  if (o.source === 'arasaac') return 'From ARASAAC · matched <code>' + esc(o.matched || '') + '</code>';
+  if (o.source === 'offline') return 'No connection — prints as a blank box.';
+  if (o.source === 'none')    return 'No symbol found — try a different word.';
+  return 'Type a word below.';
+}
+
+function renderBoard() {
+  const wrap = document.getElementById('slots');
+  const isChoiceSlot = i => board.choice && i === board.slots.length - 1;
+
+  wrap.innerHTML = board.slots.map((sl, i) => {
+    if (isChoiceSlot(i)) {
+      return '<div class="slot">' +
+        '<h3>Slot ' + (i+1) + ' — the student chooses</h3>' +
+        '<input class="slot-label" value="' + esc(board.labels[i] || '') + '" ' +
+               'onchange="setSlotLabel(' + i + ', this.value)">' +
+        '<div class="slot-sym"><div class="none">filled by the student<br>from your choices</div></div>' +
+        '<p class="hint">Add the options below.</p>' +
+      '</div>';
+    }
+    const img = sl.source === 'loading' ? '<div class="none">…</div>'
+              : sl.url ? '<img src="' + esc(sl.url) + '" alt="">'
+              : '<div class="none">no symbol yet</div>';
+    const alts = (sl.candidates || []).map((u, idx) =>
+      '<div class="alt' + (u === sl.url ? ' sel' : '') + '" onclick="pickSlotAlt(' + i + ',' + idx + ')">' +
+      '<img src="' + esc(u) + '" alt=""></div>').join('');
+    return '<div class="slot">' +
+      '<h3>Slot ' + (i+1) + '</h3>' +
+      '<input class="slot-label" value="' + esc(board.labels[i] || '') + '" ' +
+             'onchange="setSlotLabel(' + i + ', this.value)">' +
+      '<div class="slot-sym">' + img + '</div>' +
+      '<input type="text" placeholder="what goes here — e.g. work" value="' + esc(sl.word) + '" ' +
+             'onchange="setSlotWord(' + i + ', this.value)" style="width:100%;margin-bottom:7px">' +
+      '<div class="item-meta">' + symStatus(sl) + '</div>' +
+      '<div class="item-actions">' +
+        (sl.candidates && sl.candidates.length > 1
+          ? '<button class="ghost tiny" onclick="toggleSlotAlts(' + i + ')">Other symbols (' + sl.candidates.length + ')</button>' : '') +
+        '<input type="text" placeholder="search a different word" value="' + esc(sl.term) + '" ' +
+               'onchange="setSlotTerm(' + i + ', this.value)" style="width:170px;font-size:12px;padding:5px 8px">' +
+      '</div>' +
+      '<div class="alts' + (sl.altsOpen ? ' show' : '') + '">' + alts + '</div>' +
+    '</div>';
+  }).join('');
+
+  document.getElementById('choicePanel').hidden = !board.choice;
+
+  document.getElementById('optList').innerHTML = board.opts.map(o =>
+    '<div class="opt-row">' +
+      '<div class="thumb-sm">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
+                                        : '<span style="font-size:9px;color:#999">' +
+                                          (o.source === 'loading' ? '…' : 'none') + '</span>') + '</div>' +
+      '<strong style="flex:1">' + esc(o.label) + '</strong>' +
+      '<button class="ghost tiny" onclick="removeOption(' + o.id + ')">Remove</button>' +
+    '</div>').join('') ||
+    '<p class="hint">No options yet. Two to six works best — more than six stops being a choice.</p>';
+}
+
+/* ── printed board ───────────────────────────────────────────────────── */
+
+function renderBoardPrint() {
+  const host = document.getElementById('boardPrint');
+  if (!host) return;
+  const n    = board.slots.length;
+  const tall = board.size === 'half' ? 2.6 : 4.4;       // inches of symbol height
+  const lab  = board.size === 'half' ? 15 : 22;         // pt
+
+  const boxes = board.slots.map((sl, i) => {
+    const isChoice = board.choice && i === n - 1;
+    const inner = isChoice ? '<div class="blank"></div>'
+                : sl.url   ? '<img src="' + esc(sl.url) + '" alt="">'
+                : '<div class="blank"></div>';
+    // Height on the BOX; the image area flexes into the remainder. An explicit
+    // height on the image area itself does not survive printing.
+    return '<div class="bbox" style="height:' + (tall + 0.85).toFixed(2) + 'in">' +
+      '<div class="bl" style="font-size:' + lab + 'pt">' + esc(board.labels[i] || '') + '</div>' +
+      '<div class="bi">' + inner + '</div>' +
+    '</div>';
+  }).join('');
+
+  // Choice options print as loose cards to velcro on.
+  let cut = '';
+  if (board.choice && board.opts.length) {
+    // Give each card as much room as the count allows, so the set always
+    // stays on one row instead of spilling a lone card onto page 2.
+    const gap = 0.1875;
+    // every card carries a right margin, the last one included, so the row
+    // width is n*(w+gap) — not n*w + (n-1)*gap.
+    // 7.44 not 7.50 — landing exactly on the content width lets rounding
+    // wrap the last card onto a page of its own.
+    const cw  = Math.min(2, 7.44 / board.opts.length - gap);
+    const cards = board.opts.map(o =>
+      '<div class="pcard" style="width:' + cw.toFixed(3) + 'in;height:' + cw.toFixed(3) + 'in;border:3pt solid ' +
+        FK_COLOR[fkCategory(o.term || o.label)] + ';margin:0 0.1875in 0.1875in 0">' +
+        '<div class="sym">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
+                                     : '<div class="drawit">draw it</div>') + '</div>' +
+        '<div class="lbl" style="font-size:' + Math.max(7, Math.round(cw * 5.5)) + 'pt">' +
+          esc(castLabel(o.label, 'upper')) + '</div>' +
+      '</div>').join('');
+    cut = '<div class="bcut-h">Cut out and velcro onto the ' +
+          esc(board.labels[n-1] || 'choice') + ' box</div>' +
+          '<div class="cards" style="padding-top:.12in">' + cards + '</div>';
+  }
+
+  host.innerHTML =
+    (board.title ? '<div class="bprint-title">' + esc(board.title) + '</div>' : '') +
+    '<div class="bboxes">' + boxes + '</div>' + cut +
+    '<div class="attrib">' + esc(ARASAAC_ATTRIB) + '</div>';
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRESENT — the device view
+   ══════════════════════════════════════════════════════════════════════ */
+
+function presentBoard() {
+  primeSpeech();
+  board.chosen = null;
+  document.getElementById('presentTitle').textContent = board.title || board.labels.join(' → ');
+  document.getElementById('present').classList.add('show');
+  renderPresent();
+  const el = document.documentElement;
+  if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+}
+
+function exitPresent() {
+  document.getElementById('present').classList.remove('show');
+  if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
+  try { speechSynthesis.cancel(); } catch (e) {}
+}
+
+function renderPresent() {
+  const n = board.slots.length;
+  const host = document.getElementById('presentBoxes');
+
+  host.innerHTML = board.slots.map((sl, i) => {
+    const isChoice = board.choice && i === n - 1;
+    const label = esc(board.labels[i] || '');
+
+    // Choice slot, nothing picked yet -> show the options as big tiles.
+    if (isChoice && board.chosen === null) {
+      const tiles = board.opts.map((o, oi) =>
+        '<div class="choice" onclick="chooseOption(' + oi + ')">' +
+          '<div class="ci">' + (o.url ? '<img src="' + esc(o.url) + '" alt="' + esc(o.label) + '">'
+                                      : '<span style="color:#999">?</span>') + '</div>' +
+          '<div class="cl">' + esc(castLabel(o.label, 'upper')) + '</div>' +
+        '</div>').join('');
+      return '<div class="pbox"><div class="plabel">' + label + '</div>' +
+             (board.opts.length ? '<div class="choices">' + tiles + '</div>'
+                                : '<div class="pimg"><div class="empty">Add choices in step 3</div></div>') +
+             '</div>';
+    }
+
+    const src = isChoice ? (board.opts[board.chosen] || {}) : sl;
+    const cap = isChoice ? castLabel(src.label || '', 'upper') : '';
+    const img = src.url ? '<img src="' + esc(src.url) + '" alt="">'
+                        : '<div class="empty">no symbol</div>';
+    return '<div class="pbox speakable" onclick="speakBox(' + i + ')">' +
+             '<div class="plabel">' + label + (cap ? ' · ' + esc(cap) : '') + '</div>' +
+             '<div class="pimg">' + img + '</div>' +
+           '</div>';
+  }).join('');
+
+  const note = document.getElementById('chosenNote');
+  const reset = document.getElementById('resetChoice');
+  if (board.choice && board.chosen !== null) {
+    note.textContent = 'Chose: ' + (board.opts[board.chosen] || {}).label;
+    reset.hidden = false;
+  } else { note.textContent = ''; reset.hidden = true; }
+}
+
+function speakBox(i) {
+  primeSpeech();
+  const n = board.slots.length;
+  const isChoice = board.choice && i === n - 1;
+  const src = isChoice ? (board.opts[board.chosen] || {}) : board.slots[i];
+  say((board.labels[i] || '') + (src.label || src.word ? ', ' + (src.label || src.word) : ''));
+}
+
+// The student picked. Say it back — the same auditory confirmation loop the
+// UFLI lessons use — then leave it standing. Honor it.
+function chooseOption(oi) {
+  primeSpeech();
+  board.chosen = oi;
+  const o = board.opts[oi] || {};
+  renderPresent();
+  say((board.labels[board.slots.length - 1] || '') + ', ' + (o.label || ''));
+}
+
+function resetChoice() { board.chosen = null; renderPresent(); }
+
+
+/* ══════════════════════════════════════════════════════════════════════
    GOOGLE DOCS EXPORT
 
    Google Drive converts an uploaded .html file into a Doc, fetching every
@@ -977,6 +1628,27 @@ async function exportForGoogleDocs() {
 
   restore();
   render();
+
+  // Board mode
+  const bp = document.getElementById('bPreset');
+  for (const name of Object.keys(BOARD_PRESETS)) {
+    const o = document.createElement('option');
+    o.value = name; o.textContent = name;
+    bp.appendChild(o);
+  }
+  restoreBoard();
+  let lastMode = 'print';
+  try { lastMode = localStorage.getItem('cbd_mode') || 'print'; } catch (e) {}
+  setMode(lastMode);
+
+  // iOS will not speak until a genuine tap has happened.
+  document.addEventListener('touchstart', primeSpeech, { once: true });
+  document.addEventListener('mousedown',  primeSpeech, { once: true });
+
+  // Escape leaves the device view.
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('present').classList.contains('show')) exitPresent();
+  });
   document.getElementById('input').addEventListener('keydown', e => {
     if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) addWords();
   });
