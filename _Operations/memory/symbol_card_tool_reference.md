@@ -29,6 +29,50 @@ Built for quick classroom needs by Jill, paras, RBTs and BCBAs — not a TPT bui
 **Directions live at the bottom of the page** (moved there Sep 2026). Someone who
 already knows the tool should not scroll past the manual to reach the thing they
 opened it to do. The header carries a "How to use this" button that jumps to them.
+Below the directions sits the end matter, in the Communicate by Design document
+order: Accessibility → About the Creator → Terms of Use → Symbols.
+
+---
+
+## The design, and why it is two themes
+
+Jill's feedback, Sep 2026: *too dark and heavy · the routine step rows · too slow to
+make one.* All three were the same root cause — the tool was shaped like a dashboard
+when the job is making paper.
+
+**`--navy` is INK, not a background.** That one token was doing two jobs: printed
+colour and workspace background. Splitting it is what let the theme change at all.
+The tokens now are:
+
+| Group | Tokens | Where |
+|-------|--------|-------|
+| Ink | `--navy` | printed rules, headings, device-view background |
+| Workspace | `--page` `--panel` `--line` `--edge` `--muted` | everything the teacher touches |
+| Device view | `--d-bg` `--d-card` `--d-line` `--d-muted` | the student's full-screen view |
+
+**The split is deliberate and worth keeping.** The teacher's workspace is light,
+because it is a tool for making paper and it should look like paper. The student's
+view stays dark so the symbols are the brightest thing on the screen rather than the
+furniture around them.
+
+**Colour rule that bites:** Electric Teal `#00B4D8` is 2.5:1 on white. It is a
+non-text accent on light surfaces only. Every link, active state and accent on the
+light workspace uses Deep Teal `#006DA0` (5.68:1). Electric Teal is still correct on
+navy — the device-view timer uses it.
+
+**Speed came from deleting, not adding.** The numbered `1 · 2 · 3 · 4` panels implied
+a wizard for a ten-second job. Print mode is now one compose panel, one cards panel
+with the options folded into a `<details>`, then the preview.
+
+**The card list is a chip grid, not a row per word.** Twelve words used to be about a
+thousand pixels of editor between you and the print button. Clicking a chip opens the
+fiddly controls (label, search word, copies, alternatives) for that one card only —
+`editingId` holds at most one.
+
+**Routine steps are one line each**, shaped like the row they print as: number, name,
+pictures, minutes, picks. Six steps fit on one screen; the old two-row cards showed
+two. Choice options are chips with an `+ add options` prompt rather than a textarea
+per step — options get added rarely, and the textarea was most of the row height.
 
 ---
 
@@ -376,6 +420,33 @@ Nothing below is decided. See CLAUDE.md → New Product Line Workflow (Phase 0).
    re-upload, and put that link in Substack, the Instagram bio, and Pinterest.
 5. **Support burden.** A free public tool generates questions. Real cost on a
    one-person operation.
+
+---
+
+## Accessibility — what is claimed, and why it is true
+
+The page states WCAG 2.2 AA in its own end matter, so the claim has to hold.
+
+**Everything clickable is a real `<button>`.** Before Sep 2026 the symbol
+thumbnails, the alternative pickers, the choice tiles, the routine strip tiles and
+the big speak-aloud box were all click-only `<div>`s — unreachable by keyboard, and
+therefore unreachable by most switch interfaces. For a tool whose whole audience is
+access, that was the worst defect in the file. `button.pbox, button.choice,
+button.rtile` carry a small reset so they still look like the boxes they replaced.
+
+**Every field has an accessible name.** 21 inputs had placeholder text and no label;
+placeholders are not names. They now carry `aria-label` where a visible label would
+crowd the row.
+
+**Two guards that should stay in the test suite**, because both regressed silently
+once already:
+- nothing carrying `onclick` may be a non-focusable element
+- no `input`/`select`/`textarea` without a label, `aria-label` or wrapping label
+
+**Stated limits are in the page, deliberately.** The print preview is a visual layout
+and reads poorly aloud; speech quality depends on the device's own voices; and nobody
+who uses a screen reader daily has tested it. Saying so is better than a claim that
+overreaches — and it tells a user the gap is a bug, not their problem.
 
 ---
 

@@ -42,14 +42,29 @@
 -->
 <style>
   :root {
+    /* --navy is INK. It is the printed colour and the device-view background,
+       never the workspace background — those are two different jobs and
+       sharing one token is what made the whole tool read as a dashboard. */
     --navy:   #1B1F3B;
-    --teal:   #00B4D8;
-    --teal-d: #006DA0;
+    --teal:   #00B4D8;   /* Electric Teal — 2.5:1 on white, so NEVER text here */
+    --teal-d: #006DA0;   /* Deep Teal — 5.68:1 on white. Every link and accent. */
     --amber:  #FFB703;
     --white:  #FFFFFF;
-    --slate:  #94A3B8;
-    --card:   #252A4A;
-    --line:   #3A4068;
+
+    /* Workspace: paper, because the job is making paper. */
+    --page:   #F2F4F9;
+    --panel:  #FFFFFF;
+    --line:   #E3E8F1;   /* dividers */
+    --edge:   #AAB4CC;   /* borders of things you can click or type in */
+    --muted:  #56607E;   /* 6.2:1 on panel, 5.7:1 on page */
+    --slate:  #56607E;   /* alias of --muted, kept for inline styles */
+
+    /* Device view stays dark on purpose: the symbols should be the brightest
+       thing on a student's screen, not the furniture around them. */
+    --d-bg:    #1B1F3B;
+    --d-card:  #252A4A;
+    --d-line:  #3A4068;
+    --d-muted: #94A3B8;
 
     /* Fitzgerald Key border colors — ported from build_nonfiction_symbol_pages.py */
     --fk-green:  #2E7D32;
@@ -67,19 +82,28 @@
   [hidden] { display: none !important; }
   body {
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--navy);
-    color: var(--white);
+    background: var(--page);
+    color: var(--navy);
     min-height: 100vh;
     font-size: 14px;
+  }
+
+  /* A visible focus ring everywhere. This tool is used by people who navigate
+     by keyboard and by switch; a focus style you cannot see is a broken tool. */
+  :focus-visible {
+    outline: 3px solid var(--teal-d);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   /* ── HEADER ─────────────────────────────────────────────── */
   header {
     background: var(--navy);
     border-bottom: 3px solid var(--amber);
-    padding: 14px 22px;
+    padding: 12px 22px;
     display: flex; align-items: center; gap: 14px;
     position: sticky; top: 0; z-index: 100;
+    color: var(--white);
   }
   .brand-icon {
     width: 38px; height: 38px; flex: 0 0 38px;
@@ -88,101 +112,105 @@
     font-size: 20px; line-height: 1;
   }
   .brand h1 { font-size: 17px; letter-spacing: .2px; }
-  .brand p  { font-size: 11.5px; color: var(--slate); margin-top: 2px; }
+  .brand p  { font-size: 11.5px; color: #B6BFD6; margin-top: 2px; }
   .spacer { flex: 1; }
 
   /* ── LAYOUT ─────────────────────────────────────────────── */
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 20px 22px 80px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 18px 22px 60px; }
   .panel {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 18px; margin-bottom: 18px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 18px; margin-bottom: 14px;
+    box-shadow: 0 1px 2px rgba(27,31,59,.05);
   }
   .panel h2 {
-    font-size: 13px; text-transform: uppercase; letter-spacing: 1.1px;
-    color: var(--amber); margin-bottom: 12px;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1.1px;
+    color: var(--muted); margin-bottom: 11px;
   }
-  .hint { font-size: 12px; color: var(--slate); line-height: 1.5; }
+  .hint { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .hint code, .item-meta code { color: var(--teal-d); }
 
   /* ── INPUT ──────────────────────────────────────────────── */
   textarea {
-    width: 100%; min-height: 84px; resize: vertical;
-    background: #1B1F3B; color: var(--white);
-    border: 1px solid var(--line); border-radius: 8px;
-    padding: 11px 12px; font: 14px/1.5 Arial, Helvetica, sans-serif;
+    width: 100%; min-height: 70px; resize: vertical;
+    background: var(--panel); color: var(--navy);
+    border: 1px solid var(--edge); border-radius: 8px;
+    padding: 10px 12px; font: 14px/1.5 Arial, Helvetica, sans-serif;
   }
-  textarea:focus, input:focus, select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+  textarea::placeholder, input::placeholder { color: #808AA6; }
 
   .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-top: 12px; }
   .field { display: flex; flex-direction: column; gap: 5px; }
   .field label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: .7px; color: var(--slate);
+    font-size: 11px; text-transform: uppercase; letter-spacing: .7px; color: var(--muted);
   }
   select, input[type="text"], input[type="number"] {
-    background: #1B1F3B; color: var(--white);
-    border: 1px solid var(--line); border-radius: 7px;
+    background: var(--panel); color: var(--navy);
+    border: 1px solid var(--edge); border-radius: 7px;
     padding: 8px 10px; font: 13px Arial, Helvetica, sans-serif;
   }
   input[type="number"] { width: 68px; }
 
   button {
     background: var(--amber); color: var(--navy);
-    border: 0; border-radius: 8px; padding: 10px 18px;
+    border: 1px solid transparent; border-radius: 8px; padding: 10px 18px;
     font: bold 13px Arial, Helvetica, sans-serif; cursor: pointer;
   }
-  button:hover { filter: brightness(1.08); }
+  button:hover { filter: brightness(.96); }
   button.ghost {
-    background: transparent; color: var(--teal);
-    border: 1px solid var(--teal); font-weight: normal;
+    background: var(--panel); color: var(--teal-d);
+    border: 1px solid var(--edge); font-weight: normal;
   }
-  button.ghost:hover { background: rgba(0,180,216,.12); filter: none; }
+  button.ghost:hover { background: #EDF4F9; border-color: var(--teal-d); filter: none; }
   button.tiny { padding: 5px 9px; font-size: 11.5px; border-radius: 6px; }
+  button:disabled { opacity: .4; cursor: default; filter: none; }
 
   .checks { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
   .checks label { display: flex; align-items: center; gap: 7px; font-size: 12.5px; cursor: pointer; }
-  .checks input { accent-color: var(--teal); width: 15px; height: 15px; }
+  .checks input { accent-color: var(--teal-d); width: 15px; height: 15px; }
 
   /* ── BUILT-IN HELP ──────────────────────────────────────────
      This file gets emailed to people who have never seen it. The
      instructions travel inside it so there is no second file to lose. */
   details.help {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 0; margin-bottom: 18px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 12px; padding: 0; margin-bottom: 14px;
   }
   details.help > summary {
-    cursor: pointer; list-style: none; padding: 15px 18px;
+    cursor: pointer; list-style: none; padding: 14px 18px;
     font: bold 13px Arial, Helvetica, sans-serif;
-    color: var(--amber); text-transform: uppercase; letter-spacing: 1.1px;
+    color: var(--navy); text-transform: uppercase; letter-spacing: 1.1px;
   }
   details.help > summary::-webkit-details-marker { display: none; }
-  details.help > summary::before { content: '▸ '; }
-  details.help[open] > summary::before { content: '▾ '; }
-  .help-body { padding: 0 18px 18px; font-size: 13px; line-height: 1.65; color: #D8DEF0; }
+  details.help > summary::before { content: '▸ '; color: var(--teal-d); }
+  details.help[open] > summary::before { content: '▾ '; color: var(--teal-d); }
+  .help-body { padding: 0 18px 18px; font-size: 13px; line-height: 1.65; color: #3A4364; }
   .help-body h3 {
     font-size: 12px; text-transform: uppercase; letter-spacing: .8px;
-    color: var(--teal); margin: 14px 0 5px;
+    color: var(--teal-d); margin: 16px 0 5px;
   }
   .help-body ol, .help-body ul { margin: 0 0 0 20px; }
   .help-body li { margin-bottom: 5px; }
-  .help-body strong { color: #fff; }
-  .help-body .warn { color: var(--amber); }
+  .help-body strong { color: var(--navy); }
+  .help-body .warn { color: #8A5A00; }
+  .help-body a, .endmatter a { color: var(--teal-d); }
 
 
   /* ── MODE TABS ─────────────────────────────────────────────
      Two tools, one file. The handoff story ("email one file") is what makes
      this usable by a para, so a second tool would halve its value. */
   .modes {
-    display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;
+    display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap;
   }
   .modes button {
-    background: transparent; color: var(--slate);
+    background: var(--panel); color: var(--muted);
     border: 1px solid var(--line); border-radius: 10px;
-    padding: 12px 20px; font: bold 13px Arial, Helvetica, sans-serif;
+    padding: 10px 18px; font: bold 13px Arial, Helvetica, sans-serif;
   }
   .modes button[aria-selected="true"] {
-    background: var(--amber); color: var(--navy); border-color: var(--amber);
+    background: var(--navy); color: var(--white); border-color: var(--navy);
   }
   .modes button:not([aria-selected="true"]):hover {
-    color: var(--white); border-color: var(--teal);
+    color: var(--navy); border-color: var(--edge);
   }
 
   /* ── BOARD SETUP ───────────────────────────────────────────
@@ -192,20 +220,20 @@
   .slot {
     flex: 1 1 240px; min-width: 240px;
     border: 1px solid var(--line); border-radius: 10px;
-    background: rgba(27,31,59,.55); padding: 14px;
+    background: var(--page); padding: 14px;
   }
   .slot h3 {
     font-size: 11px; text-transform: uppercase; letter-spacing: .9px;
-    color: var(--teal); margin-bottom: 9px;
+    color: var(--muted); margin-bottom: 9px;
   }
   .slot-label {
     width: 100%; font: bold 17px Arial, Helvetica, sans-serif;
-    background: #1B1F3B; color: var(--white);
-    border: 1px solid var(--line); border-radius: 7px;
+    background: var(--panel); color: var(--navy);
+    border: 1px solid var(--edge); border-radius: 7px;
     padding: 9px 11px; margin-bottom: 10px; text-align: center;
   }
   .slot-sym {
-    width: 100%; aspect-ratio: 1; background: #fff; border-radius: 8px;
+    width: 100%; aspect-ratio: 1; background: #fff; border: 1px solid var(--line); border-radius: 8px;
     display: grid; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); place-items: stretch; overflow: hidden; margin-bottom: 10px;
   }
   .slot-sym img { align-self: stretch; justify-self: stretch; width: 100%; height: 100%; object-fit: contain; padding: 6px; }
@@ -214,6 +242,7 @@
   .opt-row { display: flex; gap: 7px; align-items: center; margin-bottom: 7px; }
   .opt-row .thumb-sm {
     width: 42px; height: 42px; flex: 0 0 42px; background: #fff;
+    border: 1px solid var(--line);
     border-radius: 6px; display: grid; place-items: center; overflow: hidden;
   }
   .opt-row .thumb-sm img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
@@ -222,7 +251,7 @@
      Full bleed, enormous targets, nothing to mis-tap. */
   .present {
     position: fixed; inset: 0; z-index: 9999;
-    background: var(--navy); display: none;
+    background: var(--d-bg); color: var(--white); display: none;
     flex-direction: column; padding: 2.2vh 2.2vw;
   }
   .present.show { display: flex; }
@@ -232,16 +261,24 @@
   }
   .present-head .ttl { font-size: clamp(15px, 2.4vh, 26px); font-weight: bold; color: var(--amber); }
   .present-exit {
-    background: transparent; color: var(--slate); border: 1px solid var(--line);
+    background: transparent; color: var(--d-muted); border: 1px solid var(--d-line);
     border-radius: 8px; padding: 8px 14px; font-size: 12px;
   }
   .present-boxes { flex: 1 1 auto; display: flex; gap: 2vw; min-height: 0; }
   .pbox {
     flex: 1 1 0; display: flex; flex-direction: column; min-width: 0;
-    background: var(--card); border: 4px solid var(--line); border-radius: 18px;
+    background: var(--d-card); border: 4px solid var(--d-line); border-radius: 18px;
     padding: 1.4vh 1.2vw; cursor: pointer;
   }
   .pbox.speakable:active { border-color: var(--amber); }
+  /* These are real <button>s so a keyboard or a switch can reach them. The
+     reset keeps them looking exactly like the boxes they replaced. */
+  button.pbox, button.choice, button.rtile {
+    font: inherit; text-align: inherit; color: inherit;
+    -webkit-appearance: none; appearance: none;
+  }
+  button.pbox:hover, button.choice:hover, button.rtile:hover { filter: none; }
+  .present :focus-visible { outline: 4px solid var(--amber); outline-offset: 3px; }
   .pbox .plabel {
     flex: 0 0 auto; text-align: center; color: var(--white);
     font-size: clamp(18px, 4.2vh, 46px); font-weight: bold;
@@ -272,34 +309,34 @@
      wear text tokens; the amber is the label, not the datum. */
   .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
   .stat {
-    flex: 1 1 130px; min-width: 130px; background: rgba(27,31,59,.55);
+    flex: 1 1 130px; min-width: 130px; background: var(--page);
     border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
   }
-  .stat .n { font-size: 26px; font-weight: bold; color: var(--white); line-height: 1.1; }
+  .stat .n { font-size: 26px; font-weight: bold; color: var(--navy); line-height: 1.1; }
   .stat .k {
     font-size: 10.5px; text-transform: uppercase; letter-spacing: .7px;
-    color: var(--slate); margin-top: 4px;
+    color: var(--muted); margin-top: 4px;
   }
-  .stat .sub { font-size: 11px; color: var(--slate); margin-top: 3px; }
+  .stat .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
 
   .logtab { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   .logtab th {
-    text-align: left; color: var(--slate); font-size: 10.5px; text-transform: uppercase;
-    letter-spacing: .6px; padding: 6px 8px; border-bottom: 1px solid var(--line);
+    text-align: left; color: var(--muted); font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: .6px; padding: 6px 8px; border-bottom: 1px solid var(--edge);
   }
-  .logtab td { padding: 7px 8px; border-bottom: 1px solid rgba(58,64,104,.5); }
+  .logtab td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
   .logtab tr:last-child td { border-bottom: 0; }
   .logwrap { max-height: 320px; overflow: auto; }
   .th-sub {
     display: block; font-size: 9.5px; letter-spacing: .3px;
-    text-transform: none; color: var(--amber); font-weight: normal; margin-top: 2px;
+    text-transform: none; color: #8A5A00; font-weight: normal; margin-top: 2px;
   }
   .latency-note {
     margin-top: 12px; padding: 11px 13px; border-left: 3px solid var(--amber);
-    background: rgba(255,183,3,.07); border-radius: 0 8px 8px 0;
+    background: #FFF9EC; border-radius: 0 8px 8px 0;
   }
   .mark {
-    background: transparent; color: var(--slate); border: 1px solid var(--line);
+    background: var(--panel); color: var(--muted); border: 1px solid var(--edge);
     border-radius: 6px; padding: 4px 9px; font-size: 11px; cursor: pointer;
   }
   .mark[aria-pressed="true"] { background: var(--teal-d); color: #fff; border-color: var(--teal-d); }
@@ -307,16 +344,16 @@
 
   /* Partner controls in the device view: small, low, away from the boxes. */
   .pmark { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .pmark .lbl { color: var(--slate); font-size: 11px; }
+  .pmark .lbl { color: var(--d-muted); font-size: 11px; }
   .pmark button {
-    background: transparent; color: var(--slate); border: 1px solid var(--line);
+    background: transparent; color: var(--d-muted); border: 1px solid var(--d-line);
     border-radius: 7px; padding: 6px 11px; font-size: 12px;
   }
   .pmark button[aria-pressed="true"] { background: var(--teal-d); color: #fff; border-color: var(--teal-d); }
 
   /* ── BOARD PRINT ───────────────────────────────────────────
      The low-tech version: laminate, velcro, no device required. */
-  .board-shell { background: #fff; border-radius: 12px; padding: .5in; color: #000; }
+  .board-shell { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .5in; color: #000; box-shadow: 0 1px 3px rgba(27,31,59,.07); }
   .bprint-title { font-size: 15pt; color: var(--navy); font-weight: bold; margin-bottom: .18in; }
   .bboxes { display: flex; gap: .25in; }
   .bbox { flex: 1 1 0; border: 4pt solid var(--navy); border-radius: 10pt; padding: .12in; display: flex; flex-direction: column; }
@@ -339,56 +376,80 @@
      own column count inline so each picture gets an equal share; the
      width/height pairing on the images is load-bearing and unchanged. */
   .symstrip { display: flex; gap: 10px; flex-wrap: wrap; }
-  .symchip {
-    width: 62px; height: 62px; background: #fff; border-radius: 6px;
-    display: grid; place-items: center; overflow: hidden; cursor: pointer;
-    border: 2px solid transparent;
-  }
-  .symchip:hover { border-color: var(--teal); }
-  .symchip img  { max-width: 100%; max-height: 100%; }
-  .symchip .none { font-size: 9px; color: #999; text-align: center; padding: 2px; }
+  /* .symchip itself is defined once, with the step editor. */
 
   /* ── STEP EDITOR (routine mode) ────────────────────────────
-     One row per step, one panel for the lot. Six numbered panels for a
-     six-step routine would be unusable — the row is the unit of editing. */
-  .steps { display: flex; flex-direction: column; gap: 10px; }
+     One line per step, shaped like the row it prints as: number, name,
+     picture, minutes. Six steps fit on one screen. The old version gave
+     each step a two-row card and you could see two of them at a time. */
+  .steps { display: flex; flex-direction: column; gap: 7px; }
   .step {
     border: 1px solid var(--line); border-radius: 10px;
-    background: rgba(27,31,59,.55); padding: 12px 13px;
+    background: var(--page); padding: 8px 10px;
   }
-  .step-top { display: flex; gap: 9px; align-items: flex-end; flex-wrap: wrap; }
+  .step.is-choice { border-left: 3px solid var(--amber); }
+  .step-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .step-n {
-    flex: 0 0 26px; width: 26px; height: 26px; border-radius: 50%;
-    background: var(--teal-d); color: #fff; display: grid; place-items: center;
-    font: bold 12px Arial, Helvetica, sans-serif; margin-bottom: 8px;
+    flex: 0 0 24px; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--navy); color: #fff; display: grid; place-items: center;
+    font: bold 12px Arial, Helvetica, sans-serif;
   }
-  .step-name { flex: 1 1 150px; min-width: 130px; }
   .step-lab {
-    width: 100%; font: bold 15px Arial, Helvetica, sans-serif;
-    background: #1B1F3B; color: var(--white);
-    border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px;
+    flex: 1 1 130px; min-width: 110px; font: bold 14px Arial, Helvetica, sans-serif;
+    background: var(--panel); color: var(--navy);
+    border: 1px solid var(--edge); border-radius: 7px; padding: 7px 9px;
   }
-  .step-words { flex: 2 1 210px; min-width: 180px; }
-  .step-words input { width: 100%; }
-  .step-words input:disabled { opacity: .45; cursor: not-allowed; }
-  .step-min { width: 72px; }
-  .step-top .field label { white-space: nowrap; }
-  .step-row2 { display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; margin-top: 11px; }
-  .step-opts {
-    flex: 1 1 290px; min-width: 250px;
-    border-left: 2px solid var(--teal-d); padding-left: 12px;
+  .step-words { flex: 1 1 150px; min-width: 130px; }
+  .step-words:disabled { opacity: .45; cursor: not-allowed; }
+  .step-min { width: 58px; text-align: center; }
+  .unit { font-size: 11.5px; color: var(--muted); margin-left: -4px; }
+
+  /* the step's pictures, inline at row height */
+  .step-pics { display: flex; gap: 4px; flex: 0 0 auto; }
+  .symchip {
+    width: 38px; height: 38px; background: #fff; border-radius: 6px;
+    display: grid; place-items: center; overflow: hidden; cursor: pointer;
+    border: 1px solid var(--line); padding: 0;
   }
-  .step-opts textarea { min-height: 54px; }
-  .cbox { display: flex; align-items: center; gap: 7px; font-size: 12.5px; cursor: pointer; }
-  .cbox input { accent-color: var(--teal); width: 15px; height: 15px; }
+  .symchip:hover { border-color: var(--teal-d); }
+  .symchip.lg { width: 58px; height: 58px; border-width: 2px; }
+  .symchip img  { max-width: 100%; max-height: 100%; }
+  .symchip .none { font-size: 8px; color: #8A93AB; text-align: center; line-height: 1.1; }
+
+  /* option chips for a choice step — the second line, only when needed */
+  .step-opts-line {
+    display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+    margin-top: 7px; padding-left: 32px;
+  }
+  .ochip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--panel); border: 1px solid var(--edge);
+    border-radius: 999px; padding: 3px 4px 3px 3px; font-size: 12px;
+  }
+  .ochip img { width: 22px; height: 22px; object-fit: contain; background: #fff; border-radius: 50%; }
+  .ochip .x {
+    background: none; border: 0; color: var(--muted); cursor: pointer;
+    font-size: 15px; line-height: 1; padding: 0 3px;
+  }
+  .ochip .x:hover { color: #A4262C; }
+  .addopt {
+    border: 1px dashed var(--edge); background: transparent; color: var(--teal-d);
+    border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: normal;
+  }
+  .step-io { display: flex; gap: 4px; }
+  .iconbtn {
+    background: var(--panel); border: 1px solid var(--edge); color: var(--muted);
+    border-radius: 6px; padding: 5px 8px; font-size: 12px; line-height: 1;
+  }
+  .iconbtn:hover:not(:disabled) { color: var(--navy); border-color: var(--teal-d); }
 
   /* ── ROUTINE: the device view ──────────────────────────────
      The strip across the top IS the support. A student needs to see where
      they are and what is still coming, not only the box they are in. */
   .rstrip { flex: 0 0 auto; display: flex; gap: 6px; margin-bottom: 1.4vh; }
   .rtile {
-    flex: 1 1 0; min-width: 0; background: var(--card);
-    border: 2px solid var(--line); border-radius: 10px; padding: .55vh .4vw;
+    flex: 1 1 0; min-width: 0; background: var(--d-card);
+    border: 2px solid var(--d-line); border-radius: 10px; padding: .55vh .4vw;
     display: flex; flex-direction: column; align-items: center; gap: 3px;
     opacity: .55; cursor: pointer;
   }
@@ -398,7 +459,7 @@
     width: 100%; height: 5vh; background: #fff; border-radius: 5px;
     display: grid; place-items: center; overflow: hidden;
   }
-  .rtile .rt-i.empty { background: transparent; border: 1.5px dashed var(--line); }
+  .rtile .rt-i.empty { background: transparent; border: 1.5px dashed var(--d-line); }
   .rtile .rt-i img { max-width: 100%; max-height: 100%; }
   .rtile .rt-l {
     font-size: clamp(9px, 1.5vh, 14px); color: var(--white); text-align: center;
@@ -416,7 +477,7 @@
   /* ── ROUTINE: the printed strip ────────────────────────────
      Vertical, top to bottom. That is the direction a visual schedule is read
      in, and it is the shape that survives six steps on one page. */
-  .routine-shell { background: #fff; border-radius: 12px; padding: .5in; color: #000; }
+  .routine-shell { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: .5in; color: #000; box-shadow: 0 1px 3px rgba(27,31,59,.07); }
   .rprint-title { font-size: 15pt; color: var(--navy); font-weight: bold; margin-bottom: .16in; }
   .rrow {
     display: flex; align-items: stretch; gap: .13in; margin-bottom: .13in;
@@ -450,24 +511,113 @@
      start on a sheet of their own rather than dangling off the bottom of it. */
   .rcut-sheet { break-before: page; page-break-before: always; }
 
+  /* ── COMPOSE + CARD GRID ───────────────────────────────────
+     The old editor was one tall row per word: twelve words put a thousand
+     pixels between you and the print button. A chip grid keeps the whole set
+     on one screen, and clicking a chip opens the fiddly bits for that one
+     card only. */
+  .lede {
+    display: block; font-size: 15px; font-weight: bold;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .h2-sub { color: var(--muted); font-weight: normal; text-transform: none; letter-spacing: 0; }
+  kbd {
+    font: 11px ui-monospace, Menlo, Consolas, monospace; background: var(--page);
+    border: 1px solid var(--edge); border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px;
+  }
+
+  .cardgrid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cchip {
+    width: 98px; background: var(--panel); border: 1px solid var(--edge);
+    border-radius: 9px; padding: 6px; cursor: pointer; position: relative;
+    display: block; text-align: center; font: inherit; color: var(--navy);
+  }
+  .cchip:hover { border-color: var(--teal-d); }
+  .cchip[aria-expanded="true"] { border-color: var(--teal-d); box-shadow: 0 0 0 2px rgba(0,109,160,.18); }
+  .cchip .im {
+    height: 62px; background: #fff; border: 1px solid var(--line);
+    border-radius: 6px; display: grid; place-items: center; overflow: hidden;
+  }
+  .cchip .im img { max-width: 100%; max-height: 100%; }
+  .cchip .im .none { font-size: 9.5px; color: #8A93AB; padding: 3px; line-height: 1.2; }
+  .cchip .w {
+    font-size: 11.5px; font-weight: bold; margin-top: 5px;
+    overflow-wrap: anywhere; line-height: 1.2;
+  }
+  .cchip .n { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .cchip .fk { height: 3px; border-radius: 2px; margin-top: 5px; }
+
+  .cedit {
+    margin-top: 12px; border: 1px solid var(--teal-d); border-radius: 10px;
+    padding: 13px; background: var(--page);
+  }
+  .cedit h3 { font-size: 13px; color: var(--navy); margin-bottom: 10px; }
+
+  /* Options are one line until you want them. */
+  details.opts { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+  details.opts > summary {
+    cursor: pointer; list-style: none; font-size: 12.5px; color: var(--teal-d);
+  }
+  details.opts > summary::-webkit-details-marker { display: none; }
+  details.opts > summary::before { content: '▸ '; }
+  details.opts[open] > summary::before { content: '▾ '; }
+  .opts-body { padding-top: 4px; }
+
+  .prev-head { margin: 4px 2px 10px; }
+  .prev-head h2 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1.1px;
+    color: var(--muted); margin-bottom: 4px;
+  }
+
+  /* ── END MATTER ────────────────────────────────────────────
+     Accessibility, then who made it, then terms — the Communicate by Design
+     document order. Screen only: it must never land on a card sheet. */
+  .endmatter {
+    margin-top: 26px; border-top: 2px solid var(--line); padding-top: 20px;
+    font-size: 13px; line-height: 1.6; color: #3A4364;
+  }
+  .endmatter h2 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1.1px;
+    color: var(--navy); margin: 0 0 7px;
+  }
+  .endmatter section { margin-bottom: 20px; }
+  .endmatter p { margin-bottom: 8px; }
+  .endmatter ul { margin: 0 0 8px 20px; }
+  .endmatter li { margin-bottom: 4px; }
+  .endmatter strong { color: var(--navy); }
+
+  .morelinks { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 4px; }
+  .morelinks a {
+    display: block; flex: 1 1 250px; padding: 12px 14px;
+    background: var(--panel); border: 1px solid var(--edge); border-radius: 10px;
+    text-decoration: none; color: var(--navy);
+  }
+  .morelinks a:hover { border-color: var(--teal-d); background: #F7FBFD; }
+  .morelinks .t { font-weight: bold; display: block; }
+  .morelinks .d { font-size: 12px; color: var(--muted); display: block; margin-top: 2px; }
+  .colophon {
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-size: 11.5px; color: var(--muted);
+  }
+
   /* ── STATUS BANNER ──────────────────────────────────────── */
   .banner {
     border-radius: 9px; padding: 11px 14px; margin-bottom: 16px;
     font-size: 12.5px; line-height: 1.55; display: none;
   }
   .banner.show { display: block; }
-  .banner.warn  { background: rgba(255,183,3,.13); border: 1px solid var(--amber); color: #FFE3A3; }
-  .banner.info  { background: rgba(0,180,216,.12); border: 1px solid var(--teal);  color: #B6ECFA; }
+  .banner.warn  { background: #FFF6E3; border: 1px solid var(--amber);  color: #6B4700; }
+  .banner.info  { background: #EAF5FB; border: 1px solid var(--teal-d); color: #084D70; }
 
   /* ── WORD LIST EDITOR ───────────────────────────────────── */
   .item {
     display: flex; gap: 13px; align-items: flex-start;
     padding: 12px; border: 1px solid var(--line); border-radius: 9px;
-    margin-bottom: 9px; background: rgba(27,31,59,.55);
+    margin-bottom: 9px; background: var(--page);
   }
   .thumb {
     width: 62px; height: 62px; flex: 0 0 62px;
-    background: var(--white); border-radius: 6px;
+    background: var(--white); border: 1px solid var(--line); border-radius: 6px;
     display: grid; place-items: center; overflow: hidden;
   }
   .thumb img { max-width: 100%; max-height: 100%; }
@@ -475,29 +625,31 @@
   .item-body { flex: 1; min-width: 0; }
   .item-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .item-label {
-    font-size: 15px; font-weight: bold; border: 0; background: transparent;
-    color: var(--white); padding: 3px 6px; border-radius: 5px; min-width: 140px;
+    font-size: 15px; font-weight: bold; border: 1px solid transparent; background: transparent;
+    color: var(--navy); padding: 3px 6px; border-radius: 5px; min-width: 140px;
   }
-  .item-label:hover { background: rgba(255,255,255,.07); }
-  .item-meta { font-size: 11.5px; color: var(--slate); margin-top: 5px; }
-  .item-meta code { color: var(--teal); font-size: 11.5px; }
+  .item-label:hover { background: var(--panel); border-color: var(--edge); }
+  .item-meta { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+  .item-meta code { color: var(--teal-d); font-size: 11.5px; }
   .item-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; align-items: center; }
   .copies { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--slate); }
 
   .alts { display: none; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
   .alts.show { display: flex; }
   .alt {
-    width: 56px; height: 56px; background: var(--white); border: 2px solid transparent;
+    width: 56px; height: 56px; background: var(--white); border: 2px solid var(--line);
     border-radius: 6px; padding: 3px; cursor: pointer; display: grid; place-items: center;
   }
-  .alt:hover { border-color: var(--teal); }
-  .alt.sel { border-color: var(--amber); }
+  .alt:hover { border-color: var(--teal-d); }
+  .alt.sel { border-color: var(--amber); border-width: 3px; }
+  button.alt { padding: 3px; }
   .alt img { max-width: 100%; max-height: 100%; }
 
   /* ── SHEET PREVIEW ──────────────────────────────────────── */
   .sheet-shell {
-    background: var(--white); border-radius: 12px; padding: 0.5in;
-    color: #000; overflow-x: auto;
+    background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+    padding: 0.5in; color: #000; overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(27,31,59,.07);
   }
   .sheet { width: 7.5in; margin: 0 auto; }
   .sheet-head { margin-bottom: .22in; }
@@ -599,105 +751,109 @@
     <button role="tab" aria-selected="false" onclick="setMode('routine')" id="tab-routine">Routine &amp; timers</button>
   </div>
 
-  <div id="banner" class="banner"></div>
+  <div id="banner" class="banner" role="status" aria-live="polite"></div>
 
   <div id="mode-print">
 
-  <!-- ── WORDS ─────────────────────────────────────────── -->
+  <!-- ── COMPOSE ───────────────────────────────────────────
+       One panel from typing to printed. The numbered 1-2-3-4 panels this
+       replaced implied a wizard for a job that should take ten seconds. -->
   <div class="panel">
-    <h2>1 · Words</h2>
-    <textarea id="input" placeholder="back stretch, hand rub, squeezes&#10;&#10;One per line, or separated by commas."></textarea>
+    <label class="lede" for="input">Type your words</label>
+    <textarea id="input" rows="2"
+              placeholder="back stretch, hand rub, squeezes — one per line or separated by commas"></textarea>
     <div class="row">
       <button onclick="addWords()">Add words</button>
-      <button class="ghost" onclick="retryAll()">Retry lookups</button>
-      <button class="ghost" onclick="clearAll()">Clear all</button>
-      <div class="spacer"></div>
       <div class="field">
-        <label for="preset">Quick sets</label>
+        <label for="preset">or start from a set</label>
         <select id="preset" onchange="loadPreset(this.value)">
           <option value="">Choose a set…</option>
         </select>
       </div>
+      <div class="spacer"></div>
+      <button class="ghost" onclick="retryAll()">Retry lookups</button>
+      <button class="ghost" onclick="clearAll()">Clear all</button>
     </div>
-    <p class="hint" style="margin-top:10px">
-      Multi-word phrases work. If ARASAAC has no symbol for the whole phrase, the
-      search falls back to the main word — <code>back stretch</code> finds
-      <em>stretch</em>, <code>squeezes</code> finds <em>squeeze</em> — and the card
-      keeps the label you typed.
+    <p class="hint" style="margin-top:9px">
+      Multi-word phrases work — <code>back stretch</code> finds <em>stretch</em> and the card
+      keeps the label you typed. <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd> adds them too.
     </p>
   </div>
 
-  <!-- ── CARDS ─────────────────────────────────────────── -->
+  <!-- ── CARDS ─────────────────────────────────────────────
+       A compact grid, not a row per word. Twelve words used to be a
+       thousand pixels of editor between you and the print button. -->
   <div class="panel">
-    <h2>2 · Cards <span id="count" style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0"></span></h2>
-    <div id="list"></div>
-    <p id="listEmpty" class="hint">No cards yet. Add words above.</p>
-  </div>
+    <h2>Your cards <span id="count" class="h2-sub"></span></h2>
+    <div id="list" class="cardgrid"></div>
+    <p id="listEmpty" class="hint">No cards yet. Type some words above.</p>
+    <div id="cardEdit" hidden></div>
 
-  <!-- ── SHEET OPTIONS ─────────────────────────────────── -->
-  <div class="panel">
-    <h2>3 · Sheet</h2>
-    <div class="row">
-      <div class="field">
-        <label for="size">Card size</label>
-        <select id="size" onchange="save();render()">
-          <option value="1">1" × 1"</option>
-          <option value="1.5" selected>1.5" × 1.5"</option>
-          <option value="2">2" × 2"</option>
-          <option value="2.5">2.5" × 2.5"</option>
-          <option value="3">3" × 3"</option>
-        </select>
+    <details class="opts" id="sheetOpts">
+      <summary>Sheet options — size, spacing, borders, title</summary>
+      <div class="opts-body">
+        <div class="row" style="margin-top:0">
+          <div class="field">
+            <label for="size">Card size</label>
+            <select id="size" onchange="save();render()">
+              <option value="1">1" × 1"</option>
+              <option value="1.5" selected>1.5" × 1.5"</option>
+              <option value="2">2" × 2"</option>
+              <option value="2.5">2.5" × 2.5"</option>
+              <option value="3">3" × 3"</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="gap">Cutting space</label>
+            <select id="gap" onchange="save();render()">
+              <option value="0.0625">Tight — 1/16"</option>
+              <option value="0.1875" selected>Standard — 3/16"</option>
+              <option value="0.3125">Wide — 5/16"</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="border">Border</label>
+            <select id="border" onchange="save();render()">
+              <option value="fk" selected>Fitzgerald Key color</option>
+              <option value="black">Black</option>
+              <option value="gray">Light gray (cut guide)</option>
+              <option value="none">None</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="case">Label style</label>
+            <select id="case" onchange="save();render()">
+              <option value="upper" selected>ALL CAPS</option>
+              <option value="lower">lowercase</option>
+              <option value="title">Title Case</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="title">Sheet title</label>
+            <input type="text" id="title" placeholder="e.g. Movement Break Choices"
+                   oninput="save();render()" style="width:200px">
+          </div>
+        </div>
+        <div class="checks">
+          <label><input type="checkbox" id="showLabels" checked onchange="save();render()"> Show word labels</label>
+          <label><input type="checkbox" id="showHead"   checked onchange="save();render()"> Show sheet header + Name/Date</label>
+        </div>
+        <div class="row" style="border-top:1px solid var(--line);padding-top:12px">
+          <button class="ghost" onclick="exportForGoogleDocs()">Export for Google Docs</button>
+          <p class="hint" style="flex:1;min-width:240px">
+            Saves an <code>.html</code> file. In Google Drive: <strong>New → File upload</strong>, then
+            right-click it → <strong>Open with → Google Docs</strong>. The symbols come across as real
+            images and the cards keep their size.
+          </p>
+        </div>
       </div>
-      <div class="field">
-        <label for="case">Label style</label>
-        <select id="case" onchange="save();render()">
-          <option value="upper" selected>ALL CAPS</option>
-          <option value="lower">lowercase</option>
-          <option value="title">Title Case</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="gap">Cutting space</label>
-        <select id="gap" onchange="save();render()">
-          <option value="0.0625">Tight — 1/16"</option>
-          <option value="0.1875" selected>Standard — 3/16"</option>
-          <option value="0.3125">Wide — 5/16"</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="border">Border</label>
-        <select id="border" onchange="save();render()">
-          <option value="fk" selected>Fitzgerald Key color</option>
-          <option value="black">Black</option>
-          <option value="gray">Light gray (cut guide)</option>
-          <option value="none">None</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="title">Sheet title</label>
-        <input type="text" id="title" placeholder="e.g. Movement Break Choices"
-               oninput="save();render()" style="width:220px">
-      </div>
-    </div>
-    <div class="checks">
-      <label><input type="checkbox" id="showLabels" checked onchange="save();render()"> Show word labels</label>
-      <label><input type="checkbox" id="showHead"   checked onchange="save();render()"> Show sheet header + Name/Date</label>
-    </div>
-    <div class="row" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
-      <button class="ghost" onclick="exportForGoogleDocs()">Export for Google Docs</button>
-      <p class="hint" style="flex:1;min-width:240px">
-        Saves an <code>.html</code> file. In Google Drive: <strong>New → File upload</strong>, then
-        right-click it → <strong>Open with → Google Docs</strong>. The symbols come across as real
-        images and the cards stay 1.5". Share it with your team like any other Doc.
-      </p>
-    </div>
+    </details>
   </div>
 
   <!-- ── PREVIEW ───────────────────────────────────────── -->
-  <div class="panel noprint" style="padding-bottom:8px">
-    <h2>4 · Print preview</h2>
-    <p class="hint">This is exactly what prints. Set your browser's print scale to 100% —
-      not "Fit to page" — or the cards will not measure true.</p>
+  <div class="prev-head noprint">
+    <h2>Print preview</h2>
+    <p class="hint">Exactly what prints. Set print scale to <strong>100%</strong>, not "Fit to page."</p>
   </div>
   <div class="sheet-shell">
     <div class="sheet" id="sheet"></div>
@@ -709,7 +865,7 @@
   <div id="mode-board" hidden>
 
     <div class="panel noprint">
-      <h2>1 · Board</h2>
+      <h2>The board</h2>
       <div class="row">
         <div class="field">
           <label for="bStyle">Labels</label>
@@ -747,12 +903,12 @@
     </div>
 
     <div class="panel noprint">
-      <h2>2 · Slots</h2>
+      <h2>Boxes</h2>
       <div class="slots" id="slots"></div>
     </div>
 
     <div class="panel noprint" id="choicePanel" hidden>
-      <h2>3 · Choices <span style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0">· what the student picks from</span></h2>
+      <h2>Choices <span style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0">· what the student picks from</span></h2>
       <textarea id="bOpts" placeholder="iPad, bubbles, swing, music&#10;&#10;2 to 6 options, one per line or comma separated."></textarea>
       <div class="row">
         <button onclick="addOptions()">Add options</button>
@@ -766,7 +922,7 @@
     </div>
 
     <div class="panel noprint">
-      <h2>4 · Use it</h2>
+      <h2>Use it</h2>
       <div class="row">
         <button onclick="presentBoard()">Open on this device</button>
         <button class="ghost" onclick="window.print()">Print the board</button>
@@ -786,7 +942,7 @@
     </div>
 
     <div class="panel noprint" style="padding-bottom:8px">
-      <h2>5 · Print preview</h2>
+      <h2>Print preview</h2>
       <p class="hint">Print at 100%, not "Fit to page."</p>
     </div>
     <div class="board-shell">
@@ -799,7 +955,7 @@
   <div id="mode-routine" hidden>
 
     <div class="panel noprint">
-      <h2>1 · The routine</h2>
+      <h2>The routine</h2>
       <p class="hint" style="margin-bottom:13px">
         A chain of First–Then pairs instead of one. Each step gets a name, one or more pictures,
         and — if it helps — a number of minutes. Any step can be handed to the student to choose
@@ -822,7 +978,7 @@
     </div>
 
     <div class="panel noprint">
-      <h2>2 · Steps</h2>
+      <h2>Steps</h2>
       <div class="steps" id="steps"></div>
       <div class="row">
         <button onclick="addStep()">Add a step</button>
@@ -836,7 +992,7 @@
     </div>
 
     <div class="panel noprint">
-      <h2>3 · Use it</h2>
+      <h2>Use it</h2>
       <div class="row">
         <button onclick="presentRoutine()">Open on this device</button>
         <button class="ghost" onclick="window.print()">Print the routine</button>
@@ -860,7 +1016,7 @@
     </div>
 
     <div class="panel noprint" style="padding-bottom:8px">
-      <h2>4 · Print preview</h2>
+      <h2>Print preview</h2>
       <p class="hint">Print at 100%, not "Fit to page."</p>
     </div>
     <div class="routine-shell">
@@ -1032,6 +1188,122 @@
          <strong>Retry lookups</strong>.</p>
     </div>
   </details>
+
+  <!-- ══ END MATTER ══════════════════════════════════════════
+       Accessibility Statement, then About the Creator, then Terms of Use —
+       the Communicate by Design order. All of it .noprint: none of this
+       belongs on a sheet of cards a student is about to use. -->
+  <div class="endmatter noprint">
+
+    <section>
+      <h2>Accessibility</h2>
+      <p>
+        This page targets <strong>WCAG 2.2 Level AA</strong>, and the parts a student
+        touches were built first.
+      </p>
+      <ul>
+        <li><strong>Everything works from a keyboard.</strong> Every picture, choice tile,
+            routine step and option is a real button, so it can be reached by tab and
+            activated by space or enter — which is also how most switch interfaces drive a
+            page. The focus outline is deliberately loud.</li>
+        <li><strong>Text meets AA contrast</strong> against the surface it sits on. The
+            student-facing view is deliberately dark so the symbols are the brightest thing
+            on the screen.</li>
+        <li><strong>Every picture carries its word</strong> in text beside it, so the tool
+            does not depend on recognising a symbol.</li>
+        <li><strong>Nothing depends on colour alone.</strong> Fitzgerald Key colour is
+            additional to the word, never instead of it.</li>
+        <li><strong>It scales.</strong> Zoom to 200% or run it at phone width and the layout
+            reflows rather than scrolling sideways.</li>
+      </ul>
+      <p>
+        <strong>Known limits, honestly:</strong> the print preview is a visual layout and is
+        not useful read aloud; speech uses whatever voices the device already has, so quality
+        varies; and no part of this has been tested with a screen reader by someone who uses
+        one daily. If something gets in your way,
+        <a href="https://communicatebydesign.substack.com">say so</a> — that is a bug, not
+        your problem to work around.
+      </p>
+    </section>
+
+    <section>
+      <h2>About</h2>
+      <p>
+        Made by <strong>Jill McCardel</strong>, a special educator and advocate, and the
+        creator of <strong>Communicate by Design</strong> — specially designed instruction and
+        assistive technology resources for special educators, IEP teams, therapists,
+        paraprofessionals and families.
+      </p>
+      <p>
+        Assistive technology, augmentative and alternative communication, and speech
+        generating devices are an ecosystem, not a hierarchy. Every access method is equally
+        valid. The device is never the goal; communication is the goal. This tool is free
+        because a student should not wait on a purchase order to be understood.
+      </p>
+      <div class="morelinks">
+        <a href="https://communicatebydesign.substack.com" target="_blank" rel="noopener">
+          <span class="t">Writing → communicatebydesign.substack.com</span>
+          <span class="d">Evidence-based posts on access, instruction and advocacy. Free to read.</span>
+        </a>
+        <a href="https://www.teacherspayteachers.com/store/communicate-by-design" target="_blank" rel="noopener">
+          <span class="t">Classroom resources → Teachers Pay Teachers</span>
+          <span class="d">Reading units, picture book companions and IEP team tools, with communication access designed in.</span>
+        </a>
+        <a href="https://www.instagram.com/communicatebydesignaac" target="_blank" rel="noopener">
+          <span class="t">Instagram → @communicatebydesignaac</span>
+          <span class="d">Shorter thoughts, and what is being built.</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Terms of use</h2>
+      <p>
+        <strong>This tool is free.</strong> Use it with your students, keep a copy, and send
+        the file or the link to anyone who needs it — colleagues, your team, the families you
+        work with. No account, no licence key, nothing to renew.
+      </p>
+      <ul>
+        <li><strong>Print as much as you like</strong>, for as many students as you like.</li>
+        <li><strong>Please do not sell anything made with it.</strong> The symbols are
+            licensed for non-commercial use only (see below), so sheets, boards and routines
+            made here cannot be sold, put behind a paywall, or included in a paid product.
+            That is the symbol licence, not a Communicate by Design restriction.</li>
+        <li><strong>Leave the symbol attribution on printed sheets.</strong> It is a condition
+            of the licence that lets everyone use these pictures for free.</li>
+        <li><strong>Do not resell or rebrand the tool itself.</strong> Sharing it is the whole
+            point; passing it off as your own is not.</li>
+      </ul>
+      <p>
+        Provided as is, with no warranty. It is a classroom utility, not a medical device or a
+        clinical decision-making tool, and nothing in it replaces the judgement of the team
+        around a student.
+      </p>
+    </section>
+
+    <section>
+      <h2>Symbols</h2>
+      <p>
+        Pictographic symbols are the property of the Government of Aragón and were created by
+        Sergio Palao for <a href="https://arasaac.org" target="_blank" rel="noopener">ARASAAC</a>,
+        distributed under
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+        The attribution prints on every sheet — please keep it there.
+      </p>
+      <p>
+        If a student already uses a different symbol set, match what they know. A student who
+        learned one picture for <em>break</em> should not have to learn a second one.
+      </p>
+    </section>
+
+    <p class="colophon">
+      Communicate by Design — where specially designed instruction and assistive technology
+      meet practice. Nothing typed into this page is uploaded; the only thing that leaves it
+      is the vocabulary word itself, used to look up a picture for it.
+    </p>
+
+  </div>
+
 
 </div>
 
@@ -1599,54 +1871,88 @@ function borderFor(item, mode) {
   return '3pt solid ' + FK_COLOR[fkCategory(item.term || item.label)];
 }
 
+// Which card has its editor open. Only one at a time — the fiddly controls
+// are needed rarely, and showing them for every card is what made the old
+// list unusable at twelve words.
+let editingId = null;
+
+function editCard(id) {
+  editingId = (editingId === id) ? null : id;
+  render();
+  if (editingId !== null) {
+    const el = document.getElementById('cardEdit');
+    if (el) el.scrollIntoView({ block: 'nearest' });
+  }
+}
+
 function renderList() {
   const list  = document.getElementById('list');
   const empty = document.getElementById('listEmpty');
+  const edit  = document.getElementById('cardEdit');
   document.getElementById('count').textContent =
     items.length ? '· ' + items.length + ' word' + (items.length > 1 ? 's' : '') : '';
-  empty.style.display = items.length ? 'none' : 'block';
+  empty.hidden = items.length > 0;
 
   list.innerHTML = items.map(it => {
-    let thumb;
-    if (it.source === 'loading')  thumb = '<div class="none">…</div>';
-    else if (it.url)              thumb = '<img src="' + esc(it.url) + '" alt="">';
-    else                          thumb = '<div class="none">no symbol</div>';
-
-    let meta;
-    if (it.source === 'loading')      meta = 'Searching…';
-    else if (it.source === 'cache')   meta = 'From local cache · matched <code>' + esc(it.matched) + '</code>';
-    else if (it.source === 'arasaac') meta = 'From ARASAAC · matched <code>' + esc(it.matched) + '</code>';
-    else if (it.source === 'offline') meta = 'No connection to ARASAAC — prints as a draw-it box.';
-    else                              meta = 'No symbol found — prints as a draw-it box. Try a different search word below.';
-
-    const alts = (it.candidates || []).map((u, idx) =>
-      '<div class="alt' + (u === it.url ? ' sel' : '') + '" onclick="pickAlt(' + it.id + ',' + idx + ')">' +
-      '<img src="' + esc(u) + '" alt=""></div>').join('');
-
-    return '' +
-      '<div class="item">' +
-        '<div class="thumb">' + thumb + '</div>' +
-        '<div class="item-body">' +
-          '<div class="item-top">' +
-            '<input class="item-label" value="' + esc(it.label) + '" ' +
-                   'onchange="setLabel(' + it.id + ', this.value)" title="Label printed on the card">' +
-          '</div>' +
-          '<div class="item-meta">' + meta + '</div>' +
-          '<div class="item-actions">' +
-            (it.candidates && it.candidates.length > 1
-              ? '<button class="ghost tiny" onclick="toggleAlts(' + it.id + ')">Other symbols (' + it.candidates.length + ')</button>'
-              : '') +
-            '<input type="text" placeholder="search a different word" value="' + esc(it.term) + '" ' +
-                   'onchange="setTerm(' + it.id + ', this.value)" style="width:190px;font-size:12px;padding:5px 8px">' +
-            '<span class="copies">copies ' +
-              '<input type="number" min="1" max="60" value="' + it.copies + '" ' +
-                     'onchange="setCopies(' + it.id + ', this.value)"></span>' +
-            '<button class="ghost tiny" onclick="removeItem(' + it.id + ')">Remove</button>' +
-          '</div>' +
-          '<div class="alts' + (it.altsOpen ? ' show' : '') + '">' + alts + '</div>' +
-        '</div>' +
-      '</div>';
+    const im = it.source === 'loading' ? '<div class="none">…</div>'
+             : it.url ? '<img src="' + esc(it.url) + '" alt="">'
+             : '<div class="none">draw it</div>';
+    const fk = FK_COLOR[fkCategory(it.term || it.label)];
+    return '<button type="button" class="cchip" aria-expanded="' + (editingId === it.id) + '" ' +
+             'onclick="editCard(' + it.id + ')" title="Edit this card">' +
+      '<span class="im">' + im + '</span>' +
+      '<span class="w">' + esc(it.label) + '</span>' +
+      (it.copies > 1 ? '<span class="n">× ' + it.copies + '</span>' : '') +
+      '<span class="fk" style="background:' + fk + '"></span>' +
+    '</button>';
   }).join('');
+
+  // the editor for whichever card is open
+  const it = items.find(x => x.id === editingId);
+  if (!it) { edit.hidden = true; edit.innerHTML = ''; return; }
+  edit.hidden = false;
+
+  let meta;
+  if (it.source === 'loading')      meta = 'Searching…';
+  else if (it.source === 'cache')   meta = 'From your symbol cache · matched <code>' + esc(it.matched) + '</code>';
+  else if (it.source === 'arasaac') meta = 'From ARASAAC · matched <code>' + esc(it.matched) + '</code>';
+  else if (it.source === 'offline') meta = 'No connection to ARASAAC — this prints as a draw-it box.';
+  else                              meta = 'No symbol found — prints as a draw-it box. Try a different search word.';
+
+  const alts = (it.candidates || []).map((u, idx) =>
+    '<button type="button" class="alt' + (u === it.url ? ' sel' : '') + '" ' +
+      'aria-label="Use picture ' + (idx + 1) + '" aria-pressed="' + (u === it.url) + '" ' +
+      'onclick="pickAlt(' + it.id + ',' + idx + ')">' +
+    '<img src="' + esc(u) + '" alt=""></button>').join('');
+
+  edit.innerHTML =
+    '<div class="cedit">' +
+      '<h3>' + esc(it.label) + '</h3>' +
+      '<div class="row" style="margin-top:0">' +
+        '<div class="field">' +
+          '<label for="ed-label">Printed label</label>' +
+          '<input type="text" id="ed-label" value="' + esc(it.label) + '" ' +
+                 'onchange="setLabel(' + it.id + ', this.value)" style="width:170px">' +
+        '</div>' +
+        '<div class="field">' +
+          '<label for="ed-term">Search a different word</label>' +
+          '<input type="text" id="ed-term" value="' + esc(it.term) + '" ' +
+                 'placeholder="' + esc(it.label) + '" ' +
+                 'onchange="setTerm(' + it.id + ', this.value)" style="width:170px">' +
+        '</div>' +
+        '<div class="field">' +
+          '<label for="ed-copies">Copies</label>' +
+          '<input type="number" id="ed-copies" min="1" max="60" value="' + it.copies + '" ' +
+                 'onchange="setCopies(' + it.id + ', this.value)">' +
+        '</div>' +
+        '<div class="spacer"></div>' +
+        '<button class="ghost tiny" onclick="removeItem(' + it.id + ')">Remove card</button>' +
+        '<button class="ghost tiny" onclick="editCard(' + it.id + ')">Done</button>' +
+      '</div>' +
+      '<p class="item-meta">' + meta + '</p>' +
+      (alts ? '<p class="hint" style="margin-top:10px">Other pictures for this word:</p>' +
+              '<div class="alts show">' + alts + '</div>' : '') +
+    '</div>';
 }
 
 function renderSheet() {
@@ -1745,10 +2051,11 @@ function renderBoard() {
     if (isChoiceSlot(i)) {
       return '<div class="slot">' +
         '<h3>Slot ' + (i+1) + ' — the student chooses</h3>' +
-        '<input class="slot-label" value="' + esc(board.labels[i] || '') + '" ' +
+        '<input class="slot-label" aria-label="Label above box ' + (i+1) + '" ' +
+               'value="' + esc(board.labels[i] || '') + '" ' +
                'onchange="setSlotLabel(' + i + ', this.value)">' +
         '<div class="slot-sym"><div class="none">filled by the student<br>from your choices</div></div>' +
-        '<p class="hint">Add the options below.</p>' +
+        '<p class="hint">Add the choices below.</p>' +
       '</div>';
     }
     const syms = sl.syms || [];
@@ -1765,15 +2072,20 @@ function renderBoard() {
                   : s.url ? '<img src="' + esc(s.url) + '" alt="">'
                   : '<div class="none">none</div>';
       const alts = (s.candidates || []).map((u, k) =>
-        '<div class="alt' + (u === s.url ? ' sel' : '') + '" onclick="pickSymAlt(' + i + ',' + j + ',' + k + ')">' +
-        '<img src="' + esc(u) + '" alt=""></div>').join('');
+        '<button type="button" class="alt' + (u === s.url ? ' sel' : '') + '" ' +
+          'aria-label="Use picture ' + (k + 1) + ' for ' + esc(s.word) + '" ' +
+          'aria-pressed="' + (u === s.url) + '" ' +
+          'onclick="pickSymAlt(' + i + ',' + j + ',' + k + ')">' +
+        '<img src="' + esc(u) + '" alt=""></button>').join('');
       return '<div style="flex:1 1 100%">' +
         '<div style="display:flex;gap:9px;align-items:flex-start">' +
-          '<div class="symchip" title="other pictures for ' + esc(s.word) + '" ' +
-               'onclick="toggleSymAlts(' + i + ',' + j + ')">' + inner + '</div>' +
+          '<button type="button" class="symchip lg" aria-expanded="' + !!s.altsOpen + '" ' +
+               'title="Other pictures for ' + esc(s.word) + '" ' +
+               'onclick="toggleSymAlts(' + i + ',' + j + ')">' + inner + '</button>' +
           '<div style="flex:1;min-width:0">' +
             '<div class="item-meta" style="margin-top:0"><strong>' + esc(s.word) + '</strong> — ' + symStatus(s) + '</div>' +
-            '<input type="text" placeholder="search a different word" value="' + esc(s.term) + '" ' +
+            '<input type="text" aria-label="Search a different word for ' + esc(s.word) + '" ' +
+                   'placeholder="search a different word" value="' + esc(s.term) + '" ' +
                    'onchange="setSlotSymTerm(' + i + ',' + j + ', this.value)" ' +
                    'style="width:100%;font-size:12px;padding:5px 8px;margin-top:5px">' +
           '</div>' +
@@ -1784,10 +2096,12 @@ function renderBoard() {
 
     return '<div class="slot">' +
       '<h3>Slot ' + (i+1) + '</h3>' +
-      '<input class="slot-label" value="' + esc(board.labels[i] || '') + '" ' +
+      '<input class="slot-label" aria-label="Label above box ' + (i+1) + '" ' +
+             'value="' + esc(board.labels[i] || '') + '" ' +
              'onchange="setSlotLabel(' + i + ', this.value)">' +
       '<div class="slot-sym" style="' + gridCols(syms.length) + '">' + big + '</div>' +
-      '<input type="text" placeholder="what goes here — work, or calm, body" ' +
+      '<input type="text" aria-label="Pictures for box ' + (i+1) + ', comma separated" ' +
+             'placeholder="what goes here — work, or calm, body" ' +
              'value="' + esc(symWords(sl).join(', ')) + '" ' +
              'onchange="setSlotWords(' + i + ', this.value)" style="width:100%;margin-bottom:9px">' +
       (syms.length ? '<div class="symstrip">' + perSym + '</div>'
@@ -1908,11 +2222,11 @@ function renderPresent() {
     // Choice slot, nothing picked yet -> show the options as big tiles.
     if (isChoice && board.chosen === null) {
       const tiles = board.opts.map((o, oi) =>
-        '<div class="choice" onclick="chooseOption(' + oi + ')">' +
-          '<div class="ci">' + (o.url ? '<img src="' + esc(o.url) + '" alt="' + esc(o.label) + '">'
-                                      : '<span style="color:#999">?</span>') + '</div>' +
-          '<div class="cl">' + esc(castLabel(o.label, 'upper')) + '</div>' +
-        '</div>').join('');
+        '<button type="button" class="choice" onclick="chooseOption(' + oi + ')">' +
+          '<span class="ci">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
+                                       : '<span style="color:#999">?</span>') + '</span>' +
+          '<span class="cl">' + esc(castLabel(o.label, 'upper')) + '</span>' +
+        '</button>').join('');
       return '<div class="pbox"><div class="plabel">' + label + '</div>' +
              (board.opts.length ? '<div class="choices">' + tiles + '</div>'
                                 : '<div class="pimg"><div class="empty">Add choices in step 3</div></div>') +
@@ -1924,10 +2238,11 @@ function renderPresent() {
     const cap  = pick ? castLabel(pick.label || '', 'upper') : '';
     const img  = art.length ? art.map(s => '<img src="' + esc(s.url) + '" alt="">').join('')
                             : '<div class="empty">no symbol</div>';
-    return '<div class="pbox speakable" onclick="speakBox(' + i + ')">' +
-             '<div class="plabel">' + label + (cap ? ' · ' + esc(cap) : '') + '</div>' +
-             '<div class="pimg" style="' + gridCols(art.length) + '">' + img + '</div>' +
-           '</div>';
+    return '<button type="button" class="pbox speakable" onclick="speakBox(' + i + ')" ' +
+             'aria-label="Say ' + label + ' out loud">' +
+             '<span class="plabel">' + label + (cap ? ' · ' + esc(cap) : '') + '</span>' +
+             '<span class="pimg" style="' + gridCols(art.length) + '">' + img + '</span>' +
+           '</button>';
   }).join('');
 
   const note = document.getElementById('chosenNote');
@@ -2353,89 +2668,108 @@ function drawRoutine() {
   host.innerHTML = routine.steps.map((st, i) => {
     const syms = st.syms || [];
 
-    const perSym = syms.map((s, j) => {
-      const inner = s.source === 'loading' ? '<div class="none">…</div>'
-                  : s.url ? '<img src="' + esc(s.url) + '" alt="">'
-                  : '<div class="none">none</div>';
-      const alts = (s.candidates || []).map((u, k) =>
-        '<div class="alt' + (u === s.url ? ' sel' : '') + '" onclick="pickStepSymAlt(' + i + ',' + j + ',' + k + ')">' +
-        '<img src="' + esc(u) + '" alt=""></div>').join('');
-      return '<div>' +
-        '<div class="symchip" title="other pictures for ' + esc(s.word) + '" ' +
-             'onclick="toggleStepSymAlts(' + i + ',' + j + ')">' + inner + '</div>' +
-        '<input type="text" data-k="s' + i + '-t' + j + '" placeholder="other word" ' +
-               'value="' + esc(s.term) + '" onchange="setStepSymTerm(' + i + ',' + j + ', this.value)" ' +
-               'style="width:76px;font-size:11px;padding:4px 5px;margin-top:5px">' +
-        '<div class="alts' + (s.altsOpen ? ' show' : '') + '" style="max-width:280px">' + alts + '</div>' +
-      '</div>';
+    // pictures sit inline at row height; clicking one opens its alternatives
+    const pics = syms.map((sy, j) => {
+      const inner = sy.source === 'loading' ? '<span class="none">…</span>'
+                  : sy.url ? '<img src="' + esc(sy.url) + '" alt="">'
+                  : '<span class="none">none</span>';
+      return '<button type="button" class="symchip" onclick="toggleStepSymAlts(' + i + ',' + j + ')" ' +
+             'aria-expanded="' + !!sy.altsOpen + '" ' +
+             'title="Other pictures for ' + esc(sy.word) + '">' + inner + '</button>';
     }).join('');
 
-    const optRows = (st.opts || []).map(o =>
-      '<div class="opt-row">' +
-        '<div class="thumb-sm">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
-          : '<span style="font-size:9px;color:#999">' + (o.source === 'loading' ? '…' : 'none') + '</span>') +
-        '</div>' +
-        '<strong style="flex:1">' + esc(o.label) + '</strong>' +
-        '<button class="ghost tiny" onclick="removeStepOption(' + i + ',' + o.id + ')">Remove</button>' +
-      '</div>').join('');
+    // any open alternative picker, below the row
+    const openSym = syms.findIndex(x => x.altsOpen);
+    let altBlock = '';
+    if (openSym >= 0) {
+      const sy = syms[openSym];
+      const alts = (sy.candidates || []).map((u, k) =>
+        '<button type="button" class="alt' + (u === sy.url ? ' sel' : '') + '" ' +
+          'aria-label="Use picture ' + (k + 1) + ' for ' + esc(sy.word) + '" ' +
+          'aria-pressed="' + (u === sy.url) + '" ' +
+          'onclick="pickStepSymAlt(' + i + ',' + openSym + ',' + k + ')">' +
+        '<img src="' + esc(u) + '" alt=""></button>').join('');
+      altBlock = '<div class="step-opts-line">' +
+        '<span class="hint">Pictures for <strong>' + esc(sy.word) + '</strong>:</span>' +
+        (alts || '<span class="hint">No alternatives found.</span>') +
+        '<input type="text" data-k="s' + i + '-t' + openSym + '" placeholder="search another word" ' +
+               'value="' + esc(sy.term) + '" onchange="setStepSymTerm(' + i + ',' + openSym + ', this.value)" ' +
+               'style="width:150px;font-size:12px;padding:5px 8px">' +
+      '</div>';
+    }
 
-    const choiceBlock = st.choice
-      ? '<div class="step-opts">' +
-          '<label style="font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--slate)">' +
-            'The student picks from</label>' +
-          '<textarea data-k="s' + i + '-opts" style="margin-top:5px" ' +
-                    'placeholder="reading, history, bathroom, lunch"></textarea>' +
-          '<div class="row" style="margin-top:7px">' +
-            '<button class="tiny" onclick="addStepOptions(' + i + ')">Add options</button>' +
-            (st.opts.length ? '<button class="ghost tiny" onclick="clearStepOptions(' + i + ')">Clear</button>' : '') +
-          '</div>' +
-          (optRows ||
-            '<p class="hint" style="margin-top:8px">Two to six. More than six stops being a ' +
-            'choice and starts being a search.</p>') +
-        '</div>'
-      : '';
+    // a choice step shows its options as chips rather than a second editor
+    let optLine = '';
+    if (st.choice) {
+      const chips = (st.opts || []).map(o =>
+        '<span class="ochip">' +
+          (o.url ? '<img src="' + esc(o.url) + '" alt="">' : '') +
+          esc(o.label) +
+          '<button type="button" class="x" aria-label="Remove ' + esc(o.label) + '" ' +
+                  'onclick="removeStepOption(' + i + ',' + o.id + ')">×</button>' +
+        '</span>').join('');
+      optLine = '<div class="step-opts-line">' +
+        (chips || '<span class="hint">The student picks from — nothing added yet.</span>') +
+        (st.opts.length < 6
+          ? '<button type="button" class="addopt" onclick="promptStepOptions(' + i + ')">+ add options</button>'
+          : '<span class="hint">Six is the most a choice can hold.</span>') +
+      '</div>';
+    }
 
-    return '<div class="step">' +
+    return '<div class="step' + (st.choice ? ' is-choice' : '') + '">' +
       '<div class="step-top">' +
-        '<div class="step-n">' + (i + 1) + '</div>' +
-        '<div class="field step-name">' +
-          '<label>Step name</label>' +
-          '<input class="step-lab" data-k="s' + i + '-label" placeholder="e.g. Calm body" ' +
-                 'value="' + esc(st.label) + '" onchange="setStepLabel(' + i + ', this.value)">' +
-        '</div>' +
-        '<div class="field step-words">' +
-          '<label>Pictures — a comma adds another</label>' +
-          '<input type="text" data-k="s' + i + '-words" placeholder="calm, body" ' +
-                 'value="' + esc(symWords(st).join(', ')) + '" ' +
-                 (st.choice ? 'disabled title="the student fills this step" ' : '') +
-                 'onchange="setStepWords(' + i + ', this.value)">' +
-        '</div>' +
-        '<div class="field">' +
-          '<label>Minutes</label>' +
-          '<input type="number" min="0" max="120" class="step-min" data-k="s' + i + '-min" ' +
-                 'value="' + (st.minutes || 0) + '" onchange="setStepMinutes(' + i + ', this.value)">' +
-        '</div>' +
-        '<button class="ghost tiny" onclick="moveStep(' + i + ',-1)" ' +
-                (i === 0 ? 'disabled' : '') + ' title="move up">&uarr;</button>' +
-        '<button class="ghost tiny" onclick="moveStep(' + i + ',1)" ' +
-                (i === last ? 'disabled' : '') + ' title="move down">&darr;</button>' +
-        '<button class="ghost tiny" onclick="removeStep(' + i + ')" ' +
-                (last === 0 ? 'disabled' : '') + '>Remove</button>' +
+        '<span class="step-n">' + (i + 1) + '</span>' +
+        '<input class="step-lab" data-k="s' + i + '-label" aria-label="Name of step ' + (i + 1) + '" ' +
+               'placeholder="step name" value="' + esc(st.label) + '" ' +
+               'onchange="setStepLabel(' + i + ', this.value)">' +
+        (st.choice
+          ? '<span class="hint" style="flex:1 1 150px">the student fills this</span>'
+          : '<input type="text" class="step-words" data-k="s' + i + '-words" ' +
+                   'aria-label="Pictures for step ' + (i + 1) + ', comma separated" ' +
+                   'placeholder="pictures — calm, body" ' +
+                   'value="' + esc(symWords(st).join(', ')) + '" ' +
+                   'onchange="setStepWords(' + i + ', this.value)">') +
+        (st.choice ? '' : '<span class="step-pics">' + pics + '</span>') +
+        '<input type="number" min="0" max="120" class="step-min" data-k="s' + i + '-min" ' +
+               'aria-label="Minutes for step ' + (i + 1) + ', 0 for none" ' +
+               'value="' + (st.minutes || 0) + '" onchange="setStepMinutes(' + i + ', this.value)">' +
+        '<span class="unit">min</span>' +
+        '<label class="cbox" title="Hand this step to the student">' +
+          '<input type="checkbox" ' + (st.choice ? 'checked' : '') +
+            ' onchange="toggleStepChoice(' + i + ')"> picks' +
+        '</label>' +
+        '<span class="step-io">' +
+          '<button type="button" class="iconbtn" onclick="moveStep(' + i + ',-1)" ' +
+                  (i === 0 ? 'disabled' : '') + ' aria-label="Move step ' + (i+1) + ' up">&uarr;</button>' +
+          '<button type="button" class="iconbtn" onclick="moveStep(' + i + ',1)" ' +
+                  (i === last ? 'disabled' : '') + ' aria-label="Move step ' + (i+1) + ' down">&darr;</button>' +
+          '<button type="button" class="iconbtn" onclick="removeStep(' + i + ')" ' +
+                  (last === 0 ? 'disabled' : '') + ' aria-label="Remove step ' + (i+1) + '">&times;</button>' +
+        '</span>' +
       '</div>' +
-      '<div class="step-row2">' +
-        '<div style="' + (st.choice ? 'flex:0 1 240px' : 'flex:1 1 210px') + '">' +
-          '<label class="cbox"><input type="checkbox" ' + (st.choice ? 'checked' : '') +
-            ' onchange="toggleStepChoice(' + i + ')"> The student chooses this step</label>' +
-          (st.choice
-            ? '<p class="hint" style="margin-top:10px">The student fills this box, and what ' +
-              'they pick goes in the choice log. Honor it.</p>'
-            : (syms.length ? '<div class="symstrip" style="margin-top:10px">' + perSym + '</div>'
-                           : '<p class="hint" style="margin-top:10px">No picture yet.</p>')) +
-        '</div>' +
-        choiceBlock +
-      '</div>' +
+      optLine + altBlock +
     '</div>';
   }).join('');
+}
+
+// Options used to need their own textarea inside every choice step, which is
+// most of what made the rows tall. They are added rarely; a prompt is enough.
+function promptStepOptions(i) {
+  const st = routine.steps[i];
+  if (!st) return;
+  const raw = window.prompt(
+    'What can the student pick from at step ' + (i + 1) +
+    (st.label ? ' (' + st.label + ')' : '') + '?\n\nSeparate with commas.',
+    '');
+  if (!raw) return;
+  const words = raw.split(/[\n,;]+/).map(x => x.trim()).filter(Boolean);
+  for (const w of words) {
+    if (st.opts.length >= 6) break;
+    const o = { id: rOptId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
+    st.opts.push(o);
+    lookupInto(o, w, afterRoutine);
+  }
+  afterRoutine();
 }
 
 /* ── the printed strip ───────────────────────────────────────────────────
@@ -2553,11 +2887,13 @@ function renderPresentRoutine() {
     const pick = (s.choice && s.chosen !== null) ? (s.opts[s.chosen] || {}) : null;
     const url  = pick ? pick.url : (symsWithArt(s)[0] || {}).url;
     const cls  = i === at ? 'rtile now' : (i < at ? 'rtile past' : 'rtile');
-    return '<div class="' + cls + '" onclick="goStep(' + i + ')">' +
-      '<div class="rt-i' + (url ? '' : ' empty') + '">' +
-        (url ? '<img src="' + esc(url) + '" alt="">' : '') + '</div>' +
-      '<div class="rt-l">' + esc(s.label || String(i + 1)) + '</div>' +
-    '</div>';
+    return '<button type="button" class="' + cls + '" onclick="goStep(' + i + ')" ' +
+      'aria-current="' + (i === at ? 'step' : 'false') + '" ' +
+      'aria-label="Go to step ' + (i + 1) + (s.label ? ', ' + esc(s.label) : '') + '">' +
+      '<span class="rt-i' + (url ? '' : ' empty') + '">' +
+        (url ? '<img src="' + esc(url) + '" alt="">' : '') + '</span>' +
+      '<span class="rt-l">' + esc(s.label || String(i + 1)) + '</span>' +
+    '</button>';
   }).join('');
 
   const host  = document.getElementById('presentBoxes');
@@ -2565,13 +2901,13 @@ function renderPresentRoutine() {
 
   if (st.choice && st.chosen === null) {
     const tiles = (st.opts || []).map((o, oi) =>
-      '<div class="choice" onclick="chooseStepOption(' + oi + ')">' +
-        '<div class="ci">' + (o.url ? '<img src="' + esc(o.url) + '" alt="' + esc(o.label) + '">'
-                                    : '<span style="color:#999">?</span>') + '</div>' +
-        '<div class="cl">' + esc(castLabel(o.label, 'upper')) + '</div>' +
-      '</div>').join('');
+      '<button type="button" class="choice" onclick="chooseStepOption(' + oi + ')">' +
+        '<span class="ci">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
+                                     : '<span style="color:#999">?</span>') + '</span>' +
+        '<span class="cl">' + esc(castLabel(o.label, 'upper')) + '</span>' +
+      '</button>').join('');
     host.innerHTML = '<div class="pbox"><div class="plabel">' + label + '</div>' +
-      (st.opts.length ? '<div class="choices">' + tiles + '</div>'
+      (st.opts.length ? '<div class="choices" role="group" aria-label="Choose one">' + tiles + '</div>'
                       : '<div class="pimg"><div class="empty">Add choices for this step</div></div>') +
       '</div>';
     choicesShownAt = Date.now();          // the latency clock starts with the tiles
@@ -2581,10 +2917,11 @@ function renderPresentRoutine() {
     const imgs = art.length ? art.map(s => '<img src="' + esc(s.url) + '" alt="">').join('')
                             : '<div class="empty">no picture</div>';
     const cap  = pick ? ' · ' + esc(castLabel(pick.label || '', 'upper')) : '';
-    host.innerHTML = '<div class="pbox speakable" onclick="speakStep()">' +
-      '<div class="plabel">' + label + cap + '</div>' +
-      '<div class="pimg" style="' + gridCols(art.length) + '">' + imgs + '</div>' +
-    '</div>';
+    host.innerHTML = '<button type="button" class="pbox speakable" onclick="speakStep()" ' +
+      'aria-label="Say ' + label + ' out loud">' +
+      '<span class="plabel">' + label + cap + '</span>' +
+      '<span class="pimg" style="' + gridCols(art.length) + '">' + imgs + '</span>' +
+    '</button>';
   }
 
   const note  = document.getElementById('chosenNote');
