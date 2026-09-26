@@ -8,7 +8,18 @@
   ============================================================================
   Communicate by Design — Symbol Card Sheet Generator
   ============================================================================
-  Standalone classroom tool. Type words or phrases, pull symbols, print a sheet.
+  Standalone classroom tool. Three things in one file, sharing one symbol engine:
+
+    1. PRINT SYMBOL CARDS   type words, pull symbols, print a cuttable sheet
+    2. FIRST-THEN BOARD     two boxes: now, and what comes next
+    3. ROUTINE & TIMERS     the same idea at any number of steps, with optional
+                            minutes per step and any step handed to the student
+
+  Any box in 2 or 3 can hold up to three pictures, which read as ONE message
+  ("calm" + "body"), not as separate steps.
+
+  ONE FILE ON PURPOSE. The handoff story is "email this to your para" — a
+  second file to keep track of would halve what the tool is worth.
 
   HOW TO RUN:
     Double-click this file. It opens in any browser. Nothing to install.
@@ -49,6 +60,11 @@
     --fk-white:  #757575;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Load-bearing. Several elements below set display:flex AND get toggled with
+     the hidden attribute, and an author-level display beats the UA sheet's
+     [hidden] rule — so without this they stay visible when hidden. */
+  [hidden] { display: none !important; }
   body {
     font-family: Arial, Helvetica, sans-serif;
     background: var(--navy);
@@ -316,6 +332,124 @@
     font-size: 9pt; color: #444; font-weight: bold;
   }
 
+  /* ── MULTI-SYMBOL BOXES ────────────────────────────────────
+     A box can hold more than one picture. Two symbols side by side read as
+     ONE message — "calm" + "body" is a single instruction, not two steps,
+     which is how a sentence strip works on paper. Every image area sets its
+     own column count inline so each picture gets an equal share; the
+     width/height pairing on the images is load-bearing and unchanged. */
+  .symstrip { display: flex; gap: 10px; flex-wrap: wrap; }
+  .symchip {
+    width: 62px; height: 62px; background: #fff; border-radius: 6px;
+    display: grid; place-items: center; overflow: hidden; cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .symchip:hover { border-color: var(--teal); }
+  .symchip img  { max-width: 100%; max-height: 100%; }
+  .symchip .none { font-size: 9px; color: #999; text-align: center; padding: 2px; }
+
+  /* ── STEP EDITOR (routine mode) ────────────────────────────
+     One row per step, one panel for the lot. Six numbered panels for a
+     six-step routine would be unusable — the row is the unit of editing. */
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    border: 1px solid var(--line); border-radius: 10px;
+    background: rgba(27,31,59,.55); padding: 12px 13px;
+  }
+  .step-top { display: flex; gap: 9px; align-items: flex-end; flex-wrap: wrap; }
+  .step-n {
+    flex: 0 0 26px; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--teal-d); color: #fff; display: grid; place-items: center;
+    font: bold 12px Arial, Helvetica, sans-serif; margin-bottom: 8px;
+  }
+  .step-name { flex: 1 1 150px; min-width: 130px; }
+  .step-lab {
+    width: 100%; font: bold 15px Arial, Helvetica, sans-serif;
+    background: #1B1F3B; color: var(--white);
+    border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px;
+  }
+  .step-words { flex: 2 1 210px; min-width: 180px; }
+  .step-words input { width: 100%; }
+  .step-words input:disabled { opacity: .45; cursor: not-allowed; }
+  .step-min { width: 72px; }
+  .step-top .field label { white-space: nowrap; }
+  .step-row2 { display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap; margin-top: 11px; }
+  .step-opts {
+    flex: 1 1 290px; min-width: 250px;
+    border-left: 2px solid var(--teal-d); padding-left: 12px;
+  }
+  .step-opts textarea { min-height: 54px; }
+  .cbox { display: flex; align-items: center; gap: 7px; font-size: 12.5px; cursor: pointer; }
+  .cbox input { accent-color: var(--teal); width: 15px; height: 15px; }
+
+  /* ── ROUTINE: the device view ──────────────────────────────
+     The strip across the top IS the support. A student needs to see where
+     they are and what is still coming, not only the box they are in. */
+  .rstrip { flex: 0 0 auto; display: flex; gap: 6px; margin-bottom: 1.4vh; }
+  .rtile {
+    flex: 1 1 0; min-width: 0; background: var(--card);
+    border: 2px solid var(--line); border-radius: 10px; padding: .55vh .4vw;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    opacity: .55; cursor: pointer;
+  }
+  .rtile.now  { opacity: 1; border-color: var(--amber); }
+  .rtile.past { opacity: .3; }
+  .rtile .rt-i {
+    width: 100%; height: 5vh; background: #fff; border-radius: 5px;
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .rtile .rt-i.empty { background: transparent; border: 1.5px dashed var(--line); }
+  .rtile .rt-i img { max-width: 100%; max-height: 100%; }
+  .rtile .rt-l {
+    font-size: clamp(9px, 1.5vh, 14px); color: var(--white); text-align: center;
+    line-height: 1.15; max-width: 100%; overflow: hidden;
+  }
+  .timer {
+    font: bold clamp(20px, 4.2vh, 46px)/1 Arial, Helvetica, sans-serif;
+    color: var(--teal); letter-spacing: 1px; padding: 0 16px; white-space: nowrap;
+  }
+  .timer.low  { color: var(--amber); }
+  .timer.done { color: var(--amber); font-size: clamp(14px, 2.6vh, 28px); }
+  .rnav { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .rnav button:disabled { opacity: .35; cursor: default; }
+
+  /* ── ROUTINE: the printed strip ────────────────────────────
+     Vertical, top to bottom. That is the direction a visual schedule is read
+     in, and it is the shape that survives six steps on one page. */
+  .routine-shell { background: #fff; border-radius: 12px; padding: .5in; color: #000; }
+  .rprint-title { font-size: 15pt; color: var(--navy); font-weight: bold; margin-bottom: .16in; }
+  .rrow {
+    display: flex; align-items: stretch; gap: .13in; margin-bottom: .13in;
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  .rrow .rn {
+    flex: 0 0 .4in; background: var(--navy); color: #fff; border-radius: 6pt;
+    display: grid; place-items: center; font-weight: bold; font-size: 13pt;
+  }
+  .rrow .rlab {
+    flex: 0 0 1.6in; border: 2.5pt solid var(--navy); border-radius: 7pt;
+    display: grid; place-items: center; text-align: center; font-weight: bold;
+    color: var(--navy); padding: .05in; overflow-wrap: break-word;
+  }
+  .rrow .rsym {
+    flex: 1 1 auto; border: 2.5pt solid var(--navy); border-radius: 7pt;
+    display: grid; place-items: center; overflow: hidden; padding: .04in;
+  }
+  .rrow .rsym img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
+  .rrow .rsym .blank {
+    align-self: stretch; justify-self: stretch;
+    border: 1.5pt dashed #bbb; border-radius: 6pt;
+  }
+  .rrow .rdur {
+    flex: 0 0 .74in; border: 2.5pt solid var(--amber); border-radius: 7pt;
+    display: grid; place-items: center; font-weight: bold; font-size: 10.5pt;
+    color: #7A5400; text-align: center; line-height: 1.2;
+  }
+  .rrow .rdur.none { border-color: #E2E2E2; color: #CCC; }
+  /* Full page: the strip is the thing that gets laminated, so the cards to cut
+     start on a sheet of their own rather than dangling off the bottom of it. */
+  .rcut-sheet { break-before: page; page-break-before: always; }
+
   /* ── STATUS BANNER ──────────────────────────────────────── */
   .banner {
     border-radius: 9px; padding: 11px 14px; margin-bottom: 16px;
@@ -420,13 +554,17 @@
     .sheet { width: 100%; }
     .pcard { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-    /* One file, two printable outputs — print whichever mode is open. */
+    /* One file, three printable outputs — print whichever mode is open. Each
+       one is named, rather than excluded: a fourth mode should print nothing
+       rather than silently print on top of another one. */
     .modes, .present { display: none !important; }
-    body.board-mode .sheet-shell { display: none !important; }
-    body:not(.board-mode) .board-shell { display: none !important; }
-    .board-shell { padding: 0; border-radius: 0; }
-    .bbox { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    body.board-mode .attrib { position: static; padding-bottom: 0; }
+    body:not([data-mode="print"])   .sheet-shell   { display: none !important; }
+    body:not([data-mode="board"])   .board-shell   { display: none !important; }
+    body:not([data-mode="routine"]) .routine-shell { display: none !important; }
+    .board-shell, .routine-shell { padding: 0; border-radius: 0; }
+    .bbox, .rrow > div { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    /* Only the card sheet runs long enough to need the fixed attribution. */
+    body:not([data-mode="print"]) .attrib { position: static; padding-bottom: 0; }
 
     /* The ARASAAC attribution is required on every printed sheet. In flow it
        takes a page of its own whenever the cards happen to fill the last page
@@ -446,10 +584,11 @@
   <div class="brand-icon">💬</div>
   <div class="brand">
     <h1>Symbol Card Sheet Generator</h1>
-    <p>Communicate by Design · type words → pull symbols → print</p>
+    <p>Communicate by Design · symbol cards · First–Then · routines with timers</p>
   </div>
   <div class="spacer"></div>
-  <button class="noprint" onclick="window.print()">Print sheet</button>
+  <button class="ghost noprint" onclick="openHelp()">How to use this</button>
+  <button class="noprint" onclick="window.print()">Print</button>
 </header>
 
 <div class="wrap">
@@ -457,93 +596,8 @@
   <div class="modes noprint" role="tablist">
     <button role="tab" aria-selected="true"  onclick="setMode('print')" id="tab-print">Print symbol cards</button>
     <button role="tab" aria-selected="false" onclick="setMode('board')" id="tab-board">First–Then board</button>
+    <button role="tab" aria-selected="false" onclick="setMode('routine')" id="tab-routine">Routine &amp; timers</button>
   </div>
-
-  <details class="help noprint" id="help">
-    <summary>How to use this</summary>
-    <div class="help-body">
-      <p>Type words. Get a page of picture cards. Cut them out. That is the whole tool.</p>
-
-      <h3>Making a sheet</h3>
-      <ol>
-        <li>Type your words in the box below — one per line, or separated by commas.</li>
-        <li>Click <strong>Add words</strong>. A picture is found for each one.</li>
-        <li>If a picture is wrong, click <strong>Other symbols</strong> on that card and pick a
-            better one, or type a different word in the small search box. The printed label
-            stays whatever you typed.</li>
-        <li>Set the card size and how much space you want for cutting.</li>
-        <li>Click <strong>Print sheet</strong>.</li>
-      </ol>
-
-      <h3 class="warn">One thing that matters when you print</h3>
-      <p>In the print window, set <strong>Scale</strong> to <strong>100%</strong> — not
-         "Fit to page." Fit to page shrinks everything, and the cards stop being the size
-         they say they are.</p>
-
-      <h3>Good to know</h3>
-      <ul>
-        <li><strong>You need internet</strong> the first time you look up a word — that is how
-            the pictures are found.</li>
-        <li><strong>Nothing is saved anywhere but your own browser.</strong> No account, no
-            upload, no student information leaves this page. The only thing sent out is the
-            vocabulary word itself, to look up a picture for it.</li>
-        <li><strong>Card borders are colored by word type</strong> — green for actions, gray for
-            things, yellow for people, orange for describing words, blue for little words, pink
-            for social words. Cut apart, the color helps show how words fit together.</li>
-        <li><strong>Check the student's own system first.</strong> If they already use a device,
-            book, or cards, match those pictures where you can. A student who learned one
-            picture for "break" should not have to learn a second one.</li>
-        <li>A student may select a card, point to it, use gaze to indicate it, hand it to you,
-            or answer some other way entirely. All of it counts.</li>
-      </ul>
-
-      <h3>The First–Then board (second tab)</h3>
-      <p>Two boxes: what is happening now, and what comes next. Print it and laminate it,
-         or open it on a device where tapping a box says it out loud.</p>
-      <ul>
-        <li><strong>Labels are yours to set.</strong> First / Then, Now / Next, or your own
-            words. Use whatever this student already knows — a student who learned one
-            wording should not have to learn a second.</li>
-        <li><strong>Two different jobs.</strong> With the adult setting both boxes, the board
-            tells a student what is coming — it helps with transitions, and it is not the
-            student communicating. Turn on <em>let the student choose what comes next</em> and
-            the second box becomes something else entirely: the student is now telling
-            <em>you</em> something.</li>
-        <li><strong>If they choose, honor it.</strong> A choice that gets overridden teaches
-            that choosing does not matter, which is the opposite of the point.</li>
-        <li><strong>Two to six options.</strong> More than six stops being a choice and starts
-            being a search.</li>
-        <li><strong>On an iPad:</strong> add the page to the Home Screen first, then turn on
-            Guided Access. Opening a downloaded file directly in Safari works but is fiddly.</li>
-      </ul>
-
-      <h3>The choice log</h3>
-      <p>When a student picks something, it is recorded — the word, the time, what it was
-         chosen from, and how long it took. It is a record of <strong>what they
-         communicated</strong>, not a score.</p>
-      <ul>
-        <li><strong>Nothing is marked right or wrong</strong>, because there is no correct
-            answer to a choice. You will not find an accuracy figure anywhere in this tool.</li>
-        <li><strong>Mark it spontaneous or prompted</strong> from the buttons under the board.
-            Language becoming self-initiated is the thing worth watching over months.</li>
-        <li><strong>"Could not" is about the room, not the student.</strong> If choices often
-            cannot be honored, the options on the board are the thing to change.</li>
-        <li><strong>"Took" is not a target.</strong> Time usually shortens as a board becomes
-            familiar, but a long pause is often a student weighing two things they want, and a
-            fast tap can be a reach for whatever was nearest. Watch it across weeks in the same
-            setup, never coach for speed, and when it shifts look at what changed around the
-            student first.</li>
-        <li><strong>It stays on this device.</strong> Nothing is uploaded. The CSV is written
-            only when you click Export. Use initials or a code, not a full name. The CSV has no
-            room for the note above — if you hand the file to someone, hand them the note too.</li>
-      </ul>
-
-      <h3>If the pictures do not appear</h3>
-      <p>You are probably offline, or a school network is blocking the picture site. Cards will
-         still print as empty boxes you can draw in. Reconnect and click
-         <strong>Retry lookups</strong>.</p>
-    </div>
-  </details>
 
   <div id="banner" class="banner"></div>
 
@@ -731,8 +785,95 @@
       </p>
     </div>
 
+    <div class="panel noprint" style="padding-bottom:8px">
+      <h2>5 · Print preview</h2>
+      <p class="hint">Print at 100%, not "Fit to page."</p>
+    </div>
+    <div class="board-shell">
+      <div id="boardPrint"></div>
+    </div>
+
+  </div><!-- /mode-board -->
+
+  <!-- ══ ROUTINE — steps, timers, choices ══════════════════ -->
+  <div id="mode-routine" hidden>
+
     <div class="panel noprint">
-      <h2>5 · Choice log <span style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0">· what the student communicated</span></h2>
+      <h2>1 · The routine</h2>
+      <p class="hint" style="margin-bottom:13px">
+        A chain of First–Then pairs instead of one. Each step gets a name, one or more pictures,
+        and — if it helps — a number of minutes. Any step can be handed to the student to choose
+        instead of being set for them.
+      </p>
+      <div class="row" style="margin-top:0">
+        <div class="field">
+          <label for="rTitle">Routine name (optional)</label>
+          <input type="text" id="rTitle" placeholder="e.g. Regulate, then return to class"
+                 oninput="saveRoutine();renderRoutinePrint()" style="width:290px">
+        </div>
+        <div class="spacer"></div>
+        <div class="field">
+          <label for="rPreset">Start from</label>
+          <select id="rPreset" onchange="loadRoutinePreset(this.value)">
+            <option value="">Choose…</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel noprint">
+      <h2>2 · Steps</h2>
+      <div class="steps" id="steps"></div>
+      <div class="row">
+        <button onclick="addStep()">Add a step</button>
+        <p class="hint" style="flex:1;min-width:250px">
+          Type <code>calm, body</code> to put two pictures in one box — they read as one message.
+          <strong>Minutes are for predictability, not performance.</strong> The clock says how
+          long; it does not end the step. When it runs out it says so and waits for you, because
+          a student who is not regulated yet needs the break to keep going.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel noprint">
+      <h2>3 · Use it</h2>
+      <div class="row">
+        <button onclick="presentRoutine()">Open on this device</button>
+        <button class="ghost" onclick="window.print()">Print the routine</button>
+        <div class="field">
+          <label for="rSize">Printed size</label>
+          <select id="rSize" onchange="saveRoutine();renderRoutinePrint()">
+            <option value="full" selected>Full page — wall or table</option>
+            <option value="half">Half page — desk or binder</option>
+          </select>
+        </div>
+        <label class="cbox" style="margin-bottom:9px">
+          <input type="checkbox" id="rSpeak" checked onchange="saveRoutine()"> Speak each step
+        </label>
+      </div>
+      <p class="hint" style="margin-top:10px">
+        <strong>On a device:</strong> the whole strip sits across the top so the student can see
+        what is still coming, with the current step large underneath. You move it on — tapping a
+        step in the strip jumps straight there. <strong>Printed:</strong> laminate it and add
+        velcro; the choice cards for each step print underneath the strip.
+      </p>
+    </div>
+
+    <div class="panel noprint" style="padding-bottom:8px">
+      <h2>4 · Print preview</h2>
+      <p class="hint">Print at 100%, not "Fit to page."</p>
+    </div>
+    <div class="routine-shell">
+      <div id="routinePrint"></div>
+    </div>
+
+  </div><!-- /mode-routine -->
+
+  <!-- The choice log belongs to the student, not to one of the two boards, so
+       it sits outside both and shows for either. -->
+  <div id="logHost" hidden>
+    <div class="panel noprint">
+      <h2>Choice log <span style="color:var(--slate);font-weight:normal;text-transform:none;letter-spacing:0">· what the student communicated</span></h2>
       <div class="stats" id="logStats"></div>
       <div class="row" style="margin-bottom:10px">
         <div class="field">
@@ -765,16 +906,132 @@
         if choices often cannot be honored, the option set is the thing to change.
       </p>
     </div>
+  </div>
 
-    <div class="panel noprint" style="padding-bottom:8px">
-      <h2>6 · Print preview</h2>
-      <p class="hint">Print at 100%, not "Fit to page."</p>
-    </div>
-    <div class="board-shell">
-      <div id="boardPrint"></div>
-    </div>
+  <!-- Directions last. Someone who already knows this tool should not have to
+       scroll past the manual to reach the thing they opened it to do. -->
+  <details class="help noprint" id="help">
+    <summary>How to use this</summary>
+    <div class="help-body">
+      <p>Three tabs at the top of the page:</p>
+      <ul>
+        <li><strong>Print symbol cards</strong> — type words, get a page of picture cards, cut
+            them out.</li>
+        <li><strong>First–Then board</strong> — two boxes: what is happening now, and what comes
+            next.</li>
+        <li><strong>Routine &amp; timers</strong> — the same idea stretched to as many steps as
+            the routine actually has, with minutes on the steps that need them.</li>
+      </ul>
+      <p>Everything works printed, on a device, or both. Nothing needs installing.</p>
 
-  </div><!-- /mode-board -->
+      <h3>Making a sheet</h3>
+      <ol>
+        <li>Type your words in the box below — one per line, or separated by commas.</li>
+        <li>Click <strong>Add words</strong>. A picture is found for each one.</li>
+        <li>If a picture is wrong, click <strong>Other symbols</strong> on that card and pick a
+            better one, or type a different word in the small search box. The printed label
+            stays whatever you typed.</li>
+        <li>Set the card size and how much space you want for cutting.</li>
+        <li>Click <strong>Print sheet</strong>.</li>
+      </ol>
+
+      <h3 class="warn">One thing that matters when you print</h3>
+      <p>In the print window, set <strong>Scale</strong> to <strong>100%</strong> — not
+         "Fit to page." Fit to page shrinks everything, and the cards stop being the size
+         they say they are.</p>
+
+      <h3>Good to know</h3>
+      <ul>
+        <li><strong>You need internet</strong> the first time you look up a word — that is how
+            the pictures are found.</li>
+        <li><strong>Nothing is saved anywhere but your own browser.</strong> No account, no
+            upload, no student information leaves this page. The only thing sent out is the
+            vocabulary word itself, to look up a picture for it.</li>
+        <li><strong>Card borders are colored by word type</strong> — green for actions, gray for
+            things, yellow for people, orange for describing words, blue for little words, pink
+            for social words. Cut apart, the color helps show how words fit together.</li>
+        <li><strong>Check the student's own system first.</strong> If they already use a device,
+            book, or cards, match those pictures where you can. A student who learned one
+            picture for "break" should not have to learn a second one.</li>
+        <li>A student may select a card, point to it, use gaze to indicate it, hand it to you,
+            or answer some other way entirely. All of it counts.</li>
+      </ul>
+
+      <h3>The First–Then board (second tab)</h3>
+      <p>Two boxes: what is happening now, and what comes next. Print it and laminate it,
+         or open it on a device where tapping a box says it out loud.</p>
+      <ul>
+        <li><strong>Labels are yours to set.</strong> First / Then, Now / Next, or your own
+            words. Use whatever this student already knows — a student who learned one
+            wording should not have to learn a second.</li>
+        <li><strong>Two different jobs.</strong> With the adult setting both boxes, the board
+            tells a student what is coming — it helps with transitions, and it is not the
+            student communicating. Turn on <em>let the student choose what comes next</em> and
+            the second box becomes something else entirely: the student is now telling
+            <em>you</em> something.</li>
+        <li><strong>If they choose, honor it.</strong> A choice that gets overridden teaches
+            that choosing does not matter, which is the opposite of the point.</li>
+        <li><strong>Two to six options.</strong> More than six stops being a choice and starts
+            being a search.</li>
+        <li><strong>Two pictures in one box.</strong> Type <code>calm, body</code> and both
+            pictures go in the same box, read as one message — the way a sentence strip works.
+            Up to three.</li>
+        <li><strong>On an iPad:</strong> add the page to the Home Screen first, then turn on
+            Guided Access. Opening a downloaded file directly in Safari works but is fiddly.</li>
+      </ul>
+
+      <h3>Routine &amp; timers (third tab)</h3>
+      <p>A First–Then board is two boxes. A lot of what a day asks of a student is a chain of
+         them — calm the body, take a break, say where you are going, pick what happens when you
+         get there. That is this tab.</p>
+      <ul>
+        <li><strong>Each step gets a name and pictures.</strong> A comma puts two pictures in
+            one box. Up to ten steps.</li>
+        <li><strong>Any step can be the student's.</strong> Tick <em>the student chooses this
+            step</em> and that step becomes a choice board — they fill it, and what they pick
+            goes in the choice log below.</li>
+        <li><strong>Minutes are optional.</strong> Leave a step at 0 if it runs until it is
+            finished rather than until a clock says so.</li>
+        <li class="warn"><strong>The timer does not end the step — you do.</strong> When it
+            reaches zero it says "time's up" and stops there. A student who is not regulated
+            yet needs the break to keep going, and a clock cannot see that. There is a
+            <strong>+1 min</strong> button for exactly that reason, and no timer value is ever
+            written to the log. How long a student needed is not data about the student.</li>
+        <li><strong>On a device:</strong> the whole strip shows across the top so the student can
+            see what is still coming, with the current step large underneath. Tapping the big box
+            says it out loud. You move it on with <strong>Next step</strong>, or tap any step in
+            the strip to jump there.</li>
+        <li><strong>Printed:</strong> the strip prints top to bottom with the minutes marked, and
+            each choice step's options print underneath as loose cards to cut out and velcro on.</li>
+      </ul>
+
+      <h3>The choice log</h3>
+      <p>When a student picks something — on either board — it is recorded: the word, the time,
+         what it was chosen from, and how long it took. One log, because it is one student's
+         language. It is a record of <strong>what they communicated</strong>, not a score.</p>
+      <ul>
+        <li><strong>Nothing is marked right or wrong</strong>, because there is no correct
+            answer to a choice. You will not find an accuracy figure anywhere in this tool.</li>
+        <li><strong>Mark it spontaneous or prompted</strong> from the buttons under the board.
+            Language becoming self-initiated is the thing worth watching over months.</li>
+        <li><strong>"Could not" is about the room, not the student.</strong> If choices often
+            cannot be honored, the options on the board are the thing to change.</li>
+        <li><strong>"Took" is not a target.</strong> Time usually shortens as a board becomes
+            familiar, but a long pause is often a student weighing two things they want, and a
+            fast tap can be a reach for whatever was nearest. Watch it across weeks in the same
+            setup, never coach for speed, and when it shifts look at what changed around the
+            student first.</li>
+        <li><strong>It stays on this device.</strong> Nothing is uploaded. The CSV is written
+            only when you click Export. Use initials or a code, not a full name. The CSV has no
+            room for the note above — if you hand the file to someone, hand them the note too.</li>
+      </ul>
+
+      <h3>If the pictures do not appear</h3>
+      <p>You are probably offline, or a school network is blocking the picture site. Cards will
+         still print as empty boxes you can draw in. Reconnect and click
+         <strong>Retry lookups</strong>.</p>
+    </div>
+  </details>
 
 </div>
 
@@ -782,8 +1039,10 @@
 <div class="present noprint" id="present">
   <div class="present-head">
     <div class="ttl" id="presentTitle"></div>
+    <div class="timer" id="presentTimer" hidden></div>
     <button class="present-exit" onclick="exitPresent()">Close</button>
   </div>
+  <div class="rstrip" id="presentStrip" hidden></div>
   <div class="present-boxes" id="presentBoxes"></div>
   <div class="present-foot">
     <span class="chosen-note" id="chosenNote"></span>
@@ -796,6 +1055,12 @@
       <button id="mNot"  onclick="markLast('outcome','could_not')" aria-pressed="false">Could not</button>
     </div>
     <button class="ghost" id="resetChoice" onclick="resetChoice()" hidden>Choose again</button>
+    <div class="rnav" id="rnav" hidden>
+      <button class="ghost" id="rBack"  onclick="stepBack()">◂ Back</button>
+      <button class="ghost" id="tPause" onclick="toggleTimer()" hidden>Pause</button>
+      <button class="ghost" id="tPlus"  onclick="addMinute()"   hidden>+1 min</button>
+      <button id="rNext" onclick="stepNext()">Next step ▸</button>
+    </div>
   </div>
 </div>
 
@@ -1102,6 +1367,7 @@ const BOARD_PRESETS = {
   'Reading lesson':       { style:'now3',  slots:['read','answer','finished'],choice:false, opts:[] },
   'Clean up then choose': { style:'now',   slots:['clean up',''],             choice:true,  opts:['outside','blocks','book','snack'] },
   'Sensory break':        { style:'first', slots:['','break'],                choice:true,  opts:['squeezes','stretch','swing','quiet corner'] },
+  'Calm body then choose':{ style:'first', slots:['calm, body',''],          choice:true,  opts:['squeezes','swing','music','quiet corner'] },
 };
 
 let board = {
@@ -1117,19 +1383,57 @@ let board = {
 };
 let optId = 1;
 
-function blankSlot() { return { word:'', term:'', url:null, source:'idle', candidates:[], altsOpen:false }; }
+/* ── symbol groups ────────────────────────────────────────────────────────
+   One picture. A slot or a routine step holds a LIST of these, because two
+   symbols side by side read as ONE message — "calm" + "body" is a single
+   instruction, not two steps. That is how a sentence strip works on paper,
+   and it is the reason a box is a list rather than a single symbol. */
+
+function blankSym()  { return { word:'', term:'', url:null, source:'idle', candidates:[], altsOpen:false }; }
+function blankSlot() { return { syms: [] }; }
+
+// Past three pictures in one box nobody reads it as a single message any more.
+const MAX_SYMS = 3;
+
+// Comma-separated words in, a list of looked-up symbols out.
+function setSymWords(target, csv, after) {
+  const words = String(csv).split(/[,;]+/).map(s => s.trim()).filter(Boolean).slice(0, MAX_SYMS);
+  target.syms = words.map(w => Object.assign(blankSym(), { word: w }));
+  after();
+  for (const s of target.syms) lookupInto(s, s.word, after);
+}
+
+function symWords(target) { return (target.syms || []).map(s => s.word).filter(Boolean); }
+function symsWithArt(target) { return (target.syms || []).filter(s => s.url); }
+
+// Every image area lays its pictures out in equal columns. Set inline so one
+// picture and three behave the same and none of them overflow their share.
+function gridCols(n) { return 'grid-template-columns:repeat(' + Math.max(1, n) + ',minmax(0,1fr))'; }
 
 /* ── mode switching ──────────────────────────────────────────────────── */
 
+const MODES = ['print', 'board', 'routine'];
+
 function setMode(m) {
-  const isBoard = (m === 'board');
-  document.getElementById('mode-print').hidden = isBoard;
-  document.getElementById('mode-board').hidden = !isBoard;
-  document.getElementById('tab-print').setAttribute('aria-selected', String(!isBoard));
-  document.getElementById('tab-board').setAttribute('aria-selected', String(isBoard));
-  document.body.classList.toggle('board-mode', isBoard);   // routes @media print
+  if (MODES.indexOf(m) < 0) m = 'print';
+  for (const k of MODES) {
+    document.getElementById('mode-' + k).hidden = (k !== m);
+    document.getElementById('tab-'  + k).setAttribute('aria-selected', String(k === m));
+  }
+  document.body.dataset.mode = m;                       // routes @media print
+  document.getElementById('logHost').hidden = (m === 'print');
   try { localStorage.setItem('cbd_mode', m); } catch (e) {}
-  if (isBoard) { renderBoard(); renderBoardPrint(); }
+  if (m === 'board')   { renderBoard();   renderBoardPrint(); }
+  if (m === 'routine') { renderRoutine(); renderRoutinePrint(); }
+}
+
+// The directions moved to the bottom of the page; this is the way back up to
+// them from the header.
+function openHelp() {
+  const h = document.getElementById('help');
+  if (!h) return;
+  h.open = true;
+  h.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ── setup ───────────────────────────────────────────────────────────── */
@@ -1148,33 +1452,36 @@ function applyStyle() {
 
 function setSlotLabel(i, v) { board.labels[i] = v; saveBoard(); renderBoardPrint(); }
 
-function setSlotWord(i, v) {
-  const sl = board.slots[i];
-  sl.word = v.trim();
-  if (!sl.word) { Object.assign(sl, blankSlot()); saveBoard(); renderBoard(); renderBoardPrint(); return; }
-  lookupInto(sl, sl.word);
-}
+// "work" is one picture. "calm, body" is two in the same box.
+function setSlotWords(i, v) { setSymWords(board.slots[i], v, afterBoard); }
 
-function setSlotTerm(i, v) {
-  const sl = board.slots[i];
-  sl.term = v.trim();
-  lookupInto(sl, sl.term || sl.word);
+function setSlotSymTerm(i, j, v) {
+  const s = (board.slots[i].syms || [])[j];
+  if (!s) return;
+  s.term = v.trim();
+  lookupInto(s, s.term || s.word, afterBoard);
 }
 
 // Reuses resolveSymbol — same cache-then-ARASAAC path, same fallback chain.
-async function lookupInto(target, phrase) {
+async function lookupInto(target, phrase, after) {
+  const done = after || afterBoard;
   target.source = 'loading';
-  renderBoard();
+  done();
   const r = await resolveSymbol({ label: phrase, term: target.term || '' });
   Object.assign(target, { url: r.url, candidates: r.candidates, matched: r.matched, source: r.source });
-  saveBoard(); renderBoard(); renderBoardPrint();
+  done();
 }
 
-function toggleSlotAlts(i) { board.slots[i].altsOpen = !board.slots[i].altsOpen; renderBoard(); }
-function pickSlotAlt(i, idx) {
-  const sl = board.slots[i];
-  if (sl.candidates && sl.candidates[idx]) { sl.url = sl.candidates[idx]; sl.altsOpen = false; }
-  saveBoard(); renderBoard(); renderBoardPrint();
+function afterBoard() { saveBoard(); renderBoard(); renderBoardPrint(); }
+
+function toggleSymAlts(i, j) {
+  const s = (board.slots[i].syms || [])[j];
+  if (s) { s.altsOpen = !s.altsOpen; renderBoard(); }
+}
+function pickSymAlt(i, j, idx) {
+  const s = (board.slots[i].syms || [])[j];
+  if (s && s.candidates && s.candidates[idx]) { s.url = s.candidates[idx]; s.altsOpen = false; }
+  afterBoard();
 }
 
 /* ── choice options ──────────────────────────────────────────────────── */
@@ -1188,7 +1495,7 @@ function addOptions() {
     if (board.opts.length >= 6) break;          // more than six is a field, not a choice
     const o = { id: optId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
     board.opts.push(o);
-    lookupInto(o, w);
+    lookupInto(o, w, afterBoard);
   }
   saveBoard(); renderBoard();
 }
@@ -1210,10 +1517,10 @@ function loadBoardPreset(name) {
   document.getElementById('bChoice').checked = p.choice;
   document.getElementById('bTitle').value   = name;
   board.title = name;
-  p.slots.forEach((w, i) => { if (w) { board.slots[i].word = w; lookupInto(board.slots[i], w); } });
+  p.slots.forEach((w, i) => { if (w) setSymWords(board.slots[i], w, afterBoard); });
   for (const w of (p.opts || [])) {
     const o = { id: optId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
-    board.opts.push(o); lookupInto(o, w);
+    board.opts.push(o); lookupInto(o, w, afterBoard);
   }
   saveBoard(); renderBoard(); renderBoardPrint();
 }
@@ -1254,6 +1561,13 @@ function restoreBoard() {
   if (!d) return;
   board = Object.assign(board, d);
   if (!Array.isArray(board.slots) || !board.slots.length) board.slots = [blankSlot(), blankSlot()];
+  // Slots used to be a single symbol held inline. Carry saved boards forward
+  // rather than silently dropping whatever the teacher had set up.
+  board.slots = board.slots.map(sl => {
+    if (sl && Array.isArray(sl.syms)) return sl;
+    if (sl && sl.word) return { syms: [Object.assign(blankSym(), sl)] };
+    return blankSlot();
+  });
   if (!Array.isArray(board.labels)) board.labels = ['First','Then'];
   optId = board.opts.reduce((m,o) => Math.max(m, o.id||0), 0) + 1;
   document.getElementById('bStyle').value   = board.style || 'first';
@@ -1437,27 +1751,47 @@ function renderBoard() {
         '<p class="hint">Add the options below.</p>' +
       '</div>';
     }
-    const img = sl.source === 'loading' ? '<div class="none">…</div>'
-              : sl.url ? '<img src="' + esc(sl.url) + '" alt="">'
-              : '<div class="none">no symbol yet</div>';
-    const alts = (sl.candidates || []).map((u, idx) =>
-      '<div class="alt' + (u === sl.url ? ' sel' : '') + '" onclick="pickSlotAlt(' + i + ',' + idx + ')">' +
-      '<img src="' + esc(u) + '" alt=""></div>').join('');
+    const syms = sl.syms || [];
+    const big  = syms.length
+      ? syms.map(s => s.source === 'loading' ? '<div class="none">…</div>'
+                    : s.url ? '<img src="' + esc(s.url) + '" alt="">'
+                    : '<div class="none">no symbol</div>').join('')
+      : '<div class="none">no symbol yet</div>';
+
+    // One block per picture in the box: the thumbnail opens alternatives, the
+    // small field searches a different word without changing the printed label.
+    const perSym = syms.map((s, j) => {
+      const inner = s.source === 'loading' ? '<div class="none">…</div>'
+                  : s.url ? '<img src="' + esc(s.url) + '" alt="">'
+                  : '<div class="none">none</div>';
+      const alts = (s.candidates || []).map((u, k) =>
+        '<div class="alt' + (u === s.url ? ' sel' : '') + '" onclick="pickSymAlt(' + i + ',' + j + ',' + k + ')">' +
+        '<img src="' + esc(u) + '" alt=""></div>').join('');
+      return '<div style="flex:1 1 100%">' +
+        '<div style="display:flex;gap:9px;align-items:flex-start">' +
+          '<div class="symchip" title="other pictures for ' + esc(s.word) + '" ' +
+               'onclick="toggleSymAlts(' + i + ',' + j + ')">' + inner + '</div>' +
+          '<div style="flex:1;min-width:0">' +
+            '<div class="item-meta" style="margin-top:0"><strong>' + esc(s.word) + '</strong> — ' + symStatus(s) + '</div>' +
+            '<input type="text" placeholder="search a different word" value="' + esc(s.term) + '" ' +
+                   'onchange="setSlotSymTerm(' + i + ',' + j + ', this.value)" ' +
+                   'style="width:100%;font-size:12px;padding:5px 8px;margin-top:5px">' +
+          '</div>' +
+        '</div>' +
+        '<div class="alts' + (s.altsOpen ? ' show' : '') + '">' + alts + '</div>' +
+      '</div>';
+    }).join('');
+
     return '<div class="slot">' +
       '<h3>Slot ' + (i+1) + '</h3>' +
       '<input class="slot-label" value="' + esc(board.labels[i] || '') + '" ' +
              'onchange="setSlotLabel(' + i + ', this.value)">' +
-      '<div class="slot-sym">' + img + '</div>' +
-      '<input type="text" placeholder="what goes here — e.g. work" value="' + esc(sl.word) + '" ' +
-             'onchange="setSlotWord(' + i + ', this.value)" style="width:100%;margin-bottom:7px">' +
-      '<div class="item-meta">' + symStatus(sl) + '</div>' +
-      '<div class="item-actions">' +
-        (sl.candidates && sl.candidates.length > 1
-          ? '<button class="ghost tiny" onclick="toggleSlotAlts(' + i + ')">Other symbols (' + sl.candidates.length + ')</button>' : '') +
-        '<input type="text" placeholder="search a different word" value="' + esc(sl.term) + '" ' +
-               'onchange="setSlotTerm(' + i + ', this.value)" style="width:170px;font-size:12px;padding:5px 8px">' +
-      '</div>' +
-      '<div class="alts' + (sl.altsOpen ? ' show' : '') + '">' + alts + '</div>' +
+      '<div class="slot-sym" style="' + gridCols(syms.length) + '">' + big + '</div>' +
+      '<input type="text" placeholder="what goes here — work, or calm, body" ' +
+             'value="' + esc(symWords(sl).join(', ')) + '" ' +
+             'onchange="setSlotWords(' + i + ', this.value)" style="width:100%;margin-bottom:9px">' +
+      (syms.length ? '<div class="symstrip">' + perSym + '</div>'
+                   : '<p class="hint">A comma puts two pictures in the same box.</p>') +
     '</div>';
   }).join('');
 
@@ -1485,14 +1819,14 @@ function renderBoardPrint() {
 
   const boxes = board.slots.map((sl, i) => {
     const isChoice = board.choice && i === n - 1;
-    const inner = isChoice ? '<div class="blank"></div>'
-                : sl.url   ? '<img src="' + esc(sl.url) + '" alt="">'
-                : '<div class="blank"></div>';
+    const art   = isChoice ? [] : symsWithArt(sl);
+    const inner = art.length ? art.map(s => '<img src="' + esc(s.url) + '" alt="">').join('')
+                             : '<div class="blank"></div>';
     // Height on the BOX; the image area flexes into the remainder. An explicit
     // height on the image area itself does not survive printing.
     return '<div class="bbox" style="height:' + (tall + 0.85).toFixed(2) + 'in">' +
       '<div class="bl" style="font-size:' + lab + 'pt">' + esc(board.labels[i] || '') + '</div>' +
-      '<div class="bi">' + inner + '</div>' +
+      '<div class="bi" style="' + gridCols(art.length) + '">' + inner + '</div>' +
     '</div>';
   }).join('');
 
@@ -1530,18 +1864,35 @@ function renderBoardPrint() {
    PRESENT — the device view
    ══════════════════════════════════════════════════════════════════════ */
 
+// Both boards share one full-screen shell; this says which one is in it.
+let presentMode = 'board';
+function isPresenting() { return document.getElementById('present').classList.contains('show'); }
+
 function presentBoard() {
   primeSpeech();
+  presentMode = 'board';
+  stopTimer();
   board.chosen = null;
   document.getElementById('presentTitle').textContent = board.title || board.labels.join(' → ');
+  document.getElementById('presentStrip').hidden = true;
+  document.getElementById('presentTimer').hidden = true;
+  document.getElementById('rnav').hidden = true;
   document.getElementById('present').classList.add('show');
   renderPresent();
+  goFullScreen();
+}
+
+function goFullScreen() {
   const el = document.documentElement;
   if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
 }
 
 function exitPresent() {
+  stopTimer();
   document.getElementById('present').classList.remove('show');
+  document.getElementById('presentStrip').hidden = true;
+  document.getElementById('presentTimer').hidden = true;
+  document.getElementById('rnav').hidden = true;
   if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
   try { speechSynthesis.cancel(); } catch (e) {}
 }
@@ -1568,13 +1919,14 @@ function renderPresent() {
              '</div>';
     }
 
-    const src = isChoice ? (board.opts[board.chosen] || {}) : sl;
-    const cap = isChoice ? castLabel(src.label || '', 'upper') : '';
-    const img = src.url ? '<img src="' + esc(src.url) + '" alt="">'
-                        : '<div class="empty">no symbol</div>';
+    const pick = isChoice ? (board.opts[board.chosen] || {}) : null;
+    const art  = pick ? (pick.url ? [pick] : []) : symsWithArt(sl);
+    const cap  = pick ? castLabel(pick.label || '', 'upper') : '';
+    const img  = art.length ? art.map(s => '<img src="' + esc(s.url) + '" alt="">').join('')
+                            : '<div class="empty">no symbol</div>';
     return '<div class="pbox speakable" onclick="speakBox(' + i + ')">' +
              '<div class="plabel">' + label + (cap ? ' · ' + esc(cap) : '') + '</div>' +
-             '<div class="pimg">' + img + '</div>' +
+             '<div class="pimg" style="' + gridCols(art.length) + '">' + img + '</div>' +
            '</div>';
   }).join('');
 
@@ -1594,8 +1946,10 @@ function speakBox(i) {
   primeSpeech();
   const n = board.slots.length;
   const isChoice = board.choice && i === n - 1;
-  const src = isChoice ? (board.opts[board.chosen] || {}) : board.slots[i];
-  say((board.labels[i] || '') + (src.label || src.word ? ', ' + (src.label || src.word) : ''));
+  // Two pictures in one box are one message, so they are spoken as one phrase.
+  const said = isChoice ? ((board.opts[board.chosen] || {}).label || '')
+                        : symWords(board.slots[i]).join(' ');
+  say((board.labels[i] || '') + (said ? ', ' + said : ''));
 }
 
 // The student picked. Say it back — the same auditory confirmation loop the
@@ -1614,6 +1968,13 @@ function resetChoice() {
   // A revision is still communication — mark the superseded act rather than
   // deleting it, so the record shows the student refining a message.
   if (choiceLog.length) { choiceLog[choiceLog.length - 1].revised = true; persistLog(); renderLog(); }
+  if (presentMode === 'routine') {
+    const st = routine.steps[routine.at];
+    if (st) st.chosen = null;
+    stopTimer();                       // a step's clock starts once they have chosen
+    renderPresentRoutine();
+    return;
+  }
   board.chosen = null;
   renderPresent();
 }
@@ -1649,7 +2010,11 @@ function persistLog() {
   try { localStorage.setItem(LOG_KEY, JSON.stringify(choiceLog.slice(-500))); } catch (e) {}
 }
 
-function logChoice(o) {
+// ctx names what the choice was made from and where. Both boards write here:
+// it is one student's language, not one screen's data.
+function logChoice(o, ctx) {
+  const c = ctx || { options: board.opts.map(x => x.label),
+                     board: board.title || board.labels.join('/') };
   let who = '';
   try { who = document.getElementById('logWho').value.trim(); } catch (e) {}
   choiceLog.push({
@@ -1657,9 +2022,9 @@ function logChoice(o) {
     ts: new Date().toISOString(),
     who,
     word: o.label || '',
-    options: board.opts.map(x => x.label),
+    options: c.options || [],
     latencyMs: choicesShownAt ? (Date.now() - choicesShownAt) : null,
-    board: board.title || board.labels.join('/'),
+    board: c.board || '',
     initiation: 'unmarked',
     outcome: 'unmarked',
     revised: false,
@@ -1759,6 +2124,629 @@ function markEntry(id, field, value) {
   persistLog(); renderLog(); syncMarkButtons();
 }
 
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   ROUTINE — the third mode
+
+   A First–Then board is two boxes. Most of what a school day actually asks
+   of a student is a CHAIN of them: calm the body, take a break, say where
+   you are going, pick what happens when you get there. Three First–Then
+   pairs in a row — the same support the student already reads, extended
+   rather than replaced by something new to learn.
+
+   What a step carries:
+     label     the word above the box — "Calm body", "Break", "Where next"
+     syms      one OR MORE pictures. Two side by side read as one message.
+     minutes   optional duration.
+     choice    when on, the STUDENT fills this step from the options.
+
+   On timers, because this is the part that can go wrong:
+
+   A timer here answers "how long until this ends," which is the question
+   underneath most transition refusals. It is not a performance clock, and
+   it does not advance the routine — when it reaches zero it says so and
+   stops. The adult moves the routine on, because a student who is not
+   regulated yet needs the break to continue and a clock cannot see that.
+   No timer value is written to the choice log. How long a student needed
+   is not data about the student.
+   ══════════════════════════════════════════════════════════════════════ */
+
+const ROUTINE_KEY = 'cbd_routine_v1';
+
+// Routines these teams actually run. The first is the chained pattern in full:
+// regulate, then hand the student the decisions about returning.
+const ROUTINE_PRESETS = {
+  'Regulate, then return to class': { steps: [
+    { label: 'Calm body',  words: 'calm, body' },
+    { label: 'Break',      minutes: 5, choice: true, opts: ['squeezes','swing','music','quiet corner'] },
+    { label: 'Where next', choice: true, opts: ['reading','history','bathroom','lunch'] },
+    { label: 'Then',       choice: true, opts: ['drawing','book','iPad','bubbles'] },
+    { label: 'Where next', choice: true, opts: ['reading','history','bathroom','lunch'] },
+    { label: 'Then',       choice: true, opts: ['drawing','book','iPad','bubbles'] },
+  ]},
+  'Work, break, work': { steps: [
+    { label: 'Work',  words: 'work',  minutes: 10 },
+    { label: 'Break', minutes: 5, choice: true, opts: ['walk','squeezes','music','water'] },
+    { label: 'Work',  words: 'work',  minutes: 10 },
+    { label: 'Finished', words: 'all done' },
+  ]},
+  'Arriving in the morning': { steps: [
+    { label: 'Bathroom',     words: 'bathroom' },
+    { label: 'Backpack',     words: 'backpack' },
+    { label: 'Sit down',     words: 'sit' },
+    { label: 'Morning work', words: 'write', minutes: 10 },
+  ]},
+  'Getting ready to go home': { steps: [
+    { label: 'Clean up', words: 'clean up', minutes: 3 },
+    { label: 'Backpack', words: 'backpack' },
+    { label: 'Coat',     words: 'coat' },
+    { label: 'Line up',  words: 'line up' },
+  ]},
+};
+
+let routine = {
+  title: '',
+  size:  'full',
+  speak: true,
+  steps: [ blankStep(), blankStep() ],
+  at:    0,            // which step the device view is showing
+};
+let rOptId = 1;
+
+function blankStep() { return { label:'', syms:[], minutes:0, choice:false, opts:[], chosen:null }; }
+
+function afterRoutine() {
+  saveRoutine(); renderRoutine(); renderRoutinePrint();
+  if (presentMode === 'routine' && isPresenting()) renderPresentRoutine();
+}
+
+/* ── editing ─────────────────────────────────────────────────────────── */
+
+const MAX_STEPS = 10;
+
+function addStep() {
+  if (routine.steps.length >= MAX_STEPS) return;
+  routine.steps.push(blankStep());
+  afterRoutine();
+}
+function removeStep(i) {
+  if (routine.steps.length <= 1) return;
+  routine.steps.splice(i, 1);
+  routine.at = Math.min(routine.at, routine.steps.length - 1);
+  afterRoutine();
+}
+function moveStep(i, d) {
+  const j = i + d;
+  if (j < 0 || j >= routine.steps.length) return;
+  const [s] = routine.steps.splice(i, 1);
+  routine.steps.splice(j, 0, s);
+  afterRoutine();
+}
+function setStepLabel(i, v)   { routine.steps[i].label = v; afterRoutine(); }
+function setStepWords(i, v)   { setSymWords(routine.steps[i], v, afterRoutine); }
+function setStepMinutes(i, v) {
+  routine.steps[i].minutes = Math.max(0, Math.min(120, parseInt(v, 10) || 0));
+  afterRoutine();
+}
+function toggleStepChoice(i) {
+  const st = routine.steps[i];
+  st.choice = !st.choice;
+  st.chosen = null;
+  afterRoutine();
+}
+function setStepSymTerm(i, j, v) {
+  const s = (routine.steps[i].syms || [])[j];
+  if (!s) return;
+  s.term = v.trim();
+  lookupInto(s, s.term || s.word, afterRoutine);
+}
+function toggleStepSymAlts(i, j) {
+  const s = (routine.steps[i].syms || [])[j];
+  if (s) { s.altsOpen = !s.altsOpen; renderRoutine(); }
+}
+function pickStepSymAlt(i, j, k) {
+  const s = (routine.steps[i].syms || [])[j];
+  if (s && s.candidates && s.candidates[k]) { s.url = s.candidates[k]; s.altsOpen = false; }
+  afterRoutine();
+}
+
+function addStepOptions(i) {
+  const ta = document.querySelector('[data-k="s' + i + '-opts"]');
+  if (!ta) return;
+  const words = ta.value.split(/[\n,;]+/).map(x => x.trim()).filter(Boolean);
+  ta.value = '';
+  const st = routine.steps[i];
+  for (const w of words) {
+    if (st.opts.length >= 6) break;        // past six it is a search, not a choice
+    const o = { id: rOptId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
+    st.opts.push(o);
+    lookupInto(o, w, afterRoutine);
+  }
+  afterRoutine();
+}
+function removeStepOption(i, id) {
+  const st = routine.steps[i];
+  st.opts = st.opts.filter(o => o.id !== id);
+  st.chosen = null;
+  afterRoutine();
+}
+function clearStepOptions(i) {
+  routine.steps[i].opts = [];
+  routine.steps[i].chosen = null;
+  afterRoutine();
+}
+
+function loadRoutinePreset(name) {
+  if (!name) return;
+  document.getElementById('rPreset').value = '';
+  const p = ROUTINE_PRESETS[name];
+  routine.title = name;
+  routine.at = 0;
+  routine.steps = p.steps.map(s => Object.assign(blankStep(), {
+    label: s.label || '', minutes: s.minutes || 0, choice: !!s.choice,
+  }));
+  document.getElementById('rTitle').value = name;
+  afterRoutine();
+  p.steps.forEach((s, i) => {
+    if (s.words) setSymWords(routine.steps[i], s.words, afterRoutine);
+    for (const w of (s.opts || [])) {
+      if (routine.steps[i].opts.length >= 6) break;
+      const o = { id: rOptId++, label: w, term: '', url: null, source: 'loading', candidates: [] };
+      routine.steps[i].opts.push(o);
+      lookupInto(o, w, afterRoutine);
+    }
+  });
+  afterRoutine();
+}
+
+/* ── persistence ─────────────────────────────────────────────────────── */
+
+function saveRoutine() {
+  const t = document.getElementById('rTitle');
+  const s = document.getElementById('rSpeak');
+  const z = document.getElementById('rSize');
+  if (t) routine.title = t.value;
+  if (s) routine.speak = s.checked;
+  if (z) routine.size  = z.value;
+  try { localStorage.setItem(ROUTINE_KEY, JSON.stringify(routine)); } catch (e) {}
+}
+
+function restoreRoutine() {
+  let d = null;
+  try { d = JSON.parse(localStorage.getItem(ROUTINE_KEY) || 'null'); } catch (e) {}
+  if (d) {
+    routine = Object.assign(routine, d);
+    if (!Array.isArray(routine.steps) || !routine.steps.length) routine.steps = [blankStep(), blankStep()];
+    routine.steps = routine.steps.map(s => Object.assign(blankStep(), s || {}));
+    rOptId = routine.steps.reduce(
+      (m, s) => (s.opts || []).reduce((n, o) => Math.max(n, o.id || 0), m), 0) + 1;
+  }
+  routine.at = 0;
+  document.getElementById('rTitle').value   = routine.title || '';
+  document.getElementById('rSpeak').checked = routine.speak !== false;
+  document.getElementById('rSize').value    = routine.size  || 'full';
+}
+
+/* ── the step editor ─────────────────────────────────────────────────────
+   Re-rendering the whole list on every lookup would throw away whatever the
+   teacher was typing, and a six-step routine fires a lot of lookups. Each
+   field carries a key so the caret comes back where it was. */
+
+function renderRoutine() {
+  const a = document.activeElement;
+  const key = a && a.dataset ? a.dataset.k : null;
+  let caret = null;
+  try { caret = a ? a.selectionStart : null; } catch (e) {}
+  drawRoutine();
+  if (key) {
+    const el = document.querySelector('[data-k="' + key + '"]');
+    if (el) { el.focus(); try { if (caret != null) el.setSelectionRange(caret, caret); } catch (e) {} }
+  }
+}
+
+function drawRoutine() {
+  const host = document.getElementById('steps');
+  if (!host) return;
+  const last = routine.steps.length - 1;
+
+  host.innerHTML = routine.steps.map((st, i) => {
+    const syms = st.syms || [];
+
+    const perSym = syms.map((s, j) => {
+      const inner = s.source === 'loading' ? '<div class="none">…</div>'
+                  : s.url ? '<img src="' + esc(s.url) + '" alt="">'
+                  : '<div class="none">none</div>';
+      const alts = (s.candidates || []).map((u, k) =>
+        '<div class="alt' + (u === s.url ? ' sel' : '') + '" onclick="pickStepSymAlt(' + i + ',' + j + ',' + k + ')">' +
+        '<img src="' + esc(u) + '" alt=""></div>').join('');
+      return '<div>' +
+        '<div class="symchip" title="other pictures for ' + esc(s.word) + '" ' +
+             'onclick="toggleStepSymAlts(' + i + ',' + j + ')">' + inner + '</div>' +
+        '<input type="text" data-k="s' + i + '-t' + j + '" placeholder="other word" ' +
+               'value="' + esc(s.term) + '" onchange="setStepSymTerm(' + i + ',' + j + ', this.value)" ' +
+               'style="width:76px;font-size:11px;padding:4px 5px;margin-top:5px">' +
+        '<div class="alts' + (s.altsOpen ? ' show' : '') + '" style="max-width:280px">' + alts + '</div>' +
+      '</div>';
+    }).join('');
+
+    const optRows = (st.opts || []).map(o =>
+      '<div class="opt-row">' +
+        '<div class="thumb-sm">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
+          : '<span style="font-size:9px;color:#999">' + (o.source === 'loading' ? '…' : 'none') + '</span>') +
+        '</div>' +
+        '<strong style="flex:1">' + esc(o.label) + '</strong>' +
+        '<button class="ghost tiny" onclick="removeStepOption(' + i + ',' + o.id + ')">Remove</button>' +
+      '</div>').join('');
+
+    const choiceBlock = st.choice
+      ? '<div class="step-opts">' +
+          '<label style="font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--slate)">' +
+            'The student picks from</label>' +
+          '<textarea data-k="s' + i + '-opts" style="margin-top:5px" ' +
+                    'placeholder="reading, history, bathroom, lunch"></textarea>' +
+          '<div class="row" style="margin-top:7px">' +
+            '<button class="tiny" onclick="addStepOptions(' + i + ')">Add options</button>' +
+            (st.opts.length ? '<button class="ghost tiny" onclick="clearStepOptions(' + i + ')">Clear</button>' : '') +
+          '</div>' +
+          (optRows ||
+            '<p class="hint" style="margin-top:8px">Two to six. More than six stops being a ' +
+            'choice and starts being a search.</p>') +
+        '</div>'
+      : '';
+
+    return '<div class="step">' +
+      '<div class="step-top">' +
+        '<div class="step-n">' + (i + 1) + '</div>' +
+        '<div class="field step-name">' +
+          '<label>Step name</label>' +
+          '<input class="step-lab" data-k="s' + i + '-label" placeholder="e.g. Calm body" ' +
+                 'value="' + esc(st.label) + '" onchange="setStepLabel(' + i + ', this.value)">' +
+        '</div>' +
+        '<div class="field step-words">' +
+          '<label>Pictures — a comma adds another</label>' +
+          '<input type="text" data-k="s' + i + '-words" placeholder="calm, body" ' +
+                 'value="' + esc(symWords(st).join(', ')) + '" ' +
+                 (st.choice ? 'disabled title="the student fills this step" ' : '') +
+                 'onchange="setStepWords(' + i + ', this.value)">' +
+        '</div>' +
+        '<div class="field">' +
+          '<label>Minutes</label>' +
+          '<input type="number" min="0" max="120" class="step-min" data-k="s' + i + '-min" ' +
+                 'value="' + (st.minutes || 0) + '" onchange="setStepMinutes(' + i + ', this.value)">' +
+        '</div>' +
+        '<button class="ghost tiny" onclick="moveStep(' + i + ',-1)" ' +
+                (i === 0 ? 'disabled' : '') + ' title="move up">&uarr;</button>' +
+        '<button class="ghost tiny" onclick="moveStep(' + i + ',1)" ' +
+                (i === last ? 'disabled' : '') + ' title="move down">&darr;</button>' +
+        '<button class="ghost tiny" onclick="removeStep(' + i + ')" ' +
+                (last === 0 ? 'disabled' : '') + '>Remove</button>' +
+      '</div>' +
+      '<div class="step-row2">' +
+        '<div style="' + (st.choice ? 'flex:0 1 240px' : 'flex:1 1 210px') + '">' +
+          '<label class="cbox"><input type="checkbox" ' + (st.choice ? 'checked' : '') +
+            ' onchange="toggleStepChoice(' + i + ')"> The student chooses this step</label>' +
+          (st.choice
+            ? '<p class="hint" style="margin-top:10px">The student fills this box, and what ' +
+              'they pick goes in the choice log. Honor it.</p>'
+            : (syms.length ? '<div class="symstrip" style="margin-top:10px">' + perSym + '</div>'
+                           : '<p class="hint" style="margin-top:10px">No picture yet.</p>')) +
+        '</div>' +
+        choiceBlock +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+/* ── the printed strip ───────────────────────────────────────────────────
+   Vertical, top to bottom — the direction a visual schedule is read in, and
+   the shape that survives six steps on one page. */
+
+function renderRoutinePrint() {
+  const host = document.getElementById('routinePrint');
+  if (!host) return;
+  const steps = routine.steps;
+  const n = Math.max(1, steps.length);
+  const half = routine.size === 'half';
+
+  // Fill the page without overrunning it. Never taller than 1.6in a row —
+  // past that the strip stops reading as a single sequence.
+  const avail = (half ? 4.3 : 9.1) - (routine.title ? 0.4 : 0) - 0.25;   // 0.25 = attribution
+  const h = Math.max(0.7, Math.min(1.6, avail / n - 0.14));
+
+  const rows = steps.map((st, i) => {
+    const art   = st.choice ? [] : symsWithArt(st);
+    const inner = art.length ? art.map(s => '<img src="' + esc(s.url) + '" alt="">').join('')
+                             : '<div class="blank"></div>';
+    const dur = st.minutes > 0
+      ? '<div class="rdur">' + st.minutes + '<br>min</div>'
+      : '<div class="rdur none">&ndash;</div>';
+    return '<div class="rrow" style="height:' + h.toFixed(2) + 'in">' +
+      '<div class="rn">' + (i + 1) + '</div>' +
+      '<div class="rlab" style="font-size:' + (half ? 10 : 12) + 'pt">' + esc(st.label || '') + '</div>' +
+      '<div class="rsym" style="' + gridCols(art.length) + '">' + inner + '</div>' +
+      dur +
+    '</div>';
+  }).join('');
+
+  // Every choice step's options print as loose cards to velcro onto its box.
+  // Steps that offer the SAME options share one set of cards — a routine that
+  // asks "where next" twice does not need the four cards printed twice, and a
+  // teacher who has to cut out twenty is a teacher who will not print this.
+  const groups = new Map();
+  steps.forEach((st, i) => {
+    if (!st.choice || !st.opts.length) return;
+    const key = st.opts.map(o => (o.label || '').toLowerCase()).join('|');
+    if (!groups.has(key)) groups.set(key, { opts: st.opts, nums: [] });
+    groups.get(key).nums.push(i + 1);
+  });
+
+  const stepList = ns => ns.length === 1
+    ? 'Step ' + ns[0]
+    : 'Steps ' + ns.slice(0, -1).join(', ') + ' and ' + ns[ns.length - 1];
+
+  const cut = [...groups.values()].map(g => {
+    const gap = 0.1875;
+    // Every card carries a right margin, the last one included, so the row is
+    // n*(w+gap). 7.44 not 7.50 — landing on the content width exactly lets
+    // rounding wrap the last card onto a page of its own.
+    const cw = Math.min(1.75, 7.44 / g.opts.length - gap);
+    const cards = g.opts.map(o =>
+      '<div class="pcard" style="width:' + cw.toFixed(3) + 'in;height:' + cw.toFixed(3) +
+        'in;border:3pt solid ' + FK_COLOR[fkCategory(o.term || o.label)] +
+        ';margin:0 ' + gap + 'in ' + gap + 'in 0">' +
+        '<div class="sym">' + (o.url ? '<img src="' + esc(o.url) + '" alt="">'
+                                    : '<div class="drawit">draw it</div>') + '</div>' +
+        '<div class="lbl" style="font-size:' + Math.max(7, Math.round(cw * 5.5)) + 'pt">' +
+          esc(castLabel(o.label, 'upper')) + '</div>' +
+      '</div>').join('');
+    const names = [...new Set(g.nums.map(x => (steps[x - 1].label || '').trim()).filter(Boolean))];
+    const many = g.nums.length > 1;
+    return '<div class="bcut-h">' + stepList(g.nums) +
+           (names.length ? ' &middot; ' + esc(names.join(' / ')) : '') +
+           ' — cut out and velcro onto the box' +
+           (many ? ' (one set, used at ' + g.nums.length + ' steps — print again if you want a set each)' : '') +
+           '</div><div class="cards" style="padding-top:.12in">' + cards + '</div>';
+  }).join('');
+
+  const attrib = '<div class="attrib">' + esc(ARASAAC_ATTRIB) + '</div>';
+  // The licence wants attribution wherever the symbols appear, and the strip
+  // and the cut sheet become two separate physical things.
+  const cutSheet = !cut ? ''
+    : (routine.size === 'full'
+        ? attrib + '<div class="rcut-sheet">' + cut + '</div>'
+        : cut);
+
+  host.innerHTML =
+    (routine.title ? '<div class="rprint-title">' + esc(routine.title) + '</div>' : '') +
+    rows + cutSheet + attrib;
+}
+
+/* ── the device view ─────────────────────────────────────────────────────
+   The strip along the top is not decoration: a student needs to see where
+   they are and what is still coming. The current step is the big box. */
+
+function presentRoutine() {
+  primeSpeech();
+  presentMode = 'routine';
+  stopTimer();
+  routine.at = 0;
+  routine.steps.forEach(s => { s.chosen = null; });
+  document.getElementById('presentStrip').hidden = false;
+  document.getElementById('rnav').hidden = false;
+  document.getElementById('present').classList.add('show');
+  renderPresentRoutine();
+  announceStep();
+  goFullScreen();
+}
+
+function renderPresentRoutine() {
+  const steps = routine.steps;
+  const at = Math.max(0, Math.min(routine.at, steps.length - 1));
+  routine.at = at;
+  const st = steps[at] || blankStep();
+
+  document.getElementById('presentTitle').textContent =
+    (routine.title || 'Routine') + ' · step ' + (at + 1) + ' of ' + steps.length;
+
+  document.getElementById('presentStrip').innerHTML = steps.map((s, i) => {
+    const pick = (s.choice && s.chosen !== null) ? (s.opts[s.chosen] || {}) : null;
+    const url  = pick ? pick.url : (symsWithArt(s)[0] || {}).url;
+    const cls  = i === at ? 'rtile now' : (i < at ? 'rtile past' : 'rtile');
+    return '<div class="' + cls + '" onclick="goStep(' + i + ')">' +
+      '<div class="rt-i' + (url ? '' : ' empty') + '">' +
+        (url ? '<img src="' + esc(url) + '" alt="">' : '') + '</div>' +
+      '<div class="rt-l">' + esc(s.label || String(i + 1)) + '</div>' +
+    '</div>';
+  }).join('');
+
+  const host  = document.getElementById('presentBoxes');
+  const label = esc(st.label || '');
+
+  if (st.choice && st.chosen === null) {
+    const tiles = (st.opts || []).map((o, oi) =>
+      '<div class="choice" onclick="chooseStepOption(' + oi + ')">' +
+        '<div class="ci">' + (o.url ? '<img src="' + esc(o.url) + '" alt="' + esc(o.label) + '">'
+                                    : '<span style="color:#999">?</span>') + '</div>' +
+        '<div class="cl">' + esc(castLabel(o.label, 'upper')) + '</div>' +
+      '</div>').join('');
+    host.innerHTML = '<div class="pbox"><div class="plabel">' + label + '</div>' +
+      (st.opts.length ? '<div class="choices">' + tiles + '</div>'
+                      : '<div class="pimg"><div class="empty">Add choices for this step</div></div>') +
+      '</div>';
+    choicesShownAt = Date.now();          // the latency clock starts with the tiles
+  } else {
+    const pick = st.choice ? (st.opts[st.chosen] || {}) : null;
+    const art  = pick ? (pick.url ? [pick] : []) : symsWithArt(st);
+    const imgs = art.length ? art.map(s => '<img src="' + esc(s.url) + '" alt="">').join('')
+                            : '<div class="empty">no picture</div>';
+    const cap  = pick ? ' · ' + esc(castLabel(pick.label || '', 'upper')) : '';
+    host.innerHTML = '<div class="pbox speakable" onclick="speakStep()">' +
+      '<div class="plabel">' + label + cap + '</div>' +
+      '<div class="pimg" style="' + gridCols(art.length) + '">' + imgs + '</div>' +
+    '</div>';
+  }
+
+  const note  = document.getElementById('chosenNote');
+  const reset = document.getElementById('resetChoice');
+  const pm    = document.getElementById('pmark');
+  if (st.choice && st.chosen !== null) {
+    note.textContent = 'Chose: ' + ((st.opts[st.chosen] || {}).label || '');
+    reset.hidden = false; if (pm) pm.hidden = false;
+  } else {
+    note.textContent = ''; reset.hidden = true; if (pm) pm.hidden = true;
+  }
+
+  document.getElementById('rBack').disabled = (at === 0);
+  document.getElementById('rNext').textContent = (at === steps.length - 1) ? 'Finished' : 'Next step ▸';
+
+  startStepTimer();
+}
+
+function goStep(i) {
+  if (i < 0 || i >= routine.steps.length || i === routine.at) return;
+  stopTimer();
+  routine.at = i;
+  renderPresentRoutine();
+  announceStep();
+}
+function stepNext() {
+  if (routine.at >= routine.steps.length - 1) { exitPresent(); return; }
+  goStep(routine.at + 1);
+}
+function stepBack() { goStep(routine.at - 1); }
+
+function sayR(text) {
+  if (!routine.speak || !text || !('speechSynthesis' in window)) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.rate = 0.9;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+function announceStep() {
+  const st = routine.steps[routine.at] || {};
+  const words = st.choice ? '' : symWords(st).join(' ');
+  sayR((st.label || '') + (words ? ', ' + words : ''));
+}
+
+function speakStep() {
+  primeSpeech();
+  const st = routine.steps[routine.at] || {};
+  const pick = st.choice ? (st.opts[st.chosen] || {}) : null;
+  const words = pick ? (pick.label || '') : symWords(st).join(' ');
+  sayR((st.label || '') + (words ? ', ' + words : ''));
+}
+
+// Same auditory confirmation loop as the board: say it back, then leave it
+// standing. The act goes in the same log — one student, one record.
+function chooseStepOption(oi) {
+  primeSpeech();
+  const st = routine.steps[routine.at];
+  if (!st) return;
+  st.chosen = oi;
+  const o = st.opts[oi] || {};
+  logChoice(o, {
+    options: st.opts.map(x => x.label),
+    board: (routine.title || 'Routine') + ' · ' + (st.label || 'step ' + (routine.at + 1)),
+  });
+  renderPresentRoutine();
+  syncMarkButtons();
+  sayR((st.label || '') + ', ' + (o.label || ''));
+}
+
+/* ── the timer ───────────────────────────────────────────────────────────
+   Counts down, warns at a minute, announces the end, and then stops. It
+   never advances the routine and it never writes anything to the log. */
+
+let timer = { id:null, endsAt:0, left:0, running:false, warned:false, key:null };
+
+function startStepTimer() {
+  const st = routine.steps[routine.at] || {};
+  const el = document.getElementById('presentTimer');
+  // A timed choice step is timed from the moment they have chosen, not while
+  // they are still choosing — deciding is not part of the break.
+  const wants = st.minutes > 0 && !(st.choice && st.chosen === null);
+  const key   = wants ? routine.at + ':' + st.minutes : null;
+
+  if (key && timer.key === key) { paintTimer(); setTimerButtons(true); return; }
+
+  stopTimer();
+  if (!wants) { if (el) el.hidden = true; setTimerButtons(false); return; }
+
+  timer.key     = key;
+  timer.left    = st.minutes * 60000;
+  timer.endsAt  = Date.now() + timer.left;
+  timer.running = true;
+  timer.warned  = (st.minutes <= 1);      // no "one minute left" on a one-minute step
+  timer.id      = setInterval(tickTimer, 250);
+  if (el) el.hidden = false;
+  setTimerButtons(true);
+  paintTimer();
+}
+
+function tickTimer() {
+  if (!timer.running) return;
+  timer.left = Math.max(0, timer.endsAt - Date.now());
+  if (!timer.warned && timer.left <= 60000) { timer.warned = true; sayR('one minute left'); }
+  if (timer.left === 0) {
+    timer.running = false;
+    clearInterval(timer.id); timer.id = null;
+    sayR('time is up');
+  }
+  paintTimer();
+}
+
+function paintTimer() {
+  const el = document.getElementById('presentTimer');
+  if (!el || !timer.key) return;
+  if (timer.left <= 0) { el.className = 'timer done'; el.textContent = "Time's up"; return; }
+  const s = Math.ceil(timer.left / 1000);
+  el.className = 'timer' + (timer.left <= 60000 ? ' low' : '');
+  el.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') +
+                   (timer.running ? '' : ' paused');
+}
+
+function stopTimer() {
+  if (timer.id) clearInterval(timer.id);
+  timer = { id:null, endsAt:0, left:0, running:false, warned:false, key:null };
+}
+
+function toggleTimer() {
+  if (!timer.key) return;
+  if (timer.running) {
+    timer.left = Math.max(0, timer.endsAt - Date.now());
+    timer.running = false;
+  } else if (timer.left > 0) {
+    timer.endsAt = Date.now() + timer.left;
+    timer.running = true;
+    if (!timer.id) timer.id = setInterval(tickTimer, 250);
+  }
+  setTimerButtons(true);
+  paintTimer();
+}
+
+// Giving a student another minute is a normal thing to need to do, so it is a
+// button rather than a restart.
+function addMinute() {
+  if (!timer.key) return;
+  timer.left += 60000;
+  timer.warned = false;
+  timer.endsAt = Date.now() + timer.left;
+  timer.running = true;
+  if (!timer.id) timer.id = setInterval(tickTimer, 250);
+  setTimerButtons(true);
+  paintTimer();
+}
+
+function setTimerButtons(on) {
+  const p = document.getElementById('tPause');
+  const a = document.getElementById('tPlus');
+  if (p) { p.hidden = !on; p.textContent = timer.running ? 'Pause' : 'Resume'; }
+  if (a) a.hidden = !on;
+}
 
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -1884,10 +2872,12 @@ async function exportForGoogleDocs() {
     o.value = name; o.textContent = name;
     sel.appendChild(o);
   }
+  // The directions sit at the bottom now, so leaving them open costs a
+  // brand-new user nothing and pushes no controls down the page.
   const help = document.getElementById('help');
   let seen = null;
   try { seen = localStorage.getItem(STORAGE_KEY + '_help'); } catch (e) {}
-  help.open = (seen !== 'closed');          // a brand-new user sees the instructions
+  help.open = (seen !== 'closed');
   help.addEventListener('toggle', () => {
     try { localStorage.setItem(STORAGE_KEY + '_help', help.open ? 'open' : 'closed'); } catch (e) {}
   });
@@ -1903,6 +2893,16 @@ async function exportForGoogleDocs() {
     bp.appendChild(o);
   }
   restoreBoard();
+
+  // Routine mode
+  const rp = document.getElementById('rPreset');
+  for (const name of Object.keys(ROUTINE_PRESETS)) {
+    const o = document.createElement('option');
+    o.value = name; o.textContent = name;
+    rp.appendChild(o);
+  }
+  restoreRoutine();
+
   loadLog();
   renderLog();
   let lastMode = 'print';

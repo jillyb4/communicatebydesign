@@ -6,15 +6,29 @@
 (same commit as main).
 **Status:** Working, classroom-ready. NOT yet an official product — see Open Decisions.
 
-A standalone browser tool, separate from the product build system. Two modes in one
+A standalone browser tool, separate from the product build system. Three modes in one
 file, because "email one file" is what makes it usable by a para and a second tool
 would halve that:
 
 1. **Print symbol cards** — type words → print a sheet of cards at true size.
 2. **First–Then board** — a two- or three-slot board that prints for velcro or runs
    on a device with speech, optionally letting the student choose what comes next.
+3. **Routine & timers** — the same idea at any number of steps (up to ten), with
+   optional minutes per step and any step handed to the student to choose.
 
 Built for quick classroom needs by Jill, paras, RBTs and BCBAs — not a TPT build.
+
+**Two things run across modes 2 and 3:**
+
+- **A box holds up to three pictures.** Typing `calm, body` puts both in one box.
+  Two symbols side by side read as ONE message, the way a sentence strip does — not
+  as two steps. This is why a slot is a list of symbols rather than a single symbol.
+- **One choice log.** Both boards write to it. It is one student's language, not one
+  screen's data.
+
+**Directions live at the bottom of the page** (moved there Sep 2026). Someone who
+already knows the tool should not scroll past the manual to reach the thing they
+opened it to do. The header carries a "How to use this" button that jumps to them.
 
 ---
 
@@ -168,6 +182,79 @@ Decisions below.
 
 ---
 
+## Routine & timers (third mode)
+
+### Why it is a chain, not a new concept
+
+A First–Then board is two boxes. Most of what a school day asks of a student is a
+*chain* of them. Jill's worked example, which is preset #1:
+
+    Calm body                                    ← adult-set, two pictures
+    Preferred regulation activity (5 mins)       ← student chooses, 5 min
+
+    Request (ELA, History, Bathroom, Eat Lunch)  ← student chooses
+    Choice exit activity                         ← student chooses
+
+    Next Request                                 ← student chooses
+    Exit choice activity                         ← student chooses
+
+Read the blank lines: that is three First–Then pairs chained. The student is already
+reading the same support — it is extended, not replaced with something new to learn.
+That framing is the reason this is one mode rather than a separate visual-schedule
+tool.
+
+### What a step carries
+
+| Field | Meaning |
+|-------|---------|
+| `label` | the word above the box — "Calm body", "Break", "Where next" |
+| `syms` | one to three pictures, read as one message |
+| `minutes` | optional duration. 0 = runs until finished, not until a clock says so |
+| `choice` | when on, the **student** fills this step from `opts` |
+| `opts` | 2–6 options, same cap and same reason as the board |
+
+### Timers — the part that can go wrong
+
+A timer answers "how long until this ends," which is the question underneath most
+transition refusals. It is **not** a performance clock. The rules are enforced in
+code, not just documented:
+
+- **It does not advance the routine.** At zero it says "time is up" and stops. The
+  adult moves it on, because a student who is not regulated yet needs the break to
+  continue and a clock cannot see that.
+- **A timed choice step is timed from the moment they have chosen**, not while they
+  are still choosing. Deciding is not part of the break.
+- **`+1 min` is a first-class button**, not a restart, because giving a student
+  another minute is a normal thing to need to do.
+- **"One minute left" is spoken** at 60s (skipped on a one-minute step).
+- **No timer value is ever written to the choice log.** How long a student needed is
+  not data about the student. Nothing in the log or the CSV records duration.
+
+### The device view
+
+The strip across the top is the support, not decoration — a student needs to see
+where they are and what is still coming, not only the box they are in. Current step
+amber, past steps dimmed, future steps a dashed empty tile (an empty *white* box
+reads as a picture that failed to load). Tapping any tile jumps there. The current
+step is the big box underneath; tapping it speaks it.
+
+### The printed strip
+
+Vertical, top to bottom — the direction a visual schedule is read in, and the shape
+that survives six steps on one page. Each row: number · step name · picture(s) ·
+minutes chip (amber when set, greyed dash when not).
+
+**Steps offering the same options share one set of cut-out cards.** Jill's six-step
+preset has five choice steps but only three distinct option sets; printing 20 cards
+instead of 12 is how you get a tool nobody prints. The heading names every step that
+shares a set ("Steps 3 and 5 · Where next").
+
+**On a full page the cut-out cards start on a sheet of their own** (`break-before:
+page`), so page 1 is the strip to laminate and page 2 is the cards to cut. The
+ARASAAC attribution prints on both, because they become two separate physical things.
+
+---
+
 ## Choice log
 
 Language growth, never compliance — per the CbD Data Framework. **There is no
@@ -306,6 +393,19 @@ All three were found by measuring, not by looking:
    aspect ratio and it overflows its box. The board's image area uses the flex
    pattern the cards already prove in print; on screen a definite track
    (`minmax(0, 1fr)`) also breaks the cycle.
+4. **An author-level `display` beats the UA sheet's `[hidden]` rule.** Any element
+   that sets `display: flex` *and* gets toggled with the `hidden` attribute stays
+   visible when hidden. This had been shipping: `.pmark` showed the
+   Spontaneous/Prompted buttons before any choice had been made. Fixed globally with
+   `[hidden] { display: none !important; }` near the top of the stylesheet — keep it.
+5. **`flex-basis` on a child of `.field` sizes its HEIGHT.** `.field` is a *column*
+   flex container, so `flex: 1 1 140px` on an input inside one made a 140px-tall
+   text box. Put the sizing on the `.field` wrapper and `width: 100%` on the input.
+6. **Print routing must name each mode, not exclude the others.** With three modes,
+   `body:not(.board-mode)` stops meaning anything useful. The rules are
+   `body:not([data-mode="print"]) .sheet-shell { display: none }` and one each for
+   `board` and `routine`, so a fourth mode prints nothing rather than silently
+   printing on top of another one.
 
 ---
 
@@ -316,3 +416,25 @@ Fitzgerald classification, label casing). Layout and print geometry were verifie
 driving a real browser, generating PDFs and measuring the drawn boxes — that is how
 the widows bug, the attribution page and the `squeez` bug were all caught. Anything
 touching print layout should be re-verified the same way, not eyeballed.
+
+The Sep 2026 routine work added a 70-assertion Playwright suite covering the model,
+the editor, the printed strip, the device view, the timer (including that zero does
+*not* advance the routine), logging from both boards, print routing per mode, reload
+persistence, and migration of boards saved before a slot held multiple symbols. It
+caught three real defects the eye missed: the `[hidden]` override, the `flex-basis`
+height bug, and duplicate card sets.
+
+Harness gotchas that cost time twice now, in case a third session writes this again:
+
+- `window.speechSynthesis` is a **read-only accessor**; plain assignment is a silent
+  no-op. Stub it with `Object.defineProperty`.
+- `addInitScript` runs on **every navigation, reloads included**. A
+  `localStorage.clear()` in there wipes the state the persistence tests are checking.
+  Guard it with a `sessionStorage` sentinel.
+- The empty local symbol cache in a fresh clone throws `ERR_FILE_NOT_FOUND` per
+  lookup. Expected and handled — filter it out of the console-error check.
+- Mock symbols must be **opaque and distinct**; a transparent PNG looks exactly like
+  a missing image. Coloured SVGs work and embed as vectors (so `get_images()` on the
+  PDF returns 0 — read the text layer instead).
+- Playwright from npm may not match `/opt/pw-browsers`. Launch with
+  `executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'`.
